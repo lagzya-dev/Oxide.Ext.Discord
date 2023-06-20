@@ -3,20 +3,21 @@
 Application Sub Command Builder
 
 ```csharp
-public class ApplicationSubCommandBuilder : 
-    BaseSubCommandBuilder<ApplicationSubCommandBuilder, ApplicationCommandBuilder>
+public class ApplicationSubCommandBuilder
 ```
 
 ## Public Members
 
 | name | description |
 | --- | --- |
+| [AddDescriptionLocalization](ApplicationSubCommandBuilder/AddDescriptionLocalization.md)(…) | Adds Application Sub Command Description Localizations |
+| [AddDescriptionLocalizations](ApplicationSubCommandBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](ApplicationSubCommandBuilder/AddNameLocalization.md)(…) | Adds Application Sub Command Name Localization |
+| [AddNameLocalizations](ApplicationSubCommandBuilder/AddNameLocalizations.md)(…) | Adds command name localizations for a given plugin and lang key |
 | [AddOption](ApplicationSubCommandBuilder/AddOption.md)(…) | Adds a new option |
 
 ## See Also
 
-* class [BaseSubCommandBuilder&lt;TBuilder,TParent&gt;](./BaseBuilders/BaseSubCommandBuilder-2.md)
-* class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationSubCommandBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.cs)

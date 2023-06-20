@@ -3,8 +3,8 @@
 Adds a new option
 
 ```csharp
-public ApplicationSubCommandOptionBuilder AddOption(CommandOptionType type, string name, 
-    string description)
+public ApplicationSubCommandBuilder AddOption(CommandOptionType type, string name, 
+    string description, Action<ApplicationCommandOptionBuilder> builder)
 ```
 
 | parameter | description |
@@ -12,17 +12,22 @@ public ApplicationSubCommandOptionBuilder AddOption(CommandOptionType type, stri
 | type | Option data type (Cannot be SubCommand or SubCommandGroup) |
 | name | Name of the option |
 | description | Description of the option |
+| builder | Callback with the [`ApplicationCommandOptionBuilder`](../ApplicationCommandOptionBuilder.md) |
+
+## Return Value
+
+This
 
 ## Exceptions
 
 | exception | condition |
 | --- | --- |
-| Exception |  |
+| Exception | Thrown if type is SubCommand or SubCommandGroup |
 
 ## See Also
 
-* class [ApplicationSubCommandOptionBuilder](../ApplicationSubCommandOptionBuilder.md)
 * enum [CommandOptionType](../../../Entities/Interactions/ApplicationCommands/CommandOptionType.md)
+* class [ApplicationCommandOptionBuilder](../ApplicationCommandOptionBuilder.md)
 * class [ApplicationSubCommandBuilder](../ApplicationSubCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](../ApplicationSubCommandBuilder.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

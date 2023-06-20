@@ -214,7 +214,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder})">
             <summary>
             Creates a new SubCommandGroup
             SubCommandGroups contain subcommands
@@ -222,26 +222,29 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder"/></returns>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder"/></param>
+            <returns>this</returns>
             <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommand(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
             <summary>
             Adds a sub command to the root command
             </summary>
             <param name="name">Name of the sub command</param>
             <param name="description">Description for the sub command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></returns>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/>"/></param>
+            <returns>this</returns>
             <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder})">
             <summary>
             Adds a command option.
             </summary>
             <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
             <param name="name">Name of the option</param>
             <param name="description">Description for the option</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></returns>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></param>
+            <returns>this</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
             <summary>
@@ -257,45 +260,10 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder">
             <summary>
-            Represents a Subcommand Option Builder for Application Commands
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder">
-            <summary>
-            Application Sub Command Builder
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="options">Options for the sub command</param>
-            <param name="name">Name of the sub command</param>
-            <param name="description">Description of the sub command</param>
-            <param name="parent">Parent for this builder</param>
-            <param name="defaultLanguage"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
-            <summary>
-            Adds a new option
-            </summary>
-            <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
-            <param name="name">Name of the option</param>
-            <param name="description">Description of the option</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandOptionBuilder">
-            <summary>
             Represents a Subcommand Option Builder for SubCommands
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2">
-            <summary>
-            Builder for command options
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,`1,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
@@ -303,10 +271,9 @@
             <param name="type"></param>
             <param name="name"></param>
             <param name="description"></param>
-            <param name="parentBuilder"></param>
             <param name="defaultLanguage"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -314,7 +281,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Option Name Localization
             </summary>
@@ -322,7 +289,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -330,7 +297,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Command Option Description Localization
             </summary>
@@ -338,49 +305,49 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.Required(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.Required(System.Boolean)">
             <summary>
             Set the required state for the option
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AutoComplete(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AutoComplete(System.Boolean)">
             <summary>
             Enable auto complete for the option
             </summary>
             <param name="autoComplete">If the option support auto complete (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinValue(System.Int32)">
             <summary>
             Min Value for Integer Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinValue(System.Double)">
             <summary>
             Min Value for Number Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxValue(System.Int32)">
             <summary>
             Max Value for Integer Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxValue(System.Double)">
             <summary>
             Max Value for Number Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MinLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinLength(System.Int32)">
             <summary>
             Min Length for String Option
             Max Of 6000
@@ -388,7 +355,7 @@
             <param name="minLength">Min Length for the string</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.MaxLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxLength(System.Int32)">
             <summary>
             Max Length for String Option
             Max Of 6000
@@ -396,7 +363,7 @@
             <param name="maxLength">Max Length</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.ChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.ChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Channels.ChannelType})">
             <summary>
             Set's the channel types for the option
             </summary>
@@ -404,7 +371,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType"/> is not Channel</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddChoice(System.String,System.String,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.String,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type string
             </summary>
@@ -414,7 +381,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not string</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddChoice(System.String,System.Int32,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Int32,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type int
             </summary>
@@ -424,7 +391,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not int</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.AddChoice(System.String,System.Double,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Double,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type double
             </summary>
@@ -434,45 +401,31 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not double</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseCommandOptionBuilder`2.Build">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder">
             <summary>
-            Builds the CommandOptionBuilder
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2">
-            <summary>
-            Base Subcommand Builder
-            </summary>
-            <typeparam name="TBuilder">Child Builder that inherits from this type</typeparam>
-            <typeparam name="TParent">Parent for this builder</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.Builder">
-            <summary>
-            The child builder for this type
+            Application Sub Command Builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.SubCommand">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder._subCommand">
             <summary>
             The subcommand for the builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.DefaultLanguage">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder._defaultLanguage">
             <summary>
             Default language being built
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,`1,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Constructor
             </summary>
-            <param name="options">The options for the sub command</param>
+            <param name="options">Options for the sub command</param>
             <param name="name">Name of the sub command</param>
             <param name="description">Description of the sub command</param>
-            <param name="parent">Parent for the sub command</param>
-            <param name="defaultLanguage">Default language being built</param>
+            <param name="defaultLanguage"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -480,7 +433,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Sub Command Name Localization
             </summary>
@@ -488,7 +441,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -496,7 +449,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
             <summary>
             Adds Application Sub Command Description Localizations
             </summary>
@@ -504,41 +457,16 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders.BaseSubCommandBuilder`2.Build">
-            <summary>
-            Builds the sub command and returns the parent builder
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder">
-            <summary>
-            Application Sub Command Builder
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="options">The options for the Sub Command Group</param>
-            <param name="name">Name of the Sub Command Group</param>
-            <param name="description">Description of the Sub Command Group</param>
-            <param name="parent">The parent builder for this builder</param>
-            <param name="defaultLanguage">Default language for the builder</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder})">
             <summary>
             Adds a new option
             </summary>
             <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
             <param name="name">Name of the option</param>
             <param name="description">Description of the option</param>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.GroupSubCommandOptionBuilder">
-            <summary>
-            Represents a Subcommand Option Builder for SubCommands
-            </summary>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></param>
+            <returns>This</returns>
+            <exception cref="T:System.Exception">Thrown if type is <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.SubCommand"/> or <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.SubCommandGroup"/></exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
             <summary>
@@ -577,19 +505,14 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
             <summary>
             Adds a sub command to this sub command group
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.Build">
-            <summary>
-            Returns the built <see cref="T:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.DiscordApplicationCommand"/>
-            </summary>
-            <returns></returns>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></param>
+            <returns>this</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
             <summary>
@@ -19903,12 +19826,13 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``1(Oxide.Core.Plugins.Plugin,System.String,System.String)">
             <summary>
-            Registers a placeholder
+            Registers a placeholder that uses the dataKey value
             </summary>
             <param name="plugin">Plugin this placeholder is for</param>
             <param name="placeholder">Placeholder string</param>
-            <param name="callback">Callback Method for the placeholder</param>
-            <exception cref="T:System.ArgumentNullException"></exception>
+            <param name="dataKey"></param>
+            <typeparam name="TData">Type that is registered in the PlaceholderData</typeparam>
+            <exception cref="T:System.ArgumentNullException">Thrown if placeholder or plugin is null</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``2(Oxide.Core.Plugins.Plugin,System.String,System.Func{``0,``1})">
             <summary>
@@ -19918,6 +19842,7 @@
             <param name="placeholder">Placeholder string</param>
             <param name="callback">Callback Method for the placeholder</param>
             <typeparam name="TData">Type of the data key</typeparam>
+            <typeparam name="TResult">The return type of the placeholder callback</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``2(Oxide.Core.Plugins.Plugin,System.String,System.String,System.Func{``0,``1})">
@@ -19929,6 +19854,7 @@
             <param name="dataKey">The name of the data key in PlaceholderData</param>
             <param name="callback">Callback Method for the placeholder</param>
             <typeparam name="TData">Type of the data key</typeparam>
+            <typeparam name="TResult">The return type of the placeholder callback</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``2(Oxide.Core.Plugins.Plugin,System.String,System.Func{Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,``0,``1})">
@@ -19939,6 +19865,7 @@
             <param name="placeholder">Placeholder string</param>
             <param name="callback">Callback Method for the placeholder</param>
             <typeparam name="TData">Type of the data key</typeparam>
+            <typeparam name="TResult">The return type of the placeholder callback</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.RegisterPlaceholder``2(Oxide.Core.Plugins.Plugin,System.String,System.String,System.Func{Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,``0,``1})">
@@ -19950,6 +19877,7 @@
             <param name="dataKey">The name of the data key in PlaceholderData</param>
             <param name="callback">Callback Method for the placeholder</param>
             <typeparam name="TData">Type of the data key</typeparam>
+            <typeparam name="TResult">The return type of the placeholder callback</typeparam>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -24334,27 +24262,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"56b0a894"
+            => @"dc05b8a0"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"56b0a89424b610a0526cd494648afb8d080c9065"
+            => @"dc05b8a090fba7549c93d1650018e33eb1723a9a"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-20T10:20:28-05:00"
+            => @"2023-06-20T15:56:26-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"572"
+            => @"574"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-572-g56b0a894"
+            => @"2.1.9-574-gdc05b8a0"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24389,7 +24317,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"581"
+            => @"583"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

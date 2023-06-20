@@ -11,16 +11,14 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// </summary>
     public class SubCommandGroupBuilder
     {
-        private readonly ApplicationCommandBuilder _builder;
         private readonly CommandOption _option;
         private readonly ServerLocale _defaultLanguage;
 
-        internal SubCommandGroupBuilder(string name, string description, ApplicationCommandBuilder builder, ServerLocale defaultLanguage)
+        internal SubCommandGroupBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage)
         {
             _defaultLanguage = defaultLanguage;
             _option = new CommandOption(name, description, CommandOptionType.SubCommandGroup, new List<CommandOption>());
-            _builder = builder;
-            builder.Command.Options.Add(_option);
+            options.Add(_option);
             AddNameLocalization(name, _defaultLanguage);
             AddDescriptionLocalization(description, _defaultLanguage);
         }
@@ -90,19 +88,12 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the command</param>
         /// <param name="description">Description of the command</param>
-        /// <returns><see cref="ApplicationSubCommandBuilder"/></returns>
-        public GroupSubCommandBuilder AddSubCommand(string name, string description)
+        /// <param name="builder">Callback with the <see cref="ApplicationSubCommandBuilder"/></param>
+        /// <returns>this</returns>
+        public SubCommandGroupBuilder AddSubCommand(string name, string description, Action<ApplicationSubCommandBuilder> builder)
         {
-            return new GroupSubCommandBuilder(_option.Options, name, description, this, _defaultLanguage);
-        }
-
-        /// <summary>
-        /// Returns the built <see cref="DiscordApplicationCommand"/>
-        /// </summary>
-        /// <returns></returns>
-        public ApplicationCommandBuilder Build()
-        {
-            return _builder;
+            builder(new ApplicationSubCommandBuilder(_option.Options, name, description, _defaultLanguage));
+            return this;
         }
     }
 }

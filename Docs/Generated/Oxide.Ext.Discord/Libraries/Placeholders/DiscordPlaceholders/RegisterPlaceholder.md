@@ -56,7 +56,7 @@ public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func
 
 # DiscordPlaceholders.RegisterPlaceholder&lt;TData&gt; method (3 of 7)
 
-Registers a placeholder
+Registers a placeholder that uses the dataKey value
 
 ```csharp
 public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string dataKey)
@@ -64,15 +64,16 @@ public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string
 
 | parameter | description |
 | --- | --- |
+| TData | Type that is registered in the PlaceholderData |
 | plugin | Plugin this placeholder is for |
 | placeholder | Placeholder string |
-| callback | Callback Method for the placeholder |
+| dataKey |  |
 
 ## Exceptions
 
 | exception | condition |
 | --- | --- |
-| ArgumentNullException |  |
+| ArgumentNullException | Thrown if placeholder or plugin is null |
 
 ## See Also
 
@@ -94,6 +95,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | parameter | description |
 | --- | --- |
 | TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
 | placeholder | Placeholder string |
 | callback | Callback Method for the placeholder |
@@ -125,6 +127,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | parameter | description |
 | --- | --- |
 | TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
 | placeholder | Placeholder string |
 | callback | Callback Method for the placeholder |
@@ -155,6 +158,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | parameter | description |
 | --- | --- |
 | TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
 | placeholder | Placeholder string |
 | dataKey | The name of the data key in PlaceholderData |
@@ -187,6 +191,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | parameter | description |
 | --- | --- |
 | TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
 | placeholder | Placeholder string |
 | dataKey | The name of the data key in PlaceholderData |

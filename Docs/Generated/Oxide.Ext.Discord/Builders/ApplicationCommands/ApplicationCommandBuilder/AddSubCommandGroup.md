@@ -3,17 +3,19 @@
 Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain
 
 ```csharp
-public SubCommandGroupBuilder AddSubCommandGroup(string name, string description)
+public ApplicationCommandBuilder AddSubCommandGroup(string name, string description, 
+    Action<SubCommandGroupBuilder> builder)
 ```
 
 | parameter | description |
 | --- | --- |
 | name | Name of the command |
 | description | Description of the command |
+| builder | Callback with the [`SubCommandGroupBuilder`](../SubCommandGroupBuilder.md) |
 
 ## Return Value
 
-[`SubCommandGroupBuilder`](../SubCommandGroupBuilder.md)
+this
 
 ## Exceptions
 

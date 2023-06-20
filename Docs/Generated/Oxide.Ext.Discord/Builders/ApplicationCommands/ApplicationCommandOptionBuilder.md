@@ -1,16 +1,30 @@
 # ApplicationCommandOptionBuilder class
 
-Represents a Subcommand Option Builder for Application Commands
+Represents a Subcommand Option Builder for SubCommands
 
 ```csharp
-public class ApplicationCommandOptionBuilder : 
-    BaseCommandOptionBuilder<ApplicationCommandOptionBuilder, ApplicationCommandBuilder>
+public class ApplicationCommandOptionBuilder
 ```
+
+## Public Members
+
+| name | description |
+| --- | --- |
+| [AddChoice](ApplicationCommandOptionBuilder/AddChoice.md)(…) | Adds a choice to this option of type string (3 methods) |
+| [AddDescriptionLocalization](ApplicationCommandOptionBuilder/AddDescriptionLocalization.md)(…) | Adds Application Command Option Description Localization |
+| [AddDescriptionLocalizations](ApplicationCommandOptionBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](ApplicationCommandOptionBuilder/AddNameLocalization.md)(…) | Adds Application Command Option Name Localization |
+| [AddNameLocalizations](ApplicationCommandOptionBuilder/AddNameLocalizations.md)(…) | Adds command name localizations for a given plugin and lang key |
+| [AutoComplete](ApplicationCommandOptionBuilder/AutoComplete.md)(…) | Enable auto complete for the option |
+| [ChannelTypes](ApplicationCommandOptionBuilder/ChannelTypes.md)(…) | Set's the channel types for the option |
+| [MaxLength](ApplicationCommandOptionBuilder/MaxLength.md)(…) | Max Length for String Option Max Of 6000 |
+| [MaxValue](ApplicationCommandOptionBuilder/MaxValue.md)(…) | Max Value for Integer Option (2 methods) |
+| [MinLength](ApplicationCommandOptionBuilder/MinLength.md)(…) | Min Length for String Option Max Of 6000 |
+| [MinValue](ApplicationCommandOptionBuilder/MinValue.md)(…) | Min Value for Integer Option (2 methods) |
+| [Required](ApplicationCommandOptionBuilder/Required.md)(…) | Set the required state for the option |
 
 ## See Also
 
-* class [BaseCommandOptionBuilder&lt;TBuilder,TParent&gt;](./BaseBuilders/BaseCommandOptionBuilder-2.md)
-* class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationCommandOptionBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.cs)

@@ -148,9 +148,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the command</param>
         /// <param name="description">Description of the command</param>
-        /// <returns><see cref="SubCommandGroupBuilder"/></returns>
+        /// <param name="builder">Callback with the <see cref="SubCommandGroupBuilder"/></param>
+        /// <returns>this</returns>
         /// <exception cref="Exception">Thrown if trying to add a subcommand group to</exception>
-        public SubCommandGroupBuilder AddSubCommandGroup(string name, string description)
+        public ApplicationCommandBuilder AddSubCommandGroup(string name, string description, Action<SubCommandGroupBuilder> builder)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -159,8 +160,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             ApplicationCommandBuilderException.ThrowIfAddingSubCommandToMessageOrUser(this);
 
             _chosenType = CommandOptionType.SubCommandGroup;
+            builder(new SubCommandGroupBuilder(Command.Options, name, description, _defaultLanguage));
 
-            return new SubCommandGroupBuilder(name, description, this, _defaultLanguage);
+            return this;
         }
 
         /// <summary>
@@ -168,9 +170,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// </summary>
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description for the sub command</param>
-        /// <returns><see cref="ApplicationSubCommandBuilder"/></returns>
+        /// <param name="builder">Callback with the <see cref="ApplicationSubCommandBuilder"/>"/></param>
+        /// <returns>this</returns>
         /// <exception cref="Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
-        public ApplicationSubCommandBuilder AddSubCommand(string name, string description)
+        public ApplicationCommandBuilder AddSubCommand(string name, string description, Action<ApplicationSubCommandBuilder> builder)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -180,7 +183,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            return new ApplicationSubCommandBuilder(Command.Options, name, description, this, _defaultLanguage);
+            builder(new ApplicationSubCommandBuilder(Command.Options, name, description, _defaultLanguage));
+                
+            return this;
         }
 
         /// <summary>
@@ -189,30 +194,25 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
         /// <param name="name">Name of the option</param>
         /// <param name="description">Description for the option</param>
-        /// <returns><see cref="ApplicationCommandOptionBuilder"/></returns>
-        public ApplicationCommandOptionBuilder AddOption(CommandOptionType type, string name, string description)
+        /// <param name="builder">Callback with the <see cref="ApplicationCommandOptionBuilder"/></param>
+        /// <returns>this</returns>
+        public ApplicationCommandBuilder AddOption(CommandOptionType type, string name, string description, Action<ApplicationCommandOptionBuilder> builder)
         {
             ApplicationCommandBuilderException.ThrowIfMixingCommandOptions(_chosenType);
-
-            return new ApplicationCommandOptionBuilder(Command.Options, type, name, description, this, _defaultLanguage);
+            builder(new ApplicationCommandOptionBuilder(Command.Options, type, name, description, _defaultLanguage));
+            return this;
         }
 
         /// <summary>
         /// Returns the created command
         /// </summary>
         /// <returns></returns>
-        public CommandCreate Build()
-        {
-            return Command;
-        }
+        public CommandCreate Build() => Command;
 
         /// <summary>
         /// Returns a built <see cref="DiscordCommandLocalization"/> using the provided name / descriptions as the default
         /// </summary>
         /// <returns></returns>
-        public DiscordCommandLocalization BuildCommandLocalization(string lang = DiscordLocales.DefaultServerLanguage)
-        {
-            return new DiscordCommandLocalization(Command, ServerLocale.Parse(lang));
-        }
+        public DiscordCommandLocalization BuildCommandLocalization(string lang = DiscordLocales.DefaultServerLanguage) => new DiscordCommandLocalization(Command, ServerLocale.Parse(lang));
     }
 }

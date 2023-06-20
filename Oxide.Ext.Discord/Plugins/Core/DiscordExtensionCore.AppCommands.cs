@@ -30,14 +30,10 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             ApplicationCommandBuilder builder = new ApplicationCommandBuilder(AppCommandKeys.DeCommand, "Discord Extension Commands", ApplicationCommandType.ChatInput)
                                                 .AddDefaultPermissions(PermissionFlags.Administrator)
-                                                    .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands")
-                                                        .AddSubCommand(AppCommandKeys.DeleteAppCommand, "Delete a registered application command")
-                                                            .AddOption(CommandOptionType.String, AppCommandKeys.DeleteAppCommandArgument, "Application Command To Delete")
-                                                            .AutoComplete()
-                                                            .Required()
-                                                            .Build()
-                                                        .Build()
-                                                    .Build();
+                                                .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands",
+                                                    group => group.AddSubCommand(AppCommandKeys.DeleteAppCommand, "Delete a registered application command",
+                                                        sub => sub.AddOption(CommandOptionType.String, AppCommandKeys.DeleteAppCommandArgument, "Application Command To Delete",
+                                                            options => options.AutoComplete().Required())));
 
             CommandCreate create = builder.Build();
             DiscordCommandLocalization localization = builder.BuildCommandLocalization();

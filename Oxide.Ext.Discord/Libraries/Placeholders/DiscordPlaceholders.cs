@@ -178,15 +178,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             
             _placeholders[placeholder] = holder;
         }
+
         
         /// <summary>
-        /// Registers a placeholder
+        /// Registers a placeholder that uses the dataKey value
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
-        /// <param name="callback">Callback Method for the placeholder</param>
-        /// <exception cref="ArgumentNullException"></exception>
-        public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder,string dataKey)
+        /// <param name="dataKey"></param>
+        /// <typeparam name="TData">Type that is registered in the PlaceholderData</typeparam>
+        /// <exception cref="ArgumentNullException">Thrown if placeholder or plugin is null</exception>
+        public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string dataKey)
         {
             if (string.IsNullOrEmpty(placeholder)) throw new ArgumentNullException(nameof(placeholder));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
@@ -204,7 +206,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 _internalPlaceholders[placeholder] = holder;
             }
         }
-        
+
         /// <summary>
         /// Registers a placeholder of type {T}
         /// </summary>
@@ -212,6 +214,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="placeholder">Placeholder string</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="TData">Type of the data key</typeparam>
+        /// <typeparam name="TResult">The return type of the placeholder callback</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, Func<TData, TResult> callback)
         {
@@ -226,6 +229,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="dataKey">The name of the data key in PlaceholderData</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="TData">Type of the data key</typeparam>
+        /// <typeparam name="TResult">The return type of the placeholder callback</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, Func<TData, TResult> callback)
         {
@@ -255,6 +259,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="placeholder">Placeholder string</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="TData">Type of the data key</typeparam>
+        /// <typeparam name="TResult">The return type of the placeholder callback</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, Func<PlaceholderState, TData, TResult> callback)
         {
@@ -269,6 +274,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="dataKey">The name of the data key in PlaceholderData</param>
         /// <param name="callback">Callback Method for the placeholder</param>
         /// <typeparam name="TData">Type of the data key</typeparam>
+        /// <typeparam name="TResult">The return type of the placeholder callback</typeparam>
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, Func<PlaceholderState, TData, TResult> callback)
         {

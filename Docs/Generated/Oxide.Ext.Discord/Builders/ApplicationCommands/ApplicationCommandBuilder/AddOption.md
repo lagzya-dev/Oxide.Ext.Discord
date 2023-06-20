@@ -3,8 +3,8 @@
 Adds a command option.
 
 ```csharp
-public ApplicationCommandOptionBuilder AddOption(CommandOptionType type, string name, 
-    string description)
+public ApplicationCommandBuilder AddOption(CommandOptionType type, string name, string description, 
+    Action<ApplicationCommandOptionBuilder> builder)
 ```
 
 | parameter | description |
@@ -12,15 +12,16 @@ public ApplicationCommandOptionBuilder AddOption(CommandOptionType type, string 
 | type | The type of option. Cannot be SubCommand or SubCommandGroup |
 | name | Name of the option |
 | description | Description for the option |
+| builder | Callback with the [`ApplicationCommandOptionBuilder`](../ApplicationCommandOptionBuilder.md) |
 
 ## Return Value
 
-[`ApplicationCommandOptionBuilder`](../ApplicationCommandOptionBuilder.md)
+this
 
 ## See Also
 
-* class [ApplicationCommandOptionBuilder](../ApplicationCommandOptionBuilder.md)
 * enum [CommandOptionType](../../../Entities/Interactions/ApplicationCommands/CommandOptionType.md)
+* class [ApplicationCommandOptionBuilder](../ApplicationCommandOptionBuilder.md)
 * class [ApplicationCommandBuilder](../ApplicationCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](../ApplicationCommandBuilder.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

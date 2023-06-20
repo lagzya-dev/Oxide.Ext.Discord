@@ -43,19 +43,9 @@
 | public type | description |
 | --- | --- |
 | class [ApplicationCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.md) | Builder to use when building application commands |
-| class [ApplicationCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.md) | Represents a Subcommand Option Builder for Application Commands |
+| class [ApplicationCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
 | class [ApplicationSubCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.md) | Application Sub Command Builder |
-| class [ApplicationSubCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
-| class [GroupSubCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/GroupSubCommandBuilder.md) | Application Sub Command Builder |
-| class [GroupSubCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/GroupSubCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
 | class [SubCommandGroupBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/SubCommandGroupBuilder.md) | Builder for Sub Command Groups |
-
-## Oxide.Ext.Discord.Builders.ApplicationCommands.BaseBuilders namespace
-
-| public type | description |
-| --- | --- |
-| abstract class [BaseCommandOptionBuilder&lt;TBuilder,TParent&gt;](./Oxide.Ext.Discord/Builders/ApplicationCommands/BaseBuilders/BaseCommandOptionBuilder-2.md) | Builder for command options |
-| abstract class [BaseSubCommandBuilder&lt;TBuilder,TParent&gt;](./Oxide.Ext.Discord/Builders/ApplicationCommands/BaseBuilders/BaseSubCommandBuilder-2.md) | Base Subcommand Builder |
 
 ## Oxide.Ext.Discord.Builders.Interactions namespace
 

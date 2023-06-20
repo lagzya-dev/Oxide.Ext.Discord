@@ -14,7 +14,6 @@ public class SubCommandGroupBuilder
 | [AddNameLocalization](SubCommandGroupBuilder/AddNameLocalization.md)(…) | Adds Application Sub Command Group Name Localizations |
 | [AddNameLocalizations](SubCommandGroupBuilder/AddNameLocalizations.md)(…) | Adds command name localizations for a given plugin and lang key |
 | [AddSubCommand](SubCommandGroupBuilder/AddSubCommand.md)(…) | Adds a sub command to this sub command group |
-| [Build](SubCommandGroupBuilder/Build.md)() | Returns the built [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
 
 ## See Also
 

@@ -3,17 +3,19 @@
 Adds a sub command to the root command
 
 ```csharp
-public ApplicationSubCommandBuilder AddSubCommand(string name, string description)
+public ApplicationCommandBuilder AddSubCommand(string name, string description, 
+    Action<ApplicationSubCommandBuilder> builder)
 ```
 
 | parameter | description |
 | --- | --- |
 | name | Name of the sub command |
 | description | Description for the sub command |
+| builder | Callback with the [`ApplicationSubCommandBuilder`](../ApplicationSubCommandBuilder.md)"/&gt; |
 
 ## Return Value
 
-[`ApplicationSubCommandBuilder`](../ApplicationSubCommandBuilder.md)
+this
 
 ## Exceptions
 

@@ -3,21 +3,23 @@
 Adds a sub command to this sub command group
 
 ```csharp
-public GroupSubCommandBuilder AddSubCommand(string name, string description)
+public SubCommandGroupBuilder AddSubCommand(string name, string description, 
+    Action<ApplicationSubCommandBuilder> builder)
 ```
 
 | parameter | description |
 | --- | --- |
 | name | Name of the command |
 | description | Description of the command |
+| builder | Callback with the [`ApplicationSubCommandBuilder`](../ApplicationSubCommandBuilder.md) |
 
 ## Return Value
 
-[`ApplicationSubCommandBuilder`](../ApplicationSubCommandBuilder.md)
+this
 
 ## See Also
 
-* class [GroupSubCommandBuilder](../GroupSubCommandBuilder.md)
+* class [ApplicationSubCommandBuilder](../ApplicationSubCommandBuilder.md)
 * class [SubCommandGroupBuilder](../SubCommandGroupBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](../SubCommandGroupBuilder.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
