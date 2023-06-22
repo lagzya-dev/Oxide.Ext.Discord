@@ -1,14 +1,11 @@
 # Promise.Create method
 
-Returns a promise that is currently pending
-
 ```csharp
-public static IPendingPromise Create()
+public static Promise Create()
 ```
 
 ## See Also
 
-* interface [IPendingPromise](../../Interfaces/Promises/IPendingPromise.md)
 * class [Promise](../Promise.md)
 * namespace [Oxide.Ext.Discord.Promises](../Promise.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

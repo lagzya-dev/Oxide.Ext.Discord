@@ -11,6 +11,7 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | name | description |
 | --- | --- |
 | [Promise](Promise-1/Promise.md)() | Constructor |
+| static [Create](Promise-1/Create.md)() | Returns a promise that is currently pending |
 | [Catch](Promise-1/Catch.md)(…) |  (2 methods) |
 | [Catch&lt;TException&gt;](Promise-1/Catch.md)(…) |  |
 | [ContinueWith](Promise-1/ContinueWith.md)(…) |  |
@@ -22,8 +23,8 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | [ThenAll](Promise-1/ThenAll.md)(…) |  |
 | [ThenAll&lt;TConvert&gt;](Promise-1/ThenAll.md)(…) |  |
 | static [All](Promise-1/All.md)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Create](Promise-1/Create.md)() | Returns a promise that is currently pending |
 | static [Create](Promise-1/Create.md)(…) |  |
+| static [Create&lt;TConvert&gt;](Promise-1/Create.md)() | Returns a promise that is currently pending |
 | static [Rejected](Promise-1/Rejected.md)(…) | Convert an exception directly into a rejected promise. |
 | static [Resolved](Promise-1/Resolved.md)(…) | Convert a simple value directly into a resolved promise. |
 

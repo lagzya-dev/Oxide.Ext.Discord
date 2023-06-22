@@ -20,7 +20,6 @@ public class BasePromise : BasePoolable, IRejectable
 | --- | --- |
 | [BasePromise](BasePromise/BasePromise.md)() | Constructor |
 | [Exception](BasePromise/Exception.md) | The exception when the promise is rejected. |
-| [IsInternal](BasePromise/IsInternal.md) | If this promise is an promise internal to the DiscordExtension only. This promise and all child promises are allowed to run off the main thread |
 | readonly [Rejects](BasePromise/Rejects.md) | Collection of handlers for rejected promises |
 | virtual [ClearHandlers](BasePromise/ClearHandlers.md)() | Clears all the handlers for the promises Called after completion |
 | [DelayedDispose](BasePromise/DelayedDispose.md)() | Delays disposing the promise till NextTick |

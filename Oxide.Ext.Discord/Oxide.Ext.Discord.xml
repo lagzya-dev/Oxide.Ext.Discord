@@ -20556,7 +20556,7 @@
             <param name="name"></param>
             <param name="description"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Constructor
             </summary>
@@ -20642,14 +20642,14 @@
             <param name="name"></param>
             <param name="description"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Constructor
             </summary>
             <param name="create">Command to be created</param>
             <param name="locale">Oxide lang of the localization</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Constructor
             </summary>
@@ -22409,12 +22409,6 @@
             The exception when the promise is rejected.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Promises.BasePromise.IsInternal">
-            <summary>
-            If this promise is an promise internal to the DiscordExtension only.
-            This promise and all child promises are allowed to run off the main thread
-            </summary>
-        </member>
         <member name="F:Oxide.Ext.Discord.Promises.BasePromise.Rejects">
             <summary>
             Collection of handlers for rejected promises
@@ -22465,12 +22459,6 @@
             <summary>
             Constructor for the promise
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Create">
-            <summary>
-            Returns a promise that is currently pending
-            </summary>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise.Resolved">
             <summary>
@@ -22609,6 +22597,12 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Create">
+            <summary>
+            Returns a promise that is currently pending
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Create``1">
             <summary>
             Returns a promise that is currently pending
             </summary>
@@ -24262,27 +24256,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"5bb3216d"
+            => @"b219c35f"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"5bb3216d284827806efa6b08ef97ebaf49da9b17"
+            => @"b219c35fd032b3987ded1403f02a95dcb9a774f4"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-22T09:57:34-05:00"
+            => @"2023-06-22T15:20:09-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"581"
+            => @"586"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-581-g5bb3216d"
+            => @"2.1.9-586-gb219c35f"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24317,7 +24311,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"590"
+            => @"595"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

@@ -19,7 +19,7 @@ public ArgumentLocalization()
 Constructor
 
 ```csharp
-public ArgumentLocalization(CommandOption option, ServerLocale locale)
+public ArgumentLocalization(CommandOption option, DiscordLocale locale)
 ```
 
 | parameter | description |
@@ -30,7 +30,7 @@ public ArgumentLocalization(CommandOption option, ServerLocale locale)
 ## See Also
 
 * class [CommandOption](../../../../Entities/Interactions/ApplicationCommands/CommandOption.md)
-* struct [ServerLocale](../../../Locale/ServerLocale.md)
+* struct [DiscordLocale](../../../Locale/DiscordLocale.md)
 * class [ArgumentLocalization](../ArgumentLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](../ArgumentLocalization.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

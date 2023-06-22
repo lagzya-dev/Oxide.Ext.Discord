@@ -19,7 +19,7 @@ public CommandLocalization()
 Constructor
 
 ```csharp
-public CommandLocalization(CommandCreate create, ServerLocale locale)
+public CommandLocalization(CommandCreate create, DiscordLocale locale)
 ```
 
 | parameter | description |
@@ -30,7 +30,7 @@ public CommandLocalization(CommandCreate create, ServerLocale locale)
 ## See Also
 
 * class [CommandCreate](../../../../Entities/Interactions/ApplicationCommands/CommandCreate.md)
-* struct [ServerLocale](../../../Locale/ServerLocale.md)
+* struct [DiscordLocale](../../../Locale/DiscordLocale.md)
 * class [CommandLocalization](../CommandLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](../CommandLocalization.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
@@ -42,7 +42,7 @@ public CommandLocalization(CommandCreate create, ServerLocale locale)
 Constructor
 
 ```csharp
-public CommandLocalization(CommandOption opt, ServerLocale locale)
+public CommandLocalization(CommandOption opt, DiscordLocale locale)
 ```
 
 | parameter | description |
@@ -53,7 +53,7 @@ public CommandLocalization(CommandOption opt, ServerLocale locale)
 ## See Also
 
 * class [CommandOption](../../../../Entities/Interactions/ApplicationCommands/CommandOption.md)
-* struct [ServerLocale](../../../Locale/ServerLocale.md)
+* struct [DiscordLocale](../../../Locale/DiscordLocale.md)
 * class [CommandLocalization](../CommandLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](../CommandLocalization.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

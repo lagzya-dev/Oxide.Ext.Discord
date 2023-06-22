@@ -11,6 +11,7 @@ public sealed class Promise : BasePromise, IPendingPromise
 | name | description |
 | --- | --- |
 | [Promise](Promise/Promise.md)() | Constructor for the promise |
+| static [Create](Promise/Create.md)() |  |
 | [Catch](Promise/Catch.md)(…) |  |
 | [Catch&lt;TException&gt;](Promise/Catch.md)(…) |  |
 | [ContinueWith](Promise/ContinueWith.md)(…) |  |
@@ -23,7 +24,6 @@ public sealed class Promise : BasePromise, IPendingPromise
 | [ThenAll&lt;TConvert&gt;](Promise/ThenAll.md)(…) |  |
 | [ThenSequence](Promise/ThenSequence.md)(…) |  |
 | static [All](Promise/All.md)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Create](Promise/Create.md)() | Returns a promise that is currently pending |
 | static [Rejected](Promise/Rejected.md)(…) | Convert an exception directly into a rejected promise. |
 | static [Resolved](Promise/Resolved.md)() | Returns a promise that has been resolved |
 | static [Sequence](Promise/Sequence.md)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |

@@ -1,21 +1,20 @@
-# Promise&lt;TPromised&gt;.Create method (1 of 2)
+# Promise&lt;TPromised&gt;.Create method (1 of 3)
 
 Returns a promise that is currently pending
 
 ```csharp
-public static IPendingPromise<TPromised> Create()
+public static Promise Create()
 ```
 
 ## See Also
 
-* interface [IPendingPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPendingPromise-1.md)
 * class [Promise&lt;TPromised&gt;](../Promise-1.md)
 * namespace [Oxide.Ext.Discord.Promises](../Promise-1.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
 
-# Promise&lt;TPromised&gt;.Create method (2 of 2)
+# Promise&lt;TPromised&gt;.Create method (2 of 3)
 
 ```csharp
 public static IPromise<TPromised> Create(Action<Action<TPromised>, Action<Exception>> resolver)
@@ -28,6 +27,22 @@ public static IPromise<TPromised> Create(Action<Action<TPromised>, Action<Except
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise-1.md)
+* class [Promise&lt;TPromised&gt;](../Promise-1.md)
+* namespace [Oxide.Ext.Discord.Promises](../Promise-1.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# Promise&lt;TPromised&gt;.Create&lt;TConvert&gt; method (3 of 3)
+
+Returns a promise that is currently pending
+
+```csharp
+public static Promise<TConvert> Create<TConvert>()
+```
+
+## See Also
+
 * class [Promise&lt;TPromised&gt;](../Promise-1.md)
 * namespace [Oxide.Ext.Discord.Promises](../Promise-1.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
