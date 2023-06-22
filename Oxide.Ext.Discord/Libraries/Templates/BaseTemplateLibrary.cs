@@ -67,7 +67,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         {
             if (version < minVersion)
             {
-                Logger.Error("Failed to register for plugin: {0} Name: {1} Language: {2} because the template version {3} is less than the min supported version {4}", id.GetPluginName(), id.TemplateName, id.GetLanguageName(), version, minVersion);
+                string error = $"Failed to register for plugin: {id.GetPluginName()} Name: {id.TemplateName} Language: {id.GetLanguageName()} because the template version {version} is less than the min supported version {minVersion}";
+                Logger.Error(error);
+                promise?.Reject(new Exception(error));
                 return;
             }
             
@@ -101,7 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 OnTemplateRegistered(id, template);
             }
             
-            promise.Resolve();
+            promise?.Resolve();
         }
         
         internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)

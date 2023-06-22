@@ -11,6 +11,10 @@ using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Pooling;
 
+#if PROMISE_DEBUG
+using Oxide.Ext.Discord.Logging;
+#endif
+
 namespace Oxide.Ext.Discord.Promises
 {
     /// <summary>
@@ -33,11 +37,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         protected Exception Exception;
 
-        /// <summary>
-        /// If this promise is an promise internal to the DiscordExtension only.
-        /// This promise and all child promises are allowed to run off the main thread
-        /// </summary>
-        protected bool IsInternal;
+        private bool _isDisposing;
         
         /// <summary>
         /// Collection of handlers for rejected promises
@@ -47,6 +47,10 @@ namespace Oxide.Ext.Discord.Promises
         internal readonly Action<Exception> OnReject;
         private readonly Action _onRejectInternal;
         private readonly Action _dispose;
+        
+#if PROMISE_DEBUG
+        private System.Timers.Timer _timer;
+#endif
 
         /// <summary>
         /// Constructor
@@ -76,7 +80,7 @@ namespace Oxide.Ext.Discord.Promises
         private void InvokeRejectHandlers(Exception ex)
         {
             Exception = ex;
-            if (ThreadEx.IsMain || IsInternal)
+            if (ThreadEx.IsMain)
             {
                 InvokeRejectHandlersInternal();
                 return;
@@ -89,38 +93,71 @@ namespace Oxide.Ext.Discord.Promises
         {
             for (int i = 0; i < Rejects.Count; ++i)
             {
-                Rejects[i].Reject(Exception);
+                RejectHandler reject = Rejects[i];
+#if PROMISE_DEBUG
+                DiscordExtension.GlobalLogger.Info($"Invoking Reject ID: {Id}");
+#endif
+                reject.Reject(Exception);
             }
 
             ClearHandlers();
+            DelayedDispose();
         }
         
         /// <summary>
         /// Clears all the handlers for the promises
         /// Called after completion
         /// </summary>
-        protected virtual void ClearHandlers() => Rejects.Clear();
+        protected virtual void ClearHandlers()
+        {
+            Rejects.Clear();
+        }
 
         /// <summary>
         /// Delays disposing the promise till NextTick
         /// </summary>
-        protected void DelayedDispose() => Interface.Oxide.NextTick(_dispose);
+        protected void DelayedDispose()
+        {
+            if (!_isDisposing)
+            {
+                _isDisposing = true;
+                Interface.Oxide.NextTick(_dispose);
+            }
+        }
 
         ///<inheritdoc/>
         protected override void LeavePool()
         {
             Id = SnowflakeIdFactory.Instance.Generate();
             base.LeavePool();
+#if PROMISE_DEBUG
+            Snowflake id = Id;
+            DiscordExtension.GlobalLogger.Error($"Creating Promise. ID: {Id}");
+            _timer = new System.Timers.Timer(5000);
+            _timer.Elapsed += (sender, args) =>
+            {
+                if (Id == id && !Disposed)
+                {
+                    DiscordExtension.GlobalLogger.Error($"Promise not disposed!!! ID: {Id}");
+                }
+            };
+#endif
         }
 
         ///<inheritdoc/>
         protected override void EnterPool()
         {
+#if PROMISE_DEBUG
+            DiscordExtension.GlobalLogger.Info($"Disposed Promise: {Id}");
+            _timer?.Stop();
+            _timer?.Dispose();
+            _timer = null;
+#endif
             Id = default(Snowflake);
             State = PromiseState.Pending;
             Exception = null;
             Rejects.Clear();
-            IsInternal = false;
+            _isDisposing = false;
             base.EnterPool();
         }
     }

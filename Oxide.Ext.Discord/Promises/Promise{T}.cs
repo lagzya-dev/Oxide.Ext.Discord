@@ -11,6 +11,11 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
 
+#if PROMISE_DEBUG
+using Oxide.Ext.Discord.Logging;
+#endif
+
+
 namespace Oxide.Ext.Discord.Promises
 {
     /// <summary>
@@ -45,14 +50,19 @@ namespace Oxide.Ext.Discord.Promises
         /// Returns a promise that is currently pending
         /// </summary>
         /// <returns></returns>
-        public static IPendingPromise<TPromised> Create() => Create(false);
-
-        internal static Promise<TPromised> Create(bool isInternal) => Create<TPromised>(isInternal);
-
-        private static Promise<TConvert> Create<TConvert>(bool isInternal)
+        public static Promise<TPromised> Create()
+        {
+            Promise<TPromised> promise = DiscordPool.Internal.Get<Promise<TPromised>>();
+            return promise;
+        }
+        
+        /// <summary>
+        /// Returns a promise that is currently pending
+        /// </summary>
+        /// <returns></returns>
+        public static Promise<TConvert> Create<TConvert>()
         {
             Promise<TConvert> promise = DiscordPool.Internal.Get<Promise<TConvert>>();
-            promise.IsInternal = isInternal;
             return promise;
         }
         
@@ -63,7 +73,7 @@ namespace Oxide.Ext.Discord.Promises
         /// <returns></returns>
         public static IPromise<TPromised> Create(Action<Action<TPromised>, Action<Exception>> resolver)
         {
-            Promise<TPromised> promise = Create(false);
+            Promise<TPromised> promise = Create();
             try
             {
                 resolver(promise._onResolve, promise.OnReject);
@@ -81,7 +91,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         public static IPromise<TPromised> Resolved(TPromised promisedValue)
         {
-            Promise<TPromised> promise = Create(false);
+            Promise<TPromised> promise = Create();
             promise.State = PromiseState.Resolved;
             promise._resolveValue = promisedValue;
             promise.DelayedDispose();
@@ -93,7 +103,7 @@ namespace Oxide.Ext.Discord.Promises
         /// </summary>
         public static IPromise<TPromised> Rejected(Exception ex)
         {
-            Promise<TPromised> promise = Create(false);
+            Promise<TPromised> promise = Create();
             promise.State = PromiseState.Rejected;
             promise.Exception = ex;
             promise.DelayedDispose();
@@ -118,7 +128,7 @@ namespace Oxide.Ext.Discord.Promises
         private void InvokeResolveHandlers(TPromised value)
         {
             _resolveValue = value;
-            if (ThreadEx.IsMain || IsInternal)
+            if (ThreadEx.IsMain)
             {
                 InvokeResolveHandlersInternal();
                 return;
@@ -131,10 +141,15 @@ namespace Oxide.Ext.Discord.Promises
         {
             for (int i = 0; i < _resolves.Count; i++)
             {
-                _resolves[i].Resolve(_resolveValue);
+                ResolveHandler<TPromised> resolve = _resolves[i];
+#if PROMISE_DEBUG
+                DiscordExtension.GlobalLogger.Info($"Invoking Resolve ID: {Id}");
+#endif
+                resolve.Resolve(_resolveValue);
             }
 
             ClearHandlers();
+            DelayedDispose();
         }
 
         ///<inheritdoc/>
@@ -145,7 +160,7 @@ namespace Oxide.Ext.Discord.Promises
                 return Promise.Resolved();
             }
 
-            Promise resultPromise = Promise.Create(IsInternal);
+            Promise resultPromise = Promise.Create();
 
             void ResolveHandler(TPromised _) => resultPromise.Resolve();
             void RejectHandler(Exception ex)
@@ -186,7 +201,7 @@ namespace Oxide.Ext.Discord.Promises
                 return this;
             }
 
-            Promise<TPromised> resultPromise = Create(IsInternal);
+            Promise<TPromised> resultPromise = Create();
 
             void RejectHandler(Exception ex)
             {
@@ -228,7 +243,7 @@ namespace Oxide.Ext.Discord.Promises
 
             // This version of the function must supply an onResolved.
             // Otherwise there is no way to get the converted value to pass to the resulting promise.
-            Promise<TConvert> resultPromise = Create<TConvert>(IsInternal);
+            Promise<TConvert> resultPromise = Create<TConvert>();
 
             void ResolveHandler(TPromised promised)
             {
@@ -273,7 +288,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
             }
 
-            Promise resultPromise = Promise.Create(IsInternal);
+            Promise resultPromise = Promise.Create();
             
             void ResolveHandler(TPromised promised)
             {
@@ -331,7 +346,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
             }
 
-            Promise<TPromised> resultPromise = Create(IsInternal);
+            Promise<TPromised> resultPromise = Create();
 
             PromiseCallback<TPromised> callback = PromiseCallback<TPromised>.Create(resultPromise, onResolved, onRejected);
 
@@ -358,6 +373,9 @@ namespace Oxide.Ext.Discord.Promises
             }
             else
             {
+#if PROMISE_DEBUG
+                Interface.Oxide.LogInfo($"{Id} Adding Handlers.");
+#endif
                 _resolves.Add(resolve);
                 Rejects.Add(reject);
             }
@@ -391,7 +409,7 @@ namespace Oxide.Ext.Discord.Promises
 
             int remainingCount = promises.Count;
             TPromised[] results = new TPromised[remainingCount];
-            Promise<IEnumerable<TPromised>> resultPromise = Create<IEnumerable<TPromised>>(false);
+            Promise<IEnumerable<TPromised>> resultPromise = Create<IEnumerable<TPromised>>();
 
             for (int index = 0; index < promises.Count; index++)
             {
@@ -440,7 +458,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
             }
 
-            Promise<TPromised> promise = Create(IsInternal);
+            Promise<TPromised> promise = Create();
 
             Then(promise._onResolve);
             Catch(e => 
@@ -466,7 +484,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise ContinueWith(Func<IPromise> onComplete)
         {
-            Promise promise = Promise.Create(IsInternal);
+            Promise promise = Promise.Create();
 
             Then(x => promise.Resolve());
             Catch(e => promise.Resolve());
@@ -477,7 +495,7 @@ namespace Oxide.Ext.Discord.Promises
         ///<inheritdoc/>
         public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete)
         {
-            Promise promise = Promise.Create(IsInternal);
+            Promise promise = Promise.Create();
 
             Then(x => promise.Resolve());
             Catch(e => promise.Resolve());
