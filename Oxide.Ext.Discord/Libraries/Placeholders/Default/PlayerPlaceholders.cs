@@ -13,32 +13,42 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="IPlayer.Id"/> placeholder
         /// </summary>
-        public static string Id(PlaceholderState state, IPlayer player) => player.Id;
+        public static string Id(IPlayer player) => player.Id;
         
         /// <summary>
         /// <see cref="IPlayer.Name"/> placeholder
         /// </summary>
-        public static string Name(PlaceholderState state, IPlayer player) => player.Name;
+        public static string Name(IPlayer player) => player.Name;
         
         /// <summary>
         /// <see cref="IPlayer.Health"/> placeholder
         /// </summary>
-        public static float Health(PlaceholderState state, IPlayer player) => player.Health;
+        public static float Health(IPlayer player) => player.Health;
         
         /// <summary>
         /// <see cref="IPlayer.MaxHealth"/> placeholder
         /// </summary>
-        public static float MaxHealth(PlaceholderState state, IPlayer player) => player.MaxHealth;
+        public static float MaxHealth(IPlayer player) => player.MaxHealth;
         
         /// <summary>
         /// <see cref="IPlayer.Position()"/> placeholder
         /// </summary>
-        public static GenericPosition Position(PlaceholderState state, IPlayer player) => player.Position();
+        public static GenericPosition Position(IPlayer player) => player.Position();
         
         /// <summary>
         /// <see cref="IPlayer.Ping"/> placeholder
         /// </summary>
-        public static int Ping(PlaceholderState state, IPlayer player) => player.Ping;
+        public static int Ping(IPlayer player) => player.Ping;
+
+        /// <summary>
+        /// <see cref="IPlayer.Ping"/> placeholder
+        /// </summary>
+        public static string SteamProfileUrl(IPlayer player) => $"https://steamcommunity.com/profiles/{player.Id}";
+
+        /// <summary>
+        /// <see cref="IPlayer.Ping"/> placeholder
+        /// </summary>
+        public static string SteamAvatarUrl(IPlayer player) => DiscordExtensionCore.Instance.GetPlayerAvatarUrl(player.Id);
         
         /// <summary>
         /// <see cref="PlayerExt.IsLinked"/> placeholder
@@ -65,6 +75,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health.max", dataKey, MaxHealth);
             placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
             placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.islinked", dataKey, IsLinked);
         }
     }
