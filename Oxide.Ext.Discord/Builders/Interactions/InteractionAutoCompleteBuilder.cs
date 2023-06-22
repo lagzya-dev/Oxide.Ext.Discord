@@ -204,7 +204,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         public void AddGroupsPlayerNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] groups = Permissions.GetGroups();
-            AddList(Permissions.GetUserGroups(playerId).Except(groups), filter, comparison, search);
+            AddList(groups.Except(Permissions.GetUserGroups(playerId)), filter, comparison, search);
         }
         
         /// <summary>
@@ -229,7 +229,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         public void AddPermissionsPlayerNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] perms = Permissions.GetPermissions();
-            AddList(Permissions.GetUserPermissions(playerId).Except(perms), filter, comparison, search);
+            AddList(perms.Except(Permissions.GetUserPermissions(playerId)), filter, comparison, search);
         }
 
         /// <summary>
