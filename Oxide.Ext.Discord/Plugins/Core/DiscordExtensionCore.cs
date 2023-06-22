@@ -161,7 +161,9 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 sb.Append('{');
                 sb.Append(placeholder.Key);
-                sb.Append("} - ");
+                sb.Append("} - Return Type: ");
+                sb.Append(placeholder.Value.GetReturnType().Name);
+                sb.Append(" Plugin: ");
                 sb.AppendLine(placeholder.Value.IsExtensionPlaceholder ? extensionName : placeholder.Value.PluginName);
             }
             

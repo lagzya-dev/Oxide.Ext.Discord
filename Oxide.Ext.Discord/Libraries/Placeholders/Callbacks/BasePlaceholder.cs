@@ -31,5 +31,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
         public abstract TResult InvokeInternal(PlaceholderState state);
         
         public bool IsForPlugin(Plugin plugin) => !IsExtensionPlaceholder && plugin.Id() == _pluginId;
+
+        public Type GetReturnType() => typeof(TResult);
     }
 }
