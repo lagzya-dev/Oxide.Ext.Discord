@@ -18,6 +18,8 @@ public static class PlayerPlaceholders
 | static [Ping](PlayerPlaceholders/Ping.md)(…) | Ping placeholder |
 | static [Position](PlayerPlaceholders/Position.md)(…) | Position placeholder |
 | static [RegisterPlaceholders](PlayerPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
+| static [SteamAvatarUrl](PlayerPlaceholders/SteamAvatarUrl.md)(…) | Ping placeholder |
+| static [SteamProfileUrl](PlayerPlaceholders/SteamProfileUrl.md)(…) | Ping placeholder |
 
 ## See Also
 

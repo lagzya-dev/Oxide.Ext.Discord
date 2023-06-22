@@ -4,7 +4,7 @@ Adds a command option.
 
 ```csharp
 public ApplicationCommandBuilder AddOption(CommandOptionType type, string name, string description, 
-    Action<ApplicationCommandOptionBuilder> builder)
+    Action<ApplicationCommandOptionBuilder> builder = null)
 ```
 
 | parameter | description |

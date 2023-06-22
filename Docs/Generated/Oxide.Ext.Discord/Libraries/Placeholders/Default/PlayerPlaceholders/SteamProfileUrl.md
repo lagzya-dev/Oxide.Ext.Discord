@@ -1,9 +1,9 @@
-# PlayerPlaceholders.Name method
+# PlayerPlaceholders.SteamProfileUrl method
 
-Name placeholder
+Ping placeholder
 
 ```csharp
-public static string Name(IPlayer player)
+public static string SteamProfileUrl(IPlayer player)
 ```
 
 ## See Also

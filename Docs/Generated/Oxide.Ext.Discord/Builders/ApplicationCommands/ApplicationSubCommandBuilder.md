@@ -10,6 +10,9 @@ public class ApplicationSubCommandBuilder
 
 | name | description |
 | --- | --- |
+| readonly [CommandName](ApplicationSubCommandBuilder/CommandName.md) |  |
+| readonly [GroupName](ApplicationSubCommandBuilder/GroupName.md) |  |
+| readonly [SubCommandName](ApplicationSubCommandBuilder/SubCommandName.md) |  |
 | [AddDescriptionLocalization](ApplicationSubCommandBuilder/AddDescriptionLocalization.md)(…) | Adds Application Sub Command Description Localizations |
 | [AddDescriptionLocalizations](ApplicationSubCommandBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |
 | [AddNameLocalization](ApplicationSubCommandBuilder/AddNameLocalization.md)(…) | Adds Application Sub Command Name Localization |

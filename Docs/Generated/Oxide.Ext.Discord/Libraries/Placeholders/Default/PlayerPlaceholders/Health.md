@@ -3,12 +3,11 @@
 Health placeholder
 
 ```csharp
-public static float Health(PlaceholderState state, IPlayer player)
+public static float Health(IPlayer player)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [PlayerPlaceholders](../PlayerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../PlayerPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

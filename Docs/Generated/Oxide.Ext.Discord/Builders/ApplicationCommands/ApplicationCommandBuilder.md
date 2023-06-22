@@ -11,6 +11,7 @@ public class ApplicationCommandBuilder
 | name | description |
 | --- | --- |
 | [ApplicationCommandBuilder](ApplicationCommandBuilder/ApplicationCommandBuilder.md)(…) | Creates a new Application Command Builder (2 constructors) |
+| readonly [CommandName](ApplicationCommandBuilder/CommandName.md) |  |
 | [AddDefaultPermissions](ApplicationCommandBuilder/AddDefaultPermissions.md)(…) | Adds default command permissions |
 | [AddDescriptionLocalization](ApplicationCommandBuilder/AddDescriptionLocalization.md)(…) | Adds Application Command Description Localizations |
 | [AddDescriptionLocalizations](ApplicationCommandBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |

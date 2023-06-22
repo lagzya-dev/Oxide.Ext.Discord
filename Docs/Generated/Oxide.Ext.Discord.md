@@ -43,9 +43,9 @@
 | public type | description |
 | --- | --- |
 | class [ApplicationCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.md) | Builder to use when building application commands |
+| class [ApplicationCommandGroupBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandGroupBuilder.md) | Builder for Sub Command Groups |
 | class [ApplicationCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
 | class [ApplicationSubCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.md) | Application Sub Command Builder |
-| class [SubCommandGroupBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/SubCommandGroupBuilder.md) | Builder for Sub Command Groups |
 
 ## Oxide.Ext.Discord.Builders.Interactions namespace
 

@@ -3,12 +3,11 @@
 Position placeholder
 
 ```csharp
-public static GenericPosition Position(PlaceholderState state, IPlayer player)
+public static GenericPosition Position(IPlayer player)
 ```
 
 ## See Also
 
-* class [PlaceholderState](../../PlaceholderState.md)
 * class [PlayerPlaceholders](../PlayerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](../PlayerPlaceholders.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

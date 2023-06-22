@@ -4,7 +4,7 @@ Adds a sub command to the root command
 
 ```csharp
 public ApplicationCommandBuilder AddSubCommand(string name, string description, 
-    Action<ApplicationSubCommandBuilder> builder)
+    Action<ApplicationSubCommandBuilder> builder = null)
 ```
 
 | parameter | description |

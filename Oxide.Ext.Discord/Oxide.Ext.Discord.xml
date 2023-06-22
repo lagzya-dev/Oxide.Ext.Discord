@@ -214,7 +214,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder})">
             <summary>
             Creates a new SubCommandGroup
             SubCommandGroups contain subcommands
@@ -222,7 +222,7 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder"/></param>
             <returns>this</returns>
             <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
         </member>
@@ -258,12 +258,58 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder">
+            <summary>
+            Builder for Sub Command Groups
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command name localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Adds Application Sub Command Group Name Localizations
+            </summary>
+            <param name="name">Localized name value</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+            <summary>
+            Adds command description localizations for a given plugin and lang key
+            </summary>
+            <param name="plugin">Plugin containing the localizations</param>
+            <param name="langKey">Lang Key containing the localized text</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+            <summary>
+            Adds Application Command Description Localizations
+            </summary>
+            <param name="description">Localized description value</param>
+            <param name="serverLocale">Oxide lang the value is in</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
+            <summary>
+            Adds a sub command to this sub command group
+            </summary>
+            <param name="name">Name of the command</param>
+            <param name="description">Description of the command</param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></param>
+            <returns>this</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder">
             <summary>
             Represents a Subcommand Option Builder for SubCommands
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType,System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale,System.String,System.String,System.String)">
             <summary>
             Constructor
             </summary>
@@ -406,17 +452,7 @@
             Application Sub Command Builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder._subCommand">
-            <summary>
-            The subcommand for the builder
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder._defaultLanguage">
-            <summary>
-            Default language being built
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption},System.String,System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale,System.String,System.String)">
             <summary>
             Constructor
             </summary>
@@ -467,52 +503,6 @@
             <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if type is <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.SubCommand"/> or <see cref="F:Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionType.SubCommandGroup"/></exception>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder">
-            <summary>
-            Builder for Sub Command Groups
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Adds command name localizations for a given plugin and lang key
-            </summary>
-            <param name="plugin">Plugin containing the localizations</param>
-            <param name="langKey">Lang Key containing the localized text</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
-            <summary>
-            Adds Application Sub Command Group Name Localizations
-            </summary>
-            <param name="name">Localized name value</param>
-            <param name="serverLocale">Oxide lang the value is in</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
-            <summary>
-            Adds command description localizations for a given plugin and lang key
-            </summary>
-            <param name="plugin">Plugin containing the localizations</param>
-            <param name="langKey">Lang Key containing the localized text</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.Locale.ServerLocale)">
-            <summary>
-            Adds Application Command Description Localizations
-            </summary>
-            <param name="description">Localized description value</param>
-            <param name="serverLocale">Oxide lang the value is in</param>
-            <returns>This</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.SubCommandGroupBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
-            <summary>
-            Adds a sub command to this sub command group
-            </summary>
-            <param name="name">Name of the command</param>
-            <param name="description">Description of the command</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></param>
-            <returns>this</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder">
             <summary>
@@ -19410,32 +19400,42 @@
             <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> placeholders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Id(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Id(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Id"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Name(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Name(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Name"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Health(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Health(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Health"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.MaxHealth(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.MaxHealth(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.MaxHealth"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Position(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Position(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="M:Oxide.Core.Libraries.Covalence.IPlayer.Position"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Ping(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Ping(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Ping"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.SteamProfileUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Ping"/> placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.SteamAvatarUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Ping"/> placeholder
             </summary>
@@ -24262,27 +24262,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"dc05b8a0"
+            => @"71889300"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"dc05b8a090fba7549c93d1650018e33eb1723a9a"
+            => @"71889300132b169566d34f3ac3300be5ac64289b"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-20T15:56:26-05:00"
+            => @"2023-06-21T13:55:00-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"574"
+            => @"576"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-574-gdc05b8a0"
+            => @"2.1.9-576-g71889300"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24317,7 +24317,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"583"
+            => @"585"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

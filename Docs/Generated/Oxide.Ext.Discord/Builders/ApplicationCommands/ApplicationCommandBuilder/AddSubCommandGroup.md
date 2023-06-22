@@ -4,14 +4,14 @@ Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root com
 
 ```csharp
 public ApplicationCommandBuilder AddSubCommandGroup(string name, string description, 
-    Action<SubCommandGroupBuilder> builder)
+    Action<ApplicationCommandGroupBuilder> builder)
 ```
 
 | parameter | description |
 | --- | --- |
 | name | Name of the command |
 | description | Description of the command |
-| builder | Callback with the [`SubCommandGroupBuilder`](../SubCommandGroupBuilder.md) |
+| builder | Callback with the [`ApplicationCommandGroupBuilder`](../ApplicationCommandGroupBuilder.md) |
 
 ## Return Value
 
@@ -25,7 +25,7 @@ this
 
 ## See Also
 
-* class [SubCommandGroupBuilder](../SubCommandGroupBuilder.md)
+* class [ApplicationCommandGroupBuilder](../ApplicationCommandGroupBuilder.md)
 * class [ApplicationCommandBuilder](../ApplicationCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](../ApplicationCommandBuilder.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

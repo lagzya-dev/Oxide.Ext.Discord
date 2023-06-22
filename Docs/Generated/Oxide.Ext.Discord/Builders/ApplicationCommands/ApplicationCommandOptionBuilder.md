@@ -10,6 +10,10 @@ public class ApplicationCommandOptionBuilder
 
 | name | description |
 | --- | --- |
+| readonly [CommandName](ApplicationCommandOptionBuilder/CommandName.md) |  |
+| readonly [GroupName](ApplicationCommandOptionBuilder/GroupName.md) |  |
+| readonly [OptionName](ApplicationCommandOptionBuilder/OptionName.md) |  |
+| readonly [SubCommandName](ApplicationCommandOptionBuilder/SubCommandName.md) |  |
 | [AddChoice](ApplicationCommandOptionBuilder/AddChoice.md)(…) | Adds a choice to this option of type string (3 methods) |
 | [AddDescriptionLocalization](ApplicationCommandOptionBuilder/AddDescriptionLocalization.md)(…) | Adds Application Command Option Description Localization |
 | [AddDescriptionLocalizations](ApplicationCommandOptionBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |
