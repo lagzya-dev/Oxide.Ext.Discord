@@ -3,20 +3,23 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
 {
     internal class BaseDiscordPlugin : CSPlugin
     {
-        protected Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
+        protected readonly Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
         protected readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
-        protected Oxide.Core.Libraries.Plugins Plugins = Interface.Oxide.GetLibrary<Oxide.Core.Libraries.Plugins>();
-        protected Permission Permission = Interface.Oxide.GetLibrary<Permission>();
+        protected readonly Oxide.Core.Libraries.Plugins Plugins = Interface.Oxide.GetLibrary<Oxide.Core.Libraries.Plugins>();
+        protected readonly Permission Permission = Interface.Oxide.GetLibrary<Permission>();
+        internal readonly PluginTimers Timer;
 
         protected BaseDiscordPlugin()
         {
             Author = DiscordExtension.Authors;
             Version = DiscordExtension.ExtensionVersion;
+            Timer = new PluginTimers(this);
         }
         
         #region Helper Methods
