@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Hooks;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Pooling.Pools;
@@ -63,8 +64,27 @@ namespace Oxide.Ext.Discord.Hooks
 
         #region Internal Handling
         private static bool CanCallHook(DiscordHookCache cache, string hookName, out List<Plugin> plugins) => cache.TryGetHook(hookName, out plugins) && plugins.Count != 0;
-        private static void CallHookInternal(Plugin plugin, string hookName, object[] args) => PluginHookCallback.Start(plugin, hookName, args);
-        private static void CallHookInternal(List<Plugin> plugins, string hookName, object[] args) => PluginHookCallback.Start(plugins, hookName, args);
+        private static void CallHookInternal(Plugin plugin, string hookName, object[] args)
+        {
+            if (ThreadEx.IsMain)
+            {
+                CallHook(plugin, hookName, args);
+                return;
+            }
+            
+            PluginHookCallback.Start(plugin, hookName, args);
+        }
+
+        private static void CallHookInternal(List<Plugin> plugins, string hookName, object[] args)
+        {
+            if (ThreadEx.IsMain)
+            {
+                CallHook(plugins, hookName, args);
+                return;
+            }
+            
+            PluginHookCallback.Start(plugins, hookName, args);
+        }
 
         private static void CallHookInternal(Plugin plugin, string name) => CallHookInternal(plugin, name, GetArgs());
         private static void CallHookInternal<T0>(Plugin plugin, string name, T0 arg0) => CallHookInternal(plugin, name, GetArgs(arg0));
@@ -168,6 +188,32 @@ namespace Oxide.Ext.Discord.Hooks
             args[3] = arg3;
             args[4] = arg4;
             return args;
+        }
+        #endregion
+
+        #region HandleCall
+        internal static void CallHook(Plugin plugin, string name, object[] args)
+        {
+            if (plugin != null && plugin.IsLoaded)
+            {
+                plugin.CallHook(name, args);
+            }
+            
+            ArrayPool<object>.Instance.Free(ref args);
+        }
+        
+        internal static void CallHook(List<Plugin> plugins, string name, object[] args)
+        {
+            for (int index = 0; index < plugins.Count; index++)
+            {
+                Plugin plugin = plugins[index];
+                if (plugin.IsLoaded)
+                {
+                    plugin.CallHook(name, args);
+                }
+            }
+            
+            ArrayPool<object>.Instance.Free(ref args);
         }
         #endregion
     }

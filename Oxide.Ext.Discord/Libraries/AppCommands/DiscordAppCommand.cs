@@ -77,7 +77,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
 
             handler.AddAppCommand(new AppCommand(plugin, applicationId, commandId, callback, _logger));
-            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback);
+            _logger.Debug("Adding App Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback.Method.Name);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
             
             handler.AddAppCommand(new AutoCompleteCommand(plugin, applicationId, commandId, callback, _logger));
-            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback);
+            _logger.Debug("Adding Auto Complete Command For: {0} Command: {1} Callback: {2}", plugin.PluginName(), commandId, callback.Method.Name);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
             
             handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
-            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback);
+            _logger.Debug("Adding Message Component Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback.Method.Name);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             }
             
             handler.AddAppCommand(new ComponentCommand(plugin, applicationId, commandId, callback, _logger));
-            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback);
+            _logger.Debug("Adding Modal Submit Command For: {0} CustomId: {1} Callback: {2}", plugin.PluginName(), customId, callback.Method.Name);
         }
 
         /// <summary>

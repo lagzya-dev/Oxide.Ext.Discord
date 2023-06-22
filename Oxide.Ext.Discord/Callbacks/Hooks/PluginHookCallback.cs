@@ -1,28 +1,28 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {
     internal class PluginHookCallback : BaseNextTickCallback
     {
-        private string _hook;
+        private string _name;
         private object[] _args;
         private Plugin _plugin;
         private List<Plugin> _plugins;
 
-        public static void Start(Plugin plugin, string hook, object[] args)
+        public static void Start(Plugin plugin, string name, object[] args)
         {
             PluginHookCallback callback = DiscordPool.Internal.Get<PluginHookCallback>();
-            callback.Init(plugin, hook, args);
+            callback.Init(plugin, name, args);
             callback.Run();
         }
         
-        public static void Start(List<Plugin> plugins, string hook, object[] args)
+        public static void Start(List<Plugin> plugins, string name, object[] args)
         {
             PluginHookCallback callback = DiscordPool.Internal.Get<PluginHookCallback>();
-            callback.Init(plugins, hook, args);
+            callback.Init(plugins, name, args);
             callback.Run();
         }
         
@@ -40,33 +40,24 @@ namespace Oxide.Ext.Discord.Callbacks.Hooks
         
         private void Init(string hook, object[] args)
         {
-            _hook = hook;
+            _name = hook;
             _args = args;
         }
 
         protected override void HandleCallback()
         {
-            if (_plugin != null && _plugin.IsLoaded)
+            if (_plugin != null)
             {
-                _plugin.CallHook(_hook, _args);
+                DiscordHook.CallHook(_plugin, _name, _args);
                 return;
             }
             
-            for (int index = 0; index < _plugins.Count; index++)
-            {
-                Plugin plugin = _plugins[index];
-                if (plugin.IsLoaded)
-                {
-                    plugin.CallHook(_hook, _args);
-                }
-            }
-            
-            ArrayPool<object>.Instance.Free(ref _args);
+            DiscordHook.CallHook(_plugins, _name, _args);
         }
 
         protected override void EnterPool()
         {
-            _hook = null;
+            _name = null;
             _args = null;
             _plugin = null;
             _plugins = null;
