@@ -9,18 +9,22 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// <summary>
     /// Builder for Sub Command Groups
     /// </summary>
-    public class SubCommandGroupBuilder
+    public class ApplicationCommandGroupBuilder
     {
         private readonly CommandOption _option;
         private readonly ServerLocale _defaultLanguage;
+        public readonly string CommandName;
+        public readonly string GroupName;
 
-        internal SubCommandGroupBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage)
+        internal ApplicationCommandGroupBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage, string commandName)
         {
             _defaultLanguage = defaultLanguage;
             _option = new CommandOption(name, description, CommandOptionType.SubCommandGroup, new List<CommandOption>());
             options.Add(_option);
             AddNameLocalization(name, _defaultLanguage);
             AddDescriptionLocalization(description, _defaultLanguage);
+            CommandName = commandName;
+            GroupName = name;
         }
 
         /// <summary>
@@ -30,7 +34,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
         [Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
-        public SubCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
+        public ApplicationCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
         {
             _option.NameLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return this;
@@ -42,7 +46,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Localized name value</param>
         /// <param name="serverLocale">Oxide lang the value is in</param>
         /// <returns>This</returns>
-        public SubCommandGroupBuilder AddNameLocalization(string name, ServerLocale serverLocale)
+        public ApplicationCommandGroupBuilder AddNameLocalization(string name, ServerLocale serverLocale)
         {
             DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
             if (discordLocale.IsValid)
@@ -60,7 +64,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="langKey">Lang Key containing the localized text</param>
         /// <returns></returns>
         [Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
-        public SubCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
+        public ApplicationCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
         {
             _option.DescriptionLocalizations = DiscordLocales.Instance.GetDiscordLocalizations(plugin, langKey);
             return this;
@@ -72,7 +76,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="description">Localized description value</param>
         /// <param name="serverLocale">Oxide lang the value is in</param>
         /// <returns>This</returns>
-        private SubCommandGroupBuilder AddDescriptionLocalization(string description, ServerLocale serverLocale)
+        private ApplicationCommandGroupBuilder AddDescriptionLocalization(string description, ServerLocale serverLocale)
         {
             DiscordLocale discordLocale = serverLocale.GetDiscordLocale();
             if (discordLocale.IsValid)
@@ -90,9 +94,9 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="description">Description of the command</param>
         /// <param name="builder">Callback with the <see cref="ApplicationSubCommandBuilder"/></param>
         /// <returns>this</returns>
-        public SubCommandGroupBuilder AddSubCommand(string name, string description, Action<ApplicationSubCommandBuilder> builder)
+        public ApplicationCommandGroupBuilder AddSubCommand(string name, string description, Action<ApplicationSubCommandBuilder> builder = null)
         {
-            builder(new ApplicationSubCommandBuilder(_option.Options, name, description, _defaultLanguage));
+            builder?.Invoke(new ApplicationSubCommandBuilder(_option.Options, name, description, _defaultLanguage, CommandName, GroupName));
             return this;
         }
     }

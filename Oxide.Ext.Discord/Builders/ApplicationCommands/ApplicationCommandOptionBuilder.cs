@@ -16,6 +16,11 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     {
         private readonly CommandOption _option;
 
+        public readonly string CommandName;
+        public readonly string GroupName;
+        public readonly string SubCommandName;
+        public readonly string OptionName;
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -24,7 +29,7 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name"></param>
         /// <param name="description"></param>
         /// <param name="defaultLanguage"></param>
-        internal ApplicationCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, ServerLocale defaultLanguage)
+        internal ApplicationCommandOptionBuilder(List<CommandOption> parent, CommandOptionType type, string name, string description, ServerLocale defaultLanguage, string commandName, string groupName, string subCommandName)
         {
             InvalidCommandOptionException.ThrowIfInvalidName(name, false);
             InvalidCommandOptionException.ThrowIfInvalidDescription(description, false);
@@ -35,6 +40,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             parent.Add(_option);
             AddNameLocalization(name, defaultLanguage);
             AddDescriptionLocalization(description, defaultLanguage);
+            CommandName = commandName;
+            GroupName = groupName;
+            SubCommandName = name;
+            OptionName = name;
         }
 
         /// <summary>

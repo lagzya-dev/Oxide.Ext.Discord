@@ -12,16 +12,13 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     /// </summary>
     public class ApplicationSubCommandBuilder
     {
-        /// <summary>
-        /// The subcommand for the builder
-        /// </summary>
         private readonly CommandOption _subCommand;
-        
-        /// <summary>
-        /// Default language being built
-        /// </summary>
         private readonly ServerLocale _defaultLanguage;
 
+        public readonly string CommandName;
+        public readonly string GroupName;
+        public readonly string SubCommandName;
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -29,13 +26,16 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="defaultLanguage"></param>
-        internal ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage)
+        internal ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage, string commandName, string groupName)
         {
             _subCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());
             options.Add(_subCommand);
             _defaultLanguage = defaultLanguage;
             AddNameLocalization(name, _defaultLanguage);
             AddDescriptionLocalization(description, _defaultLanguage);
+            CommandName = commandName;
+            GroupName = groupName;
+            SubCommandName = name;
         }
 
         /// <summary>
@@ -107,10 +107,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="builder">Callback with the <see cref="ApplicationCommandOptionBuilder"/></param>
         /// <returns>This</returns>
         /// <exception cref="Exception">Thrown if type is <see cref="CommandOptionType.SubCommand"/> or <see cref="CommandOptionType.SubCommandGroup"/></exception>
-        public ApplicationSubCommandBuilder AddOption(CommandOptionType type, string name, string description, Action<ApplicationCommandOptionBuilder> builder)
+        public ApplicationSubCommandBuilder AddOption(CommandOptionType type, string name, string description, Action<ApplicationCommandOptionBuilder> builder = null)
         {
             ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
-            builder(new ApplicationCommandOptionBuilder(_subCommand.Options, type, name, description, _defaultLanguage));
+            builder?.Invoke(new ApplicationCommandOptionBuilder(_subCommand.Options, type, name, description, _defaultLanguage, CommandName, GroupName, SubCommandName));
             return this;
         }
     }
