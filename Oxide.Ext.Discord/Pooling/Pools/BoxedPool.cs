@@ -13,6 +13,13 @@ namespace Oxide.Ext.Discord.Pooling.Pools
         protected override void OnGetItem(Boxed<T> item)
         {
             item.LeavePool();
+            item._pool = PluginPool;
+        }
+
+        protected override bool OnFreeItem(ref Boxed<T> item)
+        {
+            item._pool = null;
+            return base.OnFreeItem(ref item);
         }
 
         protected override Boxed<T> CreateNew() => new Boxed<T>();

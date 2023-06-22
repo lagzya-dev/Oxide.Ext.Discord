@@ -208,9 +208,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (typeof(T).IsValueType())
             {
-                Boxed<T> boxed = DiscordPool.Internal.GetBoxed(obj);
-                _data[name] = boxed;
-                _boxed.Add(boxed);
+                AddBoxed(name, DiscordPool.Internal.GetBoxed(obj));
                 return this;
             }
             
@@ -221,6 +219,12 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
 
             return this;
+        }
+
+        internal void AddBoxed(string name, IBoxed boxed)
+        {
+            _data[name] = boxed;
+            _boxed.Add(boxed);
         }
 
         /// <summary>
@@ -280,9 +284,19 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns></returns>
         public PlaceholderData Clone()
         {
-            PlaceholderData data = PluginPool.GetPlaceholderData();
-            _data.CopyTo(data._data);
-            return data;
+            PlaceholderData clone = PluginPool.GetPlaceholderData();
+            foreach (KeyValuePair<string, object> data in _data)
+            {
+                if (data.Value is IBoxed boxed)
+                {
+                    clone.AddBoxed(data.Key, boxed.Copy());
+                }
+                else
+                {
+                    clone.Add(data.Key, data.Value);
+                }
+            }
+            return clone;
         }
 
         ///<inheritdoc/>
