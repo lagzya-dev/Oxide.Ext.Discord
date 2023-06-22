@@ -19,8 +19,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <summary>
         /// Constructor
         /// </summary>
-        [JsonConstructor]
         // ReSharper disable once UnusedMember.Local
+        [JsonConstructor]
         private DiscordCommandLocalization() { }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="locale">Oxide Lang for the command</param>
         public DiscordCommandLocalization(CommandCreate command, ServerLocale locale)
         {
-            Command = new CommandLocalization(command, locale);
+            Command = new CommandLocalization(command, locale.GetDiscordLocale());
         }
 
         /// <summary>

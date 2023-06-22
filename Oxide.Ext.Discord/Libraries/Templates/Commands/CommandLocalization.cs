@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// </summary>
         /// <param name="create">Command to be created</param>
         /// <param name="locale">Oxide lang of the localization</param>
-        public CommandLocalization(CommandCreate create, ServerLocale locale) : this(create.NameLocalizations[locale.Id], create.DescriptionLocalizations[locale.Id])
+        public CommandLocalization(CommandCreate create, DiscordLocale locale) : this(create.NameLocalizations[locale.Id], create.DescriptionLocalizations[locale.Id])
         {
             if (create.Options != null)
             {
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// </summary>
         /// <param name="opt"></param>
         /// <param name="locale"></param>
-        public CommandLocalization(CommandOption opt, ServerLocale locale) : this(opt.NameLocalizations[locale.Id], opt.DescriptionLocalizations[locale.Id])
+        public CommandLocalization(CommandOption opt, DiscordLocale locale) : this(opt.NameLocalizations[locale.Id], opt.DescriptionLocalizations[locale.Id])
         {
             if (opt.Options != null)
             { 
@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             }
         }
 
-        private void ProcessOption(CommandOption option, ServerLocale locale)
+        private void ProcessOption(CommandOption option, DiscordLocale locale)
         {
             if (option.Type == CommandOptionType.SubCommand || option.Type == CommandOptionType.SubCommandGroup)
             {
