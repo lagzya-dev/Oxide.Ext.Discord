@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 
@@ -43,14 +44,14 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns></returns>
         public IReadOnlyList<string> GetLoadablePlugins()
         {
-            if (_nextUpdate < DateTime.UtcNow)
+            if (_nextUpdate > DateTime.UtcNow)
             {
                 return _loadablePlugins;
             }
             
             _loadablePlugins.Clear();
             _loadablePlugins.AddRange(_pluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
-            _nextUpdate = DateTime.UtcNow + TimeSpan.FromMinutes(1);
+            _nextUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(5);
             return _loadablePlugins;
         }
 
