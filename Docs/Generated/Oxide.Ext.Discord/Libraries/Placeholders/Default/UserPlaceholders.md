@@ -10,15 +10,15 @@ public static class UserPlaceholders
 
 | name | description |
 | --- | --- |
-| static [AvatarUrl](#AvatarUrl)(…) | [`GetAvatarUrl`](../../../Entities/Users/DiscordUser/GetAvatarUrl.md) placeholder |
-| static [BannerUrl](#BannerUrl)(…) | [`GetBannerUrl`](../../../Entities/Users/DiscordUser/GetBannerUrl.md) placeholder |
-| static [Discriminator](#Discriminator)(…) | [`Discriminator`](../../../Entities/Users/DiscordUser/Discriminator.md) placeholder |
-| static [FullName](#FullName)(…) | [`FullUserName`](../../../Entities/Users/DiscordUser/FullUserName.md) placeholder |
-| static [Id](#Id)(…) | [`Id`](../../../Entities/Users/DiscordUser/Id.md) placeholder |
-| static [IsLinked](#IsLinked)(…) | [`IsLinked`](../../../Extensions/DiscordUserExt/IsLinked.md) placeholder |
-| static [Mention](#Mention)(…) | [`Mention`](../../../Entities/Users/DiscordUser/Mention.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
-| static [UserName](#UserName)(…) | [`Username`](../../../Entities/Users/DiscordUser/Username.md) placeholder |
+| static [AvatarUrl](#AvatarUrl-method)(…) | [`GetAvatarUrl`](../../../Entities/Users/DiscordUser/GetAvatarUrl.md) placeholder |
+| static [BannerUrl](#BannerUrl-method)(…) | [`GetBannerUrl`](../../../Entities/Users/DiscordUser/GetBannerUrl.md) placeholder |
+| static [Discriminator](#Discriminator-method)(…) | [`Discriminator`](../../../Entities/Users/DiscordUser/Discriminator.md) placeholder |
+| static [FullName](#FullName-method)(…) | [`FullUserName`](../../../Entities/Users/DiscordUser/FullUserName.md) placeholder |
+| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Users/DiscordUser/Id.md) placeholder |
+| static [IsLinked](#IsLinked-method)(…) | [`IsLinked`](../../../Extensions/DiscordUserExt/IsLinked.md) placeholder |
+| static [Mention](#Mention-method)(…) | [`Mention`](../../../Entities/Users/DiscordUser/Mention.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [UserName](#UserName-method)(…) | [`Username`](../../../Entities/Users/DiscordUser/Username.md) placeholder |
 
 ## See Also
 

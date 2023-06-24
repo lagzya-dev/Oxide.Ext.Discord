@@ -10,7 +10,7 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 
 | name | description |
 | --- | --- |
-| [GetSteamToDiscordIds](#GetSteamToDiscordIds)() | Returns a IDictionary of Steam ID's to Discord ID's |
+| [GetSteamToDiscordIds](#GetSteamToDiscordIds-method)() | Returns a IDictionary of Steam ID's to Discord ID's |
 
 ## See Also
 

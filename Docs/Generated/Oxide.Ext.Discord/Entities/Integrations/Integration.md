@@ -10,19 +10,19 @@ public class Integration : IntegrationUpdate, ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [Integration](#Integration)() | The default constructor. |
-| [Account](#Account) { get; set; } | Integration account information |
-| [Application](#Application) { get; set; } | The bot/OAuth2 application for discord integrations |
-| [Enabled](#Enabled) { get; set; } | Is this integration enabled |
-| [Id](#Id) { get; set; } | Integration ID |
-| [Name](#Name) { get; set; } | Integration Name |
-| [Revoked](#Revoked) { get; set; } | Has this integration been revoked |
-| [RoleId](#RoleId) { get; set; } | ID that this integration uses for "subscribers" |
-| [SubscriberCount](#SubscriberCount) { get; set; } | How many subscribers this integration has |
-| [SyncedAt](#SyncedAt) { get; set; } | When this integration was last synced |
-| [Syncing](#Syncing) { get; set; } | Is this integration syncing |
-| [Type](#Type) { get; set; } | Integration type See [`IntegrationType`](./IntegrationType.md) |
-| [User](#User) { get; set; } | User for this integration |
+| [Integration](#Integration-constructor)() | The default constructor. |
+| [Account](#Account-property) { get; set; } | Integration account information |
+| [Application](#Application-property) { get; set; } | The bot/OAuth2 application for discord integrations |
+| [Enabled](#Enabled-property) { get; set; } | Is this integration enabled |
+| [Id](#Id-property) { get; set; } | Integration ID |
+| [Name](#Name-property) { get; set; } | Integration Name |
+| [Revoked](#Revoked-property) { get; set; } | Has this integration been revoked |
+| [RoleId](#RoleId-property) { get; set; } | ID that this integration uses for "subscribers" |
+| [SubscriberCount](#SubscriberCount-property) { get; set; } | How many subscribers this integration has |
+| [SyncedAt](#SyncedAt-property) { get; set; } | When this integration was last synced |
+| [Syncing](#Syncing-property) { get; set; } | Is this integration syncing |
+| [Type](#Type-property) { get; set; } | Integration type See [`IntegrationType`](./IntegrationType.md) |
+| [User](#User-property) { get; set; } | User for this integration |
 
 ## See Also
 

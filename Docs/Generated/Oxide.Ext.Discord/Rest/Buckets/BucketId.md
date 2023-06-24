@@ -10,15 +10,15 @@ public struct BucketId : IEquatable<BucketId>
 
 | name | description |
 | --- | --- |
-| [BucketId](#BucketId)(…) | Constructor |
-| [IsValid](#IsValid) { get; } | If the bucket ID is valid |
-| readonly [Id](#Id) | ID of the bucket |
-| [Equals](#Equals)(…) |  |
-| override [Equals](#Equals)(…) |  |
-| override [GetHashCode](#GetHashCode)() |  |
-| override [ToString](#ToString)() |  |
-| [operator ==](#op_Equality) |  |
-| [operator !=](#op_Inequality) |  |
+| [BucketId](#BucketId-constructor)(…) | Constructor |
+| [IsValid](#IsValid-property) { get; } | If the bucket ID is valid |
+| readonly [Id](#Id-field) | ID of the bucket |
+| [Equals](#Equals-method)(…) |  |
+| override [Equals](#Equals-method)(…) |  |
+| override [GetHashCode](#GetHashCode-method)() |  |
+| override [ToString](#ToString-method)() |  |
+| [operator ==](#op_Equality-operator) |  |
+| [operator !=](#op_Inequality-operator) |  |
 
 ## See Also
 

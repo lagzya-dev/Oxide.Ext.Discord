@@ -10,7 +10,7 @@ public interface IPendingPromise : IPromise, IRejectable
 
 | name | description |
 | --- | --- |
-| [Resolve](#Resolve)() | Resolves the promise |
+| [Resolve](#Resolve-method)() | Resolves the promise |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class WebhookEdit
 
 | name | description |
 | --- | --- |
-| [WebhookEdit](#WebhookEdit)() | The default constructor. |
-| [Avatar](#Avatar) { get; set; } | Image for the default webhook avatar |
-| [ChannelId](#ChannelId) { get; set; } | Channel ID of the webhook |
-| [Name](#Name) { get; set; } | Name of the webhook (1-80 characters) |
-| [Validate](#Validate)() |  |
+| [WebhookEdit](#WebhookEdit-constructor)() | The default constructor. |
+| [Avatar](#Avatar-property) { get; set; } | Image for the default webhook avatar |
+| [ChannelId](#ChannelId-property) { get; set; } | Channel ID of the webhook |
+| [Name](#Name-property) { get; set; } | Name of the webhook (1-80 characters) |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

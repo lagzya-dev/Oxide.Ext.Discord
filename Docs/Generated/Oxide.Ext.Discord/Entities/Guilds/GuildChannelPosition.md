@@ -10,9 +10,9 @@ public class GuildChannelPosition
 
 | name | description |
 | --- | --- |
-| [GuildChannelPosition](#GuildChannelPosition)() | The default constructor. |
-| [Id](#Id) { get; set; } | ID of the channel or role |
-| [Position](#Position) { get; set; } | New position for the role / channel |
+| [GuildChannelPosition](#GuildChannelPosition-constructor)() | The default constructor. |
+| [Id](#Id-property) { get; set; } | ID of the channel or role |
+| [Position](#Position-property) { get; set; } | New position for the role / channel |
 
 ## See Also
 

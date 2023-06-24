@@ -10,29 +10,29 @@ public class BotClient : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [BotClient](#BotClient)(…) | Connection settings to use for the bot |
-| [Application](#Application) { get; } | Application reference for this bot |
-| [BotUser](#BotUser) { get; } | Bot User |
-| [Initialized](#Initialized) { get; } | If the connection is initialized and not disconnected |
-| [IsFullyLoaded](#IsFullyLoaded) { get; } | Returns if the bot has fully loaded. All guilds are loaded and if GuildMembers is specified all guild members have been loaded |
-| [Rest](#Rest) { get; } | Rest handler for all discord API calls |
-| readonly [Clients](#Clients) | List of all clients that are using this bot client |
-| readonly [DirectMessagesByChannelId](#DirectMessagesByChannelId) | All the direct messages that we have seen by channel Id |
-| readonly [DirectMessagesByUserId](#DirectMessagesByUserId) | All the direct messages that we have seen by User ID |
-| readonly [Servers](#Servers) | All the servers that this bot is in |
-| [AddClient](#AddClient)(…) | Add a client to this bot client |
-| [AddDirectChannel](#AddDirectChannel)(…) | Adds a Direct Message Channel to the bot cache |
-| [AddGuild](#AddGuild)(…) | Adds a guild to the list of servers a bot is in |
-| [AddGuildOrUpdate](#AddGuildOrUpdate)(…) | Adds a guild if it does not exist or updates the guild with |
-| [ConnectWebSocket](#ConnectWebSocket)() | Connects the websocket to discord. Should only be called if the websocket is disconnected |
-| [DisconnectWebsocket](#DisconnectWebsocket)(…) | Close the websocket with discord |
-| [GetChannel](#GetChannel)(…) | Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel |
-| [GetClientPluginList](#GetClientPluginList)() | Returns the list of plugins for this bot |
-| [GetGuild](#GetGuild)(…) | Returns a guild for the specific ID |
-| [LogDebug](#LogDebug)(…) |  |
-| [RemoveClient](#RemoveClient)(…) | Remove a client from the bot client If not clients are left bot will shutdown |
-| [RemoveDirectMessageChannel](#RemoveDirectMessageChannel)(…) | Removes a direct message channel if it exists |
-| [SendWebSocketCommand](#SendWebSocketCommand)(…) | Sends a websocket command |
+| [BotClient](#BotClient-constructor)(…) | Connection settings to use for the bot |
+| [Application](#Application-property) { get; } | Application reference for this bot |
+| [BotUser](#BotUser-property) { get; } | Bot User |
+| [Initialized](#Initialized-property) { get; } | If the connection is initialized and not disconnected |
+| [IsFullyLoaded](#IsFullyLoaded-property) { get; } | Returns if the bot has fully loaded. All guilds are loaded and if GuildMembers is specified all guild members have been loaded |
+| [Rest](#Rest-property) { get; } | Rest handler for all discord API calls |
+| readonly [Clients](#Clients-field) | List of all clients that are using this bot client |
+| readonly [DirectMessagesByChannelId](#DirectMessagesByChannelId-field) | All the direct messages that we have seen by channel Id |
+| readonly [DirectMessagesByUserId](#DirectMessagesByUserId-field) | All the direct messages that we have seen by User ID |
+| readonly [Servers](#Servers-field) | All the servers that this bot is in |
+| [AddClient](#AddClient-method)(…) | Add a client to this bot client |
+| [AddDirectChannel](#AddDirectChannel-method)(…) | Adds a Direct Message Channel to the bot cache |
+| [AddGuild](#AddGuild-method)(…) | Adds a guild to the list of servers a bot is in |
+| [AddGuildOrUpdate](#AddGuildOrUpdate-method)(…) | Adds a guild if it does not exist or updates the guild with |
+| [ConnectWebSocket](#ConnectWebSocket-method)() | Connects the websocket to discord. Should only be called if the websocket is disconnected |
+| [DisconnectWebsocket](#DisconnectWebsocket-method)(…) | Close the websocket with discord |
+| [GetChannel](#GetChannel-method)(…) | Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel |
+| [GetClientPluginList](#GetClientPluginList-method)() | Returns the list of plugins for this bot |
+| [GetGuild](#GetGuild-method)(…) | Returns a guild for the specific ID |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [RemoveClient](#RemoveClient-method)(…) | Remove a client from the bot client If not clients are left bot will shutdown |
+| [RemoveDirectMessageChannel](#RemoveDirectMessageChannel-method)(…) | Removes a direct message channel if it exists |
+| [SendWebSocketCommand](#SendWebSocketCommand-method)(…) | Sends a websocket command |
 
 ## See Also
 

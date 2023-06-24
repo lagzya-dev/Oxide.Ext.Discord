@@ -10,21 +10,21 @@ public class DiscordWebSocket : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [DiscordWebSocket](#DiscordWebSocket)(…) | Socket used by the BotClient |
-| [SocketHasConnected](#SocketHasConnected) { get; } | If the bot has successfully connected to the websocket at least once |
-| [ShouldReconnect](#ShouldReconnect) | If we should attempt to reconnect to discord on disconnect |
-| [ShouldResume](#ShouldResume) | If we should attempt to resume our previous session after connecting |
-| [Connect](#Connect)() | Connect to the websocket |
-| [Disconnect](#Disconnect)(…) | Disconnects the websocket from discord |
-| [IsConnected](#IsConnected)() | Returns if the websocket is in the open state |
-| [IsConnecting](#IsConnecting)() | Returns if the websocket is in the connecting state |
-| [IsDisconnected](#IsDisconnected)() | Returns if the websocket is null or is currently closing / closed |
-| [IsDisconnecting](#IsDisconnecting)() | Returns if the websocket is null or is currently closing / closed |
-| [IsPendingReconnect](#IsPendingReconnect)() | Returns if the socket is waiting to reconnect |
-| [LogDebug](#LogDebug)(…) |  |
-| [ReconnectIfRequested](#ReconnectIfRequested)() | Reconnected to the websocket is a reconnect is requested and we are not shutting down |
-| [Send](#Send)(…) | Send a command to discord over the websocket |
-| [Shutdown](#Shutdown)() | Shutdowns the websocket completely. Used when bot is being shutdown |
+| [DiscordWebSocket](#DiscordWebSocket-constructor)(…) | Socket used by the BotClient |
+| [SocketHasConnected](#SocketHasConnected-property) { get; } | If the bot has successfully connected to the websocket at least once |
+| [ShouldReconnect](#ShouldReconnect-field) | If we should attempt to reconnect to discord on disconnect |
+| [ShouldResume](#ShouldResume-field) | If we should attempt to resume our previous session after connecting |
+| [Connect](#Connect-method)() | Connect to the websocket |
+| [Disconnect](#Disconnect-method)(…) | Disconnects the websocket from discord |
+| [IsConnected](#IsConnected-method)() | Returns if the websocket is in the open state |
+| [IsConnecting](#IsConnecting-method)() | Returns if the websocket is in the connecting state |
+| [IsDisconnected](#IsDisconnected-method)() | Returns if the websocket is null or is currently closing / closed |
+| [IsDisconnecting](#IsDisconnecting-method)() | Returns if the websocket is null or is currently closing / closed |
+| [IsPendingReconnect](#IsPendingReconnect-method)() | Returns if the socket is waiting to reconnect |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [ReconnectIfRequested](#ReconnectIfRequested-method)() | Reconnected to the websocket is a reconnect is requested and we are not shutting down |
+| [Send](#Send-method)(…) | Send a command to discord over the websocket |
+| [Shutdown](#Shutdown-method)() | Shutdowns the websocket completely. Used when bot is being shutdown |
 
 ## See Also
 

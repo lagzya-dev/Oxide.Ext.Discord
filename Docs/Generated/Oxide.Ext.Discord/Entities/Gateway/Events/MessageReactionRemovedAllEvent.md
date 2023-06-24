@@ -10,10 +10,10 @@ public class MessageReactionRemovedAllEvent
 
 | name | description |
 | --- | --- |
-| [MessageReactionRemovedAllEvent](#MessageReactionRemovedAllEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The id of the channel |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [MessageId](#MessageId) { get; set; } | The id of the message |
+| [MessageReactionRemovedAllEvent](#MessageReactionRemovedAllEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [MessageId](#MessageId-property) { get; set; } | The id of the message |
 
 ## See Also
 

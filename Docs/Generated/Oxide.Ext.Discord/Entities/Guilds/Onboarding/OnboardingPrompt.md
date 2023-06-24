@@ -10,14 +10,14 @@ public class OnboardingPrompt
 
 | name | description |
 | --- | --- |
-| [OnboardingPrompt](#OnboardingPrompt)() | The default constructor. |
-| [Id](#Id) { get; set; } | ID of the prompt |
-| [InOnboarding](#InOnboarding) { get; set; } | Indicates whether the prompt is present in the onboarding flow. If false, the prompt will only appear in the Channels and Roles tab |
-| [Options](#Options) { get; set; } | Options available within the prompt |
-| [Required](#Required) { get; set; } | Indicates whether the prompt is required before a user completes the onboarding flow |
-| [SingleSelect](#SingleSelect) { get; set; } | Indicates whether users are limited to selecting one option for the prompt |
-| [Title](#Title) { get; set; } | Title of the prompt |
-| [Type](#Type) { get; set; } | Type of prompt |
+| [OnboardingPrompt](#OnboardingPrompt-constructor)() | The default constructor. |
+| [Id](#Id-property) { get; set; } | ID of the prompt |
+| [InOnboarding](#InOnboarding-property) { get; set; } | Indicates whether the prompt is present in the onboarding flow. If false, the prompt will only appear in the Channels and Roles tab |
+| [Options](#Options-property) { get; set; } | Options available within the prompt |
+| [Required](#Required-property) { get; set; } | Indicates whether the prompt is required before a user completes the onboarding flow |
+| [SingleSelect](#SingleSelect-property) { get; set; } | Indicates whether users are limited to selecting one option for the prompt |
+| [Title](#Title-property) { get; set; } | Title of the prompt |
+| [Type](#Type-property) { get; set; } | Type of prompt |
 
 ## See Also
 

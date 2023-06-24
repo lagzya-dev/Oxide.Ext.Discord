@@ -10,10 +10,10 @@ public class VoiceServerUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [VoiceServerUpdatedEvent](#VoiceServerUpdatedEvent)() | The default constructor. |
-| [Endpoint](#Endpoint) { get; set; } | The voice server host |
-| [GuildId](#GuildId) { get; set; } | The guild this voice server update is for |
-| [Token](#Token) { get; set; } | Voice connection token |
+| [VoiceServerUpdatedEvent](#VoiceServerUpdatedEvent-constructor)() | The default constructor. |
+| [Endpoint](#Endpoint-property) { get; set; } | The voice server host |
+| [GuildId](#GuildId-property) { get; set; } | The guild this voice server update is for |
+| [Token](#Token-property) { get; set; } | Voice connection token |
 
 ## See Also
 

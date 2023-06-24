@@ -10,12 +10,12 @@ public class EmbedThumbnail
 
 | name | description |
 | --- | --- |
-| [EmbedThumbnail](#EmbedThumbnail)() | Embed Thumbnail constructor |
-| [EmbedThumbnail](#EmbedThumbnail)(…) | Embed Thumbnail constructor |
-| [Height](#Height) { get; set; } | Height of thumbnail |
-| [ProxyUrl](#ProxyUrl) { get; set; } | A proxied url of the thumbnail |
-| [Url](#Url) { get; set; } | Source url of thumbnail (only supports http(s) and attachments) |
-| [Width](#Width) { get; set; } | Width of thumbnail |
+| [EmbedThumbnail](#EmbedThumbnail-constructor)() | Embed Thumbnail constructor |
+| [EmbedThumbnail](#EmbedThumbnail-constructor)(…) | Embed Thumbnail constructor |
+| [Height](#Height-property) { get; set; } | Height of thumbnail |
+| [ProxyUrl](#ProxyUrl-property) { get; set; } | A proxied url of the thumbnail |
+| [Url](#Url-property) { get; set; } | Source url of thumbnail (only supports http(s) and attachments) |
+| [Width](#Width-property) { get; set; } | Width of thumbnail |
 
 ## See Also
 

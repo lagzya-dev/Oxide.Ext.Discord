@@ -10,13 +10,13 @@ public class ThreadForumCreate
 
 | name | description |
 | --- | --- |
-| [ThreadForumCreate](#ThreadForumCreate)() | The default constructor. |
-| [AppliedTags](#AppliedTags) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
-| [AutoArchiveDuration](#AutoArchiveDuration) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [Message](#Message) { get; set; } | Contents of the first message in the forum thread |
-| [Name](#Name) { get; set; } | 1-100 character thread name |
-| [RateLimitPerUser](#RateLimitPerUser) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
-| [Validate](#Validate)() | Validates the Thread Forum Create |
+| [ThreadForumCreate](#ThreadForumCreate-constructor)() | The default constructor. |
+| [AppliedTags](#AppliedTags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
+| [AutoArchiveDuration](#AutoArchiveDuration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [Message](#Message-property) { get; set; } | Contents of the first message in the forum thread |
+| [Name](#Name-property) { get; set; } | 1-100 character thread name |
+| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
+| [Validate](#Validate-method)() | Validates the Thread Forum Create |
 
 ## See Also
 

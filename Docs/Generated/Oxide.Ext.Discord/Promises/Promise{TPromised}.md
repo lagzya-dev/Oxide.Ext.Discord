@@ -10,30 +10,30 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 
 | name | description |
 | --- | --- |
-| [Promise](#Promise)() | Constructor |
-| static [Create](#Create)() | Returns a promise that is currently pending |
-| [Catch](#Catch)(…) |  (2 methods) |
-| [Catch&lt;TException&gt;](#Catch)(…) |  |
-| [ContinueWith](#ContinueWith)(…) |  |
-| [ContinueWith&lt;TConvert&gt;](#ContinueWith)(…) |  |
-| [Finally](#Finally)(…) |  |
-| [Resolve](#Resolve)(…) |  |
-| [Then](#Then)(…) |  (4 methods) |
-| [Then&lt;TConvert&gt;](#Then)(…) |  (3 methods) |
-| [ThenAll](#ThenAll)(…) |  |
-| [ThenAll&lt;TConvert&gt;](#ThenAll)(…) |  |
-| static [All](#All)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Create](#Create)(…) |  |
-| static [Create&lt;TConvert&gt;](#Create)() | Returns a promise that is currently pending |
-| static [Rejected](#Rejected)(…) | Convert an exception directly into a rejected promise. |
-| static [Resolved](#Resolved)(…) | Convert a simple value directly into a resolved promise. |
+| [Promise](#Promise-constructor)() | Constructor |
+| static [Create](#Create-method)() | Returns a promise that is currently pending |
+| [Catch](#Catch-method)(…) |  (2 methods) |
+| [Catch&lt;TException&gt;](#Catch-method)(…) |  |
+| [ContinueWith](#ContinueWith-method)(…) |  |
+| [ContinueWith&lt;TConvert&gt;](#ContinueWith-method)(…) |  |
+| [Finally](#Finally-method)(…) |  |
+| [Resolve](#Resolve-method)(…) |  |
+| [Then](#Then-method)(…) |  (4 methods) |
+| [Then&lt;TConvert&gt;](#Then-method)(…) |  (3 methods) |
+| [ThenAll](#ThenAll-method)(…) |  |
+| [ThenAll&lt;TConvert&gt;](#ThenAll-method)(…) |  |
+| static [All](#All-method)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [Create](#Create-method)(…) |  |
+| static [Create&lt;TConvert&gt;](#Create-method)() | Returns a promise that is currently pending |
+| static [Rejected](#Rejected-method)(…) | Convert an exception directly into a rejected promise. |
+| static [Resolved](#Resolved-method)(…) | Convert a simple value directly into a resolved promise. |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [ClearHandlers](#ClearHandlers)() |  |
-| override [EnterPool](#EnterPool)() |  |
+| override [ClearHandlers](#ClearHandlers-method)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

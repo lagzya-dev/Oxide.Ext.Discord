@@ -11,7 +11,7 @@ public abstract class BaseApplicationCommandAttribute : BaseDiscordAttribute
 
 | name | description |
 | --- | --- |
-| [BaseApplicationCommandAttribute](#BaseApplicationCommandAttribute)() | The default constructor. |
+| [BaseApplicationCommandAttribute](#BaseApplicationCommandAttribute-constructor)() | The default constructor. |
 
 ## See Also
 

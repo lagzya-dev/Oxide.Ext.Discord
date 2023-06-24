@@ -17,24 +17,24 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 
 | name | description |
 | --- | --- |
-| virtual [AddActionRow](#AddActionRow)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
-| virtual [AddAllowedMentions](#AddAllowedMentions)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
-| virtual [AddAttachment](#AddAttachment)(…) | Adds an attachment to the message |
-| virtual [AddComponents](#AddComponents)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
-| virtual [AddContent](#AddContent)(…) | Adds message text |
-| virtual [AddEmbed](#AddEmbed)(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
-| virtual [AddEmbeds](#AddEmbeds)(…) | Adds a collection of [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) to the response |
-| virtual [AsTts](#AsTts)(…) | Marks the message As Text-To-Speech |
-| [Build](#Build)() | Returns the built message |
-| virtual [SuppressEmbeds](#SuppressEmbeds)() | Suppresses embeds on this response |
+| virtual [AddActionRow](#AddActionRow-method)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
+| virtual [AddAllowedMentions](#AddAllowedMentions-method)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
+| virtual [AddAttachment](#AddAttachment-method)(…) | Adds an attachment to the message |
+| virtual [AddComponents](#AddComponents-method)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
+| virtual [AddContent](#AddContent-method)(…) | Adds message text |
+| virtual [AddEmbed](#AddEmbed-method)(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
+| virtual [AddEmbeds](#AddEmbeds-method)(…) | Adds a collection of [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) to the response |
+| virtual [AsTts](#AsTts-method)(…) | Marks the message As Text-To-Speech |
+| [Build](#Build-method)() | Returns the built message |
+| virtual [SuppressEmbeds](#SuppressEmbeds-method)() | Suppresses embeds on this response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseMessageBuilder](#BaseMessageBuilder)(…) | Constructor |
-| readonly [Builder](#Builder) | This builder |
-| readonly [Message](#Message) | Message the builder is for |
+| [BaseMessageBuilder](#BaseMessageBuilder-constructor)(…) | Constructor |
+| readonly [Builder](#Builder-field) | This builder |
+| readonly [Message](#Message-field) | Message the builder is for |
 
 ## See Also
 

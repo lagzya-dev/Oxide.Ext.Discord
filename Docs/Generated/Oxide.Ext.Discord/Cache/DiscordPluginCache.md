@@ -10,8 +10,8 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
 
 | name | description |
 | --- | --- |
-| [GetLoadablePlugins](#GetLoadablePlugins)() | Returns a list of plugins that can be loaded by oxide Already loaded plugins are excluded from the list |
-| [GetLoadedPlugins](#GetLoadedPlugins)() | Returns a list of plugins loaded by oxide |
+| [GetLoadablePlugins](#GetLoadablePlugins-method)() | Returns a list of plugins that can be loaded by oxide Already loaded plugins are excluded from the list |
+| [GetLoadedPlugins](#GetLoadedPlugins-method)() | Returns a list of plugins loaded by oxide |
 
 ## See Also
 

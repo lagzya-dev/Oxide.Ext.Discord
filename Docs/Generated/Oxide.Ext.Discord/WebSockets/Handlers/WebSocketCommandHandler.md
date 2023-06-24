@@ -10,8 +10,8 @@ public class WebSocketCommandHandler
 
 | name | description |
 | --- | --- |
-| [WebSocketCommandHandler](#WebSocketCommandHandler)(…) | Constructor |
-| [Enqueue](#Enqueue)(…) | Enqueue a payload to be sent over the websocket If the websocket is connected it will be sent immediately If the websocket is not connected it will be queued until it is back online |
+| [WebSocketCommandHandler](#WebSocketCommandHandler-constructor)(…) | Constructor |
+| [Enqueue](#Enqueue-method)(…) | Enqueue a payload to be sent over the websocket If the websocket is connected it will be sent immediately If the websocket is not connected it will be queued until it is back online |
 
 ## See Also
 

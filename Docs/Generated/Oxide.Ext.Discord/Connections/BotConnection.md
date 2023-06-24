@@ -10,15 +10,15 @@ public class BotConnection
 
 | name | description |
 | --- | --- |
-| [BotConnection](#BotConnection)() | Constructor |
-| [BotConnection](#BotConnection)(…) | Constructor |
-| [ApiToken](#ApiToken) { get; set; } | API token for the bot |
-| [ApplicationId](#ApplicationId) { get; } | Application ID of the Bot Token |
-| [HiddenToken](#HiddenToken) { get; } | Hidden Bot Token. Used when needing to display the token. |
-| [Intents](#Intents) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
-| [LogLevel](#LogLevel) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
-| [HasAnyIntent](#HasAnyIntent)(…) | Returns if the settings has any intent specified |
-| [HasIntents](#HasIntents)(…) | Returns if the settings has the given intents |
+| [BotConnection](#BotConnection-constructor)() | Constructor |
+| [BotConnection](#BotConnection-constructor)(…) | Constructor |
+| [ApiToken](#ApiToken-property) { get; set; } | API token for the bot |
+| [ApplicationId](#ApplicationId-property) { get; } | Application ID of the Bot Token |
+| [HiddenToken](#HiddenToken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
+| [Intents](#Intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
+| [LogLevel](#LogLevel-property) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
+| [HasAnyIntent](#HasAnyIntent-method)(…) | Returns if the settings has any intent specified |
+| [HasIntents](#HasIntents-method)(…) | Returns if the settings has the given intents |
 
 ## See Also
 

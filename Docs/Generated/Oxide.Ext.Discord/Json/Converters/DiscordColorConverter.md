@@ -10,10 +10,10 @@ public class DiscordColorConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [DiscordColorConverter](#DiscordColorConverter)() | The default constructor. |
-| override [CanConvert](#CanConvert)(…) | Check if can convert |
-| override [ReadJson](#ReadJson)(…) | Reads from JSON |
-| override [WriteJson](#WriteJson)(…) | Writes to JSON |
+| [DiscordColorConverter](#DiscordColorConverter-constructor)() | The default constructor. |
+| override [CanConvert](#CanConvert-method)(…) | Check if can convert |
+| override [ReadJson](#ReadJson-method)(…) | Reads from JSON |
+| override [WriteJson](#WriteJson-method)(…) | Writes to JSON |
 
 ## See Also
 

@@ -10,18 +10,18 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 
 | name | description |
 | --- | --- |
-| [CreateData](#CreateData)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
-| [ProcessPlaceholders](#ProcessPlaceholders)(…) | Process placeholders for the given Text |
-| [RegisterPlaceholder](#RegisterPlaceholder)(…) | Registers a placeholder static value placeholder |
-| [RegisterPlaceholder&lt;TResult&gt;](#RegisterPlaceholder)(…) | Registers a placeholder |
-| [RegisterPlaceholder&lt;TData&gt;](#RegisterPlaceholder)(…) | Registers a placeholder that uses the dataKey value |
-| [RegisterPlaceholder&lt;TData,TResult&gt;](#RegisterPlaceholder)(…) | Registers a placeholder of type {T} (4 methods) |
+| [CreateData](#CreateData-method)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
+| [ProcessPlaceholders](#ProcessPlaceholders-method)(…) | Process placeholders for the given Text |
+| [RegisterPlaceholder](#RegisterPlaceholder-method)(…) | Registers a placeholder static value placeholder |
+| [RegisterPlaceholder&lt;TResult&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder |
+| [RegisterPlaceholder&lt;TData&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder that uses the dataKey value |
+| [RegisterPlaceholder&lt;TData,TResult&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder of type {T} (4 methods) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

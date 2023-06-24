@@ -15,13 +15,13 @@ public abstract class Singleton<T>
 
 | name | description |
 | --- | --- |
-| static readonly [Instance](#Instance) | Retrieves the instance of the singleton |
+| static readonly [Instance](#Instance-field) | Retrieves the instance of the singleton |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [Singleton](#Singleton)() | The default constructor. |
+| [Singleton](#Singleton-constructor)() | The default constructor. |
 
 ## See Also
 

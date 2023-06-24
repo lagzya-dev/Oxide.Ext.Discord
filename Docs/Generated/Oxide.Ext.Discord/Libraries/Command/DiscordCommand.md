@@ -11,23 +11,23 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| readonly [CommandPrefixes](#CommandPrefixes) | Available command prefixes used by the extension |
-| [AddDirectMessageCommand](#AddDirectMessageCommand)(…) | Adds a discord direct message command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134) |
-| [AddDirectMessageLocalizedCommand](#AddDirectMessageLocalizedCommand)(…) | Adds a localized discord direct message command Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123) |
-| [AddGuildCommand](#AddGuildCommand)(…) | Adds a discord guild command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134) |
-| [AddGuildLocalizedCommand](#AddGuildLocalizedCommand)(…) | Adds a localized discord guild command Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123) |
-| [HasCommands](#HasCommands)() | Returns if there are any guild discord commands are registered |
-| [HasDirectMessageCommands](#HasDirectMessageCommands)() | Returns if there are any guild discord commands are registered |
-| [HasGuildCommands](#HasGuildCommands)() | Returns if there are any guild discord commands are registered |
-| [LogDebug](#LogDebug)(…) |  |
-| [RemoveDiscordCommand](#RemoveDiscordCommand)(…) | Removes a previously registered discord command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L286) |
+| readonly [CommandPrefixes](#CommandPrefixes-field) | Available command prefixes used by the extension |
+| [AddDirectMessageCommand](#AddDirectMessageCommand-method)(…) | Adds a discord direct message command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134) |
+| [AddDirectMessageLocalizedCommand](#AddDirectMessageLocalizedCommand-method)(…) | Adds a localized discord direct message command Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123) |
+| [AddGuildCommand](#AddGuildCommand-method)(…) | Adds a discord guild command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L134) |
+| [AddGuildLocalizedCommand](#AddGuildLocalizedCommand-method)(…) | Adds a localized discord guild command Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L123) |
+| [HasCommands](#HasCommands-method)() | Returns if there are any guild discord commands are registered |
+| [HasDirectMessageCommands](#HasDirectMessageCommands-method)() | Returns if there are any guild discord commands are registered |
+| [HasGuildCommands](#HasGuildCommands-method)() | Returns if there are any guild discord commands are registered |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [RemoveDiscordCommand](#RemoveDiscordCommand-method)(…) | Removes a previously registered discord command Sourced From Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L286) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginLoaded](#OnPluginLoaded)(…) |  |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) | Called when a plugin has been unloaded |
+| override [OnPluginLoaded](#OnPluginLoaded-method)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) | Called when a plugin has been unloaded |
 
 ## See Also
 

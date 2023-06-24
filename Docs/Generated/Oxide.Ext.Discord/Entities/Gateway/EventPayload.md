@@ -10,19 +10,19 @@ public class EventPayload : BasePoolable
 
 | name | description |
 | --- | --- |
-| [EventPayload](#EventPayload)() | The default constructor. |
-| [Data](#Data) { get; } | Event data |
-| [DispatchCode](#DispatchCode) { get; } | The event name for this payload |
-| [OpCode](#OpCode) { get; } | Op Code for the payload |
-| [Sequence](#Sequence) { get; } | Sequence number, used for resuming sessions and heartbeats |
-| [ShouldResume](#ShouldResume) { get; } | If the websocket should resume on reconnect. |
-| [GetData&lt;T&gt;](#GetData)(…) | Returns the Data as {T} |
+| [EventPayload](#EventPayload-constructor)() | The default constructor. |
+| [Data](#Data-property) { get; } | Event data |
+| [DispatchCode](#DispatchCode-property) { get; } | The event name for this payload |
+| [OpCode](#OpCode-property) { get; } | Op Code for the payload |
+| [Sequence](#Sequence-property) { get; } | Sequence number, used for resuming sessions and heartbeats |
+| [ShouldResume](#ShouldResume-property) { get; } | If the websocket should resume on reconnect. |
+| [GetData&lt;T&gt;](#GetData-method)(…) | Returns the Data as {T} |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

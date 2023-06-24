@@ -10,18 +10,18 @@ public struct ServerLocale : IEquatable<ServerLocale>
 
 | name | description |
 | --- | --- |
-| static readonly [Default](#Default) | The default locale for servers |
-| static [Parse](#Parse)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
-| [IsDefault](#IsDefault) { get; } | Returns if the Locale is the default server language "en" |
-| [IsValid](#IsValid) { get; } | Returns if the Locale is valid |
-| readonly [Id](#Id) | ID of the Locale |
-| override [Equals](#Equals)(…) |  |
-| [Equals](#Equals)(…) |  |
-| [GetDiscordLocale](#GetDiscordLocale)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
-| override [GetHashCode](#GetHashCode)() |  |
-| override [ToString](#ToString)() | Returns the ID of the ServerLocale |
-| [operator ==](#op_Equality) | Returns if two Server Locales are equal to each other |
-| [operator !=](#op_Inequality) | Returns if two Server Locales are not equal to each other |
+| static readonly [Default](#Default-field) | The default locale for servers |
+| static [Parse](#Parse-method)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
+| [IsDefault](#IsDefault-property) { get; } | Returns if the Locale is the default server language "en" |
+| [IsValid](#IsValid-property) { get; } | Returns if the Locale is valid |
+| readonly [Id](#Id-field) | ID of the Locale |
+| override [Equals](#Equals-method)(…) |  |
+| [Equals](#Equals-method)(…) |  |
+| [GetDiscordLocale](#GetDiscordLocale-method)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
+| override [GetHashCode](#GetHashCode-method)() |  |
+| override [ToString](#ToString-method)() | Returns the ID of the ServerLocale |
+| [operator ==](#op_Equality-operator) | Returns if two Server Locales are equal to each other |
+| [operator !=](#op_Inequality-operator) | Returns if two Server Locales are not equal to each other |
 
 ## See Also
 

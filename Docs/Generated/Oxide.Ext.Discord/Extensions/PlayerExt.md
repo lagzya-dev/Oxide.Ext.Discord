@@ -10,14 +10,14 @@ public static class PlayerExt
 
 | name | description |
 | --- | --- |
-| static [GetDiscordUser](#GetDiscordUser)(…) | Returns a minimal Discord User for the given player |
-| static [GetDiscordUserId](#GetDiscordUserId)(…) | Returns the Discord ID of the IPlayer if linked |
-| static [GetGuildMember](#GetGuildMember)(…) | Returns a minimal Guild Member for the given player |
-| static [IsDummyPlayer](#IsDummyPlayer)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
-| static [IsLinked](#IsLinked)(…) | Returns true if the player is linked |
-| static [SendDiscordGlobalTemplateMessage](#SendDiscordGlobalTemplateMessage)(…) | Send a message in a DM to the linked user using a global message template |
-| static [SendDiscordMessage](#SendDiscordMessage)(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
-| static [SendDiscordTemplateMessage](#SendDiscordTemplateMessage)(…) | Send a message in a DM to the linked user using a localized message template |
+| static [GetDiscordUser](#GetDiscordUser-method)(…) | Returns a minimal Discord User for the given player |
+| static [GetDiscordUserId](#GetDiscordUserId-method)(…) | Returns the Discord ID of the IPlayer if linked |
+| static [GetGuildMember](#GetGuildMember-method)(…) | Returns a minimal Guild Member for the given player |
+| static [IsDummyPlayer](#IsDummyPlayer-method)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
+| static [IsLinked](#IsLinked-method)(…) | Returns true if the player is linked |
+| static [SendDiscordGlobalTemplateMessage](#SendDiscordGlobalTemplateMessage-method)(…) | Send a message in a DM to the linked user using a global message template |
+| static [SendDiscordMessage](#SendDiscordMessage-method)(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
+| static [SendDiscordTemplateMessage](#SendDiscordTemplateMessage-method)(…) | Send a message in a DM to the linked user using a localized message template |
 
 ## See Also
 

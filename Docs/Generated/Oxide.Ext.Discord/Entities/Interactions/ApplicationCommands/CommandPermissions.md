@@ -10,12 +10,12 @@ public class CommandPermissions
 
 | name | description |
 | --- | --- |
-| [CommandPermissions](#CommandPermissions)() | The default constructor. |
-| static [AllowAllGuildChannels](#AllowAllGuildChannels)(…) | Creates a new CommandPermissions that allows the application command to be used in all guild channels |
-| static [AllowAllGuildMembers](#AllowAllGuildMembers)(…) | Creates a new CommandPermissions that allows all guild members to use the application command |
-| [Id](#Id) { get; set; } | The ID of the role or user |
-| [Permission](#Permission) { get; set; } | True to allow, False to disallow |
-| [Type](#Type) { get; set; } | The type of permissions [`CommandPermissionType`](./CommandPermissionType.md) |
+| [CommandPermissions](#CommandPermissions-constructor)() | The default constructor. |
+| static [AllowAllGuildChannels](#AllowAllGuildChannels-method)(…) | Creates a new CommandPermissions that allows the application command to be used in all guild channels |
+| static [AllowAllGuildMembers](#AllowAllGuildMembers-method)(…) | Creates a new CommandPermissions that allows all guild members to use the application command |
+| [Id](#Id-property) { get; set; } | The ID of the role or user |
+| [Permission](#Permission-property) { get; set; } | True to allow, False to disallow |
+| [Type](#Type-property) { get; set; } | The type of permissions [`CommandPermissionType`](./CommandPermissionType.md) |
 
 ## See Also
 

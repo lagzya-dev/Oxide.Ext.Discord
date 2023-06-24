@@ -10,10 +10,10 @@ public class UnixDateTimeConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [UnixDateTimeConverter](#UnixDateTimeConverter)() | The default constructor. |
-| override [CanConvert](#CanConvert)(…) | Can the type be converted |
-| override [ReadJson](#ReadJson)(…) | Convert to DateTimeOffset from UnixTimeMilliseconds |
-| override [WriteJson](#WriteJson)(…) | Write DateTimeOffset to UnixTimeMilliseconds |
+| [UnixDateTimeConverter](#UnixDateTimeConverter-constructor)() | The default constructor. |
+| override [CanConvert](#CanConvert-method)(…) | Can the type be converted |
+| override [ReadJson](#ReadJson-method)(…) | Convert to DateTimeOffset from UnixTimeMilliseconds |
+| override [WriteJson](#WriteJson-method)(…) | Write DateTimeOffset to UnixTimeMilliseconds |
 
 ## See Also
 

@@ -18,17 +18,17 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 
 | name | description |
 | --- | --- |
-| [AddMessageReference](#AddMessageReference)(…) | Adds a [`MessageReference`](../../../Entities/Messages/MessageReference.md) to the message |
-| [AddReply](#AddReply)(…) | Adds a [`AddMessageReference`](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D/AddMessageReference.md) to the message (2 methods) |
-| [AddSticker](#AddSticker)(…) | Adds a sticker to the message (2 methods) |
-| [AddStickers](#AddStickers)(…) | Adds stickers to the message (2 methods) |
-| [SuppressNotifications](#SuppressNotifications)(…) | Adds a sticker to the message |
+| [AddMessageReference](#AddMessageReference-method)(…) | Adds a [`MessageReference`](../../../Entities/Messages/MessageReference.md) to the message |
+| [AddReply](#AddReply-method)(…) | Adds a [`AddMessageReference`](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D/AddMessageReference.md) to the message (2 methods) |
+| [AddSticker](#AddSticker-method)(…) | Adds a sticker to the message (2 methods) |
+| [AddStickers](#AddStickers-method)(…) | Adds stickers to the message (2 methods) |
+| [SuppressNotifications](#SuppressNotifications-method)(…) | Adds a sticker to the message |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseChannelMessageBuilder](#BaseChannelMessageBuilder)(…) | Constructor |
+| [BaseChannelMessageBuilder](#BaseChannelMessageBuilder-constructor)(…) | Constructor |
 
 ## See Also
 

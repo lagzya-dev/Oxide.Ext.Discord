@@ -10,8 +10,8 @@ public static class SnowflakePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Created](#Created)(…) | [`GetCreationDate`](../../../Entities/Snowflake/GetCreationDate.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
+| static [Created](#Created-method)(…) | [`GetCreationDate`](../../../Entities/Snowflake/GetCreationDate.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

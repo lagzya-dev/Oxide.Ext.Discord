@@ -10,9 +10,9 @@ public static class MathExt
 
 | name | description |
 | --- | --- |
-| static [Clamp&lt;T&gt;](#Clamp)(…) | Returns the value of {T} clamped between min and max value |
-| static [Max&lt;T&gt;](#Max)(…) | Returns the Max value between left and right |
-| static [Min&lt;T&gt;](#Min)(…) | Returns the min value between left and right |
+| static [Clamp&lt;T&gt;](#Clamp-method)(…) | Returns the value of {T} clamped between min and max value |
+| static [Max&lt;T&gt;](#Max-method)(…) | Returns the Max value between left and right |
+| static [Min&lt;T&gt;](#Min-method)(…) | Returns the min value between left and right |
 
 ## See Also
 

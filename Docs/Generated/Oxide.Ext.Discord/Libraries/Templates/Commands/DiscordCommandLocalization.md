@@ -10,9 +10,9 @@ public class DiscordCommandLocalization
 
 | name | description |
 | --- | --- |
-| [DiscordCommandLocalization](#DiscordCommandLocalization)(…) | Constructor |
-| [Command](#Command) { get; set; } | Localized Command |
-| [ApplyCommandLocalization](#ApplyCommandLocalization)(…) | Apply localizations to [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) for language |
+| [DiscordCommandLocalization](#DiscordCommandLocalization-constructor)(…) | Constructor |
+| [Command](#Command-property) { get; set; } | Localized Command |
+| [ApplyCommandLocalization](#ApplyCommandLocalization-method)(…) | Apply localizations to [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) for language |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public class DiscordMessageTemplate
 
 | name | description |
 | --- | --- |
-| [DiscordMessageTemplate](#DiscordMessageTemplate)() | Constructor |
-| [DiscordMessageTemplate](#DiscordMessageTemplate)(…) | Constructor |
-| [Components](#Components) { get; set; } | Buttons for the message |
-| [Content](#Content) { get; set; } | String contents of the message |
-| [Embeds](#Embeds) { get; set; } | Embeds for the message |
-| [ToMessage&lt;T&gt;](#ToMessage)(…) | Converts the [`DiscordMessageTemplate`](./DiscordMessageTemplate.md) to a {T} message {T} supports all message types |
+| [DiscordMessageTemplate](#DiscordMessageTemplate-constructor)() | Constructor |
+| [DiscordMessageTemplate](#DiscordMessageTemplate-constructor)(…) | Constructor |
+| [Components](#Components-property) { get; set; } | Buttons for the message |
+| [Content](#Content-property) { get; set; } | String contents of the message |
+| [Embeds](#Embeds-property) { get; set; } | Embeds for the message |
+| [ToMessage&lt;T&gt;](#ToMessage-method)(…) | Converts the [`DiscordMessageTemplate`](./DiscordMessageTemplate.md) to a {T} message {T} supports all message types |
 
 ## See Also
 

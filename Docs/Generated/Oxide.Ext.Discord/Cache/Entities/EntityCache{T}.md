@@ -11,10 +11,10 @@ public sealed class EntityCache<T> : Singleton<EntityCache>
 
 | name | description |
 | --- | --- |
-| readonly [Cache](#Cache) | Readonly Cache of [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
-| [Get](#Get)(…) | Returns the cached entity with the given ID; default(T) otherwise |
-| [GetOrCreate](#GetOrCreate)(…) | Returns a cached for the given user ID or creates a new with that ID |
-| [Update](#Update)(…) | Updates the cached entity |
+| readonly [Cache](#Cache-field) | Readonly Cache of [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
+| [Get](#Get-method)(…) | Returns the cached entity with the given ID; default(T) otherwise |
+| [GetOrCreate](#GetOrCreate-method)(…) | Returns a cached for the given user ID or creates a new with that ID |
+| [Update](#Update-method)(…) | Updates the cached entity |
 
 ## See Also
 

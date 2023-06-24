@@ -10,15 +10,15 @@ public class InteractionDataArgs
 
 | name | description |
 | --- | --- |
-| [GetBool](#GetBool)(…) | Returns the bool value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
-| [GetChannel](#GetChannel)(…) | Returns the [`DiscordChannel`](../Channels/DiscordChannel.md) that was resolved from the command. |
-| [GetFloat](#GetFloat)(…) | Returns the float value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
-| [GetInt](#GetInt)(…) | Returns the int value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
-| [GetNumber](#GetNumber)(…) | Returns the double value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
-| [GetRole](#GetRole)(…) | Returns the [`DiscordRole`](../Permissions/DiscordRole.md) that was resolved from the command. |
-| [GetString](#GetString)(…) | Returns the string value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
-| [GetUser](#GetUser)(…) | Returns the [`DiscordUser`](../Users/DiscordUser.md) that was resolved from the command. |
-| [HasArg](#HasArg)(…) | Returns if a given arg exists |
+| [GetBool](#GetBool-method)(…) | Returns the bool value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
+| [GetChannel](#GetChannel-method)(…) | Returns the [`DiscordChannel`](../Channels/DiscordChannel.md) that was resolved from the command. |
+| [GetFloat](#GetFloat-method)(…) | Returns the float value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
+| [GetInt](#GetInt-method)(…) | Returns the int value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
+| [GetNumber](#GetNumber-method)(…) | Returns the double value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
+| [GetRole](#GetRole-method)(…) | Returns the [`DiscordRole`](../Permissions/DiscordRole.md) that was resolved from the command. |
+| [GetString](#GetString-method)(…) | Returns the string value supplied to command option matching the name. If the arg was optional and wasn't supplied default supplied value will be used. |
+| [GetUser](#GetUser-method)(…) | Returns the [`DiscordUser`](../Users/DiscordUser.md) that was resolved from the command. |
+| [HasArg](#HasArg-method)(…) | Returns if a given arg exists |
 
 ## See Also
 

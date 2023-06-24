@@ -10,7 +10,7 @@ public interface IRejectable
 
 | name | description |
 | --- | --- |
-| [Reject](#Reject)(…) | Reject the promise with an exception. |
+| [Reject](#Reject-method)(…) | Reject the promise with an exception. |
 
 ## See Also
 

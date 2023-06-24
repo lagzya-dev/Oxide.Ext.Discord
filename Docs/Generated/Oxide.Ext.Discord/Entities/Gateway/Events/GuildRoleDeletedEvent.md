@@ -10,9 +10,9 @@ public class GuildRoleDeletedEvent
 
 | name | description |
 | --- | --- |
-| [GuildRoleDeletedEvent](#GuildRoleDeletedEvent)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | ID of the guild |
-| [RoleId](#RoleId) { get; set; } | ID of the role |
+| [GuildRoleDeletedEvent](#GuildRoleDeletedEvent-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
+| [RoleId](#RoleId-property) { get; set; } | ID of the role |
 
 ## See Also
 

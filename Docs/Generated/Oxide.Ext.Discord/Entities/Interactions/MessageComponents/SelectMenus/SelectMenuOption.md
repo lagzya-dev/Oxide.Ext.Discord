@@ -10,13 +10,13 @@ public class SelectMenuOption
 
 | name | description |
 | --- | --- |
-| [SelectMenuOption](#SelectMenuOption)() | The default constructor. |
-| [Default](#Default) { get; set; } | Will show this option as selected by default |
-| [Description](#Description) { get; set; } | Additional description of the option, Max 100 characters |
-| [Emoji](#Emoji) { get; set; } | Emoji in the option |
-| [Label](#Label) { get; set; } | User-facing name of the option, Max 100 characters |
-| [Value](#Value) { get; set; } | Dev-define value of the option, Max 100 characters |
-| [Validate](#Validate)() |  |
+| [SelectMenuOption](#SelectMenuOption-constructor)() | The default constructor. |
+| [Default](#Default-property) { get; set; } | Will show this option as selected by default |
+| [Description](#Description-property) { get; set; } | Additional description of the option, Max 100 characters |
+| [Emoji](#Emoji-property) { get; set; } | Emoji in the option |
+| [Label](#Label-property) { get; set; } | User-facing name of the option, Max 100 characters |
+| [Value](#Value-property) { get; set; } | Dev-define value of the option, Max 100 characters |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

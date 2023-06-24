@@ -14,12 +14,12 @@ public class UkkonenTrie<T>
 
 | name | description |
 | --- | --- |
-| [UkkonenTrie](#UkkonenTrie)() | Constructor |
-| [UkkonenTrie](#UkkonenTrie)(…) | Constructor |
-| [Size](#Size) { get; } | Size of the Trie |
-| [Add](#Add)(…) | Add a new record into the trie |
-| [Remove](#Remove)(…) | Removes a record from the trie |
-| [Search](#Search)(…) | Search the trie for search value |
+| [UkkonenTrie](#UkkonenTrie-constructor)() | Constructor |
+| [UkkonenTrie](#UkkonenTrie-constructor)(…) | Constructor |
+| [Size](#Size-property) { get; } | Size of the Trie |
+| [Add](#Add-method)(…) | Add a new record into the trie |
+| [Remove](#Remove-method)(…) | Removes a record from the trie |
+| [Search](#Search-method)(…) | Search the trie for search value |
 
 ## See Also
 

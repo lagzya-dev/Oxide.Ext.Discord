@@ -10,9 +10,9 @@ public interface IDiscordMessageTemplate
 
 | name | description |
 | --- | --- |
-| [Components](#Components) { get; set; } | Components for the message |
-| [Content](#Content) { get; set; } | Content of the message |
-| [Embeds](#Embeds) { get; set; } | Embeds for the message |
+| [Components](#Components-property) { get; set; } | Components for the message |
+| [Content](#Content-property) { get; set; } | Content of the message |
+| [Embeds](#Embeds-property) { get; set; } | Embeds for the message |
 
 ## See Also
 

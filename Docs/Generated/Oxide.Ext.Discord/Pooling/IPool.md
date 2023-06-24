@@ -10,9 +10,9 @@ public interface IPool
 
 | name | description |
 | --- | --- |
-| [ClearPoolEntities](#ClearPoolEntities)() | Clears the pool of all items |
-| [OnPluginUnloaded](#OnPluginUnloaded)(…) | Called on a pool when a plugin is unloaded |
-| [RemoveAllPools](#RemoveAllPools)() | Wipes all pools of the given type |
+| [ClearPoolEntities](#ClearPoolEntities-method)() | Clears the pool of all items |
+| [OnPluginUnloaded](#OnPluginUnloaded-method)(…) | Called on a pool when a plugin is unloaded |
+| [RemoveAllPools](#RemoveAllPools-method)() | Wipes all pools of the given type |
 
 ## See Also
 

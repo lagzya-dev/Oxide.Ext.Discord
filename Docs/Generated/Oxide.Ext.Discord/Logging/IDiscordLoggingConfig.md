@@ -10,10 +10,10 @@ public interface IDiscordLoggingConfig
 
 | name | description |
 | --- | --- |
-| [ConsoleLogFormat](#ConsoleLogFormat) { get; } | Format for console logging |
-| [ConsoleLogLevel](#ConsoleLogLevel) { get; } | Log Level for the Console |
-| [FileLogFormat](#FileLogFormat) { get; } | Format for file logging |
-| [FileLogLevel](#FileLogLevel) { get; } | Log Level for file Logging |
+| [ConsoleLogFormat](#ConsoleLogFormat-property) { get; } | Format for console logging |
+| [ConsoleLogLevel](#ConsoleLogLevel-property) { get; } | Log Level for the Console |
+| [FileLogFormat](#FileLogFormat-property) { get; } | Format for file logging |
+| [FileLogLevel](#FileLogLevel-property) { get; } | Log Level for file Logging |
 
 ## See Also
 

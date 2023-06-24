@@ -10,8 +10,8 @@ public abstract class BaseNextTickCallback : BaseCallback
 
 | name | description |
 | --- | --- |
-| [BaseNextTickCallback](#BaseNextTickCallback)() | The default constructor. |
-| [Run](#Run)() |  |
+| [BaseNextTickCallback](#BaseNextTickCallback-constructor)() | The default constructor. |
+| [Run](#Run-method)() |  |
 
 ## See Also
 

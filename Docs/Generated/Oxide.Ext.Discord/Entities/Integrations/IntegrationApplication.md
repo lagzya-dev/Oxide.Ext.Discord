@@ -10,12 +10,12 @@ public class IntegrationApplication
 
 | name | description |
 | --- | --- |
-| [IntegrationApplication](#IntegrationApplication)() | The default constructor. |
-| [Bot](#Bot) { get; set; } | The bot associated with this application |
-| [Description](#Description) { get; set; } | The description of the app |
-| [Icon](#Icon) { get; set; } | The icon hash of the app |
-| [Id](#Id) { get; set; } | The ID of the app |
-| [Name](#Name) { get; set; } | The name of the app |
+| [IntegrationApplication](#IntegrationApplication-constructor)() | The default constructor. |
+| [Bot](#Bot-property) { get; set; } | The bot associated with this application |
+| [Description](#Description-property) { get; set; } | The description of the app |
+| [Icon](#Icon-property) { get; set; } | The icon hash of the app |
+| [Id](#Id-property) { get; set; } | The ID of the app |
+| [Name](#Name-property) { get; set; } | The name of the app |
 
 ## See Also
 

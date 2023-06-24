@@ -10,9 +10,9 @@ public class GuildWidgetSettings
 
 | name | description |
 | --- | --- |
-| [GuildWidgetSettings](#GuildWidgetSettings)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The widget channel id |
-| [Enabled](#Enabled) { get; set; } | Whether the widget is enabled |
+| [GuildWidgetSettings](#GuildWidgetSettings-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The widget channel id |
+| [Enabled](#Enabled-property) { get; set; } | Whether the widget is enabled |
 
 ## See Also
 

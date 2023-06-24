@@ -10,13 +10,13 @@ public class GuildWidget
 
 | name | description |
 | --- | --- |
-| [GuildWidget](#GuildWidget)() | The default constructor. |
-| [Channels](#Channels) { get; set; } | Voice and stage channels which are accessible by @everyone |
-| [Id](#Id) { get; set; } | Guild id |
-| [InstantInvite](#InstantInvite) { get; set; } | Instant invite for the guilds specified widget invite channel |
-| [Members](#Members) { get; set; } | Special widget user objects that includes users presence (Limit 100) |
-| [Name](#Name) { get; set; } | Guild name (2-100 characters) |
-| [PresenceCount](#PresenceCount) { get; set; } | Number of online members in this guild |
+| [GuildWidget](#GuildWidget-constructor)() | The default constructor. |
+| [Channels](#Channels-property) { get; set; } | Voice and stage channels which are accessible by @everyone |
+| [Id](#Id-property) { get; set; } | Guild id |
+| [InstantInvite](#InstantInvite-property) { get; set; } | Instant invite for the guilds specified widget invite channel |
+| [Members](#Members-property) { get; set; } | Special widget user objects that includes users presence (Limit 100) |
+| [Name](#Name-property) { get; set; } | Guild name (2-100 characters) |
+| [PresenceCount](#PresenceCount-property) { get; set; } | Number of online members in this guild |
 
 ## See Also
 

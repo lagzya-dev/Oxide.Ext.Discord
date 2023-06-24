@@ -10,15 +10,15 @@ public class WebsocketRateLimit : BaseRateLimit
 
 | name | description |
 | --- | --- |
-| [WebsocketRateLimit](#WebsocketRateLimit)(…) | Constructor for WebsocketRateLimit |
-| [CanFireRequest](#CanFireRequest)(…) | Returns if the client can return the given command. This is used to limit plugins to a certain number of websocket commands per rate limit tick |
-| [FiredRequest](#FiredRequest)(…) | Called when an API request is fired |
+| [WebsocketRateLimit](#WebsocketRateLimit-constructor)(…) | Constructor for WebsocketRateLimit |
+| [CanFireRequest](#CanFireRequest-method)(…) | Returns if the client can return the given command. This is used to limit plugins to a certain number of websocket commands per rate limit tick |
+| [FiredRequest](#FiredRequest-method)(…) | Called when an API request is fired |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnRateLimitReset](#OnRateLimitReset)() |  |
+| override [OnRateLimitReset](#OnRateLimitReset-method)() |  |
 
 ## See Also
 

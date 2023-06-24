@@ -10,13 +10,13 @@ public class MessageReactionAddedEvent
 
 | name | description |
 | --- | --- |
-| [MessageReactionAddedEvent](#MessageReactionAddedEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The id of the channel |
-| [Emoji](#Emoji) { get; set; } | The emoji used to react |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [Member](#Member) { get; set; } | The member who reacted if this happened in a guild |
-| [MessageId](#MessageId) { get; set; } | The id of the message |
-| [UserId](#UserId) { get; set; } | The id of the user |
+| [MessageReactionAddedEvent](#MessageReactionAddedEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
+| [Emoji](#Emoji-property) { get; set; } | The emoji used to react |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [Member](#Member-property) { get; set; } | The member who reacted if this happened in a guild |
+| [MessageId](#MessageId-property) { get; set; } | The id of the message |
+| [UserId](#UserId-property) { get; set; } | The id of the user |
 
 ## See Also
 

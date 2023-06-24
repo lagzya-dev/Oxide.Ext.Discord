@@ -10,14 +10,14 @@ public class ApplicationSubCommandBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName) |  |
-| readonly [GroupName](#GroupName) |  |
-| readonly [SubCommandName](#SubCommandName) |  |
-| [AddDescriptionLocalization](#AddDescriptionLocalization)(…) | Adds Application Sub Command Description Localizations |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization)(…) | Adds Application Sub Command Name Localization |
-| [AddNameLocalizations](#AddNameLocalizations)(…) | Adds command name localizations for a given plugin and lang key |
-| [AddOption](#AddOption)(…) | Adds a new option |
+| readonly [CommandName](#CommandName-field) |  |
+| readonly [GroupName](#GroupName-field) |  |
+| readonly [SubCommandName](#SubCommandName-field) |  |
+| [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Sub Command Description Localizations |
+| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Sub Command Name Localization |
+| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AddOption](#AddOption-method)(…) | Adds a new option |
 
 ## See Also
 

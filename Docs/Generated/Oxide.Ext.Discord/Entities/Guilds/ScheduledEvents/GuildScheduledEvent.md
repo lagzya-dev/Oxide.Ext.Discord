@@ -10,28 +10,28 @@ public class GuildScheduledEvent : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [GuildScheduledEvent](#GuildScheduledEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The channel ID in which the scheduled event will be hosted, or null if [`scheduled entity type`](./ScheduledEventEntityType.md) is EXTERNAL |
-| [Creator](#Creator) { get; set; } | The user that created the scheduled event |
-| [CreatorId](#CreatorId) { get; set; } | The ID of the user that created the scheduled event |
-| [Description](#Description) { get; set; } | The description of the scheduled event (1-1000 characters) |
-| [EntityId](#EntityId) { get; set; } | The id of an entity associated with a guild scheduled event |
-| [EntityMetadata](#EntityMetadata) { get; set; } | Additional metadata for the guild scheduled event |
-| [EntityType](#EntityType) { get; set; } | The type of the scheduled event |
-| [GuildId](#GuildId) { get; set; } | The guild ID which the scheduled event belongs to |
-| [Id](#Id) { get; set; } | The ID of the scheduled event |
-| [Name](#Name) { get; set; } | The name of the scheduled event (1-100 characters) |
-| [PrivacyLevel](#PrivacyLevel) { get; set; } | The privacy level of the scheduled event |
-| [ScheduledEndTime](#ScheduledEndTime) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType.md) is EXTERNAL |
-| [ScheduledStartTime](#ScheduledStartTime) { get; set; } | The time the scheduled event will start |
-| [Status](#Status) { get; set; } | The status of the scheduled event |
-| [UserCount](#UserCount) { get; set; } | The number of users subscribed to the scheduled event |
-| [Delete](#Delete)(…) | Delete a guild scheduled event See [Delete Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event) |
-| [Edit](#Edit)(…) | Modify a guild scheduled event. Returns the modified [`guild scheduled event`](./GuildScheduledEvent.md) object on success. See [Modify Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event) |
-| static [Create](#Create)(…) | Create a guild scheduled event in the guild. Returns a [`guild scheduled event`](./GuildScheduledEvent.md) object on success. See [Create Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event) |
-| static [Get](#Get)(…) | Get a guild scheduled event. Returns a guild scheduled event object on success. See [Get Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event) |
-| static [GetGuildEvents](#GetGuildEvents)(…) | Returns a list of guild scheduled event objects for the given guild. See [List Scheduled Events for Guild](https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild) |
-| static [GetUsers](#GetUsers)(…) | Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the WithMember query parameter is set. See [Get Guild Scheduled Event Users](https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event-users) |
+| [GuildScheduledEvent](#GuildScheduledEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The channel ID in which the scheduled event will be hosted, or null if [`scheduled entity type`](./ScheduledEventEntityType.md) is EXTERNAL |
+| [Creator](#Creator-property) { get; set; } | The user that created the scheduled event |
+| [CreatorId](#CreatorId-property) { get; set; } | The ID of the user that created the scheduled event |
+| [Description](#Description-property) { get; set; } | The description of the scheduled event (1-1000 characters) |
+| [EntityId](#EntityId-property) { get; set; } | The id of an entity associated with a guild scheduled event |
+| [EntityMetadata](#EntityMetadata-property) { get; set; } | Additional metadata for the guild scheduled event |
+| [EntityType](#EntityType-property) { get; set; } | The type of the scheduled event |
+| [GuildId](#GuildId-property) { get; set; } | The guild ID which the scheduled event belongs to |
+| [Id](#Id-property) { get; set; } | The ID of the scheduled event |
+| [Name](#Name-property) { get; set; } | The name of the scheduled event (1-100 characters) |
+| [PrivacyLevel](#PrivacyLevel-property) { get; set; } | The privacy level of the scheduled event |
+| [ScheduledEndTime](#ScheduledEndTime-property) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType.md) is EXTERNAL |
+| [ScheduledStartTime](#ScheduledStartTime-property) { get; set; } | The time the scheduled event will start |
+| [Status](#Status-property) { get; set; } | The status of the scheduled event |
+| [UserCount](#UserCount-property) { get; set; } | The number of users subscribed to the scheduled event |
+| [Delete](#Delete-method)(…) | Delete a guild scheduled event See [Delete Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#delete-guild-scheduled-event) |
+| [Edit](#Edit-method)(…) | Modify a guild scheduled event. Returns the modified [`guild scheduled event`](./GuildScheduledEvent.md) object on success. See [Modify Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#modify-guild-scheduled-event) |
+| static [Create](#Create-method)(…) | Create a guild scheduled event in the guild. Returns a [`guild scheduled event`](./GuildScheduledEvent.md) object on success. See [Create Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event) |
+| static [Get](#Get-method)(…) | Get a guild scheduled event. Returns a guild scheduled event object on success. See [Get Guild Scheduled Event](https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event) |
+| static [GetGuildEvents](#GetGuildEvents-method)(…) | Returns a list of guild scheduled event objects for the given guild. See [List Scheduled Events for Guild](https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild) |
+| static [GetUsers](#GetUsers-method)(…) | Get a list of guild scheduled event users subscribed to a guild scheduled event. Returns a list of guild scheduled event user objects on success. Guild member data, if it exists, is included if the WithMember query parameter is set. See [Get Guild Scheduled Event Users](https://discord.com/developers/docs/resources/guild-scheduled-event#get-guild-scheduled-event-users) |
 
 ## See Also
 

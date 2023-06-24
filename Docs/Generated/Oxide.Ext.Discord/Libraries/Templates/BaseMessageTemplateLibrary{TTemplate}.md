@@ -11,17 +11,17 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 
 | name | description |
 | --- | --- |
-| [GetGlobalTemplate](#GetGlobalTemplate)(…) | Returns a global message template for the plugin with the given name |
-| [GetLocalizedTemplate](#GetLocalizedTemplate)(…) | Returns a message template for a given language (2 methods) |
-| [GetPlayerTemplate](#GetPlayerTemplate)(…) | Returns a message template for a given IPlayer player (2 methods) |
-| [RegisterGlobalTemplateAsync](#RegisterGlobalTemplateAsync)(…) | Registers a global message template Global Message templates cannot be localized |
-| [RegisterLocalizedTemplateAsync](#RegisterLocalizedTemplateAsync)(…) | Registers a message template with the given name and language |
+| [GetGlobalTemplate](#GetGlobalTemplate-method)(…) | Returns a global message template for the plugin with the given name |
+| [GetLocalizedTemplate](#GetLocalizedTemplate-method)(…) | Returns a message template for a given language (2 methods) |
+| [GetPlayerTemplate](#GetPlayerTemplate-method)(…) | Returns a message template for a given IPlayer player (2 methods) |
+| [RegisterGlobalTemplateAsync](#RegisterGlobalTemplateAsync-method)(…) | Registers a global message template Global Message templates cannot be localized |
+| [RegisterLocalizedTemplateAsync](#RegisterLocalizedTemplateAsync-method)(…) | Registers a message template with the given name and language |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

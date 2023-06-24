@@ -10,7 +10,7 @@ public static class StringBuilderExt
 
 | name | description |
 | --- | --- |
-| static [Trim](#Trim)(…) | Trim empty space to the left and right of the StringBuilder |
+| static [Trim](#Trim-method)(…) | Trim empty space to the left and right of the StringBuilder |
 
 ## See Also
 

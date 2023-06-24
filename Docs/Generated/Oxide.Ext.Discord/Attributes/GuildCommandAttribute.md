@@ -12,7 +12,7 @@ public class GuildCommandAttribute : BaseCommandAttribute
 
 | name | description |
 | --- | --- |
-| [GuildCommandAttribute](#GuildCommandAttribute)(…) | Creates a discord command to be used in guild |
+| [GuildCommandAttribute](#GuildCommandAttribute-constructor)(…) | Creates a discord command to be used in guild |
 
 ## See Also
 

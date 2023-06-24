@@ -10,14 +10,14 @@ public class ApplicationRoleConnectionMetadata
 
 | name | description |
 | --- | --- |
-| [ApplicationRoleConnectionMetadata](#ApplicationRoleConnectionMetadata)() | The default constructor. |
-| [Description](#Description) { get; set; } | Description of the metadata field (1-200 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Translations of the description |
-| [Key](#Key) { get; set; } | Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters) |
-| [Name](#Name) { get; set; } | Name of the metadata field (1-100 characters) |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Translations of the name |
-| [Type](#Type) { get; set; } | Type of metadata value |
-| [Validate](#Validate)() |  |
+| [ApplicationRoleConnectionMetadata](#ApplicationRoleConnectionMetadata-constructor)() | The default constructor. |
+| [Description](#Description-property) { get; set; } | Description of the metadata field (1-200 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Translations of the description |
+| [Key](#Key-property) { get; set; } | Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters) |
+| [Name](#Name-property) { get; set; } | Name of the metadata field (1-100 characters) |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Translations of the name |
+| [Type](#Type-property) { get; set; } | Type of metadata value |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

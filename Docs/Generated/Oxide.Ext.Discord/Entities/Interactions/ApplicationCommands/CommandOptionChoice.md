@@ -10,11 +10,11 @@ public class CommandOptionChoice
 
 | name | description |
 | --- | --- |
-| [CommandOptionChoice](#CommandOptionChoice)() | Default Constructor |
-| [CommandOptionChoice](#CommandOptionChoice)(…) | Creates a Command Option Choice |
-| [Name](#Name) { get; set; } | Choice name (1-100 characters) |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Value](#Value) { get; set; } | Type can be string, integer, double or boolean Value of the choice, up to 100 characters if string |
+| [CommandOptionChoice](#CommandOptionChoice-constructor)() | Default Constructor |
+| [CommandOptionChoice](#CommandOptionChoice-constructor)(…) | Creates a Command Option Choice |
+| [Name](#Name-property) { get; set; } | Choice name (1-100 characters) |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Value](#Value-property) { get; set; } | Type can be string, integer, double or boolean Value of the choice, up to 100 characters if string |
 
 ## See Also
 

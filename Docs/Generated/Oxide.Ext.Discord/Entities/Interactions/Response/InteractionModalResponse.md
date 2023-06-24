@@ -10,8 +10,8 @@ public class InteractionModalResponse : BaseInteractionResponse<InteractionModal
 
 | name | description |
 | --- | --- |
-| [InteractionModalResponse](#InteractionModalResponse)() | Constructor |
-| [InteractionModalResponse](#InteractionModalResponse)(…) | Constructor with message |
+| [InteractionModalResponse](#InteractionModalResponse-constructor)() | Constructor |
+| [InteractionModalResponse](#InteractionModalResponse-constructor)(…) | Constructor with message |
 
 ## See Also
 

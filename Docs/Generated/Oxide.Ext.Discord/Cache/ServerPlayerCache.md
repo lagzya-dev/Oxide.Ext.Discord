@@ -10,10 +10,10 @@ public class ServerPlayerCache : Singleton<ServerPlayerCache>
 
 | name | description |
 | --- | --- |
-| readonly [Cache](#Cache) | Readonly Cache of IPlayer |
-| [GetAllPlayers](#GetAllPlayers)(…) | Returns an IEnumerable matching player names |
-| [GetOnlinePlayers](#GetOnlinePlayers)(…) | Returns an IEnumerable matching player names that are online |
-| [GetPlayerById](#GetPlayerById)(…) | Returns the IPlayer for the given ID |
+| readonly [Cache](#Cache-field) | Readonly Cache of IPlayer |
+| [GetAllPlayers](#GetAllPlayers-method)(…) | Returns an IEnumerable matching player names |
+| [GetOnlinePlayers](#GetOnlinePlayers-method)(…) | Returns an IEnumerable matching player names that are online |
+| [GetPlayerById](#GetPlayerById-method)(…) | Returns the IPlayer for the given ID |
 
 ## See Also
 

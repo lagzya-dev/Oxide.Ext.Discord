@@ -10,12 +10,12 @@ public class EmbedImage
 
 | name | description |
 | --- | --- |
-| [EmbedImage](#EmbedImage)() | Embed Image Constructor |
-| [EmbedImage](#EmbedImage)(…) | Embed Image Constructor |
-| [Height](#Height) { get; set; } | Height of image |
-| [ProxyUrl](#ProxyUrl) { get; set; } | A proxied url of the image |
-| [Url](#Url) { get; set; } | Source url of image (only supports http(s) and attachments) |
-| [Width](#Width) { get; set; } | Width of image |
+| [EmbedImage](#EmbedImage-constructor)() | Embed Image Constructor |
+| [EmbedImage](#EmbedImage-constructor)(…) | Embed Image Constructor |
+| [Height](#Height-property) { get; set; } | Height of image |
+| [ProxyUrl](#ProxyUrl-property) { get; set; } | A proxied url of the image |
+| [Url](#Url-property) { get; set; } | Source url of image (only supports http(s) and attachments) |
+| [Width](#Width-property) { get; set; } | Width of image |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public class AllowedMention
 
 | name | description |
 | --- | --- |
-| [AllowedMention](#AllowedMention)() | The default constructor. |
-| static readonly [None](#None) | Prevents all mentions |
-| [AllowedTypes](#AllowedTypes) { get; set; } | An array of allowed mention types to parse from the content. [`AllowedMentionTypes`](./AllowedMentionTypes.md) |
-| [RepliedUser](#RepliedUser) { get; set; } | For replies, whether to mention the author of the message being replied to (default false) |
-| [Roles](#Roles) { get; set; } | Array of Role IDs to mention (Max size of 100) |
-| [Users](#Users) { get; set; } | Array of User IDs to mention (Max size of 100) |
+| [AllowedMention](#AllowedMention-constructor)() | The default constructor. |
+| static readonly [None](#None-field) | Prevents all mentions |
+| [AllowedTypes](#AllowedTypes-property) { get; set; } | An array of allowed mention types to parse from the content. [`AllowedMentionTypes`](./AllowedMentionTypes.md) |
+| [RepliedUser](#RepliedUser-property) { get; set; } | For replies, whether to mention the author of the message being replied to (default false) |
+| [Roles](#Roles-property) { get; set; } | Array of Role IDs to mention (Max size of 100) |
+| [Users](#Users-property) { get; set; } | Array of User IDs to mention (Max size of 100) |
 
 ## See Also
 

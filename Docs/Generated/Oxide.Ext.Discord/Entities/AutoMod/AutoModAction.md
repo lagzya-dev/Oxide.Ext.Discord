@@ -10,9 +10,9 @@ public class AutoModAction
 
 | name | description |
 | --- | --- |
-| [AutoModAction](#AutoModAction)() | The default constructor. |
-| [Metadata](#Metadata) { get; set; } | Additional metadata needed during execution for this specific action type |
-| [Type](#Type) { get; set; } | Type of [`AutoModActionType`](./AutoModActionType.md) |
+| [AutoModAction](#AutoModAction-constructor)() | The default constructor. |
+| [Metadata](#Metadata-property) { get; set; } | Additional metadata needed during execution for this specific action type |
+| [Type](#Type-property) { get; set; } | Type of [`AutoModActionType`](./AutoModActionType.md) |
 
 ## See Also
 

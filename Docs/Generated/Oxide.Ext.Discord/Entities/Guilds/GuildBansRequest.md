@@ -10,11 +10,11 @@ public class GuildBansRequest : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [GuildBansRequest](#GuildBansRequest)() | The default constructor. |
-| [After](#After) { get; set; } | Get bans after this user ID |
-| [Before](#Before) { get; set; } | Get bans before this user ID |
-| [Limit](#Limit) { get; set; } | Number of users to return (up to maximum 1000) |
-| [ToQueryString](#ToQueryString)() |  |
+| [GuildBansRequest](#GuildBansRequest-constructor)() | The default constructor. |
+| [After](#After-property) { get; set; } | Get bans after this user ID |
+| [Before](#Before-property) { get; set; } | Get bans before this user ID |
+| [Limit](#Limit-property) { get; set; } | Number of users to return (up to maximum 1000) |
+| [ToQueryString](#ToQueryString-method)() |  |
 
 ## See Also
 

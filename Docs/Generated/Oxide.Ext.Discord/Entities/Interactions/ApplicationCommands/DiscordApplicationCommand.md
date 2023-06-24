@@ -10,26 +10,26 @@ public class DiscordApplicationCommand
 
 | name | description |
 | --- | --- |
-| [DiscordApplicationCommand](#DiscordApplicationCommand)() | The default constructor. |
-| [ApplicationId](#ApplicationId) { get; set; } | ID of the parent application |
-| [DefaultMemberPermissions](#DefaultMemberPermissions) { get; set; } | Set of permissions represented as a bit set |
-| [Description](#Description) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](#DmPermission) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [GuildId](#GuildId) { get; set; } | Guild ID of the command, if not global |
-| [Id](#Id) { get; set; } | Unique id of the command |
-| [Mention](#Mention) { get; } | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) |
-| [Name](#Name) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](#Nsfw) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](#Options) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
-| [Type](#Type) { get; set; } | The type of command, defaults to 1 |
-| [Version](#Version) { get; set; } | Auto incrementing version identifier updated during substantial record changes |
-| [Delete](#Delete)(…) | Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command) |
-| [Edit](#Edit)(…) | Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command) |
-| [EditPermissions](#EditPermissions)(…) | Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions) |
-| [GetPermissions](#GetPermissions)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
-| [MentionCustom](#MentionCustom)(…) | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string |
+| [DiscordApplicationCommand](#DiscordApplicationCommand-constructor)() | The default constructor. |
+| [ApplicationId](#ApplicationId-property) { get; set; } | ID of the parent application |
+| [DefaultMemberPermissions](#DefaultMemberPermissions-property) { get; set; } | Set of permissions represented as a bit set |
+| [Description](#Description-property) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#DmPermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [GuildId](#GuildId-property) { get; set; } | Guild ID of the command, if not global |
+| [Id](#Id-property) { get; set; } | Unique id of the command |
+| [Mention](#Mention-property) { get; } | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) |
+| [Name](#Name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#Nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#Options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [Type](#Type-property) { get; set; } | The type of command, defaults to 1 |
+| [Version](#Version-property) { get; set; } | Auto incrementing version identifier updated during substantial record changes |
+| [Delete](#Delete-method)(…) | Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command) |
+| [Edit](#Edit-method)(…) | Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command) |
+| [EditPermissions](#EditPermissions-method)(…) | Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions) |
+| [GetPermissions](#GetPermissions-method)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
+| [MentionCustom](#MentionCustom-method)(…) | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string |
 
 ## See Also
 

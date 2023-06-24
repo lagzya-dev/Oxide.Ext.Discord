@@ -10,15 +10,15 @@ public class DiscordStreamContent : HttpContent
 
 | name | description |
 | --- | --- |
-| [DiscordStreamContent](#DiscordStreamContent)(…) | Constructor |
+| [DiscordStreamContent](#DiscordStreamContent-constructor)(…) | Constructor |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [CreateContentReadStreamAsync](#CreateContentReadStreamAsync)() |  |
-| override [SerializeToStreamAsync](#SerializeToStreamAsync)(…) |  |
-| override [TryComputeLength](#TryComputeLength)(…) |  |
+| override [CreateContentReadStreamAsync](#CreateContentReadStreamAsync-method)() |  |
+| override [SerializeToStreamAsync](#SerializeToStreamAsync-method)(…) |  |
+| override [TryComputeLength](#TryComputeLength-method)(…) |  |
 
 ## See Also
 

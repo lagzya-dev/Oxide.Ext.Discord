@@ -10,10 +10,10 @@ public class ClientStatus
 
 | name | description |
 | --- | --- |
-| [ClientStatus](#ClientStatus)() | The default constructor. |
-| [Desktop](#Desktop) { get; set; } | The user's status set for an active desktop (Windows, Linux, Mac) application session |
-| [Mobile](#Mobile) { get; set; } | The user's status set for an active mobile (iOS, Android) application session |
-| [Web](#Web) { get; set; } | The user's status set for an active web (browser, bot account) application session |
+| [ClientStatus](#ClientStatus-constructor)() | The default constructor. |
+| [Desktop](#Desktop-property) { get; set; } | The user's status set for an active desktop (Windows, Linux, Mac) application session |
+| [Mobile](#Mobile-property) { get; set; } | The user's status set for an active mobile (iOS, Android) application session |
+| [Web](#Web-property) { get; set; } | The user's status set for an active web (browser, bot account) application session |
 
 ## See Also
 

@@ -10,14 +10,14 @@ public static class DateTimePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Day](#Day)(…) | Day placeholder |
-| static [Hour](#Hour)(…) | Hour placeholder |
-| static [Millisecond](#Millisecond)(…) | Millisecond placeholder |
-| static [Minute](#Minute)(…) | Minute placeholder |
-| static [Month](#Month)(…) | Month placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
-| static [Second](#Second)(…) | Second placeholder |
-| static [Year](#Year)(…) | Year placeholder |
+| static [Day](#Day-method)(…) | Day placeholder |
+| static [Hour](#Hour-method)(…) | Hour placeholder |
+| static [Millisecond](#Millisecond-method)(…) | Millisecond placeholder |
+| static [Minute](#Minute-method)(…) | Minute placeholder |
+| static [Month](#Month-method)(…) | Month placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Second](#Second-method)(…) | Second placeholder |
+| static [Year](#Year-method)(…) | Year placeholder |
 
 ## See Also
 

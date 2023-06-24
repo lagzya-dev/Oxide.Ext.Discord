@@ -10,7 +10,7 @@ public interface IFileAttachments
 
 | name | description |
 | --- | --- |
-| [FileAttachments](#FileAttachments) { get; } | File attachments for an entity |
+| [FileAttachments](#FileAttachments-property) { get; } | File attachments for an entity |
 
 ## See Also
 

@@ -10,15 +10,15 @@ public class ButtonTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [ButtonTemplate](#ButtonTemplate)() | Default Constructor |
-| [ButtonTemplate](#ButtonTemplate)(…) | Constructor without emoji (2 constructors) |
-| [Command](#Command) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
-| [Emoji](#Emoji) { get; set; } | Emoji for the button |
-| [Enabled](#Enabled) { get; set; } | If the Button is enabled |
-| [Inline](#Inline) { get; set; } | Should the button be on the same or new row |
-| [Label](#Label) { get; set; } | Display label for the button |
-| [Style](#Style) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
-| override [ToComponent](#ToComponent)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
+| [ButtonTemplate](#ButtonTemplate-constructor)() | Default Constructor |
+| [ButtonTemplate](#ButtonTemplate-constructor)(…) | Constructor without emoji (2 constructors) |
+| [Command](#Command-property) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
+| [Emoji](#Emoji-property) { get; set; } | Emoji for the button |
+| [Enabled](#Enabled-property) { get; set; } | If the Button is enabled |
+| [Inline](#Inline-property) { get; set; } | Should the button be on the same or new row |
+| [Label](#Label-property) { get; set; } | Display label for the button |
+| [Style](#Style-property) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
+| override [ToComponent](#ToComponent-method)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
 
 ## See Also
 

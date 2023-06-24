@@ -10,10 +10,10 @@ public class GuildBanCreate
 
 | name | description |
 | --- | --- |
-| [GuildBanCreate](#GuildBanCreate)() | The default constructor. |
-| [DeleteMessageDays](#DeleteMessageDays) { get; set; } | Number of days to delete messages for (0-7) |
-| [DeleteMessageSeconds](#DeleteMessageSeconds) { get; set; } | Number of seconds to delete messages for, between 0 and 604800 (7 days) |
-| [Validate](#Validate)() |  |
+| [GuildBanCreate](#GuildBanCreate-constructor)() | The default constructor. |
+| [DeleteMessageDays](#DeleteMessageDays-property) { get; set; } | Number of days to delete messages for (0-7) |
+| [DeleteMessageSeconds](#DeleteMessageSeconds-property) { get; set; } | Number of seconds to delete messages for, between 0 and 604800 (7 days) |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

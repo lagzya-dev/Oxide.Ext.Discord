@@ -10,7 +10,7 @@ public class RoleSelectComponent : BaseSelectMenuComponent
 
 | name | description |
 | --- | --- |
-| [RoleSelectComponent](#RoleSelectComponent)() | Select Menu Component Constructor |
+| [RoleSelectComponent](#RoleSelectComponent-constructor)() | Select Menu Component Constructor |
 
 ## See Also
 

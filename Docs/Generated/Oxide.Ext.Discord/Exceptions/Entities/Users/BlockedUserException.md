@@ -10,8 +10,8 @@ public class BlockedUserException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| readonly [BlockedUntil](#BlockedUntil) | Time until we try sending a message again |
-| readonly [User](#User) | User who has blocked messages |
+| readonly [BlockedUntil](#BlockedUntil-field) | Time until we try sending a message again |
+| readonly [User](#User-field) | User who has blocked messages |
 
 ## See Also
 

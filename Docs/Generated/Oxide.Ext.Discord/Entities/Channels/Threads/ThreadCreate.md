@@ -10,13 +10,13 @@ public class ThreadCreate
 
 | name | description |
 | --- | --- |
-| [ThreadCreate](#ThreadCreate)() | The default constructor. |
-| [AutoArchiveDuration](#AutoArchiveDuration) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [Invitable](#Invitable) { get; set; } | Whether non-moderators can add other non-moderators to a thread; only available when creating a private thread |
-| [Name](#Name) { get; set; } | 1-100 character thread name |
-| [RateLimitPerUser](#RateLimitPerUser) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
-| [Type](#Type) { get; set; } | The type of thread to create Can only be GuildNewsThread, GuildPublicThread, or GuildPrivateThread |
-| [Validate](#Validate)() | Validates the Thread Forum Create |
+| [ThreadCreate](#ThreadCreate-constructor)() | The default constructor. |
+| [AutoArchiveDuration](#AutoArchiveDuration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [Invitable](#Invitable-property) { get; set; } | Whether non-moderators can add other non-moderators to a thread; only available when creating a private thread |
+| [Name](#Name-property) { get; set; } | 1-100 character thread name |
+| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
+| [Type](#Type-property) { get; set; } | The type of thread to create Can only be GuildNewsThread, GuildPublicThread, or GuildPrivateThread |
+| [Validate](#Validate-method)() | Validates the Thread Forum Create |
 
 ## See Also
 

@@ -10,14 +10,14 @@ public class VoiceRegion
 
 | name | description |
 | --- | --- |
-| [VoiceRegion](#VoiceRegion)() | The default constructor. |
-| [Custom](#Custom) { get; set; } | Whether this is a custom voice region (used for events/etc) |
-| [Deprecated](#Deprecated) { get; set; } | Whether this is a deprecated voice region (avoid switching to these) |
-| [Id](#Id) { get; set; } | Unique ID for the region |
-| [Name](#Name) { get; set; } | Name of the region |
-| [Optimal](#Optimal) { get; set; } | True for a single server that is closest to the current user's client |
-| [Vip](#Vip) { get; set; } | True if this is a vip-only server |
-| static [ListVoiceRegions](#ListVoiceRegions)(…) | Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions) |
+| [VoiceRegion](#VoiceRegion-constructor)() | The default constructor. |
+| [Custom](#Custom-property) { get; set; } | Whether this is a custom voice region (used for events/etc) |
+| [Deprecated](#Deprecated-property) { get; set; } | Whether this is a deprecated voice region (avoid switching to these) |
+| [Id](#Id-property) { get; set; } | Unique ID for the region |
+| [Name](#Name-property) { get; set; } | Name of the region |
+| [Optimal](#Optimal-property) { get; set; } | True for a single server that is closest to the current user's client |
+| [Vip](#Vip-property) { get; set; } | True if this is a vip-only server |
+| static [ListVoiceRegions](#ListVoiceRegions-method)(…) | Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions) |
 
 ## See Also
 

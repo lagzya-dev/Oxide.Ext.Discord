@@ -10,16 +10,16 @@ public class AutoModRuleCreate
 
 | name | description |
 | --- | --- |
-| [AutoModRuleCreate](#AutoModRuleCreate)() | The default constructor. |
-| [Actions](#Actions) { get; set; } | Actions which will execute when the rule is triggered |
-| [Enabled](#Enabled) { get; set; } | Whether the rule is enabled |
-| [EventType](#EventType) { get; set; } | Rule [`AutoModEventType`](./AutoModEventType.md) |
-| [ExemptChannels](#ExemptChannels) { get; set; } | Channel ids that should not be affected by the rule (Maximum of 50) |
-| [ExemptRoles](#ExemptRoles) { get; set; } | Role ids that should not be affected by the rule (Maximum of 20) |
-| [Name](#Name) { get; set; } | Rule name |
-| [TriggerMetadata](#TriggerMetadata) { get; set; } | Rule [`AutoModTriggerMetadata`](./AutoModTriggerMetadata.md) |
-| [TriggerType](#TriggerType) { get; set; } | Rule [`AutoModTriggerType`](./AutoModTriggerType.md) |
-| [Validate](#Validate)() |  |
+| [AutoModRuleCreate](#AutoModRuleCreate-constructor)() | The default constructor. |
+| [Actions](#Actions-property) { get; set; } | Actions which will execute when the rule is triggered |
+| [Enabled](#Enabled-property) { get; set; } | Whether the rule is enabled |
+| [EventType](#EventType-property) { get; set; } | Rule [`AutoModEventType`](./AutoModEventType.md) |
+| [ExemptChannels](#ExemptChannels-property) { get; set; } | Channel ids that should not be affected by the rule (Maximum of 50) |
+| [ExemptRoles](#ExemptRoles-property) { get; set; } | Role ids that should not be affected by the rule (Maximum of 20) |
+| [Name](#Name-property) { get; set; } | Rule name |
+| [TriggerMetadata](#TriggerMetadata-property) { get; set; } | Rule [`AutoModTriggerMetadata`](./AutoModTriggerMetadata.md) |
+| [TriggerType](#TriggerType-property) { get; set; } | Rule [`AutoModTriggerType`](./AutoModTriggerType.md) |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

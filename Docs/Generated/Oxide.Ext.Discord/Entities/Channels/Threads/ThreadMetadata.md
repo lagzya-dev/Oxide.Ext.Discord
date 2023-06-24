@@ -10,13 +10,13 @@ public class ThreadMetadata
 
 | name | description |
 | --- | --- |
-| [ThreadMetadata](#ThreadMetadata)() | The default constructor. |
-| [Archived](#Archived) { get; set; } | Whether the thread is archived |
-| [ArchiveTimestamp](#ArchiveTimestamp) { get; set; } | Timestamp when the thread's archive status was last changed, used for calculating recent activity |
-| [AutoArchiveDuration](#AutoArchiveDuration) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [CreateTimestamp](#CreateTimestamp) { get; set; } | Timestamp when the thread was created; only populated for threads created after 2022-01-09 |
-| [Invitable](#Invitable) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
-| [Locked](#Locked) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
+| [ThreadMetadata](#ThreadMetadata-constructor)() | The default constructor. |
+| [Archived](#Archived-property) { get; set; } | Whether the thread is archived |
+| [ArchiveTimestamp](#ArchiveTimestamp-property) { get; set; } | Timestamp when the thread's archive status was last changed, used for calculating recent activity |
+| [AutoArchiveDuration](#AutoArchiveDuration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [CreateTimestamp](#CreateTimestamp-property) { get; set; } | Timestamp when the thread was created; only populated for threads created after 2022-01-09 |
+| [Invitable](#Invitable-property) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
+| [Locked](#Locked-property) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
 
 ## See Also
 

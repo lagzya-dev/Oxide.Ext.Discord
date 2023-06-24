@@ -10,18 +10,18 @@ public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordEmoji](#DiscordEmoji)() | The default constructor. |
-| static [FromCharacter](#FromCharacter)(…) | Returns an emoji object for the given emoji character |
-| [Animated](#Animated) { get; set; } | Whether this emoji is animated |
-| [Available](#Available) { get; set; } | Whether this emoji can be used, may be false due to loss of Server Boosts |
-| [EmojiId](#EmojiId) { get; set; } | Emoji id |
-| [Id](#Id) { get; } | The ID for the emoji if it is custom; Otherwise invalid snowflake |
-| [Managed](#Managed) { get; set; } | Whether this emoji is managed |
-| [Mention](#Mention) { get; } | Show the emoji in a message |
-| [RequireColons](#RequireColons) { get; set; } | Whether this emoji must be wrapped in colons |
-| [Url](#Url) { get; } | Url to the emoji image |
-| [User](#User) { get; set; } | User that created this emoji |
-| [ToDataString](#ToDataString)() | Returns the data string to be used in the API request |
+| [DiscordEmoji](#DiscordEmoji-constructor)() | The default constructor. |
+| static [FromCharacter](#FromCharacter-method)(…) | Returns an emoji object for the given emoji character |
+| [Animated](#Animated-property) { get; set; } | Whether this emoji is animated |
+| [Available](#Available-property) { get; set; } | Whether this emoji can be used, may be false due to loss of Server Boosts |
+| [EmojiId](#EmojiId-property) { get; set; } | Emoji id |
+| [Id](#Id-property) { get; } | The ID for the emoji if it is custom; Otherwise invalid snowflake |
+| [Managed](#Managed-property) { get; set; } | Whether this emoji is managed |
+| [Mention](#Mention-property) { get; } | Show the emoji in a message |
+| [RequireColons](#RequireColons-property) { get; set; } | Whether this emoji must be wrapped in colons |
+| [Url](#Url-property) { get; } | Url to the emoji image |
+| [User](#User-property) { get; set; } | User that created this emoji |
+| [ToDataString](#ToDataString-method)() | Returns the data string to be used in the API request |
 
 ## See Also
 

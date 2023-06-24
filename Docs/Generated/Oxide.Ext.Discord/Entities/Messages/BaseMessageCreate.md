@@ -10,25 +10,25 @@ public abstract class BaseMessageCreate : IDiscordMessageTemplate, IFileAttachme
 
 | name | description |
 | --- | --- |
-| [AllowedMention](#AllowedMention) { get; set; } | Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content. |
-| [Attachments](#Attachments) { get; set; } | Attachments for the message |
-| [Components](#Components) { get; set; } | Used to create message components on a message |
-| [Content](#Content) { get; set; } | Contents of the message |
-| [Embeds](#Embeds) { get; set; } | Embeds for the message Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown. |
-| [FileAttachments](#FileAttachments) { get; set; } | Attachments for a discord message |
-| [Flags](#Flags) { get; set; } | Attachments for the message |
-| [StickerIds](#StickerIds) { get; set; } | IDs of up to 3 stickers in the server to send in the message |
-| [Tts](#Tts) { get; set; } | Whether this was a TTS message |
-| [AddAttachment](#AddAttachment)(…) | Adds an attachment to the message |
-| [Validate](#Validate)() |  |
+| [AllowedMention](#AllowedMention-property) { get; set; } | Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content. |
+| [Attachments](#Attachments-property) { get; set; } | Attachments for the message |
+| [Components](#Components-property) { get; set; } | Used to create message components on a message |
+| [Content](#Content-property) { get; set; } | Contents of the message |
+| [Embeds](#Embeds-property) { get; set; } | Embeds for the message Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown. |
+| [FileAttachments](#FileAttachments-property) { get; set; } | Attachments for a discord message |
+| [Flags](#Flags-property) { get; set; } | Attachments for the message |
+| [StickerIds](#StickerIds-property) { get; set; } | IDs of up to 3 stickers in the server to send in the message |
+| [Tts](#Tts-property) { get; set; } | Whether this was a TTS message |
+| [AddAttachment](#AddAttachment-method)(…) | Adds an attachment to the message |
+| [Validate](#Validate-method)() |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseMessageCreate](#BaseMessageCreate)() | The default constructor. |
-| virtual [ValidateFlags](#ValidateFlags)() | Validates that the message flags are correct for the message type |
-| virtual [ValidateRequiredFields](#ValidateRequiredFields)() | Validates required fields for the message |
+| [BaseMessageCreate](#BaseMessageCreate-constructor)() | The default constructor. |
+| virtual [ValidateFlags](#ValidateFlags-method)() | Validates that the message flags are correct for the message type |
+| virtual [ValidateRequiredFields](#ValidateRequiredFields-method)() | Validates required fields for the message |
 
 ## See Also
 

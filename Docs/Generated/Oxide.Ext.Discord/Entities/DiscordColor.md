@@ -10,36 +10,36 @@ public struct DiscordColor
 
 | name | description |
 | --- | --- |
-| [DiscordColor](#DiscordColor)(…) | DiscordColor Constructor (7 constructors) |
-| static readonly [Blue](#Blue) | Blue Role Color |
-| static readonly [Blurple](#Blurple) | Discord Blurple Color |
-| static readonly [BlurpleOld](#BlurpleOld) | Discord Old Blurple Color |
-| static readonly [Danger](#Danger) | Discord Danger Color |
-| static readonly [DarkBlue](#DarkBlue) | Dark Blue Role Color |
-| static readonly [DarkerGrey](#DarkerGrey) | Darker Gray Role Color |
-| static readonly [DarkGreen](#DarkGreen) | Dark Green Role Color |
-| static readonly [DarkGrey](#DarkGrey) | Dark Gray Role Color |
-| static readonly [DarkMagenta](#DarkMagenta) | Dark Magenta Role Color |
-| static readonly [DarkOrange](#DarkOrange) | Dark Orange Role Color |
-| static readonly [DarkPurple](#DarkPurple) | Dark Purple Role Color |
-| static readonly [DarkRed](#DarkRed) | Dark Red Role Color |
-| static readonly [DarkTeal](#DarkTeal) | Dark Teal Role Color |
-| static readonly [Default](#Default) | Default Role Color |
-| static readonly [Fuchsia](#Fuchsia) | Discord Fuchsia Color |
-| static readonly [Gold](#Gold) | Gold Role Color |
-| static readonly [Green](#Green) | Green Role Color |
-| static readonly [LighterGrey](#LighterGrey) | Lighter Gray Role Color |
-| static readonly [LightGrey](#LightGrey) | Light Gray Role Color |
-| static readonly [LightOrange](#LightOrange) | Light Orange Role Color |
-| static readonly [Magenta](#Magenta) | Magenta Role Color |
-| static readonly [Orange](#Orange) | Orange Role Color |
-| static readonly [Purple](#Purple) | Purple Role Color |
-| static readonly [Red](#Red) | Red Role Color |
-| static readonly [Success](#Success) | Discord Success Color |
-| static readonly [Teal](#Teal) | Teal Role Color |
-| static readonly [Warning](#Warning) | Discord Warning Color |
-| readonly [Color](#Color) | uint value of the hex color code |
-| override [ToString](#ToString)() | Returns the color as a string |
+| [DiscordColor](#DiscordColor-constructor)(…) | DiscordColor Constructor (7 constructors) |
+| static readonly [Blue](#Blue-field) | Blue Role Color |
+| static readonly [Blurple](#Blurple-field) | Discord Blurple Color |
+| static readonly [BlurpleOld](#BlurpleOld-field) | Discord Old Blurple Color |
+| static readonly [Danger](#Danger-field) | Discord Danger Color |
+| static readonly [DarkBlue](#DarkBlue-field) | Dark Blue Role Color |
+| static readonly [DarkerGrey](#DarkerGrey-field) | Darker Gray Role Color |
+| static readonly [DarkGreen](#DarkGreen-field) | Dark Green Role Color |
+| static readonly [DarkGrey](#DarkGrey-field) | Dark Gray Role Color |
+| static readonly [DarkMagenta](#DarkMagenta-field) | Dark Magenta Role Color |
+| static readonly [DarkOrange](#DarkOrange-field) | Dark Orange Role Color |
+| static readonly [DarkPurple](#DarkPurple-field) | Dark Purple Role Color |
+| static readonly [DarkRed](#DarkRed-field) | Dark Red Role Color |
+| static readonly [DarkTeal](#DarkTeal-field) | Dark Teal Role Color |
+| static readonly [Default](#Default-field) | Default Role Color |
+| static readonly [Fuchsia](#Fuchsia-field) | Discord Fuchsia Color |
+| static readonly [Gold](#Gold-field) | Gold Role Color |
+| static readonly [Green](#Green-field) | Green Role Color |
+| static readonly [LighterGrey](#LighterGrey-field) | Lighter Gray Role Color |
+| static readonly [LightGrey](#LightGrey-field) | Light Gray Role Color |
+| static readonly [LightOrange](#LightOrange-field) | Light Orange Role Color |
+| static readonly [Magenta](#Magenta-field) | Magenta Role Color |
+| static readonly [Orange](#Orange-field) | Orange Role Color |
+| static readonly [Purple](#Purple-field) | Purple Role Color |
+| static readonly [Red](#Red-field) | Red Role Color |
+| static readonly [Success](#Success-field) | Discord Success Color |
+| static readonly [Teal](#Teal-field) | Teal Role Color |
+| static readonly [Warning](#Warning-field) | Discord Warning Color |
+| readonly [Color](#Color-field) | uint value of the hex color code |
+| override [ToString](#ToString-method)() | Returns the color as a string |
 
 ## See Also
 

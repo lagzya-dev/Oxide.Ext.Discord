@@ -10,9 +10,9 @@ public class ScheduledEventLookup : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ScheduledEventLookup](#ScheduledEventLookup)() | The default constructor. |
-| [WithUserCount](#WithUserCount) { get; set; } | Include number of users subscribed to each event |
-| [ToQueryString](#ToQueryString)() |  |
+| [ScheduledEventLookup](#ScheduledEventLookup-constructor)() | The default constructor. |
+| [WithUserCount](#WithUserCount-property) { get; set; } | Include number of users subscribed to each event |
+| [ToQueryString](#ToQueryString-method)() |  |
 
 ## See Also
 

@@ -10,16 +10,16 @@ public class ThreadChannelUpdate
 
 | name | description |
 | --- | --- |
-| [ThreadChannelUpdate](#ThreadChannelUpdate)() | The default constructor. |
-| [AppliedTags](#AppliedTags) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
-| [Archived](#Archived) { get; set; } | Whether the channel is archived |
-| [AutoArchiveDuration](#AutoArchiveDuration) { get; set; } | Duration in minutes to automatically archive the thread after recent activity Can be set to: 60, 1440, 4320, 10080 |
-| [Flags](#Flags) { get; set; } | Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels |
-| [Invitable](#Invitable) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
-| [Locked](#Locked) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
-| [Name](#Name) { get; set; } | The name of the channel (1-100 characters) |
-| [RateLimitPerUser](#RateLimitPerUser) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected |
-| [Validate](#Validate)() |  |
+| [ThreadChannelUpdate](#ThreadChannelUpdate-constructor)() | The default constructor. |
+| [AppliedTags](#AppliedTags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
+| [Archived](#Archived-property) { get; set; } | Whether the channel is archived |
+| [AutoArchiveDuration](#AutoArchiveDuration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity Can be set to: 60, 1440, 4320, 10080 |
+| [Flags](#Flags-property) { get; set; } | Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels |
+| [Invitable](#Invitable-property) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
+| [Locked](#Locked-property) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
+| [Name](#Name-property) { get; set; } | The name of the channel (1-100 characters) |
+| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) Bots and users with the permission manage_messages, manage_thread, or manage_channel, are unaffected |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public class MessageInteraction
 
 | name | description |
 | --- | --- |
-| [MessageInteraction](#MessageInteraction)() | The default constructor. |
-| [Id](#Id) { get; set; } | ID of the interaction |
-| [Member](#Member) { get; set; } | Member who invoked the interaction in the guild |
-| [Name](#Name) { get; set; } | Name of the [`DiscordApplicationCommand`](../Interactions/ApplicationCommands/DiscordApplicationCommand.md), including subcommands and subcommand groups |
-| [Type](#Type) { get; set; } | Type of interaction |
-| [User](#User) { get; set; } | The user who invoked the interaction |
+| [MessageInteraction](#MessageInteraction-constructor)() | The default constructor. |
+| [Id](#Id-property) { get; set; } | ID of the interaction |
+| [Member](#Member-property) { get; set; } | Member who invoked the interaction in the guild |
+| [Name](#Name-property) { get; set; } | Name of the [`DiscordApplicationCommand`](../Interactions/ApplicationCommands/DiscordApplicationCommand.md), including subcommands and subcommand groups |
+| [Type](#Type-property) { get; set; } | Type of interaction |
+| [User](#User-property) { get; set; } | The user who invoked the interaction |
 
 ## See Also
 

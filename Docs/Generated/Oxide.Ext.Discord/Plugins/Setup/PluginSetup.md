@@ -10,7 +10,7 @@ public class PluginSetup
 
 | name | description |
 | --- | --- |
-| [PluginSetup](#PluginSetup)(…) | Constructor |
+| [PluginSetup](#PluginSetup-constructor)(…) | Constructor |
 
 ## See Also
 

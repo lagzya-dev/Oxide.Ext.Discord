@@ -10,9 +10,9 @@ public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLoc
 
 | name | description |
 | --- | --- |
-| [ApplyCommandLocalizationsAsync](#ApplyCommandLocalizationsAsync)(…) | Applies Command Localizations Async |
-| [BulkRegisterCommandLocalizationsAsync](#BulkRegisterCommandLocalizationsAsync)(…) | Registers multiple command localizations |
-| [RegisterCommandLocalizationAsync](#RegisterCommandLocalizationAsync)(…) | Registers Application Command Localization for a given language |
+| [ApplyCommandLocalizationsAsync](#ApplyCommandLocalizationsAsync-method)(…) | Applies Command Localizations Async |
+| [BulkRegisterCommandLocalizationsAsync](#BulkRegisterCommandLocalizationsAsync-method)(…) | Registers multiple command localizations |
+| [RegisterCommandLocalizationAsync](#RegisterCommandLocalizationAsync-method)(…) | Registers Application Command Localization for a given language |
 
 ## See Also
 

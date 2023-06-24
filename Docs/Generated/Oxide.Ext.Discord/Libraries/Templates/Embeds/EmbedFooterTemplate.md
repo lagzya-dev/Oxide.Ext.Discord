@@ -10,12 +10,12 @@ public class EmbedFooterTemplate
 
 | name | description |
 | --- | --- |
-| [EmbedFooterTemplate](#EmbedFooterTemplate)() | Constructor |
-| [EmbedFooterTemplate](#EmbedFooterTemplate)(…) | Constructor |
-| [Enabled](#Enabled) { get; set; } | Show Embed Footer |
-| [IconUrl](#IconUrl) { get; set; } | Embed Footer Icon |
-| [Text](#Text) { get; set; } | Embed Footer Text |
-| [ToFooter](#ToFooter)(…) | Converts the template to a [`EmbedFooter`](../../../Entities/Messages/Embeds/EmbedFooter.md) |
+| [EmbedFooterTemplate](#EmbedFooterTemplate-constructor)() | Constructor |
+| [EmbedFooterTemplate](#EmbedFooterTemplate-constructor)(…) | Constructor |
+| [Enabled](#Enabled-property) { get; set; } | Show Embed Footer |
+| [IconUrl](#IconUrl-property) { get; set; } | Embed Footer Icon |
+| [Text](#Text-property) { get; set; } | Embed Footer Text |
+| [ToFooter](#ToFooter-method)(…) | Converts the template to a [`EmbedFooter`](../../../Entities/Messages/Embeds/EmbedFooter.md) |
 
 ## See Also
 

@@ -19,7 +19,7 @@ public sealed class DiscordMessageComponentCommandAttribute : BaseApplicationCom
 
 | name | description |
 | --- | --- |
-| [DiscordMessageComponentCommandAttribute](#DiscordMessageComponentCommandAttribute)(…) | Constructor |
+| [DiscordMessageComponentCommandAttribute](#DiscordMessageComponentCommandAttribute-constructor)(…) | Constructor |
 
 ## See Also
 

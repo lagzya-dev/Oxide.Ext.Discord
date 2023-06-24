@@ -10,9 +10,9 @@ public class GuildMemberRemovedEvent
 
 | name | description |
 | --- | --- |
-| [GuildMemberRemovedEvent](#GuildMemberRemovedEvent)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [User](#User) { get; set; } | The user who was removed |
+| [GuildMemberRemovedEvent](#GuildMemberRemovedEvent-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [User](#User-property) { get; set; } | The user who was removed |
 
 ## See Also
 

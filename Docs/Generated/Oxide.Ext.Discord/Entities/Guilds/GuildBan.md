@@ -10,9 +10,9 @@ public class GuildBan
 
 | name | description |
 | --- | --- |
-| [GuildBan](#GuildBan)() | The default constructor. |
-| [Reason](#Reason) { get; set; } | The reason for the ban |
-| [User](#User) { get; set; } | The banned user |
+| [GuildBan](#GuildBan-constructor)() | The default constructor. |
+| [Reason](#Reason-property) { get; set; } | The reason for the ban |
+| [User](#User-property) { get; set; } | The banned user |
 
 ## See Also
 

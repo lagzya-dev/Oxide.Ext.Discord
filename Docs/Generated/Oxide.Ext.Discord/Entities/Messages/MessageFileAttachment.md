@@ -10,10 +10,10 @@ public class MessageFileAttachment
 
 | name | description |
 | --- | --- |
-| [MessageFileAttachment](#MessageFileAttachment)(…) | Constructor |
-| [ContentType](#ContentType) { get; set; } | Web Content Type for the file attachment |
-| [Data](#Data) { get; set; } | Data for the file attachment |
-| [FileName](#FileName) { get; set; } | Name of the file attachment |
+| [MessageFileAttachment](#MessageFileAttachment-constructor)(…) | Constructor |
+| [ContentType](#ContentType-property) { get; set; } | Web Content Type for the file attachment |
+| [Data](#Data-property) { get; set; } | Data for the file attachment |
+| [FileName](#FileName-property) { get; set; } | Name of the file attachment |
 
 ## See Also
 

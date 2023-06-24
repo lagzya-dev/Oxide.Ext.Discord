@@ -10,14 +10,14 @@ public abstract class BaseCallback<T> : BasePoolable
 
 | name | description |
 | --- | --- |
-| virtual [Start](#Start)(…) | Run the callback |
+| virtual [Start](#Start-method)(…) | Run the callback |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseCallback](#BaseCallback)() | Constructor |
-| abstract [HandleCallback](#HandleCallback)(…) | Overridden in the child class to handle the callback |
+| [BaseCallback](#BaseCallback-constructor)() | Constructor |
+| abstract [HandleCallback](#HandleCallback-method)(…) | Overridden in the child class to handle the callback |
 
 ## See Also
 

@@ -11,14 +11,14 @@ public abstract class BaseCommandAttribute : BaseDiscordAttribute
 
 | name | description |
 | --- | --- |
-| [IsLocalized](#IsLocalized) { get; } | If the command name is the localization key |
-| [Name](#Name) { get; } | Name of the command |
+| [IsLocalized](#IsLocalized-property) { get; } | If the command name is the localization key |
+| [Name](#Name-property) { get; } | Name of the command |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseCommandAttribute](#BaseCommandAttribute)(…) | Constructor for a base command |
+| [BaseCommandAttribute](#BaseCommandAttribute-constructor)(…) | Constructor for a base command |
 
 ## See Also
 

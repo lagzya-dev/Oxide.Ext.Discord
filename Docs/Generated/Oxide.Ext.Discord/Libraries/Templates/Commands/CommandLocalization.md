@@ -10,13 +10,13 @@ public class CommandLocalization
 
 | name | description |
 | --- | --- |
-| [CommandLocalization](#CommandLocalization)() | Constructor |
-| [CommandLocalization](#CommandLocalization)(…) | Constructor (3 constructors) |
-| [Arguments](#Arguments) { get; set; } | Localized Argument Options |
-| [Description](#Description) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](#Name) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
-| [Options](#Options) { get; set; } | Localized Options for the Command |
-| [ApplyCommandLocalization](#ApplyCommandLocalization)(…) | Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) |
+| [CommandLocalization](#CommandLocalization-constructor)() | Constructor |
+| [CommandLocalization](#CommandLocalization-constructor)(…) | Constructor (3 constructors) |
+| [Arguments](#Arguments-property) { get; set; } | Localized Argument Options |
+| [Description](#Description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
+| [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [Options](#Options-property) { get; set; } | Localized Options for the Command |
+| [ApplyCommandLocalization](#ApplyCommandLocalization-method)(…) | Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) |
 
 ## See Also
 

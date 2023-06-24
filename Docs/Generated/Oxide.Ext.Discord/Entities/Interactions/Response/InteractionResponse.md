@@ -10,9 +10,9 @@ public class InteractionResponse : BaseInteractionResponse<InteractionCallbackDa
 
 | name | description |
 | --- | --- |
-| [InteractionResponse](#InteractionResponse)() | Default Constructor |
-| [InteractionResponse](#InteractionResponse)(…) | Creates a [`InteractionResponse`](./InteractionResponse.md) |
-| [Validate](#Validate)() |  |
+| [InteractionResponse](#InteractionResponse-constructor)() | Default Constructor |
+| [InteractionResponse](#InteractionResponse-constructor)(…) | Creates a [`InteractionResponse`](./InteractionResponse.md) |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

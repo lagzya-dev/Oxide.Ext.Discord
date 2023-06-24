@@ -10,9 +10,9 @@ public class StringSelectComponent : BaseSelectMenuComponent
 
 | name | description |
 | --- | --- |
-| [StringSelectComponent](#StringSelectComponent)() | Select Menu Component Constructor |
-| [Options](#Options) { get; } | The choices in the select Max 25 options |
-| override [Validate](#Validate)() |  |
+| [StringSelectComponent](#StringSelectComponent-constructor)() | Select Menu Component Constructor |
+| [Options](#Options-property) { get; } | The choices in the select Max 25 options |
+| override [Validate](#Validate-method)() |  |
 
 ## See Also
 

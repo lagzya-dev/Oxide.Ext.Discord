@@ -10,9 +10,9 @@ public class GuildEmojisUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [GuildEmojisUpdatedEvent](#GuildEmojisUpdatedEvent)() | The default constructor. |
-| [Emojis](#Emojis) { get; set; } | List of emojis |
-| [GuildId](#GuildId) { get; set; } | ID of the guild |
+| [GuildEmojisUpdatedEvent](#GuildEmojisUpdatedEvent-constructor)() | The default constructor. |
+| [Emojis](#Emojis-property) { get; set; } | List of emojis |
+| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class EventPayloadConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [EventPayloadConverter](#EventPayloadConverter)() | The default constructor. |
-| override [CanWrite](#CanWrite) { get; } | We do not write with this converter |
-| override [CanConvert](#CanConvert)(…) | Returns if this converter can convert the given type |
-| override [ReadJson](#ReadJson)(…) | Reads the JSON into a pooled [`EventPayload`](../../Entities/Gateway/EventPayload.md) Populates the Data field with the correct type during deserialization |
-| override [WriteJson](#WriteJson)(…) | We do nto write with this converter |
+| [EventPayloadConverter](#EventPayloadConverter-constructor)() | The default constructor. |
+| override [CanWrite](#CanWrite-property) { get; } | We do not write with this converter |
+| override [CanConvert](#CanConvert-method)(…) | Returns if this converter can convert the given type |
+| override [ReadJson](#ReadJson-method)(…) | Reads the JSON into a pooled [`EventPayload`](../../Entities/Gateway/EventPayload.md) Populates the Data field with the correct type during deserialization |
+| override [WriteJson](#WriteJson-method)(…) | We do nto write with this converter |
 
 ## See Also
 

@@ -10,14 +10,14 @@ public static class RateLimitHeaders
 
 | name | description |
 | --- | --- |
-| const [BucketId](#BucketId) | A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path) |
-| const [BucketLimit](#BucketLimit) | The number of requests that can be made |
-| const [BucketRemaining](#BucketRemaining) | The number of remaining requests that can be made |
-| const [BucketReset](#BucketReset) | Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets |
-| const [BucketResetAfter](#BucketResetAfter) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision |
-| const [IsGlobal](#IsGlobal) | Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route) |
-| const [RetryAfter](#RetryAfter) | The number of seconds to wait before submitting another request. |
-| const [Scope](#Scope) | Scope of the rate limit |
+| const [BucketId](#BucketId-field) | A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path) |
+| const [BucketLimit](#BucketLimit-field) | The number of requests that can be made |
+| const [BucketRemaining](#BucketRemaining-field) | The number of remaining requests that can be made |
+| const [BucketReset](#BucketReset-field) | Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets |
+| const [BucketResetAfter](#BucketResetAfter-field) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision |
+| const [IsGlobal](#IsGlobal-field) | Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route) |
+| const [RetryAfter](#RetryAfter-field) | The number of seconds to wait before submitting another request. |
+| const [Scope](#Scope-field) | Scope of the rate limit |
 
 ## See Also
 

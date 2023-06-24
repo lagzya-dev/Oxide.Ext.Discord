@@ -10,21 +10,21 @@ public class BasePromise : BasePoolable, IRejectable
 
 | name | description |
 | --- | --- |
-| [Id](#Id) { get; } | ID of the promise |
-| [State](#State) { get; protected set; } | Tracks the current state of the promise. |
-| [Reject](#Reject)(…) |  |
+| [Id](#Id-property) { get; } | ID of the promise |
+| [State](#State-property) { get; protected set; } | Tracks the current state of the promise. |
+| [Reject](#Reject-method)(…) |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BasePromise](#BasePromise)() | Constructor |
-| [Exception](#Exception) | The exception when the promise is rejected. |
-| readonly [Rejects](#Rejects) | Collection of handlers for rejected promises |
-| virtual [ClearHandlers](#ClearHandlers)() | Clears all the handlers for the promises Called after completion |
-| [DelayedDispose](#DelayedDispose)() | Delays disposing the promise till NextTick |
-| override [EnterPool](#EnterPool)() |  |
-| override [LeavePool](#LeavePool)() |  |
+| [BasePromise](#BasePromise-constructor)() | Constructor |
+| [Exception](#Exception-field) | The exception when the promise is rejected. |
+| readonly [Rejects](#Rejects-field) | Collection of handlers for rejected promises |
+| virtual [ClearHandlers](#ClearHandlers-method)() | Clears all the handlers for the promises Called after completion |
+| [DelayedDispose](#DelayedDispose-method)() | Delays disposing the promise till NextTick |
+| override [EnterPool](#EnterPool-method)() |  |
+| override [LeavePool](#LeavePool-method)() |  |
 
 ## See Also
 

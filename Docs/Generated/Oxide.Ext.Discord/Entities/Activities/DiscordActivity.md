@@ -10,24 +10,24 @@ public class DiscordActivity
 
 | name | description |
 | --- | --- |
-| [DiscordActivity](#DiscordActivity)() | The default constructor. |
-| [ApplicationId](#ApplicationId) { get; set; } | Application id for the game |
-| [Assets](#Assets) { get; set; } | Images for the presence and their hover texts See [`ActivityAssets`](./ActivityAssets.md) |
-| [Buttons](#Buttons) { get; set; } | The custom buttons shown in the Rich Presence (max 2) See [`ActivityButton`](./ActivityButton.md) |
-| [CreatedAt](#CreatedAt) { get; set; } | Timestamp of when the activity was added to the user's session |
-| [Details](#Details) { get; set; } | What the player is currently doing |
-| [Emoji](#Emoji) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./DiscordActivity/Emoji.md) |
-| [Flags](#Flags) { get; set; } | Describes what the payload includes See [`ActivityFlags`](./ActivityFlags.md) |
-| [GetLargeImageUrl](#GetLargeImageUrl) { get; } | Returns the large image url for the presence asset |
-| [GetSmallImageUrl](#GetSmallImageUrl) { get; } | Returns the small image url for the presence asset |
-| [Instance](#Instance) { get; set; } | Whether or not the activity is an instanced game session |
-| [Name](#Name) { get; set; } | The activity's name |
-| [Party](#Party) { get; set; } | Information for the current party of the player See [`ActivityParty`](./ActivityParty.md) |
-| [Secrets](#Secrets) { get; set; } | Secrets for Rich Presence joining and spectating See [`ActivitySecrets`](./ActivitySecrets.md) |
-| [State](#State) { get; set; } | The user's current party status |
-| [Timestamps](#Timestamps) { get; set; } | Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md) |
-| [Type](#Type) { get; set; } | Activity type See [`ActivityType`](./ActivityType.md) |
-| [Url](#Url) { get; set; } | Stream url, is validated when type is 1 |
+| [DiscordActivity](#DiscordActivity-constructor)() | The default constructor. |
+| [ApplicationId](#ApplicationId-property) { get; set; } | Application id for the game |
+| [Assets](#Assets-property) { get; set; } | Images for the presence and their hover texts See [`ActivityAssets`](./ActivityAssets.md) |
+| [Buttons](#Buttons-property) { get; set; } | The custom buttons shown in the Rich Presence (max 2) See [`ActivityButton`](./ActivityButton.md) |
+| [CreatedAt](#CreatedAt-property) { get; set; } | Timestamp of when the activity was added to the user's session |
+| [Details](#Details-property) { get; set; } | What the player is currently doing |
+| [Emoji](#Emoji-property) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./DiscordActivity/Emoji.md) |
+| [Flags](#Flags-property) { get; set; } | Describes what the payload includes See [`ActivityFlags`](./ActivityFlags.md) |
+| [GetLargeImageUrl](#GetLargeImageUrl-property) { get; } | Returns the large image url for the presence asset |
+| [GetSmallImageUrl](#GetSmallImageUrl-property) { get; } | Returns the small image url for the presence asset |
+| [Instance](#Instance-property) { get; set; } | Whether or not the activity is an instanced game session |
+| [Name](#Name-property) { get; set; } | The activity's name |
+| [Party](#Party-property) { get; set; } | Information for the current party of the player See [`ActivityParty`](./ActivityParty.md) |
+| [Secrets](#Secrets-property) { get; set; } | Secrets for Rich Presence joining and spectating See [`ActivitySecrets`](./ActivitySecrets.md) |
+| [State](#State-property) { get; set; } | The user's current party status |
+| [Timestamps](#Timestamps-property) { get; set; } | Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md) |
+| [Type](#Type-property) { get; set; } | Activity type See [`ActivityType`](./ActivityType.md) |
+| [Url](#Url-property) { get; set; } | Stream url, is validated when type is 1 |
 
 ## See Also
 

@@ -10,9 +10,9 @@ public class IntegrationAccount
 
 | name | description |
 | --- | --- |
-| [IntegrationAccount](#IntegrationAccount)() | The default constructor. |
-| [Id](#Id) { get; set; } | ID of the account |
-| [Name](#Name) { get; set; } | Name of the account |
+| [IntegrationAccount](#IntegrationAccount-constructor)() | The default constructor. |
+| [Id](#Id-property) { get; set; } | ID of the account |
+| [Name](#Name-property) { get; set; } | Name of the account |
 
 ## See Also
 

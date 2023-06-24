@@ -10,9 +10,9 @@ public class FollowedChannel
 
 | name | description |
 | --- | --- |
-| [FollowedChannel](#FollowedChannel)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | Source channel ID |
-| [WebhookId](#WebhookId) { get; set; } | Created target webhook ID |
+| [FollowedChannel](#FollowedChannel-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | Source channel ID |
+| [WebhookId](#WebhookId-property) { get; set; } | Created target webhook ID |
 
 ## See Also
 

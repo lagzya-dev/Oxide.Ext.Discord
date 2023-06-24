@@ -10,22 +10,22 @@ public class ApplicationCommandOptionBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName) |  |
-| readonly [GroupName](#GroupName) |  |
-| readonly [OptionName](#OptionName) |  |
-| readonly [SubCommandName](#SubCommandName) |  |
-| [AddChoice](#AddChoice)(…) | Adds a choice to this option of type string (3 methods) |
-| [AddDescriptionLocalization](#AddDescriptionLocalization)(…) | Adds Application Command Option Description Localization |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization)(…) | Adds Application Command Option Name Localization |
-| [AddNameLocalizations](#AddNameLocalizations)(…) | Adds command name localizations for a given plugin and lang key |
-| [AutoComplete](#AutoComplete)(…) | Enable auto complete for the option |
-| [ChannelTypes](#ChannelTypes)(…) | Set's the channel types for the option |
-| [MaxLength](#MaxLength)(…) | Max Length for String Option Max Of 6000 |
-| [MaxValue](#MaxValue)(…) | Max Value for Integer Option (2 methods) |
-| [MinLength](#MinLength)(…) | Min Length for String Option Max Of 6000 |
-| [MinValue](#MinValue)(…) | Min Value for Integer Option (2 methods) |
-| [Required](#Required)(…) | Set the required state for the option |
+| readonly [CommandName](#CommandName-field) |  |
+| readonly [GroupName](#GroupName-field) |  |
+| readonly [OptionName](#OptionName-field) |  |
+| readonly [SubCommandName](#SubCommandName-field) |  |
+| [AddChoice](#AddChoice-method)(…) | Adds a choice to this option of type string (3 methods) |
+| [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Option Description Localization |
+| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Command Option Name Localization |
+| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AutoComplete](#AutoComplete-method)(…) | Enable auto complete for the option |
+| [ChannelTypes](#ChannelTypes-method)(…) | Set's the channel types for the option |
+| [MaxLength](#MaxLength-method)(…) | Max Length for String Option Max Of 6000 |
+| [MaxValue](#MaxValue-method)(…) | Max Value for Integer Option (2 methods) |
+| [MinLength](#MinLength-method)(…) | Min Length for String Option Max Of 6000 |
+| [MinValue](#MinValue-method)(…) | Min Value for Integer Option (2 methods) |
+| [Required](#Required-method)(…) | Set the required state for the option |
 
 ## See Also
 

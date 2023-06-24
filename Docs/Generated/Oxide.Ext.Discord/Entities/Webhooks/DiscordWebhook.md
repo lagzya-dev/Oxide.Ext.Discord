@@ -10,37 +10,37 @@ public class DiscordWebhook
 
 | name | description |
 | --- | --- |
-| [DiscordWebhook](#DiscordWebhook)() | The default constructor. |
-| [ApplicationId](#ApplicationId) { get; set; } | The bot/OAuth2 application that created this webhook |
-| [Avatar](#Avatar) { get; set; } | the default user avatar hash of the webhook |
-| [ChannelId](#ChannelId) { get; set; } | The channel id this webhook is for, if any |
-| [GuildId](#GuildId) { get; set; } | The guild id this webhook is for, if any |
-| [Id](#Id) { get; set; } | The id of the webhook |
-| [Name](#Name) { get; set; } | The default name of the webhook |
-| [SourceChannel](#SourceChannel) { get; set; } | The channel that this webhook is following (returned for Channel Follower Webhooks) |
-| [SourceGuild](#SourceGuild) { get; set; } | The guild of the channel that this webhook is following (returned for Channel Follower Webhooks) |
-| [Token](#Token) { get; set; } | The secure token of the webhook returned for Incoming Webhooks |
-| [Type](#Type) { get; set; } | The type of the webhook See [`WebhookType`](./WebhookType.md) |
-| [User](#User) { get; set; } | The user this webhook was created by not returned when getting a webhook with its token |
-| [DeleteWebhook](#DeleteWebhook)(…) | Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. See [Delete Webhook](https://discord.com/developers/docs/resources/webhook#delete-webhook) |
-| [DeleteWebhookMessage](#DeleteWebhookMessage)(…) | Deletes a message that was created by the webhook. |
-| [DeleteWebhookWithToken](#DeleteWebhookWithToken)(…) | Delete a webhook permanently. Does not require authentication. See [Delete Webhook with Token](https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token) |
-| [EditWebhook](#EditWebhook)(…) | Modify a webhook. Requires the MANAGE_WEBHOOKS permission. See [Modify Webhook](https://discord.com/developers/docs/resources/webhook#modify-webhook) |
-| [EditWebhookMessage](#EditWebhookMessage)(…) | Edits a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) |
-| [EditWebhookMessageGlobalTemplate](#EditWebhookMessageGlobalTemplate)(…) | Edit a message from a webhook using a global message template |
-| [EditWebhookMessageTemplate](#EditWebhookMessageTemplate)(…) | Edit a message from a webhook using a localized message template |
-| [ExecuteWebhook](#ExecuteWebhook)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
-| [ExecuteWebhookGlobalTemplate](#ExecuteWebhookGlobalTemplate)(…) | Send a message to a webhook using a global message template |
-| [ExecuteWebhookTemplate](#ExecuteWebhookTemplate)(…) | Send a message to a webhook using a localized message template |
-| [ExecuteWebhookWithMessage](#ExecuteWebhookWithMessage)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
-| [GetWebhookMessage](#GetWebhookMessage)(…) | Gets a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#get-webhook-message) |
-| [ModifyWebhookWithToken](#ModifyWebhookWithToken)(…) | Modify a webhook. Requires the MANAGE_WEBHOOKS permission. See [Modify Webhook with Token](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) |
-| static [CreateWebhook](#CreateWebhook)(…) | Create a new webhook. Requires the MANAGE_WEBHOOKS permission. See [Create Webhook](https://discord.com/developers/docs/resources/webhook#create-webhook) |
-| static [GetChannelWebhooks](#GetChannelWebhooks)(…) | Returns a list of channel webhook. See [Get Channel Webhooks](https://discord.com/developers/docs/resources/webhook#get-channel-webhooks) |
-| static [GetGuildWebhooks](#GetGuildWebhooks)(…) | Returns a list of guild webhooks See [Get Guild Webhooks](https://discord.com/developers/docs/resources/webhook#get-guild-webhooks) |
-| static [GetWebhook](#GetWebhook)(…) | Returns the webhook with the given webhook ID See [Get Webhook](https://discord.com/developers/docs/resources/webhook#get-webhook) |
-| static [GetWebhookWithToken](#GetWebhookWithToken)(…) | Returns the webhook with the given ID &amp; Token This call does not required authentication No user is returned in webhook object See [Get Webhook with Token](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) |
-| static [GetWebhookWithUrl](#GetWebhookWithUrl)(…) | Returns the webhook with the given ID &amp; Token This call does not required authentication No user is returned in webhook object See [Get Webhook with Token](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) |
+| [DiscordWebhook](#DiscordWebhook-constructor)() | The default constructor. |
+| [ApplicationId](#ApplicationId-property) { get; set; } | The bot/OAuth2 application that created this webhook |
+| [Avatar](#Avatar-property) { get; set; } | the default user avatar hash of the webhook |
+| [ChannelId](#ChannelId-property) { get; set; } | The channel id this webhook is for, if any |
+| [GuildId](#GuildId-property) { get; set; } | The guild id this webhook is for, if any |
+| [Id](#Id-property) { get; set; } | The id of the webhook |
+| [Name](#Name-property) { get; set; } | The default name of the webhook |
+| [SourceChannel](#SourceChannel-property) { get; set; } | The channel that this webhook is following (returned for Channel Follower Webhooks) |
+| [SourceGuild](#SourceGuild-property) { get; set; } | The guild of the channel that this webhook is following (returned for Channel Follower Webhooks) |
+| [Token](#Token-property) { get; set; } | The secure token of the webhook returned for Incoming Webhooks |
+| [Type](#Type-property) { get; set; } | The type of the webhook See [`WebhookType`](./WebhookType.md) |
+| [User](#User-property) { get; set; } | The user this webhook was created by not returned when getting a webhook with its token |
+| [DeleteWebhook](#DeleteWebhook-method)(…) | Delete a webhook permanently. Requires the MANAGE_WEBHOOKS permission. See [Delete Webhook](https://discord.com/developers/docs/resources/webhook#delete-webhook) |
+| [DeleteWebhookMessage](#DeleteWebhookMessage-method)(…) | Deletes a message that was created by the webhook. |
+| [DeleteWebhookWithToken](#DeleteWebhookWithToken-method)(…) | Delete a webhook permanently. Does not require authentication. See [Delete Webhook with Token](https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token) |
+| [EditWebhook](#EditWebhook-method)(…) | Modify a webhook. Requires the MANAGE_WEBHOOKS permission. See [Modify Webhook](https://discord.com/developers/docs/resources/webhook#modify-webhook) |
+| [EditWebhookMessage](#EditWebhookMessage-method)(…) | Edits a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) |
+| [EditWebhookMessageGlobalTemplate](#EditWebhookMessageGlobalTemplate-method)(…) | Edit a message from a webhook using a global message template |
+| [EditWebhookMessageTemplate](#EditWebhookMessageTemplate-method)(…) | Edit a message from a webhook using a localized message template |
+| [ExecuteWebhook](#ExecuteWebhook-method)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
+| [ExecuteWebhookGlobalTemplate](#ExecuteWebhookGlobalTemplate-method)(…) | Send a message to a webhook using a global message template |
+| [ExecuteWebhookTemplate](#ExecuteWebhookTemplate-method)(…) | Send a message to a webhook using a localized message template |
+| [ExecuteWebhookWithMessage](#ExecuteWebhookWithMessage-method)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
+| [GetWebhookMessage](#GetWebhookMessage-method)(…) | Gets a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#get-webhook-message) |
+| [ModifyWebhookWithToken](#ModifyWebhookWithToken-method)(…) | Modify a webhook. Requires the MANAGE_WEBHOOKS permission. See [Modify Webhook with Token](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) |
+| static [CreateWebhook](#CreateWebhook-method)(…) | Create a new webhook. Requires the MANAGE_WEBHOOKS permission. See [Create Webhook](https://discord.com/developers/docs/resources/webhook#create-webhook) |
+| static [GetChannelWebhooks](#GetChannelWebhooks-method)(…) | Returns a list of channel webhook. See [Get Channel Webhooks](https://discord.com/developers/docs/resources/webhook#get-channel-webhooks) |
+| static [GetGuildWebhooks](#GetGuildWebhooks-method)(…) | Returns a list of guild webhooks See [Get Guild Webhooks](https://discord.com/developers/docs/resources/webhook#get-guild-webhooks) |
+| static [GetWebhook](#GetWebhook-method)(…) | Returns the webhook with the given webhook ID See [Get Webhook](https://discord.com/developers/docs/resources/webhook#get-webhook) |
+| static [GetWebhookWithToken](#GetWebhookWithToken-method)(…) | Returns the webhook with the given ID &amp; Token This call does not required authentication No user is returned in webhook object See [Get Webhook with Token](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) |
+| static [GetWebhookWithUrl](#GetWebhookWithUrl-method)(…) | Returns the webhook with the given ID &amp; Token This call does not required authentication No user is returned in webhook object See [Get Webhook with Token](https://discord.com/developers/docs/resources/webhook#get-webhook-with-token) |
 
 ## See Also
 

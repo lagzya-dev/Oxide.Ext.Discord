@@ -10,10 +10,10 @@ public abstract class BaseCallback : BasePoolable
 
 | name | description |
 | --- | --- |
-| [BaseCallback](#BaseCallback)() | Constructor |
-| readonly [Callback](#Callback) | The callback to be called by the delegate |
-| abstract [HandleCallback](#HandleCallback)() | Overridden in the child class to handle the callback |
-| virtual [Run](#Run)() | Run the callback |
+| [BaseCallback](#BaseCallback-constructor)() | Constructor |
+| readonly [Callback](#Callback-field) | The callback to be called by the delegate |
+| abstract [HandleCallback](#HandleCallback-method)() | Overridden in the child class to handle the callback |
+| virtual [Run](#Run-method)() | Run the callback |
 
 ## See Also
 

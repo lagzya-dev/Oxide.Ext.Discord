@@ -10,13 +10,13 @@ public class ButtonComponent : BaseInteractableComponent
 
 | name | description |
 | --- | --- |
-| [ButtonComponent](#ButtonComponent)() | Constructor for button Sets type to button |
-| [Disabled](#Disabled) { get; set; } | Whether the button is disabled Default false |
-| [Emoji](#Emoji) { get; set; } | Emoji on the component |
-| [Label](#Label) { get; set; } | Text that appears on the button Max 80 characters |
-| [Style](#Style) { get; set; } | Style for the button component |
-| [Url](#Url) { get; set; } | URL for link-style buttons |
-| override [Validate](#Validate)() |  |
+| [ButtonComponent](#ButtonComponent-constructor)() | Constructor for button Sets type to button |
+| [Disabled](#Disabled-property) { get; set; } | Whether the button is disabled Default false |
+| [Emoji](#Emoji-property) { get; set; } | Emoji on the component |
+| [Label](#Label-property) { get; set; } | Text that appears on the button Max 80 characters |
+| [Style](#Style-property) { get; set; } | Style for the button component |
+| [Url](#Url-property) { get; set; } | URL for link-style buttons |
+| override [Validate](#Validate-method)() |  |
 
 ## See Also
 

@@ -10,25 +10,25 @@ public class RestHandler : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [RestHandler](#RestHandler)(…) | Creates a new REST handler for a bot client |
-| readonly [Buckets](#Buckets) | Buckets with Routes we don't know the Hash of yet |
-| readonly [Client](#Client) | HttpClient for API Requests |
-| readonly [RateLimit](#RateLimit) | Global Rate Limit for the bot |
-| readonly [RouteToBucketId](#RouteToBucketId) | Route to Bucket ID |
-| [Delete](#Delete)(…) | Performs a HTTP Delete Request |
-| [Delete&lt;TResult&gt;](#Delete)(…) | Performs a HTTP Delete Request with TResult response |
-| [Get&lt;TResult&gt;](#Get)(…) | Performs a HTTP Get Request with TResult response |
-| [GetBucket](#GetBucket)(…) | Returns the bucket with the given ID |
-| [LogDebug](#LogDebug)(…) |  |
-| [Patch](#Patch)(…) | Performs a HTTP Patch Request |
-| [Patch&lt;TResult&gt;](#Patch)(…) | Performs a HTTP Patch Request with TResult response |
-| [Post](#Post)(…) | Performs a HTTP Post Request |
-| [Post&lt;TResult&gt;](#Post)(…) | Performs a HTTP Post Request with TResult response |
-| [Put](#Put)(…) | Performs a HTTP Put Request |
-| [Put&lt;TResult&gt;](#Put)(…) | Performs a HTTP Put Request with TResult response |
-| [QueueBucket](#QueueBucket)(…) | Queues the request for the bucket |
-| [Shutdown](#Shutdown)() | Shutdown the REST handler |
-| [StartRequest](#StartRequest)(…) | Starts the request |
+| [RestHandler](#RestHandler-constructor)(…) | Creates a new REST handler for a bot client |
+| readonly [Buckets](#Buckets-field) | Buckets with Routes we don't know the Hash of yet |
+| readonly [Client](#Client-field) | HttpClient for API Requests |
+| readonly [RateLimit](#RateLimit-field) | Global Rate Limit for the bot |
+| readonly [RouteToBucketId](#RouteToBucketId-field) | Route to Bucket ID |
+| [Delete](#Delete-method)(…) | Performs a HTTP Delete Request |
+| [Delete&lt;TResult&gt;](#Delete-method)(…) | Performs a HTTP Delete Request with TResult response |
+| [Get&lt;TResult&gt;](#Get-method)(…) | Performs a HTTP Get Request with TResult response |
+| [GetBucket](#GetBucket-method)(…) | Returns the bucket with the given ID |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [Patch](#Patch-method)(…) | Performs a HTTP Patch Request |
+| [Patch&lt;TResult&gt;](#Patch-method)(…) | Performs a HTTP Patch Request with TResult response |
+| [Post](#Post-method)(…) | Performs a HTTP Post Request |
+| [Post&lt;TResult&gt;](#Post-method)(…) | Performs a HTTP Post Request with TResult response |
+| [Put](#Put-method)(…) | Performs a HTTP Put Request |
+| [Put&lt;TResult&gt;](#Put-method)(…) | Performs a HTTP Put Request with TResult response |
+| [QueueBucket](#QueueBucket-method)(…) | Queues the request for the bucket |
+| [Shutdown](#Shutdown-method)() | Shutdown the REST handler |
+| [StartRequest](#StartRequest-method)(…) | Starts the request |
 
 ## See Also
 

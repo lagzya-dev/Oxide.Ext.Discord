@@ -11,7 +11,7 @@ public class DiscordPoolAttribute : BaseDiscordAttribute
 
 | name | description |
 | --- | --- |
-| [DiscordPoolAttribute](#DiscordPoolAttribute)() | The default constructor. |
+| [DiscordPoolAttribute](#DiscordPoolAttribute-constructor)() | The default constructor. |
 
 ## See Also
 

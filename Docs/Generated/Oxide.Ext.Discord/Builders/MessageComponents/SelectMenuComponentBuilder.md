@@ -10,9 +10,9 @@ public class SelectMenuComponentBuilder
 
 | name | description |
 | --- | --- |
-| [AddChannelType](#AddChannelType)(…) | Adds an allow channel type for ChannelSelect |
-| [AddOption](#AddOption)(…) | Adds an option to a select menu; |
-| [Build](#Build)() | Returns the root builder |
+| [AddChannelType](#AddChannelType-method)(…) | Adds an allow channel type for ChannelSelect |
+| [AddOption](#AddOption-method)(…) | Adds an option to a select menu; |
+| [Build](#Build-method)() | Returns the root builder |
 
 ## See Also
 

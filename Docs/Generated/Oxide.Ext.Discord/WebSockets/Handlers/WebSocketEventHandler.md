@@ -10,11 +10,11 @@ public class WebSocketEventHandler : IWebSocketEventHandler
 
 | name | description |
 | --- | --- |
-| [WebSocketEventHandler](#WebSocketEventHandler)(…) | Creates a new socket listener |
-| [SocketClosed](#SocketClosed)(…) | Called when a socket is closed |
-| [SocketErrored](#SocketErrored)(…) | Called when an error occurs on a socket |
-| [SocketMessage](#SocketMessage)(…) | Called when a socket receives a message |
-| [SocketOpened](#SocketOpened)(…) | Called when a socket is open |
+| [WebSocketEventHandler](#WebSocketEventHandler-constructor)(…) | Creates a new socket listener |
+| [SocketClosed](#SocketClosed-method)(…) | Called when a socket is closed |
+| [SocketErrored](#SocketErrored-method)(…) | Called when an error occurs on a socket |
+| [SocketMessage](#SocketMessage-method)(…) | Called when a socket receives a message |
+| [SocketOpened](#SocketOpened-method)(…) | Called when a socket is open |
 
 ## See Also
 

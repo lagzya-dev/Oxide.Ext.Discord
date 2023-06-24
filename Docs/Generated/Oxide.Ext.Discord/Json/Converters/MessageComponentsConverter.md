@@ -10,11 +10,11 @@ public class MessageComponentsConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [MessageComponentsConverter](#MessageComponentsConverter)() | The default constructor. |
-| override [CanWrite](#CanWrite) { get; } | Message Component Convert does not write JSON |
-| override [CanConvert](#CanConvert)(…) | Returns if this can convert the value |
-| override [ReadJson](#ReadJson)(…) | Populate the correct types in components instead of just the BaseComponent |
-| override [WriteJson](#WriteJson)(…) | Ignored as we don't write JSON |
+| [MessageComponentsConverter](#MessageComponentsConverter-constructor)() | The default constructor. |
+| override [CanWrite](#CanWrite-property) { get; } | Message Component Convert does not write JSON |
+| override [CanConvert](#CanConvert-method)(…) | Returns if this can convert the value |
+| override [ReadJson](#ReadJson-method)(…) | Populate the correct types in components instead of just the BaseComponent |
+| override [WriteJson](#WriteJson-method)(…) | Ignored as we don't write JSON |
 
 ## See Also
 

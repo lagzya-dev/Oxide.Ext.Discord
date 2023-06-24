@@ -10,8 +10,8 @@ public class IntegrationCreatedEvent : Integration
 
 | name | description |
 | --- | --- |
-| [IntegrationCreatedEvent](#IntegrationCreatedEvent)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | Guild Id the Integration was created in |
+| [IntegrationCreatedEvent](#IntegrationCreatedEvent-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | Guild Id the Integration was created in |
 
 ## See Also
 

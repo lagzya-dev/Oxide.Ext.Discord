@@ -14,9 +14,9 @@ public class DiscordArrayPool<T>
 
 | name | description |
 | --- | --- |
-| static readonly [Shared](#Shared) | [`DiscordArrayPool`](./DiscordArrayPool%7BT%7D.md) Instance |
-| [Rent](#Rent)(…) | Rents an array from the pool |
-| [Return](#Return)(…) | Returns an array to the pool |
+| static readonly [Shared](#Shared-field) | [`DiscordArrayPool`](./DiscordArrayPool%7BT%7D.md) Instance |
+| [Rent](#Rent-method)(…) | Rents an array from the pool |
+| [Return](#Return-method)(…) | Returns an array to the pool |
 
 ## See Also
 

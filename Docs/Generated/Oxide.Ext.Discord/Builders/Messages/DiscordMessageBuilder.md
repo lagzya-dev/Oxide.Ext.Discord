@@ -10,8 +10,8 @@ public class DiscordMessageBuilder : BaseChannelMessageBuilder<MessageCreate, Di
 
 | name | description |
 | --- | --- |
-| [DiscordMessageBuilder](#DiscordMessageBuilder)() | Constructor creating a new message |
-| [DiscordMessageBuilder](#DiscordMessageBuilder)(…) | Constructor to use existing message |
+| [DiscordMessageBuilder](#DiscordMessageBuilder-constructor)() | Constructor creating a new message |
+| [DiscordMessageBuilder](#DiscordMessageBuilder-constructor)(…) | Constructor to use existing message |
 
 ## See Also
 

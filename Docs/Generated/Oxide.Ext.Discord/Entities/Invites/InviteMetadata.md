@@ -10,12 +10,12 @@ public class InviteMetadata : DiscordInvite
 
 | name | description |
 | --- | --- |
-| [InviteMetadata](#InviteMetadata)() | The default constructor. |
-| [CreatedAt](#CreatedAt) { get; set; } | When this invite was created |
-| [MaxAge](#MaxAge) { get; set; } | Duration (in seconds) after which the invite expires |
-| [MaxUses](#MaxUses) { get; set; } | Max number of times this invite can be used |
-| [Temporary](#Temporary) { get; set; } | Whether this invite only grants temporary membership |
-| [Uses](#Uses) { get; set; } | Number of times this invite has been used |
+| [InviteMetadata](#InviteMetadata-constructor)() | The default constructor. |
+| [CreatedAt](#CreatedAt-property) { get; set; } | When this invite was created |
+| [MaxAge](#MaxAge-property) { get; set; } | Duration (in seconds) after which the invite expires |
+| [MaxUses](#MaxUses-property) { get; set; } | Max number of times this invite can be used |
+| [Temporary](#Temporary-property) { get; set; } | Whether this invite only grants temporary membership |
+| [Uses](#Uses-property) { get; set; } | Number of times this invite has been used |
 
 ## See Also
 

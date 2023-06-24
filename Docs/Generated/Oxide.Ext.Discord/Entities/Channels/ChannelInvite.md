@@ -10,15 +10,15 @@ public class ChannelInvite
 
 | name | description |
 | --- | --- |
-| [ChannelInvite](#ChannelInvite)() | The default constructor. |
-| [MaxAge](#MaxAge) { get; set; } | Duration of invite in seconds before expiry, or 0 for never |
-| [MaxUses](#MaxUses) { get; set; } | Max number of uses or 0 for unlimited |
-| [TargetApplicationId](#TargetApplicationId) { get; set; } | The id of the embedded application to open for this invite, Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag |
-| [TargetUser](#TargetUser) { get; set; } | The target user id for this invite |
-| [TargetUserType](#TargetUserType) { get; set; } | The type of target user for this invite |
-| [Temporary](#Temporary) { get; set; } | Whether this invite only grants temporary membership |
-| [Unique](#Unique) { get; set; } | If true, don't try to reuse a similar invite (useful for creating many unique one time use invites) |
-| [Validate](#Validate)() |  |
+| [ChannelInvite](#ChannelInvite-constructor)() | The default constructor. |
+| [MaxAge](#MaxAge-property) { get; set; } | Duration of invite in seconds before expiry, or 0 for never |
+| [MaxUses](#MaxUses-property) { get; set; } | Max number of uses or 0 for unlimited |
+| [TargetApplicationId](#TargetApplicationId-property) { get; set; } | The id of the embedded application to open for this invite, Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag |
+| [TargetUser](#TargetUser-property) { get; set; } | The target user id for this invite |
+| [TargetUserType](#TargetUserType-property) { get; set; } | The type of target user for this invite |
+| [Temporary](#Temporary-property) { get; set; } | Whether this invite only grants temporary membership |
+| [Unique](#Unique-property) { get; set; } | If true, don't try to reuse a similar invite (useful for creating many unique one time use invites) |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

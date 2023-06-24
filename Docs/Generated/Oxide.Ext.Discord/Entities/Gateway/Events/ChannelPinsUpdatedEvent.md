@@ -10,10 +10,10 @@ public class ChannelPinsUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [ChannelPinsUpdatedEvent](#ChannelPinsUpdatedEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The id of the channel |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [LastPinTimestamp](#LastPinTimestamp) { get; set; } | The time at which the most recent pinned message was pinned |
+| [ChannelPinsUpdatedEvent](#ChannelPinsUpdatedEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [LastPinTimestamp](#LastPinTimestamp-property) { get; set; } | The time at which the most recent pinned message was pinned |
 
 ## See Also
 

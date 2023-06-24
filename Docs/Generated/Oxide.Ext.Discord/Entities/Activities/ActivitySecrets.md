@@ -10,10 +10,10 @@ public class ActivitySecrets
 
 | name | description |
 | --- | --- |
-| [ActivitySecrets](#ActivitySecrets)() | The default constructor. |
-| [Join](#Join) { get; set; } | The secret for joining a party |
-| [Match](#Match) { get; set; } | The secret for a specific instanced match |
-| [Spectate](#Spectate) { get; set; } | The secret for spectating a game |
+| [ActivitySecrets](#ActivitySecrets-constructor)() | The default constructor. |
+| [Join](#Join-property) { get; set; } | The secret for joining a party |
+| [Match](#Match-property) { get; set; } | The secret for a specific instanced match |
+| [Spectate](#Spectate-property) { get; set; } | The secret for spectating a game |
 
 ## See Also
 

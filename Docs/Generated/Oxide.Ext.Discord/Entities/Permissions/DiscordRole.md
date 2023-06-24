@@ -10,23 +10,23 @@ public class DiscordRole : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordRole](#DiscordRole)() | The default constructor. |
-| [Color](#Color) { get; set; } | Role Color |
-| [Hoist](#Hoist) { get; set; } | If this role is pinned in the user listing |
-| [Icon](#Icon) { get; set; } | The role's icon image (if the guild has the ROLE_ICONS feature) |
-| [Id](#Id) { get; set; } | Role id |
-| [Managed](#Managed) { get; set; } | Whether this role is managed by an integration |
-| [Mention](#Mention) { get; } | Returns a string to mention this role in a message |
-| [Mentionable](#Mentionable) { get; set; } | Whether this role is mentionable |
-| [Name](#Name) { get; set; } | Role name |
-| [Permissions](#Permissions) { get; set; } | Role Permissions |
-| [Position](#Position) { get; set; } | Position of this role |
-| [RoleIcon](#RoleIcon) { get; } | Return the Role Icon URL for a Discord Role. Empty string is not set. |
-| [Tags](#Tags) { get; set; } | The tags this role has |
-| [UnicodeEmoji](#UnicodeEmoji) { get; set; } | The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature) |
-| [HasPermission](#HasPermission)(…) | Returns if the role has the specified permission |
-| [IsBoosterRole](#IsBoosterRole)() | Returns if this role is the booster |
-| [Validate](#Validate)() |  |
+| [DiscordRole](#DiscordRole-constructor)() | The default constructor. |
+| [Color](#Color-property) { get; set; } | Role Color |
+| [Hoist](#Hoist-property) { get; set; } | If this role is pinned in the user listing |
+| [Icon](#Icon-property) { get; set; } | The role's icon image (if the guild has the ROLE_ICONS feature) |
+| [Id](#Id-property) { get; set; } | Role id |
+| [Managed](#Managed-property) { get; set; } | Whether this role is managed by an integration |
+| [Mention](#Mention-property) { get; } | Returns a string to mention this role in a message |
+| [Mentionable](#Mentionable-property) { get; set; } | Whether this role is mentionable |
+| [Name](#Name-property) { get; set; } | Role name |
+| [Permissions](#Permissions-property) { get; set; } | Role Permissions |
+| [Position](#Position-property) { get; set; } | Position of this role |
+| [RoleIcon](#RoleIcon-property) { get; } | Return the Role Icon URL for a Discord Role. Empty string is not set. |
+| [Tags](#Tags-property) { get; set; } | The tags this role has |
+| [UnicodeEmoji](#UnicodeEmoji-property) { get; set; } | The role's unicode emoji as a standard emoji (if the guild has the ROLE_ICONS feature) |
+| [HasPermission](#HasPermission-method)(…) | Returns if the role has the specified permission |
+| [IsBoosterRole](#IsBoosterRole-method)() | Returns if this role is the booster |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

@@ -10,8 +10,8 @@ public class InteractionAutoCompleteMessage
 
 | name | description |
 | --- | --- |
-| [InteractionAutoCompleteMessage](#InteractionAutoCompleteMessage)() | The default constructor. |
-| [Choices](#Choices) { get; set; } | Autocomplete choices (max of 25 choices) |
+| [InteractionAutoCompleteMessage](#InteractionAutoCompleteMessage-constructor)() | The default constructor. |
+| [Choices](#Choices-property) { get; set; } | Autocomplete choices (max of 25 choices) |
 
 ## See Also
 

@@ -10,23 +10,23 @@ public class AutoModRule
 
 | name | description |
 | --- | --- |
-| [AutoModRule](#AutoModRule)() | The default constructor. |
-| [Actions](#Actions) { get; set; } | Actions which will execute when the rule is triggered |
-| [CreatorId](#CreatorId) { get; set; } | User which first created this rule |
-| [Enabled](#Enabled) { get; set; } | Whether the rule is enabled |
-| [EventType](#EventType) { get; set; } | Rule [`AutoModEventType`](./AutoModEventType.md) |
-| [ExemptChannels](#ExemptChannels) { get; set; } | Channel ids that should not be affected by the rule (Maximum of 50) |
-| [ExemptRoles](#ExemptRoles) { get; set; } | Role ids that should not be affected by the rule (Maximum of 20) |
-| [GuildId](#GuildId) { get; set; } | ID of the Guild which this rule belongs to |
-| [Id](#Id) { get; set; } | Id of this rule |
-| [Name](#Name) { get; set; } | Rule name |
-| [TriggerMetadata](#TriggerMetadata) { get; set; } | Rule [`AutoModTriggerMetadata`](./AutoModTriggerMetadata.md) |
-| [TriggerType](#TriggerType) { get; set; } | Rule [`AutoModTriggerType`](./AutoModTriggerType.md) |
-| [Delete](#Delete)(…) | Delete a rule Requires ManageGuild permissions. See [Delete Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#delete-auto-moderation-rule) |
-| [Edit](#Edit)(…) | Modify an existing rule Requires ManageGuild permissions. See [Modify Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule) |
-| static [Create](#Create)(…) | Create a new rule Requires ManageGuild permissions. See [Create Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule) |
-| static [Get](#Get)(…) | Get a single rule Requires ManageGuild permissions. See [Get Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#get-auto-moderation-rule) |
-| static [GetAll](#GetAll)(…) | Modify an existing rule Requires ManageGuild permissions. See [List Auto Moderation Rules for Guild](https://discord.com/developers/docs/resources/auto-moderation#list-auto-moderation-rules-for-guild) |
+| [AutoModRule](#AutoModRule-constructor)() | The default constructor. |
+| [Actions](#Actions-property) { get; set; } | Actions which will execute when the rule is triggered |
+| [CreatorId](#CreatorId-property) { get; set; } | User which first created this rule |
+| [Enabled](#Enabled-property) { get; set; } | Whether the rule is enabled |
+| [EventType](#EventType-property) { get; set; } | Rule [`AutoModEventType`](./AutoModEventType.md) |
+| [ExemptChannels](#ExemptChannels-property) { get; set; } | Channel ids that should not be affected by the rule (Maximum of 50) |
+| [ExemptRoles](#ExemptRoles-property) { get; set; } | Role ids that should not be affected by the rule (Maximum of 20) |
+| [GuildId](#GuildId-property) { get; set; } | ID of the Guild which this rule belongs to |
+| [Id](#Id-property) { get; set; } | Id of this rule |
+| [Name](#Name-property) { get; set; } | Rule name |
+| [TriggerMetadata](#TriggerMetadata-property) { get; set; } | Rule [`AutoModTriggerMetadata`](./AutoModTriggerMetadata.md) |
+| [TriggerType](#TriggerType-property) { get; set; } | Rule [`AutoModTriggerType`](./AutoModTriggerType.md) |
+| [Delete](#Delete-method)(…) | Delete a rule Requires ManageGuild permissions. See [Delete Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#delete-auto-moderation-rule) |
+| [Edit](#Edit-method)(…) | Modify an existing rule Requires ManageGuild permissions. See [Modify Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule) |
+| static [Create](#Create-method)(…) | Create a new rule Requires ManageGuild permissions. See [Create Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#create-auto-moderation-rule) |
+| static [Get](#Get-method)(…) | Get a single rule Requires ManageGuild permissions. See [Get Auto Moderation Rule](https://discord.com/developers/docs/resources/auto-moderation#get-auto-moderation-rule) |
+| static [GetAll](#GetAll-method)(…) | Modify an existing rule Requires ManageGuild permissions. See [List Auto Moderation Rules for Guild](https://discord.com/developers/docs/resources/auto-moderation#list-auto-moderation-rules-for-guild) |
 
 ## See Also
 

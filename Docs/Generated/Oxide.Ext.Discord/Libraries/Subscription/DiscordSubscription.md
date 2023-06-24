@@ -10,10 +10,10 @@ public class DiscordSubscription : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [DiscordSubscription](#DiscordSubscription)(…) | Constructor |
-| [CanRun](#CanRun)(…) | Returns if a subscription can run. They can only run for the client that they were created for. |
-| [Invoke](#Invoke)(…) | Invokes the callback with the message |
-| [LogDebug](#LogDebug)(…) |  |
+| [DiscordSubscription](#DiscordSubscription-constructor)(…) | Constructor |
+| [CanRun](#CanRun-method)(…) | Returns if a subscription can run. They can only run for the client that they were created for. |
+| [Invoke](#Invoke-method)(…) | Invokes the callback with the message |
+| [LogDebug](#LogDebug-method)(…) |  |
 
 ## See Also
 

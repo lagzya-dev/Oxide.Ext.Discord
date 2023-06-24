@@ -10,14 +10,14 @@ public abstract class BaseInteractableComponent : BaseComponent
 
 | name | description |
 | --- | --- |
-| [CustomId](#CustomId) { get; set; } | Developer-defined identifier for the interactable component Max 100 characters |
-| override [Validate](#Validate)() |  |
+| [CustomId](#CustomId-property) { get; set; } | Developer-defined identifier for the interactable component Max 100 characters |
+| override [Validate](#Validate-method)() |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractableComponent](#BaseInteractableComponent)() | The default constructor. |
+| [BaseInteractableComponent](#BaseInteractableComponent-constructor)() | The default constructor. |
 
 ## See Also
 

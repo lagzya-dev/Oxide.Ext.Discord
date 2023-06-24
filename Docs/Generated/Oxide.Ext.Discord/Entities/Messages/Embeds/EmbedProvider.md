@@ -10,10 +10,10 @@ public class EmbedProvider
 
 | name | description |
 | --- | --- |
-| [EmbedProvider](#EmbedProvider)() | Embed Provider Constructor |
-| [EmbedProvider](#EmbedProvider)(…) | Embed Provider Constructor |
-| [Name](#Name) { get; set; } | Name of provider |
-| [Url](#Url) { get; set; } | Url of provider |
+| [EmbedProvider](#EmbedProvider-constructor)() | Embed Provider Constructor |
+| [EmbedProvider](#EmbedProvider-constructor)(…) | Embed Provider Constructor |
+| [Name](#Name-property) { get; set; } | Name of provider |
+| [Url](#Url-property) { get; set; } | Url of provider |
 
 ## See Also
 

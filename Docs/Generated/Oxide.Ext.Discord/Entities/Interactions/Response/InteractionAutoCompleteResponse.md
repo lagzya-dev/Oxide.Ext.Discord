@@ -11,8 +11,8 @@ public class InteractionAutoCompleteResponse :
 
 | name | description |
 | --- | --- |
-| [InteractionAutoCompleteResponse](#InteractionAutoCompleteResponse)() | Constructor |
-| [InteractionAutoCompleteResponse](#InteractionAutoCompleteResponse)(…) | Constructor with initial message |
+| [InteractionAutoCompleteResponse](#InteractionAutoCompleteResponse-constructor)() | Constructor |
+| [InteractionAutoCompleteResponse](#InteractionAutoCompleteResponse-constructor)(…) | Constructor with initial message |
 
 ## See Also
 

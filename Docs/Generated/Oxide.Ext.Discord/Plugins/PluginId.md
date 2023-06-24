@@ -10,15 +10,15 @@ public struct PluginId : IDebugLoggable, IEquatable<PluginId>
 
 | name | description |
 | --- | --- |
-| [IsValid](#IsValid) { get; } | Returns if the PluginId is valid |
-| readonly [Id](#Id) | Hashcode value of the Plugin Name |
-| override [Equals](#Equals)(…) |  |
-| [Equals](#Equals)(…) |  |
-| override [GetHashCode](#GetHashCode)() |  |
-| [LogDebug](#LogDebug)(…) |  |
-| override [ToString](#ToString)() | Returns the PluginName |
-| [operator ==](#op_Equality) |  |
-| [operator !=](#op_Inequality) |  |
+| [IsValid](#IsValid-property) { get; } | Returns if the PluginId is valid |
+| readonly [Id](#Id-field) | Hashcode value of the Plugin Name |
+| override [Equals](#Equals-method)(…) |  |
+| [Equals](#Equals-method)(…) |  |
+| override [GetHashCode](#GetHashCode-method)() |  |
+| [LogDebug](#LogDebug-method)(…) |  |
+| override [ToString](#ToString-method)() | Returns the PluginName |
+| [operator ==](#op_Equality-operator) |  |
+| [operator !=](#op_Inequality-operator) |  |
 
 ## See Also
 

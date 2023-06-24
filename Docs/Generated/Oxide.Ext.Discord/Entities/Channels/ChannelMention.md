@@ -10,11 +10,11 @@ public class ChannelMention : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [ChannelMention](#ChannelMention)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | ID of the guild containing the channel |
-| [Id](#Id) { get; set; } | ID of the channel |
-| [Name](#Name) { get; set; } | The name of the channel |
-| [Type](#Type) { get; set; } | The type of channel [`ChannelType`](./ChannelType.md) |
+| [ChannelMention](#ChannelMention-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | ID of the guild containing the channel |
+| [Id](#Id-property) { get; set; } | ID of the channel |
+| [Name](#Name-property) { get; set; } | The name of the channel |
+| [Type](#Type-property) { get; set; } | The type of channel [`ChannelType`](./ChannelType.md) |
 
 ## See Also
 

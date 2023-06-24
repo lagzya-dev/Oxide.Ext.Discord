@@ -14,14 +14,14 @@ public abstract class BaseInteractionResponse<T> : BaseInteractionResponse
 
 | name | description |
 | --- | --- |
-| [Data](#Data) { get; set; } | Response to the Interaction |
+| [Data](#Data-property) { get; set; } | Response to the Interaction |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractionResponse](#BaseInteractionResponse)() | Constructor |
-| [BaseInteractionResponse](#BaseInteractionResponse)(…) | Constructor with Data and response type |
+| [BaseInteractionResponse](#BaseInteractionResponse-constructor)() | Constructor |
+| [BaseInteractionResponse](#BaseInteractionResponse-constructor)(…) | Constructor with Data and response type |
 
 ## See Also
 

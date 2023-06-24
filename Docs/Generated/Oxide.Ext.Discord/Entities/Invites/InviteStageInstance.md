@@ -10,11 +10,11 @@ public class InviteStageInstance
 
 | name | description |
 | --- | --- |
-| [InviteStageInstance](#InviteStageInstance)() | The default constructor. |
-| [Members](#Members) { get; set; } | The members speaking in the Stage |
-| [ParticipantCount](#ParticipantCount) { get; set; } | The number of users in the Stage |
-| [SpeakerCount](#SpeakerCount) { get; set; } | The number of users speaking in the Stage |
-| [Topic](#Topic) { get; set; } | The topic of the Stage instance (1-120 characters) |
+| [InviteStageInstance](#InviteStageInstance-constructor)() | The default constructor. |
+| [Members](#Members-property) { get; set; } | The members speaking in the Stage |
+| [ParticipantCount](#ParticipantCount-property) { get; set; } | The number of users in the Stage |
+| [SpeakerCount](#SpeakerCount-property) { get; set; } | The number of users speaking in the Stage |
+| [Topic](#Topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
 
 ## See Also
 

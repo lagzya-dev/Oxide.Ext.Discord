@@ -10,14 +10,14 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 
 | name | description |
 | --- | --- |
-| [GetOrCreate](#GetOrCreate)(…) | Returns an existing [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) for the given plugin or returns a new one |
+| [GetOrCreate](#GetOrCreate-method)(…) | Returns an existing [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) for the given plugin or returns a new one |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginLoaded](#OnPluginLoaded)(…) |  |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginLoaded](#OnPluginLoaded-method)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

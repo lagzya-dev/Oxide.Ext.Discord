@@ -11,8 +11,8 @@ public class WebhookMessageBuilder :
 
 | name | description |
 | --- | --- |
-| [WebhookMessageBuilder](#WebhookMessageBuilder)() | Constructor for creating a new WebhookCreateMessage |
-| [WebhookMessageBuilder](#WebhookMessageBuilder)(…) | Constructor for using an existing WebhookCreateMessage |
+| [WebhookMessageBuilder](#WebhookMessageBuilder-constructor)() | Constructor for creating a new WebhookCreateMessage |
+| [WebhookMessageBuilder](#WebhookMessageBuilder-constructor)(…) | Constructor for using an existing WebhookCreateMessage |
 
 ## See Also
 

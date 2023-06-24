@@ -10,16 +10,16 @@ public class WebhookCreateMessage : MessageCreate
 
 | name | description |
 | --- | --- |
-| [WebhookCreateMessage](#WebhookCreateMessage)() | The default constructor. |
-| [AvatarUrl](#AvatarUrl) { get; set; } | Override the default avatar of the webhook |
-| [ThreadName](#ThreadName) { get; set; } | Name of thread to create Requires the webhook channel to be a forum channel |
-| [Username](#Username) { get; set; } | Override the default username of the webhook |
+| [WebhookCreateMessage](#WebhookCreateMessage-constructor)() | The default constructor. |
+| [AvatarUrl](#AvatarUrl-property) { get; set; } | Override the default avatar of the webhook |
+| [ThreadName](#ThreadName-property) { get; set; } | Name of thread to create Requires the webhook channel to be a forum channel |
+| [Username](#Username-property) { get; set; } | Override the default username of the webhook |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [ValidateFlags](#ValidateFlags)() |  |
+| override [ValidateFlags](#ValidateFlags-method)() |  |
 
 ## See Also
 

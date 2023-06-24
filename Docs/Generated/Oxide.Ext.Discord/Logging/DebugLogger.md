@@ -10,27 +10,27 @@ public class DebugLogger
 
 | name | description |
 | --- | --- |
-| [DebugLogger](#DebugLogger)() | The default constructor. |
-| [AppendChannelPath](#AppendChannelPath)(…) | Appends a channel path to the logger. This path will include the guild name / Parent Channel Name (Optional) / Channel Name |
-| [AppendField](#AppendField)(…) | Appends a field into the logger (11 methods) |
-| [AppendFieldEnum&lt;T&gt;](#AppendFieldEnum)(…) | Appends a field with the given name and enum value |
-| [AppendFieldOutOf](#AppendFieldOutOf)(…) | Appends a field with the given name and int amount over int total value |
-| [AppendFieldPrefix](#AppendFieldPrefix)(…) | Appends the field name into the logger |
-| [AppendIndent](#AppendIndent)() | Appends the current indent into the logger |
-| [AppendLine](#AppendLine)() | Appends a line to the logger |
-| [AppendLine](#AppendLine)(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
-| [AppendList](#AppendList)(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
-| [AppendList&lt;T&gt;](#AppendList)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
-| [AppendMethod](#AppendMethod)(…) | Appends a field with the given name and method info |
-| [AppendNullField](#AppendNullField)(…) | Appends a field with the given name and Null value |
-| [AppendObject](#AppendObject)(…) | Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name |
-| [DecrementIndent](#DecrementIndent)() | Decrements the Indent |
-| [EndArray](#EndArray)() | Ends an array on the logger |
-| [EndObject](#EndObject)() | Ends an object on the logger |
-| [IncrementIndent](#IncrementIndent)() | Increments the Indent |
-| [StartArray](#StartArray)(…) | Starts an array on the logger with the given name |
-| [StartObject](#StartObject)(…) | Starts an object on the logger with the given name |
-| override [ToString](#ToString)() | Returns the logged data as a string |
+| [DebugLogger](#DebugLogger-constructor)() | The default constructor. |
+| [AppendChannelPath](#AppendChannelPath-method)(…) | Appends a channel path to the logger. This path will include the guild name / Parent Channel Name (Optional) / Channel Name |
+| [AppendField](#AppendField-method)(…) | Appends a field into the logger (11 methods) |
+| [AppendFieldEnum&lt;T&gt;](#AppendFieldEnum-method)(…) | Appends a field with the given name and enum value |
+| [AppendFieldOutOf](#AppendFieldOutOf-method)(…) | Appends a field with the given name and int amount over int total value |
+| [AppendFieldPrefix](#AppendFieldPrefix-method)(…) | Appends the field name into the logger |
+| [AppendIndent](#AppendIndent-method)() | Appends the current indent into the logger |
+| [AppendLine](#AppendLine-method)() | Appends a line to the logger |
+| [AppendLine](#AppendLine-method)(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
+| [AppendList](#AppendList-method)(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
+| [AppendList&lt;T&gt;](#AppendList-method)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
+| [AppendMethod](#AppendMethod-method)(…) | Appends a field with the given name and method info |
+| [AppendNullField](#AppendNullField-method)(…) | Appends a field with the given name and Null value |
+| [AppendObject](#AppendObject-method)(…) | Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name |
+| [DecrementIndent](#DecrementIndent-method)() | Decrements the Indent |
+| [EndArray](#EndArray-method)() | Ends an array on the logger |
+| [EndObject](#EndObject-method)() | Ends an object on the logger |
+| [IncrementIndent](#IncrementIndent-method)() | Increments the Indent |
+| [StartArray](#StartArray-method)(…) | Starts an array on the logger with the given name |
+| [StartObject](#StartObject-method)(…) | Starts an object on the logger with the given name |
+| override [ToString](#ToString-method)() | Returns the logged data as a string |
 
 ## See Also
 

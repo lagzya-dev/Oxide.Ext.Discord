@@ -10,10 +10,10 @@ public class GuildUserVoiceStateUpdate
 
 | name | description |
 | --- | --- |
-| [GuildUserVoiceStateUpdate](#GuildUserVoiceStateUpdate)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The id of the channel the user is currently in |
-| [Suppress](#Suppress) { get; set; } | Toggles the user's suppress state |
-| [Validate](#Validate)() |  |
+| [GuildUserVoiceStateUpdate](#GuildUserVoiceStateUpdate-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel the user is currently in |
+| [Suppress](#Suppress-property) { get; set; } | Toggles the user's suppress state |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

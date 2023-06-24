@@ -10,12 +10,12 @@ public class ApplicationCommandGroupBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName) |  |
-| readonly [GroupName](#GroupName) |  |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization)(…) | Adds Application Sub Command Group Name Localizations |
-| [AddNameLocalizations](#AddNameLocalizations)(…) | Adds command name localizations for a given plugin and lang key |
-| [AddSubCommand](#AddSubCommand)(…) | Adds a sub command to this sub command group |
+| readonly [CommandName](#CommandName-field) |  |
+| readonly [GroupName](#GroupName-field) |  |
+| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Sub Command Group Name Localizations |
+| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AddSubCommand](#AddSubCommand-method)(…) | Adds a sub command to this sub command group |
 
 ## See Also
 

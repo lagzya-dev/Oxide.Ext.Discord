@@ -10,11 +10,11 @@ public class GuildSearchMembers : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [GuildSearchMembers](#GuildSearchMembers)() | The default constructor. |
-| [Limit](#Limit) { get; set; } | Max number of members to return (1-1000) Default is 1 |
-| [Query](#Query) { get; set; } | Query string to match username(s) and nickname(s) against. |
-| [ToQueryString](#ToQueryString)() |  |
-| [Validate](#Validate)() |  |
+| [GuildSearchMembers](#GuildSearchMembers-constructor)() | The default constructor. |
+| [Limit](#Limit-property) { get; set; } | Max number of members to return (1-1000) Default is 1 |
+| [Query](#Query-property) { get; set; } | Query string to match username(s) and nickname(s) against. |
+| [ToQueryString](#ToQueryString-method)() |  |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

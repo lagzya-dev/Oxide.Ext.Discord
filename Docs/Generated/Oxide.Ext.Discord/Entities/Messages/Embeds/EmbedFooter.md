@@ -10,11 +10,11 @@ public class EmbedFooter
 
 | name | description |
 | --- | --- |
-| [EmbedFooter](#EmbedFooter)() | Embed Footer Constructor |
-| [EmbedFooter](#EmbedFooter)(…) | Embed Footer Constructor |
-| [IconUrl](#IconUrl) { get; set; } | Url of footer icon (only supports http(s) and attachments) |
-| [ProxyIconUrl](#ProxyIconUrl) { get; set; } | A proxied url of footer icon |
-| [Text](#Text) { get; set; } | Footer text |
+| [EmbedFooter](#EmbedFooter-constructor)() | Embed Footer Constructor |
+| [EmbedFooter](#EmbedFooter-constructor)(…) | Embed Footer Constructor |
+| [IconUrl](#IconUrl-property) { get; set; } | Url of footer icon (only supports http(s) and attachments) |
+| [ProxyIconUrl](#ProxyIconUrl-property) { get; set; } | A proxied url of footer icon |
+| [Text](#Text-property) { get; set; } | Footer text |
 
 ## See Also
 

@@ -10,18 +10,18 @@ public class InteractionData
 
 | name | description |
 | --- | --- |
-| [InteractionData](#InteractionData)() | The default constructor. |
-| [Components](#Components) { get; set; } | The values submitted by the user (Modal Submit) |
-| [ComponentType](#ComponentType) { get; set; } | For components, the type of the component |
-| [CustomId](#CustomId) { get; set; } | For components, the custom_id of the component |
-| [GuildId](#GuildId) { get; set; } | The id of the guild the command is registered to |
-| [Id](#Id) { get; set; } | ID of the invoked command |
-| [Name](#Name) { get; set; } | The name of the invoked command |
-| [Options](#Options) { get; set; } | The params + values from the user |
-| [Resolved](#Resolved) { get; set; } | Converted [`DiscordUser`](../Users/DiscordUser.md)s, [`DiscordRole`](../Permissions/DiscordRole.md)s, [`DiscordChannel`](../Channels/DiscordChannel.md)s, [`GuildMember`](../Guilds/GuildMember.md)s, [`DiscordMessage`](../Messages/DiscordMessage.md)s [`MessageAttachment`](../Messages/MessageAttachment.md)s |
-| [TargetId](#TargetId) { get; set; } | Id the of user or message targeted by a user or message command |
-| [Type](#Type) { get; set; } | The type of the invoked command |
-| [Values](#Values) { get; set; } | For components, the values for the select menu component |
+| [InteractionData](#InteractionData-constructor)() | The default constructor. |
+| [Components](#Components-property) { get; set; } | The values submitted by the user (Modal Submit) |
+| [ComponentType](#ComponentType-property) { get; set; } | For components, the type of the component |
+| [CustomId](#CustomId-property) { get; set; } | For components, the custom_id of the component |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild the command is registered to |
+| [Id](#Id-property) { get; set; } | ID of the invoked command |
+| [Name](#Name-property) { get; set; } | The name of the invoked command |
+| [Options](#Options-property) { get; set; } | The params + values from the user |
+| [Resolved](#Resolved-property) { get; set; } | Converted [`DiscordUser`](../Users/DiscordUser.md)s, [`DiscordRole`](../Permissions/DiscordRole.md)s, [`DiscordChannel`](../Channels/DiscordChannel.md)s, [`GuildMember`](../Guilds/GuildMember.md)s, [`DiscordMessage`](../Messages/DiscordMessage.md)s [`MessageAttachment`](../Messages/MessageAttachment.md)s |
+| [TargetId](#TargetId-property) { get; set; } | Id the of user or message targeted by a user or message command |
+| [Type](#Type-property) { get; set; } | The type of the invoked command |
+| [Values](#Values-property) { get; set; } | For components, the values for the select menu component |
 
 ## See Also
 

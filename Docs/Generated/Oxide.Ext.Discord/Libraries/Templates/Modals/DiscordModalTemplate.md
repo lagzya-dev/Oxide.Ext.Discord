@@ -10,12 +10,12 @@ public class DiscordModalTemplate
 
 | name | description |
 | --- | --- |
-| [DiscordModalTemplate](#DiscordModalTemplate)() | Constructor |
-| [DiscordModalTemplate](#DiscordModalTemplate)(…) | Constructor |
-| [Components](#Components) { get; set; } | Components of the Modal |
-| [CustomId](#CustomId) { get; set; } | Title of the modal |
-| [Title](#Title) { get; set; } | Title of the modal |
-| [ToModal](#ToModal)(…) | Converts the template to a [`InteractionModalMessage`](../../../Entities/Interactions/Response/InteractionModalMessage.md) |
+| [DiscordModalTemplate](#DiscordModalTemplate-constructor)() | Constructor |
+| [DiscordModalTemplate](#DiscordModalTemplate-constructor)(…) | Constructor |
+| [Components](#Components-property) { get; set; } | Components of the Modal |
+| [CustomId](#CustomId-property) { get; set; } | Title of the modal |
+| [Title](#Title-property) { get; set; } | Title of the modal |
+| [ToModal](#ToModal-method)(…) | Converts the template to a [`InteractionModalMessage`](../../../Entities/Interactions/Response/InteractionModalMessage.md) |
 
 ## See Also
 

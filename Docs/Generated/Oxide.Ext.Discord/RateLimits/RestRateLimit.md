@@ -10,16 +10,16 @@ public class RestRateLimit : BaseRateLimit
 
 | name | description |
 | --- | --- |
-| [RestRateLimit](#RestRateLimit)(…) | Constructor for RestRateLimit |
-| [FiredRequest](#FiredRequest)() | Called when an API request is fired |
-| override [NextReset](#NextReset)() | Returns how long until the current rate limit period will expire |
-| [ReachedRateLimit](#ReachedRateLimit)(…) | Called if we receive a header notifying us of hitting the rate limit |
+| [RestRateLimit](#RestRateLimit-constructor)(…) | Constructor for RestRateLimit |
+| [FiredRequest](#FiredRequest-method)() | Called when an API request is fired |
+| override [NextReset](#NextReset-method)() | Returns how long until the current rate limit period will expire |
+| [ReachedRateLimit](#ReachedRateLimit-method)(…) | Called if we receive a header notifying us of hitting the rate limit |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnRateLimitReset](#OnRateLimitReset)() |  |
+| override [OnRateLimitReset](#OnRateLimitReset-method)() |  |
 
 ## See Also
 

@@ -10,20 +10,20 @@ public class DiscordInvite
 
 | name | description |
 | --- | --- |
-| [DiscordInvite](#DiscordInvite)() | The default constructor. |
-| [ApproximateMemberCount](#ApproximateMemberCount) { get; set; } | Approximate count of total members |
-| [ApproximatePresenceCount](#ApproximatePresenceCount) { get; set; } | Approximate count of online members (only present when target_user is set) |
-| [Channel](#Channel) { get; set; } | The channel this invite is for See [`Channel`](./DiscordInvite/Channel.md) |
-| [Code](#Code) { get; set; } | The invite code (unique ID) |
-| [ExpiresAt](#ExpiresAt) { get; set; } | When the invite code expires |
-| [Guild](#Guild) { get; set; } | The guild this invite is for See [`Guild`](./DiscordInvite/Guild.md) |
-| [GuildScheduledEvent](#GuildScheduledEvent) { get; set; } | Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id |
-| [Inviter](#Inviter) { get; set; } | The user who created the invite See [`DiscordUser`](../Users/DiscordUser.md) |
-| [StageInstance](#StageInstance) { get; set; } | Stage instance data if there is a public Stage instance in the Stage channel this invite is for |
-| [TargetUser](#TargetUser) { get; set; } | The target user for this invite See [`DiscordUser`](../Users/DiscordUser.md) |
-| [UserTargetType](#UserTargetType) { get; set; } | The type of user target for this invite See [`TargetUserType`](./TargetUserType.md) |
-| [Delete](#Delete)(…) | Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success. See [Delete Invite](https://discord.com/developers/docs/resources/invite#delete-invite) |
-| static [Get](#Get)(…) | Returns an invite object for the given code. See [Get Invite](https://discord.com/developers/docs/resources/invite#get-invite) |
+| [DiscordInvite](#DiscordInvite-constructor)() | The default constructor. |
+| [ApproximateMemberCount](#ApproximateMemberCount-property) { get; set; } | Approximate count of total members |
+| [ApproximatePresenceCount](#ApproximatePresenceCount-property) { get; set; } | Approximate count of online members (only present when target_user is set) |
+| [Channel](#Channel-property) { get; set; } | The channel this invite is for See [`Channel`](./DiscordInvite/Channel.md) |
+| [Code](#Code-property) { get; set; } | The invite code (unique ID) |
+| [ExpiresAt](#ExpiresAt-property) { get; set; } | When the invite code expires |
+| [Guild](#Guild-property) { get; set; } | The guild this invite is for See [`Guild`](./DiscordInvite/Guild.md) |
+| [GuildScheduledEvent](#GuildScheduledEvent-property) { get; set; } | Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id |
+| [Inviter](#Inviter-property) { get; set; } | The user who created the invite See [`DiscordUser`](../Users/DiscordUser.md) |
+| [StageInstance](#StageInstance-property) { get; set; } | Stage instance data if there is a public Stage instance in the Stage channel this invite is for |
+| [TargetUser](#TargetUser-property) { get; set; } | The target user for this invite See [`DiscordUser`](../Users/DiscordUser.md) |
+| [UserTargetType](#UserTargetType-property) { get; set; } | The type of user target for this invite See [`TargetUserType`](./TargetUserType.md) |
+| [Delete](#Delete-method)(…) | Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success. See [Delete Invite](https://discord.com/developers/docs/resources/invite#delete-invite) |
+| static [Get](#Get-method)(…) | Returns an invite object for the given code. See [Get Invite](https://discord.com/developers/docs/resources/invite#get-invite) |
 
 ## See Also
 

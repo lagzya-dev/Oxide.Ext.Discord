@@ -10,7 +10,7 @@ public class InvalidWebhookException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| static readonly [InvalidUserNameCharacters](#InvalidUserNameCharacters) | Invalid username characters |
+| static readonly [InvalidUserNameCharacters](#InvalidUserNameCharacters-field) | Invalid username characters |
 
 ## See Also
 

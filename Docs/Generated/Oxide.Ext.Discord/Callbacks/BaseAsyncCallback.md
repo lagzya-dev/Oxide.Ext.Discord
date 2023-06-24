@@ -10,10 +10,10 @@ public abstract class BaseAsyncCallback : BasePoolable
 
 | name | description |
 | --- | --- |
-| [BaseAsyncCallback](#BaseAsyncCallback)() | Constructor |
-| abstract [GetExceptionMessage](#GetExceptionMessage)() | Returns Exception message if an error occurs |
-| abstract [HandleCallback](#HandleCallback)() | Overridden in the child class to handle the callback |
-| [Run](#Run)() | Runs the callback using async |
+| [BaseAsyncCallback](#BaseAsyncCallback-constructor)() | Constructor |
+| abstract [GetExceptionMessage](#GetExceptionMessage-method)() | Returns Exception message if an error occurs |
+| abstract [HandleCallback](#HandleCallback-method)() | Overridden in the child class to handle the callback |
+| [Run](#Run-method)() | Runs the callback using async |
 
 ## See Also
 

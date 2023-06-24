@@ -10,8 +10,8 @@ public class GuildPruneResult
 
 | name | description |
 | --- | --- |
-| [GuildPruneResult](#GuildPruneResult)() | The default constructor. |
-| [Pruned](#Pruned) { get; set; } | Number of members pruned |
+| [GuildPruneResult](#GuildPruneResult-constructor)() | The default constructor. |
+| [Pruned](#Pruned-property) { get; set; } | Number of members pruned |
 
 ## See Also
 

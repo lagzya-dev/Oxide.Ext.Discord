@@ -10,22 +10,22 @@ public class CommandOption
 
 | name | description |
 | --- | --- |
-| [CommandOption](#CommandOption)() | Constructor |
-| [CommandOption](#CommandOption)(…) | Constructor |
-| [Autocomplete](#Autocomplete) { get; set; } | If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option |
-| [ChannelTypes](#ChannelTypes) { get; set; } | If the option is a channel type, the channels shown will be restricted to these types See [`ChannelType`](../../Channels/ChannelType.md) |
-| [Choices](#Choices) { get; set; } | Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25 See [`CommandOptionChoice`](./CommandOptionChoice.md) |
-| [Description](#Description) { get; set; } | Description the command option (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [MaxLength](#MaxLength) { get; set; } | For option type STRING, the maximum allowed length (minimum of 1) |
-| [MaxValue](#MaxValue) { get; set; } | If the option is an INTEGER or NUMBER type, the maximum value permitted |
-| [MinLength](#MinLength) { get; set; } | For option type STRING, the minimum allowed length (minimum of 0) |
-| [MinValue](#MinValue) { get; set; } | If the option is an INTEGER or NUMBER type, the minimum value permitted |
-| [Name](#Name) { get; set; } | Name of the command option (1-32 characters) |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Options](#Options) { get; set; } | If the option is a subcommand or subcommand group type, these nested options will be the parameters See [`CommandOption`](./CommandOption.md) |
-| [Required](#Required) { get; set; } | If the parameter is required or optional Defaults to false |
-| [Type](#Type) { get; set; } | Type of option See [`CommandOptionType`](./CommandOptionType.md) |
+| [CommandOption](#CommandOption-constructor)() | Constructor |
+| [CommandOption](#CommandOption-constructor)(…) | Constructor |
+| [Autocomplete](#Autocomplete-property) { get; set; } | If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option |
+| [ChannelTypes](#ChannelTypes-property) { get; set; } | If the option is a channel type, the channels shown will be restricted to these types See [`ChannelType`](../../Channels/ChannelType.md) |
+| [Choices](#Choices-property) { get; set; } | Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25 See [`CommandOptionChoice`](./CommandOptionChoice.md) |
+| [Description](#Description-property) { get; set; } | Description the command option (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [MaxLength](#MaxLength-property) { get; set; } | For option type STRING, the maximum allowed length (minimum of 1) |
+| [MaxValue](#MaxValue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the maximum value permitted |
+| [MinLength](#MinLength-property) { get; set; } | For option type STRING, the minimum allowed length (minimum of 0) |
+| [MinValue](#MinValue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the minimum value permitted |
+| [Name](#Name-property) { get; set; } | Name of the command option (1-32 characters) |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Options](#Options-property) { get; set; } | If the option is a subcommand or subcommand group type, these nested options will be the parameters See [`CommandOption`](./CommandOption.md) |
+| [Required](#Required-property) { get; set; } | If the parameter is required or optional Defaults to false |
+| [Type](#Type-property) { get; set; } | Type of option See [`CommandOptionType`](./CommandOptionType.md) |
 
 ## See Also
 

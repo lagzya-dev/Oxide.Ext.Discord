@@ -14,8 +14,8 @@ public interface IPool<T> : IPool
 
 | name | description |
 | --- | --- |
-| [Free](#Free)(…) | Returns the pooled type back to the pool |
-| [Get](#Get)() | Returns the Pooled type or a new instance if pool is empty. |
+| [Free](#Free-method)(…) | Returns the pooled type back to the pool |
+| [Get](#Get-method)() | Returns the Pooled type or a new instance if pool is empty. |
 
 ## See Also
 

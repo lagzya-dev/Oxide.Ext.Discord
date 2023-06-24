@@ -10,13 +10,13 @@ public class MessageComponentBuilder
 
 | name | description |
 | --- | --- |
-| [MessageComponentBuilder](#MessageComponentBuilder)() | Creates a new MessageComponentBuilder |
-| [AddActionButton](#AddActionButton)(…) | Adds an action button to the current action row |
-| [AddDummyButton](#AddDummyButton)(…) | Adds a dummy button that doesn't do anything |
-| [AddInputText](#AddInputText)(…) | Adds a select menu to a new action row |
-| [AddLinkButton](#AddLinkButton)(…) | Adds a link button to the current action row |
-| [AddSelectMenu](#AddSelectMenu)(…) | Adds a select menu to a new action row |
-| [Build](#Build)() | Returns the built action rows |
+| [MessageComponentBuilder](#MessageComponentBuilder-constructor)() | Creates a new MessageComponentBuilder |
+| [AddActionButton](#AddActionButton-method)(…) | Adds an action button to the current action row |
+| [AddDummyButton](#AddDummyButton-method)(…) | Adds a dummy button that doesn't do anything |
+| [AddInputText](#AddInputText-method)(…) | Adds a select menu to a new action row |
+| [AddLinkButton](#AddLinkButton-method)(…) | Adds a link button to the current action row |
+| [AddSelectMenu](#AddSelectMenu-method)(…) | Adds a select menu to a new action row |
+| [Build](#Build-method)() | Returns the built action rows |
 
 ## See Also
 

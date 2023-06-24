@@ -10,28 +10,28 @@ public class InteractionAutoCompleteBuilder
 
 | name | description |
 | --- | --- |
-| [InteractionAutoCompleteBuilder](#InteractionAutoCompleteBuilder)(…) | Constructor |
-| [AddAllOnlineFirstPlayers](#AddAllOnlineFirstPlayers)(…) | Adds Online Players to the list first If there is still space add Offline Players |
-| [AddAllPlayers](#AddAllPlayers)(…) | Adds Any Player to the list |
-| [AddByPlayerId](#AddByPlayerId)(…) | Adds a player by player Id to the list |
-| [AddChoice](#AddChoice)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
-| [AddChoices](#AddChoices)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
-| [AddGroups](#AddGroups)(…) | Adds Oxide Groups to the AutoComplete |
-| [AddGroupsWithoutPermission](#AddGroupsWithoutPermission)(…) | Adds The List of Groups that have this permission |
-| [AddGroupsWithoutPlayer](#AddGroupsWithoutPlayer)(…) | Adds The List of Groups that playerId has |
-| [AddGroupsWithPermission](#AddGroupsWithPermission)(…) | Adds The List of Groups that have this permission |
-| [AddGroupsWithPlayer](#AddGroupsWithPlayer)(…) | Adds The List of Groups that playerId has |
-| [AddLoadablePlugins](#AddLoadablePlugins)(…) | Adds a list of plugins that can be loaded |
-| [AddLoadedPlugins](#AddLoadedPlugins)(…) | Adds a list of plugins that are currently loaded |
-| [AddOfflinePlayers](#AddOfflinePlayers)(…) | Adds Online Players to the list |
-| [AddOnlinePlayers](#AddOnlinePlayers)(…) | Adds Online Players to the list |
-| [AddPermissions](#AddPermissions)(…) | Adds Oxide Permissions to the AutoComplete |
-| [AddPermissionsInGroup](#AddPermissionsInGroup)(…) |  |
-| [AddPermissionsNotInGroup](#AddPermissionsNotInGroup)(…) |  |
-| [AddPermissionsPlayerIn](#AddPermissionsPlayerIn)(…) | Adds The List of Permissions that playerId has |
-| [AddPermissionsPlayerNotIn](#AddPermissionsPlayerNotIn)(…) | Adds The List of Permissions that playerId does not have |
-| [Build](#Build)() | Returns the built message |
-| [CanAddChoice](#CanAddChoice)() | Returns if the Auto Complete can add any more choices |
+| [InteractionAutoCompleteBuilder](#InteractionAutoCompleteBuilder-constructor)(…) | Constructor |
+| [AddAllOnlineFirstPlayers](#AddAllOnlineFirstPlayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
+| [AddAllPlayers](#AddAllPlayers-method)(…) | Adds Any Player to the list |
+| [AddByPlayerId](#AddByPlayerId-method)(…) | Adds a player by player Id to the list |
+| [AddChoice](#AddChoice-method)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
+| [AddChoices](#AddChoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
+| [AddGroups](#AddGroups-method)(…) | Adds Oxide Groups to the AutoComplete |
+| [AddGroupsWithoutPermission](#AddGroupsWithoutPermission-method)(…) | Adds The List of Groups that have this permission |
+| [AddGroupsWithoutPlayer](#AddGroupsWithoutPlayer-method)(…) | Adds The List of Groups that playerId has |
+| [AddGroupsWithPermission](#AddGroupsWithPermission-method)(…) | Adds The List of Groups that have this permission |
+| [AddGroupsWithPlayer](#AddGroupsWithPlayer-method)(…) | Adds The List of Groups that playerId has |
+| [AddLoadablePlugins](#AddLoadablePlugins-method)(…) | Adds a list of plugins that can be loaded |
+| [AddLoadedPlugins](#AddLoadedPlugins-method)(…) | Adds a list of plugins that are currently loaded |
+| [AddOfflinePlayers](#AddOfflinePlayers-method)(…) | Adds Online Players to the list |
+| [AddOnlinePlayers](#AddOnlinePlayers-method)(…) | Adds Online Players to the list |
+| [AddPermissions](#AddPermissions-method)(…) | Adds Oxide Permissions to the AutoComplete |
+| [AddPermissionsInGroup](#AddPermissionsInGroup-method)(…) |  |
+| [AddPermissionsNotInGroup](#AddPermissionsNotInGroup-method)(…) |  |
+| [AddPermissionsPlayerIn](#AddPermissionsPlayerIn-method)(…) | Adds The List of Permissions that playerId has |
+| [AddPermissionsPlayerNotIn](#AddPermissionsPlayerNotIn-method)(…) | Adds The List of Permissions that playerId does not have |
+| [Build](#Build-method)() | Returns the built message |
+| [CanAddChoice](#CanAddChoice-method)() | Returns if the Auto Complete can add any more choices |
 
 ## See Also
 

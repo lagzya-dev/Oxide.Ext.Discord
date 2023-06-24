@@ -10,11 +10,11 @@ public class GuildListMembers : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [GuildListMembers](#GuildListMembers)() | The default constructor. |
-| [After](#After) { get; set; } | The highest user id in the previous page |
-| [Limit](#Limit) { get; set; } | Max number of members to return (1-1000) Default is 1 |
-| [ToQueryString](#ToQueryString)() |  |
-| [Validate](#Validate)() |  |
+| [GuildListMembers](#GuildListMembers-constructor)() | The default constructor. |
+| [After](#After-property) { get; set; } | The highest user id in the previous page |
+| [Limit](#Limit-property) { get; set; } | Max number of members to return (1-1000) Default is 1 |
+| [ToQueryString](#ToQueryString-method)() |  |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

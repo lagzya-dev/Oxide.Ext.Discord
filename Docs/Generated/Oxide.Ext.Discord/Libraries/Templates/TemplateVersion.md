@@ -10,21 +10,21 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 
 | name | description |
 | --- | --- |
-| [TemplateVersion](#TemplateVersion)(…) | Constructor |
-| readonly [Major](#Major) | Major Version |
-| readonly [Minor](#Minor) | Minor Version |
-| readonly [Revision](#Revision) | Revision Version |
-| [CompareTo](#CompareTo)(…) |  |
-| override [Equals](#Equals)(…) |  |
-| [Equals](#Equals)(…) |  |
-| override [GetHashCode](#GetHashCode)() |  |
-| override [ToString](#ToString)() |  |
-| [operator ==](#op_Equality) | Returns if the template versions are equal |
-| [operator &gt;](#op_GreaterThan) | Returns if the right template version is greater than the left |
-| [operator &gt;=](#op_GreaterThanOrEqual) | Returns if the right template version is greater or equal than the left |
-| [operator !=](#op_Inequality) | Returns if the template versions are not equal |
-| [operator &lt;](#op_LessThan) | Returns if the left template version is less than the right |
-| [operator &lt;=](#op_LessThanOrEqual) | Returns if the left template version is less than or equal the right |
+| [TemplateVersion](#TemplateVersion-constructor)(…) | Constructor |
+| readonly [Major](#Major-field) | Major Version |
+| readonly [Minor](#Minor-field) | Minor Version |
+| readonly [Revision](#Revision-field) | Revision Version |
+| [CompareTo](#CompareTo-method)(…) |  |
+| override [Equals](#Equals-method)(…) |  |
+| [Equals](#Equals-method)(…) |  |
+| override [GetHashCode](#GetHashCode-method)() |  |
+| override [ToString](#ToString-method)() |  |
+| [operator ==](#op_Equality-operator) | Returns if the template versions are equal |
+| [operator &gt;](#op_GreaterThan-operator) | Returns if the right template version is greater than the left |
+| [operator &gt;=](#op_GreaterThanOrEqual-operator) | Returns if the right template version is greater or equal than the left |
+| [operator !=](#op_Inequality-operator) | Returns if the template versions are not equal |
+| [operator &lt;](#op_LessThan-operator) | Returns if the left template version is less than the right |
+| [operator &lt;=](#op_LessThanOrEqual-operator) | Returns if the left template version is less than or equal the right |
 
 ## See Also
 

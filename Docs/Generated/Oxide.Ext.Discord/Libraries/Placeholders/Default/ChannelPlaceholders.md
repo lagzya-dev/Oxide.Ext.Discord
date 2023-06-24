@@ -10,12 +10,12 @@ public static class ChannelPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Icon](#Icon)(…) | [`IconUrl`](../../../Entities/Channels/DiscordChannel/IconUrl.md) placeholder |
-| static [Id](#Id)(…) | [`Id`](../../../Entities/Channels/DiscordChannel/Id.md) placeholder |
-| static [Mention](#Mention)(…) | [`Mention`](../../../Entities/Channels/DiscordChannel/Mention.md) placeholder |
-| static [Name](#Name)(…) | [`Name`](../../../Entities/Channels/DiscordChannel/Name.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
-| static [Topic](#Topic)(…) | [`Topic`](../../../Entities/Channels/DiscordChannel/Topic.md) placeholder |
+| static [Icon](#Icon-method)(…) | [`IconUrl`](../../../Entities/Channels/DiscordChannel/IconUrl.md) placeholder |
+| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Channels/DiscordChannel/Id.md) placeholder |
+| static [Mention](#Mention-method)(…) | [`Mention`](../../../Entities/Channels/DiscordChannel/Mention.md) placeholder |
+| static [Name](#Name-method)(…) | [`Name`](../../../Entities/Channels/DiscordChannel/Name.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Topic](#Topic-method)(…) | [`Topic`](../../../Entities/Channels/DiscordChannel/Topic.md) placeholder |
 
 ## See Also
 

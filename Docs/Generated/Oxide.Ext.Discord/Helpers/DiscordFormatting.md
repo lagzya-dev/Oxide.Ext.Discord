@@ -10,35 +10,35 @@ public static class DiscordFormatting
 
 | name | description |
 | --- | --- |
-| static [BlockQuoteMultiLine](#BlockQuoteMultiLine)(…) | Will display the message in multiline block quote |
-| static [BlockQuoteSingleLine](#BlockQuoteSingleLine)(…) | Will display the message in single line block quote |
-| static [Bold](#Bold)(…) | Will display the message in bold |
-| static [CodeBlockLanguage](#CodeBlockLanguage)(…) | Will display a multiline code bloc with the specified language |
-| static [CodeBlockMultiLine](#CodeBlockMultiLine)(…) | Will display the message as a multiline code block |
-| static [CodeBlockOneLine](#CodeBlockOneLine)(…) | Will display the message as a one line code block |
-| static [CustomEmojiDataString](#CustomEmojiDataString)(…) | Returns formatting string for custom emoji to be used in a url |
-| static [CustomEmojiMessageString](#CustomEmojiMessageString)(…) | Returns formatting string for custom emoji to be used in a message |
-| static [EmojiMessageString](#EmojiMessageString)(…) | Return the emoji string for a message |
-| static [Header1](#Header1)(…) | Creates a Big Header |
-| static [Header2](#Header2)(…) | Creates a Medium Header |
-| static [Header3](#Header3)(…) | Creates a Small Header |
-| static [Italics](#Italics)(…) | Will display the message in italics |
-| static [ItalicsBold](#ItalicsBold)(…) | Will display the message in italics and bold |
-| static [List](#List)(…) | Creates a list item for the given message |
-| static [MaskLink](#MaskLink)(…) | Creates a clickable link displayed as the mask text |
-| static [MentionApplicationCommand](#MentionApplicationCommand)(…) | Mention the the Application command |
-| static [MentionApplicationCommandCustom](#MentionApplicationCommandCustom)(…) | Mention the application command using a custom command string |
-| static [MentionChannel](#MentionChannel)(…) | Mention the the channel with the given ID |
-| static [MentionRole](#MentionRole)(…) | Mention the the role with the given ID |
-| static [MentionUser](#MentionUser)(…) | Mention the user with the given user ID |
-| static [NumberedList](#NumberedList)(…) | Creates a list item for the given message |
-| static [Spoiler](#Spoiler)(…) | Will display the text as a spoiler |
-| static [Strikethrough](#Strikethrough)(…) | Will display the message with a strikethrough |
-| static [Underline](#Underline)(…) | Will display the message in underline |
-| static [UnderlineBold](#UnderlineBold)(…) | Will display the message in underline and bold |
-| static [UnderlineBoldItalics](#UnderlineBoldItalics)(…) | Will display the message in underline and bold and italics |
-| static [UnderlineItalics](#UnderlineItalics)(…) | Will display the message in underline and italics |
-| static [UnixTimestamp](#UnixTimestamp)(…) | Displays a timestamp (2 methods) |
+| static [BlockQuoteMultiLine](#BlockQuoteMultiLine-method)(…) | Will display the message in multiline block quote |
+| static [BlockQuoteSingleLine](#BlockQuoteSingleLine-method)(…) | Will display the message in single line block quote |
+| static [Bold](#Bold-method)(…) | Will display the message in bold |
+| static [CodeBlockLanguage](#CodeBlockLanguage-method)(…) | Will display a multiline code bloc with the specified language |
+| static [CodeBlockMultiLine](#CodeBlockMultiLine-method)(…) | Will display the message as a multiline code block |
+| static [CodeBlockOneLine](#CodeBlockOneLine-method)(…) | Will display the message as a one line code block |
+| static [CustomEmojiDataString](#CustomEmojiDataString-method)(…) | Returns formatting string for custom emoji to be used in a url |
+| static [CustomEmojiMessageString](#CustomEmojiMessageString-method)(…) | Returns formatting string for custom emoji to be used in a message |
+| static [EmojiMessageString](#EmojiMessageString-method)(…) | Return the emoji string for a message |
+| static [Header1](#Header1-method)(…) | Creates a Big Header |
+| static [Header2](#Header2-method)(…) | Creates a Medium Header |
+| static [Header3](#Header3-method)(…) | Creates a Small Header |
+| static [Italics](#Italics-method)(…) | Will display the message in italics |
+| static [ItalicsBold](#ItalicsBold-method)(…) | Will display the message in italics and bold |
+| static [List](#List-method)(…) | Creates a list item for the given message |
+| static [MaskLink](#MaskLink-method)(…) | Creates a clickable link displayed as the mask text |
+| static [MentionApplicationCommand](#MentionApplicationCommand-method)(…) | Mention the the Application command |
+| static [MentionApplicationCommandCustom](#MentionApplicationCommandCustom-method)(…) | Mention the application command using a custom command string |
+| static [MentionChannel](#MentionChannel-method)(…) | Mention the the channel with the given ID |
+| static [MentionRole](#MentionRole-method)(…) | Mention the the role with the given ID |
+| static [MentionUser](#MentionUser-method)(…) | Mention the user with the given user ID |
+| static [NumberedList](#NumberedList-method)(…) | Creates a list item for the given message |
+| static [Spoiler](#Spoiler-method)(…) | Will display the text as a spoiler |
+| static [Strikethrough](#Strikethrough-method)(…) | Will display the message with a strikethrough |
+| static [Underline](#Underline-method)(…) | Will display the message in underline |
+| static [UnderlineBold](#UnderlineBold-method)(…) | Will display the message in underline and bold |
+| static [UnderlineBoldItalics](#UnderlineBoldItalics-method)(…) | Will display the message in underline and bold and italics |
+| static [UnderlineItalics](#UnderlineItalics-method)(…) | Will display the message in underline and italics |
+| static [UnixTimestamp](#UnixTimestamp-method)(…) | Displays a timestamp (2 methods) |
 
 ## See Also
 

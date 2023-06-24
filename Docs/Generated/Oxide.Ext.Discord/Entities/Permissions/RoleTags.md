@@ -10,13 +10,13 @@ public class RoleTags
 
 | name | description |
 | --- | --- |
-| [RoleTags](#RoleTags)() | The default constructor. |
-| [AvailableForPurchase](#AvailableForPurchase) { get; set; } | whether this role is available for purchase |
-| [BotId](#BotId) { get; set; } | The id of the bot this role belongs to |
-| [GuildConnections](#GuildConnections) { get; set; } | Whether this role is a guild's linked role |
-| [IntegrationId](#IntegrationId) { get; set; } | The id of the integration this role belongs to |
-| [PremiumSubscriber](#PremiumSubscriber) { get; set; } | Whether this is the guild's premium subscriber role |
-| [SubscriptionListingId](#SubscriptionListingId) { get; set; } | The id of this role's subscription sku and listing |
+| [RoleTags](#RoleTags-constructor)() | The default constructor. |
+| [AvailableForPurchase](#AvailableForPurchase-property) { get; set; } | whether this role is available for purchase |
+| [BotId](#BotId-property) { get; set; } | The id of the bot this role belongs to |
+| [GuildConnections](#GuildConnections-property) { get; set; } | Whether this role is a guild's linked role |
+| [IntegrationId](#IntegrationId-property) { get; set; } | The id of the integration this role belongs to |
+| [PremiumSubscriber](#PremiumSubscriber-property) { get; set; } | Whether this is the guild's premium subscriber role |
+| [SubscriptionListingId](#SubscriptionListingId-property) { get; set; } | The id of this role's subscription sku and listing |
 
 ## See Also
 

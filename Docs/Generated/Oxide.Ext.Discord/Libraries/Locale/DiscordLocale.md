@@ -10,16 +10,16 @@ public struct DiscordLocale : IEquatable<DiscordLocale>
 
 | name | description |
 | --- | --- |
-| static [Parse](#Parse)(…) | Parses a Discord Locale |
-| [IsValid](#IsValid) { get; } | Is the Locale Valid |
-| readonly [Id](#Id) | ID of the locale |
-| [Equals](#Equals)(…) |  |
-| override [Equals](#Equals)(…) |  |
-| override [GetHashCode](#GetHashCode)() |  |
-| [GetServerLocale](#GetServerLocale)() | Returns the Server Locale for this Discord Locale |
-| override [ToString](#ToString)() | Returns the ID of the Locale |
-| [operator ==](#op_Equality) | Returns if two Discord Locales are equal to each other |
-| [operator !=](#op_Inequality) | Returns if two Discord Locales are not equal to each other |
+| static [Parse](#Parse-method)(…) | Parses a Discord Locale |
+| [IsValid](#IsValid-property) { get; } | Is the Locale Valid |
+| readonly [Id](#Id-field) | ID of the locale |
+| [Equals](#Equals-method)(…) |  |
+| override [Equals](#Equals-method)(…) |  |
+| override [GetHashCode](#GetHashCode-method)() |  |
+| [GetServerLocale](#GetServerLocale-method)() | Returns the Server Locale for this Discord Locale |
+| override [ToString](#ToString-method)() | Returns the ID of the Locale |
+| [operator ==](#op_Equality-operator) | Returns if two Discord Locales are equal to each other |
+| [operator !=](#op_Inequality-operator) | Returns if two Discord Locales are not equal to each other |
 
 ## See Also
 

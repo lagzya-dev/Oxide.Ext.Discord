@@ -10,12 +10,12 @@ public class ThreadMember
 
 | name | description |
 | --- | --- |
-| [ThreadMember](#ThreadMember)() | The default constructor. |
-| [Flags](#Flags) { get; set; } | Any user-thread settings, currently only used for notifications |
-| [Id](#Id) { get; set; } | The id of the thread |
-| [JoinTimestamp](#JoinTimestamp) { get; set; } | The time the current user last joined the thread |
-| [Member](#Member) { get; set; } | The time the current user last joined the thread * field is only present when withMember is set to true when calling List Thread Members or Get Thread Member. |
-| [UserId](#UserId) { get; set; } | The id of the user |
+| [ThreadMember](#ThreadMember-constructor)() | The default constructor. |
+| [Flags](#Flags-property) { get; set; } | Any user-thread settings, currently only used for notifications |
+| [Id](#Id-property) { get; set; } | The id of the thread |
+| [JoinTimestamp](#JoinTimestamp-property) { get; set; } | The time the current user last joined the thread |
+| [Member](#Member-property) { get; set; } | The time the current user last joined the thread * field is only present when withMember is set to true when calling List Thread Members or Get Thread Member. |
+| [UserId](#UserId-property) { get; set; } | The id of the user |
 
 ## See Also
 

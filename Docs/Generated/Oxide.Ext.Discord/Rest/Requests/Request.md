@@ -10,16 +10,16 @@ public class Request : BaseRequest
 
 | name | description |
 | --- | --- |
-| [Request](#Request)() | The default constructor. |
-| static [CreateRequest](#CreateRequest)(…) | Creates a REST API request that returns type of T from the response |
+| [Request](#Request-constructor)() | The default constructor. |
+| static [CreateRequest](#CreateRequest-method)(…) | Creates a REST API request that returns type of T from the response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
-| override [OnRequestError](#OnRequestError)(…) |  |
-| override [OnRequestSuccess](#OnRequestSuccess)(…) |  |
+| override [EnterPool](#EnterPool-method)() |  |
+| override [OnRequestError](#OnRequestError-method)(…) |  |
+| override [OnRequestSuccess](#OnRequestSuccess-method)(…) |  |
 
 ## See Also
 

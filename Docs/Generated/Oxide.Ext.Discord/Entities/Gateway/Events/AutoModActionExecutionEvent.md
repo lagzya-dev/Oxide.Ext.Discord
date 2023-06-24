@@ -10,17 +10,17 @@ public class AutoModActionExecutionEvent
 
 | name | description |
 | --- | --- |
-| [AutoModActionExecutionEvent](#AutoModActionExecutionEvent)() | The default constructor. |
-| [Action](#Action) { get; set; } | The action which was executed |
-| [AlertSystemMessageId](#AlertSystemMessageId) { get; set; } | The id of any system auto moderation messages posted as a result of this action |
-| [Content](#Content) { get; set; } | The user generated text content |
-| [GuildId](#GuildId) { get; set; } | Id of the guild in which action was executed |
-| [MatchedContent](#MatchedContent) { get; set; } | The substring in content that triggered the rule |
-| [MatchedKeyword](#MatchedKeyword) { get; set; } | The word or phrase configured in the rule that triggered the rule |
-| [MessageId](#MessageId) { get; set; } | Id of any user message which content belongs to |
-| [RuleId](#RuleId) { get; set; } | Id of the rule which action belongs to |
-| [RuleTriggerType](#RuleTriggerType) { get; set; } | The [`AutoModTriggerType`](../../AutoMod/AutoModTriggerType.md) of rule which was triggered |
-| [UserId](#UserId) { get; set; } | Id of the user which generated the content which triggered the rule |
+| [AutoModActionExecutionEvent](#AutoModActionExecutionEvent-constructor)() | The default constructor. |
+| [Action](#Action-property) { get; set; } | The action which was executed |
+| [AlertSystemMessageId](#AlertSystemMessageId-property) { get; set; } | The id of any system auto moderation messages posted as a result of this action |
+| [Content](#Content-property) { get; set; } | The user generated text content |
+| [GuildId](#GuildId-property) { get; set; } | Id of the guild in which action was executed |
+| [MatchedContent](#MatchedContent-property) { get; set; } | The substring in content that triggered the rule |
+| [MatchedKeyword](#MatchedKeyword-property) { get; set; } | The word or phrase configured in the rule that triggered the rule |
+| [MessageId](#MessageId-property) { get; set; } | Id of any user message which content belongs to |
+| [RuleId](#RuleId-property) { get; set; } | Id of the rule which action belongs to |
+| [RuleTriggerType](#RuleTriggerType-property) { get; set; } | The [`AutoModTriggerType`](../../AutoMod/AutoModTriggerType.md) of rule which was triggered |
+| [UserId](#UserId-property) { get; set; } | Id of the user which generated the content which triggered the rule |
 
 ## See Also
 

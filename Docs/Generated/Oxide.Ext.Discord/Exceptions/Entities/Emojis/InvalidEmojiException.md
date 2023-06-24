@@ -10,7 +10,7 @@ public class InvalidEmojiException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| static readonly [EmojiValidation](#EmojiValidation) | Regex emoji validation matching discord emoji formatting standards |
+| static readonly [EmojiValidation](#EmojiValidation-field) | Regex emoji validation matching discord emoji formatting standards |
 
 ## See Also
 

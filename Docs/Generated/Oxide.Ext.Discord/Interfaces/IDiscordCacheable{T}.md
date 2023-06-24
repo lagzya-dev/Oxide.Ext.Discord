@@ -14,8 +14,8 @@ public interface IDiscordCacheable<in T>
 
 | name | description |
 | --- | --- |
-| [Id](#Id) { get; set; } | Id of the entity |
-| [Update](#Update)(…) | Method to update the entity |
+| [Id](#Id-property) { get; set; } | Id of the entity |
+| [Update](#Update-method)(…) | Method to update the entity |
 
 ## See Also
 

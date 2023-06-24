@@ -10,13 +10,13 @@ public class AutoModTriggerMetadata
 
 | name | description |
 | --- | --- |
-| [AutoModTriggerMetadata](#AutoModTriggerMetadata)() | The default constructor. |
-| [AllowList](#AllowList) { get; set; } | Associated Trigger Types: KeywordPreset and Keyword Substrings which should not trigger the rule (Maximum of 100 or 1000) |
-| [KeywordFilter](#KeywordFilter) { get; set; } | Associated Trigger Types: Keyword Substrings which will be searched for in content |
-| [MentionRaidProtectionEnabled](#MentionRaidProtectionEnabled) { get; set; } | Associated Trigger Types: MentionSpam Whether to automatically detect mention raids |
-| [MentionTotalLimit](#MentionTotalLimit) { get; set; } | Associated Trigger Types: MentionSpam Total number of unique role and user mentions allowed per message Maximum of 50 |
-| [Presets](#Presets) { get; set; } | Associated Trigger Types: KeywordPreset The internally pre-defined wordsets which will be searched for in content |
-| [RegexPatterns](#RegexPatterns) { get; set; } | Associated Trigger Types: Keyword Regular expression patterns which will be matched against content (Maximum of 10) * Only Rust flavored regex is currently supported, which can be tested in online editors such as [Rustexp](https://rustexp.lpil.uk/). Each regex pattern must be 260 characters or less. |
+| [AutoModTriggerMetadata](#AutoModTriggerMetadata-constructor)() | The default constructor. |
+| [AllowList](#AllowList-property) { get; set; } | Associated Trigger Types: KeywordPreset and Keyword Substrings which should not trigger the rule (Maximum of 100 or 1000) |
+| [KeywordFilter](#KeywordFilter-property) { get; set; } | Associated Trigger Types: Keyword Substrings which will be searched for in content |
+| [MentionRaidProtectionEnabled](#MentionRaidProtectionEnabled-property) { get; set; } | Associated Trigger Types: MentionSpam Whether to automatically detect mention raids |
+| [MentionTotalLimit](#MentionTotalLimit-property) { get; set; } | Associated Trigger Types: MentionSpam Total number of unique role and user mentions allowed per message Maximum of 50 |
+| [Presets](#Presets-property) { get; set; } | Associated Trigger Types: KeywordPreset The internally pre-defined wordsets which will be searched for in content |
+| [RegexPatterns](#RegexPatterns-property) { get; set; } | Associated Trigger Types: Keyword Regular expression patterns which will be matched against content (Maximum of 10) * Only Rust flavored regex is currently supported, which can be tested in online editors such as [Rustexp](https://rustexp.lpil.uk/). Each regex pattern must be 260 characters or less. |
 
 ## See Also
 

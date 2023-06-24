@@ -10,9 +10,9 @@ public class GuildMemberBannedEvent
 
 | name | description |
 | --- | --- |
-| [GuildMemberBannedEvent](#GuildMemberBannedEvent)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | ID of the guild |
-| [User](#User) { get; set; } | The banned / unbanned user |
+| [GuildMemberBannedEvent](#GuildMemberBannedEvent-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
+| [User](#User-property) { get; set; } | The banned / unbanned user |
 
 ## See Also
 

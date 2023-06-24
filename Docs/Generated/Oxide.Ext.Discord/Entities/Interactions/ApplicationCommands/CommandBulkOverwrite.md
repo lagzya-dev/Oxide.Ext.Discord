@@ -10,17 +10,17 @@ public class CommandBulkOverwrite
 
 | name | description |
 | --- | --- |
-| [CommandBulkOverwrite](#CommandBulkOverwrite)() | The default constructor. |
-| [DefaultMemberPermissions](#DefaultMemberPermissions) { get; set; } | Set of permissions represented as a bit set |
-| [DefaultPermissions](#DefaultPermissions) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
-| [Description](#Description) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](#DmPermission) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [Id](#Id) { get; set; } | ID of command, if known |
-| [Name](#Name) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](#Nsfw) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](#Options) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [CommandBulkOverwrite](#CommandBulkOverwrite-constructor)() | The default constructor. |
+| [DefaultMemberPermissions](#DefaultMemberPermissions-property) { get; set; } | Set of permissions represented as a bit set |
+| [DefaultPermissions](#DefaultPermissions-property) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
+| [Description](#Description-property) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#DmPermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [Id](#Id-property) { get; set; } | ID of command, if known |
+| [Name](#Name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#Nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#Options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
 
 ## See Also
 

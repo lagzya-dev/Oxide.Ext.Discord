@@ -10,17 +10,17 @@ public abstract class BaseSelectMenuComponent : BaseInteractableComponent
 
 | name | description |
 | --- | --- |
-| [Disabled](#Disabled) { get; set; } | Disable the select Default false |
-| [MaxValues](#MaxValues) { get; set; } | the maximum number of items that must be chosen; Default 1, Min 0, Max 25 |
-| [MinValues](#MinValues) { get; set; } | the minimum number of items that must be chosen; Default 1, Min 0, Max 25 |
-| [Placeholder](#Placeholder) { get; set; } | Custom placeholder text if nothing is selected Max 150 characters |
-| override [Validate](#Validate)() |  |
+| [Disabled](#Disabled-property) { get; set; } | Disable the select Default false |
+| [MaxValues](#MaxValues-property) { get; set; } | the maximum number of items that must be chosen; Default 1, Min 0, Max 25 |
+| [MinValues](#MinValues-property) { get; set; } | the minimum number of items that must be chosen; Default 1, Min 0, Max 25 |
+| [Placeholder](#Placeholder-property) { get; set; } | Custom placeholder text if nothing is selected Max 150 characters |
+| override [Validate](#Validate-method)() |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseSelectMenuComponent](#BaseSelectMenuComponent)(…) | Select Menu Component Constructor |
+| [BaseSelectMenuComponent](#BaseSelectMenuComponent-constructor)(…) | Select Menu Component Constructor |
 
 ## See Also
 

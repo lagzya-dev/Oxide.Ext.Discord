@@ -10,10 +10,10 @@ public class DiscordEnumConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [DiscordEnumConverter](#DiscordEnumConverter)() | The default constructor. |
-| override [CanConvert](#CanConvert)(…) | Checks if this type is enum or nullable enum |
-| override [ReadJson](#ReadJson)(…) | Read enum value from Discord Enum String |
-| override [WriteJson](#WriteJson)(…) | Write Enum value to Discord Enum String |
+| [DiscordEnumConverter](#DiscordEnumConverter-constructor)() | The default constructor. |
+| override [CanConvert](#CanConvert-method)(…) | Checks if this type is enum or nullable enum |
+| override [ReadJson](#ReadJson-method)(…) | Read enum value from Discord Enum String |
+| override [WriteJson](#WriteJson-method)(…) | Write Enum value to Discord Enum String |
 
 ## See Also
 

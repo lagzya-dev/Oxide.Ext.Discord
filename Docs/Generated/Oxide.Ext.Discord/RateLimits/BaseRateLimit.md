@@ -10,22 +10,22 @@ public abstract class BaseRateLimit
 
 | name | description |
 | --- | --- |
-| [HasReachedRateLimit](#HasReachedRateLimit) { get; } | Returns true if we have reached the global rate limit |
-| virtual [NextReset](#NextReset)() | Returns the next reset for the rate limit |
-| [Shutdown](#Shutdown)() | Called when a bot is shutting down |
+| [HasReachedRateLimit](#HasReachedRateLimit-property) { get; } | Returns true if we have reached the global rate limit |
+| virtual [NextReset](#NextReset-method)() | Returns the next reset for the rate limit |
+| [Shutdown](#Shutdown-method)() | Called when a bot is shutting down |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseRateLimit](#BaseRateLimit)(…) | Base Rate Limit Constructor |
-| [LastReset](#LastReset) | Returns when the last reset occured |
-| readonly [Logger](#Logger) | Logger for the rate limit |
-| readonly [MaxRequests](#MaxRequests) | The max number of requests this rate limit can handle per interval |
-| [NumRequests](#NumRequests) | The number of requests that have executed since the last reset |
-| readonly [ResetInterval](#ResetInterval) | The interval in which this resets at |
-| [FiredRequestInternal](#FiredRequestInternal)() | Called when an API request is fired |
-| abstract [OnRateLimitReset](#OnRateLimitReset)() | Called when the rate limit is reset |
+| [BaseRateLimit](#BaseRateLimit-constructor)(…) | Base Rate Limit Constructor |
+| [LastReset](#LastReset-field) | Returns when the last reset occured |
+| readonly [Logger](#Logger-field) | Logger for the rate limit |
+| readonly [MaxRequests](#MaxRequests-field) | The max number of requests this rate limit can handle per interval |
+| [NumRequests](#NumRequests-field) | The number of requests that have executed since the last reset |
+| readonly [ResetInterval](#ResetInterval-field) | The interval in which this resets at |
+| [FiredRequestInternal](#FiredRequestInternal-method)() | Called when an API request is fired |
+| abstract [OnRateLimitReset](#OnRateLimitReset-method)() | Called when the rate limit is reset |
 
 ## See Also
 

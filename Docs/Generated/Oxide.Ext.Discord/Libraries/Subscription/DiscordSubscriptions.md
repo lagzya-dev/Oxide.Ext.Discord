@@ -10,17 +10,17 @@ public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>, ID
 
 | name | description |
 | --- | --- |
-| [AddChannelSubscription](#AddChannelSubscription)(…) | Allows a plugin to add a subscription to a discord channel |
-| [HasSubscriptions](#HasSubscriptions)() | Returns if any subscriptions have been registered |
-| [LogDebug](#LogDebug)(…) |  |
-| [RemoveChannelSubscription](#RemoveChannelSubscription)(…) | Removes a subscribed channel for a plugin |
-| [RemovePluginSubscriptions](#RemovePluginSubscriptions)(…) | Remove all subscriptions for a plugin |
+| [AddChannelSubscription](#AddChannelSubscription-method)(…) | Allows a plugin to add a subscription to a discord channel |
+| [HasSubscriptions](#HasSubscriptions-method)() | Returns if any subscriptions have been registered |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [RemoveChannelSubscription](#RemoveChannelSubscription-method)(…) | Removes a subscribed channel for a plugin |
+| [RemovePluginSubscriptions](#RemovePluginSubscriptions-method)(…) | Remove all subscriptions for a plugin |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

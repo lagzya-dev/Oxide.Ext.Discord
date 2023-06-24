@@ -10,18 +10,18 @@ public class CommandCreate
 
 | name | description |
 | --- | --- |
-| [CommandCreate](#CommandCreate)() | Constructor |
-| [CommandCreate](#CommandCreate)(…) | Constructor |
-| [DefaultMemberPermissions](#DefaultMemberPermissions) { get; set; } | Set of permissions represented as a bit set |
-| [Description](#Description) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](#DmPermission) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [Name](#Name) { get; set; } | 1-32 lowercase character name matching ^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$ |
-| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](#Nsfw) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](#Options) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
-| [Type](#Type) { get; set; } | The [`ApplicationCommandType`](./ApplicationCommandType.md) of the command |
-| [Validate](#Validate)() |  |
+| [CommandCreate](#CommandCreate-constructor)() | Constructor |
+| [CommandCreate](#CommandCreate-constructor)(…) | Constructor |
+| [DefaultMemberPermissions](#DefaultMemberPermissions-property) { get; set; } | Set of permissions represented as a bit set |
+| [Description](#Description-property) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#DmPermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [Name](#Name-property) { get; set; } | 1-32 lowercase character name matching ^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$ |
+| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#Nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#Options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [Type](#Type-property) { get; set; } | The [`ApplicationCommandType`](./ApplicationCommandType.md) of the command |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

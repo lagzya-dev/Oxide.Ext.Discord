@@ -10,12 +10,12 @@ public class MessageReactionRemovedEvent
 
 | name | description |
 | --- | --- |
-| [MessageReactionRemovedEvent](#MessageReactionRemovedEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The id of the channel |
-| [Emoji](#Emoji) { get; set; } | The emoji removed |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [MessageId](#MessageId) { get; set; } | The id of the message |
-| [UserId](#UserId) { get; set; } | The id of the user |
+| [MessageReactionRemovedEvent](#MessageReactionRemovedEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
+| [Emoji](#Emoji-property) { get; set; } | The emoji removed |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [MessageId](#MessageId-property) { get; set; } | The id of the message |
+| [UserId](#UserId-property) { get; set; } | The id of the user |
 
 ## See Also
 

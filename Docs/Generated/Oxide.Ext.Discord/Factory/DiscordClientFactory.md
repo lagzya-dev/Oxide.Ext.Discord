@@ -10,8 +10,8 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
 
 | name | description |
 | --- | --- |
-| [CreateClient](#CreateClient)(…) | Creates the client for the given plugin. If one already exist the existing one is returned |
-| [GetClient](#GetClient)(…) | Gets the client for the given plugin (2 methods) |
+| [CreateClient](#CreateClient-method)(…) | Creates the client for the given plugin. If one already exist the existing one is returned |
+| [GetClient](#GetClient-method)(…) | Gets the client for the given plugin (2 methods) |
 
 ## See Also
 

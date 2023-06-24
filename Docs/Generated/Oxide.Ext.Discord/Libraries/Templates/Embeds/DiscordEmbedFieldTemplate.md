@@ -10,13 +10,13 @@ public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
 
 | name | description |
 | --- | --- |
-| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate)() | Constructor |
-| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate)(…) | Constructor |
-| [Inline](#Inline) { get; set; } | Should the field be on the same row |
-| [Name](#Name) { get; set; } | Title of the field |
-| [Value](#Value) { get; set; } | Value of the field |
-| [ToEntity](#ToEntity)(…) | Converts the template to an [`EmbedField`](../../../Entities/Messages/Embeds/EmbedField.md) |
-| [ToEntityBulk](#ToEntityBulk)(…) |  |
+| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate-constructor)() | Constructor |
+| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate-constructor)(…) | Constructor |
+| [Inline](#Inline-property) { get; set; } | Should the field be on the same row |
+| [Name](#Name-property) { get; set; } | Title of the field |
+| [Value](#Value-property) { get; set; } | Value of the field |
+| [ToEntity](#ToEntity-method)(…) | Converts the template to an [`EmbedField`](../../../Entities/Messages/Embeds/EmbedField.md) |
+| [ToEntityBulk](#ToEntityBulk-method)(…) |  |
 
 ## See Also
 

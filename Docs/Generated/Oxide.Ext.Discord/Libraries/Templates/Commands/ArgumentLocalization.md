@@ -10,12 +10,12 @@ public class ArgumentLocalization
 
 | name | description |
 | --- | --- |
-| [ArgumentLocalization](#ArgumentLocalization)() | Constructor |
-| [ArgumentLocalization](#ArgumentLocalization)(…) | Constructor (2 constructors) |
-| [Choices](#Choices) { get; set; } | Localization for Select Menu Choices |
-| [Description](#Description) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](#Name) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
-| [ApplyArgumentLocalization](#ApplyArgumentLocalization)(…) | Apply localizations to the command option |
+| [ArgumentLocalization](#ArgumentLocalization-constructor)() | Constructor |
+| [ArgumentLocalization](#ArgumentLocalization-constructor)(…) | Constructor (2 constructors) |
+| [Choices](#Choices-property) { get; set; } | Localization for Select Menu Choices |
+| [Description](#Description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
+| [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [ApplyArgumentLocalization](#ApplyArgumentLocalization-method)(…) | Apply localizations to the command option |
 
 ## See Also
 

@@ -10,18 +10,18 @@ public class InviteCreatedEvent
 
 | name | description |
 | --- | --- |
-| [InviteCreatedEvent](#InviteCreatedEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The channel the invite is for |
-| [Code](#Code) { get; set; } | The unique invite code |
-| [CreatedAt](#CreatedAt) { get; set; } | The time at which the invite was created |
-| [GuildId](#GuildId) { get; set; } | The guild of the invite |
-| [Inviter](#Inviter) { get; set; } | The user that created the invite |
-| [MaxAge](#MaxAge) { get; set; } | How long the invite is valid for (in seconds) |
-| [MaxUses](#MaxUses) { get; set; } | The maximum number of times the invite can be use |
-| [TargetUser](#TargetUser) { get; set; } | The target user for this invite |
-| [TargetUserType](#TargetUserType) { get; set; } | The type of user target for this invite |
-| [Temporary](#Temporary) { get; set; } | Whether or not the invite is temporary (invited users will be kicked on disconnect unless they're assigned a role) |
-| [Uses](#Uses) { get; set; } | How many times the invite has been used (always will be 0) |
+| [InviteCreatedEvent](#InviteCreatedEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The channel the invite is for |
+| [Code](#Code-property) { get; set; } | The unique invite code |
+| [CreatedAt](#CreatedAt-property) { get; set; } | The time at which the invite was created |
+| [GuildId](#GuildId-property) { get; set; } | The guild of the invite |
+| [Inviter](#Inviter-property) { get; set; } | The user that created the invite |
+| [MaxAge](#MaxAge-property) { get; set; } | How long the invite is valid for (in seconds) |
+| [MaxUses](#MaxUses-property) { get; set; } | The maximum number of times the invite can be use |
+| [TargetUser](#TargetUser-property) { get; set; } | The target user for this invite |
+| [TargetUserType](#TargetUserType-property) { get; set; } | The type of user target for this invite |
+| [Temporary](#Temporary-property) { get; set; } | Whether or not the invite is temporary (invited users will be kicked on disconnect unless they're assigned a role) |
+| [Uses](#Uses-property) { get; set; } | How many times the invite has been used (always will be 0) |
 
 ## See Also
 

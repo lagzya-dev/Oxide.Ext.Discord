@@ -10,14 +10,14 @@ public class GuildMembersChunkEvent
 
 | name | description |
 | --- | --- |
-| [GuildMembersChunkEvent](#GuildMembersChunkEvent)() | The default constructor. |
-| [ChunkCount](#ChunkCount) { get; set; } | The total number of expected chunks for this response |
-| [ChunkIndex](#ChunkIndex) { get; set; } | The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count) |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [Members](#Members) { get; set; } | Set of guild members |
-| [Nonce](#Nonce) { get; set; } | The nonce used in the Guild Members Request |
-| [NotFound](#NotFound) { get; set; } | If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here |
-| [Presences](#Presences) { get; set; } | If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here |
+| [GuildMembersChunkEvent](#GuildMembersChunkEvent-constructor)() | The default constructor. |
+| [ChunkCount](#ChunkCount-property) { get; set; } | The total number of expected chunks for this response |
+| [ChunkIndex](#ChunkIndex-property) { get; set; } | The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count) |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [Members](#Members-property) { get; set; } | Set of guild members |
+| [Nonce](#Nonce-property) { get; set; } | The nonce used in the Guild Members Request |
+| [NotFound](#NotFound-property) { get; set; } | If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here |
+| [Presences](#Presences-property) { get; set; } | If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class RoleTagsConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [RoleTagsConverter](#RoleTagsConverter)() | The default constructor. |
-| override [CanWrite](#CanWrite) { get; } | Cannot write |
-| override [CanConvert](#CanConvert)(…) | Returns if the type can be converter |
-| override [ReadJson](#ReadJson)(…) | Converts the JSON to a [`RoleTags`](../../Entities/Permissions/RoleTags.md) |
-| override [WriteJson](#WriteJson)(…) | Cannot Write |
+| [RoleTagsConverter](#RoleTagsConverter-constructor)() | The default constructor. |
+| override [CanWrite](#CanWrite-property) { get; } | Cannot write |
+| override [CanConvert](#CanConvert-method)(…) | Returns if the type can be converter |
+| override [ReadJson](#ReadJson-method)(…) | Converts the JSON to a [`RoleTags`](../../Entities/Permissions/RoleTags.md) |
+| override [WriteJson](#WriteJson-method)(…) | Cannot Write |
 
 ## See Also
 

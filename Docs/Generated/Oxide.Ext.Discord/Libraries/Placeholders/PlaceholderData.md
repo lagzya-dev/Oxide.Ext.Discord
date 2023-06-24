@@ -10,32 +10,32 @@ public class PlaceholderData : BasePoolable
 
 | name | description |
 | --- | --- |
-| [Add&lt;T&gt;](#Add)(…) | Adds the data with the given name |
-| [AddChannel](#AddChannel)(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
-| [AddCommand](#AddCommand)(…) | Add a [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
-| [AddGuild](#AddGuild)(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
-| [AddGuildMember](#AddGuildMember)(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
-| [AddInteraction](#AddInteraction)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
-| [AddMessage](#AddMessage)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
-| [AddPlayer](#AddPlayer)(…) | Adds a IPlayer |
-| [AddPlugin](#AddPlugin)(…) | Adds a Plugin |
-| [AddRequestError](#AddRequestError)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
-| [AddRole](#AddRole)(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
-| [AddSnowflake](#AddSnowflake)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
-| [AddTarget](#AddTarget)(…) | Adds a target IPlayer |
-| [AddTimestamp](#AddTimestamp)(…) | Adds a Unix Timestamp |
-| [AddUser](#AddUser)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
-| [Clone](#Clone)() | Clones the current placeholder data into a new [`PlaceholderData`](./PlaceholderData.md) |
-| [Get&lt;T&gt;](#Get)() | Returns the object with the given type of {T} The key name used is |
-| [Get&lt;T&gt;](#Get)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
-| [GetKeys](#GetKeys)() | Returns comma seperated string of all the registered key Useful for debugging placeholders |
-| [ManualPool](#ManualPool)() | Disable automatic pooling and handle manually by plugin |
+| [Add&lt;T&gt;](#Add-method)(…) | Adds the data with the given name |
+| [AddChannel](#AddChannel-method)(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
+| [AddCommand](#AddCommand-method)(…) | Add a [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
+| [AddGuild](#AddGuild-method)(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
+| [AddGuildMember](#AddGuildMember-method)(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
+| [AddInteraction](#AddInteraction-method)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
+| [AddMessage](#AddMessage-method)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
+| [AddPlayer](#AddPlayer-method)(…) | Adds a IPlayer |
+| [AddPlugin](#AddPlugin-method)(…) | Adds a Plugin |
+| [AddRequestError](#AddRequestError-method)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
+| [AddRole](#AddRole-method)(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
+| [AddSnowflake](#AddSnowflake-method)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
+| [AddTarget](#AddTarget-method)(…) | Adds a target IPlayer |
+| [AddTimestamp](#AddTimestamp-method)(…) | Adds a Unix Timestamp |
+| [AddUser](#AddUser-method)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
+| [Clone](#Clone-method)() | Clones the current placeholder data into a new [`PlaceholderData`](./PlaceholderData.md) |
+| [Get&lt;T&gt;](#Get-method)() | Returns the object with the given type of {T} The key name used is |
+| [Get&lt;T&gt;](#Get-method)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
+| [GetKeys](#GetKeys-method)() | Returns comma seperated string of all the registered key Useful for debugging placeholders |
+| [ManualPool](#ManualPool-method)() | Disable automatic pooling and handle manually by plugin |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

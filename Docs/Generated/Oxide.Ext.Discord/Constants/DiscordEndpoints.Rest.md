@@ -10,9 +10,9 @@ public static class Rest
 
 | name | description |
 | --- | --- |
-| const [ApiUrl](#ApiUrl) | Discord API Url |
-| const [ApiVersion](#ApiVersion) | API Version for Rest requests |
-| const [DiscordBaseUrl](#DiscordBaseUrl) | Base URL for Discord |
+| const [ApiUrl](#ApiUrl-field) | Discord API Url |
+| const [ApiVersion](#ApiVersion-field) | API Version for Rest requests |
+| const [DiscordBaseUrl](#DiscordBaseUrl-field) | Base URL for Discord |
 
 ## See Also
 

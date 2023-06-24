@@ -10,10 +10,10 @@ public class InviteDeletedEvent
 
 | name | description |
 | --- | --- |
-| [InviteDeletedEvent](#InviteDeletedEvent)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The channel of the invite |
-| [Code](#Code) { get; set; } | The unique invite code |
-| [GuildId](#GuildId) { get; set; } | The guild of the invite |
+| [InviteDeletedEvent](#InviteDeletedEvent-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The channel of the invite |
+| [Code](#Code-property) { get; set; } | The unique invite code |
+| [GuildId](#GuildId-property) { get; set; } | The guild of the invite |
 
 ## See Also
 

@@ -10,13 +10,13 @@ public class OnboardingPromptOption
 
 | name | description |
 | --- | --- |
-| [OnboardingPromptOption](#OnboardingPromptOption)() | The default constructor. |
-| [ChannelIds](#ChannelIds) { get; set; } | IDs for channels a member is added to when the option is selected |
-| [Description](#Description) { get; set; } | Description of the option |
-| [Emoji](#Emoji) { get; set; } | Emoji of the option |
-| [Id](#Id) { get; set; } | ID of the prompt option |
-| [RoleIds](#RoleIds) { get; set; } | IDs for roles assigned to a member when the option is selected |
-| [Title](#Title) { get; set; } | Title of the option |
+| [OnboardingPromptOption](#OnboardingPromptOption-constructor)() | The default constructor. |
+| [ChannelIds](#ChannelIds-property) { get; set; } | IDs for channels a member is added to when the option is selected |
+| [Description](#Description-property) { get; set; } | Description of the option |
+| [Emoji](#Emoji-property) { get; set; } | Emoji of the option |
+| [Id](#Id-property) { get; set; } | ID of the prompt option |
+| [RoleIds](#RoleIds-property) { get; set; } | IDs for roles assigned to a member when the option is selected |
+| [Title](#Title-property) { get; set; } | Title of the option |
 
 ## See Also
 

@@ -10,16 +10,16 @@ public class WebSocketCommand : BasePoolable, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [WebSocketCommand](#WebSocketCommand)() | The default constructor. |
-| [Client](#Client) | Client requesting the command |
-| [Payload](#Payload) | Payload for the command |
-| [LogDebug](#LogDebug)(…) |  |
+| [WebSocketCommand](#WebSocketCommand-constructor)() | The default constructor. |
+| [Client](#Client-field) | Client requesting the command |
+| [Payload](#Payload-field) | Payload for the command |
+| [LogDebug](#LogDebug-method)(…) |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

@@ -10,9 +10,9 @@ public class GuildRoleUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [GuildRoleUpdatedEvent](#GuildRoleUpdatedEvent)() | The default constructor. |
-| [GuildId](#GuildId) { get; set; } | The id of the guild |
-| [Role](#Role) { get; set; } | The role updated |
+| [GuildRoleUpdatedEvent](#GuildRoleUpdatedEvent-constructor)() | The default constructor. |
+| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
+| [Role](#Role-property) { get; set; } | The role updated |
 
 ## See Also
 

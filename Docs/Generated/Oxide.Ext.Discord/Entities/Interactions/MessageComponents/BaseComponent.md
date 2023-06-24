@@ -10,14 +10,14 @@ public abstract class BaseComponent
 
 | name | description |
 | --- | --- |
-| [Type](#Type) { get; protected set; } | Message component type |
-| abstract [Validate](#Validate)() |  |
+| [Type](#Type-property) { get; protected set; } | Message component type |
+| abstract [Validate](#Validate-method)() |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseComponent](#BaseComponent)() | The default constructor. |
+| [BaseComponent](#BaseComponent-constructor)() | The default constructor. |
 
 ## See Also
 

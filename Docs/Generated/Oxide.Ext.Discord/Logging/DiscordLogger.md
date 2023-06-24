@@ -10,12 +10,12 @@ public class DiscordLogger : ILogger
 
 | name | description |
 | --- | --- |
-| [IsConsoleLogging](#IsConsoleLogging)(…) |  |
-| [IsFileLogging](#IsFileLogging)(…) |  |
-| [IsLogging](#IsLogging)(…) |  |
-| [Log](#Log)(…) |  |
-| [Shutdown](#Shutdown)() |  |
-| [UpdateLogLevel](#UpdateLogLevel)(…) |  |
+| [IsConsoleLogging](#IsConsoleLogging-method)(…) |  |
+| [IsFileLogging](#IsFileLogging-method)(…) |  |
+| [IsLogging](#IsLogging-method)(…) |  |
+| [Log](#Log-method)(…) |  |
+| [Shutdown](#Shutdown-method)() |  |
+| [UpdateLogLevel](#UpdateLogLevel-method)(…) |  |
 
 ## See Also
 

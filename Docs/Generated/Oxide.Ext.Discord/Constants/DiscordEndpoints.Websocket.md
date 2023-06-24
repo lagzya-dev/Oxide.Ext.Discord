@@ -10,9 +10,9 @@ public static class Websocket
 
 | name | description |
 | --- | --- |
-| const [Encoding](#Encoding) | How the data sent / received will be encoded |
-| const [Version](#Version) | Which websocket version to use |
-| static readonly [WebsocketArgs](#WebsocketArgs) | Generated connection string for the websocket |
+| const [Encoding](#Encoding-field) | How the data sent / received will be encoded |
+| const [Version](#Version-field) | Which websocket version to use |
+| static readonly [WebsocketArgs](#WebsocketArgs-field) | Generated connection string for the websocket |
 
 ## See Also
 

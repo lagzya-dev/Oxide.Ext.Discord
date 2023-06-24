@@ -10,11 +10,11 @@ public class EmojiTemplate
 
 | name | description |
 | --- | --- |
-| [EmojiTemplate](#EmojiTemplate)() | Default constructor |
-| [EmojiTemplate](#EmojiTemplate)(…) | Unicode emoji constructor (2 constructors) |
-| [Animated](#Animated) { get; set; } | If the emoji is Animated |
-| [Emoji](#Emoji) { get; set; } | Emoji Name or ID |
-| [ToEmoji](#ToEmoji)() | Converts the [`EmojiTemplate`](./EmojiTemplate.md) to a [`DiscordEmoji`](../../../Entities/Emojis/DiscordEmoji.md) |
+| [EmojiTemplate](#EmojiTemplate-constructor)() | Default constructor |
+| [EmojiTemplate](#EmojiTemplate-constructor)(…) | Unicode emoji constructor (2 constructors) |
+| [Animated](#Animated-property) { get; set; } | If the emoji is Animated |
+| [Emoji](#Emoji-property) { get; set; } | Emoji Name or ID |
+| [ToEmoji](#ToEmoji-method)() | Converts the [`EmojiTemplate`](./EmojiTemplate.md) to a [`DiscordEmoji`](../../../Entities/Emojis/DiscordEmoji.md) |
 
 ## See Also
 

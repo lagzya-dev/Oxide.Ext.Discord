@@ -10,30 +10,30 @@ public sealed class Promise : BasePromise, IPendingPromise
 
 | name | description |
 | --- | --- |
-| [Promise](#Promise)() | Constructor for the promise |
-| static [Create](#Create)() |  |
-| [Catch](#Catch)(…) |  |
-| [Catch&lt;TException&gt;](#Catch)(…) |  |
-| [ContinueWith](#ContinueWith)(…) |  |
-| [ContinueWith&lt;TConvert&gt;](#ContinueWith)(…) |  |
-| [Finally](#Finally)(…) |  |
-| [Resolve](#Resolve)() |  |
-| [Then](#Then)(…) |  (5 methods) |
-| [Then&lt;TConvert&gt;](#Then)(…) |  (2 methods) |
-| [ThenAll](#ThenAll)(…) |  |
-| [ThenAll&lt;TConvert&gt;](#ThenAll)(…) |  |
-| [ThenSequence](#ThenSequence)(…) |  |
-| static [All](#All)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Rejected](#Rejected)(…) | Convert an exception directly into a rejected promise. |
-| static [Resolved](#Resolved)() | Returns a promise that has been resolved |
-| static [Sequence](#Sequence)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
+| [Promise](#Promise-constructor)() | Constructor for the promise |
+| static [Create](#Create-method)() |  |
+| [Catch](#Catch-method)(…) |  |
+| [Catch&lt;TException&gt;](#Catch-method)(…) |  |
+| [ContinueWith](#ContinueWith-method)(…) |  |
+| [ContinueWith&lt;TConvert&gt;](#ContinueWith-method)(…) |  |
+| [Finally](#Finally-method)(…) |  |
+| [Resolve](#Resolve-method)() |  |
+| [Then](#Then-method)(…) |  (5 methods) |
+| [Then&lt;TConvert&gt;](#Then-method)(…) |  (2 methods) |
+| [ThenAll](#ThenAll-method)(…) |  |
+| [ThenAll&lt;TConvert&gt;](#ThenAll-method)(…) |  |
+| [ThenSequence](#ThenSequence-method)(…) |  |
+| static [All](#All-method)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [Rejected](#Rejected-method)(…) | Convert an exception directly into a rejected promise. |
+| static [Resolved](#Resolved-method)() | Returns a promise that has been resolved |
+| static [Sequence](#Sequence-method)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [ClearHandlers](#ClearHandlers)() | Helper function clear out all handlers after resolution or rejection. |
-| override [EnterPool](#EnterPool)() |  |
+| override [ClearHandlers](#ClearHandlers-method)() | Helper function clear out all handlers after resolution or rejection. |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

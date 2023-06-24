@@ -10,20 +10,20 @@ public class DiscordEmbed
 
 | name | description |
 | --- | --- |
-| [DiscordEmbed](#DiscordEmbed)() | The default constructor. |
-| [Author](#Author) { get; set; } | Author information [`EmbedAuthor`](./EmbedAuthor.md) |
-| [Color](#Color) { get; set; } | Color code of the embed |
-| [Description](#Description) { get; set; } | Description of embed |
-| [Fields](#Fields) { get; set; } | Fields information [`EmbedField`](./EmbedField.md) |
-| [Footer](#Footer) { get; set; } | Footer information [`EmbedFooter`](./EmbedFooter.md) |
-| [Image](#Image) { get; set; } | Image information [`EmbedImage`](./EmbedImage.md) |
-| [Provider](#Provider) { get; set; } | Provider information [`EmbedProvider`](./EmbedProvider.md) |
-| [Thumbnail](#Thumbnail) { get; set; } | Thumbnail information [`EmbedThumbnail`](./EmbedThumbnail.md) |
-| [Timestamp](#Timestamp) { get; set; } | Timestamp of embed content |
-| [Title](#Title) { get; set; } | Title of embed |
-| [Type](#Type) { get; set; } | Type of embed (always "rich" for webhook embeds) |
-| [Url](#Url) { get; set; } | Url of embed |
-| [Video](#Video) { get; set; } | Video information [`EmbedVideo`](./EmbedVideo.md) |
+| [DiscordEmbed](#DiscordEmbed-constructor)() | The default constructor. |
+| [Author](#Author-property) { get; set; } | Author information [`EmbedAuthor`](./EmbedAuthor.md) |
+| [Color](#Color-property) { get; set; } | Color code of the embed |
+| [Description](#Description-property) { get; set; } | Description of embed |
+| [Fields](#Fields-property) { get; set; } | Fields information [`EmbedField`](./EmbedField.md) |
+| [Footer](#Footer-property) { get; set; } | Footer information [`EmbedFooter`](./EmbedFooter.md) |
+| [Image](#Image-property) { get; set; } | Image information [`EmbedImage`](./EmbedImage.md) |
+| [Provider](#Provider-property) { get; set; } | Provider information [`EmbedProvider`](./EmbedProvider.md) |
+| [Thumbnail](#Thumbnail-property) { get; set; } | Thumbnail information [`EmbedThumbnail`](./EmbedThumbnail.md) |
+| [Timestamp](#Timestamp-property) { get; set; } | Timestamp of embed content |
+| [Title](#Title-property) { get; set; } | Title of embed |
+| [Type](#Type-property) { get; set; } | Type of embed (always "rich" for webhook embeds) |
+| [Url](#Url-property) { get; set; } | Url of embed |
+| [Video](#Video-property) { get; set; } | Video information [`EmbedVideo`](./EmbedVideo.md) |
 
 ## See Also
 

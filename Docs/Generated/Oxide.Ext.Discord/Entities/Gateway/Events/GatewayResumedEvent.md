@@ -10,7 +10,7 @@ public class GatewayResumedEvent
 
 | name | description |
 | --- | --- |
-| [GatewayResumedEvent](#GatewayResumedEvent)() | The default constructor. |
+| [GatewayResumedEvent](#GatewayResumedEvent-constructor)() | The default constructor. |
 
 ## See Also
 

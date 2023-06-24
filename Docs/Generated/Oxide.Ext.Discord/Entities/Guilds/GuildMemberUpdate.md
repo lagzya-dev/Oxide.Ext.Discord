@@ -10,14 +10,14 @@ public class GuildMemberUpdate
 
 | name | description |
 | --- | --- |
-| [GuildMemberUpdate](#GuildMemberUpdate)() | The default constructor. |
-| [ChannelId](#ChannelId) { get; set; } | The channel to move the user to Requires MOVE_MEMBERS Permission Setting to null will remove that member from a voice channel |
-| [CommunicationDisabledUntil](#CommunicationDisabledUntil) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout |
-| [Deaf](#Deaf) { get; set; } | Deafen the guild member Requires DEAFEN_MEMBERS Permission |
-| [Mute](#Mute) { get; set; } | Mute the guild member Requires MUTE_MEMBERS Permission |
-| [Nick](#Nick) { get; set; } | The nickname to give the user Requires MANAGE_NICKNAMES Permission |
-| [Roles](#Roles) { get; set; } | New list of guild members roles Will replaces all roles with the ones in this list Requires MANAGE_ROLES Permission |
-| [Validate](#Validate)() |  |
+| [GuildMemberUpdate](#GuildMemberUpdate-constructor)() | The default constructor. |
+| [ChannelId](#ChannelId-property) { get; set; } | The channel to move the user to Requires MOVE_MEMBERS Permission Setting to null will remove that member from a voice channel |
+| [CommunicationDisabledUntil](#CommunicationDisabledUntil-property) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout |
+| [Deaf](#Deaf-property) { get; set; } | Deafen the guild member Requires DEAFEN_MEMBERS Permission |
+| [Mute](#Mute-property) { get; set; } | Mute the guild member Requires MUTE_MEMBERS Permission |
+| [Nick](#Nick-property) { get; set; } | The nickname to give the user Requires MANAGE_NICKNAMES Permission |
+| [Roles](#Roles-property) { get; set; } | New list of guild members roles Will replaces all roles with the ones in this list Requires MANAGE_ROLES Permission |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

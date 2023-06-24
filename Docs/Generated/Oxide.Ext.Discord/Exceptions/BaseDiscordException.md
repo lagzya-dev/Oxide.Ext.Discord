@@ -10,8 +10,8 @@ public abstract class BaseDiscordException : Exception
 
 | name | description |
 | --- | --- |
-| [BaseDiscordException](#BaseDiscordException)() | Constructor |
-| [BaseDiscordException](#BaseDiscordException)(…) | Constructor |
+| [BaseDiscordException](#BaseDiscordException-constructor)() | Constructor |
+| [BaseDiscordException](#BaseDiscordException-constructor)(…) | Constructor |
 
 ## See Also
 

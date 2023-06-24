@@ -10,9 +10,9 @@ public static class RequestErrorPlaceholders
 
 | name | description |
 | --- | --- |
-| static [HttpCode](#HttpCode)(…) | [`HttpStatusCode`](../../../Entities/Api/ResponseError/HttpStatusCode.md) placeholder |
-| static [Message](#Message)(…) | [`ResponseMessage`](../../../Entities/Api/ResponseError/ResponseMessage.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
+| static [HttpCode](#HttpCode-method)(…) | [`HttpStatusCode`](../../../Entities/Api/ResponseError/HttpStatusCode.md) placeholder |
+| static [Message](#Message-method)(…) | [`ResponseMessage`](../../../Entities/Api/ResponseError/ResponseMessage.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

@@ -10,23 +10,23 @@ public class DiscordPluginPool
 
 | name | description |
 | --- | --- |
-| [DiscordPluginPool](#DiscordPluginPool)(…) | Constructor |
-| [FreeHash&lt;TKey,TValue&gt;](#FreeHash)(…) | Frees a pooled Hash |
-| [FreeHashSet&lt;T&gt;](#FreeHashSet)(…) | Free's a pooled HashSet |
-| [FreeList&lt;T&gt;](#FreeList)(…) | Free's a pooled List |
-| [FreeMemoryStream](#FreeMemoryStream)(…) | Frees a MemoryStream back to the pool |
-| [FreePlaceholderData](#FreePlaceholderData)(…) | Frees a [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) back to the pool |
-| [FreeStringBuilder](#FreeStringBuilder)(…) | Frees a StringBuilder back to the pool |
-| [FreeStringBuilderToString](#FreeStringBuilderToString)(…) | Frees a StringBuilder back to the pool returning the built String |
-| [Get&lt;T&gt;](#Get)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
-| [GetHash&lt;TKey,TValue&gt;](#GetHash)() | Returns a pooled Hash |
-| [GetHashSet&lt;T&gt;](#GetHashSet)() | Returns a pooled HashSet |
-| [GetList&lt;T&gt;](#GetList)() | Returns a pooled List |
-| [GetMemoryStream](#GetMemoryStream)() | Returns a pooled MemoryStream |
-| [GetPlaceholderData](#GetPlaceholderData)() | Returns a pooled [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) |
-| [GetStringBuilder](#GetStringBuilder)() | Returns a pooled StringBuilder |
-| [GetStringBuilder](#GetStringBuilder)(…) | Returns a pooled StringBuilder |
-| [SetSettings](#SetSettings)(…) | Sets the settings for the pools |
+| [DiscordPluginPool](#DiscordPluginPool-constructor)(…) | Constructor |
+| [FreeHash&lt;TKey,TValue&gt;](#FreeHash-method)(…) | Frees a pooled Hash |
+| [FreeHashSet&lt;T&gt;](#FreeHashSet-method)(…) | Free's a pooled HashSet |
+| [FreeList&lt;T&gt;](#FreeList-method)(…) | Free's a pooled List |
+| [FreeMemoryStream](#FreeMemoryStream-method)(…) | Frees a MemoryStream back to the pool |
+| [FreePlaceholderData](#FreePlaceholderData-method)(…) | Frees a [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) back to the pool |
+| [FreeStringBuilder](#FreeStringBuilder-method)(…) | Frees a StringBuilder back to the pool |
+| [FreeStringBuilderToString](#FreeStringBuilderToString-method)(…) | Frees a StringBuilder back to the pool returning the built String |
+| [Get&lt;T&gt;](#Get-method)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
+| [GetHash&lt;TKey,TValue&gt;](#GetHash-method)() | Returns a pooled Hash |
+| [GetHashSet&lt;T&gt;](#GetHashSet-method)() | Returns a pooled HashSet |
+| [GetList&lt;T&gt;](#GetList-method)() | Returns a pooled List |
+| [GetMemoryStream](#GetMemoryStream-method)() | Returns a pooled MemoryStream |
+| [GetPlaceholderData](#GetPlaceholderData-method)() | Returns a pooled [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) |
+| [GetStringBuilder](#GetStringBuilder-method)() | Returns a pooled StringBuilder |
+| [GetStringBuilder](#GetStringBuilder-method)(…) | Returns a pooled StringBuilder |
+| [SetSettings](#SetSettings-method)(…) | Sets the settings for the pools |
 
 ## See Also
 

@@ -10,9 +10,9 @@ public class ActivityTimestamps
 
 | name | description |
 | --- | --- |
-| [ActivityTimestamps](#ActivityTimestamps)() | The default constructor. |
-| [End](#End) { get; set; } | Unix time (in milliseconds) of when the activity ends |
-| [Start](#Start) { get; set; } | Unix time (in milliseconds) of when the activity started |
+| [ActivityTimestamps](#ActivityTimestamps-constructor)() | The default constructor. |
+| [End](#End-property) { get; set; } | Unix time (in milliseconds) of when the activity ends |
+| [Start](#Start-property) { get; set; } | Unix time (in milliseconds) of when the activity started |
 
 ## See Also
 

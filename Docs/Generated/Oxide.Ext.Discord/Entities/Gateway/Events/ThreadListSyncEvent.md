@@ -10,11 +10,11 @@ public class ThreadListSyncEvent
 
 | name | description |
 | --- | --- |
-| [ThreadListSyncEvent](#ThreadListSyncEvent)() | The default constructor. |
-| [ChannelIds](#ChannelIds) { get; set; } | The parent channel ids whose threads are being synced. If omitted, then threads were synced for the entire guild. This array may contain channel_ids that have no active threads as well, so you know to clear that data. |
-| [GuildId](#GuildId) { get; set; } | The ID of the guild |
-| [Members](#Members) { get; set; } | All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to |
-| [Threads](#Threads) { get; set; } | All active threads in the given channels that the current user can access |
+| [ThreadListSyncEvent](#ThreadListSyncEvent-constructor)() | The default constructor. |
+| [ChannelIds](#ChannelIds-property) { get; set; } | The parent channel ids whose threads are being synced. If omitted, then threads were synced for the entire guild. This array may contain channel_ids that have no active threads as well, so you know to clear that data. |
+| [GuildId](#GuildId-property) { get; set; } | The ID of the guild |
+| [Members](#Members-property) { get; set; } | All thread member objects from the synced threads for the current user, indicating which threads the current user has been added to |
+| [Threads](#Threads-property) { get; set; } | All active threads in the given channels that the current user can access |
 
 ## See Also
 

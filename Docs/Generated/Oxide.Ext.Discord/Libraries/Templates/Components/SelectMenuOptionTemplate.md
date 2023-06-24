@@ -10,14 +10,14 @@ public class SelectMenuOptionTemplate
 
 | name | description |
 | --- | --- |
-| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate)() | Constructor |
-| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate)(…) | Constructor |
-| [Default](#Default) { get; set; } | Will render this option as selected by default |
-| [Description](#Description) { get; set; } | An additional description of the option, Max 100 characters |
-| [Emoji](#Emoji) { get; set; } | Emoji in the option |
-| [Label](#Label) { get; set; } | The user-facing name of the option, Max 100 characters |
-| [Value](#Value) { get; set; } | The dev-define value of the option, Max 100 characters |
-| [ToOption](#ToOption)(…) | Converts the template to [`SelectMenuOption`](../../../Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.md) |
+| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate-constructor)() | Constructor |
+| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate-constructor)(…) | Constructor |
+| [Default](#Default-property) { get; set; } | Will render this option as selected by default |
+| [Description](#Description-property) { get; set; } | An additional description of the option, Max 100 characters |
+| [Emoji](#Emoji-property) { get; set; } | Emoji in the option |
+| [Label](#Label-property) { get; set; } | The user-facing name of the option, Max 100 characters |
+| [Value](#Value-property) { get; set; } | The dev-define value of the option, Max 100 characters |
+| [ToOption](#ToOption-method)(…) | Converts the template to [`SelectMenuOption`](../../../Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.md) |
 
 ## See Also
 

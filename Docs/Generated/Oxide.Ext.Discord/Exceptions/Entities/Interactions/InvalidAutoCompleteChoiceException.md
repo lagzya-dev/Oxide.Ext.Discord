@@ -10,7 +10,7 @@ public class InvalidAutoCompleteChoiceException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| [InvalidAutoCompleteChoiceException](#InvalidAutoCompleteChoiceException)(…) | Constructor |
+| [InvalidAutoCompleteChoiceException](#InvalidAutoCompleteChoiceException-constructor)(…) | Constructor |
 
 ## See Also
 

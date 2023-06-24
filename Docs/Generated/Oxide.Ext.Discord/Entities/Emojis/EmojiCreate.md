@@ -10,11 +10,11 @@ public class EmojiCreate
 
 | name | description |
 | --- | --- |
-| [EmojiCreate](#EmojiCreate)() | The default constructor. |
-| [ImageData](#ImageData) { get; set; } | The 128x128 emoji image Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji larger than this limit will fail and return 400 Bad Request |
-| [Name](#Name) { get; set; } | Emoji name |
-| [Roles](#Roles) { get; set; } | Roles this emoji is whitelisted to |
-| [Validate](#Validate)() |  |
+| [EmojiCreate](#EmojiCreate-constructor)() | The default constructor. |
+| [ImageData](#ImageData-property) { get; set; } | The 128x128 emoji image Emojis and animated emojis have a maximum file size of 256kb. Attempting to upload an emoji larger than this limit will fail and return 400 Bad Request |
+| [Name](#Name-property) { get; set; } | Emoji name |
+| [Roles](#Roles-property) { get; set; } | Roles this emoji is whitelisted to |
+| [Validate](#Validate-method)() |  |
 
 ## See Also
 

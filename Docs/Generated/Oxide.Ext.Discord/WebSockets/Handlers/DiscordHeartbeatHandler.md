@@ -10,8 +10,8 @@ public class DiscordHeartbeatHandler
 
 | name | description |
 | --- | --- |
-| [DiscordHeartbeatHandler](#DiscordHeartbeatHandler)(…) | Constructor for Heartbeat Handler |
-| [OnSocketShutdown](#OnSocketShutdown)() | Destroy the heartbeat timer on this bot |
+| [DiscordHeartbeatHandler](#DiscordHeartbeatHandler-constructor)(…) | Constructor for Heartbeat Handler |
+| [OnSocketShutdown](#OnSocketShutdown-method)() | Destroy the heartbeat timer on this bot |
 
 ## See Also
 

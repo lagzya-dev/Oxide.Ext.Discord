@@ -10,29 +10,29 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [IsEnabled](#IsEnabled) { get; } | Returns if there is a registered link plugin |
-| [LinkedCount](#LinkedCount) { get; } | Returns the number of linked players |
-| readonly [DiscordIds](#DiscordIds) | Readonly Collection of all Discord ID's |
-| readonly [DiscordToPlayerIds](#DiscordToPlayerIds) | Readonly Dictionary of Discord ID's to Player ID's |
-| readonly [PlayerIds](#PlayerIds) | Readonly Collection of all Player ID's |
-| readonly [PlayerToDiscordIds](#PlayerToDiscordIds) | Readonly Dictionary of Player ID's to Discord ID's |
-| [AddLinkPlugin](#AddLinkPlugin)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
-| [GetDiscordId](#GetDiscordId)(…) | Returns the Discord ID for the given Steam ID (2 methods) |
-| [GetDiscordUser](#GetDiscordUser)(…) | Returns a minimal Discord User (2 methods) |
-| [GetLinkedMember](#GetLinkedMember)(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
-| [GetPlayer](#GetPlayer)(…) | Returns the IPlayer for the given Discord ID |
-| [GetPlayerId](#GetPlayerId)(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
-| [IsLinked](#IsLinked)(…) | Returns if the specified ID is linked (4 methods) |
-| [LogDebug](#LogDebug)(…) |  |
-| [OnLinked](#OnLinked)(…) | Called by a link plugin when a link occured |
-| [OnUnlinked](#OnUnlinked)(…) | Called by a link plugin when an unlink occured |
-| [RemoveLinkPlugin](#RemoveLinkPlugin)(…) | Removes a link plugin from the Discord Link library |
+| [IsEnabled](#IsEnabled-property) { get; } | Returns if there is a registered link plugin |
+| [LinkedCount](#LinkedCount-property) { get; } | Returns the number of linked players |
+| readonly [DiscordIds](#DiscordIds-field) | Readonly Collection of all Discord ID's |
+| readonly [DiscordToPlayerIds](#DiscordToPlayerIds-field) | Readonly Dictionary of Discord ID's to Player ID's |
+| readonly [PlayerIds](#PlayerIds-field) | Readonly Collection of all Player ID's |
+| readonly [PlayerToDiscordIds](#PlayerToDiscordIds-field) | Readonly Dictionary of Player ID's to Discord ID's |
+| [AddLinkPlugin](#AddLinkPlugin-method)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
+| [GetDiscordId](#GetDiscordId-method)(…) | Returns the Discord ID for the given Steam ID (2 methods) |
+| [GetDiscordUser](#GetDiscordUser-method)(…) | Returns a minimal Discord User (2 methods) |
+| [GetLinkedMember](#GetLinkedMember-method)(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
+| [GetPlayer](#GetPlayer-method)(…) | Returns the IPlayer for the given Discord ID |
+| [GetPlayerId](#GetPlayerId-method)(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
+| [IsLinked](#IsLinked-method)(…) | Returns if the specified ID is linked (4 methods) |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [OnLinked](#OnLinked-method)(…) | Called by a link plugin when a link occured |
+| [OnUnlinked](#OnUnlinked-method)(…) | Called by a link plugin when an unlink occured |
+| [RemoveLinkPlugin](#RemoveLinkPlugin-method)(…) | Removes a link plugin from the Discord Link library |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

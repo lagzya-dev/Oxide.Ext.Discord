@@ -11,18 +11,18 @@ public class DiscordAutoCompleteChoiceTemplates :
 
 | name | description |
 | --- | --- |
-| [DiscordAutoCompleteChoiceTemplates](#DiscordAutoCompleteChoiceTemplates)(…) | Constructor |
-| [ApplyGlobal](#ApplyGlobal)(…) | Applies a Global Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders |
-| [ApplyLocalized](#ApplyLocalized)(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
-| [GetGlobalTemplate](#GetGlobalTemplate)(…) | Returns a global Auto Complete Template for the given plugin and template name |
-| [RegisterGlobalTemplate](#RegisterGlobalTemplate)(…) | Registers a global template for Auto Complete Choices |
-| [RegisterLocalizedTemplate](#RegisterLocalizedTemplate)(…) | Registers a global template for Auto Complete Choices |
+| [DiscordAutoCompleteChoiceTemplates](#DiscordAutoCompleteChoiceTemplates-constructor)(…) | Constructor |
+| [ApplyGlobal](#ApplyGlobal-method)(…) | Applies a Global Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders |
+| [ApplyLocalized](#ApplyLocalized-method)(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
+| [GetGlobalTemplate](#GetGlobalTemplate-method)(…) | Returns a global Auto Complete Template for the given plugin and template name |
+| [RegisterGlobalTemplate](#RegisterGlobalTemplate-method)(…) | Registers a global template for Auto Complete Choices |
+| [RegisterLocalizedTemplate](#RegisterLocalizedTemplate-method)(…) | Registers a global template for Auto Complete Choices |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

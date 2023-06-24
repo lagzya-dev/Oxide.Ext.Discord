@@ -10,17 +10,17 @@ public class InputTextTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [InputTextTemplate](#InputTextTemplate)() | Constructor |
-| [InputTextTemplate](#InputTextTemplate)(…) | Constructor |
-| [CustomId](#CustomId) { get; set; } | Custom ID of the input text |
-| [Label](#Label) { get; set; } | Text that appears on top of the input text field, max 80 characters |
-| [MaxLength](#MaxLength) { get; set; } | The maximum length of the text input |
-| [MinLength](#MinLength) { get; set; } | The minimum length of the text input |
-| [Placeholder](#Placeholder) { get; set; } | The placeholder for the text input field |
-| [Required](#Required) { get; set; } | Is the Input Text Required to be filled out |
-| [Style](#Style) { get; set; } | The style of the input text |
-| [Value](#Value) { get; set; } | The pre-filled value for text input |
-| override [ToComponent](#ToComponent)(…) | Converts the template to a [`InputTextComponent`](../../../Entities/Interactions/MessageComponents/InputTextComponent.md) |
+| [InputTextTemplate](#InputTextTemplate-constructor)() | Constructor |
+| [InputTextTemplate](#InputTextTemplate-constructor)(…) | Constructor |
+| [CustomId](#CustomId-property) { get; set; } | Custom ID of the input text |
+| [Label](#Label-property) { get; set; } | Text that appears on top of the input text field, max 80 characters |
+| [MaxLength](#MaxLength-property) { get; set; } | The maximum length of the text input |
+| [MinLength](#MinLength-property) { get; set; } | The minimum length of the text input |
+| [Placeholder](#Placeholder-property) { get; set; } | The placeholder for the text input field |
+| [Required](#Required-property) { get; set; } | Is the Input Text Required to be filled out |
+| [Style](#Style-property) { get; set; } | The style of the input text |
+| [Value](#Value-property) { get; set; } | The pre-filled value for text input |
+| override [ToComponent](#ToComponent-method)(…) | Converts the template to a [`InputTextComponent`](../../../Entities/Interactions/MessageComponents/InputTextComponent.md) |
 
 ## See Also
 

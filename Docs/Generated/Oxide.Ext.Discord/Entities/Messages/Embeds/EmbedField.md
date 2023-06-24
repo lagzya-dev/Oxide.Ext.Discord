@@ -10,12 +10,12 @@ public class EmbedField
 
 | name | description |
 | --- | --- |
-| [EmbedField](#EmbedField)() | Embed Field constructor |
-| [EmbedField](#EmbedField)(…) | Embed Field constructor |
-| [Inline](#Inline) { get; set; } | Whether or not this field should display inline |
-| [Name](#Name) { get; set; } | Name of the field |
-| [Value](#Value) { get; set; } | Value of the field |
-| const [Blank](#Blank) | Represents a blank character to be used in embeds for empty text |
+| [EmbedField](#EmbedField-constructor)() | Embed Field constructor |
+| [EmbedField](#EmbedField-constructor)(…) | Embed Field constructor |
+| [Inline](#Inline-property) { get; set; } | Whether or not this field should display inline |
+| [Name](#Name-property) { get; set; } | Name of the field |
+| [Value](#Value-property) { get; set; } | Value of the field |
+| const [Blank](#Blank-field) | Represents a blank character to be used in embeds for empty text |
 
 ## See Also
 

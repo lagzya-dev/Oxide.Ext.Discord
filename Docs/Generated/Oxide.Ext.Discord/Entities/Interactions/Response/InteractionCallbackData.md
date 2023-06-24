@@ -10,7 +10,7 @@ public class InteractionCallbackData : BaseInteractionMessage
 
 | name | description |
 | --- | --- |
-| [InteractionCallbackData](#InteractionCallbackData)() | The default constructor. |
+| [InteractionCallbackData](#InteractionCallbackData-constructor)() | The default constructor. |
 
 ## See Also
 

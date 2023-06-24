@@ -10,10 +10,10 @@ public class ChoicesLocalization
 
 | name | description |
 | --- | --- |
-| [ChoicesLocalization](#ChoicesLocalization)() | Constructor |
-| [ChoicesLocalization](#ChoicesLocalization)(…) | Constructor for command option choice localization (2 constructors) |
-| [Name](#Name) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
-| [ApplyChoiceLocalization](#ApplyChoiceLocalization)(…) | Apply Choice Localizations |
+| [ChoicesLocalization](#ChoicesLocalization-constructor)() | Constructor |
+| [ChoicesLocalization](#ChoicesLocalization-constructor)(…) | Constructor for command option choice localization (2 constructors) |
+| [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
+| [ApplyChoiceLocalization](#ApplyChoiceLocalization-method)(…) | Apply Choice Localizations |
 
 ## See Also
 

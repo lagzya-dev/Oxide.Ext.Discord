@@ -10,130 +10,130 @@ public class DiscordGuild : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordGuild](#DiscordGuild)() | The default constructor. |
-| [AfkChannelId](#AfkChannelId) { get; set; } | ID of afk channel |
-| [AfkTimeout](#AfkTimeout) { get; set; } | Afk timeout in seconds |
-| [ApplicationId](#ApplicationId) { get; set; } | Application id of the guild creator if it is bot-created |
-| [ApproximateMemberCount](#ApproximateMemberCount) { get; set; } | Approximate number of members in this guild |
-| [ApproximatePresenceCount](#ApproximatePresenceCount) { get; set; } | Approximate number of non-offline members in this guild |
-| [Banner](#Banner) { get; set; } | Banner hash |
-| [BannerUrl](#BannerUrl) { get; } | Return the guilds Banner Url |
-| [Channels](#Channels) { get; set; } | Channels in the guild |
-| [DefaultMessageNotifications](#DefaultMessageNotifications) { get; set; } | Default message notification level |
-| [Description](#Description) { get; set; } | The description of a guild |
-| [DiscoverySplash](#DiscoverySplash) { get; set; } | Discovery splash hash Only present for guilds with the "DISCOVERABLE" feature |
-| [DiscoverySplashUrl](#DiscoverySplashUrl) { get; } | Returns the guilds Discovery Splash |
-| [Emojis](#Emojis) { get; set; } | Custom guild emojis |
-| [EveryoneRole](#EveryoneRole) { get; } | Returns the everyone role for the guild. |
-| [ExplicitContentFilter](#ExplicitContentFilter) { get; set; } | Explicit content filter level |
-| [Features](#Features) { get; set; } | Enabled guild features See [`GuildFeatures`](./GuildFeatures.md) |
-| [HasLoadedAllMembers](#HasLoadedAllMembers) { get; } | Returns true if all guild members have been loaded |
-| [Icon](#Icon) { get; set; } | Base64 128x128 image for the guild icon |
-| [IconHash](#IconHash) { get; set; } | Icon hash |
-| [IconUrl](#IconUrl) { get; } | Returns the guild Icon Url |
-| [Id](#Id) { get; set; } | Guild id |
-| [IsAvailable](#IsAvailable) { get; } | Returns if the guild is available to use |
-| [JoinedAt](#JoinedAt) { get; set; } | When this guild was joined at |
-| [Large](#Large) { get; set; } | True if this is considered a large guild |
-| [LeftMembers](#LeftMembers) { get; } | Members who have left the guild This list will contain members who have left the guild since the initial bot connection |
-| [MaxMembers](#MaxMembers) { get; set; } | The maximum number of members for the guild |
-| [MaxPresences](#MaxPresences) { get; set; } | The maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned) |
-| [MaxStageVideoChannelUsers](#MaxStageVideoChannelUsers) { get; set; } | The maximum amount of users in a stage video channel |
-| [MaxVideoChannelUsers](#MaxVideoChannelUsers) { get; set; } | The maximum amount of users in a video channel |
-| [MemberCount](#MemberCount) { get; set; } | Total number of members in this guild |
-| [Members](#Members) { get; set; } | Users in the guild |
-| [MfaLevel](#MfaLevel) { get; set; } | Required MFA level for the guild See [`GuildMfaLevel`](./GuildMfaLevel.md) |
-| [Name](#Name) { get; set; } | Name of the guild (2-100 characters) |
-| [NsfwLevel](#NsfwLevel) { get; set; } | Guild NSFW level [NSFW Information](https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation) |
-| [Owner](#Owner) { get; set; } | True if the user is the owner of the guild |
-| [OwnerId](#OwnerId) { get; set; } | ID of owner |
-| [Permissions](#Permissions) { get; set; } | Total permissions for the user in the guild (excludes overrides) |
-| [PreferredLocale](#PreferredLocale) { get; set; } | The preferred locale of a Community guild Used in server discovery and notices from Discord Defaults to "en-US" |
-| [PremiumProgressBarEnabled](#PremiumProgressBarEnabled) { get; set; } | The scheduled events in the guild |
-| [PremiumSubscriptionCount](#PremiumSubscriptionCount) { get; set; } | The number of boosts this guild currently has |
-| [PremiumTier](#PremiumTier) { get; set; } | Premium tier (Server Boost level) |
-| [Presences](#Presences) { get; set; } | Presences of the members in the guild will only include non-offline members if the size is greater than large threshold |
-| [PublicUpdatesChannelId](#PublicUpdatesChannelId) { get; set; } | The maximum amount of users in a video channel |
-| [Roles](#Roles) { get; set; } | Roles in the guild |
-| [RulesChannelId](#RulesChannelId) { get; set; } | The id of the channel where Community guilds can display rules and/or guidelines |
-| [SafetyAlertsChannelId](#SafetyAlertsChannelId) { get; set; } | The ID of the channel where admins and moderators of Community guilds receive safety alerts from Discord |
-| [ScheduledEvents](#ScheduledEvents) { get; set; } | The scheduled events in the guild [`DiscordSticker`](../Stickers/DiscordSticker.md) |
-| [Splash](#Splash) { get; set; } | Splash hash |
-| [SplashUrl](#SplashUrl) { get; } | Returns the Guilds Splash Url |
-| [StageInstances](#StageInstances) { get; set; } | Stage instances in the guild [`StageInstance`](../Channels/Stages/StageInstance.md) |
-| [Stickers](#Stickers) { get; set; } | Custom guild stickers [`DiscordSticker`](../Stickers/DiscordSticker.md) |
-| [SystemChannelFlags](#SystemChannelFlags) { get; set; } | System channel flags See [`SystemChannelFlags`](./DiscordGuild/SystemChannelFlags.md) |
-| [SystemChannelId](#SystemChannelId) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
-| [Threads](#Threads) { get; set; } | All active threads in the guild that current user has permission to view |
-| [Unavailable](#Unavailable) { get; set; } | True if this guild is unavailable due to an outage |
-| [VanityUrlCode](#VanityUrlCode) { get; set; } | The vanity url code for the guild |
-| [VerificationLevel](#VerificationLevel) { get; set; } | Verification level |
-| [VoiceStates](#VoiceStates) { get; set; } | States of members currently in voice channels; lacks the guild_id key |
-| [WelcomeScreen](#WelcomeScreen) { get; set; } | The welcome screen of a Community guild Shown to new members, returned in an Invite's guild object |
-| [WidgetChannelId](#WidgetChannelId) { get; set; } | The channel id that the widget will generate an invite to, or null if set to no invite |
-| [WidgetEnabled](#WidgetEnabled) { get; set; } | True if the server widget is enabled |
-| [AddMember](#AddMember)(…) | Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. See [Add Guild Member](https://discord.com/developers/docs/resources/guild#add-guild-member) |
-| [AddMemberRole](#AddMemberRole)(…) | Adds a role to a guild member. Requires the MANAGE_ROLES permission. See [Add Guild Member Role](https://discord.com/developers/docs/resources/guild#add-guild-member-role) (2 methods) |
-| [BeginPrune](#BeginPrune)(…) | Begin a prune operation. Requires the KICK_MEMBERS permission. See [Begin Guild Prune](https://discord.com/developers/docs/resources/guild#begin-guild-prune) |
-| [CreateAutoModRule](#CreateAutoModRule)(…) |  |
-| [CreateBan](#CreateBan)(…) | Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. See [Create Guild Ban](https://discord.com/developers/docs/resources/guild#create-guild-ban) (2 methods) |
-| [CreateChannel](#CreateChannel)(…) | Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. See [Create Guild Channel](https://discord.com/developers/docs/resources/guild#create-guild-channel) |
-| [CreateEmoji](#CreateEmoji)(…) | Create a new emoji for the guild. Requires the MANAGE_EMOJIS permission. Returns the new emoji object on success. See [Create Guild Emoji](https://discord.com/developers/docs/resources/emoji#create-guild-emoji) |
-| [CreateRole](#CreateRole)(…) | Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. See [Create Guild Role](https://discord.com/developers/docs/resources/guild#create-guild-role) |
-| [CreateSticker](#CreateSticker)(…) | Create a new sticker for the guild. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the new sticker object on success. See [Create Guild Sticker](https://discord.com/developers/docs/resources/sticker#create-guild-sticker) |
-| [Delete](#Delete)(…) | Delete a guild permanently. User must be owner See [Delete Guild](https://discord.com/developers/docs/resources/guild#delete-guild) |
-| [DeleteEmoji](#DeleteEmoji)(…) | Delete the given emoji. Requires the MANAGE_EMOJIS permission. See [Delete Guild Emoji](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) |
-| [DeleteIntegration](#DeleteIntegration)(…) | Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. See [Delete Guild Integration](https://discord.com/developers/docs/resources/guild#delete-guild-integration) (2 methods) |
-| [DeleteRole](#DeleteRole)(…) | Delete a guild role. Requires the MANAGE_ROLES permission See [Delete Guild Role](https://discord.com/developers/docs/resources/guild#delete-guild-role) (2 methods) |
-| [DeleteSticker](#DeleteSticker)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. |
-| [Edit](#Edit)(…) | Modify a guild's settings. Requires the MANAGE_GUILD permission. See [Modify Guild](https://discord.com/developers/docs/resources/guild#modify-guild) |
-| [EditChannelPositions](#EditChannelPositions)(…) | Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Only channels to be modified are required, with the minimum being a swap between at least two channels. See [Modify Guild Channel Positions](https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions) |
-| [EditCurrentMember](#EditCurrentMember)(…) | Modifies the current members nickname in the guild See [Modify Current Member](https://discord.com/developers/docs/resources/guild#modify-current-member) |
-| [EditCurrentUserVoiceState](#EditCurrentUserVoiceState)(…) | Modifies the current user's voice state. See [Update Current User Voice State](https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state) |
-| [EditEmoji](#EditEmoji)(…) | Modify the given emoji. Requires the MANAGE_EMOJIS permission. Returns the updated emoji object on success. See [Modify Guild Emoji](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji) |
-| [EditMember](#EditMember)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
-| [EditMemberNick](#EditMemberNick)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
-| [EditMfaLevel](#EditMfaLevel)(…) | Modify a guild's MFA level. Requires guild ownership. See [Modify Guild MFA Level](https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level) |
-| [EditRole](#EditRole)(…) | Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. See [Modify Guild Role](https://discord.com/developers/docs/resources/guild#modify-guild-role) (2 methods) |
-| [EditRolePositions](#EditRolePositions)(…) | Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. See [Modify Guild Role Positions](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) |
-| [EditSticker](#EditSticker)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
-| [EditUserVoiceState](#EditUserVoiceState)(…) | Modifies another user's voice state. See [Update Users Voice State](https://discord.com/developers/docs/resources/guild#modify-user-voice-state) |
-| [EditWelcomeScreen](#EditWelcomeScreen)(…) | Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. |
-| [EditWidget](#EditWidget)(…) | Modify a guild widget object for the guild. Requires the MANAGE_GUILD permission. See [Modify Guild Widget](https://discord.com/developers/docs/resources/guild#modify-guild-widget) |
-| [GetAutoModRule](#GetAutoModRule)(…) |  |
-| [GetBan](#GetBan)(…) | Returns a guild ban for a specific user See [Get Guild Ban](https://discord.com/developers/docs/resources/guild#get-guild-ban) Returns 404 if not found |
-| [GetBans](#GetBans)(…) | Returns a list of ban objects for the users banned from this guild. See [Get Guild Bans](https://discord.com/developers/docs/resources/guild#get-guild-bans) |
-| [GetBoosterRole](#GetBoosterRole)() | Returns the booster role for the guild if it exists |
-| [GetChannel](#GetChannel)(…) | Returns a channel with the given name (Case Insensitive) (2 methods) |
-| [GetChannels](#GetChannels)(…) | Returns a list of guild channel objects. Does not include threads See [Get Guild Channels](https://discord.com/developers/docs/resources/guild#get-guild-channels) |
-| [GetEmoji](#GetEmoji)(…) | Finds guild emoji by name (2 methods) |
-| [GetIntegrations](#GetIntegrations)(…) | Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Integrations](https://discord.com/developers/docs/resources/guild#get-guild-integrations) |
-| [GetInvites](#GetInvites)(…) | Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Invites](https://discord.com/developers/docs/resources/guild#get-guild-invites) |
-| [GetMember](#GetMember)(…) | Returns a GuildMember with the given username (Case Insensitive) (3 methods) |
-| [GetOnboarding](#GetOnboarding)(…) | Returns the [`GuildOnboarding`](./Onboarding/GuildOnboarding.md) for the guild. |
-| [GetParentChannel](#GetParentChannel)(…) | Returns the parent channel for a channel if it exists |
-| [GetPruneCount](#GetPruneCount)(…) | Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation. Requires the KICK_MEMBERS permission. See [Get Guild Prune Count](https://discord.com/developers/docs/resources/guild#get-guild-prune-count) |
-| [GetRole](#GetRole)(…) | Returns a Role with the given name (Case Insensitive) |
-| [GetRoles](#GetRoles)(…) | Returns a list of role objects for the guild. See [Get Guild Roles](https://discord.com/developers/docs/resources/guild#get-guild-roles) |
-| [GetSticker](#GetSticker)(…) | Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission. See [Get Guild Sticker](https://discord.com/developers/docs/resources/sticker#get-guild-sticker) |
-| [GetUserPermissions](#GetUserPermissions)(…) | Returns the user permissions for the given user ID |
-| [GetVanityUrl](#GetVanityUrl)(…) | Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. Code will be null if a vanity url for the guild is not set. |
-| [GetVoiceRegions](#GetVoiceRegions)(…) | Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled. See [Get Guild Voice Regions](https://discord.com/developers/docs/resources/guild#get-guild-voice-regions) |
-| [GetWelcomeScreen](#GetWelcomeScreen)(…) | Returns the Welcome Screen object for the guild. Requires the `MANAGE_GUILD` permission. |
-| [GetWidget](#GetWidget)(…) | Returns the widget for the guild. See [Get Guild Widget](https://discord.com/developers/docs/resources/guild#get-guild-widget) |
-| [GetWidgetSettings](#GetWidgetSettings)(…) | Returns a guild widget object. Requires the MANAGE_GUILD permission. See [Get Guild Widget Settings](https://discord.com/developers/docs/resources/guild#get-guild-widget-settings) |
-| [ListActiveThreads](#ListActiveThreads)(…) | Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order. See [List Active Threads](https://discord.com/developers/docs/resources/guild#list-active-threads) |
-| [ListAutoModRules](#ListAutoModRules)(…) |  |
-| [Listembers](#Listembers)(…) | Returns a list of guild member objects that are members of the guild. In the future, this endpoint will be restricted in line with our Privileged Intents |
-| [ListEmojis](#ListEmojis)(…) | Returns a list of emoji objects for the given guild. See [List Guild Emojis](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) |
-| [ListStickers](#ListStickers)(…) | Returns an array of sticker objects for the given guild. Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission. See [List Guild Stickers](https://discord.com/developers/docs/resources/sticker#list-guild-stickers) |
-| [RemoveBan](#RemoveBan)(…) | Remove the ban for a user. Requires the BAN_MEMBERS permissions. See [Remove Guild Ban](https://discord.com/developers/docs/resources/guild#remove-guild-ban) |
-| [RemoveMember](#RemoveMember)(…) | Remove a member from a guild. Requires KICK_MEMBERS permission. See [Remove Guild Member](https://discord.com/developers/docs/resources/guild#remove-guild-member) (2 methods) |
-| [RemoveMemberRole](#RemoveMemberRole)(…) | Removes a role from a guild member. Requires the MANAGE_ROLES permission. See [Remove Guild Member Role](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) (2 methods) |
-| [SearchMembers](#SearchMembers)(…) | Searches for guild members by username or nickname |
-| static [Create](#Create)(…) | Create a new guild. See [Create Guild](https://discord.com/developers/docs/resources/guild#create-guild) |
-| static [Get](#Get)(…) | Returns the guild object for the given id See [Get Guild](https://discord.com/developers/docs/resources/guild#get-guild) |
-| static [GetGuildPreview](#GetGuildPreview)(…) | Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be Discoverable. |
+| [DiscordGuild](#DiscordGuild-constructor)() | The default constructor. |
+| [AfkChannelId](#AfkChannelId-property) { get; set; } | ID of afk channel |
+| [AfkTimeout](#AfkTimeout-property) { get; set; } | Afk timeout in seconds |
+| [ApplicationId](#ApplicationId-property) { get; set; } | Application id of the guild creator if it is bot-created |
+| [ApproximateMemberCount](#ApproximateMemberCount-property) { get; set; } | Approximate number of members in this guild |
+| [ApproximatePresenceCount](#ApproximatePresenceCount-property) { get; set; } | Approximate number of non-offline members in this guild |
+| [Banner](#Banner-property) { get; set; } | Banner hash |
+| [BannerUrl](#BannerUrl-property) { get; } | Return the guilds Banner Url |
+| [Channels](#Channels-property) { get; set; } | Channels in the guild |
+| [DefaultMessageNotifications](#DefaultMessageNotifications-property) { get; set; } | Default message notification level |
+| [Description](#Description-property) { get; set; } | The description of a guild |
+| [DiscoverySplash](#DiscoverySplash-property) { get; set; } | Discovery splash hash Only present for guilds with the "DISCOVERABLE" feature |
+| [DiscoverySplashUrl](#DiscoverySplashUrl-property) { get; } | Returns the guilds Discovery Splash |
+| [Emojis](#Emojis-property) { get; set; } | Custom guild emojis |
+| [EveryoneRole](#EveryoneRole-property) { get; } | Returns the everyone role for the guild. |
+| [ExplicitContentFilter](#ExplicitContentFilter-property) { get; set; } | Explicit content filter level |
+| [Features](#Features-property) { get; set; } | Enabled guild features See [`GuildFeatures`](./GuildFeatures.md) |
+| [HasLoadedAllMembers](#HasLoadedAllMembers-property) { get; } | Returns true if all guild members have been loaded |
+| [Icon](#Icon-property) { get; set; } | Base64 128x128 image for the guild icon |
+| [IconHash](#IconHash-property) { get; set; } | Icon hash |
+| [IconUrl](#IconUrl-property) { get; } | Returns the guild Icon Url |
+| [Id](#Id-property) { get; set; } | Guild id |
+| [IsAvailable](#IsAvailable-property) { get; } | Returns if the guild is available to use |
+| [JoinedAt](#JoinedAt-property) { get; set; } | When this guild was joined at |
+| [Large](#Large-property) { get; set; } | True if this is considered a large guild |
+| [LeftMembers](#LeftMembers-property) { get; } | Members who have left the guild This list will contain members who have left the guild since the initial bot connection |
+| [MaxMembers](#MaxMembers-property) { get; set; } | The maximum number of members for the guild |
+| [MaxPresences](#MaxPresences-property) { get; set; } | The maximum number of presences for the guild (the default value, currently 25000, is in effect when null is returned) |
+| [MaxStageVideoChannelUsers](#MaxStageVideoChannelUsers-property) { get; set; } | The maximum amount of users in a stage video channel |
+| [MaxVideoChannelUsers](#MaxVideoChannelUsers-property) { get; set; } | The maximum amount of users in a video channel |
+| [MemberCount](#MemberCount-property) { get; set; } | Total number of members in this guild |
+| [Members](#Members-property) { get; set; } | Users in the guild |
+| [MfaLevel](#MfaLevel-property) { get; set; } | Required MFA level for the guild See [`GuildMfaLevel`](./GuildMfaLevel.md) |
+| [Name](#Name-property) { get; set; } | Name of the guild (2-100 characters) |
+| [NsfwLevel](#NsfwLevel-property) { get; set; } | Guild NSFW level [NSFW Information](https://support.discord.com/hc/en-us/articles/1500005389362-NSFW-Server-Designation) |
+| [Owner](#Owner-property) { get; set; } | True if the user is the owner of the guild |
+| [OwnerId](#OwnerId-property) { get; set; } | ID of owner |
+| [Permissions](#Permissions-property) { get; set; } | Total permissions for the user in the guild (excludes overrides) |
+| [PreferredLocale](#PreferredLocale-property) { get; set; } | The preferred locale of a Community guild Used in server discovery and notices from Discord Defaults to "en-US" |
+| [PremiumProgressBarEnabled](#PremiumProgressBarEnabled-property) { get; set; } | The scheduled events in the guild |
+| [PremiumSubscriptionCount](#PremiumSubscriptionCount-property) { get; set; } | The number of boosts this guild currently has |
+| [PremiumTier](#PremiumTier-property) { get; set; } | Premium tier (Server Boost level) |
+| [Presences](#Presences-property) { get; set; } | Presences of the members in the guild will only include non-offline members if the size is greater than large threshold |
+| [PublicUpdatesChannelId](#PublicUpdatesChannelId-property) { get; set; } | The maximum amount of users in a video channel |
+| [Roles](#Roles-property) { get; set; } | Roles in the guild |
+| [RulesChannelId](#RulesChannelId-property) { get; set; } | The id of the channel where Community guilds can display rules and/or guidelines |
+| [SafetyAlertsChannelId](#SafetyAlertsChannelId-property) { get; set; } | The ID of the channel where admins and moderators of Community guilds receive safety alerts from Discord |
+| [ScheduledEvents](#ScheduledEvents-property) { get; set; } | The scheduled events in the guild [`DiscordSticker`](../Stickers/DiscordSticker.md) |
+| [Splash](#Splash-property) { get; set; } | Splash hash |
+| [SplashUrl](#SplashUrl-property) { get; } | Returns the Guilds Splash Url |
+| [StageInstances](#StageInstances-property) { get; set; } | Stage instances in the guild [`StageInstance`](../Channels/Stages/StageInstance.md) |
+| [Stickers](#Stickers-property) { get; set; } | Custom guild stickers [`DiscordSticker`](../Stickers/DiscordSticker.md) |
+| [SystemChannelFlags](#SystemChannelFlags-property) { get; set; } | System channel flags See [`SystemChannelFlags`](./DiscordGuild/SystemChannelFlags.md) |
+| [SystemChannelId](#SystemChannelId-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
+| [Threads](#Threads-property) { get; set; } | All active threads in the guild that current user has permission to view |
+| [Unavailable](#Unavailable-property) { get; set; } | True if this guild is unavailable due to an outage |
+| [VanityUrlCode](#VanityUrlCode-property) { get; set; } | The vanity url code for the guild |
+| [VerificationLevel](#VerificationLevel-property) { get; set; } | Verification level |
+| [VoiceStates](#VoiceStates-property) { get; set; } | States of members currently in voice channels; lacks the guild_id key |
+| [WelcomeScreen](#WelcomeScreen-property) { get; set; } | The welcome screen of a Community guild Shown to new members, returned in an Invite's guild object |
+| [WidgetChannelId](#WidgetChannelId-property) { get; set; } | The channel id that the widget will generate an invite to, or null if set to no invite |
+| [WidgetEnabled](#WidgetEnabled-property) { get; set; } | True if the server widget is enabled |
+| [AddMember](#AddMember-method)(…) | Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. See [Add Guild Member](https://discord.com/developers/docs/resources/guild#add-guild-member) |
+| [AddMemberRole](#AddMemberRole-method)(…) | Adds a role to a guild member. Requires the MANAGE_ROLES permission. See [Add Guild Member Role](https://discord.com/developers/docs/resources/guild#add-guild-member-role) (2 methods) |
+| [BeginPrune](#BeginPrune-method)(…) | Begin a prune operation. Requires the KICK_MEMBERS permission. See [Begin Guild Prune](https://discord.com/developers/docs/resources/guild#begin-guild-prune) |
+| [CreateAutoModRule](#CreateAutoModRule-method)(…) |  |
+| [CreateBan](#CreateBan-method)(…) | Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. See [Create Guild Ban](https://discord.com/developers/docs/resources/guild#create-guild-ban) (2 methods) |
+| [CreateChannel](#CreateChannel-method)(…) | Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. See [Create Guild Channel](https://discord.com/developers/docs/resources/guild#create-guild-channel) |
+| [CreateEmoji](#CreateEmoji-method)(…) | Create a new emoji for the guild. Requires the MANAGE_EMOJIS permission. Returns the new emoji object on success. See [Create Guild Emoji](https://discord.com/developers/docs/resources/emoji#create-guild-emoji) |
+| [CreateRole](#CreateRole-method)(…) | Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. See [Create Guild Role](https://discord.com/developers/docs/resources/guild#create-guild-role) |
+| [CreateSticker](#CreateSticker-method)(…) | Create a new sticker for the guild. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the new sticker object on success. See [Create Guild Sticker](https://discord.com/developers/docs/resources/sticker#create-guild-sticker) |
+| [Delete](#Delete-method)(…) | Delete a guild permanently. User must be owner See [Delete Guild](https://discord.com/developers/docs/resources/guild#delete-guild) |
+| [DeleteEmoji](#DeleteEmoji-method)(…) | Delete the given emoji. Requires the MANAGE_EMOJIS permission. See [Delete Guild Emoji](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) |
+| [DeleteIntegration](#DeleteIntegration-method)(…) | Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. See [Delete Guild Integration](https://discord.com/developers/docs/resources/guild#delete-guild-integration) (2 methods) |
+| [DeleteRole](#DeleteRole-method)(…) | Delete a guild role. Requires the MANAGE_ROLES permission See [Delete Guild Role](https://discord.com/developers/docs/resources/guild#delete-guild-role) (2 methods) |
+| [DeleteSticker](#DeleteSticker-method)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. |
+| [Edit](#Edit-method)(…) | Modify a guild's settings. Requires the MANAGE_GUILD permission. See [Modify Guild](https://discord.com/developers/docs/resources/guild#modify-guild) |
+| [EditChannelPositions](#EditChannelPositions-method)(…) | Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Only channels to be modified are required, with the minimum being a swap between at least two channels. See [Modify Guild Channel Positions](https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions) |
+| [EditCurrentMember](#EditCurrentMember-method)(…) | Modifies the current members nickname in the guild See [Modify Current Member](https://discord.com/developers/docs/resources/guild#modify-current-member) |
+| [EditCurrentUserVoiceState](#EditCurrentUserVoiceState-method)(…) | Modifies the current user's voice state. See [Update Current User Voice State](https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state) |
+| [EditEmoji](#EditEmoji-method)(…) | Modify the given emoji. Requires the MANAGE_EMOJIS permission. Returns the updated emoji object on success. See [Modify Guild Emoji](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji) |
+| [EditMember](#EditMember-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
+| [EditMemberNick](#EditMemberNick-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
+| [EditMfaLevel](#EditMfaLevel-method)(…) | Modify a guild's MFA level. Requires guild ownership. See [Modify Guild MFA Level](https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level) |
+| [EditRole](#EditRole-method)(…) | Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. See [Modify Guild Role](https://discord.com/developers/docs/resources/guild#modify-guild-role) (2 methods) |
+| [EditRolePositions](#EditRolePositions-method)(…) | Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. See [Modify Guild Role Positions](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) |
+| [EditSticker](#EditSticker-method)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
+| [EditUserVoiceState](#EditUserVoiceState-method)(…) | Modifies another user's voice state. See [Update Users Voice State](https://discord.com/developers/docs/resources/guild#modify-user-voice-state) |
+| [EditWelcomeScreen](#EditWelcomeScreen-method)(…) | Modify the guild's Welcome Screen. Requires the MANAGE_GUILD permission. Returns the updated Welcome Screen object. |
+| [EditWidget](#EditWidget-method)(…) | Modify a guild widget object for the guild. Requires the MANAGE_GUILD permission. See [Modify Guild Widget](https://discord.com/developers/docs/resources/guild#modify-guild-widget) |
+| [GetAutoModRule](#GetAutoModRule-method)(…) |  |
+| [GetBan](#GetBan-method)(…) | Returns a guild ban for a specific user See [Get Guild Ban](https://discord.com/developers/docs/resources/guild#get-guild-ban) Returns 404 if not found |
+| [GetBans](#GetBans-method)(…) | Returns a list of ban objects for the users banned from this guild. See [Get Guild Bans](https://discord.com/developers/docs/resources/guild#get-guild-bans) |
+| [GetBoosterRole](#GetBoosterRole-method)() | Returns the booster role for the guild if it exists |
+| [GetChannel](#GetChannel-method)(…) | Returns a channel with the given name (Case Insensitive) (2 methods) |
+| [GetChannels](#GetChannels-method)(…) | Returns a list of guild channel objects. Does not include threads See [Get Guild Channels](https://discord.com/developers/docs/resources/guild#get-guild-channels) |
+| [GetEmoji](#GetEmoji-method)(…) | Finds guild emoji by name (2 methods) |
+| [GetIntegrations](#GetIntegrations-method)(…) | Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Integrations](https://discord.com/developers/docs/resources/guild#get-guild-integrations) |
+| [GetInvites](#GetInvites-method)(…) | Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Invites](https://discord.com/developers/docs/resources/guild#get-guild-invites) |
+| [GetMember](#GetMember-method)(…) | Returns a GuildMember with the given username (Case Insensitive) (3 methods) |
+| [GetOnboarding](#GetOnboarding-method)(…) | Returns the [`GuildOnboarding`](./Onboarding/GuildOnboarding.md) for the guild. |
+| [GetParentChannel](#GetParentChannel-method)(…) | Returns the parent channel for a channel if it exists |
+| [GetPruneCount](#GetPruneCount-method)(…) | Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation. Requires the KICK_MEMBERS permission. See [Get Guild Prune Count](https://discord.com/developers/docs/resources/guild#get-guild-prune-count) |
+| [GetRole](#GetRole-method)(…) | Returns a Role with the given name (Case Insensitive) |
+| [GetRoles](#GetRoles-method)(…) | Returns a list of role objects for the guild. See [Get Guild Roles](https://discord.com/developers/docs/resources/guild#get-guild-roles) |
+| [GetSticker](#GetSticker-method)(…) | Returns a sticker object for the given guild and sticker IDs. Includes the user field if the bot has the MANAGE_EMOJIS_AND_STICKERS permission. See [Get Guild Sticker](https://discord.com/developers/docs/resources/sticker#get-guild-sticker) |
+| [GetUserPermissions](#GetUserPermissions-method)(…) | Returns the user permissions for the given user ID |
+| [GetVanityUrl](#GetVanityUrl-method)(…) | Returns a partial invite object for guilds with that feature enabled. Requires the MANAGE_GUILD permission. Code will be null if a vanity url for the guild is not set. |
+| [GetVoiceRegions](#GetVoiceRegions-method)(…) | Returns a list of voice region objects for the guild. Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled. See [Get Guild Voice Regions](https://discord.com/developers/docs/resources/guild#get-guild-voice-regions) |
+| [GetWelcomeScreen](#GetWelcomeScreen-method)(…) | Returns the Welcome Screen object for the guild. Requires the `MANAGE_GUILD` permission. |
+| [GetWidget](#GetWidget-method)(…) | Returns the widget for the guild. See [Get Guild Widget](https://discord.com/developers/docs/resources/guild#get-guild-widget) |
+| [GetWidgetSettings](#GetWidgetSettings-method)(…) | Returns a guild widget object. Requires the MANAGE_GUILD permission. See [Get Guild Widget Settings](https://discord.com/developers/docs/resources/guild#get-guild-widget-settings) |
+| [ListActiveThreads](#ListActiveThreads-method)(…) | Returns all active threads in the guild, including public and private threads. Threads are ordered by their id, in descending order. See [List Active Threads](https://discord.com/developers/docs/resources/guild#list-active-threads) |
+| [ListAutoModRules](#ListAutoModRules-method)(…) |  |
+| [Listembers](#Listembers-method)(…) | Returns a list of guild member objects that are members of the guild. In the future, this endpoint will be restricted in line with our Privileged Intents |
+| [ListEmojis](#ListEmojis-method)(…) | Returns a list of emoji objects for the given guild. See [List Guild Emojis](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) |
+| [ListStickers](#ListStickers-method)(…) | Returns an array of sticker objects for the given guild. Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission. See [List Guild Stickers](https://discord.com/developers/docs/resources/sticker#list-guild-stickers) |
+| [RemoveBan](#RemoveBan-method)(…) | Remove the ban for a user. Requires the BAN_MEMBERS permissions. See [Remove Guild Ban](https://discord.com/developers/docs/resources/guild#remove-guild-ban) |
+| [RemoveMember](#RemoveMember-method)(…) | Remove a member from a guild. Requires KICK_MEMBERS permission. See [Remove Guild Member](https://discord.com/developers/docs/resources/guild#remove-guild-member) (2 methods) |
+| [RemoveMemberRole](#RemoveMemberRole-method)(…) | Removes a role from a guild member. Requires the MANAGE_ROLES permission. See [Remove Guild Member Role](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) (2 methods) |
+| [SearchMembers](#SearchMembers-method)(…) | Searches for guild members by username or nickname |
+| static [Create](#Create-method)(…) | Create a new guild. See [Create Guild](https://discord.com/developers/docs/resources/guild#create-guild) |
+| static [Get](#Get-method)(…) | Returns the guild object for the given id See [Get Guild](https://discord.com/developers/docs/resources/guild#get-guild) |
+| static [GetGuildPreview](#GetGuildPreview-method)(…) | Returns the guild preview object for the given id. If the user is not in the guild, then the guild must be Discoverable. |
 
 ## See Also
 

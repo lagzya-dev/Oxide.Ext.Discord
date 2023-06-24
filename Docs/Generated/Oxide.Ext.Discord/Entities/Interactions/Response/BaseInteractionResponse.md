@@ -10,14 +10,14 @@ public abstract class BaseInteractionResponse
 
 | name | description |
 | --- | --- |
-| [Type](#Type) { get; set; } | The type of response |
+| [Type](#Type-property) { get; set; } | The type of response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractionResponse](#BaseInteractionResponse)() | Constructor |
-| [BaseInteractionResponse](#BaseInteractionResponse)(…) | Constructor with [`InteractionResponseType`](../InteractionResponseType.md) |
+| [BaseInteractionResponse](#BaseInteractionResponse-constructor)() | Constructor |
+| [BaseInteractionResponse](#BaseInteractionResponse-constructor)(…) | Constructor with [`InteractionResponseType`](../InteractionResponseType.md) |
 
 ## See Also
 

@@ -10,19 +10,19 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
 
 | name | description |
 | --- | --- |
-| [AddApplicationCommand](#AddApplicationCommand)(…) | Registers a new Application Command for the given plugin |
-| [AddAutoCompleteCommand](#AddAutoCompleteCommand)(…) | Registers a new Application Command for the given plugin |
-| [AddMessageComponentCommand](#AddMessageComponentCommand)(…) | Adds a MessageComponent Command type. This matches CustomId with starts with |
-| [AddModalSubmitCommand](#AddModalSubmitCommand)(…) | Adds a MessageComponent Command type. This matches CustomId with starts with |
-| [LogDebug](#LogDebug)(…) |  |
-| [RemoveApplicationCommand](#RemoveApplicationCommand)(…) | Removes an application command |
+| [AddApplicationCommand](#AddApplicationCommand-method)(…) | Registers a new Application Command for the given plugin |
+| [AddAutoCompleteCommand](#AddAutoCompleteCommand-method)(…) | Registers a new Application Command for the given plugin |
+| [AddMessageComponentCommand](#AddMessageComponentCommand-method)(…) | Adds a MessageComponent Command type. This matches CustomId with starts with |
+| [AddModalSubmitCommand](#AddModalSubmitCommand-method)(…) | Adds a MessageComponent Command type. This matches CustomId with starts with |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [RemoveApplicationCommand](#RemoveApplicationCommand-method)(…) | Removes an application command |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginLoaded](#OnPluginLoaded)(…) |  |
-| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
+| override [OnPluginLoaded](#OnPluginLoaded-method)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
 
 ## See Also
 

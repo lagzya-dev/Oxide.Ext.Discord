@@ -10,10 +10,10 @@ public class GuildPruneBegin : GuildPruneGet
 
 | name | description |
 | --- | --- |
-| [GuildPruneBegin](#GuildPruneBegin)() | The default constructor. |
-| [ComputePruneCount](#ComputePruneCount) { get; set; } | Whether 'pruned' is returned, discouraged for large guilds |
-| [Reason](#Reason) { get; set; } | Reason for the prune (Deprecated) |
-| override [ToQueryString](#ToQueryString)() | Returns Guild Prune Begin query string for the API Endpoint |
+| [GuildPruneBegin](#GuildPruneBegin-constructor)() | The default constructor. |
+| [ComputePruneCount](#ComputePruneCount-property) { get; set; } | Whether 'pruned' is returned, discouraged for large guilds |
+| [Reason](#Reason-property) { get; set; } | Reason for the prune (Deprecated) |
+| override [ToQueryString](#ToQueryString-method)() | Returns Guild Prune Begin query string for the API Endpoint |
 
 ## See Also
 

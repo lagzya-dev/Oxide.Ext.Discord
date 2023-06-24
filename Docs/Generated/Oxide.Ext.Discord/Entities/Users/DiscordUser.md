@@ -10,49 +10,49 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 
 | name | description |
 | --- | --- |
-| [DiscordUser](#DiscordUser)() | The default constructor. |
-| [AccentColor](#AccentColor) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
-| [Avatar](#Avatar) { get; set; } | The user's avatar hash |
-| [Banner](#Banner) { get; set; } | The user's banner, or null if unset |
-| [Bot](#Bot) { get; set; } | Whether the user belongs to an OAuth2 application |
-| [Discriminator](#Discriminator) { get; set; } | The user's 4-digit discord-tag |
-| [DisplayName](#DisplayName) { get; } | The display name for the user |
-| [Email](#Email) { get; set; } | The user's email |
-| [Flags](#Flags) { get; set; } | The flags on a user's account [`UserFlags`](./UserFlags.md) |
-| [FullUserName](#FullUserName) { get; } | Returns the username#discriminator for the user |
-| [GetAvatarUrl](#GetAvatarUrl) { get; } | Avatar Url for the user |
-| [GetBannerUrl](#GetBannerUrl) { get; } | Banner Url for the user |
-| [GetDefaultAvatarUrl](#GetDefaultAvatarUrl) { get; } | Default Avatar Url for the User |
-| [GlobalName](#GlobalName) { get; set; } | The user's global name |
-| [HasUpdatedUsername](#HasUpdatedUsername) { get; } | Returns true if the user has upgraded their username to the new username format |
-| [Id](#Id) { get; set; } | The user's id |
-| [IsBot](#IsBot) { get; } | Returns if the DiscordUser is a bot |
-| [IsSystem](#IsSystem) { get; } | Returns if the DiscordUser is a system user |
-| [Locale](#Locale) { get; set; } | The user's chosen language option |
-| [Mention](#Mention) { get; } | Returns a string to mention this users nickname in a message |
-| [MfaEnabled](#MfaEnabled) { get; set; } | Whether the user has two factor enabled on their account |
-| [Player](#Player) { get; } | Returns the IPlayer for the discord user if linked; null otherwise |
-| [PremiumType](#PremiumType) { get; set; } | The type of Nitro subscription on a user's account [`UserPremiumType`](./UserPremiumType.md) |
-| [PublicFlags](#PublicFlags) { get; set; } | The public flags on a user's account [`UserFlags`](./UserFlags.md) |
-| [System](#System) { get; set; } | Whether the user is an Official Discord System user (part of the urgent message system) |
-| [Username](#Username) { get; set; } | The user's username, not unique across the platform |
-| [Verified](#Verified) { get; set; } | Whether the email on this account has been verified |
-| [CreateDirectMessageChannel](#CreateDirectMessageChannel)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
-| [CreateGroupDm](#CreateGroupDm)(…) | Create a Group Direct Message |
-| [GetCurrentUserGuilds](#GetCurrentUserGuilds)(…) | Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) |
-| [GetUserConnections](#GetUserConnections)(…) | Returns a list of connection objects. Requires the connections OAuth2 scope. |
-| [GroupDmAddRecipient](#GroupDmAddRecipient)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
-| [GroupDmRemoveRecipient](#GroupDmRemoveRecipient)(…) | Removes a recipient from a Group DM (2 methods) |
-| [LeaveGuild](#LeaveGuild)(…) | Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild) |
-| [LogDebug](#LogDebug)(…) |  |
-| [ModifyCurrentUser](#ModifyCurrentUser)(…) | Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user) |
-| [SendDirectMessage](#SendDirectMessage)(…) | Send a message to a user in a direct message channel (3 methods) |
-| [SendGlobalTemplateDirectMessage](#SendGlobalTemplateDirectMessage)(…) | Reply to a message using a global message template |
-| [SendTemplateDirectMessage](#SendTemplateDirectMessage)(…) | Send a message in a DM to the user using a localized message template |
-| [Update](#Update)(…) | Updates the user data with the passed in user |
-| static [CreateDirectMessageChannel](#CreateDirectMessageChannel)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
-| static [GetCurrentUser](#GetCurrentUser)(…) | Returns the currently logged in user account See [Get Current User](https://discord.com/developers/docs/resources/user#get-current-user) |
-| static [GetUser](#GetUser)(…) | Returns the user for the given user Id See [Get User](https://discord.com/developers/docs/resources/user#get-user) |
+| [DiscordUser](#DiscordUser-constructor)() | The default constructor. |
+| [AccentColor](#AccentColor-property) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
+| [Avatar](#Avatar-property) { get; set; } | The user's avatar hash |
+| [Banner](#Banner-property) { get; set; } | The user's banner, or null if unset |
+| [Bot](#Bot-property) { get; set; } | Whether the user belongs to an OAuth2 application |
+| [Discriminator](#Discriminator-property) { get; set; } | The user's 4-digit discord-tag |
+| [DisplayName](#DisplayName-property) { get; } | The display name for the user |
+| [Email](#Email-property) { get; set; } | The user's email |
+| [Flags](#Flags-property) { get; set; } | The flags on a user's account [`UserFlags`](./UserFlags.md) |
+| [FullUserName](#FullUserName-property) { get; } | Returns the username#discriminator for the user |
+| [GetAvatarUrl](#GetAvatarUrl-property) { get; } | Avatar Url for the user |
+| [GetBannerUrl](#GetBannerUrl-property) { get; } | Banner Url for the user |
+| [GetDefaultAvatarUrl](#GetDefaultAvatarUrl-property) { get; } | Default Avatar Url for the User |
+| [GlobalName](#GlobalName-property) { get; set; } | The user's global name |
+| [HasUpdatedUsername](#HasUpdatedUsername-property) { get; } | Returns true if the user has upgraded their username to the new username format |
+| [Id](#Id-property) { get; set; } | The user's id |
+| [IsBot](#IsBot-property) { get; } | Returns if the DiscordUser is a bot |
+| [IsSystem](#IsSystem-property) { get; } | Returns if the DiscordUser is a system user |
+| [Locale](#Locale-property) { get; set; } | The user's chosen language option |
+| [Mention](#Mention-property) { get; } | Returns a string to mention this users nickname in a message |
+| [MfaEnabled](#MfaEnabled-property) { get; set; } | Whether the user has two factor enabled on their account |
+| [Player](#Player-property) { get; } | Returns the IPlayer for the discord user if linked; null otherwise |
+| [PremiumType](#PremiumType-property) { get; set; } | The type of Nitro subscription on a user's account [`UserPremiumType`](./UserPremiumType.md) |
+| [PublicFlags](#PublicFlags-property) { get; set; } | The public flags on a user's account [`UserFlags`](./UserFlags.md) |
+| [System](#System-property) { get; set; } | Whether the user is an Official Discord System user (part of the urgent message system) |
+| [Username](#Username-property) { get; set; } | The user's username, not unique across the platform |
+| [Verified](#Verified-property) { get; set; } | Whether the email on this account has been verified |
+| [CreateDirectMessageChannel](#CreateDirectMessageChannel-method)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
+| [CreateGroupDm](#CreateGroupDm-method)(…) | Create a Group Direct Message |
+| [GetCurrentUserGuilds](#GetCurrentUserGuilds-method)(…) | Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) |
+| [GetUserConnections](#GetUserConnections-method)(…) | Returns a list of connection objects. Requires the connections OAuth2 scope. |
+| [GroupDmAddRecipient](#GroupDmAddRecipient-method)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
+| [GroupDmRemoveRecipient](#GroupDmRemoveRecipient-method)(…) | Removes a recipient from a Group DM (2 methods) |
+| [LeaveGuild](#LeaveGuild-method)(…) | Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild) |
+| [LogDebug](#LogDebug-method)(…) |  |
+| [ModifyCurrentUser](#ModifyCurrentUser-method)(…) | Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user) |
+| [SendDirectMessage](#SendDirectMessage-method)(…) | Send a message to a user in a direct message channel (3 methods) |
+| [SendGlobalTemplateDirectMessage](#SendGlobalTemplateDirectMessage-method)(…) | Reply to a message using a global message template |
+| [SendTemplateDirectMessage](#SendTemplateDirectMessage-method)(…) | Send a message in a DM to the user using a localized message template |
+| [Update](#Update-method)(…) | Updates the user data with the passed in user |
+| static [CreateDirectMessageChannel](#CreateDirectMessageChannel-method)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
+| static [GetCurrentUser](#GetCurrentUser-method)(…) | Returns the currently logged in user account See [Get Current User](https://discord.com/developers/docs/resources/user#get-current-user) |
+| static [GetUser](#GetUser-method)(…) | Returns the user for the given user Id See [Get User](https://discord.com/developers/docs/resources/user#get-user) |
 
 ## See Also
 

@@ -10,7 +10,7 @@ public interface IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ToQueryString](#ToQueryString)() | Returns the request as a query string |
+| [ToQueryString](#ToQueryString-method)() | Returns the request as a query string |
 
 ## See Also
 

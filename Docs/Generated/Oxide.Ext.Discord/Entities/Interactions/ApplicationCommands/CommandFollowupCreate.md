@@ -10,7 +10,7 @@ public class CommandFollowupCreate : BaseInteractionMessage
 
 | name | description |
 | --- | --- |
-| [CommandFollowupCreate](#CommandFollowupCreate)() | The default constructor. |
+| [CommandFollowupCreate](#CommandFollowupCreate-constructor)() | The default constructor. |
 
 ## See Also
 

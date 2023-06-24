@@ -10,16 +10,16 @@ public class PlaceholderState : BasePoolable
 
 | name | description |
 | --- | --- |
-| [PlaceholderState](#PlaceholderState)() | The default constructor. |
-| [Data](#Data) { get; } | Placeholder Data for the state |
-| [Format](#Format) { get; } | Format specified in the placeholder |
-| [Name](#Name) { get; } | Name of the placeholder |
+| [PlaceholderState](#PlaceholderState-constructor)() | The default constructor. |
+| [Data](#Data-property) { get; } | Placeholder Data for the state |
+| [Format](#Format-property) { get; } | Format specified in the placeholder |
+| [Name](#Name-property) { get; } | Name of the placeholder |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public class EmbedAuthor
 
 | name | description |
 | --- | --- |
-| [EmbedAuthor](#EmbedAuthor)() | Embed Author Constructor |
-| [EmbedAuthor](#EmbedAuthor)(…) | Embed Author Constructor |
-| [IconUrl](#IconUrl) { get; set; } | Url of author icon (only supports http(s) and attachments) |
-| [Name](#Name) { get; set; } | Name of author |
-| [ProxyIconUrl](#ProxyIconUrl) { get; set; } | A proxied url of author icon |
-| [Url](#Url) { get; set; } | Url of author * Only supports http(s) |
+| [EmbedAuthor](#EmbedAuthor-constructor)() | Embed Author Constructor |
+| [EmbedAuthor](#EmbedAuthor-constructor)(…) | Embed Author Constructor |
+| [IconUrl](#IconUrl-property) { get; set; } | Url of author icon (only supports http(s) and attachments) |
+| [Name](#Name-property) { get; set; } | Name of author |
+| [ProxyIconUrl](#ProxyIconUrl-property) { get; set; } | A proxied url of author icon |
+| [Url](#Url-property) { get; set; } | Url of author * Only supports http(s) |
 
 ## See Also
 

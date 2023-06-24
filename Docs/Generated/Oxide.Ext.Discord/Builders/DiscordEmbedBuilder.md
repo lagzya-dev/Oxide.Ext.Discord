@@ -10,24 +10,24 @@ public class DiscordEmbedBuilder
 
 | name | description |
 | --- | --- |
-| [DiscordEmbedBuilder](#DiscordEmbedBuilder)() | Constructor for the builder creating a new embed |
-| [DiscordEmbedBuilder](#DiscordEmbedBuilder)(…) | Constructor for the builder using an existing embed |
-| [AddAuthor](#AddAuthor)(…) | Adds an author to the embed message. The author will appear above the title |
-| [AddBlankField](#AddBlankField)(…) | Adds a blank field. If inline it will add a blank column. If not inline will add a blank row |
-| [AddColor](#AddColor)(…) | Adds a Discord Color to the embed (7 methods) |
-| [AddDescription](#AddDescription)(…) | Adds a description to the embed message |
-| [AddField](#AddField)(…) | Adds a new field with the name as the title and value as the value. If inline will add a new column. If row will add in a new row. |
-| [AddFooter](#AddFooter)(…) | Adds a footer to the embed message |
-| [AddImage](#AddImage)(…) | Adds an image to the embed. The url should point to the url of the image. If using attachment image you can make the url: "attachment://{image name}.{image extension} |
-| [AddNowTimestamp](#AddNowTimestamp)() | Adds a timestamp to an embed with the current time |
-| [AddProvider](#AddProvider)(…) | Adds a provider to the embed |
-| [AddThumbnail](#AddThumbnail)(…) | Adds a thumbnail in the top right corner of the embed If using attachment image you can make the url: "attachment://{image name}.{image extension} |
-| [AddTimestamp](#AddTimestamp)(…) | Adds a timestamp to an embed with the given time |
-| [AddTitle](#AddTitle)(…) | Adds a title to the embed message |
-| [AddUrl](#AddUrl)(…) | Adds a url to the embed message |
-| [AddVideo](#AddVideo)(…) | Adds a video to the embed |
-| [Build](#Build)() | Returns the built embed |
-| [BuildList](#BuildList)() | Returns the built embed in a list |
+| [DiscordEmbedBuilder](#DiscordEmbedBuilder-constructor)() | Constructor for the builder creating a new embed |
+| [DiscordEmbedBuilder](#DiscordEmbedBuilder-constructor)(…) | Constructor for the builder using an existing embed |
+| [AddAuthor](#AddAuthor-method)(…) | Adds an author to the embed message. The author will appear above the title |
+| [AddBlankField](#AddBlankField-method)(…) | Adds a blank field. If inline it will add a blank column. If not inline will add a blank row |
+| [AddColor](#AddColor-method)(…) | Adds a Discord Color to the embed (7 methods) |
+| [AddDescription](#AddDescription-method)(…) | Adds a description to the embed message |
+| [AddField](#AddField-method)(…) | Adds a new field with the name as the title and value as the value. If inline will add a new column. If row will add in a new row. |
+| [AddFooter](#AddFooter-method)(…) | Adds a footer to the embed message |
+| [AddImage](#AddImage-method)(…) | Adds an image to the embed. The url should point to the url of the image. If using attachment image you can make the url: "attachment://{image name}.{image extension} |
+| [AddNowTimestamp](#AddNowTimestamp-method)() | Adds a timestamp to an embed with the current time |
+| [AddProvider](#AddProvider-method)(…) | Adds a provider to the embed |
+| [AddThumbnail](#AddThumbnail-method)(…) | Adds a thumbnail in the top right corner of the embed If using attachment image you can make the url: "attachment://{image name}.{image extension} |
+| [AddTimestamp](#AddTimestamp-method)(…) | Adds a timestamp to an embed with the given time |
+| [AddTitle](#AddTitle-method)(…) | Adds a title to the embed message |
+| [AddUrl](#AddUrl-method)(…) | Adds a url to the embed message |
+| [AddVideo](#AddVideo-method)(…) | Adds a video to the embed |
+| [Build](#Build-method)() | Returns the built embed |
+| [BuildList](#BuildList-method)() | Returns the built embed in a list |
 
 ## See Also
 

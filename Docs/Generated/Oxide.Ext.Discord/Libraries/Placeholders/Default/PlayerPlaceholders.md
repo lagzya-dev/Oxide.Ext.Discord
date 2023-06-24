@@ -10,21 +10,21 @@ public static class PlayerPlaceholders
 
 | name | description |
 | --- | --- |
-| static [BattleMetricsNameUrl](#BattleMetricsNameUrl)(…) | Battle metrics Place Name Url Placeholder |
-| static [BattleMetricsSteamIdUrl](#BattleMetricsSteamIdUrl)(…) | Battle metrics Steam ID Url Placeholder |
-| static [Connected](#Connected)(…) | IsConnected placeholder |
-| static [Groups](#Groups)(…) |  |
-| static [Health](#Health)(…) | Health placeholder |
-| static [Id](#Id)(…) | Id placeholder |
-| static [IsLinked](#IsLinked)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
-| static [MaxHealth](#MaxHealth)(…) | MaxHealth placeholder |
-| static [Name](#Name)(…) | Name placeholder |
-| static [Permissions](#Permissions)(…) |  |
-| static [Ping](#Ping)(…) | Ping placeholder |
-| static [Position](#Position)(…) | Position placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
-| static [SteamAvatarUrl](#SteamAvatarUrl)(…) | Steam Avatar Url Placeholder |
-| static [SteamProfileUrl](#SteamProfileUrl)(…) | Steam Profile Url Placeholder |
+| static [BattleMetricsNameUrl](#BattleMetricsNameUrl-method)(…) | Battle metrics Place Name Url Placeholder |
+| static [BattleMetricsSteamIdUrl](#BattleMetricsSteamIdUrl-method)(…) | Battle metrics Steam ID Url Placeholder |
+| static [Connected](#Connected-method)(…) | IsConnected placeholder |
+| static [Groups](#Groups-method)(…) |  |
+| static [Health](#Health-method)(…) | Health placeholder |
+| static [Id](#Id-method)(…) | Id placeholder |
+| static [IsLinked](#IsLinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
+| static [MaxHealth](#MaxHealth-method)(…) | MaxHealth placeholder |
+| static [Name](#Name-method)(…) | Name placeholder |
+| static [Permissions](#Permissions-method)(…) |  |
+| static [Ping](#Ping-method)(…) | Ping placeholder |
+| static [Position](#Position-method)(…) | Position placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [SteamAvatarUrl](#SteamAvatarUrl-method)(…) | Steam Avatar Url Placeholder |
+| static [SteamProfileUrl](#SteamProfileUrl-method)(…) | Steam Profile Url Placeholder |
 
 ## See Also
 

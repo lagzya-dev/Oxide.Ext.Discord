@@ -10,8 +10,8 @@ public class MessageReactionRemovedAllEmojiEvent : MessageReactionRemovedAllEven
 
 | name | description |
 | --- | --- |
-| [MessageReactionRemovedAllEmojiEvent](#MessageReactionRemovedAllEmojiEvent)() | The default constructor. |
-| [Emoji](#Emoji) { get; set; } | Emoji that was removed from the message |
+| [MessageReactionRemovedAllEmojiEvent](#MessageReactionRemovedAllEmojiEvent-constructor)() | The default constructor. |
+| [Emoji](#Emoji-property) { get; set; } | Emoji that was removed from the message |
 
 ## See Also
 

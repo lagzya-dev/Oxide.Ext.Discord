@@ -10,40 +10,40 @@ public class DiscordInteraction
 
 | name | description |
 | --- | --- |
-| [DiscordInteraction](#DiscordInteraction)() | The default constructor. |
-| [ApplicationId](#ApplicationId) { get; set; } | ID of the application this interaction is for |
-| [AppPermissions](#AppPermissions) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
-| [Channel](#Channel) { get; set; } | Channel that the interaction was sent from |
-| [ChannelId](#ChannelId) { get; set; } | Channel that the interaction was sent from |
-| [Data](#Data) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
-| [Focused](#Focused) { get; } | Returns the Focused option for Auto Complete |
-| [GuildId](#GuildId) { get; set; } | Guild that the interaction was sent from |
-| [GuildLocale](#GuildLocale) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
-| [Id](#Id) { get; set; } | Id of the interaction |
-| [Locale](#Locale) { get; set; } | The selected language of the invoking user [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
-| [Member](#Member) { get; set; } | Guild member data for the invoking user, including permissions |
-| [Message](#Message) { get; set; } | For components, the message they were attached to |
-| [Parsed](#Parsed) { get; } | Returns the interaction parsed args to make it easier to process that interaction. |
-| [Token](#Token) { get; set; } | Continuation token for responding to the interaction Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event. If the 3 second deadline is exceeded, the token will be invalidated. |
-| [Type](#Type) { get; set; } | The type of interaction See [`InteractionType`](./InteractionType.md) |
-| [User](#User) { get; } | User object. If in DM then DM user else GuildMember.User |
-| [Version](#Version) { get; set; } | Read-only property, always 1 |
-| readonly [CreatedDate](#CreatedDate) | The UTC DateTime this interaction was created |
-| [CreateFollowUpMessage](#CreateFollowUpMessage)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
-| [CreateModalResponse](#CreateModalResponse)(…) | Creates a interaction modal response from a modal template |
-| [CreateResponse](#CreateResponse)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
-| [CreateTemplateResponse](#CreateTemplateResponse)(…) | Creates a interaction message response from a message template |
-| [DefferResponse](#DefferResponse)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
-| [DeleteFollowUpMessage](#DeleteFollowUpMessage)(…) | Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message) |
-| [DeleteOriginalResponse](#DeleteOriginalResponse)(…) | Deletes the initial Interaction response See [Delete Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response) |
-| [EditFollowUpMessage](#EditFollowUpMessage)(…) | Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message) |
-| [EditOriginalResponse](#EditOriginalResponse)(…) | Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) |
-| [EditTemplateOriginalResponse](#EditTemplateOriginalResponse)(…) | Edit a interaction response with a message template |
-| [GetAutoCompleteBuilder](#GetAutoCompleteBuilder)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetFollowupBuilder](#GetFollowupBuilder)() | Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
-| [GetLangMessage](#GetLangMessage)(…) | Returns a localized string for this interaction (2 methods) |
-| [GetModalBuilder](#GetModalBuilder)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetResponseBuilder](#GetResponseBuilder)() | Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
+| [DiscordInteraction](#DiscordInteraction-constructor)() | The default constructor. |
+| [ApplicationId](#ApplicationId-property) { get; set; } | ID of the application this interaction is for |
+| [AppPermissions](#AppPermissions-property) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
+| [Channel](#Channel-property) { get; set; } | Channel that the interaction was sent from |
+| [ChannelId](#ChannelId-property) { get; set; } | Channel that the interaction was sent from |
+| [Data](#Data-property) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
+| [Focused](#Focused-property) { get; } | Returns the Focused option for Auto Complete |
+| [GuildId](#GuildId-property) { get; set; } | Guild that the interaction was sent from |
+| [GuildLocale](#GuildLocale-property) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
+| [Id](#Id-property) { get; set; } | Id of the interaction |
+| [Locale](#Locale-property) { get; set; } | The selected language of the invoking user [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
+| [Member](#Member-property) { get; set; } | Guild member data for the invoking user, including permissions |
+| [Message](#Message-property) { get; set; } | For components, the message they were attached to |
+| [Parsed](#Parsed-property) { get; } | Returns the interaction parsed args to make it easier to process that interaction. |
+| [Token](#Token-property) { get; set; } | Continuation token for responding to the interaction Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event. If the 3 second deadline is exceeded, the token will be invalidated. |
+| [Type](#Type-property) { get; set; } | The type of interaction See [`InteractionType`](./InteractionType.md) |
+| [User](#User-property) { get; } | User object. If in DM then DM user else GuildMember.User |
+| [Version](#Version-property) { get; set; } | Read-only property, always 1 |
+| readonly [CreatedDate](#CreatedDate-field) | The UTC DateTime this interaction was created |
+| [CreateFollowUpMessage](#CreateFollowUpMessage-method)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
+| [CreateModalResponse](#CreateModalResponse-method)(…) | Creates a interaction modal response from a modal template |
+| [CreateResponse](#CreateResponse-method)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
+| [CreateTemplateResponse](#CreateTemplateResponse-method)(…) | Creates a interaction message response from a message template |
+| [DefferResponse](#DefferResponse-method)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
+| [DeleteFollowUpMessage](#DeleteFollowUpMessage-method)(…) | Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message) |
+| [DeleteOriginalResponse](#DeleteOriginalResponse-method)(…) | Deletes the initial Interaction response See [Delete Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response) |
+| [EditFollowUpMessage](#EditFollowUpMessage-method)(…) | Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message) |
+| [EditOriginalResponse](#EditOriginalResponse-method)(…) | Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) |
+| [EditTemplateOriginalResponse](#EditTemplateOriginalResponse-method)(…) | Edit a interaction response with a message template |
+| [GetAutoCompleteBuilder](#GetAutoCompleteBuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetFollowupBuilder](#GetFollowupBuilder-method)() | Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
+| [GetLangMessage](#GetLangMessage-method)(…) | Returns a localized string for this interaction (2 methods) |
+| [GetModalBuilder](#GetModalBuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetResponseBuilder](#GetResponseBuilder-method)() | Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
 
 ## See Also
 

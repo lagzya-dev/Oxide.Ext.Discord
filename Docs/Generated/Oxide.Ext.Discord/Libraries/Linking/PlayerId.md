@@ -10,13 +10,13 @@ public struct PlayerId : IEquatable<PlayerId>
 
 | name | description |
 | --- | --- |
-| [PlayerId](#PlayerId)(…) | Constructor (2 constructors) |
-| [IsValid](#IsValid) { get; } | Returns true if the ID is valid; false otherwise |
-| [Player](#Player) { get; } | Returns the IPlayer for the Player ID |
-| readonly [Id](#Id) | ID of the player |
-| override [Equals](#Equals)(…) |  |
-| [Equals](#Equals)(…) |  |
-| override [GetHashCode](#GetHashCode)() |  |
+| [PlayerId](#PlayerId-constructor)(…) | Constructor (2 constructors) |
+| [IsValid](#IsValid-property) { get; } | Returns true if the ID is valid; false otherwise |
+| [Player](#Player-property) { get; } | Returns the IPlayer for the Player ID |
+| readonly [Id](#Id-field) | ID of the player |
+| override [Equals](#Equals-method)(…) |  |
+| [Equals](#Equals-method)(…) |  |
+| override [GetHashCode](#GetHashCode-method)() |  |
 
 ## See Also
 

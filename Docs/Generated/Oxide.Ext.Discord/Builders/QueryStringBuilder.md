@@ -10,19 +10,19 @@ public class QueryStringBuilder : BasePoolable
 
 | name | description |
 | --- | --- |
-| [QueryStringBuilder](#QueryStringBuilder)() | The default constructor. |
-| static [Create](#Create)(…) | Creates a pooled [`QueryStringBuilder`](./QueryStringBuilder.md) |
-| [Add](#Add)(…) | Add a key value pair to the query string |
-| [AddList&lt;T&gt;](#AddList)(…) | Add a list of values with the specified separator |
-| override [ToString](#ToString)() | Returns the query string as a string. |
-| [ToStringAndFree](#ToStringAndFree)() | Returns the query string and returns the builder back to the pool |
+| [QueryStringBuilder](#QueryStringBuilder-constructor)() | The default constructor. |
+| static [Create](#Create-method)(…) | Creates a pooled [`QueryStringBuilder`](./QueryStringBuilder.md) |
+| [Add](#Add-method)(…) | Add a key value pair to the query string |
+| [AddList&lt;T&gt;](#AddList-method)(…) | Add a list of values with the specified separator |
+| override [ToString](#ToString-method)() | Returns the query string as a string. |
+| [ToStringAndFree](#ToStringAndFree-method)() | Returns the query string and returns the builder back to the pool |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool)() |  |
-| override [LeavePool](#LeavePool)() |  |
+| override [EnterPool](#EnterPool-method)() |  |
+| override [LeavePool](#LeavePool-method)() |  |
 
 ## See Also
 

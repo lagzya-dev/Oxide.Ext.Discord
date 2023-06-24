@@ -10,8 +10,8 @@ public class CommandFollowupUpdate : WebhookEditMessage
 
 | name | description |
 | --- | --- |
-| [CommandFollowupUpdate](#CommandFollowupUpdate)() | The default constructor. |
-| [Flags](#Flags) { get; set; } | Callback data flags Set to 64 to make your response ephemeral |
+| [CommandFollowupUpdate](#CommandFollowupUpdate-constructor)() | The default constructor. |
+| [Flags](#Flags-property) { get; set; } | Callback data flags Set to 64 to make your response ephemeral |
 
 ## See Also
 

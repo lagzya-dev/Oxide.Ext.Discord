@@ -10,14 +10,14 @@ public class IdentifyCommand
 
 | name | description |
 | --- | --- |
-| [IdentifyCommand](#IdentifyCommand)() | The default constructor. |
-| [Intents](#Intents) { get; set; } | The Gateway Intents you wish to receive See [Gateway Intents](https://discord.com/developers/docs/topics/gateway#gateway-intents) See [`GatewayIntents`](../GatewayIntents.md) |
-| [Compress](#Compress) | Whether this connection supports compression of packets |
-| [LargeThreshold](#LargeThreshold) | Value between 50 and 250, total number of members where the gateway will stop sending offline members in the guild member list |
-| [PresenceUpdate](#PresenceUpdate) | Presence structure for initial presence information |
-| [Properties](#Properties) | Connection properties |
-| [Shard](#Shard) | Used for Guild Sharding See [Guild Sharding](https://discord.com/developers/docs/topics/gateway#sharding) |
-| [Token](#Token) | Authentication token |
+| [IdentifyCommand](#IdentifyCommand-constructor)() | The default constructor. |
+| [Intents](#Intents-property) { get; set; } | The Gateway Intents you wish to receive See [Gateway Intents](https://discord.com/developers/docs/topics/gateway#gateway-intents) See [`GatewayIntents`](../GatewayIntents.md) |
+| [Compress](#Compress-field) | Whether this connection supports compression of packets |
+| [LargeThreshold](#LargeThreshold-field) | Value between 50 and 250, total number of members where the gateway will stop sending offline members in the guild member list |
+| [PresenceUpdate](#PresenceUpdate-field) | Presence structure for initial presence information |
+| [Properties](#Properties-field) | Connection properties |
+| [Shard](#Shard-field) | Used for Guild Sharding See [Guild Sharding](https://discord.com/developers/docs/topics/gateway#sharding) |
+| [Token](#Token-field) | Authentication token |
 
 ## See Also
 

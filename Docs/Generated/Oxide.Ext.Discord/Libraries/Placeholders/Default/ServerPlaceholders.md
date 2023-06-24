@@ -10,12 +10,12 @@ public static class ServerPlaceholders
 
 | name | description |
 | --- | --- |
-| static [MaxPlayers](#MaxPlayers)(…) | MaxPlayers placeholder |
-| static [Name](#Name)(…) | Name placeholder |
-| static [Players](#Players)(…) | Players placeholder |
-| static [Protocol](#Protocol)(…) | Protocol placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
-| static [Version](#Version)(…) | Version placeholder |
+| static [MaxPlayers](#MaxPlayers-method)(…) | MaxPlayers placeholder |
+| static [Name](#Name-method)(…) | Name placeholder |
+| static [Players](#Players-method)(…) | Players placeholder |
+| static [Protocol](#Protocol-method)(…) | Protocol placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Version](#Version-method)(…) | Version placeholder |
 
 ## See Also
 

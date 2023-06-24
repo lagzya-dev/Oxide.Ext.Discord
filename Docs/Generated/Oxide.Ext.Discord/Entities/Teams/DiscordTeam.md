@@ -10,13 +10,13 @@ public class DiscordTeam
 
 | name | description |
 | --- | --- |
-| [DiscordTeam](#DiscordTeam)() | The default constructor. |
-| [GetTeamIconUrl](#GetTeamIconUrl) { get; } | Returns the url for the team icon |
-| [Icon](#Icon) { get; set; } | A hash of the image of the team's icon |
-| [Id](#Id) { get; set; } | The unique id of the team |
-| [Members](#Members) { get; set; } | The members of the team See [`TeamMember`](./TeamMember.md) |
-| [Name](#Name) { get; set; } | The name of the team |
-| [OwnerUserId](#OwnerUserId) { get; set; } | The user id of the current team owner |
+| [DiscordTeam](#DiscordTeam-constructor)() | The default constructor. |
+| [GetTeamIconUrl](#GetTeamIconUrl-property) { get; } | Returns the url for the team icon |
+| [Icon](#Icon-property) { get; set; } | A hash of the image of the team's icon |
+| [Id](#Id-property) { get; set; } | The unique id of the team |
+| [Members](#Members-property) { get; set; } | The members of the team See [`TeamMember`](./TeamMember.md) |
+| [Name](#Name-property) { get; set; } | The name of the team |
+| [OwnerUserId](#OwnerUserId-property) { get; set; } | The user id of the current team owner |
 
 ## See Also
 

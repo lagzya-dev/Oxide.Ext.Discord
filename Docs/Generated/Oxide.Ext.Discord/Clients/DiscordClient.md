@@ -10,16 +10,16 @@ public class DiscordClient
 
 | name | description |
 | --- | --- |
-| [Bot](#Bot) { get; } | The bot client that is unique to the Token used |
-| [Plugin](#Plugin) { get; } | Which plugin is the owner of this client |
-| readonly [PluginId](#PluginId) | The ID of the plugin |
-| readonly [PluginName](#PluginName) | The full plugin name including author and version |
-| [Connect](#Connect)(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
-| [Disconnect](#Disconnect)() | Disconnects this client from discord |
-| [IsConnected](#IsConnected)() | Returns if the client is connected to a bot and if the bot is initialized |
-| [RequestGuildMembers](#RequestGuildMembers)(…) | Used to request guild members from discord for a specific guild |
-| [UpdateStatus](#UpdateStatus)(…) | Used to update the bots status in discord |
-| [UpdateVoiceState](#UpdateVoiceState)(…) | Used to update the voice state for the bot |
+| [Bot](#Bot-property) { get; } | The bot client that is unique to the Token used |
+| [Plugin](#Plugin-property) { get; } | Which plugin is the owner of this client |
+| readonly [PluginId](#PluginId-field) | The ID of the plugin |
+| readonly [PluginName](#PluginName-field) | The full plugin name including author and version |
+| [Connect](#Connect-method)(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
+| [Disconnect](#Disconnect-method)() | Disconnects this client from discord |
+| [IsConnected](#IsConnected-method)() | Returns if the client is connected to a bot and if the bot is initialized |
+| [RequestGuildMembers](#RequestGuildMembers-method)(…) | Used to request guild members from discord for a specific guild |
+| [UpdateStatus](#UpdateStatus-method)(…) | Used to update the bots status in discord |
+| [UpdateVoiceState](#UpdateVoiceState-method)(…) | Used to update the voice state for the bot |
 
 ## See Also
 

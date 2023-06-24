@@ -10,10 +10,10 @@ public class ResumeSessionCommand
 
 | name | description |
 | --- | --- |
-| [ResumeSessionCommand](#ResumeSessionCommand)() | The default constructor. |
-| [Sequence](#Sequence) | Last sequence number received |
-| [SessionId](#SessionId) | Session ID |
-| [Token](#Token) | Session token |
+| [ResumeSessionCommand](#ResumeSessionCommand-constructor)() | The default constructor. |
+| [Sequence](#Sequence-field) | Last sequence number received |
+| [SessionId](#SessionId-field) | Session ID |
+| [Token](#Token-field) | Session token |
 
 ## See Also
 

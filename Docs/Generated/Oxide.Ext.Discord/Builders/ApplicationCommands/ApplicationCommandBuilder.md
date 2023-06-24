@@ -10,19 +10,19 @@ public class ApplicationCommandBuilder
 
 | name | description |
 | --- | --- |
-| [ApplicationCommandBuilder](#ApplicationCommandBuilder)(…) | Creates a new Application Command Builder (2 constructors) |
-| readonly [CommandName](#CommandName) |  |
-| [AddDefaultPermissions](#AddDefaultPermissions)(…) | Adds default command permissions |
-| [AddDescriptionLocalization](#AddDescriptionLocalization)(…) | Adds Application Command Description Localizations |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization)(…) | Adds Application Command Name Localizations |
-| [AddNameLocalizations](#AddNameLocalizations)(…) | Adds command name localizations for a given plugin and lang key |
-| [AddOption](#AddOption)(…) | Adds a command option. |
-| [AddSubCommand](#AddSubCommand)(…) | Adds a sub command to the root command |
-| [AddSubCommandGroup](#AddSubCommandGroup)(…) | Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain |
-| [AllowInDirectMessages](#AllowInDirectMessages)(…) | Allows the command to be used in a direct message |
-| [Build](#Build)() | Returns the created command |
-| [BuildCommandLocalization](#BuildCommandLocalization)(…) | Returns a built [`DiscordCommandLocalization`](../../Libraries/Templates/Commands/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
+| [ApplicationCommandBuilder](#ApplicationCommandBuilder-constructor)(…) | Creates a new Application Command Builder (2 constructors) |
+| readonly [CommandName](#CommandName-field) |  |
+| [AddDefaultPermissions](#AddDefaultPermissions-method)(…) | Adds default command permissions |
+| [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Description Localizations |
+| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Command Name Localizations |
+| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AddOption](#AddOption-method)(…) | Adds a command option. |
+| [AddSubCommand](#AddSubCommand-method)(…) | Adds a sub command to the root command |
+| [AddSubCommandGroup](#AddSubCommandGroup-method)(…) | Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain |
+| [AllowInDirectMessages](#AllowInDirectMessages-method)(…) | Allows the command to be used in a direct message |
+| [Build](#Build-method)() | Returns the created command |
+| [BuildCommandLocalization](#BuildCommandLocalization-method)(…) | Returns a built [`DiscordCommandLocalization`](../../Libraries/Templates/Commands/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public class EmbedVideo
 
 | name | description |
 | --- | --- |
-| [EmbedVideo](#EmbedVideo)() | Embed Video Constructor |
-| [EmbedVideo](#EmbedVideo)(…) | Embed Video Constructor |
-| [Height](#Height) { get; set; } | Height of video |
-| [ProxyUrl](#ProxyUrl) { get; set; } | Source url of video |
-| [Url](#Url) { get; set; } | Source url of video |
-| [Width](#Width) { get; set; } | Width of video |
+| [EmbedVideo](#EmbedVideo-constructor)() | Embed Video Constructor |
+| [EmbedVideo](#EmbedVideo-constructor)(…) | Embed Video Constructor |
+| [Height](#Height-property) { get; set; } | Height of video |
+| [ProxyUrl](#ProxyUrl-property) { get; set; } | Source url of video |
+| [Url](#Url-property) { get; set; } | Source url of video |
+| [Width](#Width-property) { get; set; } | Width of video |
 
 ## See Also
 

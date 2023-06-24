@@ -10,14 +10,14 @@ public class PoolSettings
 
 | name | description |
 | --- | --- |
-| [PoolSettings](#PoolSettings)() | The default constructor. |
-| [HashSetPoolSize](#HashSetPoolSize) { get; set; } | Size of the HashSetPool |
-| [ListPoolSize](#ListPoolSize) { get; set; } | Size of the ListPool |
-| [MemoryStreamPoolSize](#MemoryStreamPoolSize) { get; set; } | Size of the MemoryStreamPool |
-| [ObjectPoolSize](#ObjectPoolSize) { get; set; } | Size of the ObjectPool |
-| [PlaceholderDataPoolSize](#PlaceholderDataPoolSize) { get; set; } | Size of the PlaceholderDataPool |
-| [StringBuilderPoolSize](#StringBuilderPoolSize) { get; set; } | Size of the StringBuilderPool |
-| [HashPoolSize](#HashPoolSize) | Size of the HashPool |
+| [PoolSettings](#PoolSettings-constructor)() | The default constructor. |
+| [HashSetPoolSize](#HashSetPoolSize-property) { get; set; } | Size of the HashSetPool |
+| [ListPoolSize](#ListPoolSize-property) { get; set; } | Size of the ListPool |
+| [MemoryStreamPoolSize](#MemoryStreamPoolSize-property) { get; set; } | Size of the MemoryStreamPool |
+| [ObjectPoolSize](#ObjectPoolSize-property) { get; set; } | Size of the ObjectPool |
+| [PlaceholderDataPoolSize](#PlaceholderDataPoolSize-property) { get; set; } | Size of the PlaceholderDataPool |
+| [StringBuilderPoolSize](#StringBuilderPoolSize-property) { get; set; } | Size of the StringBuilderPool |
+| [HashPoolSize](#HashPoolSize-field) | Size of the HashPool |
 
 ## See Also
 

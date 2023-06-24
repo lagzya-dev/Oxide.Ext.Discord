@@ -10,9 +10,9 @@ public class ActivityButton
 
 | name | description |
 | --- | --- |
-| [ActivityButton](#ActivityButton)() | The default constructor. |
-| [Label](#Label) { get; set; } | The text shown on the button (1-32 characters) |
-| [Url](#Url) { get; set; } | The url opened when clicking the button (1-512 characters) |
+| [ActivityButton](#ActivityButton-constructor)() | The default constructor. |
+| [Label](#Label-property) { get; set; } | The text shown on the button (1-32 characters) |
+| [Url](#Url-property) { get; set; } | The url opened when clicking the button (1-512 characters) |
 
 ## See Also
 

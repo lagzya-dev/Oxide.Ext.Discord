@@ -15,8 +15,8 @@ public interface IBulkTemplate<T>
 
 | name | description |
 | --- | --- |
-| [ToEntity](#ToEntity)(…) | return the {T} entity with the given placeholder data If entity is not specified a new one will be created |
-| [ToEntityBulk](#ToEntityBulk)(…) | Returns a promise that returns a bulk to entity. |
+| [ToEntity](#ToEntity-method)(…) | return the {T} entity with the given placeholder data If entity is not specified a new one will be created |
+| [ToEntityBulk](#ToEntityBulk-method)(…) | Returns a promise that returns a bulk to entity. |
 
 ## See Also
 

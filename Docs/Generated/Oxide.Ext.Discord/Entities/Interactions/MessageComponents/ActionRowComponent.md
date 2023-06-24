@@ -10,9 +10,9 @@ public class ActionRowComponent : BaseComponent
 
 | name | description |
 | --- | --- |
-| [ActionRowComponent](#ActionRowComponent)() | Constructor for ActionRowComponent Sets the Type to ActionRow |
-| [Components](#Components) { get; } | The components on the action row |
-| override [Validate](#Validate)() |  |
+| [ActionRowComponent](#ActionRowComponent-constructor)() | Constructor for ActionRowComponent Sets the Type to ActionRow |
+| [Components](#Components-property) { get; } | The components on the action row |
+| override [Validate](#Validate-method)() |  |
 
 ## See Also
 
