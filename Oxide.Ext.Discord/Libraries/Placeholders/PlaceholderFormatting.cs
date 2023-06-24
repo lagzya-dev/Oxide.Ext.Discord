@@ -32,6 +32,44 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
             builder.Insert(state.Index, value);
         }
+        
+        public static void Replace(StringBuilder builder, PlaceholderState state, string[] values)
+        {
+            builder.Remove(state.Index, state.Length);
+            if (values == null)
+            {
+                return;
+            }
+            
+            string separator = !string.IsNullOrEmpty(state.Format) ? state.Format : ", ";
+            for (int index = 0; index < values.Length; index++)
+            {
+                if (index != 0)
+                {
+                    builder.Append(separator);
+                }
+                builder.Append(values[index]);
+            }
+        }
+        
+        public static void Replace(StringBuilder builder, PlaceholderState state, object[] values)
+        {
+            builder.Remove(state.Index, state.Length);
+            if (values == null)
+            {
+                return;
+            }
+            
+            string separator = !string.IsNullOrEmpty(state.Format) ? state.Format : ", ";
+            for (int index = 0; index < values.Length; index++)
+            {
+                if (index != 0)
+                {
+                    builder.Append(separator);
+                }
+                builder.Append(values[index]);
+            }
+        }
 
         /// <summary>
         /// Replace the <see cref="Match"/> with the the string value
@@ -78,6 +116,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (string.IsNullOrEmpty(state.Format))
             {
                 Replace(builder, state, value.ToString(null, CultureInfo.CurrentCulture));
+                return;
             }
             
             Replace(builder, state, value.ToString(state.Format, CultureInfo.CurrentCulture));
@@ -156,6 +195,14 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (type == typeof(GenericPosition))
             {
                 return (builder, state, value) => Replace(builder, state, value.Cast<TResult, GenericPosition>());
+            }
+            if (type == typeof(string[]))
+            {
+                return (builder, state, value) => Replace(builder, state, value as string[]);
+            }
+            if (type == typeof(object[]))
+            {
+                return (builder, state, value) => Replace(builder, state, value as object[]);
             }
             
             return (builder, state, value) => Replace(builder, state, value.ToString());
