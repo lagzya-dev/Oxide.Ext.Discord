@@ -888,24 +888,6 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Group Permissions to the AutoComplete
-            </summary>
-            <param name="group">Group to get the permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsNotInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
-            <summary>
-            Adds Oxide Permissions Not In Group to the AutoComplete
-            </summary>
-            <param name="group">Group to get the permissions for</param>
-            <param name="filter">String to filter by</param>
-            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode"/> Filter search mode</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that have this permission
@@ -924,7 +906,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsPlayerIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
@@ -933,7 +915,7 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsPlayerNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithoutPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoComplete.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
@@ -5123,7 +5105,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a message in a text channel using a global message template
             </summary>
@@ -5133,7 +5115,7 @@
             <param name="message">message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a message in a text channel using a localized message template
             </summary>
@@ -11315,7 +11297,7 @@
             <param name="type">Type of the interaction response</param>
             <param name="response">Interaction Callback Message Data</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateTemplateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateTemplateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionCallbackData,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a interaction message response from a message template
             </summary>
@@ -11327,7 +11309,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateModalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreateModalResponse(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Interactions.Response.InteractionModalMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Creates a interaction modal response from a modal template 
             </summary>
@@ -11388,7 +11370,7 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edits the initial Interaction response
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response">Edit Original Interaction Response</a>
@@ -11396,7 +11378,7 @@
             <param name="client">Client to use</param>
             /// <param name="message">Updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditTemplateOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.EditTemplateOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageUpdate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Edit a interaction response with a message template
             </summary>
@@ -12971,7 +12953,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ReplyWithGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ReplyWithGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -12981,7 +12963,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ReplyWithTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ReplyWithTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -13129,7 +13111,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edit a message using a global message template
             </summary>
@@ -13139,7 +13121,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Messages.MessageUpdate)">
             <summary>
             Edit a message using a localized message template
             </summary>
@@ -15304,7 +15286,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Send a message in a DM to the user using a localized message template
             </summary>
@@ -15315,7 +15297,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendGlobalTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.Users.DiscordUser.SendGlobalTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -15957,7 +15939,7 @@
             <param name="builder">Builder for the message</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.ExecuteWebhookGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.ExecuteWebhookGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams)">
             <summary>
             Send a message to a webhook using a global message template
             </summary>
@@ -15968,7 +15950,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.ExecuteWebhookTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.ExecuteWebhookTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookExecuteParams)">
             <summary>
             Send a message to a webhook using a localized message template
             </summary>
@@ -16810,7 +16792,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordGlobalTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordGlobalTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Send a message in a DM to the linked user using a global message template
             </summary>
@@ -16821,7 +16803,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.Messages.MessageCreate,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Send a message in a DM to the linked user using a localized message template
             </summary>
@@ -19410,6 +19392,11 @@
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Name"/> placeholder
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Connected(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.IsConnected"/> placeholder
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Health(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Health"/> placeholder
@@ -19432,12 +19419,22 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.SteamProfileUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
-            <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Ping"/> placeholder
+            Steam Profile Url Placeholder 
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.SteamAvatarUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
-            <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Ping"/> placeholder
+            Steam Avatar Url Placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.BattleMetricsSteamIdUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Battle metrics Steam ID Url Placeholder
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.BattleMetricsNameUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Battle metrics Place Name Url Placeholder
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.IsLinked(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
@@ -19982,6 +19979,13 @@
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddPlayer(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             Adds a <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
+            </summary>
+            <param name="player">player to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTarget(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Adds a target <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
             </summary>
             <param name="player">player to add</param>
             <returns>This</returns>
@@ -24256,27 +24260,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"b219c35f"
+            => @"7dc07cbd"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"b219c35fd032b3987ded1403f02a95dcb9a774f4"
+            => @"7dc07cbd92a352eca593968c39425fa61abea2f7"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-22T15:20:09-05:00"
+            => @"2023-06-24T14:47:00-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"586"
+            => @"594"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-586-gb219c35f"
+            => @"2.1.9-594-g7dc07cbd"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24311,7 +24315,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"595"
+            => @"603"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
