@@ -14,6 +14,7 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Pooling.Entities;
 using Oxide.Plugins;
@@ -169,6 +170,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="player">player to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddPlayer(IPlayer player) => Add(nameof(IPlayer), player);
+        
+        /// <summary>
+        /// Adds a target <see cref="IPlayer"/>
+        /// </summary>
+        /// <param name="player">player to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddTarget(IPlayer player) => Add(PlayerPlaceholders.TargetPlayerKey, player);
 
         /// <summary>
         /// Adds a <see cref="Plugin"/>
@@ -249,12 +257,16 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             if (_data.TryGetValue(name, out object obj))
             {
+                if (obj is T value)
+                {
+                    return value;
+                }
                 if (obj is Boxed<T> boxed)
                 {
                     return boxed.Value;
                 }
-                
-                return (T)obj;
+
+                DiscordExtension.GlobalLogger.Warning($"{nameof(PlaceholderData)}.{nameof(Get)} Failed to Convert Type: {{0}} to Type: {{1}}", obj.GetType().Name, typeof(T));
             }
 
             return default(T);
