@@ -1,3 +1,5 @@
+using Oxide.Core;
+using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
@@ -10,6 +12,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class PlayerPlaceholders
     {
+        internal const string TargetPlayerKey = "TargetPlayerKey";
+        
+        private static Permission _permission;
+        private static Permission Permission => _permission ?? (_permission = Interface.Oxide.GetLibrary<Permission>());
+        
         /// <summary>
         /// <see cref="IPlayer.Id"/> placeholder
         /// </summary>
@@ -19,6 +26,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <see cref="IPlayer.Name"/> placeholder
         /// </summary>
         public static string Name(IPlayer player) => player.Name;
+        
+        /// <summary>
+        /// <see cref="IPlayer.IsConnected"/> placeholder
+        /// </summary>
+        public static bool Connected(IPlayer player) => player.IsConnected;
         
         /// <summary>
         /// <see cref="IPlayer.Health"/> placeholder
@@ -39,16 +51,29 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <see cref="IPlayer.Ping"/> placeholder
         /// </summary>
         public static int Ping(IPlayer player) => player.Ping;
+        
+        public static string[] Permissions(IPlayer player) => Permission.GetUserPermissions(player.Id);
+        public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
 
         /// <summary>
-        /// <see cref="IPlayer.Ping"/> placeholder
+        /// Steam Profile Url Placeholder 
         /// </summary>
         public static string SteamProfileUrl(IPlayer player) => $"https://steamcommunity.com/profiles/{player.Id}";
 
         /// <summary>
-        /// <see cref="IPlayer.Ping"/> placeholder
+        /// Steam Avatar Url Placeholder
         /// </summary>
         public static string SteamAvatarUrl(IPlayer player) => DiscordExtensionCore.Instance.GetPlayerAvatarUrl(player.Id);
+
+        /// <summary>
+        /// Battle metrics Steam ID Url Placeholder
+        /// </summary>
+        public static string BattleMetricsSteamIdUrl(IPlayer player) => $"https://www.battlemetrics.com/rcon/players?filter[search]={player.Id}";
+        
+        /// <summary>
+        /// Battle metrics Place Name Url Placeholder
+        /// </summary>
+        public static string BattleMetricsNameUrl(IPlayer player) => $"https://www.battlemetrics.com/rcon/players?filter[search]={player.Name}";
         
         /// <summary>
         /// <see cref="PlayerExt.IsLinked"/> placeholder
@@ -58,6 +83,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         internal static void RegisterPlaceholders()
         {
             RegisterPlaceholders(DiscordExtensionCore.Instance, "player");
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "target", TargetPlayerKey);
         }
         
         /// <summary>
@@ -71,12 +97,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
+            placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.connected", dataKey, Connected);
+            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, $"{placeholderPrefix}.permissions", dataKey, Permissions);
+            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, $"{placeholderPrefix}.groups", dataKey, Groups);
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health", dataKey, Health);
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health.max", dataKey, MaxHealth);
             placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.steamid", dataKey, SteamAvatarUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.name", dataKey, SteamAvatarUrl);
             placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.islinked", dataKey, IsLinked);
         }
     }
