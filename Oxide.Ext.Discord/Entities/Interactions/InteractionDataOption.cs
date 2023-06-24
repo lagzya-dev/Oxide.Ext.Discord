@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
@@ -33,31 +34,31 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// Returns the value as a string
         /// </summary>
         /// <returns></returns>
-        public string GetString() => (string)Value;
+        public string GetString() => (string)Value ?? string.Empty;
 
         /// <summary>
         /// Returns the value as an int
         /// </summary>
         /// <returns></returns>
-        public int GetInt() => (int)Value;
+        public int GetInt() => Convert.ToInt32(Value);
 
         /// <summary>
         /// Returns the value as a bool
         /// </summary>
         /// <returns></returns>
-        public bool GetBool() => (bool)Value;
+        public bool GetBool() => Convert.ToBoolean(Value);
 
         /// <summary>
         /// Returns the value as a double
         /// </summary>
         /// <returns></returns>
-        public double GetNumber() => (double)Value;
+        public double GetNumber() => Convert.ToDouble(Value);
 
         /// <summary>
         /// Returns the value as a Snowflake
         /// </summary>
         /// <returns></returns>
-        public Snowflake GetSnowflake() => new Snowflake((ulong)Value);
+        public Snowflake GetSnowflake() => new Snowflake(Convert.ToUInt64(Value));
 
         /// <summary>
         /// Present if this option is a group or subcommand

@@ -181,7 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="default">Default value to return if not supplied</param>
         /// <returns>String for the matching command option name</returns>
         /// <exception cref="Exception">Thrown if the option type is not a string</exception>
-        public string GetString(string name, string @default = default(string))
+        public string GetString(string name, string @default = "")
         {
             return GetArg(name, CommandOptionType.String)?.GetString() ?? @default;
         }
