@@ -10,19 +10,138 @@ public class ApplicationRoleConnectionMetadata
 
 | name | description |
 | --- | --- |
-| [ApplicationRoleConnectionMetadata](ApplicationRoleConnectionMetadata/ApplicationRoleConnectionMetadata.md)() | The default constructor. |
-| [Description](ApplicationRoleConnectionMetadata/Description.md) { get; set; } | Description of the metadata field (1-200 characters) |
-| [DescriptionLocalizations](ApplicationRoleConnectionMetadata/DescriptionLocalizations.md) { get; set; } | Translations of the description |
-| [Key](ApplicationRoleConnectionMetadata/Key.md) { get; set; } | Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters) |
-| [Name](ApplicationRoleConnectionMetadata/Name.md) { get; set; } | Name of the metadata field (1-100 characters) |
-| [NameLocalizations](ApplicationRoleConnectionMetadata/NameLocalizations.md) { get; set; } | Translations of the name |
-| [Type](ApplicationRoleConnectionMetadata/Type.md) { get; set; } | Type of metadata value |
-| [Validate](ApplicationRoleConnectionMetadata/Validate.md)() |  |
+| [ApplicationRoleConnectionMetadata](#ApplicationRoleConnectionMetadata)() | The default constructor. |
+| [Description](#Description) { get; set; } | Description of the metadata field (1-200 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Translations of the description |
+| [Key](#Key) { get; set; } | Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters) |
+| [Name](#Name) { get; set; } | Name of the metadata field (1-100 characters) |
+| [NameLocalizations](#NameLocalizations) { get; set; } | Translations of the name |
+| [Type](#Type) { get; set; } | Type of metadata value |
+| [Validate](#Validate)() |  |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ApplicationRoleConnectionMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/RoleConnection/ApplicationRoleConnectionMetadata.cs)
+   
+   
+# Validate method
+
+```csharp
+public void Validate()
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ApplicationRoleConnectionMetadata constructor
+
+The default constructor.
+
+```csharp
+public ApplicationRoleConnectionMetadata()
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of metadata value
+
+```csharp
+public ApplicationRoleConnectionMetadataType Type { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationRoleConnectionMetadataType](./ApplicationRoleConnectionMetadataType.md)
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Key property
+
+Dictionary key for the metadata field (must be a-z, 0-9, or _ characters; 1-50 characters)
+
+```csharp
+public string Key { get; set; }
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+Name of the metadata field (1-100 characters)
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# NameLocalizations property
+
+Translations of the name
+
+```csharp
+public Hash<string, string> NameLocalizations { get; set; }
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of the metadata field (1-200 characters)
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DescriptionLocalizations property
+
+Translations of the description
+
+```csharp
+public Hash<string, string> DescriptionLocalizations { get; set; }
+```
+
+## See Also
+
+* class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

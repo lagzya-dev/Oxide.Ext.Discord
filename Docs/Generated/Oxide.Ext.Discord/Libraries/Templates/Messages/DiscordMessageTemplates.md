@@ -8,7 +8,7 @@ public class DiscordMessageTemplates : BaseMessageTemplateLibrary<DiscordMessage
 
 ## See Also
 
-* class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](../BaseMessageTemplateLibrary-1.md)
+* class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](../BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * class [DiscordMessageTemplate](./DiscordMessageTemplate.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

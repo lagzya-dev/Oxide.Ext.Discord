@@ -10,19 +10,147 @@ public class VoiceRegion
 
 | name | description |
 | --- | --- |
-| [VoiceRegion](VoiceRegion/VoiceRegion.md)() | The default constructor. |
-| [Custom](VoiceRegion/Custom.md) { get; set; } | Whether this is a custom voice region (used for events/etc) |
-| [Deprecated](VoiceRegion/Deprecated.md) { get; set; } | Whether this is a deprecated voice region (avoid switching to these) |
-| [Id](VoiceRegion/Id.md) { get; set; } | Unique ID for the region |
-| [Name](VoiceRegion/Name.md) { get; set; } | Name of the region |
-| [Optimal](VoiceRegion/Optimal.md) { get; set; } | True for a single server that is closest to the current user's client |
-| [Vip](VoiceRegion/Vip.md) { get; set; } | True if this is a vip-only server |
-| static [ListVoiceRegions](VoiceRegion/ListVoiceRegions.md)(…) | Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions) |
+| [VoiceRegion](#VoiceRegion)() | The default constructor. |
+| [Custom](#Custom) { get; set; } | Whether this is a custom voice region (used for events/etc) |
+| [Deprecated](#Deprecated) { get; set; } | Whether this is a deprecated voice region (avoid switching to these) |
+| [Id](#Id) { get; set; } | Unique ID for the region |
+| [Name](#Name) { get; set; } | Name of the region |
+| [Optimal](#Optimal) { get; set; } | True for a single server that is closest to the current user's client |
+| [Vip](#Vip) { get; set; } | True if this is a vip-only server |
+| static [ListVoiceRegions](#ListVoiceRegions)(…) | Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [VoiceRegion.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Voice/VoiceRegion.cs)
+   
+   
+# ListVoiceRegions method
+
+Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions)
+
+```csharp
+public static IPromise<List<VoiceRegion>> ListVoiceRegions(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# VoiceRegion constructor
+
+The default constructor.
+
+```csharp
+public VoiceRegion()
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+Unique ID for the region
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+Name of the region
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Vip property
+
+True if this is a vip-only server
+
+```csharp
+[Obsolete("This field is no longer sent by discord")]
+public bool Vip { get; set; }
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Optimal property
+
+True for a single server that is closest to the current user's client
+
+```csharp
+public bool Optimal { get; set; }
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Deprecated property
+
+Whether this is a deprecated voice region (avoid switching to these)
+
+```csharp
+public bool Deprecated { get; set; }
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Custom property
+
+Whether this is a custom voice region (used for events/etc)
+
+```csharp
+public bool Custom { get; set; }
+```
+
+## See Also
+
+* class [VoiceRegion](./VoiceRegion.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

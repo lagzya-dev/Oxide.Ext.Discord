@@ -10,19 +10,19 @@ public class DiscordJsonReader : BasePoolable
 
 | name | description |
 | --- | --- |
-| [DiscordJsonReader](DiscordJsonReader/DiscordJsonReader.md)() | Constructor |
-| static [Create](DiscordJsonReader/Create.md)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) |
-| static [CreateFromStream](DiscordJsonReader/CreateFromStream.md)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) with stream loaded into it |
-| [CopyFrom](DiscordJsonReader/CopyFrom.md)(…) | Copy from the given stream to our internal stream |
-| [Deserialize&lt;T&gt;](DiscordJsonReader/Deserialize.md)(…) | Deserializes the stream data to {T} |
-| [ReadAsString](DiscordJsonReader/ReadAsString.md)() | Returns the Stream data as a string |
-| static [DeserializeFrom&lt;T&gt;](DiscordJsonReader/DeserializeFrom.md)(…) | Deserialize from stream to type {T} |
+| [DiscordJsonReader](#DiscordJsonReader)() | Constructor |
+| static [Create](#Create)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) |
+| static [CreateFromStream](#CreateFromStream)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) with stream loaded into it |
+| [CopyFrom](#CopyFrom)(…) | Copy from the given stream to our internal stream |
+| [Deserialize&lt;T&gt;](#Deserialize)(…) | Deserializes the stream data to {T} |
+| [ReadAsString](#ReadAsString)() | Returns the Stream data as a string |
+| static [DeserializeFrom&lt;T&gt;](#DeserializeFrom)(…) | Deserialize from stream to type {T} |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](DiscordJsonReader/EnterPool.md)() |  |
+| override [EnterPool](#EnterPool)() |  |
 
 ## See Also
 
@@ -30,5 +30,153 @@ public class DiscordJsonReader : BasePoolable
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordJsonReader.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Serialization/DiscordJsonReader.cs)
+   
+   
+# Create method
+
+Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md)
+
+```csharp
+public static DiscordJsonReader Create(DiscordPluginPool pluginPool)
+```
+
+## See Also
+
+* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateFromStream method
+
+Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) with stream loaded into it
+
+```csharp
+public static DiscordJsonReader CreateFromStream(DiscordPluginPool pluginPool, Stream stream)
+```
+
+| parameter | description |
+| --- | --- |
+| pluginPool | The [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) to pool from |
+| stream | Stream to load |
+
+## See Also
+
+* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DeserializeFrom&lt;T&gt; method
+
+Deserialize from stream to type {T}
+
+```csharp
+public static T DeserializeFrom<T>(JsonSerializer serializer, Stream stream)
+```
+
+| parameter | description |
+| --- | --- |
+| T | Type to return |
+| serializer | Serializer to use |
+| stream | Stream to read from |
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CopyFrom method
+
+Copy from the given stream to our internal stream
+
+```csharp
+public void CopyFrom(Stream stream)
+```
+
+| parameter | description |
+| --- | --- |
+| stream | Stream to copy |
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ReadAsString method
+
+Returns the Stream data as a string
+
+```csharp
+public string ReadAsString()
+```
+
+## Return Value
+
+String of the stream data
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Deserialize&lt;T&gt; method
+
+Deserializes the stream data to {T}
+
+```csharp
+public T Deserialize<T>(JsonSerializer serializer)
+```
+
+| parameter | description |
+| --- | --- |
+| T | Type to deserialize to |
+| serializer | JsonSerializer to use with the Deserialization |
+
+## Return Value
+
+{T}
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# EnterPool method
+
+```csharp
+protected override void EnterPool()
+```
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordJsonReader constructor
+
+Constructor
+
+```csharp
+public DiscordJsonReader()
+```
+
+## See Also
+
+* class [DiscordJsonReader](./DiscordJsonReader.md)
+* namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

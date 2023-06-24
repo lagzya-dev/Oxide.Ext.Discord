@@ -10,17 +10,137 @@ public class ApplicationCommandGroupBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](ApplicationCommandGroupBuilder/CommandName.md) |  |
-| readonly [GroupName](ApplicationCommandGroupBuilder/GroupName.md) |  |
-| [AddDescriptionLocalizations](ApplicationCommandGroupBuilder/AddDescriptionLocalizations.md)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](ApplicationCommandGroupBuilder/AddNameLocalization.md)(…) | Adds Application Sub Command Group Name Localizations |
-| [AddNameLocalizations](ApplicationCommandGroupBuilder/AddNameLocalizations.md)(…) | Adds command name localizations for a given plugin and lang key |
-| [AddSubCommand](ApplicationCommandGroupBuilder/AddSubCommand.md)(…) | Adds a sub command to this sub command group |
+| readonly [CommandName](#CommandName) |  |
+| readonly [GroupName](#GroupName) |  |
+| [AddDescriptionLocalizations](#AddDescriptionLocalizations)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#AddNameLocalization)(…) | Adds Application Sub Command Group Name Localizations |
+| [AddNameLocalizations](#AddNameLocalizations)(…) | Adds command name localizations for a given plugin and lang key |
+| [AddSubCommand](#AddSubCommand)(…) | Adds a sub command to this sub command group |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ApplicationCommandGroupBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandGroupBuilder.cs)
+   
+   
+# AddNameLocalizations method
+
+Adds command name localizations for a given plugin and lang key
+
+```csharp
+[Obsolete("AddNameLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddNameLocalization(string name, string lang) instead.")]
+public ApplicationCommandGroupBuilder AddNameLocalizations(Plugin plugin, string langKey)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin containing the localizations |
+| langKey | Lang Key containing the localized text |
+
+## See Also
+
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddNameLocalization method
+
+Adds Application Sub Command Group Name Localizations
+
+```csharp
+public ApplicationCommandGroupBuilder AddNameLocalization(string name, ServerLocale serverLocale)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Localized name value |
+| serverLocale | Oxide lang the value is in |
+
+## Return Value
+
+This
+
+## See Also
+
+* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddDescriptionLocalizations method
+
+Adds command description localizations for a given plugin and lang key
+
+```csharp
+[Obsolete("AddDescriptionLocalizations(Plugin plugin, string langKey) has been deprecated and will be removed in the future. Please use AddDescriptionLocalization(string name, string lang) instead.")]
+public ApplicationCommandGroupBuilder AddDescriptionLocalizations(Plugin plugin, string langKey)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin containing the localizations |
+| langKey | Lang Key containing the localized text |
+
+## See Also
+
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddSubCommand method
+
+Adds a sub command to this sub command group
+
+```csharp
+public ApplicationCommandGroupBuilder AddSubCommand(string name, string description, 
+    Action<ApplicationSubCommandBuilder> builder = null)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the command |
+| description | Description of the command |
+| builder | Callback with the [`ApplicationSubCommandBuilder`](./ApplicationSubCommandBuilder.md) |
+
+## Return Value
+
+this
+
+## See Also
+
+* class [ApplicationSubCommandBuilder](./ApplicationSubCommandBuilder.md)
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CommandName field
+
+```csharp
+public readonly string CommandName;
+```
+
+## See Also
+
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GroupName field
+
+```csharp
+public readonly string GroupName;
+```
+
+## See Also
+
+* class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

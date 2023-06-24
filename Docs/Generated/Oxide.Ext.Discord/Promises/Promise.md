@@ -10,30 +10,30 @@ public sealed class Promise : BasePromise, IPendingPromise
 
 | name | description |
 | --- | --- |
-| [Promise](Promise/Promise.md)() | Constructor for the promise |
-| static [Create](Promise/Create.md)() |  |
-| [Catch](Promise/Catch.md)(…) |  |
-| [Catch&lt;TException&gt;](Promise/Catch.md)(…) |  |
-| [ContinueWith](Promise/ContinueWith.md)(…) |  |
-| [ContinueWith&lt;TConvert&gt;](Promise/ContinueWith.md)(…) |  |
-| [Finally](Promise/Finally.md)(…) |  |
-| [Resolve](Promise/Resolve.md)() |  |
-| [Then](Promise/Then.md)(…) |  (5 methods) |
-| [Then&lt;TConvert&gt;](Promise/Then.md)(…) |  (2 methods) |
-| [ThenAll](Promise/ThenAll.md)(…) |  |
-| [ThenAll&lt;TConvert&gt;](Promise/ThenAll.md)(…) |  |
-| [ThenSequence](Promise/ThenSequence.md)(…) |  |
-| static [All](Promise/All.md)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Rejected](Promise/Rejected.md)(…) | Convert an exception directly into a rejected promise. |
-| static [Resolved](Promise/Resolved.md)() | Returns a promise that has been resolved |
-| static [Sequence](Promise/Sequence.md)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
+| [Promise](#Promise)() | Constructor for the promise |
+| static [Create](#Create)() |  |
+| [Catch](#Catch)(…) |  |
+| [Catch&lt;TException&gt;](#Catch)(…) |  |
+| [ContinueWith](#ContinueWith)(…) |  |
+| [ContinueWith&lt;TConvert&gt;](#ContinueWith)(…) |  |
+| [Finally](#Finally)(…) |  |
+| [Resolve](#Resolve)() |  |
+| [Then](#Then)(…) |  (5 methods) |
+| [Then&lt;TConvert&gt;](#Then)(…) |  (2 methods) |
+| [ThenAll](#ThenAll)(…) |  |
+| [ThenAll&lt;TConvert&gt;](#ThenAll)(…) |  |
+| [ThenSequence](#ThenSequence)(…) |  |
+| static [All](#All)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [Rejected](#Rejected)(…) | Convert an exception directly into a rejected promise. |
+| static [Resolved](#Resolved)() | Returns a promise that has been resolved |
+| static [Sequence](#Sequence)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [ClearHandlers](Promise/ClearHandlers.md)() | Helper function clear out all handlers after resolution or rejection. |
-| override [EnterPool](Promise/EnterPool.md)() |  |
+| override [ClearHandlers](#ClearHandlers)() | Helper function clear out all handlers after resolution or rejection. |
+| override [EnterPool](#EnterPool)() |  |
 
 ## See Also
 
@@ -42,5 +42,234 @@ public sealed class Promise : BasePromise, IPendingPromise
 * namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [Promise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/Promise.cs)
+   
+   
+# Create method
+
+```csharp
+public static Promise Create()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Resolved method
+
+Returns a promise that has been resolved
+
+```csharp
+public static IPromise Resolved()
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Rejected method
+
+Convert an exception directly into a rejected promise.
+
+```csharp
+public static IPromise Rejected(Exception ex)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ClearHandlers method
+
+Helper function clear out all handlers after resolution or rejection.
+
+```csharp
+protected override void ClearHandlers()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Resolve method
+
+```csharp
+public void Resolve()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Catch method (1 of 2)
+
+```csharp
+public IPromise Catch(Action<Exception> onRejected)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Then method (1 of 7)
+
+```csharp
+public IPromise Then(Action onResolved)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# ThenAll method (1 of 2)
+
+```csharp
+public IPromise ThenAll(Func<IEnumerable<IPromise>> chain)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# All method (1 of 2)
+
+Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results.
+
+```csharp
+public static IPromise All(IEnumerable<IPromise> promisesEnumerable)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# ThenSequence method
+
+```csharp
+public IPromise ThenSequence(Func<IEnumerable<Func<IPromise>>> chain)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Sequence method (1 of 2)
+
+Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise.
+
+```csharp
+public static IPromise Sequence(params Func<IPromise>[] fns)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Finally method
+
+```csharp
+public IPromise Finally(Action onComplete)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ContinueWith method (1 of 2)
+
+```csharp
+public IPromise ContinueWith(Func<IPromise> onComplete)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# EnterPool method
+
+```csharp
+protected override void EnterPool()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Promise constructor
+
+Constructor for the promise
+
+```csharp
+public Promise()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

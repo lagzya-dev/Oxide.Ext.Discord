@@ -10,21 +10,173 @@ public struct DiscordLocale : IEquatable<DiscordLocale>
 
 | name | description |
 | --- | --- |
-| static [Parse](DiscordLocale/Parse.md)(…) | Parses a Discord Locale |
-| [IsValid](DiscordLocale/IsValid.md) { get; } | Is the Locale Valid |
-| readonly [Id](DiscordLocale/Id.md) | ID of the locale |
-| [Equals](DiscordLocale/Equals.md)(…) |  |
-| override [Equals](DiscordLocale/Equals.md)(…) |  |
-| override [GetHashCode](DiscordLocale/GetHashCode.md)() |  |
-| [GetServerLocale](DiscordLocale/GetServerLocale.md)() | Returns the Server Locale for this Discord Locale |
-| override [ToString](DiscordLocale/ToString.md)() | Returns the ID of the Locale |
-| [operator ==](DiscordLocale/op_Equality.md) | Returns if two Discord Locales are equal to each other |
-| [operator !=](DiscordLocale/op_Inequality.md) | Returns if two Discord Locales are not equal to each other |
+| static [Parse](#Parse)(…) | Parses a Discord Locale |
+| [IsValid](#IsValid) { get; } | Is the Locale Valid |
+| readonly [Id](#Id) | ID of the locale |
+| [Equals](#Equals)(…) |  |
+| override [Equals](#Equals)(…) |  |
+| override [GetHashCode](#GetHashCode)() |  |
+| [GetServerLocale](#GetServerLocale)() | Returns the Server Locale for this Discord Locale |
+| override [ToString](#ToString)() | Returns the ID of the Locale |
+| [operator ==](#op_Equality) | Returns if two Discord Locales are equal to each other |
+| [operator !=](#op_Inequality) | Returns if two Discord Locales are not equal to each other |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordLocale.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Locale/DiscordLocale.cs)
+   
+   
+# GetServerLocale method
+
+Returns the Server Locale for this Discord Locale
+
+```csharp
+public ServerLocale GetServerLocale()
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Parse method
+
+Parses a Discord Locale
+
+```csharp
+public static DiscordLocale Parse(string locale)
+```
+
+| parameter | description |
+| --- | --- |
+| locale | Locale to Parse |
+
+## Return Value
+
+Parsed Discord Locale
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Equals method (1 of 2)
+
+```csharp
+public bool Equals(DiscordLocale other)
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GetHashCode method
+
+```csharp
+public override int GetHashCode()
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordLocale Equality operator
+
+Returns if two Discord Locales are equal to each other
+
+```csharp
+public static bool operator ==(DiscordLocale left, DiscordLocale right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordLocale Inequality operator
+
+Returns if two Discord Locales are not equal to each other
+
+```csharp
+public static bool operator !=(DiscordLocale left, DiscordLocale right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ToString method
+
+Returns the ID of the Locale
+
+```csharp
+public override string ToString()
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsValid property
+
+Is the Locale Valid
+
+```csharp
+public bool IsValid { get; }
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id field
+
+ID of the locale
+
+```csharp
+public readonly string Id;
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

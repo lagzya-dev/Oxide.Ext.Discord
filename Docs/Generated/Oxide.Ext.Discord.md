@@ -51,7 +51,7 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder-2.md) | Represents a builder for [`BaseInteractionMessage`](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionMessage.md) |
+| abstract class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseInteractionMessage`](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionMessage.md) |
 | class [InteractionAutoCompleteBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.md) | Builder for Auto Complete Interaction |
 | class [InteractionFollowupBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionFollowupBuilder.md) | Represents a builder for [`CommandFollowupCreate`](./Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandFollowupCreate.md) |
 | class [InteractionModalBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionModalBuilder.md) | Builds a Modal Interaction Response Message |
@@ -83,32 +83,32 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseChannelMessageBuilder-2.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/Messages/MessageCreate.md) |
-| abstract class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseMessageBuilder-2.md) | Represents a builder for [`BaseMessageCreate`](./Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.md) |
-| abstract class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseWebhookMessageBuilder-2.md) | Represents a builder for [`WebhookCreateMessage`](./Oxide.Ext.Discord/Entities/Webhooks/WebhookCreateMessage.md) |
+| abstract class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/Messages/MessageCreate.md) |
+| abstract class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseMessageCreate`](./Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.md) |
+| abstract class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseWebhookMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`WebhookCreateMessage`](./Oxide.Ext.Discord/Entities/Webhooks/WebhookCreateMessage.md) |
 
 ## Oxide.Ext.Discord.Cache namespace
 
 | public type | description |
 | --- | --- |
 | class [DiscordPluginCache](./Oxide.Ext.Discord/Cache/DiscordPluginCache.md) | Represents a cache for Loaded and Loadable plugins |
-| class [EnumCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/EnumCache-1.md) | Represents a cache of enum strings |
+| class [EnumCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/EnumCache%7BT%7D.md) | Represents a cache of enum strings |
 | class [ServerPlayerCache](./Oxide.Ext.Discord/Cache/ServerPlayerCache.md) | Cache for server IPlayer |
-| class [StringCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/StringCache-1.md) | Caches strings from {T} ToString method |
+| class [StringCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/StringCache%7BT%7D.md) | Caches strings from {T} ToString method |
 
 ## Oxide.Ext.Discord.Cache.Entities namespace
 
 | public type | description |
 | --- | --- |
-| class [EntityCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/Entities/EntityCache-1.md) | Cache for {T} |
+| class [EntityCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/Entities/EntityCache%7BT%7D.md) | Cache for {T} |
 
 ## Oxide.Ext.Discord.Callbacks namespace
 
 | public type | description |
 | --- | --- |
 | abstract class [BaseAsyncCallback](./Oxide.Ext.Discord/Callbacks/BaseAsyncCallback.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
-| abstract class [BaseCallback&lt;T&gt;](./Oxide.Ext.Discord/Callbacks/BaseCallback-1.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
 | abstract class [BaseCallback](./Oxide.Ext.Discord/Callbacks/BaseCallback.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
+| abstract class [BaseCallback&lt;T&gt;](./Oxide.Ext.Discord/Callbacks/BaseCallback%7BT%7D.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
 | abstract class [BaseNextTickCallback](./Oxide.Ext.Discord/Callbacks/BaseNextTickCallback.md) | Represents a callback that calls next tick |
 
 ## Oxide.Ext.Discord.Clients namespace
@@ -457,8 +457,8 @@
 | public type | description |
 | --- | --- |
 | abstract class [BaseInteractionMessage](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionMessage.md) | Represents a Base Message for an interaction |
-| abstract class [BaseInteractionResponse&lt;T&gt;](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionResponse-1.md) | Represents a Base Interaction Response with generic data {T} |
 | abstract class [BaseInteractionResponse](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionResponse.md) | Represents a Base Interaction response |
+| abstract class [BaseInteractionResponse&lt;T&gt;](./Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionResponse%7BT%7D.md) | Represents a Base Interaction Response with generic data {T} |
 | class [InteractionAutoCompleteMessage](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionAutoCompleteMessage.md) | Interaction Auto Complete Response Message |
 | class [InteractionAutoCompleteResponse](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionAutoCompleteResponse.md) | Represents an Auto Complete response in Discord |
 | class [InteractionCallbackData](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionCallbackData.md) | Represents [Interaction Application Command Callback Data Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure) |
@@ -777,7 +777,7 @@
 
 | public type | description |
 | --- | --- |
-| interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable-1.md) | Represents entities that are cachable by the DiscordExtension |
+| interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
@@ -799,23 +799,23 @@
 
 | public type | description |
 | --- | --- |
-| interface [IPendingPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/Promises/IPendingPromise-1.md) | Represents a promise waiting to be resolved |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/Promises/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
-| interface [IPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/Promises/IPromise-1.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| interface [IPendingPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/Promises/IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
 | interface [IPromise](./Oxide.Ext.Discord/Interfaces/Promises/IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| interface [IPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/Promises/IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IRejectable](./Oxide.Ext.Discord/Interfaces/Promises/IRejectable.md) | Interface for a promise that can be rejected. |
 
 ## Oxide.Ext.Discord.Interfaces.Templates namespace
 
 | public type | description |
 | --- | --- |
-| interface [IBulkTemplate&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/Templates/IBulkTemplate-1.md) | Represents a Template that supports bulk operations |
+| interface [IBulkTemplate&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/Templates/IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 
 ## Oxide.Ext.Discord.Interfaces.Types namespace
 
 | public type | description |
 | --- | --- |
-| interface [IReadonlySet&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/Types/IReadonlySet-1.md) | Represents a ReadOnly interface for ISet |
+| interface [IReadonlySet&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/Types/IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |
 
 ## Oxide.Ext.Discord.Interfaces.WebSockets namespace
 
@@ -831,7 +831,7 @@
 | class [DiscordEnumConverter](./Oxide.Ext.Discord/Json/Converters/DiscordEnumConverter.md) | Handles deserializing JSON values as strings. If the value doesn't exist return the default value. |
 | class [DiscordImageDataConverter](./Oxide.Ext.Discord/Json/Converters/DiscordImageDataConverter.md) | Represents the JsonConverter for [`DiscordImageData`](./Oxide.Ext.Discord/Entities/Images/DiscordImageData.md) |
 | class [EventPayloadConverter](./Oxide.Ext.Discord/Json/Converters/EventPayloadConverter.md) | JSON converter for [`EventPayload`](./Oxide.Ext.Discord/Entities/Gateway/EventPayload.md) |
-| class [HashListConverter&lt;TValue&gt;](./Oxide.Ext.Discord/Json/Converters/HashListConverter-1.md) | Converts to and from a list in JSON to a hash |
+| class [HashListConverter&lt;TValue&gt;](./Oxide.Ext.Discord/Json/Converters/HashListConverter%7BTValue%7D.md) | Converts to and from a list in JSON to a hash |
 | class [MessageComponentsConverter](./Oxide.Ext.Discord/Json/Converters/MessageComponentsConverter.md) | Converter for list of message components |
 | class [PermissionFlagsStringConverter](./Oxide.Ext.Discord/Json/Converters/PermissionFlagsStringConverter.md) | Converts Permission Flags to and from a JSON string |
 | class [RoleTagsConverter](./Oxide.Ext.Discord/Json/Converters/RoleTagsConverter.md) | Handles converting [`RoleTags`](./Oxide.Ext.Discord/Entities/Permissions/RoleTags.md) This type contains special deserialization types |
@@ -850,8 +850,8 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BaseDiscordLibrary&lt;TLibrary&gt;](./Oxide.Ext.Discord/Libraries/BaseDiscordLibrary-1.md) | Base Discord Library for Oxide Libraries |
 | abstract class [BaseDiscordLibrary](./Oxide.Ext.Discord/Libraries/BaseDiscordLibrary.md) | Represents the base class for Discord Libraries |
+| abstract class [BaseDiscordLibrary&lt;TLibrary&gt;](./Oxide.Ext.Discord/Libraries/BaseDiscordLibrary%7BTLibrary%7D.md) | Base Discord Library for Oxide Libraries |
 
 ## Oxide.Ext.Discord.Libraries.AppCommands namespace
 
@@ -927,9 +927,9 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./Oxide.Ext.Discord/Libraries/Templates/BaseMessageTemplateLibrary-1.md) | Library for Discord Message templates |
-| abstract class [BaseTemplateLibrary&lt;TTemplate&gt;](./Oxide.Ext.Discord/Libraries/Templates/BaseTemplateLibrary-1.md) | Oxide Library for Discord Templates |
-| class [BulkTemplateRegistration&lt;T&gt;](./Oxide.Ext.Discord/Libraries/Templates/BulkTemplateRegistration-1.md) | Used for bulk template registration |
+| abstract class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./Oxide.Ext.Discord/Libraries/Templates/BaseMessageTemplateLibrary%7BTTemplate%7D.md) | Library for Discord Message templates |
+| abstract class [BaseTemplateLibrary&lt;TTemplate&gt;](./Oxide.Ext.Discord/Libraries/Templates/BaseTemplateLibrary%7BTTemplate%7D.md) | Oxide Library for Discord Templates |
+| class [BulkTemplateRegistration&lt;T&gt;](./Oxide.Ext.Discord/Libraries/Templates/BulkTemplateRegistration%7BT%7D.md) | Used for bulk template registration |
 | enum [TemplateType](./Oxide.Ext.Discord/Libraries/Templates/TemplateType.md) | Represents available template type |
 | struct [TemplateVersion](./Oxide.Ext.Discord/Libraries/Templates/TemplateVersion.md) | Version of a specific template |
 
@@ -1024,11 +1024,11 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BasePool&lt;TPooled,TPool&gt;](./Oxide.Ext.Discord/Pooling/BasePool-2.md) | Represents a BasePool in Discord |
+| abstract class [BasePool&lt;TPooled,TPool&gt;](./Oxide.Ext.Discord/Pooling/BasePool%7BTPooled,TPool%7D.md) | Represents a BasePool in Discord |
 | abstract class [BasePoolable](./Oxide.Ext.Discord/Pooling/BasePoolable.md) | Represents a poolable object |
 | class [DiscordPluginPool](./Oxide.Ext.Discord/Pooling/DiscordPluginPool.md) | Built in pooling for discord entities |
-| interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/IPool-1.md) | Represents a pool of type T |
 | interface [IPool](./Oxide.Ext.Discord/Pooling/IPool.md) | Represents a pool |
+| interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/IPool%7BT%7D.md) | Represents a pool of type T |
 | class [PoolSettings](./Oxide.Ext.Discord/Pooling/PoolSettings.md) | Settings for the pools |
 | struct [PoolSize](./Oxide.Ext.Discord/Pooling/PoolSize.md) | Represents size constraints for a pool |
 
@@ -1036,15 +1036,15 @@
 
 | public type | description |
 | --- | --- |
-| class [DiscordArrayPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool-1.md) | Represents a [`DiscordArrayPool`](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool-1.md) |
+| class [DiscordArrayPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool%7BT%7D.md) | Represents a [`DiscordArrayPool`](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool%7BT%7D.md) |
 
 ## Oxide.Ext.Discord.Promises namespace
 
 | public type | description |
 | --- | --- |
 | class [BasePromise](./Oxide.Ext.Discord/Promises/BasePromise.md) | Represents the base class for all promises |
-| class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Promises/Promise-1.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise](./Oxide.Ext.Discord/Promises/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Promises/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./Oxide.Ext.Discord/Promises/PromiseState.md) | Specifies the state of a promise. |
 | struct [RejectHandler](./Oxide.Ext.Discord/Promises/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
 
@@ -1080,8 +1080,8 @@
 | public type | description |
 | --- | --- |
 | abstract class [BaseRequest](./Oxide.Ext.Discord/Rest/Requests/BaseRequest.md) | Represents a base request class for REST API calls |
-| class [Request&lt;T&gt;](./Oxide.Ext.Discord/Rest/Requests/Request-1.md) | Represents a REST API request that returns {T} data |
 | class [Request](./Oxide.Ext.Discord/Rest/Requests/Request.md) | Represents a Request that does not return data |
+| class [Request&lt;T&gt;](./Oxide.Ext.Discord/Rest/Requests/Request%7BT%7D.md) | Represents a REST API request that returns {T} data |
 | enum [RequestCompletedStatus](./Oxide.Ext.Discord/Rest/Requests/RequestCompletedStatus.md) | Represents the completed status for the request |
 | class [RequestHandler](./Oxide.Ext.Discord/Rest/Requests/RequestHandler.md) | Represent a Discord API request |
 | enum [RequestStatus](./Oxide.Ext.Discord/Rest/Requests/RequestStatus.md) | Discord API Request Status |
@@ -1090,13 +1090,13 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Singleton/Singleton-1.md) | Represents a singleton of type {T} |
+| abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Singleton/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
 
 ## Oxide.Ext.Discord.Trie namespace
 
 | public type | description |
 | --- | --- |
-| class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Trie/UkkonenTrie-1.md) | A Ukkonen Suffix Trie |
+| class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Trie/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
 
 ## Oxide.Ext.Discord.WebSockets namespace
 

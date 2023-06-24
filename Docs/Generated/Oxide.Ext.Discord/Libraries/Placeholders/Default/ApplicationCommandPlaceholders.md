@@ -10,16 +10,104 @@ public static class ApplicationCommandPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Id](ApplicationCommandPlaceholders/Id.md)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder |
-| static [Mention](ApplicationCommandPlaceholders/Mention.md)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder |
-| static [MentionCustom](ApplicationCommandPlaceholders/MentionCustom.md)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder |
-| static [Name](ApplicationCommandPlaceholders/Name.md)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder |
-| static [RegisterPlaceholders](ApplicationCommandPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
+| static [Id](#Id)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder |
+| static [Mention](#Mention)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder |
+| static [MentionCustom](#MentionCustom)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder |
+| static [Name](#Name)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ApplicationCommandPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/ApplicationCommandPlaceholders.cs)
+   
+   
+# Id method
+
+[`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id) placeholder
+
+```csharp
+public static Snowflake Id(DiscordApplicationCommand command)
+```
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [DiscordApplicationCommand](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
+* class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name method
+
+[`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name) placeholder
+
+```csharp
+public static string Name(DiscordApplicationCommand command)
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
+* class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Mention method
+
+[`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention) placeholder
+
+```csharp
+public static string Mention(DiscordApplicationCommand command)
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
+* class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MentionCustom method
+
+[`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom) placeholder
+
+```csharp
+public static string MentionCustom(PlaceholderState state, DiscordApplicationCommand command)
+```
+
+## See Also
+
+* class [PlaceholderState](../PlaceholderState.md)
+* class [DiscordApplicationCommand](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md)
+* class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RegisterPlaceholders method
+
+Registers placeholders for the given plugin.
+
+```csharp
+public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
+    string dataKey = "DiscordApplicationCommand")
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to register placeholders for |
+| placeholderPrefix | Prefix to use for the placeholders |
+| dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
+
+## See Also
+
+* class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

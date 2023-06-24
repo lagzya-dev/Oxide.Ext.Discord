@@ -10,18 +10,125 @@ public class GuildMembersRequestCommand
 
 | name | description |
 | --- | --- |
-| [GuildMembersRequestCommand](GuildMembersRequestCommand/GuildMembersRequestCommand.md)() | The default constructor. |
-| [GuildId](GuildMembersRequestCommand/GuildId.md) { get; set; } | ID of the guild to get members for |
-| [Limit](GuildMembersRequestCommand/Limit.md) { get; set; } | Maximum number of members to send matching the query; a limit of 0 can be used with an empty string query to return all members |
-| [Nonce](GuildMembersRequestCommand/Nonce.md) { get; set; } | Nonce to identify the Guild Members Chunk response (Up to 25 characters) |
-| [Presences](GuildMembersRequestCommand/Presences.md) { get; set; } | Used to specify if we want the presences of the matched members |
-| [Query](GuildMembersRequestCommand/Query.md) { get; set; } | String that username starts with, or an empty string to return all members |
-| [UserIds](GuildMembersRequestCommand/UserIds.md) { get; set; } | Used to specify which users you wish to fetch |
+| [GuildMembersRequestCommand](#GuildMembersRequestCommand)() | The default constructor. |
+| [GuildId](#GuildId) { get; set; } | ID of the guild to get members for |
+| [Limit](#Limit) { get; set; } | Maximum number of members to send matching the query; a limit of 0 can be used with an empty string query to return all members |
+| [Nonce](#Nonce) { get; set; } | Nonce to identify the Guild Members Chunk response (Up to 25 characters) |
+| [Presences](#Presences) { get; set; } | Used to specify if we want the presences of the matched members |
+| [Query](#Query) { get; set; } | String that username starts with, or an empty string to return all members |
+| [UserIds](#UserIds) { get; set; } | Used to specify which users you wish to fetch |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GuildMembersRequestCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/GuildMembersRequestCommand.cs)
+   
+   
+# GuildMembersRequestCommand constructor
+
+The default constructor.
+
+```csharp
+public GuildMembersRequestCommand()
+```
+
+## See Also
+
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+ID of the guild to get members for
+
+```csharp
+public Snowflake GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Query property
+
+String that username starts with, or an empty string to return all members
+
+```csharp
+public string Query { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Limit property
+
+Maximum number of members to send matching the query; a limit of 0 can be used with an empty string query to return all members
+
+```csharp
+public int Limit { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Presences property
+
+Used to specify if we want the presences of the matched members
+
+```csharp
+public bool? Presences { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# UserIds property
+
+Used to specify which users you wish to fetch
+
+```csharp
+public List<Snowflake> UserIds { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Nonce property
+
+Nonce to identify the Guild Members Chunk response (Up to 25 characters)
+
+```csharp
+public string Nonce { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersRequestCommand](./GuildMembersRequestCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

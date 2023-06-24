@@ -10,19 +10,19 @@ public class MessageAttachment : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [MessageAttachment](MessageAttachment/MessageAttachment.md)() | The default constructor. |
-| [ContentType](MessageAttachment/ContentType.md) { get; set; } | The attachment's [media type](https://en.wikipedia.org/wiki/Media_type) |
-| [Description](MessageAttachment/Description.md) { get; set; } | Description for the file |
-| [DurationSecs](MessageAttachment/DurationSecs.md) { get; set; } | The duration of the audio file (currently for voice messages) |
-| [Ephemeral](MessageAttachment/Ephemeral.md) { get; set; } | Whether this attachment is ephemeral |
-| [Filename](MessageAttachment/Filename.md) { get; set; } | Name of file attached |
-| [Height](MessageAttachment/Height.md) { get; set; } | Height of file (if image) |
-| [Id](MessageAttachment/Id.md) { get; set; } | Attachment ID |
-| [ProxyUrl](MessageAttachment/ProxyUrl.md) { get; set; } | A proxied url of file |
-| [Size](MessageAttachment/Size.md) { get; set; } | Size of file in bytes |
-| [Url](MessageAttachment/Url.md) { get; set; } | Source url of file |
-| [Waveform](MessageAttachment/Waveform.md) { get; set; } | base64 encoded bytearray representing a sampled waveform (currently for voice messages) |
-| [Width](MessageAttachment/Width.md) { get; set; } | Width of file (if image) |
+| [MessageAttachment](#MessageAttachment)() | The default constructor. |
+| [ContentType](#ContentType) { get; set; } | The attachment's [media type](https://en.wikipedia.org/wiki/Media_type) |
+| [Description](#Description) { get; set; } | Description for the file |
+| [DurationSecs](#DurationSecs) { get; set; } | The duration of the audio file (currently for voice messages) |
+| [Ephemeral](#Ephemeral) { get; set; } | Whether this attachment is ephemeral |
+| [Filename](#Filename) { get; set; } | Name of file attached |
+| [Height](#Height) { get; set; } | Height of file (if image) |
+| [Id](#Id) { get; set; } | Attachment ID |
+| [ProxyUrl](#ProxyUrl) { get; set; } | A proxied url of file |
+| [Size](#Size) { get; set; } | Size of file in bytes |
+| [Url](#Url) { get; set; } | Source url of file |
+| [Waveform](#Waveform) { get; set; } | base64 encoded bytearray representing a sampled waveform (currently for voice messages) |
+| [Width](#Width) { get; set; } | Width of file (if image) |
 
 ## See Also
 
@@ -30,5 +30,201 @@ public class MessageAttachment : ISnowflakeEntity
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [MessageAttachment.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageAttachment.cs)
+   
+   
+# MessageAttachment constructor
+
+The default constructor.
+
+```csharp
+public MessageAttachment()
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+Attachment ID
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Filename property
+
+Name of file attached
+
+```csharp
+public string Filename { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description for the file
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ContentType property
+
+The attachment's [media type](https://en.wikipedia.org/wiki/Media_type)
+
+```csharp
+public string ContentType { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Size property
+
+Size of file in bytes
+
+```csharp
+public int? Size { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Url property
+
+Source url of file
+
+```csharp
+public string Url { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ProxyUrl property
+
+A proxied url of file
+
+```csharp
+public string ProxyUrl { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Height property
+
+Height of file (if image)
+
+```csharp
+public int? Height { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Width property
+
+Width of file (if image)
+
+```csharp
+public int? Width { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Ephemeral property
+
+Whether this attachment is ephemeral
+
+```csharp
+public bool? Ephemeral { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DurationSecs property
+
+The duration of the audio file (currently for voice messages)
+
+```csharp
+public float? DurationSecs { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Waveform property
+
+base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+
+```csharp
+public string Waveform { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

@@ -2,18 +2,18 @@
 
 | public type | description |
 | --- | --- |
-| abstract class [BaseMessageCreate](./Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.md) | Represents a base message in discord |
-| class [DiscordMessage](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
-| class [MessageActivity](./Oxide.Ext.Discord/Entities/Messages/MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |
-| enum [MessageActivityType](./Oxide.Ext.Discord/Entities/Messages/MessageActivityType.md) | Represents a [Message Activity Types](https://discord.com/developers/docs/resources/channel#message-object-message-activity-types) |
-| class [MessageAttachment](./Oxide.Ext.Discord/Entities/Messages/MessageAttachment.md) | Represents a message [Attachment Structure](https://discord.com/developers/docs/resources/channel#attachment-object) |
-| class [MessageCreate](./Oxide.Ext.Discord/Entities/Messages/MessageCreate.md) | Represents a [Message Create Structure](https://discord.com/developers/docs/resources/channel#create-message-jsonform-params) to be created in discord |
-| class [MessageFileAttachment](./Oxide.Ext.Discord/Entities/Messages/MessageFileAttachment.md) | Represents a file attachment for a discord message |
-| [Flags] enum [MessageFlags](./Oxide.Ext.Discord/Entities/Messages/MessageFlags.md) | Represents [Message Flags](https://discord.com/developers/docs/resources/channel#message-object-message-flags) for a message |
-| class [MessageInteraction](./Oxide.Ext.Discord/Entities/Messages/MessageInteraction.md) | Represents a [Message Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object) within Discord. |
-| class [MessageReaction](./Oxide.Ext.Discord/Entities/Messages/MessageReaction.md) | Represents a [Reaction Structure](https://discord.com/developers/docs/resources/channel#reaction-object) |
-| class [MessageReference](./Oxide.Ext.Discord/Entities/Messages/MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
-| enum [MessageType](./Oxide.Ext.Discord/Entities/Messages/MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
-| class [MessageUpdate](./Oxide.Ext.Discord/Entities/Messages/MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
+| abstract class [BaseMessageCreate](./BaseMessageCreate.md) | Represents a base message in discord |
+| class [DiscordMessage](./DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
+| class [MessageActivity](./MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |
+| enum [MessageActivityType](./MessageActivityType.md) | Represents a [Message Activity Types](https://discord.com/developers/docs/resources/channel#message-object-message-activity-types) |
+| class [MessageAttachment](./MessageAttachment.md) | Represents a message [Attachment Structure](https://discord.com/developers/docs/resources/channel#attachment-object) |
+| class [MessageCreate](./MessageCreate.md) | Represents a [Message Create Structure](https://discord.com/developers/docs/resources/channel#create-message-jsonform-params) to be created in discord |
+| class [MessageFileAttachment](./MessageFileAttachment.md) | Represents a file attachment for a discord message |
+| [Flags] enum [MessageFlags](./MessageFlags.md) | Represents [Message Flags](https://discord.com/developers/docs/resources/channel#message-object-message-flags) for a message |
+| class [MessageInteraction](./MessageInteraction.md) | Represents a [Message Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object) within Discord. |
+| class [MessageReaction](./MessageReaction.md) | Represents a [Reaction Structure](https://discord.com/developers/docs/resources/channel#reaction-object) |
+| class [MessageReference](./MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
+| enum [MessageType](./MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
+| class [MessageUpdate](./MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

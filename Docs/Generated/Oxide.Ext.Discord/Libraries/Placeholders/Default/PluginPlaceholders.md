@@ -10,20 +10,163 @@ public static class PluginPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Author](PluginPlaceholders/Author.md)(…) | Author placeholder |
-| static [Description](PluginPlaceholders/Description.md)(…) | Description placeholder |
-| static [FullName](PluginPlaceholders/FullName.md)(…) | Plugin) placeholder |
-| static [HookTime](PluginPlaceholders/HookTime.md)(…) | TotalHookTime placeholder |
-| static [LangMessage](PluginPlaceholders/LangMessage.md)(…) | Lang message for a plugin |
-| static [Name](PluginPlaceholders/Name.md)(…) | Name placeholder |
-| static [RegisterPlaceholders](PluginPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
-| static [Title](PluginPlaceholders/Title.md)(…) | Title placeholder |
-| static [Version](PluginPlaceholders/Version.md)(…) | Version placeholder |
+| static [Author](#Author)(…) | Author placeholder |
+| static [Description](#Description)(…) | Description placeholder |
+| static [FullName](#FullName)(…) | Plugin) placeholder |
+| static [HookTime](#HookTime)(…) | TotalHookTime placeholder |
+| static [LangMessage](#LangMessage)(…) | Lang message for a plugin |
+| static [Name](#Name)(…) | Name placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
+| static [Title](#Title)(…) | Title placeholder |
+| static [Version](#Version)(…) | Version placeholder |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [PluginPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/PluginPlaceholders.cs)
+   
+   
+# Name method
+
+Name placeholder
+
+```csharp
+public static string Name(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Title method
+
+Title placeholder
+
+```csharp
+public static string Title(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Author method
+
+Author placeholder
+
+```csharp
+public static string Author(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Version method
+
+Version placeholder
+
+```csharp
+public static string Version(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description method
+
+Description placeholder
+
+```csharp
+public static string Description(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# FullName method
+
+Plugin) placeholder
+
+```csharp
+public static string FullName(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# HookTime method
+
+TotalHookTime placeholder
+
+```csharp
+public static TimeSpan HookTime(Plugin plugin)
+```
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# LangMessage method
+
+Lang message for a plugin
+
+```csharp
+public static string LangMessage(PlaceholderState state, Plugin plugin)
+```
+
+## See Also
+
+* class [PlaceholderState](../PlaceholderState.md)
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RegisterPlaceholders method
+
+Registers placeholders for the given plugin.
+
+```csharp
+public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
+    string dataKey = "Plugin")
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to register placeholders for |
+| placeholderPrefix | Prefix to use for the placeholders |
+| dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
+
+## See Also
+
+* class [PluginPlaceholders](./PluginPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

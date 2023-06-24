@@ -2,21 +2,21 @@
 
 | public type | description |
 | --- | --- |
-| class [ChannelCreate](./Oxide.Ext.Discord/Entities/Channels/ChannelCreate.md) | Represents a [Guild Channel Create Structure](https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params) |
-| [Flags] enum [ChannelFlags](./Oxide.Ext.Discord/Entities/Channels/ChannelFlags.md) | Represents [Channel Flags](https://discord.com/developers/docs/resources/channel#channel-object-channel-flags) |
-| class [ChannelInvite](./Oxide.Ext.Discord/Entities/Channels/ChannelInvite.md) | Represents a [Channel Invite Structure](https://discord.com/developers/docs/resources/channel#create-channel-invite-json-params) |
-| class [ChannelMention](./Oxide.Ext.Discord/Entities/Channels/ChannelMention.md) | Represents a [Channel Mention Structure](https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure) in a message |
-| class [ChannelMessagesRequest](./Oxide.Ext.Discord/Entities/Channels/ChannelMessagesRequest.md) | Represents [Get Channel Messages Request](https://discord.com/developers/docs/resources/channel#get-channel-messages) |
-| enum [ChannelType](./Oxide.Ext.Discord/Entities/Channels/ChannelType.md) | Represents a [Types of Channels](https://discord.com/developers/docs/resources/channel#channel-object-channel-types) |
-| class [DiscordChannel](./Oxide.Ext.Discord/Entities/Channels/DiscordChannel.md) | Represents a guild or DM [Channel Structure](https://discord.com/developers/docs/resources/channel#channel-object) within Discord. |
-| class [FollowedChannel](./Oxide.Ext.Discord/Entities/Channels/FollowedChannel.md) | Represents a [Followed Channel Structure](https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure) from an API response |
-| enum [ForumLayoutTypes](./Oxide.Ext.Discord/Entities/Channels/ForumLayoutTypes.md) | Represents a [Forum Layout Types](https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types) |
-| class [ForumTag](./Oxide.Ext.Discord/Entities/Channels/ForumTag.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
-| class [GroupDmChannelUpdate](./Oxide.Ext.Discord/Entities/Channels/GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
-| class [GuildChannelUpdate](./Oxide.Ext.Discord/Entities/Channels/GuildChannelUpdate.md) | Represents a [Guild Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel) |
-| class [Overwrite](./Oxide.Ext.Discord/Entities/Channels/Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
-| enum [PermissionType](./Oxide.Ext.Discord/Entities/Channels/PermissionType.md) | Represents the type of a permission |
-| enum [SortOrderType](./Oxide.Ext.Discord/Entities/Channels/SortOrderType.md) | Represents [Sort Order Types](https://discord.com/developers/docs/resources/channel#channel-object-sort-order-types) in Discord |
-| enum [VideoQualityMode](./Oxide.Ext.Discord/Entities/Channels/VideoQualityMode.md) | Represents a [Video Quality Mode](https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes) |
+| class [ChannelCreate](./ChannelCreate.md) | Represents a [Guild Channel Create Structure](https://discord.com/developers/docs/resources/guild#create-guild-channel-json-params) |
+| [Flags] enum [ChannelFlags](./ChannelFlags.md) | Represents [Channel Flags](https://discord.com/developers/docs/resources/channel#channel-object-channel-flags) |
+| class [ChannelInvite](./ChannelInvite.md) | Represents a [Channel Invite Structure](https://discord.com/developers/docs/resources/channel#create-channel-invite-json-params) |
+| class [ChannelMention](./ChannelMention.md) | Represents a [Channel Mention Structure](https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure) in a message |
+| class [ChannelMessagesRequest](./ChannelMessagesRequest.md) | Represents [Get Channel Messages Request](https://discord.com/developers/docs/resources/channel#get-channel-messages) |
+| enum [ChannelType](./ChannelType.md) | Represents a [Types of Channels](https://discord.com/developers/docs/resources/channel#channel-object-channel-types) |
+| class [DiscordChannel](./DiscordChannel.md) | Represents a guild or DM [Channel Structure](https://discord.com/developers/docs/resources/channel#channel-object) within Discord. |
+| class [FollowedChannel](./FollowedChannel.md) | Represents a [Followed Channel Structure](https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure) from an API response |
+| enum [ForumLayoutTypes](./ForumLayoutTypes.md) | Represents a [Forum Layout Types](https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types) |
+| class [ForumTag](./ForumTag.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
+| class [GroupDmChannelUpdate](./GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
+| class [GuildChannelUpdate](./GuildChannelUpdate.md) | Represents a [Guild Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel) |
+| class [Overwrite](./Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
+| enum [PermissionType](./PermissionType.md) | Represents the type of a permission |
+| enum [SortOrderType](./SortOrderType.md) | Represents [Sort Order Types](https://discord.com/developers/docs/resources/channel#channel-object-sort-order-types) in Discord |
+| enum [VideoQualityMode](./VideoQualityMode.md) | Represents a [Video Quality Mode](https://discord.com/developers/docs/resources/channel#channel-object-video-quality-modes) |
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

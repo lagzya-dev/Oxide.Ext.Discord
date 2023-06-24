@@ -10,19 +10,142 @@ public class OnboardingPrompt
 
 | name | description |
 | --- | --- |
-| [OnboardingPrompt](OnboardingPrompt/OnboardingPrompt.md)() | The default constructor. |
-| [Id](OnboardingPrompt/Id.md) { get; set; } | ID of the prompt |
-| [InOnboarding](OnboardingPrompt/InOnboarding.md) { get; set; } | Indicates whether the prompt is present in the onboarding flow. If false, the prompt will only appear in the Channels and Roles tab |
-| [Options](OnboardingPrompt/Options.md) { get; set; } | Options available within the prompt |
-| [Required](OnboardingPrompt/Required.md) { get; set; } | Indicates whether the prompt is required before a user completes the onboarding flow |
-| [SingleSelect](OnboardingPrompt/SingleSelect.md) { get; set; } | Indicates whether users are limited to selecting one option for the prompt |
-| [Title](OnboardingPrompt/Title.md) { get; set; } | Title of the prompt |
-| [Type](OnboardingPrompt/Type.md) { get; set; } | Type of prompt |
+| [OnboardingPrompt](#OnboardingPrompt)() | The default constructor. |
+| [Id](#Id) { get; set; } | ID of the prompt |
+| [InOnboarding](#InOnboarding) { get; set; } | Indicates whether the prompt is present in the onboarding flow. If false, the prompt will only appear in the Channels and Roles tab |
+| [Options](#Options) { get; set; } | Options available within the prompt |
+| [Required](#Required) { get; set; } | Indicates whether the prompt is required before a user completes the onboarding flow |
+| [SingleSelect](#SingleSelect) { get; set; } | Indicates whether users are limited to selecting one option for the prompt |
+| [Title](#Title) { get; set; } | Title of the prompt |
+| [Type](#Type) { get; set; } | Type of prompt |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [OnboardingPrompt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPrompt.cs)
+   
+   
+# OnboardingPrompt constructor
+
+The default constructor.
+
+```csharp
+public OnboardingPrompt()
+```
+
+## See Also
+
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the prompt
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of prompt
+
+```csharp
+public OnboardingPromptType Type { get; set; }
+```
+
+## See Also
+
+* enum [OnboardingPromptType](./OnboardingPromptType.md)
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Options property
+
+Options available within the prompt
+
+```csharp
+public List<OnboardingPromptOption> Options { get; set; }
+```
+
+## See Also
+
+* class [OnboardingPromptOption](./OnboardingPromptOption.md)
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Title property
+
+Title of the prompt
+
+```csharp
+public string Title { get; set; }
+```
+
+## See Also
+
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# SingleSelect property
+
+Indicates whether users are limited to selecting one option for the prompt
+
+```csharp
+public bool SingleSelect { get; set; }
+```
+
+## See Also
+
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Required property
+
+Indicates whether the prompt is required before a user completes the onboarding flow
+
+```csharp
+public bool Required { get; set; }
+```
+
+## See Also
+
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# InOnboarding property
+
+Indicates whether the prompt is present in the onboarding flow. If false, the prompt will only appear in the Channels and Roles tab
+
+```csharp
+public bool InOnboarding { get; set; }
+```
+
+## See Also
+
+* class [OnboardingPrompt](./OnboardingPrompt.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

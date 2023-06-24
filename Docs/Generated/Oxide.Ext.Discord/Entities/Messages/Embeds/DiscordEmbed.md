@@ -10,25 +10,244 @@ public class DiscordEmbed
 
 | name | description |
 | --- | --- |
-| [DiscordEmbed](DiscordEmbed/DiscordEmbed.md)() | The default constructor. |
-| [Author](DiscordEmbed/Author.md) { get; set; } | Author information [`EmbedAuthor`](./EmbedAuthor.md) |
-| [Color](DiscordEmbed/Color.md) { get; set; } | Color code of the embed |
-| [Description](DiscordEmbed/Description.md) { get; set; } | Description of embed |
-| [Fields](DiscordEmbed/Fields.md) { get; set; } | Fields information [`EmbedField`](./EmbedField.md) |
-| [Footer](DiscordEmbed/Footer.md) { get; set; } | Footer information [`EmbedFooter`](./EmbedFooter.md) |
-| [Image](DiscordEmbed/Image.md) { get; set; } | Image information [`EmbedImage`](./EmbedImage.md) |
-| [Provider](DiscordEmbed/Provider.md) { get; set; } | Provider information [`EmbedProvider`](./EmbedProvider.md) |
-| [Thumbnail](DiscordEmbed/Thumbnail.md) { get; set; } | Thumbnail information [`EmbedThumbnail`](./EmbedThumbnail.md) |
-| [Timestamp](DiscordEmbed/Timestamp.md) { get; set; } | Timestamp of embed content |
-| [Title](DiscordEmbed/Title.md) { get; set; } | Title of embed |
-| [Type](DiscordEmbed/Type.md) { get; set; } | Type of embed (always "rich" for webhook embeds) |
-| [Url](DiscordEmbed/Url.md) { get; set; } | Url of embed |
-| [Video](DiscordEmbed/Video.md) { get; set; } | Video information [`EmbedVideo`](./EmbedVideo.md) |
+| [DiscordEmbed](#DiscordEmbed)() | The default constructor. |
+| [Author](#Author) { get; set; } | Author information [`EmbedAuthor`](./EmbedAuthor.md) |
+| [Color](#Color) { get; set; } | Color code of the embed |
+| [Description](#Description) { get; set; } | Description of embed |
+| [Fields](#Fields) { get; set; } | Fields information [`EmbedField`](./EmbedField.md) |
+| [Footer](#Footer) { get; set; } | Footer information [`EmbedFooter`](./EmbedFooter.md) |
+| [Image](#Image) { get; set; } | Image information [`EmbedImage`](./EmbedImage.md) |
+| [Provider](#Provider) { get; set; } | Provider information [`EmbedProvider`](./EmbedProvider.md) |
+| [Thumbnail](#Thumbnail) { get; set; } | Thumbnail information [`EmbedThumbnail`](./EmbedThumbnail.md) |
+| [Timestamp](#Timestamp) { get; set; } | Timestamp of embed content |
+| [Title](#Title) { get; set; } | Title of embed |
+| [Type](#Type) { get; set; } | Type of embed (always "rich" for webhook embeds) |
+| [Url](#Url) { get; set; } | Url of embed |
+| [Video](#Video) { get; set; } | Video information [`EmbedVideo`](./EmbedVideo.md) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordEmbed.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/DiscordEmbed.cs)
+   
+   
+# DiscordEmbed constructor
+
+The default constructor.
+
+```csharp
+public DiscordEmbed()
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Title property
+
+Title of embed
+
+```csharp
+public string Title { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of embed (always "rich" for webhook embeds)
+
+```csharp
+[Obsolete("Embed types should be considered deprecated and might be removed in a future API version")]
+public string Type { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of embed
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Url property
+
+Url of embed
+
+```csharp
+public string Url { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Timestamp property
+
+Timestamp of embed content
+
+```csharp
+public DateTime? Timestamp { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Color property
+
+Color code of the embed
+
+```csharp
+public DiscordColor? Color { get; set; }
+```
+
+## See Also
+
+* struct [DiscordColor](../../DiscordColor.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Footer property
+
+Footer information [`EmbedFooter`](./EmbedFooter.md)
+
+```csharp
+public EmbedFooter Footer { get; set; }
+```
+
+## See Also
+
+* class [EmbedFooter](./EmbedFooter.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Image property
+
+Image information [`EmbedImage`](./EmbedImage.md)
+
+```csharp
+public EmbedImage Image { get; set; }
+```
+
+## See Also
+
+* class [EmbedImage](./EmbedImage.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Thumbnail property
+
+Thumbnail information [`EmbedThumbnail`](./EmbedThumbnail.md)
+
+```csharp
+public EmbedThumbnail Thumbnail { get; set; }
+```
+
+## See Also
+
+* class [EmbedThumbnail](./EmbedThumbnail.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Video property
+
+Video information [`EmbedVideo`](./EmbedVideo.md)
+
+```csharp
+public EmbedVideo Video { get; set; }
+```
+
+## See Also
+
+* class [EmbedVideo](./EmbedVideo.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Provider property
+
+Provider information [`EmbedProvider`](./EmbedProvider.md)
+
+```csharp
+public EmbedProvider Provider { get; set; }
+```
+
+## See Also
+
+* class [EmbedProvider](./EmbedProvider.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Author property
+
+Author information [`EmbedAuthor`](./EmbedAuthor.md)
+
+```csharp
+public EmbedAuthor Author { get; set; }
+```
+
+## See Also
+
+* class [EmbedAuthor](./EmbedAuthor.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Fields property
+
+Fields information [`EmbedField`](./EmbedField.md)
+
+```csharp
+public List<EmbedField> Fields { get; set; }
+```
+
+## See Also
+
+* class [EmbedField](./EmbedField.md)
+* class [DiscordEmbed](./DiscordEmbed.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

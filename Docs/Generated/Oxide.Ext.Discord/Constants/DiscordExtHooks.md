@@ -10,117 +10,1516 @@ public static class DiscordExtHooks
 
 | name | description |
 | --- | --- |
-| static readonly [HookGatewayIntent](DiscordExtHooks/HookGatewayIntent.md) | A mapping of Hooks required Gateway Intent |
-| const [OnDiscordApplicationCommandPermissionsUpdated](DiscordExtHooks/OnDiscordApplicationCommandPermissionsUpdated.md) |  |
-| const [OnDiscordAutoModActionExecuted](DiscordExtHooks/OnDiscordAutoModActionExecuted.md) |  |
-| const [OnDiscordAutoModRuleCreated](DiscordExtHooks/OnDiscordAutoModRuleCreated.md) |  |
-| const [OnDiscordAutoModRuleDeleted](DiscordExtHooks/OnDiscordAutoModRuleDeleted.md) |  |
-| const [OnDiscordAutoModRuleUpdated](DiscordExtHooks/OnDiscordAutoModRuleUpdated.md) |  |
-| const [OnDiscordBotFullyLoaded](DiscordExtHooks/OnDiscordBotFullyLoaded.md) |  |
-| const [OnDiscordClientCreated](DiscordExtHooks/OnDiscordClientCreated.md) |  |
-| const [OnDiscordDirectChannelCreated](DiscordExtHooks/OnDiscordDirectChannelCreated.md) |  |
-| const [OnDiscordDirectChannelDeleted](DiscordExtHooks/OnDiscordDirectChannelDeleted.md) |  |
-| const [OnDiscordDirectChannelPinsUpdated](DiscordExtHooks/OnDiscordDirectChannelPinsUpdated.md) |  |
-| const [OnDiscordDirectChannelUpdated](DiscordExtHooks/OnDiscordDirectChannelUpdated.md) |  |
-| const [OnDiscordDirectInviteCreated](DiscordExtHooks/OnDiscordDirectInviteCreated.md) |  |
-| const [OnDiscordDirectInviteDeleted](DiscordExtHooks/OnDiscordDirectInviteDeleted.md) |  |
-| const [OnDiscordDirectMessageCreated](DiscordExtHooks/OnDiscordDirectMessageCreated.md) |  |
-| const [OnDiscordDirectMessageDeleted](DiscordExtHooks/OnDiscordDirectMessageDeleted.md) |  |
-| const [OnDiscordDirectMessageReactionAdded](DiscordExtHooks/OnDiscordDirectMessageReactionAdded.md) |  |
-| const [OnDiscordDirectMessageReactionEmojiRemoved](DiscordExtHooks/OnDiscordDirectMessageReactionEmojiRemoved.md) |  |
-| const [OnDiscordDirectMessageReactionRemoved](DiscordExtHooks/OnDiscordDirectMessageReactionRemoved.md) |  |
-| const [OnDiscordDirectMessageReactionRemovedAll](DiscordExtHooks/OnDiscordDirectMessageReactionRemovedAll.md) |  |
-| const [OnDiscordDirectMessagesBulkDeleted](DiscordExtHooks/OnDiscordDirectMessagesBulkDeleted.md) |  |
-| const [OnDiscordDirectMessageUpdated](DiscordExtHooks/OnDiscordDirectMessageUpdated.md) |  |
-| const [OnDiscordDirectTypingStarted](DiscordExtHooks/OnDiscordDirectTypingStarted.md) |  |
-| const [OnDiscordDirectVoiceStateUpdated](DiscordExtHooks/OnDiscordDirectVoiceStateUpdated.md) |  |
-| const [OnDiscordGatewayReady](DiscordExtHooks/OnDiscordGatewayReady.md) |  |
-| const [OnDiscordGatewayResumed](DiscordExtHooks/OnDiscordGatewayResumed.md) |  |
-| const [OnDiscordGuildChannelCreated](DiscordExtHooks/OnDiscordGuildChannelCreated.md) |  |
-| const [OnDiscordGuildChannelDeleted](DiscordExtHooks/OnDiscordGuildChannelDeleted.md) |  |
-| const [OnDiscordGuildChannelPinsUpdated](DiscordExtHooks/OnDiscordGuildChannelPinsUpdated.md) |  |
-| const [OnDiscordGuildChannelUpdated](DiscordExtHooks/OnDiscordGuildChannelUpdated.md) |  |
-| const [OnDiscordGuildCreated](DiscordExtHooks/OnDiscordGuildCreated.md) |  |
-| const [OnDiscordGuildDeleted](DiscordExtHooks/OnDiscordGuildDeleted.md) |  |
-| const [OnDiscordGuildEmojisUpdated](DiscordExtHooks/OnDiscordGuildEmojisUpdated.md) |  |
-| const [OnDiscordGuildIntegrationCreated](DiscordExtHooks/OnDiscordGuildIntegrationCreated.md) |  |
-| const [OnDiscordGuildIntegrationDeleted](DiscordExtHooks/OnDiscordGuildIntegrationDeleted.md) |  |
-| const [OnDiscordGuildIntegrationsUpdated](DiscordExtHooks/OnDiscordGuildIntegrationsUpdated.md) |  |
-| const [OnDiscordGuildIntegrationUpdated](DiscordExtHooks/OnDiscordGuildIntegrationUpdated.md) |  |
-| const [OnDiscordGuildInviteCreated](DiscordExtHooks/OnDiscordGuildInviteCreated.md) |  |
-| const [OnDiscordGuildInviteDeleted](DiscordExtHooks/OnDiscordGuildInviteDeleted.md) |  |
-| const [OnDiscordGuildMemberAdded](DiscordExtHooks/OnDiscordGuildMemberAdded.md) |  |
-| const [OnDiscordGuildMemberAvatarUpdated](DiscordExtHooks/OnDiscordGuildMemberAvatarUpdated.md) |  |
-| const [OnDiscordGuildMemberBanned](DiscordExtHooks/OnDiscordGuildMemberBanned.md) |  |
-| const [OnDiscordGuildMemberBoosted](DiscordExtHooks/OnDiscordGuildMemberBoosted.md) |  |
-| const [OnDiscordGuildMemberBoostEnded](DiscordExtHooks/OnDiscordGuildMemberBoostEnded.md) |  |
-| const [OnDiscordGuildMemberBoostExtended](DiscordExtHooks/OnDiscordGuildMemberBoostExtended.md) |  |
-| const [OnDiscordGuildMemberDeafened](DiscordExtHooks/OnDiscordGuildMemberDeafened.md) |  |
-| const [OnDiscordGuildMemberMuted](DiscordExtHooks/OnDiscordGuildMemberMuted.md) |  |
-| const [OnDiscordGuildMemberNicknameUpdated](DiscordExtHooks/OnDiscordGuildMemberNicknameUpdated.md) |  |
-| const [OnDiscordGuildMemberPresenceUpdated](DiscordExtHooks/OnDiscordGuildMemberPresenceUpdated.md) |  |
-| const [OnDiscordGuildMemberRemoved](DiscordExtHooks/OnDiscordGuildMemberRemoved.md) |  |
-| const [OnDiscordGuildMemberRoleAdded](DiscordExtHooks/OnDiscordGuildMemberRoleAdded.md) |  |
-| const [OnDiscordGuildMemberRoleRemoved](DiscordExtHooks/OnDiscordGuildMemberRoleRemoved.md) |  |
-| const [OnDiscordGuildMembersChunk](DiscordExtHooks/OnDiscordGuildMembersChunk.md) |  |
-| const [OnDiscordGuildMembersLoaded](DiscordExtHooks/OnDiscordGuildMembersLoaded.md) |  |
-| const [OnDiscordGuildMemberTimeout](DiscordExtHooks/OnDiscordGuildMemberTimeout.md) |  |
-| const [OnDiscordGuildMemberTimeoutEnded](DiscordExtHooks/OnDiscordGuildMemberTimeoutEnded.md) |  |
-| const [OnDiscordGuildMemberUnbanned](DiscordExtHooks/OnDiscordGuildMemberUnbanned.md) |  |
-| const [OnDiscordGuildMemberUndeafened](DiscordExtHooks/OnDiscordGuildMemberUndeafened.md) |  |
-| const [OnDiscordGuildMemberUnmuted](DiscordExtHooks/OnDiscordGuildMemberUnmuted.md) |  |
-| const [OnDiscordGuildMemberUpdated](DiscordExtHooks/OnDiscordGuildMemberUpdated.md) |  |
-| const [OnDiscordGuildMessageCreated](DiscordExtHooks/OnDiscordGuildMessageCreated.md) |  |
-| const [OnDiscordGuildMessageDeleted](DiscordExtHooks/OnDiscordGuildMessageDeleted.md) |  |
-| const [OnDiscordGuildMessageReactionAdded](DiscordExtHooks/OnDiscordGuildMessageReactionAdded.md) |  |
-| const [OnDiscordGuildMessageReactionEmojiRemoved](DiscordExtHooks/OnDiscordGuildMessageReactionEmojiRemoved.md) |  |
-| const [OnDiscordGuildMessageReactionRemoved](DiscordExtHooks/OnDiscordGuildMessageReactionRemoved.md) |  |
-| const [OnDiscordGuildMessageReactionRemovedAll](DiscordExtHooks/OnDiscordGuildMessageReactionRemovedAll.md) |  |
-| const [OnDiscordGuildMessagesBulkDeleted](DiscordExtHooks/OnDiscordGuildMessagesBulkDeleted.md) |  |
-| const [OnDiscordGuildMessageUpdated](DiscordExtHooks/OnDiscordGuildMessageUpdated.md) |  |
-| const [OnDiscordGuildRoleCreated](DiscordExtHooks/OnDiscordGuildRoleCreated.md) |  |
-| const [OnDiscordGuildRoleDeleted](DiscordExtHooks/OnDiscordGuildRoleDeleted.md) |  |
-| const [OnDiscordGuildRoleUpdated](DiscordExtHooks/OnDiscordGuildRoleUpdated.md) |  |
-| const [OnDiscordGuildScheduledEventCreated](DiscordExtHooks/OnDiscordGuildScheduledEventCreated.md) |  |
-| const [OnDiscordGuildScheduledEventDeleted](DiscordExtHooks/OnDiscordGuildScheduledEventDeleted.md) |  |
-| const [OnDiscordGuildScheduledEventUpdated](DiscordExtHooks/OnDiscordGuildScheduledEventUpdated.md) |  |
-| const [OnDiscordGuildScheduledEventUserAdded](DiscordExtHooks/OnDiscordGuildScheduledEventUserAdded.md) |  |
-| const [OnDiscordGuildScheduledEventUserRemoved](DiscordExtHooks/OnDiscordGuildScheduledEventUserRemoved.md) |  |
-| const [OnDiscordGuildStickersUpdated](DiscordExtHooks/OnDiscordGuildStickersUpdated.md) |  |
-| const [OnDiscordGuildThreadCreated](DiscordExtHooks/OnDiscordGuildThreadCreated.md) |  |
-| const [OnDiscordGuildThreadDeleted](DiscordExtHooks/OnDiscordGuildThreadDeleted.md) |  |
-| const [OnDiscordGuildThreadListSynced](DiscordExtHooks/OnDiscordGuildThreadListSynced.md) |  |
-| const [OnDiscordGuildThreadMembersUpdated](DiscordExtHooks/OnDiscordGuildThreadMembersUpdated.md) |  |
-| const [OnDiscordGuildThreadMemberUpdated](DiscordExtHooks/OnDiscordGuildThreadMemberUpdated.md) |  |
-| const [OnDiscordGuildThreadUpdated](DiscordExtHooks/OnDiscordGuildThreadUpdated.md) |  |
-| const [OnDiscordGuildTypingStarted](DiscordExtHooks/OnDiscordGuildTypingStarted.md) |  |
-| const [OnDiscordGuildUnavailable](DiscordExtHooks/OnDiscordGuildUnavailable.md) |  |
-| const [OnDiscordGuildUpdated](DiscordExtHooks/OnDiscordGuildUpdated.md) |  |
-| const [OnDiscordGuildVoiceServerUpdated](DiscordExtHooks/OnDiscordGuildVoiceServerUpdated.md) |  |
-| const [OnDiscordGuildVoiceStateUpdated](DiscordExtHooks/OnDiscordGuildVoiceStateUpdated.md) |  |
-| const [OnDiscordGuildWebhookUpdated](DiscordExtHooks/OnDiscordGuildWebhookUpdated.md) |  |
-| const [OnDiscordHeartbeatSent](DiscordExtHooks/OnDiscordHeartbeatSent.md) |  |
-| const [OnDiscordInteractionCreated](DiscordExtHooks/OnDiscordInteractionCreated.md) |  |
-| const [OnDiscordPlayerLinked](DiscordExtHooks/OnDiscordPlayerLinked.md) |  |
-| const [OnDiscordPlayerUnlink](DiscordExtHooks/OnDiscordPlayerUnlink.md) |  |
-| const [OnDiscordPlayerUnlinked](DiscordExtHooks/OnDiscordPlayerUnlinked.md) |  |
-| const [OnDiscordSetupHeartbeat](DiscordExtHooks/OnDiscordSetupHeartbeat.md) |  |
-| const [OnDiscordStageInstanceCreated](DiscordExtHooks/OnDiscordStageInstanceCreated.md) |  |
-| const [OnDiscordStageInstanceDeleted](DiscordExtHooks/OnDiscordStageInstanceDeleted.md) |  |
-| const [OnDiscordStageInstanceUpdated](DiscordExtHooks/OnDiscordStageInstanceUpdated.md) |  |
-| const [OnDiscordUnhandledCommand](DiscordExtHooks/OnDiscordUnhandledCommand.md) |  |
-| const [OnDiscordUserUpdated](DiscordExtHooks/OnDiscordUserUpdated.md) |  |
-| const [OnDiscordWebsocketClosed](DiscordExtHooks/OnDiscordWebsocketClosed.md) |  |
-| const [OnDiscordWebsocketErrored](DiscordExtHooks/OnDiscordWebsocketErrored.md) |  |
-| const [OnDiscordWebsocketOpened](DiscordExtHooks/OnDiscordWebsocketOpened.md) |  |
-| static [IsDiscordHook](DiscordExtHooks/IsDiscordHook.md)(…) | Returns true if the hook is a Discord Extension Hook |
-| static [IsGlobalHook](DiscordExtHooks/IsGlobalHook.md)(…) | Returns true if the hook is a Discord Extension Global Hook |
-| static [IsPluginHook](DiscordExtHooks/IsPluginHook.md)(…) | Returns true if the hook is a Discord Extension Plugin Hook |
+| static readonly [HookGatewayIntent](#HookGatewayIntent) | A mapping of Hooks required Gateway Intent |
+| const [OnDiscordApplicationCommandPermissionsUpdated](#OnDiscordApplicationCommandPermissionsUpdated) |  |
+| const [OnDiscordAutoModActionExecuted](#OnDiscordAutoModActionExecuted) |  |
+| const [OnDiscordAutoModRuleCreated](#OnDiscordAutoModRuleCreated) |  |
+| const [OnDiscordAutoModRuleDeleted](#OnDiscordAutoModRuleDeleted) |  |
+| const [OnDiscordAutoModRuleUpdated](#OnDiscordAutoModRuleUpdated) |  |
+| const [OnDiscordBotFullyLoaded](#OnDiscordBotFullyLoaded) |  |
+| const [OnDiscordClientCreated](#OnDiscordClientCreated) |  |
+| const [OnDiscordDirectChannelCreated](#OnDiscordDirectChannelCreated) |  |
+| const [OnDiscordDirectChannelDeleted](#OnDiscordDirectChannelDeleted) |  |
+| const [OnDiscordDirectChannelPinsUpdated](#OnDiscordDirectChannelPinsUpdated) |  |
+| const [OnDiscordDirectChannelUpdated](#OnDiscordDirectChannelUpdated) |  |
+| const [OnDiscordDirectInviteCreated](#OnDiscordDirectInviteCreated) |  |
+| const [OnDiscordDirectInviteDeleted](#OnDiscordDirectInviteDeleted) |  |
+| const [OnDiscordDirectMessageCreated](#OnDiscordDirectMessageCreated) |  |
+| const [OnDiscordDirectMessageDeleted](#OnDiscordDirectMessageDeleted) |  |
+| const [OnDiscordDirectMessageReactionAdded](#OnDiscordDirectMessageReactionAdded) |  |
+| const [OnDiscordDirectMessageReactionEmojiRemoved](#OnDiscordDirectMessageReactionEmojiRemoved) |  |
+| const [OnDiscordDirectMessageReactionRemoved](#OnDiscordDirectMessageReactionRemoved) |  |
+| const [OnDiscordDirectMessageReactionRemovedAll](#OnDiscordDirectMessageReactionRemovedAll) |  |
+| const [OnDiscordDirectMessagesBulkDeleted](#OnDiscordDirectMessagesBulkDeleted) |  |
+| const [OnDiscordDirectMessageUpdated](#OnDiscordDirectMessageUpdated) |  |
+| const [OnDiscordDirectTypingStarted](#OnDiscordDirectTypingStarted) |  |
+| const [OnDiscordDirectVoiceStateUpdated](#OnDiscordDirectVoiceStateUpdated) |  |
+| const [OnDiscordGatewayReady](#OnDiscordGatewayReady) |  |
+| const [OnDiscordGatewayResumed](#OnDiscordGatewayResumed) |  |
+| const [OnDiscordGuildChannelCreated](#OnDiscordGuildChannelCreated) |  |
+| const [OnDiscordGuildChannelDeleted](#OnDiscordGuildChannelDeleted) |  |
+| const [OnDiscordGuildChannelPinsUpdated](#OnDiscordGuildChannelPinsUpdated) |  |
+| const [OnDiscordGuildChannelUpdated](#OnDiscordGuildChannelUpdated) |  |
+| const [OnDiscordGuildCreated](#OnDiscordGuildCreated) |  |
+| const [OnDiscordGuildDeleted](#OnDiscordGuildDeleted) |  |
+| const [OnDiscordGuildEmojisUpdated](#OnDiscordGuildEmojisUpdated) |  |
+| const [OnDiscordGuildIntegrationCreated](#OnDiscordGuildIntegrationCreated) |  |
+| const [OnDiscordGuildIntegrationDeleted](#OnDiscordGuildIntegrationDeleted) |  |
+| const [OnDiscordGuildIntegrationsUpdated](#OnDiscordGuildIntegrationsUpdated) |  |
+| const [OnDiscordGuildIntegrationUpdated](#OnDiscordGuildIntegrationUpdated) |  |
+| const [OnDiscordGuildInviteCreated](#OnDiscordGuildInviteCreated) |  |
+| const [OnDiscordGuildInviteDeleted](#OnDiscordGuildInviteDeleted) |  |
+| const [OnDiscordGuildMemberAdded](#OnDiscordGuildMemberAdded) |  |
+| const [OnDiscordGuildMemberAvatarUpdated](#OnDiscordGuildMemberAvatarUpdated) |  |
+| const [OnDiscordGuildMemberBanned](#OnDiscordGuildMemberBanned) |  |
+| const [OnDiscordGuildMemberBoosted](#OnDiscordGuildMemberBoosted) |  |
+| const [OnDiscordGuildMemberBoostEnded](#OnDiscordGuildMemberBoostEnded) |  |
+| const [OnDiscordGuildMemberBoostExtended](#OnDiscordGuildMemberBoostExtended) |  |
+| const [OnDiscordGuildMemberDeafened](#OnDiscordGuildMemberDeafened) |  |
+| const [OnDiscordGuildMemberMuted](#OnDiscordGuildMemberMuted) |  |
+| const [OnDiscordGuildMemberNicknameUpdated](#OnDiscordGuildMemberNicknameUpdated) |  |
+| const [OnDiscordGuildMemberPresenceUpdated](#OnDiscordGuildMemberPresenceUpdated) |  |
+| const [OnDiscordGuildMemberRemoved](#OnDiscordGuildMemberRemoved) |  |
+| const [OnDiscordGuildMemberRoleAdded](#OnDiscordGuildMemberRoleAdded) |  |
+| const [OnDiscordGuildMemberRoleRemoved](#OnDiscordGuildMemberRoleRemoved) |  |
+| const [OnDiscordGuildMembersChunk](#OnDiscordGuildMembersChunk) |  |
+| const [OnDiscordGuildMembersLoaded](#OnDiscordGuildMembersLoaded) |  |
+| const [OnDiscordGuildMemberTimeout](#OnDiscordGuildMemberTimeout) |  |
+| const [OnDiscordGuildMemberTimeoutEnded](#OnDiscordGuildMemberTimeoutEnded) |  |
+| const [OnDiscordGuildMemberUnbanned](#OnDiscordGuildMemberUnbanned) |  |
+| const [OnDiscordGuildMemberUndeafened](#OnDiscordGuildMemberUndeafened) |  |
+| const [OnDiscordGuildMemberUnmuted](#OnDiscordGuildMemberUnmuted) |  |
+| const [OnDiscordGuildMemberUpdated](#OnDiscordGuildMemberUpdated) |  |
+| const [OnDiscordGuildMessageCreated](#OnDiscordGuildMessageCreated) |  |
+| const [OnDiscordGuildMessageDeleted](#OnDiscordGuildMessageDeleted) |  |
+| const [OnDiscordGuildMessageReactionAdded](#OnDiscordGuildMessageReactionAdded) |  |
+| const [OnDiscordGuildMessageReactionEmojiRemoved](#OnDiscordGuildMessageReactionEmojiRemoved) |  |
+| const [OnDiscordGuildMessageReactionRemoved](#OnDiscordGuildMessageReactionRemoved) |  |
+| const [OnDiscordGuildMessageReactionRemovedAll](#OnDiscordGuildMessageReactionRemovedAll) |  |
+| const [OnDiscordGuildMessagesBulkDeleted](#OnDiscordGuildMessagesBulkDeleted) |  |
+| const [OnDiscordGuildMessageUpdated](#OnDiscordGuildMessageUpdated) |  |
+| const [OnDiscordGuildRoleCreated](#OnDiscordGuildRoleCreated) |  |
+| const [OnDiscordGuildRoleDeleted](#OnDiscordGuildRoleDeleted) |  |
+| const [OnDiscordGuildRoleUpdated](#OnDiscordGuildRoleUpdated) |  |
+| const [OnDiscordGuildScheduledEventCreated](#OnDiscordGuildScheduledEventCreated) |  |
+| const [OnDiscordGuildScheduledEventDeleted](#OnDiscordGuildScheduledEventDeleted) |  |
+| const [OnDiscordGuildScheduledEventUpdated](#OnDiscordGuildScheduledEventUpdated) |  |
+| const [OnDiscordGuildScheduledEventUserAdded](#OnDiscordGuildScheduledEventUserAdded) |  |
+| const [OnDiscordGuildScheduledEventUserRemoved](#OnDiscordGuildScheduledEventUserRemoved) |  |
+| const [OnDiscordGuildStickersUpdated](#OnDiscordGuildStickersUpdated) |  |
+| const [OnDiscordGuildThreadCreated](#OnDiscordGuildThreadCreated) |  |
+| const [OnDiscordGuildThreadDeleted](#OnDiscordGuildThreadDeleted) |  |
+| const [OnDiscordGuildThreadListSynced](#OnDiscordGuildThreadListSynced) |  |
+| const [OnDiscordGuildThreadMembersUpdated](#OnDiscordGuildThreadMembersUpdated) |  |
+| const [OnDiscordGuildThreadMemberUpdated](#OnDiscordGuildThreadMemberUpdated) |  |
+| const [OnDiscordGuildThreadUpdated](#OnDiscordGuildThreadUpdated) |  |
+| const [OnDiscordGuildTypingStarted](#OnDiscordGuildTypingStarted) |  |
+| const [OnDiscordGuildUnavailable](#OnDiscordGuildUnavailable) |  |
+| const [OnDiscordGuildUpdated](#OnDiscordGuildUpdated) |  |
+| const [OnDiscordGuildVoiceServerUpdated](#OnDiscordGuildVoiceServerUpdated) |  |
+| const [OnDiscordGuildVoiceStateUpdated](#OnDiscordGuildVoiceStateUpdated) |  |
+| const [OnDiscordGuildWebhookUpdated](#OnDiscordGuildWebhookUpdated) |  |
+| const [OnDiscordHeartbeatSent](#OnDiscordHeartbeatSent) |  |
+| const [OnDiscordInteractionCreated](#OnDiscordInteractionCreated) |  |
+| const [OnDiscordPlayerLinked](#OnDiscordPlayerLinked) |  |
+| const [OnDiscordPlayerUnlink](#OnDiscordPlayerUnlink) |  |
+| const [OnDiscordPlayerUnlinked](#OnDiscordPlayerUnlinked) |  |
+| const [OnDiscordSetupHeartbeat](#OnDiscordSetupHeartbeat) |  |
+| const [OnDiscordStageInstanceCreated](#OnDiscordStageInstanceCreated) |  |
+| const [OnDiscordStageInstanceDeleted](#OnDiscordStageInstanceDeleted) |  |
+| const [OnDiscordStageInstanceUpdated](#OnDiscordStageInstanceUpdated) |  |
+| const [OnDiscordUnhandledCommand](#OnDiscordUnhandledCommand) |  |
+| const [OnDiscordUserUpdated](#OnDiscordUserUpdated) |  |
+| const [OnDiscordWebsocketClosed](#OnDiscordWebsocketClosed) |  |
+| const [OnDiscordWebsocketErrored](#OnDiscordWebsocketErrored) |  |
+| const [OnDiscordWebsocketOpened](#OnDiscordWebsocketOpened) |  |
+| static [IsDiscordHook](#IsDiscordHook)(…) | Returns true if the hook is a Discord Extension Hook |
+| static [IsGlobalHook](#IsGlobalHook)(…) | Returns true if the hook is a Discord Extension Global Hook |
+| static [IsPluginHook](#IsPluginHook)(…) | Returns true if the hook is a Discord Extension Plugin Hook |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordExtHooks.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Constants/DiscordExtHooks.cs)
+   
+   
+# IsGlobalHook method
+
+Returns true if the hook is a Discord Extension Global Hook
+
+```csharp
+public static bool IsGlobalHook(string hook)
+```
+
+| parameter | description |
+| --- | --- |
+| hook | Name of the hook |
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IsPluginHook method
+
+Returns true if the hook is a Discord Extension Plugin Hook
+
+```csharp
+public static bool IsPluginHook(string hook)
+```
+
+| parameter | description |
+| --- | --- |
+| hook | Name of the hook |
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IsDiscordHook method
+
+Returns true if the hook is a Discord Extension Hook
+
+```csharp
+public static bool IsDiscordHook(string hook)
+```
+
+| parameter | description |
+| --- | --- |
+| hook | Name of the hook |
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# HookGatewayIntent field
+
+A mapping of Hooks required Gateway Intent
+
+```csharp
+public static readonly Hash<string, GatewayIntents> HookGatewayIntent;
+```
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordClientCreated field
+
+```csharp
+public const string OnDiscordClientCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordBotFullyLoaded field
+
+```csharp
+public const string OnDiscordBotFullyLoaded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordWebsocketOpened field
+
+```csharp
+public const string OnDiscordWebsocketOpened;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordWebsocketClosed field
+
+```csharp
+public const string OnDiscordWebsocketClosed;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordWebsocketErrored field
+
+```csharp
+public const string OnDiscordWebsocketErrored;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordSetupHeartbeat field
+
+```csharp
+public const string OnDiscordSetupHeartbeat;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordHeartbeatSent field
+
+```csharp
+public const string OnDiscordHeartbeatSent;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPlayerLinked field
+
+```csharp
+public const string OnDiscordPlayerLinked;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPlayerUnlink field
+
+```csharp
+public const string OnDiscordPlayerUnlink;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPlayerUnlinked field
+
+```csharp
+public const string OnDiscordPlayerUnlinked;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGatewayReady field
+
+```csharp
+public const string OnDiscordGatewayReady;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGatewayResumed field
+
+```csharp
+public const string OnDiscordGatewayResumed;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectChannelCreated field
+
+```csharp
+public const string OnDiscordDirectChannelCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildChannelCreated field
+
+```csharp
+public const string OnDiscordGuildChannelCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectChannelUpdated field
+
+```csharp
+public const string OnDiscordDirectChannelUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildChannelUpdated field
+
+```csharp
+public const string OnDiscordGuildChannelUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectChannelDeleted field
+
+```csharp
+public const string OnDiscordDirectChannelDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildChannelDeleted field
+
+```csharp
+public const string OnDiscordGuildChannelDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectChannelPinsUpdated field
+
+```csharp
+public const string OnDiscordDirectChannelPinsUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildChannelPinsUpdated field
+
+```csharp
+public const string OnDiscordGuildChannelPinsUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildCreated field
+
+```csharp
+public const string OnDiscordGuildCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildUpdated field
+
+```csharp
+public const string OnDiscordGuildUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildUnavailable field
+
+```csharp
+public const string OnDiscordGuildUnavailable;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildDeleted field
+
+```csharp
+public const string OnDiscordGuildDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberBanned field
+
+```csharp
+public const string OnDiscordGuildMemberBanned;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberUnbanned field
+
+```csharp
+public const string OnDiscordGuildMemberUnbanned;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildEmojisUpdated field
+
+```csharp
+public const string OnDiscordGuildEmojisUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildStickersUpdated field
+
+```csharp
+public const string OnDiscordGuildStickersUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildIntegrationsUpdated field
+
+```csharp
+public const string OnDiscordGuildIntegrationsUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberAdded field
+
+```csharp
+public const string OnDiscordGuildMemberAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberRemoved field
+
+```csharp
+public const string OnDiscordGuildMemberRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberUpdated field
+
+```csharp
+public const string OnDiscordGuildMemberUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberNicknameUpdated field
+
+```csharp
+public const string OnDiscordGuildMemberNicknameUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberAvatarUpdated field
+
+```csharp
+public const string OnDiscordGuildMemberAvatarUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberDeafened field
+
+```csharp
+public const string OnDiscordGuildMemberDeafened;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberUndeafened field
+
+```csharp
+public const string OnDiscordGuildMemberUndeafened;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberMuted field
+
+```csharp
+public const string OnDiscordGuildMemberMuted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberUnmuted field
+
+```csharp
+public const string OnDiscordGuildMemberUnmuted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberTimeout field
+
+```csharp
+public const string OnDiscordGuildMemberTimeout;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberTimeoutEnded field
+
+```csharp
+public const string OnDiscordGuildMemberTimeoutEnded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberBoosted field
+
+```csharp
+public const string OnDiscordGuildMemberBoosted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberBoostExtended field
+
+```csharp
+public const string OnDiscordGuildMemberBoostExtended;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberBoostEnded field
+
+```csharp
+public const string OnDiscordGuildMemberBoostEnded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberRoleAdded field
+
+```csharp
+public const string OnDiscordGuildMemberRoleAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberRoleRemoved field
+
+```csharp
+public const string OnDiscordGuildMemberRoleRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMembersLoaded field
+
+```csharp
+public const string OnDiscordGuildMembersLoaded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMembersChunk field
+
+```csharp
+public const string OnDiscordGuildMembersChunk;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildRoleCreated field
+
+```csharp
+public const string OnDiscordGuildRoleCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildRoleUpdated field
+
+```csharp
+public const string OnDiscordGuildRoleUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildRoleDeleted field
+
+```csharp
+public const string OnDiscordGuildRoleDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildScheduledEventCreated field
+
+```csharp
+public const string OnDiscordGuildScheduledEventCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildScheduledEventUpdated field
+
+```csharp
+public const string OnDiscordGuildScheduledEventUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildScheduledEventDeleted field
+
+```csharp
+public const string OnDiscordGuildScheduledEventDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildScheduledEventUserAdded field
+
+```csharp
+public const string OnDiscordGuildScheduledEventUserAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildScheduledEventUserRemoved field
+
+```csharp
+public const string OnDiscordGuildScheduledEventUserRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageCreated field
+
+```csharp
+public const string OnDiscordDirectMessageCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageCreated field
+
+```csharp
+public const string OnDiscordGuildMessageCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageUpdated field
+
+```csharp
+public const string OnDiscordDirectMessageUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageUpdated field
+
+```csharp
+public const string OnDiscordGuildMessageUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageDeleted field
+
+```csharp
+public const string OnDiscordDirectMessageDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageDeleted field
+
+```csharp
+public const string OnDiscordGuildMessageDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessagesBulkDeleted field
+
+```csharp
+public const string OnDiscordDirectMessagesBulkDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessagesBulkDeleted field
+
+```csharp
+public const string OnDiscordGuildMessagesBulkDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageReactionAdded field
+
+```csharp
+public const string OnDiscordDirectMessageReactionAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageReactionAdded field
+
+```csharp
+public const string OnDiscordGuildMessageReactionAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageReactionRemoved field
+
+```csharp
+public const string OnDiscordDirectMessageReactionRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageReactionRemoved field
+
+```csharp
+public const string OnDiscordGuildMessageReactionRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageReactionRemovedAll field
+
+```csharp
+public const string OnDiscordDirectMessageReactionRemovedAll;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageReactionRemovedAll field
+
+```csharp
+public const string OnDiscordGuildMessageReactionRemovedAll;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectMessageReactionEmojiRemoved field
+
+```csharp
+public const string OnDiscordDirectMessageReactionEmojiRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMessageReactionEmojiRemoved field
+
+```csharp
+public const string OnDiscordGuildMessageReactionEmojiRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildMemberPresenceUpdated field
+
+```csharp
+public const string OnDiscordGuildMemberPresenceUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectTypingStarted field
+
+```csharp
+public const string OnDiscordDirectTypingStarted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildTypingStarted field
+
+```csharp
+public const string OnDiscordGuildTypingStarted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordUserUpdated field
+
+```csharp
+public const string OnDiscordUserUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectVoiceStateUpdated field
+
+```csharp
+public const string OnDiscordDirectVoiceStateUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildVoiceStateUpdated field
+
+```csharp
+public const string OnDiscordGuildVoiceStateUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildVoiceServerUpdated field
+
+```csharp
+public const string OnDiscordGuildVoiceServerUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildWebhookUpdated field
+
+```csharp
+public const string OnDiscordGuildWebhookUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectInviteCreated field
+
+```csharp
+public const string OnDiscordDirectInviteCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildInviteCreated field
+
+```csharp
+public const string OnDiscordGuildInviteCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordDirectInviteDeleted field
+
+```csharp
+public const string OnDiscordDirectInviteDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildInviteDeleted field
+
+```csharp
+public const string OnDiscordGuildInviteDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordApplicationCommandPermissionsUpdated field
+
+```csharp
+public const string OnDiscordApplicationCommandPermissionsUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordInteractionCreated field
+
+```csharp
+public const string OnDiscordInteractionCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildIntegrationCreated field
+
+```csharp
+public const string OnDiscordGuildIntegrationCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildIntegrationUpdated field
+
+```csharp
+public const string OnDiscordGuildIntegrationUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildIntegrationDeleted field
+
+```csharp
+public const string OnDiscordGuildIntegrationDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadCreated field
+
+```csharp
+public const string OnDiscordGuildThreadCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadUpdated field
+
+```csharp
+public const string OnDiscordGuildThreadUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadDeleted field
+
+```csharp
+public const string OnDiscordGuildThreadDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadListSynced field
+
+```csharp
+public const string OnDiscordGuildThreadListSynced;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadMemberUpdated field
+
+```csharp
+public const string OnDiscordGuildThreadMemberUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGuildThreadMembersUpdated field
+
+```csharp
+public const string OnDiscordGuildThreadMembersUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordStageInstanceCreated field
+
+```csharp
+public const string OnDiscordStageInstanceCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordStageInstanceUpdated field
+
+```csharp
+public const string OnDiscordStageInstanceUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordStageInstanceDeleted field
+
+```csharp
+public const string OnDiscordStageInstanceDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordAutoModRuleCreated field
+
+```csharp
+public const string OnDiscordAutoModRuleCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordAutoModRuleUpdated field
+
+```csharp
+public const string OnDiscordAutoModRuleUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordAutoModRuleDeleted field
+
+```csharp
+public const string OnDiscordAutoModRuleDeleted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordAutoModActionExecuted field
+
+```csharp
+public const string OnDiscordAutoModActionExecuted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordUnhandledCommand field
+
+```csharp
+public const string OnDiscordUnhandledCommand;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

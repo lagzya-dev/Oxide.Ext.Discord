@@ -10,18 +10,123 @@ public class ThreadMetadata
 
 | name | description |
 | --- | --- |
-| [ThreadMetadata](ThreadMetadata/ThreadMetadata.md)() | The default constructor. |
-| [Archived](ThreadMetadata/Archived.md) { get; set; } | Whether the thread is archived |
-| [ArchiveTimestamp](ThreadMetadata/ArchiveTimestamp.md) { get; set; } | Timestamp when the thread's archive status was last changed, used for calculating recent activity |
-| [AutoArchiveDuration](ThreadMetadata/AutoArchiveDuration.md) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [CreateTimestamp](ThreadMetadata/CreateTimestamp.md) { get; set; } | Timestamp when the thread was created; only populated for threads created after 2022-01-09 |
-| [Invitable](ThreadMetadata/Invitable.md) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
-| [Locked](ThreadMetadata/Locked.md) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
+| [ThreadMetadata](#ThreadMetadata)() | The default constructor. |
+| [Archived](#Archived) { get; set; } | Whether the thread is archived |
+| [ArchiveTimestamp](#ArchiveTimestamp) { get; set; } | Timestamp when the thread's archive status was last changed, used for calculating recent activity |
+| [AutoArchiveDuration](#AutoArchiveDuration) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [CreateTimestamp](#CreateTimestamp) { get; set; } | Timestamp when the thread was created; only populated for threads created after 2022-01-09 |
+| [Invitable](#Invitable) { get; set; } | Whether non-moderators can add other non-moderators to a thread Only available on private threads |
+| [Locked](#Locked) { get; set; } | Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ThreadMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMetadata.cs)
+   
+   
+# ThreadMetadata constructor
+
+The default constructor.
+
+```csharp
+public ThreadMetadata()
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Archived property
+
+Whether the thread is archived
+
+```csharp
+public bool Archived { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# AutoArchiveDuration property
+
+Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080
+
+```csharp
+public int AutoArchiveDuration { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ArchiveTimestamp property
+
+Timestamp when the thread's archive status was last changed, used for calculating recent activity
+
+```csharp
+public DateTime ArchiveTimestamp { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Locked property
+
+Whether the thread is locked When a thread is locked, only users with MANAGE_THREADS can unarchive it
+
+```csharp
+public bool Locked { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Invitable property
+
+Whether non-moderators can add other non-moderators to a thread Only available on private threads
+
+```csharp
+public bool? Invitable { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateTimestamp property
+
+Timestamp when the thread was created; only populated for threads created after 2022-01-09
+
+```csharp
+public DateTime? CreateTimestamp { get; set; }
+```
+
+## See Also
+
+* class [ThreadMetadata](./ThreadMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

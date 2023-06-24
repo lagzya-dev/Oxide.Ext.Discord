@@ -10,19 +10,139 @@ public static class RateLimitHeaders
 
 | name | description |
 | --- | --- |
-| const [BucketId](RateLimitHeaders/BucketId.md) | A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path) |
-| const [BucketLimit](RateLimitHeaders/BucketLimit.md) | The number of requests that can be made |
-| const [BucketRemaining](RateLimitHeaders/BucketRemaining.md) | The number of remaining requests that can be made |
-| const [BucketReset](RateLimitHeaders/BucketReset.md) | Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets |
-| const [BucketResetAfter](RateLimitHeaders/BucketResetAfter.md) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision |
-| const [IsGlobal](RateLimitHeaders/IsGlobal.md) | Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route) |
-| const [RetryAfter](RateLimitHeaders/RetryAfter.md) | The number of seconds to wait before submitting another request. |
-| const [Scope](RateLimitHeaders/Scope.md) | Scope of the rate limit |
+| const [BucketId](#BucketId) | A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path) |
+| const [BucketLimit](#BucketLimit) | The number of requests that can be made |
+| const [BucketRemaining](#BucketRemaining) | The number of remaining requests that can be made |
+| const [BucketReset](#BucketReset) | Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets |
+| const [BucketResetAfter](#BucketResetAfter) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision |
+| const [IsGlobal](#IsGlobal) | Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route) |
+| const [RetryAfter](#RetryAfter) | The number of seconds to wait before submitting another request. |
+| const [Scope](#Scope) | Scope of the rate limit |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [RateLimitHeaders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Constants/RateLimitHeaders.cs)
+   
+   
+# RetryAfter field
+
+The number of seconds to wait before submitting another request.
+
+```csharp
+public const string RetryAfter;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IsGlobal field
+
+Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route)
+
+```csharp
+public const string IsGlobal;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BucketId field
+
+A unique string denoting the rate limit being encountered (non-inclusive of top-level resources in the path)
+
+```csharp
+public const string BucketId;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BucketLimit field
+
+The number of requests that can be made
+
+```csharp
+public const string BucketLimit;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BucketRemaining field
+
+The number of remaining requests that can be made
+
+```csharp
+public const string BucketRemaining;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BucketResetAfter field
+
+Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision
+
+```csharp
+public const string BucketResetAfter;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BucketReset field
+
+Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets
+
+```csharp
+public const string BucketReset;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Scope field
+
+Scope of the rate limit
+
+```csharp
+public const string Scope;
+```
+
+## See Also
+
+* class [RateLimitHeaders](./RateLimitHeaders.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

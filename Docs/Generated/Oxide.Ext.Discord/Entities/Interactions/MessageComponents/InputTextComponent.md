@@ -10,15 +10,15 @@ public class InputTextComponent : BaseInteractableComponent
 
 | name | description |
 | --- | --- |
-| [InputTextComponent](InputTextComponent/InputTextComponent.md)() | Input Text Constructor |
-| [Label](InputTextComponent/Label.md) { get; set; } | Text that appears on top of the input text field, max 80 characters |
-| [MaxLength](InputTextComponent/MaxLength.md) { get; set; } | Maximum length of the text input |
-| [MinLength](InputTextComponent/MinLength.md) { get; set; } | Minimum length of the text input |
-| [Placeholder](InputTextComponent/Placeholder.md) { get; set; } | Custom placeholder text if the input is empty Max 100 characters |
-| [Required](InputTextComponent/Required.md) { get; set; } | Whether this component is required to be filled defaults to true |
-| [Style](InputTextComponent/Style.md) { get; set; } | Style of the input text |
-| [Value](InputTextComponent/Value.md) { get; set; } | Pre-filled value for text input |
-| override [Validate](InputTextComponent/Validate.md)() |  |
+| [InputTextComponent](#InputTextComponent)() | Input Text Constructor |
+| [Label](#Label) { get; set; } | Text that appears on top of the input text field, max 80 characters |
+| [MaxLength](#MaxLength) { get; set; } | Maximum length of the text input |
+| [MinLength](#MinLength) { get; set; } | Minimum length of the text input |
+| [Placeholder](#Placeholder) { get; set; } | Custom placeholder text if the input is empty Max 100 characters |
+| [Required](#Required) { get; set; } | Whether this component is required to be filled defaults to true |
+| [Style](#Style) { get; set; } | Style of the input text |
+| [Value](#Value) { get; set; } | Pre-filled value for text input |
+| override [Validate](#Validate)() |  |
 
 ## See Also
 
@@ -26,5 +26,139 @@ public class InputTextComponent : BaseInteractableComponent
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [InputTextComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/InputTextComponent.cs)
+   
+   
+# Validate method
+
+```csharp
+public override void Validate()
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# InputTextComponent constructor
+
+Input Text Constructor
+
+```csharp
+public InputTextComponent()
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Style property
+
+Style of the input text
+
+```csharp
+public InputTextStyles Style { get; set; }
+```
+
+## See Also
+
+* enum [InputTextStyles](./InputTextStyles.md)
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Label property
+
+Text that appears on top of the input text field, max 80 characters
+
+```csharp
+public string Label { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MinLength property
+
+Minimum length of the text input
+
+```csharp
+public int? MinLength { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MaxLength property
+
+Maximum length of the text input
+
+```csharp
+public int? MaxLength { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Required property
+
+Whether this component is required to be filled defaults to true
+
+```csharp
+public bool? Required { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Value property
+
+Pre-filled value for text input
+
+```csharp
+public string Value { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Placeholder property
+
+Custom placeholder text if the input is empty Max 100 characters
+
+```csharp
+public string Placeholder { get; set; }
+```
+
+## See Also
+
+* class [InputTextComponent](./InputTextComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

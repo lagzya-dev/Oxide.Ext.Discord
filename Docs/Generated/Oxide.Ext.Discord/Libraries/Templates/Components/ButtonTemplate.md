@@ -10,15 +10,15 @@ public class ButtonTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [ButtonTemplate](ButtonTemplate/ButtonTemplate.md)() | Default Constructor |
-| [ButtonTemplate](ButtonTemplate/ButtonTemplate.md)(…) | Constructor without emoji (2 constructors) |
-| [Command](ButtonTemplate/Command.md) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
-| [Emoji](ButtonTemplate/Emoji.md) { get; set; } | Emoji for the button |
-| [Enabled](ButtonTemplate/Enabled.md) { get; set; } | If the Button is enabled |
-| [Inline](ButtonTemplate/Inline.md) { get; set; } | Should the button be on the same or new row |
-| [Label](ButtonTemplate/Label.md) { get; set; } | Display label for the button |
-| [Style](ButtonTemplate/Style.md) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
-| override [ToComponent](ButtonTemplate/ToComponent.md)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
+| [ButtonTemplate](#ButtonTemplate)() | Default Constructor |
+| [ButtonTemplate](#ButtonTemplate)(…) | Constructor without emoji (2 constructors) |
+| [Command](#Command) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
+| [Emoji](#Emoji) { get; set; } | Emoji for the button |
+| [Enabled](#Enabled) { get; set; } | If the Button is enabled |
+| [Inline](#Inline) { get; set; } | Should the button be on the same or new row |
+| [Label](#Label) { get; set; } | Display label for the button |
+| [Style](#Style) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
+| override [ToComponent](#ToComponent)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
 
 ## See Also
 
@@ -26,5 +26,131 @@ public class ButtonTemplate : BaseComponentTemplate
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [ButtonTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/ButtonTemplate.cs)
+   
+   
+# ToComponent method
+
+Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md)
+
+```csharp
+public override BaseComponent ToComponent(PlaceholderData data)
+```
+
+## See Also
+
+* class [BaseComponent](../../../Entities/Interactions/MessageComponents/BaseComponent.md)
+* class [PlaceholderData](../../Placeholders/PlaceholderData.md)
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ButtonTemplate constructor (1 of 3)
+
+Default Constructor
+
+```csharp
+public ButtonTemplate()
+```
+
+## See Also
+
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Label property
+
+Display label for the button
+
+```csharp
+public string Label { get; set; }
+```
+
+## See Also
+
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Emoji property
+
+Emoji for the button
+
+```csharp
+public EmojiTemplate Emoji { get; set; }
+```
+
+## See Also
+
+* class [EmojiTemplate](../Emojis/EmojiTemplate.md)
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Style property
+
+[`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button
+
+```csharp
+public ButtonStyle Style { get; set; }
+```
+
+## See Also
+
+* enum [ButtonStyle](../../../Entities/Interactions/MessageComponents/ButtonStyle.md)
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Command property
+
+Command for the button. If Link then this will set the Url field; Else the CustomId field
+
+```csharp
+public string Command { get; set; }
+```
+
+## See Also
+
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Inline property
+
+Should the button be on the same or new row
+
+```csharp
+public bool Inline { get; set; }
+```
+
+## See Also
+
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Enabled property
+
+If the Button is enabled
+
+```csharp
+public bool Enabled { get; set; }
+```
+
+## See Also
+
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

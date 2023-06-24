@@ -10,31 +10,380 @@ public class DiscordApplicationCommand
 
 | name | description |
 | --- | --- |
-| [DiscordApplicationCommand](DiscordApplicationCommand/DiscordApplicationCommand.md)() | The default constructor. |
-| [ApplicationId](DiscordApplicationCommand/ApplicationId.md) { get; set; } | ID of the parent application |
-| [DefaultMemberPermissions](DiscordApplicationCommand/DefaultMemberPermissions.md) { get; set; } | Set of permissions represented as a bit set |
-| [Description](DiscordApplicationCommand/Description.md) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](DiscordApplicationCommand/DescriptionLocalizations.md) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](DiscordApplicationCommand/DmPermission.md) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [GuildId](DiscordApplicationCommand/GuildId.md) { get; set; } | Guild ID of the command, if not global |
-| [Id](DiscordApplicationCommand/Id.md) { get; set; } | Unique id of the command |
-| [Mention](DiscordApplicationCommand/Mention.md) { get; } | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) |
-| [Name](DiscordApplicationCommand/Name.md) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
-| [NameLocalizations](DiscordApplicationCommand/NameLocalizations.md) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](DiscordApplicationCommand/Nsfw.md) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](DiscordApplicationCommand/Options.md) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
-| [Type](DiscordApplicationCommand/Type.md) { get; set; } | The type of command, defaults to 1 |
-| [Version](DiscordApplicationCommand/Version.md) { get; set; } | Auto incrementing version identifier updated during substantial record changes |
-| [Delete](DiscordApplicationCommand/Delete.md)(…) | Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command) |
-| [Edit](DiscordApplicationCommand/Edit.md)(…) | Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command) |
-| [EditPermissions](DiscordApplicationCommand/EditPermissions.md)(…) | Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions) |
-| [GetPermissions](DiscordApplicationCommand/GetPermissions.md)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
-| [MentionCustom](DiscordApplicationCommand/MentionCustom.md)(…) | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string |
+| [DiscordApplicationCommand](#DiscordApplicationCommand)() | The default constructor. |
+| [ApplicationId](#ApplicationId) { get; set; } | ID of the parent application |
+| [DefaultMemberPermissions](#DefaultMemberPermissions) { get; set; } | Set of permissions represented as a bit set |
+| [Description](#Description) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#DmPermission) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [GuildId](#GuildId) { get; set; } | Guild ID of the command, if not global |
+| [Id](#Id) { get; set; } | Unique id of the command |
+| [Mention](#Mention) { get; } | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) |
+| [Name](#Name) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
+| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#Nsfw) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#Options) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [Type](#Type) { get; set; } | The type of command, defaults to 1 |
+| [Version](#Version) { get; set; } | Auto incrementing version identifier updated during substantial record changes |
+| [Delete](#Delete)(…) | Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command) |
+| [Edit](#Edit)(…) | Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command) |
+| [EditPermissions](#EditPermissions)(…) | Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions) |
+| [GetPermissions](#GetPermissions)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
+| [MentionCustom](#MentionCustom)(…) | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [DiscordApplicationCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.cs)
+   
+   
+# MentionCustom method
+
+Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string
+
+```csharp
+public string MentionCustom(string command)
+```
+
+| parameter | description |
+| --- | --- |
+| command | Custom commands string |
+
+## Return Value
+
+Mentioned Custom Command string
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Edit method
+
+Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command)
+
+```csharp
+public IPromise<DiscordApplicationCommand> Edit(DiscordClient client, CommandUpdate update)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| update | Command Update |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../../Clients/DiscordClient.md)
+* class [CommandUpdate](./CommandUpdate.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Delete method
+
+Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command)
+
+```csharp
+public IPromise Delete(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise](../../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../../Clients/DiscordClient.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GetPermissions method
+
+Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions)
+
+```csharp
+public IPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| guildId | Guild ID of the guild to get permissions for |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [GuildCommandPermissions](./GuildCommandPermissions.md)
+* class [DiscordClient](../../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# EditPermissions method
+
+Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions)
+
+```csharp
+public IPromise EditPermissions(DiscordClient client, Snowflake guildId, 
+    CommandUpdatePermissions permissions)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| guildId | Guild ID of the guild to edit permissions for |
+| permissions | List of permissions for the command |
+
+## See Also
+
+* interface [IPromise](../../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Snowflake.md)
+* class [CommandUpdatePermissions](./CommandUpdatePermissions.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordApplicationCommand constructor
+
+The default constructor.
+
+```csharp
+public DiscordApplicationCommand()
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+Unique id of the command
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of command, defaults to 1
+
+```csharp
+public ApplicationCommandType? Type { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationCommandType](./ApplicationCommandType.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ApplicationId property
+
+ID of the parent application
+
+```csharp
+public Snowflake ApplicationId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+Guild ID of the command, if not global
+
+```csharp
+public Snowflake? GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+1-32 lowercase character name matching ^[\w-]{1,32}$
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# NameLocalizations property
+
+Localization dictionary for the name field. Values follow the same restrictions as name
+
+```csharp
+public Hash<string, string> NameLocalizations { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of the command (1-100 characters)
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DescriptionLocalizations property
+
+Localization dictionary for the description field. Values follow the same restrictions as description
+
+```csharp
+public Hash<string, string> DescriptionLocalizations { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Options property
+
+The parameters for the command See [`CommandOption`](./CommandOption.md)
+
+```csharp
+public List<CommandOption> Options { get; set; }
+```
+
+## See Also
+
+* class [CommandOption](./CommandOption.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DefaultMemberPermissions property
+
+Set of permissions represented as a bit set
+
+```csharp
+public PermissionFlags DefaultMemberPermissions { get; set; }
+```
+
+## See Also
+
+* enum [PermissionFlags](../../Permissions/PermissionFlags.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DmPermission property
+
+Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+
+```csharp
+public bool? DmPermission { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Nsfw property
+
+Indicates whether the command is age-restricted
+
+```csharp
+public bool? Nsfw { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Version property
+
+Auto incrementing version identifier updated during substantial record changes
+
+```csharp
+public Snowflake Version { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Mention property
+
+Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md)
+
+```csharp
+public string Mention { get; }
+```
+
+## See Also
+
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

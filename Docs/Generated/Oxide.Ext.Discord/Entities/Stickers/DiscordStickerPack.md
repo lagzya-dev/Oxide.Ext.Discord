@@ -10,20 +10,166 @@ public class DiscordStickerPack
 
 | name | description |
 | --- | --- |
-| [DiscordStickerPack](DiscordStickerPack/DiscordStickerPack.md)() | The default constructor. |
-| [BannerAssetId](DiscordStickerPack/BannerAssetId.md) { get; set; } | ID of the sticker pack's banner image |
-| [CoverStickerId](DiscordStickerPack/CoverStickerId.md) { get; set; } | ID of a sticker in the pack which is shown as the pack's icon |
-| [Description](DiscordStickerPack/Description.md) { get; set; } | Description of the sticker pack |
-| [Id](DiscordStickerPack/Id.md) { get; set; } | ID of the sticker pack |
-| [Name](DiscordStickerPack/Name.md) { get; set; } | Name of the sticker pack |
-| [SkuId](DiscordStickerPack/SkuId.md) { get; set; } | ID of the pack's SKU |
-| [Stickers](DiscordStickerPack/Stickers.md) { get; set; } | The stickers in the pack |
-| static [GetNitroStickerPacks](DiscordStickerPack/GetNitroStickerPacks.md)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
+| [DiscordStickerPack](#DiscordStickerPack)() | The default constructor. |
+| [BannerAssetId](#BannerAssetId) { get; set; } | ID of the sticker pack's banner image |
+| [CoverStickerId](#CoverStickerId) { get; set; } | ID of a sticker in the pack which is shown as the pack's icon |
+| [Description](#Description) { get; set; } | Description of the sticker pack |
+| [Id](#Id) { get; set; } | ID of the sticker pack |
+| [Name](#Name) { get; set; } | Name of the sticker pack |
+| [SkuId](#SkuId) { get; set; } | ID of the pack's SKU |
+| [Stickers](#Stickers) { get; set; } | The stickers in the pack |
+| static [GetNitroStickerPacks](#GetNitroStickerPacks)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordStickerPack.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Stickers/DiscordStickerPack.cs)
+   
+   
+# GetNitroStickerPacks method
+
+Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs)
+
+```csharp
+public static IPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordStickerPack constructor
+
+The default constructor.
+
+```csharp
+public DiscordStickerPack()
+```
+
+## See Also
+
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the sticker pack
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Stickers property
+
+The stickers in the pack
+
+```csharp
+public List<DiscordSticker> Stickers { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+Name of the sticker pack
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SkuId property
+
+ID of the pack's SKU
+
+```csharp
+public Snowflake SkuId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CoverStickerId property
+
+ID of a sticker in the pack which is shown as the pack's icon
+
+```csharp
+public Snowflake? CoverStickerId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of the sticker pack
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# BannerAssetId property
+
+ID of the sticker pack's banner image
+
+```csharp
+public Snowflake? BannerAssetId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordStickerPack](./DiscordStickerPack.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

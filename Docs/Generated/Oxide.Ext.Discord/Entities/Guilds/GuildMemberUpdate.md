@@ -10,19 +10,139 @@ public class GuildMemberUpdate
 
 | name | description |
 | --- | --- |
-| [GuildMemberUpdate](GuildMemberUpdate/GuildMemberUpdate.md)() | The default constructor. |
-| [ChannelId](GuildMemberUpdate/ChannelId.md) { get; set; } | The channel to move the user to Requires MOVE_MEMBERS Permission Setting to null will remove that member from a voice channel |
-| [CommunicationDisabledUntil](GuildMemberUpdate/CommunicationDisabledUntil.md) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout |
-| [Deaf](GuildMemberUpdate/Deaf.md) { get; set; } | Deafen the guild member Requires DEAFEN_MEMBERS Permission |
-| [Mute](GuildMemberUpdate/Mute.md) { get; set; } | Mute the guild member Requires MUTE_MEMBERS Permission |
-| [Nick](GuildMemberUpdate/Nick.md) { get; set; } | The nickname to give the user Requires MANAGE_NICKNAMES Permission |
-| [Roles](GuildMemberUpdate/Roles.md) { get; set; } | New list of guild members roles Will replaces all roles with the ones in this list Requires MANAGE_ROLES Permission |
-| [Validate](GuildMemberUpdate/Validate.md)() |  |
+| [GuildMemberUpdate](#GuildMemberUpdate)() | The default constructor. |
+| [ChannelId](#ChannelId) { get; set; } | The channel to move the user to Requires MOVE_MEMBERS Permission Setting to null will remove that member from a voice channel |
+| [CommunicationDisabledUntil](#CommunicationDisabledUntil) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout |
+| [Deaf](#Deaf) { get; set; } | Deafen the guild member Requires DEAFEN_MEMBERS Permission |
+| [Mute](#Mute) { get; set; } | Mute the guild member Requires MUTE_MEMBERS Permission |
+| [Nick](#Nick) { get; set; } | The nickname to give the user Requires MANAGE_NICKNAMES Permission |
+| [Roles](#Roles) { get; set; } | New list of guild members roles Will replaces all roles with the ones in this list Requires MANAGE_ROLES Permission |
+| [Validate](#Validate)() |  |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [GuildMemberUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildMemberUpdate.cs)
+   
+   
+# Validate method
+
+```csharp
+public void Validate()
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildMemberUpdate constructor
+
+The default constructor.
+
+```csharp
+public GuildMemberUpdate()
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Nick property
+
+The nickname to give the user Requires MANAGE_NICKNAMES Permission
+
+```csharp
+public string Nick { get; set; }
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Roles property
+
+New list of guild members roles Will replaces all roles with the ones in this list Requires MANAGE_ROLES Permission
+
+```csharp
+public List<Snowflake> Roles { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Deaf property
+
+Deafen the guild member Requires DEAFEN_MEMBERS Permission
+
+```csharp
+public bool? Deaf { get; set; }
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Mute property
+
+Mute the guild member Requires MUTE_MEMBERS Permission
+
+```csharp
+public bool? Mute { get; set; }
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ChannelId property
+
+The channel to move the user to Requires MOVE_MEMBERS Permission Setting to null will remove that member from a voice channel
+
+```csharp
+public Snowflake? ChannelId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CommunicationDisabledUntil property
+
+When the user's timeout will expire and the user will be able to communicate in the guild again (up to 28 days in the future), set to null to remove timeout
+
+```csharp
+public DateTime? CommunicationDisabledUntil { get; set; }
+```
+
+## See Also
+
+* class [GuildMemberUpdate](./GuildMemberUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

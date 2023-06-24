@@ -10,18 +10,137 @@ public static class GuildPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Banner](GuildPlaceholders/Banner.md)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl.md) placeholder |
-| static [Description](GuildPlaceholders/Description.md)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild/Description.md) placeholder |
-| static [Icon](GuildPlaceholders/Icon.md)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder |
-| static [Id](GuildPlaceholders/Id.md)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild/Id.md) placeholder |
-| static [MemberCount](GuildPlaceholders/MemberCount.md)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder |
-| static [Name](GuildPlaceholders/Name.md)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild/Name.md) placeholder |
-| static [RegisterPlaceholders](GuildPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
+| static [Banner](#Banner)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl.md) placeholder |
+| static [Description](#Description)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild/Description.md) placeholder |
+| static [Icon](#Icon)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder |
+| static [Id](#Id)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild/Id.md) placeholder |
+| static [MemberCount](#MemberCount)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder |
+| static [Name](#Name)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild/Name.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GuildPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/GuildPlaceholders.cs)
+   
+   
+# Id method
+
+[`Id`](../../../Entities/Guilds/DiscordGuild/Id) placeholder
+
+```csharp
+public static Snowflake Id(DiscordGuild guild)
+```
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name method
+
+[`Name`](../../../Entities/Guilds/DiscordGuild/Name) placeholder
+
+```csharp
+public static string Name(DiscordGuild guild)
+```
+
+## See Also
+
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description method
+
+[`Description`](../../../Entities/Guilds/DiscordGuild/Description) placeholder
+
+```csharp
+public static string Description(DiscordGuild guild)
+```
+
+## See Also
+
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Icon method
+
+[`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl) placeholder
+
+```csharp
+public static string Icon(DiscordGuild guild)
+```
+
+## See Also
+
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Banner method
+
+[`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl) placeholder
+
+```csharp
+public static string Banner(DiscordGuild guild)
+```
+
+## See Also
+
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MemberCount method
+
+[`Members`](../../../Entities/Guilds/DiscordGuild/Members) count placeholder
+
+```csharp
+public static int MemberCount(DiscordGuild guild)
+```
+
+## See Also
+
+* class [DiscordGuild](../../../Entities/Guilds/DiscordGuild.md)
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RegisterPlaceholders method
+
+Registers placeholders for the given plugin.
+
+```csharp
+public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
+    string dataKey = "DiscordGuild")
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to register placeholders for |
+| placeholderPrefix | Prefix to use for the placeholders |
+| dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
+
+## See Also
+
+* class [GuildPlaceholders](./GuildPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

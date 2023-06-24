@@ -10,22 +10,190 @@ public class CommandBulkOverwrite
 
 | name | description |
 | --- | --- |
-| [CommandBulkOverwrite](CommandBulkOverwrite/CommandBulkOverwrite.md)() | The default constructor. |
-| [DefaultMemberPermissions](CommandBulkOverwrite/DefaultMemberPermissions.md) { get; set; } | Set of permissions represented as a bit set |
-| [DefaultPermissions](CommandBulkOverwrite/DefaultPermissions.md) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
-| [Description](CommandBulkOverwrite/Description.md) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](CommandBulkOverwrite/DescriptionLocalizations.md) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](CommandBulkOverwrite/DmPermission.md) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [Id](CommandBulkOverwrite/Id.md) { get; set; } | ID of command, if known |
-| [Name](CommandBulkOverwrite/Name.md) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
-| [NameLocalizations](CommandBulkOverwrite/NameLocalizations.md) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](CommandBulkOverwrite/Nsfw.md) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](CommandBulkOverwrite/Options.md) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [CommandBulkOverwrite](#CommandBulkOverwrite)() | The default constructor. |
+| [DefaultMemberPermissions](#DefaultMemberPermissions) { get; set; } | Set of permissions represented as a bit set |
+| [DefaultPermissions](#DefaultPermissions) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
+| [Description](#Description) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#DescriptionLocalizations) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#DmPermission) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [Id](#Id) { get; set; } | ID of command, if known |
+| [Name](#Name) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
+| [NameLocalizations](#NameLocalizations) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#Nsfw) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#Options) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [CommandBulkOverwrite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandBulkOverwrite.cs)
+   
+   
+# CommandBulkOverwrite constructor
+
+The default constructor.
+
+```csharp
+public CommandBulkOverwrite()
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of command, if known
+
+```csharp
+public Snowflake? Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+1-32 lowercase character name matching ^[\w-]{1,32}$
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# NameLocalizations property
+
+Localization dictionary for the name field. Values follow the same restrictions as name
+
+```csharp
+public Hash<string, string> NameLocalizations { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of the command (1-100 characters)
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DescriptionLocalizations property
+
+Localization dictionary for the description field. Values follow the same restrictions as description
+
+```csharp
+public Hash<string, string> DescriptionLocalizations { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Options property
+
+The parameters for the command See [`CommandOption`](./CommandOption.md)
+
+```csharp
+public List<CommandOption> Options { get; set; }
+```
+
+## See Also
+
+* class [CommandOption](./CommandOption.md)
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DefaultMemberPermissions property
+
+Set of permissions represented as a bit set
+
+```csharp
+public PermissionFlags DefaultMemberPermissions { get; set; }
+```
+
+## See Also
+
+* enum [PermissionFlags](../../Permissions/PermissionFlags.md)
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DmPermission property
+
+Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
+
+```csharp
+public bool? DmPermission { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DefaultPermissions property
+
+Whether the command is enabled by default when the app is added to a guild
+
+```csharp
+public bool? DefaultPermissions { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Nsfw property
+
+Indicates whether the command is age-restricted
+
+```csharp
+public bool? Nsfw { get; set; }
+```
+
+## See Also
+
+* class [CommandBulkOverwrite](./CommandBulkOverwrite.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

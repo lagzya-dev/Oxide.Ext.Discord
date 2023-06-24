@@ -10,13 +10,58 @@ public static class Rest
 
 | name | description |
 | --- | --- |
-| const [ApiUrl](DiscordEndpoints.Rest/ApiUrl.md) | Discord API Url |
-| const [ApiVersion](DiscordEndpoints.Rest/ApiVersion.md) | API Version for Rest requests |
-| const [DiscordBaseUrl](DiscordEndpoints.Rest/DiscordBaseUrl.md) | Base URL for Discord |
+| const [ApiUrl](#ApiUrl) | Discord API Url |
+| const [ApiVersion](#ApiVersion) | API Version for Rest requests |
+| const [DiscordBaseUrl](#DiscordBaseUrl) | Base URL for Discord |
 
 ## See Also
 
 * class [DiscordEndpoints](./DiscordEndpoints.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordBaseUrl.DiscordBaseUrl field
+
+Base URL for Discord
+
+```csharp
+public const string DiscordBaseUrl;
+```
+
+## See Also
+
+* class [Rest](./DiscordEndpoints.Rest.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ApiVersion.ApiVersion field
+
+API Version for Rest requests
+
+```csharp
+public const string ApiVersion;
+```
+
+## See Also
+
+* class [Rest](./DiscordEndpoints.Rest.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ApiUrl.ApiUrl field
+
+Discord API Url
+
+```csharp
+public const string ApiUrl;
+```
+
+## See Also
+
+* class [Rest](./DiscordEndpoints.Rest.md)
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 

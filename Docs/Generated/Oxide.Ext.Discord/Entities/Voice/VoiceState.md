@@ -10,21 +10,21 @@ public class VoiceState : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [VoiceState](VoiceState/VoiceState.md)() | The default constructor. |
-| [ChannelId](VoiceState/ChannelId.md) { get; set; } | The channel id this user is connected to |
-| [Deaf](VoiceState/Deaf.md) { get; set; } | Whether this user is deafened by the server |
-| [GuildId](VoiceState/GuildId.md) { get; set; } | The guild id this voice state is for |
-| [Id](VoiceState/Id.md) { get; } | User ID for the voice state |
-| [Member](VoiceState/Member.md) { get; set; } | The guild member this voice state is for |
-| [Mute](VoiceState/Mute.md) { get; set; } | Whether this user is muted by the server |
-| [RequestToSpeakTimestamp](VoiceState/RequestToSpeakTimestamp.md) { get; set; } | Whether this user is muted by the current user |
-| [SelfDeaf](VoiceState/SelfDeaf.md) { get; set; } | Whether this user is locally deafened |
-| [SelfMute](VoiceState/SelfMute.md) { get; set; } | Whether this user is locally muted |
-| [SelfStream](VoiceState/SelfStream.md) { get; set; } | Whether this user is streaming using "Go Live" |
-| [SelfVideo](VoiceState/SelfVideo.md) { get; set; } | Whether this user's camera is enabled |
-| [SessionId](VoiceState/SessionId.md) { get; set; } | The session id for this voice state |
-| [Suppress](VoiceState/Suppress.md) { get; set; } | whether this user's permission to speak is denied |
-| [UserId](VoiceState/UserId.md) { get; set; } | The user id this voice state is for |
+| [VoiceState](#VoiceState)() | The default constructor. |
+| [ChannelId](#ChannelId) { get; set; } | The channel id this user is connected to |
+| [Deaf](#Deaf) { get; set; } | Whether this user is deafened by the server |
+| [GuildId](#GuildId) { get; set; } | The guild id this voice state is for |
+| [Id](#Id) { get; } | User ID for the voice state |
+| [Member](#Member) { get; set; } | The guild member this voice state is for |
+| [Mute](#Mute) { get; set; } | Whether this user is muted by the server |
+| [RequestToSpeakTimestamp](#RequestToSpeakTimestamp) { get; set; } | Whether this user is muted by the current user |
+| [SelfDeaf](#SelfDeaf) { get; set; } | Whether this user is locally deafened |
+| [SelfMute](#SelfMute) { get; set; } | Whether this user is locally muted |
+| [SelfStream](#SelfStream) { get; set; } | Whether this user is streaming using "Go Live" |
+| [SelfVideo](#SelfVideo) { get; set; } | Whether this user's camera is enabled |
+| [SessionId](#SessionId) { get; set; } | The session id for this voice state |
+| [Suppress](#Suppress) { get; set; } | whether this user's permission to speak is denied |
+| [UserId](#UserId) { get; set; } | The user id this voice state is for |
 
 ## See Also
 
@@ -32,5 +32,235 @@ public class VoiceState : ISnowflakeEntity
 * namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [VoiceState.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Voice/VoiceState.cs)
+   
+   
+# VoiceState constructor
+
+The default constructor.
+
+```csharp
+public VoiceState()
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+User ID for the voice state
+
+```csharp
+public Snowflake Id { get; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+The guild id this voice state is for
+
+```csharp
+public Snowflake? GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ChannelId property
+
+The channel id this user is connected to
+
+```csharp
+public Snowflake? ChannelId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# UserId property
+
+The user id this voice state is for
+
+```csharp
+public Snowflake UserId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Member property
+
+The guild member this voice state is for
+
+```csharp
+public GuildMember Member { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](../Guilds/GuildMember.md)
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SessionId property
+
+The session id for this voice state
+
+```csharp
+public string SessionId { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Deaf property
+
+Whether this user is deafened by the server
+
+```csharp
+public bool Deaf { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Mute property
+
+Whether this user is muted by the server
+
+```csharp
+public bool Mute { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SelfDeaf property
+
+Whether this user is locally deafened
+
+```csharp
+public bool SelfDeaf { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SelfMute property
+
+Whether this user is locally muted
+
+```csharp
+public bool SelfMute { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SelfStream property
+
+Whether this user is streaming using "Go Live"
+
+```csharp
+public bool? SelfStream { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SelfVideo property
+
+Whether this user's camera is enabled
+
+```csharp
+public bool SelfVideo { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Suppress property
+
+whether this user's permission to speak is denied
+
+```csharp
+public bool Suppress { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# RequestToSpeakTimestamp property
+
+Whether this user is muted by the current user
+
+```csharp
+public DateTime? RequestToSpeakTimestamp { get; set; }
+```
+
+## See Also
+
+* class [VoiceState](./VoiceState.md)
+* namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

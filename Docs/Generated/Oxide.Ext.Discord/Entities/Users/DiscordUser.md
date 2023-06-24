@@ -10,57 +10,826 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 
 | name | description |
 | --- | --- |
-| [DiscordUser](DiscordUser/DiscordUser.md)() | The default constructor. |
-| [AccentColor](DiscordUser/AccentColor.md) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
-| [Avatar](DiscordUser/Avatar.md) { get; set; } | The user's avatar hash |
-| [Banner](DiscordUser/Banner.md) { get; set; } | The user's banner, or null if unset |
-| [Bot](DiscordUser/Bot.md) { get; set; } | Whether the user belongs to an OAuth2 application |
-| [Discriminator](DiscordUser/Discriminator.md) { get; set; } | The user's 4-digit discord-tag |
-| [DisplayName](DiscordUser/DisplayName.md) { get; } | The display name for the user |
-| [Email](DiscordUser/Email.md) { get; set; } | The user's email |
-| [Flags](DiscordUser/Flags.md) { get; set; } | The flags on a user's account [`UserFlags`](./UserFlags.md) |
-| [FullUserName](DiscordUser/FullUserName.md) { get; } | Returns the username#discriminator for the user |
-| [GetAvatarUrl](DiscordUser/GetAvatarUrl.md) { get; } | Avatar Url for the user |
-| [GetBannerUrl](DiscordUser/GetBannerUrl.md) { get; } | Banner Url for the user |
-| [GetDefaultAvatarUrl](DiscordUser/GetDefaultAvatarUrl.md) { get; } | Default Avatar Url for the User |
-| [GlobalName](DiscordUser/GlobalName.md) { get; set; } | The user's global name |
-| [HasUpdatedUsername](DiscordUser/HasUpdatedUsername.md) { get; } | Returns true if the user has upgraded their username to the new username format |
-| [Id](DiscordUser/Id.md) { get; set; } | The user's id |
-| [IsBot](DiscordUser/IsBot.md) { get; } | Returns if the DiscordUser is a bot |
-| [IsSystem](DiscordUser/IsSystem.md) { get; } | Returns if the DiscordUser is a system user |
-| [Locale](DiscordUser/Locale.md) { get; set; } | The user's chosen language option |
-| [Mention](DiscordUser/Mention.md) { get; } | Returns a string to mention this users nickname in a message |
-| [MfaEnabled](DiscordUser/MfaEnabled.md) { get; set; } | Whether the user has two factor enabled on their account |
-| [Player](DiscordUser/Player.md) { get; } | Returns the IPlayer for the discord user if linked; null otherwise |
-| [PremiumType](DiscordUser/PremiumType.md) { get; set; } | The type of Nitro subscription on a user's account [`UserPremiumType`](./UserPremiumType.md) |
-| [PublicFlags](DiscordUser/PublicFlags.md) { get; set; } | The public flags on a user's account [`UserFlags`](./UserFlags.md) |
-| [System](DiscordUser/System.md) { get; set; } | Whether the user is an Official Discord System user (part of the urgent message system) |
-| [Username](DiscordUser/Username.md) { get; set; } | The user's username, not unique across the platform |
-| [Verified](DiscordUser/Verified.md) { get; set; } | Whether the email on this account has been verified |
-| [CreateDirectMessageChannel](DiscordUser/CreateDirectMessageChannel.md)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
-| [CreateGroupDm](DiscordUser/CreateGroupDm.md)(…) | Create a Group Direct Message |
-| [GetCurrentUserGuilds](DiscordUser/GetCurrentUserGuilds.md)(…) | Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) |
-| [GetUserConnections](DiscordUser/GetUserConnections.md)(…) | Returns a list of connection objects. Requires the connections OAuth2 scope. |
-| [GroupDmAddRecipient](DiscordUser/GroupDmAddRecipient.md)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
-| [GroupDmRemoveRecipient](DiscordUser/GroupDmRemoveRecipient.md)(…) | Removes a recipient from a Group DM (2 methods) |
-| [LeaveGuild](DiscordUser/LeaveGuild.md)(…) | Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild) |
-| [LogDebug](DiscordUser/LogDebug.md)(…) |  |
-| [ModifyCurrentUser](DiscordUser/ModifyCurrentUser.md)(…) | Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user) |
-| [SendDirectMessage](DiscordUser/SendDirectMessage.md)(…) | Send a message to a user in a direct message channel (3 methods) |
-| [SendGlobalTemplateDirectMessage](DiscordUser/SendGlobalTemplateDirectMessage.md)(…) | Reply to a message using a global message template |
-| [SendTemplateDirectMessage](DiscordUser/SendTemplateDirectMessage.md)(…) | Send a message in a DM to the user using a localized message template |
-| [Update](DiscordUser/Update.md)(…) | Updates the user data with the passed in user |
-| static [CreateDirectMessageChannel](DiscordUser/CreateDirectMessageChannel.md)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
-| static [GetCurrentUser](DiscordUser/GetCurrentUser.md)(…) | Returns the currently logged in user account See [Get Current User](https://discord.com/developers/docs/resources/user#get-current-user) |
-| static [GetUser](DiscordUser/GetUser.md)(…) | Returns the user for the given user Id See [Get User](https://discord.com/developers/docs/resources/user#get-user) |
+| [DiscordUser](#DiscordUser)() | The default constructor. |
+| [AccentColor](#AccentColor) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
+| [Avatar](#Avatar) { get; set; } | The user's avatar hash |
+| [Banner](#Banner) { get; set; } | The user's banner, or null if unset |
+| [Bot](#Bot) { get; set; } | Whether the user belongs to an OAuth2 application |
+| [Discriminator](#Discriminator) { get; set; } | The user's 4-digit discord-tag |
+| [DisplayName](#DisplayName) { get; } | The display name for the user |
+| [Email](#Email) { get; set; } | The user's email |
+| [Flags](#Flags) { get; set; } | The flags on a user's account [`UserFlags`](./UserFlags.md) |
+| [FullUserName](#FullUserName) { get; } | Returns the username#discriminator for the user |
+| [GetAvatarUrl](#GetAvatarUrl) { get; } | Avatar Url for the user |
+| [GetBannerUrl](#GetBannerUrl) { get; } | Banner Url for the user |
+| [GetDefaultAvatarUrl](#GetDefaultAvatarUrl) { get; } | Default Avatar Url for the User |
+| [GlobalName](#GlobalName) { get; set; } | The user's global name |
+| [HasUpdatedUsername](#HasUpdatedUsername) { get; } | Returns true if the user has upgraded their username to the new username format |
+| [Id](#Id) { get; set; } | The user's id |
+| [IsBot](#IsBot) { get; } | Returns if the DiscordUser is a bot |
+| [IsSystem](#IsSystem) { get; } | Returns if the DiscordUser is a system user |
+| [Locale](#Locale) { get; set; } | The user's chosen language option |
+| [Mention](#Mention) { get; } | Returns a string to mention this users nickname in a message |
+| [MfaEnabled](#MfaEnabled) { get; set; } | Whether the user has two factor enabled on their account |
+| [Player](#Player) { get; } | Returns the IPlayer for the discord user if linked; null otherwise |
+| [PremiumType](#PremiumType) { get; set; } | The type of Nitro subscription on a user's account [`UserPremiumType`](./UserPremiumType.md) |
+| [PublicFlags](#PublicFlags) { get; set; } | The public flags on a user's account [`UserFlags`](./UserFlags.md) |
+| [System](#System) { get; set; } | Whether the user is an Official Discord System user (part of the urgent message system) |
+| [Username](#Username) { get; set; } | The user's username, not unique across the platform |
+| [Verified](#Verified) { get; set; } | Whether the email on this account has been verified |
+| [CreateDirectMessageChannel](#CreateDirectMessageChannel)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
+| [CreateGroupDm](#CreateGroupDm)(…) | Create a Group Direct Message |
+| [GetCurrentUserGuilds](#GetCurrentUserGuilds)(…) | Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) |
+| [GetUserConnections](#GetUserConnections)(…) | Returns a list of connection objects. Requires the connections OAuth2 scope. |
+| [GroupDmAddRecipient](#GroupDmAddRecipient)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
+| [GroupDmRemoveRecipient](#GroupDmRemoveRecipient)(…) | Removes a recipient from a Group DM (2 methods) |
+| [LeaveGuild](#LeaveGuild)(…) | Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild) |
+| [LogDebug](#LogDebug)(…) |  |
+| [ModifyCurrentUser](#ModifyCurrentUser)(…) | Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user) |
+| [SendDirectMessage](#SendDirectMessage)(…) | Send a message to a user in a direct message channel (3 methods) |
+| [SendGlobalTemplateDirectMessage](#SendGlobalTemplateDirectMessage)(…) | Reply to a message using a global message template |
+| [SendTemplateDirectMessage](#SendTemplateDirectMessage)(…) | Send a message in a DM to the user using a localized message template |
+| [Update](#Update)(…) | Updates the user data with the passed in user |
+| static [CreateDirectMessageChannel](#CreateDirectMessageChannel)(…) | Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm) |
+| static [GetCurrentUser](#GetCurrentUser)(…) | Returns the currently logged in user account See [Get Current User](https://discord.com/developers/docs/resources/user#get-current-user) |
+| static [GetUser](#GetUser)(…) | Returns the user for the given user Id See [Get User](https://discord.com/developers/docs/resources/user#get-user) |
 
 ## See Also
 
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
-* interface [IDiscordCacheable&lt;T&gt;](../../Interfaces/IDiscordCacheable-1.md)
+* interface [IDiscordCacheable&lt;T&gt;](../../Interfaces/IDiscordCacheable%7BT%7D.md)
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordUser.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/DiscordUser.cs)
+   
+   
+# GetCurrentUser method
+
+Returns the currently logged in user account See [Get Current User](https://discord.com/developers/docs/resources/user#get-current-user)
+
+```csharp
+public static IPromise<DiscordUser> GetCurrentUser(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetUser method
+
+Returns the user for the given user Id See [Get User](https://discord.com/developers/docs/resources/user#get-user)
+
+```csharp
+public static IPromise<DiscordUser> GetUser(DiscordClient client, Snowflake userId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| userId | User ID to lookup |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SendDirectMessage method (1 of 3)
+
+Send a message to a user in a direct message channel
+
+```csharp
+public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| embeds | Embeds to be send in the message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordEmbed](../Messages/Embeds/DiscordEmbed.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# SendTemplateDirectMessage method
+
+Send a message in a DM to the user using a localized message template
+
+```csharp
+public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, 
+    string templateName, string language = "en", MessageCreate message = null, 
+    PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| plugin | Plugin for the template |
+| templateName | Template Name |
+| language | Oxide language to use |
+| message | Message to use (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [MessageCreate](../Messages/MessageCreate.md)
+* class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SendGlobalTemplateDirectMessage method
+
+Reply to a message using a global message template
+
+```csharp
+public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, 
+    string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| plugin | Plugin for the template |
+| templateName | Template Name |
+| message | Message to use (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [MessageCreate](../Messages/MessageCreate.md)
+* class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ModifyCurrentUser method
+
+Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user)
+
+```csharp
+public IPromise<DiscordUser> ModifyCurrentUser(DiscordClient client, UserModifyCurrent current)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| current | The updated current user information |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [UserModifyCurrent](./UserModifyCurrent.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetCurrentUserGuilds method
+
+Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds)
+
+```csharp
+public IPromise<List<DiscordGuild>> GetCurrentUserGuilds(DiscordClient client, 
+    UserGuildsRequest request = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| request | Request parameters for filtering guilds |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordGuild](../Guilds/DiscordGuild.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [UserGuildsRequest](./UserGuildsRequest.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# LeaveGuild method
+
+Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild)
+
+```csharp
+public IPromise LeaveGuild(DiscordClient client, Snowflake guildId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| guildId | Guild ID to leave |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateDirectMessageChannel method (1 of 2)
+
+Create a Direct Message to the current User See [Create DM](https://discord.com/developers/docs/resources/user#create-dm)
+
+```csharp
+public IPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordChannel](../Channels/DiscordChannel.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# CreateGroupDm method
+
+Create a Group Direct Message
+
+```csharp
+public IPromise<DiscordChannel> CreateGroupDm(DiscordClient client, string[] accessTokens, 
+    Hash<Snowflake, string> nicks)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| accessTokens | access tokens of users that have granted your app the gdm.join scope |
+| nicks | a list of user ids to their respective nicknames |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordChannel](../Channels/DiscordChannel.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetUserConnections method
+
+Returns a list of connection objects. Requires the connections OAuth2 scope.
+
+```csharp
+public IPromise<List<Connection>> GetUserConnections(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Connection](./Connections/Connection.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GroupDmAddRecipient method (1 of 2)
+
+Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient)
+
+```csharp
+public IPromise GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, 
+    string accessToken)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| channel | Channel to add recipient to |
+| accessToken | Users access token |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordChannel](../Channels/DiscordChannel.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GroupDmRemoveRecipient method (1 of 2)
+
+Removes a recipient from a Group DM
+
+```csharp
+public IPromise GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| channel | Channel to remove recipient from |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordChannel](../Channels/DiscordChannel.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Update method
+
+Updates the user data with the passed in user
+
+```csharp
+public void Update(DiscordUser update)
+```
+
+| parameter | description |
+| --- | --- |
+| update |  |
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../../Logging/DebugLogger.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordUser constructor
+
+The default constructor.
+
+```csharp
+public DiscordUser()
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+The user's id
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Username property
+
+The user's username, not unique across the platform
+
+```csharp
+public string Username { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GlobalName property
+
+The user's global name
+
+```csharp
+public string GlobalName { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Discriminator property
+
+The user's 4-digit discord-tag
+
+```csharp
+[Obsolete("This field will be removed by discord in a future API version")]
+public string Discriminator { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Avatar property
+
+The user's avatar hash
+
+```csharp
+public string Avatar { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Bot property
+
+Whether the user belongs to an OAuth2 application
+
+```csharp
+public bool? Bot { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# System property
+
+Whether the user is an Official Discord System user (part of the urgent message system)
+
+```csharp
+public bool? System { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# MfaEnabled property
+
+Whether the user has two factor enabled on their account
+
+```csharp
+public bool? MfaEnabled { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Banner property
+
+The user's banner, or null if unset
+
+```csharp
+public string Banner { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AccentColor property
+
+The user's banner color encoded as an integer representation of hexadecimal color code
+
+```csharp
+public DiscordColor? AccentColor { get; set; }
+```
+
+## See Also
+
+* struct [DiscordColor](../DiscordColor.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Locale property
+
+The user's chosen language option
+
+```csharp
+public string Locale { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Verified property
+
+Whether the email on this account has been verified
+
+```csharp
+public bool? Verified { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Email property
+
+The user's email
+
+```csharp
+public string Email { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Flags property
+
+The flags on a user's account [`UserFlags`](./UserFlags.md)
+
+```csharp
+public UserFlags? Flags { get; set; }
+```
+
+## See Also
+
+* enum [UserFlags](./UserFlags.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# PremiumType property
+
+The type of Nitro subscription on a user's account [`UserPremiumType`](./UserPremiumType.md)
+
+```csharp
+public UserPremiumType? PremiumType { get; set; }
+```
+
+## See Also
+
+* enum [UserPremiumType](./UserPremiumType.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# PublicFlags property
+
+The public flags on a user's account [`UserFlags`](./UserFlags.md)
+
+```csharp
+public UserFlags? PublicFlags { get; set; }
+```
+
+## See Also
+
+* enum [UserFlags](./UserFlags.md)
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Mention property
+
+Returns a string to mention this users nickname in a message
+
+```csharp
+public string Mention { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetDefaultAvatarUrl property
+
+Default Avatar Url for the User
+
+```csharp
+public string GetDefaultAvatarUrl { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetAvatarUrl property
+
+Avatar Url for the user
+
+```csharp
+public string GetAvatarUrl { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetBannerUrl property
+
+Banner Url for the user
+
+```csharp
+public string GetBannerUrl { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# FullUserName property
+
+Returns the username#discriminator for the user
+
+```csharp
+public string FullUserName { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DisplayName property
+
+The display name for the user
+
+```csharp
+public string DisplayName { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsBot property
+
+Returns if the DiscordUser is a bot
+
+```csharp
+public bool IsBot { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsSystem property
+
+Returns if the DiscordUser is a system user
+
+```csharp
+public bool IsSystem { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# HasUpdatedUsername property
+
+Returns true if the user has upgraded their username to the new username format
+
+```csharp
+public bool HasUpdatedUsername { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Player property
+
+Returns the IPlayer for the discord user if linked; null otherwise
+
+```csharp
+public IPlayer Player { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

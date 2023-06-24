@@ -10,20 +10,163 @@ public class BotConnection
 
 | name | description |
 | --- | --- |
-| [BotConnection](BotConnection/BotConnection.md)() | Constructor |
-| [BotConnection](BotConnection/BotConnection.md)(…) | Constructor |
-| [ApiToken](BotConnection/ApiToken.md) { get; set; } | API token for the bot |
-| [ApplicationId](BotConnection/ApplicationId.md) { get; } | Application ID of the Bot Token |
-| [HiddenToken](BotConnection/HiddenToken.md) { get; } | Hidden Bot Token. Used when needing to display the token. |
-| [Intents](BotConnection/Intents.md) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
-| [LogLevel](BotConnection/LogLevel.md) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
-| [HasAnyIntent](BotConnection/HasAnyIntent.md)(…) | Returns if the settings has any intent specified |
-| [HasIntents](BotConnection/HasIntents.md)(…) | Returns if the settings has the given intents |
+| [BotConnection](#BotConnection)() | Constructor |
+| [BotConnection](#BotConnection)(…) | Constructor |
+| [ApiToken](#ApiToken) { get; set; } | API token for the bot |
+| [ApplicationId](#ApplicationId) { get; } | Application ID of the Bot Token |
+| [HiddenToken](#HiddenToken) { get; } | Hidden Bot Token. Used when needing to display the token. |
+| [Intents](#Intents) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
+| [LogLevel](#LogLevel) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
+| [HasAnyIntent](#HasAnyIntent)(…) | Returns if the settings has any intent specified |
+| [HasIntents](#HasIntents)(…) | Returns if the settings has the given intents |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BotConnection.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Connections/BotConnection.cs)
+   
+   
+# HasIntents method
+
+Returns if the settings has the given intents
+
+```csharp
+public bool HasIntents(GatewayIntents intents)
+```
+
+| parameter | description |
+| --- | --- |
+| intents | Intents to be compared against |
+
+## Return Value
+
+True if settings has the given intents; False otherwise
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# HasAnyIntent method
+
+Returns if the settings has any intent specified
+
+```csharp
+public bool HasAnyIntent(GatewayIntents intents)
+```
+
+| parameter | description |
+| --- | --- |
+| intents | Intents to compare against |
+
+## Return Value
+
+True if settings has at least one of the given intents
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BotConnection constructor (1 of 2)
+
+Constructor
+
+```csharp
+public BotConnection()
+```
+
+## See Also
+
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# ApiToken property
+
+API token for the bot
+
+```csharp
+public string ApiToken { get; set; }
+```
+
+## See Also
+
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Intents property
+
+Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md)
+
+```csharp
+public GatewayIntents Intents { get; set; }
+```
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogLevel property
+
+Discord Extension Logging Level. See `LogLevel`
+
+```csharp
+public DiscordLogLevel LogLevel { get; set; }
+```
+
+## See Also
+
+* enum [DiscordLogLevel](../Logging/DiscordLogLevel.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# HiddenToken property
+
+Hidden Bot Token. Used when needing to display the token.
+
+```csharp
+public string HiddenToken { get; }
+```
+
+## See Also
+
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ApplicationId property
+
+Application ID of the Bot Token
+
+```csharp
+public Snowflake ApplicationId { get; }
+```
+
+## See Also
+
+* struct [Snowflake](../Entities/Snowflake.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

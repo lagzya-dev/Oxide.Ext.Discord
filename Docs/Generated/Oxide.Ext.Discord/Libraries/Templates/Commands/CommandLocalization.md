@@ -10,18 +10,118 @@ public class CommandLocalization
 
 | name | description |
 | --- | --- |
-| [CommandLocalization](CommandLocalization/CommandLocalization.md)() | Constructor |
-| [CommandLocalization](CommandLocalization/CommandLocalization.md)(…) | Constructor (3 constructors) |
-| [Arguments](CommandLocalization/Arguments.md) { get; set; } | Localized Argument Options |
-| [Description](CommandLocalization/Description.md) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](CommandLocalization/Name.md) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
-| [Options](CommandLocalization/Options.md) { get; set; } | Localized Options for the Command |
-| [ApplyCommandLocalization](CommandLocalization/ApplyCommandLocalization.md)(…) | Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) |
+| [CommandLocalization](#CommandLocalization)() | Constructor |
+| [CommandLocalization](#CommandLocalization)(…) | Constructor (3 constructors) |
+| [Arguments](#Arguments) { get; set; } | Localized Argument Options |
+| [Description](#Description) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
+| [Name](#Name) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [Options](#Options) { get; set; } | Localized Options for the Command |
+| [ApplyCommandLocalization](#ApplyCommandLocalization)(…) | Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [CommandLocalization.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/CommandLocalization.cs)
+   
+   
+# ApplyCommandLocalization method
+
+Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md)
+
+```csharp
+public void ApplyCommandLocalization(CommandCreate create, DiscordLocale locale)
+```
+
+| parameter | description |
+| --- | --- |
+| create |  |
+| locale |  |
+
+## See Also
+
+* class [CommandCreate](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md)
+* struct [DiscordLocale](../../Locale/DiscordLocale.md)
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# CommandLocalization constructor (1 of 4)
+
+Constructor
+
+```csharp
+public CommandLocalization()
+```
+
+## See Also
+
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Name property
+
+Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name)
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description)
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Options property
+
+Localized Options for the Command
+
+```csharp
+public List<CommandLocalization> Options { get; set; }
+```
+
+## See Also
+
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Arguments property
+
+Localized Argument Options
+
+```csharp
+public Hash<string, ArgumentLocalization> Arguments { get; set; }
+```
+
+## See Also
+
+* class [ArgumentLocalization](./ArgumentLocalization.md)
+* class [CommandLocalization](./CommandLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

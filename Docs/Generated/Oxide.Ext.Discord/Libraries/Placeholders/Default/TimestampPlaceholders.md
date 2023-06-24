@@ -10,20 +10,162 @@ public static class TimestampPlaceholders
 
 | name | description |
 | --- | --- |
-| static [LongDate](TimestampPlaceholders/LongDate.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [LongDateTime](TimestampPlaceholders/LongDateTime.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [Longtime](TimestampPlaceholders/Longtime.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [RegisterPlaceholders](TimestampPlaceholders/RegisterPlaceholders.md)(…) | Registers placeholders for the given plugin. |
-| static [RelativeTime](TimestampPlaceholders/RelativeTime.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortDate](TimestampPlaceholders/ShortDate.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortDateTime](TimestampPlaceholders/ShortDateTime.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortTime](TimestampPlaceholders/ShortTime.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [Timestamp](TimestampPlaceholders/Timestamp.md)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [LongDate](#LongDate)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [LongDateTime](#LongDateTime)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [Longtime](#Longtime)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [RegisterPlaceholders](#RegisterPlaceholders)(…) | Registers placeholders for the given plugin. |
+| static [RelativeTime](#RelativeTime)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortDate](#ShortDate)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortDateTime](#ShortDateTime)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortTime](#ShortTime)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [Timestamp](#Timestamp)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [TimestampPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/TimestampPlaceholders.cs)
+   
+   
+# Timestamp method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string Timestamp(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ShortTime method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string ShortTime(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Longtime method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string Longtime(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ShortDate method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string ShortDate(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# LongDate method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string LongDate(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ShortDateTime method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string ShortDateTime(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# LongDateTime method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string LongDateTime(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RelativeTime method
+
+[`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp) placeholder
+
+```csharp
+public static string RelativeTime(long timestamp)
+```
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RegisterPlaceholders method
+
+Registers placeholders for the given plugin.
+
+```csharp
+public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
+    string dataKey = "Timestamp")
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to register placeholders for |
+| placeholderPrefix | Prefix to use for the placeholders |
+| dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
+
+## See Also
+
+* class [TimestampPlaceholders](./TimestampPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

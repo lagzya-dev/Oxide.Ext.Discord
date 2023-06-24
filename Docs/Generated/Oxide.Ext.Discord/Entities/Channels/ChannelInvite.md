@@ -10,20 +10,156 @@ public class ChannelInvite
 
 | name | description |
 | --- | --- |
-| [ChannelInvite](ChannelInvite/ChannelInvite.md)() | The default constructor. |
-| [MaxAge](ChannelInvite/MaxAge.md) { get; set; } | Duration of invite in seconds before expiry, or 0 for never |
-| [MaxUses](ChannelInvite/MaxUses.md) { get; set; } | Max number of uses or 0 for unlimited |
-| [TargetApplicationId](ChannelInvite/TargetApplicationId.md) { get; set; } | The id of the embedded application to open for this invite, Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag |
-| [TargetUser](ChannelInvite/TargetUser.md) { get; set; } | The target user id for this invite |
-| [TargetUserType](ChannelInvite/TargetUserType.md) { get; set; } | The type of target user for this invite |
-| [Temporary](ChannelInvite/Temporary.md) { get; set; } | Whether this invite only grants temporary membership |
-| [Unique](ChannelInvite/Unique.md) { get; set; } | If true, don't try to reuse a similar invite (useful for creating many unique one time use invites) |
-| [Validate](ChannelInvite/Validate.md)() |  |
+| [ChannelInvite](#ChannelInvite)() | The default constructor. |
+| [MaxAge](#MaxAge) { get; set; } | Duration of invite in seconds before expiry, or 0 for never |
+| [MaxUses](#MaxUses) { get; set; } | Max number of uses or 0 for unlimited |
+| [TargetApplicationId](#TargetApplicationId) { get; set; } | The id of the embedded application to open for this invite, Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag |
+| [TargetUser](#TargetUser) { get; set; } | The target user id for this invite |
+| [TargetUserType](#TargetUserType) { get; set; } | The type of target user for this invite |
+| [Temporary](#Temporary) { get; set; } | Whether this invite only grants temporary membership |
+| [Unique](#Unique) { get; set; } | If true, don't try to reuse a similar invite (useful for creating many unique one time use invites) |
+| [Validate](#Validate)() |  |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ChannelInvite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/ChannelInvite.cs)
+   
+   
+# Validate method
+
+```csharp
+public void Validate()
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ChannelInvite constructor
+
+The default constructor.
+
+```csharp
+public ChannelInvite()
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# MaxAge property
+
+Duration of invite in seconds before expiry, or 0 for never
+
+```csharp
+public int? MaxAge { get; set; }
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# MaxUses property
+
+Max number of uses or 0 for unlimited
+
+```csharp
+public int? MaxUses { get; set; }
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Temporary property
+
+Whether this invite only grants temporary membership
+
+```csharp
+public bool? Temporary { get; set; }
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Unique property
+
+If true, don't try to reuse a similar invite (useful for creating many unique one time use invites)
+
+```csharp
+public bool? Unique { get; set; }
+```
+
+## See Also
+
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TargetUserType property
+
+The type of target user for this invite
+
+```csharp
+public TargetUserType? TargetUserType { get; set; }
+```
+
+## See Also
+
+* enum [TargetUserType](../Invites/TargetUserType.md)
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TargetUser property
+
+The target user id for this invite
+
+```csharp
+public Snowflake? TargetUser { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TargetApplicationId property
+
+The id of the embedded application to open for this invite, Required if TargetUserType is EMBEDDED_APPLICATION, the application must have the EMBEDDED flag
+
+```csharp
+public Snowflake? TargetApplicationId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [ChannelInvite](./ChannelInvite.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

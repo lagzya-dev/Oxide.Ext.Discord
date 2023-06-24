@@ -10,21 +10,21 @@ public class BasePromise : BasePoolable, IRejectable
 
 | name | description |
 | --- | --- |
-| [Id](BasePromise/Id.md) { get; } | ID of the promise |
-| [State](BasePromise/State.md) { get; protected set; } | Tracks the current state of the promise. |
-| [Reject](BasePromise/Reject.md)(…) |  |
+| [Id](#Id) { get; } | ID of the promise |
+| [State](#State) { get; protected set; } | Tracks the current state of the promise. |
+| [Reject](#Reject)(…) |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BasePromise](BasePromise/BasePromise.md)() | Constructor |
-| [Exception](BasePromise/Exception.md) | The exception when the promise is rejected. |
-| readonly [Rejects](BasePromise/Rejects.md) | Collection of handlers for rejected promises |
-| virtual [ClearHandlers](BasePromise/ClearHandlers.md)() | Clears all the handlers for the promises Called after completion |
-| [DelayedDispose](BasePromise/DelayedDispose.md)() | Delays disposing the promise till NextTick |
-| override [EnterPool](BasePromise/EnterPool.md)() |  |
-| override [LeavePool](BasePromise/LeavePool.md)() |  |
+| [BasePromise](#BasePromise)() | Constructor |
+| [Exception](#Exception) | The exception when the promise is rejected. |
+| readonly [Rejects](#Rejects) | Collection of handlers for rejected promises |
+| virtual [ClearHandlers](#ClearHandlers)() | Clears all the handlers for the promises Called after completion |
+| [DelayedDispose](#DelayedDispose)() | Delays disposing the promise till NextTick |
+| override [EnterPool](#EnterPool)() |  |
+| override [LeavePool](#LeavePool)() |  |
 
 ## See Also
 
@@ -33,5 +33,152 @@ public class BasePromise : BasePoolable, IRejectable
 * namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BasePromise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/BasePromise.cs)
+   
+   
+# Reject method
+
+```csharp
+public void Reject(Exception ex)
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ClearHandlers method
+
+Clears all the handlers for the promises Called after completion
+
+```csharp
+protected virtual void ClearHandlers()
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# DelayedDispose method
+
+Delays disposing the promise till NextTick
+
+```csharp
+protected void DelayedDispose()
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LeavePool method
+
+```csharp
+protected override void LeavePool()
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# EnterPool method
+
+```csharp
+protected override void EnterPool()
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BasePromise constructor
+
+Constructor
+
+```csharp
+protected BasePromise()
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the promise
+
+```csharp
+public Snowflake Id { get; }
+```
+
+## See Also
+
+* struct [Snowflake](../Entities/Snowflake.md)
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# State property
+
+Tracks the current state of the promise.
+
+```csharp
+public PromiseState State { get; protected set; }
+```
+
+## See Also
+
+* enum [PromiseState](./PromiseState.md)
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Exception field
+
+The exception when the promise is rejected.
+
+```csharp
+protected Exception Exception;
+```
+
+## See Also
+
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Rejects field
+
+Collection of handlers for rejected promises
+
+```csharp
+protected readonly List<RejectHandler> Rejects;
+```
+
+## See Also
+
+* struct [RejectHandler](./RejectHandler.md)
+* class [BasePromise](./BasePromise.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

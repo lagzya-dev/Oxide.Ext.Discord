@@ -10,22 +10,22 @@ public class DiscordSticker : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordSticker](DiscordSticker/DiscordSticker.md)() | The default constructor. |
-| [Available](DiscordSticker/Available.md) { get; set; } | Whether or not the sticker is available |
-| [Description](DiscordSticker/Description.md) { get; set; } | Description of the sticker |
-| [FormatType](DiscordSticker/FormatType.md) { get; set; } | Type of sticker format [`StickerFormatType`](./StickerFormatType.md) |
-| [GuildId](DiscordSticker/GuildId.md) { get; set; } | Id of the guild that owns this sticker |
-| [Id](DiscordSticker/Id.md) { get; set; } | ID of the sticker |
-| [Name](DiscordSticker/Name.md) { get; set; } | Name of the sticker |
-| [PackId](DiscordSticker/PackId.md) { get; set; } | ID of the pack the sticker is from |
-| [SortValue](DiscordSticker/SortValue.md) { get; set; } | A sticker's sort order within a pack |
-| [StickerUrl](DiscordSticker/StickerUrl.md) { get; } | Returns the Url for the sticker |
-| [Tags](DiscordSticker/Tags.md) { get; set; } | For guild stickers, a unicode emoji representing the sticker's expression. For nitro stickers, a comma-separated list of related expressions. autocomplete/suggestion tags for the sticker (max 200 characters) |
-| [Type](DiscordSticker/Type.md) { get; set; } | Type of sticker. |
-| [User](DiscordSticker/User.md) { get; set; } | The user that uploaded the sticker |
-| [DeleteGuildSticker](DiscordSticker/DeleteGuildSticker.md)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. See [Delete Guild Sticker](https://discord.com/developers/docs/resources/sticker#delete-guild-sticker) |
-| [ModifyGuildSticker](DiscordSticker/ModifyGuildSticker.md)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
-| static [Get](DiscordSticker/Get.md)(…) | Returns a sticker object for the given sticker ID. See [Get Sticker](https://discord.com/developers/docs/resources/sticker#get-sticker) |
+| [DiscordSticker](#DiscordSticker)() | The default constructor. |
+| [Available](#Available) { get; set; } | Whether or not the sticker is available |
+| [Description](#Description) { get; set; } | Description of the sticker |
+| [FormatType](#FormatType) { get; set; } | Type of sticker format [`StickerFormatType`](./StickerFormatType.md) |
+| [GuildId](#GuildId) { get; set; } | Id of the guild that owns this sticker |
+| [Id](#Id) { get; set; } | ID of the sticker |
+| [Name](#Name) { get; set; } | Name of the sticker |
+| [PackId](#PackId) { get; set; } | ID of the pack the sticker is from |
+| [SortValue](#SortValue) { get; set; } | A sticker's sort order within a pack |
+| [StickerUrl](#StickerUrl) { get; } | Returns the Url for the sticker |
+| [Tags](#Tags) { get; set; } | For guild stickers, a unicode emoji representing the sticker's expression. For nitro stickers, a comma-separated list of related expressions. autocomplete/suggestion tags for the sticker (max 200 characters) |
+| [Type](#Type) { get; set; } | Type of sticker. |
+| [User](#User) { get; set; } | The user that uploaded the sticker |
+| [DeleteGuildSticker](#DeleteGuildSticker)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. See [Delete Guild Sticker](https://discord.com/developers/docs/resources/sticker#delete-guild-sticker) |
+| [ModifyGuildSticker](#ModifyGuildSticker)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
+| static [Get](#Get)(…) | Returns a sticker object for the given sticker ID. See [Get Sticker](https://discord.com/developers/docs/resources/sticker#get-sticker) |
 
 ## See Also
 
@@ -33,5 +33,271 @@ public class DiscordSticker : ISnowflakeEntity
 * namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordSticker.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Stickers/DiscordSticker.cs)
+   
+   
+# Get method
+
+Returns a sticker object for the given sticker ID. See [Get Sticker](https://discord.com/developers/docs/resources/sticker#get-sticker)
+
+```csharp
+public static IPromise<DiscordSticker> Get(DiscordClient client, Snowflake stickerId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| stickerId | ID of the sticker |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ModifyGuildSticker method
+
+Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker)
+
+```csharp
+public IPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DeleteGuildSticker method
+
+Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. See [Delete Guild Sticker](https://discord.com/developers/docs/resources/sticker#delete-guild-sticker)
+
+```csharp
+public IPromise DeleteGuildSticker(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordSticker constructor
+
+The default constructor.
+
+```csharp
+public DiscordSticker()
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the sticker
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# PackId property
+
+ID of the pack the sticker is from
+
+```csharp
+public Snowflake? PackId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+Name of the sticker
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Description property
+
+Description of the sticker
+
+```csharp
+public string Description { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Tags property
+
+For guild stickers, a unicode emoji representing the sticker's expression. For nitro stickers, a comma-separated list of related expressions. autocomplete/suggestion tags for the sticker (max 200 characters)
+
+```csharp
+public string Tags { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of sticker.
+
+```csharp
+public StickerType Type { get; set; }
+```
+
+## See Also
+
+* enum [StickerType](./StickerType.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# FormatType property
+
+Type of sticker format [`StickerFormatType`](./StickerFormatType.md)
+
+```csharp
+public StickerFormatType FormatType { get; set; }
+```
+
+## See Also
+
+* enum [StickerFormatType](./StickerFormatType.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Available property
+
+Whether or not the sticker is available
+
+```csharp
+public bool? Available { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+Id of the guild that owns this sticker
+
+```csharp
+public Snowflake? GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# User property
+
+The user that uploaded the sticker
+
+```csharp
+public DiscordUser User { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](../Users/DiscordUser.md)
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# SortValue property
+
+A sticker's sort order within a pack
+
+```csharp
+public int? SortValue { get; set; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# StickerUrl property
+
+Returns the Url for the sticker
+
+```csharp
+public string StickerUrl { get; }
+```
+
+## See Also
+
+* class [DiscordSticker](./DiscordSticker.md)
+* namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

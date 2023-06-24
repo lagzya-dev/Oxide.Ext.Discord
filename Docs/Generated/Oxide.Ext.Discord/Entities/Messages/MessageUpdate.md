@@ -10,17 +10,17 @@ public class MessageUpdate : IDiscordMessageTemplate, IFileAttachments
 
 | name | description |
 | --- | --- |
-| [MessageUpdate](MessageUpdate/MessageUpdate.md)() | Constructor |
-| [MessageUpdate](MessageUpdate/MessageUpdate.md)(…) | Constructor for message to be edited Only sets the Attachments field |
-| [AllowedMentions](MessageUpdate/AllowedMentions.md) { get; set; } | Allowed mentions for the message |
-| [Attachments](MessageUpdate/Attachments.md) { get; set; } | Attachments for the message |
-| [Components](MessageUpdate/Components.md) { get; set; } | Components to include with the message |
-| [Content](MessageUpdate/Content.md) { get; set; } | Contents of the message up to 2000 characters |
-| [Embeds](MessageUpdate/Embeds.md) { get; set; } | Up to 10 rich embeds (up to 6000 characters) |
-| [FileAttachments](MessageUpdate/FileAttachments.md) { get; set; } | Attachments for a discord message |
-| [Flags](MessageUpdate/Flags.md) { get; set; } | Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset) |
-| [AddAttachment](MessageUpdate/AddAttachment.md)(…) | Adds an attachment to the message |
-| [Validate](MessageUpdate/Validate.md)() |  |
+| [MessageUpdate](#MessageUpdate)() | Constructor |
+| [MessageUpdate](#MessageUpdate)(…) | Constructor for message to be edited Only sets the Attachments field |
+| [AllowedMentions](#AllowedMentions) { get; set; } | Allowed mentions for the message |
+| [Attachments](#Attachments) { get; set; } | Attachments for the message |
+| [Components](#Components) { get; set; } | Components to include with the message |
+| [Content](#Content) { get; set; } | Contents of the message up to 2000 characters |
+| [Embeds](#Embeds) { get; set; } | Up to 10 rich embeds (up to 6000 characters) |
+| [FileAttachments](#FileAttachments) { get; set; } | Attachments for a discord message |
+| [Flags](#Flags) { get; set; } | Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset) |
+| [AddAttachment](#AddAttachment)(…) | Adds an attachment to the message |
+| [Validate](#Validate)() |  |
 
 ## See Also
 
@@ -29,5 +29,169 @@ public class MessageUpdate : IDiscordMessageTemplate, IFileAttachments
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [MessageUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageUpdate.cs)
+   
+   
+# AddAttachment method
+
+Adds an attachment to the message
+
+```csharp
+public void AddAttachment(string filename, byte[] data, string contentType, 
+    string description = null)
+```
+
+| parameter | description |
+| --- | --- |
+| filename | Name of the file |
+| data | byte[] of the attachment |
+| contentType | Attachment content type |
+| description | Description for the attachment |
+
+## See Also
+
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Validate method
+
+```csharp
+public void Validate()
+```
+
+## See Also
+
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# MessageUpdate constructor (1 of 2)
+
+Constructor
+
+```csharp
+public MessageUpdate()
+```
+
+## See Also
+
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# Content property
+
+Contents of the message up to 2000 characters
+
+```csharp
+public string Content { get; set; }
+```
+
+## See Also
+
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Embeds property
+
+Up to 10 rich embeds (up to 6000 characters)
+
+```csharp
+public List<DiscordEmbed> Embeds { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbed](./Embeds/DiscordEmbed.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Flags property
+
+Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset)
+
+```csharp
+public MessageFlags? Flags { get; set; }
+```
+
+## See Also
+
+* enum [MessageFlags](./MessageFlags.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AllowedMentions property
+
+Allowed mentions for the message
+
+```csharp
+public AllowedMention AllowedMentions { get; set; }
+```
+
+## See Also
+
+* class [AllowedMention](./AllowedMentions/AllowedMention.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Components property
+
+Components to include with the message
+
+```csharp
+public List<ActionRowComponent> Components { get; set; }
+```
+
+## See Also
+
+* class [ActionRowComponent](../Interactions/MessageComponents/ActionRowComponent.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Attachments property
+
+Attachments for the message
+
+```csharp
+public List<MessageAttachment> Attachments { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# FileAttachments property
+
+Attachments for a discord message
+
+```csharp
+public List<MessageFileAttachment> FileAttachments { get; set; }
+```
+
+## See Also
+
+* class [MessageFileAttachment](./MessageFileAttachment.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

@@ -10,26 +10,266 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 
 | name | description |
 | --- | --- |
-| [TemplateVersion](TemplateVersion/TemplateVersion.md)(…) | Constructor |
-| readonly [Major](TemplateVersion/Major.md) | Major Version |
-| readonly [Minor](TemplateVersion/Minor.md) | Minor Version |
-| readonly [Revision](TemplateVersion/Revision.md) | Revision Version |
-| [CompareTo](TemplateVersion/CompareTo.md)(…) |  |
-| override [Equals](TemplateVersion/Equals.md)(…) |  |
-| [Equals](TemplateVersion/Equals.md)(…) |  |
-| override [GetHashCode](TemplateVersion/GetHashCode.md)() |  |
-| override [ToString](TemplateVersion/ToString.md)() |  |
-| [operator ==](TemplateVersion/op_Equality.md) | Returns if the template versions are equal |
-| [operator &gt;](TemplateVersion/op_GreaterThan.md) | Returns if the right template version is greater than the left |
-| [operator &gt;=](TemplateVersion/op_GreaterThanOrEqual.md) | Returns if the right template version is greater or equal than the left |
-| [operator !=](TemplateVersion/op_Inequality.md) | Returns if the template versions are not equal |
-| [operator &lt;](TemplateVersion/op_LessThan.md) | Returns if the left template version is less than the right |
-| [operator &lt;=](TemplateVersion/op_LessThanOrEqual.md) | Returns if the left template version is less than or equal the right |
+| [TemplateVersion](#TemplateVersion)(…) | Constructor |
+| readonly [Major](#Major) | Major Version |
+| readonly [Minor](#Minor) | Minor Version |
+| readonly [Revision](#Revision) | Revision Version |
+| [CompareTo](#CompareTo)(…) |  |
+| override [Equals](#Equals)(…) |  |
+| [Equals](#Equals)(…) |  |
+| override [GetHashCode](#GetHashCode)() |  |
+| override [ToString](#ToString)() |  |
+| [operator ==](#op_Equality) | Returns if the template versions are equal |
+| [operator &gt;](#op_GreaterThan) | Returns if the right template version is greater than the left |
+| [operator &gt;=](#op_GreaterThanOrEqual) | Returns if the right template version is greater or equal than the left |
+| [operator !=](#op_Inequality) | Returns if the template versions are not equal |
+| [operator &lt;](#op_LessThan) | Returns if the left template version is less than the right |
+| [operator &lt;=](#op_LessThanOrEqual) | Returns if the left template version is less than or equal the right |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [TemplateVersion.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/TemplateVersion.cs)
+   
+   
+# Equals method (1 of 2)
+
+```csharp
+public override bool Equals(object obj)
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GetHashCode method
+
+```csharp
+public override int GetHashCode()
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CompareTo method
+
+```csharp
+public int CompareTo(TemplateVersion other)
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion Equality operator
+
+Returns if the template versions are equal
+
+```csharp
+public static bool operator ==(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion Inequality operator
+
+Returns if the template versions are not equal
+
+```csharp
+public static bool operator !=(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion LessThan operator
+
+Returns if the left template version is less than the right
+
+```csharp
+public static bool operator <(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion LessThanOrEqual operator
+
+Returns if the left template version is less than or equal the right
+
+```csharp
+public static bool operator <=(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion GreaterThan operator
+
+Returns if the right template version is greater than the left
+
+```csharp
+public static bool operator >(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion GreaterThanOrEqual operator
+
+Returns if the right template version is greater or equal than the left
+
+```csharp
+public static bool operator >=(TemplateVersion left, TemplateVersion right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ToString method
+
+```csharp
+public override string ToString()
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateVersion constructor
+
+Constructor
+
+```csharp
+public TemplateVersion(ushort major, ushort minor, ushort revision)
+```
+
+| parameter | description |
+| --- | --- |
+| major | Major Version |
+| minor | Minor Version |
+| revision | Revision Version |
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Major field
+
+Major Version
+
+```csharp
+public readonly ushort Major;
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Minor field
+
+Minor Version
+
+```csharp
+public readonly ushort Minor;
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Revision field
+
+Revision Version
+
+```csharp
+public readonly ushort Revision;
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

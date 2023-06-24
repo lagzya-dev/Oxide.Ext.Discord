@@ -10,25 +10,25 @@ public class GuildMember : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [GuildMember](GuildMember/GuildMember.md)() | The default constructor. |
-| [Avatar](GuildMember/Avatar.md) { get; set; } | The member's guild avatar hash |
-| [CommunicationDisabledUntil](GuildMember/CommunicationDisabledUntil.md) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out |
-| [Deaf](GuildMember/Deaf.md) { get; set; } | Whether the user is deafened in voice channels |
-| [DisplayName](GuildMember/DisplayName.md) { get; } | Returns the display name show for the user in a guild |
-| [Flags](GuildMember/Flags.md) { get; set; } | Flags for the GuildMember |
-| [HasLeftGuild](GuildMember/HasLeftGuild.md) { get; } | Returns if the [`GuildMember`](./GuildMember.md) has left the [`DiscordGuild`](./DiscordGuild.md) it belongs to |
-| [Id](GuildMember/Id.md) { get; } | Id for guild member |
-| [IsBot](GuildMember/IsBot.md) { get; } | Returns if the GuildMember is a bot |
-| [JoinedAt](GuildMember/JoinedAt.md) { get; set; } | When the user joined the guild |
-| [Mute](GuildMember/Mute.md) { get; set; } | Whether the user is muted in voice channels |
-| [Nickname](GuildMember/Nickname.md) { get; set; } | This users guild nickname |
-| [NickNameLastUpdated](GuildMember/NickNameLastUpdated.md) { get; } | When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet |
-| [Pending](GuildMember/Pending.md) { get; set; } | Whether the user has not yet passed the guild's Membership Screening requirements |
-| [Permissions](GuildMember/Permissions.md) { get; set; } | Total permissions of the member in the channel, including overrides, returned when in the interaction object |
-| [PremiumSince](GuildMember/PremiumSince.md) { get; set; } | When the user started boosting the guild |
-| [Roles](GuildMember/Roles.md) { get; set; } | List of member roles |
-| [User](GuildMember/User.md) { get; set; } | The user this guild member represents |
-| [HasRole](GuildMember/HasRole.md)(…) | Returns if member has the given role (2 methods) |
+| [GuildMember](#GuildMember)() | The default constructor. |
+| [Avatar](#Avatar) { get; set; } | The member's guild avatar hash |
+| [CommunicationDisabledUntil](#CommunicationDisabledUntil) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out |
+| [Deaf](#Deaf) { get; set; } | Whether the user is deafened in voice channels |
+| [DisplayName](#DisplayName) { get; } | Returns the display name show for the user in a guild |
+| [Flags](#Flags) { get; set; } | Flags for the GuildMember |
+| [HasLeftGuild](#HasLeftGuild) { get; } | Returns if the [`GuildMember`](./GuildMember.md) has left the [`DiscordGuild`](./DiscordGuild.md) it belongs to |
+| [Id](#Id) { get; } | Id for guild member |
+| [IsBot](#IsBot) { get; } | Returns if the GuildMember is a bot |
+| [JoinedAt](#JoinedAt) { get; set; } | When the user joined the guild |
+| [Mute](#Mute) { get; set; } | Whether the user is muted in voice channels |
+| [Nickname](#Nickname) { get; set; } | This users guild nickname |
+| [NickNameLastUpdated](#NickNameLastUpdated) { get; } | When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet |
+| [Pending](#Pending) { get; set; } | Whether the user has not yet passed the guild's Membership Screening requirements |
+| [Permissions](#Permissions) { get; set; } | Total permissions of the member in the channel, including overrides, returned when in the interaction object |
+| [PremiumSince](#PremiumSince) { get; set; } | When the user started boosting the guild |
+| [Roles](#Roles) { get; set; } | List of member roles |
+| [User](#User) { get; set; } | The user this guild member represents |
+| [HasRole](#HasRole)(…) | Returns if member has the given role (2 methods) |
 
 ## See Also
 
@@ -36,5 +36,312 @@ public class GuildMember : ISnowflakeEntity
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [GuildMember.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildMember.cs)
+   
+   
+# HasRole method (1 of 2)
+
+Returns if member has the given role
+
+```csharp
+public bool HasRole(DiscordRole role)
+```
+
+| parameter | description |
+| --- | --- |
+| role | Role to check |
+
+## Return Value
+
+Return true if has role; False otherwise;
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if role is null |
+
+## See Also
+
+* class [DiscordRole](../Permissions/DiscordRole.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GuildMember constructor
+
+The default constructor.
+
+```csharp
+public GuildMember()
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+Id for guild member
+
+```csharp
+public Snowflake Id { get; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# User property
+
+The user this guild member represents
+
+```csharp
+public DiscordUser User { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](../Users/DiscordUser.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Nickname property
+
+This users guild nickname
+
+```csharp
+public string Nickname { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Avatar property
+
+The member's guild avatar hash
+
+```csharp
+public string Avatar { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Roles property
+
+List of member roles
+
+```csharp
+public List<Snowflake> Roles { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# JoinedAt property
+
+When the user joined the guild
+
+```csharp
+public DateTime? JoinedAt { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# PremiumSince property
+
+When the user started boosting the guild
+
+```csharp
+public DateTime? PremiumSince { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Permissions property
+
+Total permissions of the member in the channel, including overrides, returned when in the interaction object
+
+```csharp
+public PermissionFlags? Permissions { get; set; }
+```
+
+## See Also
+
+* enum [PermissionFlags](../Permissions/PermissionFlags.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Deaf property
+
+Whether the user is deafened in voice channels
+
+```csharp
+public bool Deaf { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Mute property
+
+Whether the user is muted in voice channels
+
+```csharp
+public bool Mute { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Flags property
+
+Flags for the GuildMember
+
+```csharp
+public GuildMemberFlags Flags { get; set; }
+```
+
+## See Also
+
+* enum [GuildMemberFlags](./GuildMemberFlags.md)
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Pending property
+
+Whether the user has not yet passed the guild's Membership Screening requirements
+
+```csharp
+public bool? Pending { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CommunicationDisabledUntil property
+
+When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
+
+```csharp
+public DateTime? CommunicationDisabledUntil { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# NickNameLastUpdated property
+
+When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet
+
+```csharp
+public DateTime? NickNameLastUpdated { get; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# HasLeftGuild property
+
+Returns if the [`GuildMember`](./GuildMember.md) has left the [`DiscordGuild`](./DiscordGuild.md) it belongs to
+
+```csharp
+public bool HasLeftGuild { get; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DisplayName property
+
+Returns the display name show for the user in a guild
+
+```csharp
+public string DisplayName { get; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsBot property
+
+Returns if the GuildMember is a bot
+
+```csharp
+public bool IsBot { get; }
+```
+
+## See Also
+
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

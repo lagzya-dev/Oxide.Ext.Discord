@@ -10,24 +10,155 @@ public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>, ID
 
 | name | description |
 | --- | --- |
-| [AddChannelSubscription](DiscordSubscriptions/AddChannelSubscription.md)(…) | Allows a plugin to add a subscription to a discord channel |
-| [HasSubscriptions](DiscordSubscriptions/HasSubscriptions.md)() | Returns if any subscriptions have been registered |
-| [LogDebug](DiscordSubscriptions/LogDebug.md)(…) |  |
-| [RemoveChannelSubscription](DiscordSubscriptions/RemoveChannelSubscription.md)(…) | Removes a subscribed channel for a plugin |
-| [RemovePluginSubscriptions](DiscordSubscriptions/RemovePluginSubscriptions.md)(…) | Remove all subscriptions for a plugin |
+| [AddChannelSubscription](#AddChannelSubscription)(…) | Allows a plugin to add a subscription to a discord channel |
+| [HasSubscriptions](#HasSubscriptions)() | Returns if any subscriptions have been registered |
+| [LogDebug](#LogDebug)(…) |  |
+| [RemoveChannelSubscription](#RemoveChannelSubscription)(…) | Removes a subscribed channel for a plugin |
+| [RemovePluginSubscriptions](#RemovePluginSubscriptions)(…) | Remove all subscriptions for a plugin |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](DiscordSubscriptions/OnPluginUnloaded.md)(…) |  |
+| override [OnPluginUnloaded](#OnPluginUnloaded)(…) |  |
 
 ## See Also
 
-* class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary-1.md)
+* class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary%7BTLibrary%7D.md)
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordSubscriptions.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Subscription/DiscordSubscriptions.cs)
+   
+   
+# HasSubscriptions method
+
+Returns if any subscriptions have been registered
+
+```csharp
+public bool HasSubscriptions()
+```
+
+## Return Value
+
+True if there are any subscriptions; False otherwise
+
+## See Also
+
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddChannelSubscription method
+
+Allows a plugin to add a subscription to a discord channel
+
+```csharp
+public void AddChannelSubscription(DiscordClient client, Snowflake channelId, 
+    Action<DiscordMessage> message)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client that is subscribing |
+| channelId | Channel ID of the channel |
+| message | Callback with the message that was created in the channel |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Exception if plugin or message is null |
+| ArgumentException | Exception if Channel ID is not valid |
+
+## See Also
+
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [DiscordMessage](../../Entities/Messages/DiscordMessage.md)
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# RemoveChannelSubscription method
+
+Removes a subscribed channel for a plugin
+
+```csharp
+public void RemoveChannelSubscription(Plugin plugin, Snowflake channelId)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to remove the subscription for |
+| channelId | Channel ID to remove |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Exception if plugin is null |
+| ArgumentException | Exception if channel ID is not valid |
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# OnPluginUnloaded method
+
+```csharp
+protected override void OnPluginUnloaded(Plugin plugin)
+```
+
+## See Also
+
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# RemovePluginSubscriptions method
+
+Remove all subscriptions for a plugin
+
+```csharp
+public void RemovePluginSubscriptions(Plugin plugin)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to remove subscriptions for |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Exception if plugin is null |
+
+## See Also
+
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../../Logging/DebugLogger.md)
+* class [DiscordSubscriptions](./DiscordSubscriptions.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

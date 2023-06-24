@@ -10,22 +10,192 @@ public class Connection
 
 | name | description |
 | --- | --- |
-| [Connection](Connection/Connection.md)() | The default constructor. |
-| [FriendSync](Connection/FriendSync.md) { get; set; } | Whether friend sync is enabled for this connection |
-| [Id](Connection/Id.md) { get; set; } | ID of the connection account |
-| [Integrations](Connection/Integrations.md) { get; set; } | An array of partial server integrations [`Integration`](../../Integrations/Integration.md) |
-| [Name](Connection/Name.md) { get; set; } | The username of the connection account |
-| [Revoked](Connection/Revoked.md) { get; set; } | Whether the connection is revoked |
-| [ShowActivity](Connection/ShowActivity.md) { get; set; } | Whether activities related to this connection will be shown in presence updates |
-| [TwoWayLink](Connection/TwoWayLink.md) { get; set; } | Whether this connection has a corresponding third party OAuth2 token |
-| [Type](Connection/Type.md) { get; set; } | The service of the connection (twitch, youtube) [`ConnectionType`](./ConnectionType.md) |
-| [Verified](Connection/Verified.md) { get; set; } | Whether the connection is verified |
-| [Visibility](Connection/Visibility.md) { get; set; } | Visibility of this connection [`ConnectionVisibilityType`](./ConnectionVisibilityType.md) |
+| [Connection](#Connection)() | The default constructor. |
+| [FriendSync](#FriendSync) { get; set; } | Whether friend sync is enabled for this connection |
+| [Id](#Id) { get; set; } | ID of the connection account |
+| [Integrations](#Integrations) { get; set; } | An array of partial server integrations [`Integration`](../../Integrations/Integration.md) |
+| [Name](#Name) { get; set; } | The username of the connection account |
+| [Revoked](#Revoked) { get; set; } | Whether the connection is revoked |
+| [ShowActivity](#ShowActivity) { get; set; } | Whether activities related to this connection will be shown in presence updates |
+| [TwoWayLink](#TwoWayLink) { get; set; } | Whether this connection has a corresponding third party OAuth2 token |
+| [Type](#Type) { get; set; } | The service of the connection (twitch, youtube) [`ConnectionType`](./ConnectionType.md) |
+| [Verified](#Verified) { get; set; } | Whether the connection is verified |
+| [Visibility](#Visibility) { get; set; } | Visibility of this connection [`ConnectionVisibilityType`](./ConnectionVisibilityType.md) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [Connection.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/Connections/Connection.cs)
+   
+   
+# Connection constructor
+
+The default constructor.
+
+```csharp
+public Connection()
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the connection account
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Name property
+
+The username of the connection account
+
+```csharp
+public string Name { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The service of the connection (twitch, youtube) [`ConnectionType`](./ConnectionType.md)
+
+```csharp
+public ConnectionType Type { get; set; }
+```
+
+## See Also
+
+* enum [ConnectionType](./ConnectionType.md)
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Revoked property
+
+Whether the connection is revoked
+
+```csharp
+public bool? Revoked { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Integrations property
+
+An array of partial server integrations [`Integration`](../../Integrations/Integration.md)
+
+```csharp
+public Hash<Snowflake, Integration> Integrations { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [Integration](../../Integrations/Integration.md)
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Verified property
+
+Whether the connection is verified
+
+```csharp
+public bool Verified { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# FriendSync property
+
+Whether friend sync is enabled for this connection
+
+```csharp
+public bool FriendSync { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# TwoWayLink property
+
+Whether this connection has a corresponding third party OAuth2 token
+
+```csharp
+public bool TwoWayLink { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ShowActivity property
+
+Whether activities related to this connection will be shown in presence updates
+
+```csharp
+public bool ShowActivity { get; set; }
+```
+
+## See Also
+
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Visibility property
+
+Visibility of this connection [`ConnectionVisibilityType`](./ConnectionVisibilityType.md)
+
+```csharp
+public ConnectionVisibilityType Visibility { get; set; }
+```
+
+## See Also
+
+* enum [ConnectionVisibilityType](./ConnectionVisibilityType.md)
+* class [Connection](./Connection.md)
+* namespace [Oxide.Ext.Discord.Entities.Users.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

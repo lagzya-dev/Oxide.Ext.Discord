@@ -2,21 +2,21 @@
 
 | public type | description |
 | --- | --- |
-| static class [ApplicationCommandPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/ApplicationCommandPlaceholders.md) | [`DiscordApplicationCommand`](./Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) placeholders |
-| static class [ChannelPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/ChannelPlaceholders.md) | [`DiscordChannel`](./Oxide.Ext.Discord/Entities/Channels/DiscordChannel.md) Placeholders |
-| static class [DateTimePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/DateTimePlaceholders.md) | DateTime placeholders |
-| static class [GuildPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/GuildPlaceholders.md) | [`DiscordGuild`](./Oxide.Ext.Discord/Entities/Guilds/DiscordGuild.md) placeholders |
-| static class [InteractionPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.md) placeholders |
-| static class [MemberPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/MemberPlaceholders.md) | [`GuildMember`](./Oxide.Ext.Discord/Entities/Guilds/GuildMember.md) placeholders |
-| static class [MessagePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/MessagePlaceholders.md) | [`DiscordMessage`](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) placeholders |
-| static class [PlayerPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/PlayerPlaceholders.md) | IPlayer placeholders |
-| static class [PluginPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/PluginPlaceholders.md) | Plugin placeholders |
-| static class [RequestErrorPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
-| static class [RolePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/RolePlaceholders.md) | [`DiscordRole`](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) placeholders |
-| static class [ServerPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/ServerPlaceholders.md) | IServer placeholders |
-| static class [SnowflakePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
-| static class [TimeSpanPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/TimeSpanPlaceholders.md) | TimeSpan placeholders |
-| static class [TimestampPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/TimestampPlaceholders.md) | Timestamp placeholders |
-| static class [UserPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/UserPlaceholders.md) | [`DiscordUser`](./Oxide.Ext.Discord/Entities/Users/DiscordUser.md) placeholders |
+| static class [ApplicationCommandPlaceholders](./ApplicationCommandPlaceholders.md) | [`DiscordApplicationCommand`](./Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) placeholders |
+| static class [ChannelPlaceholders](./ChannelPlaceholders.md) | [`DiscordChannel`](./Oxide.Ext.Discord/Entities/Channels/DiscordChannel.md) Placeholders |
+| static class [DateTimePlaceholders](./DateTimePlaceholders.md) | DateTime placeholders |
+| static class [GuildPlaceholders](./GuildPlaceholders.md) | [`DiscordGuild`](./Oxide.Ext.Discord/Entities/Guilds/DiscordGuild.md) placeholders |
+| static class [InteractionPlaceholders](./InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.md) placeholders |
+| static class [MemberPlaceholders](./MemberPlaceholders.md) | [`GuildMember`](./Oxide.Ext.Discord/Entities/Guilds/GuildMember.md) placeholders |
+| static class [MessagePlaceholders](./MessagePlaceholders.md) | [`DiscordMessage`](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) placeholders |
+| static class [PlayerPlaceholders](./PlayerPlaceholders.md) | IPlayer placeholders |
+| static class [PluginPlaceholders](./PluginPlaceholders.md) | Plugin placeholders |
+| static class [RequestErrorPlaceholders](./RequestErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
+| static class [RolePlaceholders](./RolePlaceholders.md) | [`DiscordRole`](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) placeholders |
+| static class [ServerPlaceholders](./ServerPlaceholders.md) | IServer placeholders |
+| static class [SnowflakePlaceholders](./SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
+| static class [TimeSpanPlaceholders](./TimeSpanPlaceholders.md) | TimeSpan placeholders |
+| static class [TimestampPlaceholders](./TimestampPlaceholders.md) | Timestamp placeholders |
+| static class [UserPlaceholders](./UserPlaceholders.md) | [`DiscordUser`](./Oxide.Ext.Discord/Entities/Users/DiscordUser.md) placeholders |
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

@@ -10,45 +10,709 @@ public class DiscordInteraction
 
 | name | description |
 | --- | --- |
-| [DiscordInteraction](DiscordInteraction/DiscordInteraction.md)() | The default constructor. |
-| [ApplicationId](DiscordInteraction/ApplicationId.md) { get; set; } | ID of the application this interaction is for |
-| [AppPermissions](DiscordInteraction/AppPermissions.md) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
-| [Channel](DiscordInteraction/Channel.md) { get; set; } | Channel that the interaction was sent from |
-| [ChannelId](DiscordInteraction/ChannelId.md) { get; set; } | Channel that the interaction was sent from |
-| [Data](DiscordInteraction/Data.md) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
-| [Focused](DiscordInteraction/Focused.md) { get; } | Returns the Focused option for Auto Complete |
-| [GuildId](DiscordInteraction/GuildId.md) { get; set; } | Guild that the interaction was sent from |
-| [GuildLocale](DiscordInteraction/GuildLocale.md) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
-| [Id](DiscordInteraction/Id.md) { get; set; } | Id of the interaction |
-| [Locale](DiscordInteraction/Locale.md) { get; set; } | The selected language of the invoking user [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
-| [Member](DiscordInteraction/Member.md) { get; set; } | Guild member data for the invoking user, including permissions |
-| [Message](DiscordInteraction/Message.md) { get; set; } | For components, the message they were attached to |
-| [Parsed](DiscordInteraction/Parsed.md) { get; } | Returns the interaction parsed args to make it easier to process that interaction. |
-| [Token](DiscordInteraction/Token.md) { get; set; } | Continuation token for responding to the interaction Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event. If the 3 second deadline is exceeded, the token will be invalidated. |
-| [Type](DiscordInteraction/Type.md) { get; set; } | The type of interaction See [`InteractionType`](./InteractionType.md) |
-| [User](DiscordInteraction/User.md) { get; } | User object. If in DM then DM user else GuildMember.User |
-| [Version](DiscordInteraction/Version.md) { get; set; } | Read-only property, always 1 |
-| readonly [CreatedDate](DiscordInteraction/CreatedDate.md) | The UTC DateTime this interaction was created |
-| [CreateFollowUpMessage](DiscordInteraction/CreateFollowUpMessage.md)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
-| [CreateModalResponse](DiscordInteraction/CreateModalResponse.md)(…) | Creates a interaction modal response from a modal template |
-| [CreateResponse](DiscordInteraction/CreateResponse.md)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
-| [CreateTemplateResponse](DiscordInteraction/CreateTemplateResponse.md)(…) | Creates a interaction message response from a message template |
-| [DefferResponse](DiscordInteraction/DefferResponse.md)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
-| [DeleteFollowUpMessage](DiscordInteraction/DeleteFollowUpMessage.md)(…) | Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message) |
-| [DeleteOriginalResponse](DiscordInteraction/DeleteOriginalResponse.md)(…) | Deletes the initial Interaction response See [Delete Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response) |
-| [EditFollowUpMessage](DiscordInteraction/EditFollowUpMessage.md)(…) | Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message) |
-| [EditOriginalResponse](DiscordInteraction/EditOriginalResponse.md)(…) | Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) |
-| [EditTemplateOriginalResponse](DiscordInteraction/EditTemplateOriginalResponse.md)(…) | Edit a interaction response with a message template |
-| [GetAutoCompleteBuilder](DiscordInteraction/GetAutoCompleteBuilder.md)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetFollowupBuilder](DiscordInteraction/GetFollowupBuilder.md)() | Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
-| [GetLangMessage](DiscordInteraction/GetLangMessage.md)(…) | Returns a localized string for this interaction (2 methods) |
-| [GetModalBuilder](DiscordInteraction/GetModalBuilder.md)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetResponseBuilder](DiscordInteraction/GetResponseBuilder.md)() | Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
+| [DiscordInteraction](#DiscordInteraction)() | The default constructor. |
+| [ApplicationId](#ApplicationId) { get; set; } | ID of the application this interaction is for |
+| [AppPermissions](#AppPermissions) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
+| [Channel](#Channel) { get; set; } | Channel that the interaction was sent from |
+| [ChannelId](#ChannelId) { get; set; } | Channel that the interaction was sent from |
+| [Data](#Data) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
+| [Focused](#Focused) { get; } | Returns the Focused option for Auto Complete |
+| [GuildId](#GuildId) { get; set; } | Guild that the interaction was sent from |
+| [GuildLocale](#GuildLocale) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
+| [Id](#Id) { get; set; } | Id of the interaction |
+| [Locale](#Locale) { get; set; } | The selected language of the invoking user [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
+| [Member](#Member) { get; set; } | Guild member data for the invoking user, including permissions |
+| [Message](#Message) { get; set; } | For components, the message they were attached to |
+| [Parsed](#Parsed) { get; } | Returns the interaction parsed args to make it easier to process that interaction. |
+| [Token](#Token) { get; set; } | Continuation token for responding to the interaction Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event. If the 3 second deadline is exceeded, the token will be invalidated. |
+| [Type](#Type) { get; set; } | The type of interaction See [`InteractionType`](./InteractionType.md) |
+| [User](#User) { get; } | User object. If in DM then DM user else GuildMember.User |
+| [Version](#Version) { get; set; } | Read-only property, always 1 |
+| readonly [CreatedDate](#CreatedDate) | The UTC DateTime this interaction was created |
+| [CreateFollowUpMessage](#CreateFollowUpMessage)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
+| [CreateModalResponse](#CreateModalResponse)(…) | Creates a interaction modal response from a modal template |
+| [CreateResponse](#CreateResponse)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
+| [CreateTemplateResponse](#CreateTemplateResponse)(…) | Creates a interaction message response from a message template |
+| [DefferResponse](#DefferResponse)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
+| [DeleteFollowUpMessage](#DeleteFollowUpMessage)(…) | Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message) |
+| [DeleteOriginalResponse](#DeleteOriginalResponse)(…) | Deletes the initial Interaction response See [Delete Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response) |
+| [EditFollowUpMessage](#EditFollowUpMessage)(…) | Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message) |
+| [EditOriginalResponse](#EditOriginalResponse)(…) | Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) |
+| [EditTemplateOriginalResponse](#EditTemplateOriginalResponse)(…) | Edit a interaction response with a message template |
+| [GetAutoCompleteBuilder](#GetAutoCompleteBuilder)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetFollowupBuilder](#GetFollowupBuilder)() | Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
+| [GetLangMessage](#GetLangMessage)(…) | Returns a localized string for this interaction (2 methods) |
+| [GetModalBuilder](#GetModalBuilder)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetResponseBuilder](#GetResponseBuilder)() | Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordInteraction.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.cs)
+   
+   
+# GetLangMessage method (1 of 2)
+
+Returns a localized string for this interaction
+
+```csharp
+public string GetLangMessage(Plugin plugin, string langKey)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin the localization is for |
+| langKey | Lang Key to return |
+
+## Return Value
+
+Localized string if it is found; Empty string otherwise
+
+## See Also
+
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GetResponseBuilder method
+
+Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction
+
+```csharp
+public InteractionResponseBuilder GetResponseBuilder()
+```
+
+## See Also
+
+* class [InteractionResponseBuilder](../../Builders/Interactions/InteractionResponseBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetFollowupBuilder method
+
+Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction
+
+```csharp
+public InteractionFollowupBuilder GetFollowupBuilder()
+```
+
+## See Also
+
+* class [InteractionFollowupBuilder](../../Builders/Interactions/InteractionFollowupBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetAutoCompleteBuilder method
+
+Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction
+
+```csharp
+public InteractionAutoCompleteBuilder GetAutoCompleteBuilder()
+```
+
+## See Also
+
+* class [InteractionAutoCompleteBuilder](../../Builders/Interactions/InteractionAutoCompleteBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetModalBuilder method
+
+Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction
+
+```csharp
+public InteractionModalBuilder GetModalBuilder()
+```
+
+## See Also
+
+* class [InteractionModalBuilder](../../Builders/Interactions/InteractionModalBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateResponse method (1 of 7)
+
+Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response)
+
+```csharp
+public IPromise CreateResponse(DiscordClient client, BaseInteractionResponse response)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| response | Response to respond with |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [BaseInteractionResponse](./Response/BaseInteractionResponse.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# CreateTemplateResponse method
+
+Creates a interaction message response from a message template
+
+```csharp
+public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponseType type, 
+    string templateName, InteractionCallbackData message = null, 
+    PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| plugin | Plugin for the template |
+| type | Response type for the interaction |
+| templateName | Name of the template |
+| message | Message to send (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if plugin or templateName is null |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* enum [InteractionResponseType](./InteractionResponseType.md)
+* class [InteractionCallbackData](./Response/InteractionCallbackData.md)
+* class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateModalResponse method
+
+Creates a interaction modal response from a modal template
+
+```csharp
+public IPromise CreateModalResponse(DiscordClient client, string templateName, 
+    InteractionModalMessage message = null, PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| plugin | Plugin for the template |
+| templateName |  |
+| message | Message to use (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [InteractionModalMessage](./Response/InteractionModalMessage.md)
+* class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DefferResponse method
+
+Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response)
+
+```csharp
+public IPromise DefferResponse(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# EditOriginalResponse method
+
+Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response)
+
+```csharp
+public IPromise<DiscordMessage> EditOriginalResponse(DiscordClient client, MessageUpdate message)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| message | Updated message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [MessageUpdate](../Messages/MessageUpdate.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# EditTemplateOriginalResponse method
+
+Edit a interaction response with a message template
+
+```csharp
+public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, 
+    string templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| plugin | Plugin for the template |
+| templateName | Template Name |
+| message | Message to use (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [MessageUpdate](../Messages/MessageUpdate.md)
+* class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DeleteOriginalResponse method
+
+Deletes the initial Interaction response See [Delete Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-original-interaction-response)
+
+```csharp
+public IPromise DeleteOriginalResponse(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreateFollowUpMessage method (1 of 2)
+
+Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message)
+
+```csharp
+public IPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client, 
+    CommandFollowupCreate message)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| message | Message to follow up with |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [CommandFollowupCreate](./ApplicationCommands/CommandFollowupCreate.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# EditFollowUpMessage method
+
+Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message)
+
+```csharp
+public IPromise<DiscordMessage> EditFollowUpMessage(DiscordClient client, Snowflake messageId, 
+    CommandFollowupUpdate edit)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| messageId | Message ID of the follow up message |
+| edit | Updated message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [CommandFollowupUpdate](./ApplicationCommands/CommandFollowupUpdate.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DeleteFollowUpMessage method
+
+Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message)
+
+```csharp
+public IPromise DeleteFollowUpMessage(DiscordClient client, Snowflake messageId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| messageId | Message ID to delete |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DiscordInteraction constructor
+
+The default constructor.
+
+```csharp
+public DiscordInteraction()
+```
+
+## See Also
+
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+Id of the interaction
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ApplicationId property
+
+ID of the application this interaction is for
+
+```csharp
+public Snowflake ApplicationId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of interaction See [`InteractionType`](./InteractionType.md)
+
+```csharp
+public InteractionType Type { get; set; }
+```
+
+## See Also
+
+* enum [InteractionType](./InteractionType.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Data property
+
+Interaction data payload See [`InteractionData`](./InteractionData.md)
+
+```csharp
+public InteractionData Data { get; set; }
+```
+
+## See Also
+
+* class [InteractionData](./InteractionData.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+Guild that the interaction was sent from
+
+```csharp
+public Snowflake? GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Channel property
+
+Channel that the interaction was sent from
+
+```csharp
+public DiscordChannel Channel { get; set; }
+```
+
+## See Also
+
+* class [DiscordChannel](../Channels/DiscordChannel.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ChannelId property
+
+Channel that the interaction was sent from
+
+```csharp
+public Snowflake? ChannelId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Member property
+
+Guild member data for the invoking user, including permissions
+
+```csharp
+public GuildMember Member { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](../Guilds/GuildMember.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# User property
+
+User object. If in DM then DM user else GuildMember.User
+
+```csharp
+public DiscordUser User { get; }
+```
+
+## See Also
+
+* class [DiscordUser](../Users/DiscordUser.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Token property
+
+Continuation token for responding to the interaction Interaction tokens are valid for 15 minutes and can be used to send followup messages but you must send an initial response within 3 seconds of receiving the event. If the 3 second deadline is exceeded, the token will be invalidated.
+
+```csharp
+public string Token { get; set; }
+```
+
+## See Also
+
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Version property
+
+Read-only property, always 1
+
+```csharp
+public int Version { get; set; }
+```
+
+## See Also
+
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Message property
+
+For components, the message they were attached to
+
+```csharp
+public DiscordMessage Message { get; set; }
+```
+
+## See Also
+
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AppPermissions property
+
+Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+
+```csharp
+public PermissionFlags? AppPermissions { get; set; }
+```
+
+## See Also
+
+* enum [PermissionFlags](../Permissions/PermissionFlags.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Locale property
+
+The selected language of the invoking user [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales)
+
+```csharp
+public DiscordLocale Locale { get; set; }
+```
+
+## See Also
+
+* struct [DiscordLocale](../../Libraries/Locale/DiscordLocale.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildLocale property
+
+The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales)
+
+```csharp
+public DiscordLocale? GuildLocale { get; set; }
+```
+
+## See Also
+
+* struct [DiscordLocale](../../Libraries/Locale/DiscordLocale.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Parsed property
+
+Returns the interaction parsed args to make it easier to process that interaction.
+
+```csharp
+public InteractionDataParsed Parsed { get; }
+```
+
+## See Also
+
+* class [InteractionDataParsed](./InteractionDataParsed.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Focused property
+
+Returns the Focused option for Auto Complete
+
+```csharp
+public InteractionDataOption Focused { get; }
+```
+
+## See Also
+
+* class [InteractionDataOption](./InteractionDataOption.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreatedDate field
+
+The UTC DateTime this interaction was created
+
+```csharp
+public readonly DateTime CreatedDate;
+```
+
+## See Also
+
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

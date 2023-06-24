@@ -10,19 +10,142 @@ public class GuildMembersChunkEvent
 
 | name | description |
 | --- | --- |
-| [GuildMembersChunkEvent](GuildMembersChunkEvent/GuildMembersChunkEvent.md)() | The default constructor. |
-| [ChunkCount](GuildMembersChunkEvent/ChunkCount.md) { get; set; } | The total number of expected chunks for this response |
-| [ChunkIndex](GuildMembersChunkEvent/ChunkIndex.md) { get; set; } | The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count) |
-| [GuildId](GuildMembersChunkEvent/GuildId.md) { get; set; } | The id of the guild |
-| [Members](GuildMembersChunkEvent/Members.md) { get; set; } | Set of guild members |
-| [Nonce](GuildMembersChunkEvent/Nonce.md) { get; set; } | The nonce used in the Guild Members Request |
-| [NotFound](GuildMembersChunkEvent/NotFound.md) { get; set; } | If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here |
-| [Presences](GuildMembersChunkEvent/Presences.md) { get; set; } | If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here |
+| [GuildMembersChunkEvent](#GuildMembersChunkEvent)() | The default constructor. |
+| [ChunkCount](#ChunkCount) { get; set; } | The total number of expected chunks for this response |
+| [ChunkIndex](#ChunkIndex) { get; set; } | The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count) |
+| [GuildId](#GuildId) { get; set; } | The id of the guild |
+| [Members](#Members) { get; set; } | Set of guild members |
+| [Nonce](#Nonce) { get; set; } | The nonce used in the Guild Members Request |
+| [NotFound](#NotFound) { get; set; } | If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here |
+| [Presences](#Presences) { get; set; } | If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GuildMembersChunkEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildMembersChunkEvent.cs)
+   
+   
+# GuildMembersChunkEvent constructor
+
+The default constructor.
+
+```csharp
+public GuildMembersChunkEvent()
+```
+
+## See Also
+
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+The id of the guild
+
+```csharp
+public Snowflake GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Members property
+
+Set of guild members
+
+```csharp
+public List<GuildMember> Members { get; set; }
+```
+
+## See Also
+
+* class [GuildMember](../../Guilds/GuildMember.md)
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ChunkIndex property
+
+The chunk index in the expected chunks for this response (0 &lt;= chunk_index &lt; chunk_count)
+
+```csharp
+public int ChunkIndex { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ChunkCount property
+
+The total number of expected chunks for this response
+
+```csharp
+public int ChunkCount { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# NotFound property
+
+If passing an invalid id to REQUEST_GUILD_MEMBERS, it will be returned here
+
+```csharp
+public List<string> NotFound { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Presences property
+
+If passing true to REQUEST_GUILD_MEMBERS, presences of the returned members will be here
+
+```csharp
+public List<UpdatePresenceCommand> Presences { get; set; }
+```
+
+## See Also
+
+* class [UpdatePresenceCommand](../Commands/UpdatePresenceCommand.md)
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Nonce property
+
+The nonce used in the Guild Members Request
+
+```csharp
+public string Nonce { get; set; }
+```
+
+## See Also
+
+* class [GuildMembersChunkEvent](./GuildMembersChunkEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

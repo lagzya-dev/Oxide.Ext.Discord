@@ -10,19 +10,143 @@ public class GatewayReadyEvent
 
 | name | description |
 | --- | --- |
-| [GatewayReadyEvent](GatewayReadyEvent/GatewayReadyEvent.md)() | The default constructor. |
-| [Application](GatewayReadyEvent/Application.md) { get; set; } | Contains id and flags See [`Application`](./GatewayReadyEvent/Application.md) |
-| [Guilds](GatewayReadyEvent/Guilds.md) { get; set; } | The guilds the user is in |
-| [ResumeSessionUrl](GatewayReadyEvent/ResumeSessionUrl.md) { get; set; } | Websocket URL to use when resuming the session |
-| [SessionId](GatewayReadyEvent/SessionId.md) { get; set; } | Used for resuming connections |
-| [Shard](GatewayReadyEvent/Shard.md) { get; set; } | The shard information associated with this session, if sent when identifying |
-| [User](GatewayReadyEvent/User.md) { get; set; } | Information about the user including email See [`DiscordUser`](../../Users/DiscordUser.md) |
-| [Version](GatewayReadyEvent/Version.md) { get; set; } | Gateway version See [Gateway Version](https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions) |
+| [GatewayReadyEvent](#GatewayReadyEvent)() | The default constructor. |
+| [Application](#Application) { get; set; } | Contains id and flags See [`Application`](./GatewayReadyEvent/Application.md) |
+| [Guilds](#Guilds) { get; set; } | The guilds the user is in |
+| [ResumeSessionUrl](#ResumeSessionUrl) { get; set; } | Websocket URL to use when resuming the session |
+| [SessionId](#SessionId) { get; set; } | Used for resuming connections |
+| [Shard](#Shard) { get; set; } | The shard information associated with this session, if sent when identifying |
+| [User](#User) { get; set; } | Information about the user including email See [`DiscordUser`](../../Users/DiscordUser.md) |
+| [Version](#Version) { get; set; } | Gateway version See [Gateway Version](https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions) |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [GatewayReadyEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GatewayReadyEvent.cs)
+   
+   
+# GatewayReadyEvent constructor
+
+The default constructor.
+
+```csharp
+public GatewayReadyEvent()
+```
+
+## See Also
+
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Version property
+
+Gateway version See [Gateway Version](https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions)
+
+```csharp
+public int Version { get; set; }
+```
+
+## See Also
+
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# User property
+
+Information about the user including email See [`DiscordUser`](../../Users/DiscordUser.md)
+
+```csharp
+public DiscordUser User { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](../../Users/DiscordUser.md)
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Guilds property
+
+The guilds the user is in
+
+```csharp
+public Hash<Snowflake, DiscordGuild> Guilds { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordGuild](../../Guilds/DiscordGuild.md)
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# SessionId property
+
+Used for resuming connections
+
+```csharp
+public string SessionId { get; set; }
+```
+
+## See Also
+
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ResumeSessionUrl property
+
+Websocket URL to use when resuming the session
+
+```csharp
+public string ResumeSessionUrl { get; set; }
+```
+
+## See Also
+
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Shard property
+
+The shard information associated with this session, if sent when identifying
+
+```csharp
+public List<int> Shard { get; set; }
+```
+
+## See Also
+
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Application property
+
+Contains id and flags See `Application`
+
+```csharp
+public DiscordApplication Application { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplication](../../Applications/DiscordApplication.md)
+* class [GatewayReadyEvent](./GatewayReadyEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

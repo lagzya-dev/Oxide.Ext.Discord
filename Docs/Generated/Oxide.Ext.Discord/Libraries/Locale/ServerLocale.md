@@ -10,23 +10,201 @@ public struct ServerLocale : IEquatable<ServerLocale>
 
 | name | description |
 | --- | --- |
-| static readonly [Default](ServerLocale/Default.md) | The default locale for servers |
-| static [Parse](ServerLocale/Parse.md)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
-| [IsDefault](ServerLocale/IsDefault.md) { get; } | Returns if the Locale is the default server language "en" |
-| [IsValid](ServerLocale/IsValid.md) { get; } | Returns if the Locale is valid |
-| readonly [Id](ServerLocale/Id.md) | ID of the Locale |
-| override [Equals](ServerLocale/Equals.md)(…) |  |
-| [Equals](ServerLocale/Equals.md)(…) |  |
-| [GetDiscordLocale](ServerLocale/GetDiscordLocale.md)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
-| override [GetHashCode](ServerLocale/GetHashCode.md)() |  |
-| override [ToString](ServerLocale/ToString.md)() | Returns the ID of the ServerLocale |
-| [operator ==](ServerLocale/op_Equality.md) | Returns if two Server Locales are equal to each other |
-| [operator !=](ServerLocale/op_Inequality.md) | Returns if two Server Locales are not equal to each other |
+| static readonly [Default](#Default) | The default locale for servers |
+| static [Parse](#Parse)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
+| [IsDefault](#IsDefault) { get; } | Returns if the Locale is the default server language "en" |
+| [IsValid](#IsValid) { get; } | Returns if the Locale is valid |
+| readonly [Id](#Id) | ID of the Locale |
+| override [Equals](#Equals)(…) |  |
+| [Equals](#Equals)(…) |  |
+| [GetDiscordLocale](#GetDiscordLocale)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
+| override [GetHashCode](#GetHashCode)() |  |
+| override [ToString](#ToString)() | Returns the ID of the ServerLocale |
+| [operator ==](#op_Equality) | Returns if two Server Locales are equal to each other |
+| [operator !=](#op_Inequality) | Returns if two Server Locales are not equal to each other |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [ServerLocale.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Locale/ServerLocale.cs)
+   
+   
+# GetDiscordLocale method
+
+Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale
+
+```csharp
+public DiscordLocale GetDiscordLocale()
+```
+
+## See Also
+
+* struct [DiscordLocale](./DiscordLocale.md)
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Parse method
+
+Parses a locale returning a [`ServerLocale`](./ServerLocale.md)
+
+```csharp
+public static ServerLocale Parse(string locale)
+```
+
+| parameter | description |
+| --- | --- |
+| locale |  |
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Equals method (1 of 2)
+
+```csharp
+public override bool Equals(object obj)
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+   
+   
+# GetHashCode method
+
+```csharp
+public override int GetHashCode()
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ServerLocale Equality operator
+
+Returns if two Server Locales are equal to each other
+
+```csharp
+public static bool operator ==(ServerLocale left, ServerLocale right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ServerLocale Inequality operator
+
+Returns if two Server Locales are not equal to each other
+
+```csharp
+public static bool operator !=(ServerLocale left, ServerLocale right)
+```
+
+| parameter | description |
+| --- | --- |
+| left |  |
+| right |  |
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ToString method
+
+Returns the ID of the ServerLocale
+
+```csharp
+public override string ToString()
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsValid property
+
+Returns if the Locale is valid
+
+```csharp
+public bool IsValid { get; }
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsDefault property
+
+Returns if the Locale is the default server language "en"
+
+```csharp
+public bool IsDefault { get; }
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Id field
+
+ID of the Locale
+
+```csharp
+public readonly string Id;
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Default field
+
+The default locale for servers
+
+```csharp
+public static readonly ServerLocale Default;
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

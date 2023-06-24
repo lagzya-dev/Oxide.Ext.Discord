@@ -10,22 +10,194 @@ public class AutoModActionExecutionEvent
 
 | name | description |
 | --- | --- |
-| [AutoModActionExecutionEvent](AutoModActionExecutionEvent/AutoModActionExecutionEvent.md)() | The default constructor. |
-| [Action](AutoModActionExecutionEvent/Action.md) { get; set; } | The action which was executed |
-| [AlertSystemMessageId](AutoModActionExecutionEvent/AlertSystemMessageId.md) { get; set; } | The id of any system auto moderation messages posted as a result of this action |
-| [Content](AutoModActionExecutionEvent/Content.md) { get; set; } | The user generated text content |
-| [GuildId](AutoModActionExecutionEvent/GuildId.md) { get; set; } | Id of the guild in which action was executed |
-| [MatchedContent](AutoModActionExecutionEvent/MatchedContent.md) { get; set; } | The substring in content that triggered the rule |
-| [MatchedKeyword](AutoModActionExecutionEvent/MatchedKeyword.md) { get; set; } | The word or phrase configured in the rule that triggered the rule |
-| [MessageId](AutoModActionExecutionEvent/MessageId.md) { get; set; } | Id of any user message which content belongs to |
-| [RuleId](AutoModActionExecutionEvent/RuleId.md) { get; set; } | Id of the rule which action belongs to |
-| [RuleTriggerType](AutoModActionExecutionEvent/RuleTriggerType.md) { get; set; } | The [`AutoModTriggerType`](../../AutoMod/AutoModTriggerType.md) of rule which was triggered |
-| [UserId](AutoModActionExecutionEvent/UserId.md) { get; set; } | Id of the user which generated the content which triggered the rule |
+| [AutoModActionExecutionEvent](#AutoModActionExecutionEvent)() | The default constructor. |
+| [Action](#Action) { get; set; } | The action which was executed |
+| [AlertSystemMessageId](#AlertSystemMessageId) { get; set; } | The id of any system auto moderation messages posted as a result of this action |
+| [Content](#Content) { get; set; } | The user generated text content |
+| [GuildId](#GuildId) { get; set; } | Id of the guild in which action was executed |
+| [MatchedContent](#MatchedContent) { get; set; } | The substring in content that triggered the rule |
+| [MatchedKeyword](#MatchedKeyword) { get; set; } | The word or phrase configured in the rule that triggered the rule |
+| [MessageId](#MessageId) { get; set; } | Id of any user message which content belongs to |
+| [RuleId](#RuleId) { get; set; } | Id of the rule which action belongs to |
+| [RuleTriggerType](#RuleTriggerType) { get; set; } | The [`AutoModTriggerType`](../../AutoMod/AutoModTriggerType.md) of rule which was triggered |
+| [UserId](#UserId) { get; set; } | Id of the user which generated the content which triggered the rule |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 * [AutoModActionExecutionEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/AutoModActionExecutionEvent.cs)
+   
+   
+# AutoModActionExecutionEvent constructor
+
+The default constructor.
+
+```csharp
+public AutoModActionExecutionEvent()
+```
+
+## See Also
+
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+Id of the guild in which action was executed
+
+```csharp
+public Snowflake GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Action property
+
+The action which was executed
+
+```csharp
+public AutoModAction Action { get; set; }
+```
+
+## See Also
+
+* class [AutoModAction](../../AutoMod/AutoModAction.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RuleId property
+
+Id of the rule which action belongs to
+
+```csharp
+public Snowflake RuleId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# RuleTriggerType property
+
+The [`AutoModTriggerType`](../../AutoMod/AutoModTriggerType.md) of rule which was triggered
+
+```csharp
+public AutoModTriggerType RuleTriggerType { get; set; }
+```
+
+## See Also
+
+* enum [AutoModTriggerType](../../AutoMod/AutoModTriggerType.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# UserId property
+
+Id of the user which generated the content which triggered the rule
+
+```csharp
+public Snowflake? UserId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MessageId property
+
+Id of any user message which content belongs to
+
+```csharp
+public Snowflake? MessageId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# AlertSystemMessageId property
+
+The id of any system auto moderation messages posted as a result of this action
+
+```csharp
+public Snowflake? AlertSystemMessageId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Content property
+
+The user generated text content
+
+```csharp
+public string Content { get; set; }
+```
+
+## See Also
+
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MatchedKeyword property
+
+The word or phrase configured in the rule that triggered the rule
+
+```csharp
+public string MatchedKeyword { get; set; }
+```
+
+## See Also
+
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MatchedContent property
+
+The substring in content that triggered the rule
+
+```csharp
+public string MatchedContent { get; set; }
+```
+
+## See Also
+
+* class [AutoModActionExecutionEvent](./AutoModActionExecutionEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->
