@@ -133,31 +133,6 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         }
 
         /// <summary>
-        /// Adds Oxide Group Permissions to the AutoComplete
-        /// </summary>
-        /// <param name="group">Group to get the permissions for</param>
-        /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddPermissionsInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
-        {
-            AddList(Permissions.GetGroupPermissions(group), filter, comparison, search);
-        }
-        
-        /// <summary>
-        /// Adds Oxide Permissions Not In Group to the AutoComplete
-        /// </summary>
-        /// <param name="group">Group to get the permissions for</param>
-        /// <param name="filter">String to filter by</param>
-        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
-        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddPermissionsNotInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
-        {
-            string[] groupPerms = Permissions.GetGroupPermissions(group);
-            AddList(Permissions.GetPermissions().Except(groupPerms), filter, comparison, search);
-        }
-        
-        /// <summary>
         /// Adds The List of Groups that have this permission
         /// </summary>
         /// <param name="permission">Permission to get groups for</param>
@@ -181,6 +156,17 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             string[] groups = Permissions.GetPermissionGroups(permission);
             AddList(Permissions.GetGroups().Except(groups), filter, comparison, search);
         }
+        
+        public void AddPermissionsInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        {
+            AddList(Permissions.GetGroupPermissions(group), filter, comparison, search);
+        }
+        
+        public void AddPermissionsNotInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        {
+            string[] perms = Permissions.GetPermissions();
+            AddList(perms.Except(Permissions.GetGroupPermissions(group)), filter, comparison, search);
+        }
 
         /// <summary>
         /// Adds The List of Groups that playerId has
@@ -189,7 +175,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddGroupsPlayerIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddGroupsWithPlayer(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(Permissions.GetUserGroups(playerId), filter, comparison, search);
         }
@@ -201,7 +187,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// <param name="filter">String to filter by</param>
         /// <param name="comparison"><see cref="StringComparison"/> to use</param>
         /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
-        public void AddGroupsPlayerNotIn(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
+        public void AddGroupsWithoutPlayer(string playerId, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] groups = Permissions.GetGroups();
             AddList(groups.Except(Permissions.GetUserGroups(playerId)), filter, comparison, search);
