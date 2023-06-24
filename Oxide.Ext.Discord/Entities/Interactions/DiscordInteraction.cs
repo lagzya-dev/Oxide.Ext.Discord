@@ -330,12 +330,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to send (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
-        public IPromise CreateTemplateResponse(DiscordClient client, Plugin plugin, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
+        public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
+            InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
             return CreateResponse(client, type, template);
         }
         
@@ -348,12 +347,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise CreateModalResponse(DiscordClient client, Plugin plugin, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
+        public IPromise CreateModalResponse(DiscordClient client, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(plugin, templateName, this).ToModal(placeholders, message);
+            InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToModal(placeholders, message);
             return CreateResponse(client, template);
         }
 
@@ -435,7 +433,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         /// <param name="client">Client to use</param>
         /// /// <param name="message">Updated message</param>
-        public IPromise<DiscordMessage> EditOriginalResponse(DiscordClient client, DiscordMessage message)
+        public IPromise<DiscordMessage> EditOriginalResponse(DiscordClient client, MessageUpdate message)
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
@@ -451,12 +449,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, Plugin plugin, string templateName, DiscordMessage message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, string templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             
-            DiscordMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, this).ToMessage(placeholders, message);
+            MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
             return EditOriginalResponse(client, template);
         }
 

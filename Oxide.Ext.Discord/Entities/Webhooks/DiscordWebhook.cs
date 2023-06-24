@@ -284,9 +284,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="executeParams">Webhook execution parameters</param>
-        public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient client, Plugin plugin, string templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
+        public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient client, string templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
         {
-            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, message);
             return ExecuteWebhookWithMessage(client, template, executeParams);
         }
 
@@ -300,9 +300,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="executeParams">Webhook execution parameters</param>
-        public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, Plugin plugin, string templateName, string language = DiscordLocales.DefaultServerLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
+        public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, string templateName, string language = DiscordLocales.DefaultServerLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
         {
-            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, message);
             return ExecuteWebhookWithMessage(client, template, executeParams);
         }
 

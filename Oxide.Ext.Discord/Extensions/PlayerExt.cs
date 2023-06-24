@@ -92,9 +92,9 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, DiscordClient client, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(client.Plugin, templateName, player).ToMessage(placeholders, message);
             return SendMessage(client, player.GetDiscordUserId(), template);
         }
 
@@ -107,9 +107,9 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, DiscordClient client, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
-            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(plugin, templateName, player).ToMessage(placeholders, message);
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetPlayerTemplate(client.Plugin, templateName, player).ToMessage(placeholders, message);
             return SendMessage(client, player.GetDiscordUserId(), template);
         }
         
