@@ -180,7 +180,6 @@ public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponse
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | type | Response type for the interaction |
 | templateName | Name of the template |
 | message | Message to send (optional) |
@@ -216,7 +215,6 @@ public IPromise CreateModalResponse(DiscordClient client, string templateName,
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName |  |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |
@@ -295,7 +293,6 @@ public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient clien
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |

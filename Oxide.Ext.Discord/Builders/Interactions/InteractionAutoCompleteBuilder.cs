@@ -157,11 +157,25 @@ namespace Oxide.Ext.Discord.Builders.Interactions
             AddList(Permissions.GetGroups().Except(groups), filter, comparison, search);
         }
         
+        /// <summary>
+        /// Adds List of Permissions that are in the given group
+        /// </summary>
+        /// <param name="group">Group to get permissions for</param>
+        /// <param name="filter">Permission filter</param>
+        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
+        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
         public void AddPermissionsInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             AddList(Permissions.GetGroupPermissions(group), filter, comparison, search);
         }
         
+        /// <summary>
+        /// Adds a List of Permissions that are not in a given group
+        /// </summary>
+        /// <param name="group">Group that doesn't have the permissions</param>
+        /// <param name="filter">Permission filter</param>
+        /// <param name="comparison"><see cref="StringComparison"/> to use</param>
+        /// <param name="search"><see cref="AutoCompleteSearchMode"/> Filter search mode</param>
         public void AddPermissionsNotInGroup(string group, string filter = null, StringComparison comparison = StringComparison.OrdinalIgnoreCase, AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
         {
             string[] perms = Permissions.GetPermissions();

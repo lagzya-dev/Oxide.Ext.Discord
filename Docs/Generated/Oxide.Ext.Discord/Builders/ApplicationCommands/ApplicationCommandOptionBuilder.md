@@ -10,10 +10,10 @@ public class ApplicationCommandOptionBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName-field) |  |
-| readonly [GroupName](#GroupName-field) |  |
-| readonly [OptionName](#OptionName-field) |  |
-| readonly [SubCommandName](#SubCommandName-field) |  |
+| readonly [CommandName](#CommandName-field) | The Name of the command |
+| readonly [GroupName](#GroupName-field) | The Name of the group |
+| readonly [OptionName](#OptionName-field) | The Name of the Option |
+| readonly [SubCommandName](#SubCommandName-field) | The Name of the Sub Command |
 | [AddChoice](#AddChoice-method)(…) | Adds a choice to this option of type string (3 methods) |
 | [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Option Description Localization |
 | [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
@@ -335,6 +335,8 @@ This
    
 # CommandName field
 
+The Name of the command
+
 ```csharp
 public readonly string CommandName;
 ```
@@ -347,6 +349,8 @@ public readonly string CommandName;
    
    
 # GroupName field
+
+The Name of the group
 
 ```csharp
 public readonly string GroupName;
@@ -361,6 +365,8 @@ public readonly string GroupName;
    
 # SubCommandName field
 
+The Name of the Sub Command
+
 ```csharp
 public readonly string SubCommandName;
 ```
@@ -373,6 +379,8 @@ public readonly string SubCommandName;
    
    
 # OptionName field
+
+The Name of the Option
 
 ```csharp
 public readonly string OptionName;

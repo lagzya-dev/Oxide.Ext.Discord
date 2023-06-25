@@ -13,13 +13,13 @@ public static class PlayerPlaceholders
 | static [BattleMetricsNameUrl](#BattleMetricsNameUrl-method)(…) | Battle metrics Place Name Url Placeholder |
 | static [BattleMetricsSteamIdUrl](#BattleMetricsSteamIdUrl-method)(…) | Battle metrics Steam ID Url Placeholder |
 | static [Connected](#Connected-method)(…) | IsConnected placeholder |
-| static [Groups](#Groups-method)(…) |  |
+| static [Groups](#Groups-method)(…) | Player Groups Placeholder |
 | static [Health](#Health-method)(…) | Health placeholder |
 | static [Id](#Id-method)(…) | Id placeholder |
 | static [IsLinked](#IsLinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
 | static [MaxHealth](#MaxHealth-method)(…) | MaxHealth placeholder |
 | static [Name](#Name-method)(…) | Name placeholder |
-| static [Permissions](#Permissions-method)(…) |  |
+| static [Permissions](#Permissions-method)(…) | Player Permissions Placeholder |
 | static [Ping](#Ping-method)(…) | Ping placeholder |
 | static [Position](#Position-method)(…) | Position placeholder |
 | static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
@@ -141,6 +141,8 @@ public static int Ping(IPlayer player)
    
 # Permissions method
 
+Player Permissions Placeholder
+
 ```csharp
 public static string[] Permissions(IPlayer player)
 ```
@@ -154,9 +156,15 @@ public static string[] Permissions(IPlayer player)
    
 # Groups method
 
+Player Groups Placeholder
+
 ```csharp
 public static string[] Groups(IPlayer player)
 ```
+
+| parameter | description |
+| --- | --- |
+| player |  |
 
 ## See Also
 

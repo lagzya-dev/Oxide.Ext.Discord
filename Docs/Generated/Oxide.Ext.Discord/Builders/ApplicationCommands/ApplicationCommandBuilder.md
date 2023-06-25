@@ -11,7 +11,7 @@ public class ApplicationCommandBuilder
 | name | description |
 | --- | --- |
 | [ApplicationCommandBuilder](#ApplicationCommandBuilder-constructor)(…) | Creates a new Application Command Builder (2 constructors) |
-| readonly [CommandName](#CommandName-field) |  |
+| readonly [CommandName](#CommandName-field) | The Name of the command |
 | [AddDefaultPermissions](#AddDefaultPermissions-method)(…) | Adds default command permissions |
 | [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Description Localizations |
 | [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
@@ -315,6 +315,8 @@ public ApplicationCommandBuilder(string name, string description, ApplicationCom
    
    
 # CommandName field
+
+The Name of the command
 
 ```csharp
 public readonly string CommandName;

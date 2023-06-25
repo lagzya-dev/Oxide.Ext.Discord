@@ -13,7 +13,15 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
     {
         private readonly CommandOption _option;
         private readonly ServerLocale _defaultLanguage;
+        
+        /// <summary>
+        /// The Name of the command
+        /// </summary>
         public readonly string CommandName;
+        
+        /// <summary>
+        /// The Name of the group
+        /// </summary>
         public readonly string GroupName;
 
         internal ApplicationCommandGroupBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage, string commandName)

@@ -147,7 +147,6 @@ public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client,
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | language | Oxide language to use |
 | message | Message to use (optional) |
@@ -177,7 +176,6 @@ public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient cl
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |

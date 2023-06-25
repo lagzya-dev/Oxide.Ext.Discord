@@ -11,7 +11,7 @@ public sealed class Promise : BasePromise, IPendingPromise
 | name | description |
 | --- | --- |
 | [Promise](#Promise-constructor)() | Constructor for the promise |
-| static [Create](#Create-method)() |  |
+| static [Create](#Create-method)() | Creates a Promise |
 | [Catch](#Catch-method)(…) |  |
 | [Catch&lt;TException&gt;](#Catch-method)(…) |  |
 | [ContinueWith](#ContinueWith-method)(…) |  |
@@ -45,6 +45,8 @@ public sealed class Promise : BasePromise, IPendingPromise
    
    
 # Create method
+
+Creates a Promise
 
 ```csharp
 public static Promise Create()

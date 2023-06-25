@@ -88,7 +88,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="player">Player to send the message to</param>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
@@ -103,7 +102,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="player">Player to send the message to</param>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>

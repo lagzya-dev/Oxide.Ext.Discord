@@ -26,8 +26,8 @@ public class InteractionAutoCompleteBuilder
 | [AddOfflinePlayers](#AddOfflinePlayers-method)(…) | Adds Online Players to the list |
 | [AddOnlinePlayers](#AddOnlinePlayers-method)(…) | Adds Online Players to the list |
 | [AddPermissions](#AddPermissions-method)(…) | Adds Oxide Permissions to the AutoComplete |
-| [AddPermissionsInGroup](#AddPermissionsInGroup-method)(…) |  |
-| [AddPermissionsNotInGroup](#AddPermissionsNotInGroup-method)(…) |  |
+| [AddPermissionsInGroup](#AddPermissionsInGroup-method)(…) | Adds List of Permissions that are in the given group |
+| [AddPermissionsNotInGroup](#AddPermissionsNotInGroup-method)(…) | Adds a List of Permissions that are not in a given group |
 | [AddPermissionsPlayerIn](#AddPermissionsPlayerIn-method)(…) | Adds The List of Permissions that playerId has |
 | [AddPermissionsPlayerNotIn](#AddPermissionsPlayerNotIn-method)(…) | Adds The List of Permissions that playerId does not have |
 | [Build](#Build-method)() | Returns the built message |
@@ -225,11 +225,20 @@ public void AddGroupsWithoutPermission(string permission, string filter = null,
    
 # AddPermissionsInGroup method
 
+Adds List of Permissions that are in the given group
+
 ```csharp
 public void AddPermissionsInGroup(string group, string filter = null, 
     StringComparison comparison = StringComparison.OrdinalIgnoreCase, 
     AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
 ```
+
+| parameter | description |
+| --- | --- |
+| group | Group to get permissions for |
+| filter | Permission filter |
+| comparison | StringComparison to use |
+| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
@@ -241,11 +250,20 @@ public void AddPermissionsInGroup(string group, string filter = null,
    
 # AddPermissionsNotInGroup method
 
+Adds a List of Permissions that are not in a given group
+
 ```csharp
 public void AddPermissionsNotInGroup(string group, string filter = null, 
     StringComparison comparison = StringComparison.OrdinalIgnoreCase, 
     AutoCompleteSearchMode search = AutoCompleteSearchMode.StartsWith)
 ```
+
+| parameter | description |
+| --- | --- |
+| group | Group that doesn't have the permissions |
+| filter | Permission filter |
+| comparison | StringComparison to use |
+| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 

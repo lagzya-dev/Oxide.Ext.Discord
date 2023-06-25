@@ -503,12 +503,11 @@ namespace Oxide.Ext.Discord.Entities.Channels
 
             return CreateMessage(client, createMessage);
         }
-        
+
         /// <summary>
         /// Creates a message in a text channel using a global message template
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template name</param>
         /// <param name="message">message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
@@ -522,7 +521,6 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// Creates a message in a text channel using a localized message template
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template name</param>
         /// <param name="language">Oxide language for the template</param>
         /// <param name="message">message to use (optional)</param>

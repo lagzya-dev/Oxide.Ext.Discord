@@ -369,7 +369,6 @@ public IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template name |
 | message | message to use (optional) |
 | placeholders | Placeholders to apply (optional) |
@@ -398,7 +397,6 @@ public IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, stri
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template name |
 | language | Oxide language for the template |
 | message | message to use (optional) |

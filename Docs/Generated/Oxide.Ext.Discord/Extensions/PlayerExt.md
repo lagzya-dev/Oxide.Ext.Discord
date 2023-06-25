@@ -68,7 +68,6 @@ public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPl
 | --- | --- |
 | player | Player to send the message to |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |
@@ -99,7 +98,6 @@ public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer p
 | --- | --- |
 | player | Player to send the message to |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |

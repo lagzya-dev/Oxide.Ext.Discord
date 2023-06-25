@@ -20,6 +20,10 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         internal readonly CommandCreate Command;
         private CommandOptionType? _chosenType;
         private readonly ServerLocale _defaultLanguage;
+        
+        /// <summary>
+        /// The Name of the command
+        /// </summary>
         public readonly string CommandName;
 
         /// <summary>

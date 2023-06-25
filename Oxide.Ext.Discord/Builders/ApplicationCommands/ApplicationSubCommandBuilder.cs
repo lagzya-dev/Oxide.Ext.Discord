@@ -15,10 +15,21 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         private readonly CommandOption _subCommand;
         private readonly ServerLocale _defaultLanguage;
 
+        /// <summary>
+        /// The Name of the command
+        /// </summary>
         public readonly string CommandName;
-        public readonly string GroupName;
-        public readonly string SubCommandName;
         
+        /// <summary>
+        /// The Name of the group
+        /// </summary>
+        public readonly string GroupName;
+        
+        /// <summary>
+        /// The Name of the Sub Command
+        /// </summary>
+        public readonly string SubCommandName;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -26,6 +37,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <param name="name">Name of the sub command</param>
         /// <param name="description">Description of the sub command</param>
         /// <param name="defaultLanguage"></param>
+        /// <param name="commandName"></param>
+        /// <param name="groupName"></param>
         internal ApplicationSubCommandBuilder(List<CommandOption> options, string name, string description, ServerLocale defaultLanguage, string commandName, string groupName)
         {
             _subCommand = new CommandOption(name, description, CommandOptionType.SubCommand, new List<CommandOption>());

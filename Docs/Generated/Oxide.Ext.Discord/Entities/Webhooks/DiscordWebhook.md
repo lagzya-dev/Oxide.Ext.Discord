@@ -351,7 +351,6 @@ public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient clien
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |
@@ -383,7 +382,6 @@ public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, str
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | language | Oxide language to use |
 | message | Message to use (optional) |

@@ -10,8 +10,8 @@ public class ApplicationCommandGroupBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName-field) |  |
-| readonly [GroupName](#GroupName-field) |  |
+| readonly [CommandName](#CommandName-field) | The Name of the command |
+| readonly [GroupName](#GroupName-field) | The Name of the group |
 | [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
 | [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Sub Command Group Name Localizations |
 | [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
@@ -120,6 +120,8 @@ this
    
 # CommandName field
 
+The Name of the command
+
 ```csharp
 public readonly string CommandName;
 ```
@@ -132,6 +134,8 @@ public readonly string CommandName;
    
    
 # GroupName field
+
+The Name of the group
 
 ```csharp
 public readonly string GroupName;

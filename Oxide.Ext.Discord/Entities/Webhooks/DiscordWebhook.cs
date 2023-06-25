@@ -279,7 +279,6 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Send a message to a webhook using a global message template
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
@@ -294,7 +293,6 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// Send a message to a webhook using a localized message template
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Template Name</param>
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>

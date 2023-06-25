@@ -228,7 +228,6 @@ public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, st
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | message | Message to use (optional) |
 | placeholders | Placeholders to apply (optional) |
@@ -256,7 +255,6 @@ public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, string t
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | language | Oxide language to use |
 | message | Message to use (optional) |
@@ -481,7 +479,6 @@ public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client,
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | placeholders | Placeholders to apply (optional) |
 | update | Update to be applied to the message |
@@ -509,7 +506,6 @@ public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, string
 | parameter | description |
 | --- | --- |
 | client | Client to use |
-| plugin | Plugin for the template |
 | templateName | Template Name |
 | language | Oxide language to use |
 | placeholders | Placeholders to apply (optional) |

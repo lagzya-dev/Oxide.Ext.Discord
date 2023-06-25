@@ -52,7 +52,16 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// </summary>
         public static int Ping(IPlayer player) => player.Ping;
         
+        /// <summary>
+        /// Player Permissions Placeholder
+        /// </summary>
         public static string[] Permissions(IPlayer player) => Permission.GetUserPermissions(player.Id);
+        
+        /// <summary>
+        /// Player Groups Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
 
         /// <summary>

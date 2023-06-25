@@ -40,12 +40,12 @@ namespace Oxide.Ext.Discord.Promises
             _onResolveInternal = InvokeResolveHandlersInternal;
         }
 
-        public static Promise Create()
-        {
-            Promise promise = DiscordPool.Internal.Get<Promise>();
-            return promise;
-        }
-        
+        /// <summary>
+        /// Creates a Promise
+        /// </summary>
+        /// <returns></returns>
+        public static Promise Create() => DiscordPool.Internal.Get<Promise>();
+
         /// <summary>
         /// Returns a promise that has been resolved
         /// </summary>
