@@ -73,7 +73,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// Battle metrics Place Name Url Placeholder
         /// </summary>
-        public static string BattleMetricsNameUrl(IPlayer player) => $"https://www.battlemetrics.com/rcon/players?filter[search]={player.Name}";
+        public static string BattleMetricsNameUrl(IPlayer player) => $"https://www.battlemetrics.com/rcon/players?filter[search]={player.Name}";        
+        /// <summary>
+        /// Battle metrics Place Name Url Placeholder
+        /// </summary>
+        public static string ServerArmorUrl(IPlayer player) => $"https://io.serverarmour.com/profile/{player.Id}";
         
         /// <summary>
         /// <see cref="PlayerExt.IsLinked"/> placeholder
@@ -106,8 +110,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.steamid", dataKey, SteamAvatarUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.name", dataKey, SteamAvatarUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.steamid", dataKey, BattleMetricsSteamIdUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.name", dataKey, BattleMetricsNameUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.serverarmor.profile", dataKey, ServerArmorUrl);
             placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.islinked", dataKey, IsLinked);
         }
     }

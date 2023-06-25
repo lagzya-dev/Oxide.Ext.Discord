@@ -23,6 +23,7 @@ public static class PlayerPlaceholders
 | static [Ping](#Ping-method)(…) | Ping placeholder |
 | static [Position](#Position-method)(…) | Position placeholder |
 | static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [ServerArmorUrl](#ServerArmorUrl-method)(…) | Battle metrics Place Name Url Placeholder |
 | static [SteamAvatarUrl](#SteamAvatarUrl-method)(…) | Steam Avatar Url Placeholder |
 | static [SteamProfileUrl](#SteamProfileUrl-method)(…) | Steam Profile Url Placeholder |
 
@@ -215,6 +216,21 @@ Battle metrics Place Name Url Placeholder
 
 ```csharp
 public static string BattleMetricsNameUrl(IPlayer player)
+```
+
+## See Also
+
+* class [PlayerPlaceholders](./PlayerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ServerArmorUrl method
+
+Battle metrics Place Name Url Placeholder
+
+```csharp
+public static string ServerArmorUrl(IPlayer player)
 ```
 
 ## See Also

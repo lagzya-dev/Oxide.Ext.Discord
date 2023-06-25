@@ -19437,6 +19437,11 @@
             Battle metrics Place Name Url Placeholder
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.ServerArmorUrl(Oxide.Core.Libraries.Covalence.IPlayer)">
+            <summary>
+            Battle metrics Place Name Url Placeholder
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.IsLinked(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="M:Oxide.Ext.Discord.Extensions.PlayerExt.IsLinked(Oxide.Core.Libraries.Covalence.IPlayer)"/> placeholder
@@ -24245,7 +24250,7 @@
         </member>
         <member name="F:ThisAssembly.Git.IsDirtyString">
             <summary>
-            => @"false"
+            => @"true"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.RepositoryUrl">
@@ -24260,27 +24265,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"986f01f0"
+            => @"5a479e57"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"986f01f0396526892cdb9250570ac6a53c1092ed"
+            => @"5a479e57e45ca875bd208fc992595e2d47493280"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-24T14:54:16-05:00"
+            => @"2023-06-24T15:00:10-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"597"
+            => @"598"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-597-g986f01f0"
+            => @"2.1.9-598-g5a479e57"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24315,7 +24320,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"606"
+            => @"607"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
