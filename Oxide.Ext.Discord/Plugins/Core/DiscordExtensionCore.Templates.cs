@@ -48,10 +48,13 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         public void SendTemplateMessage(DiscordClient client, string key, DiscordInteraction interaction, PlaceholderData placeholders = null)
         {
-            interaction.CreateTemplateResponse(client, InteractionResponseType.ChannelMessageWithSource, key, new InteractionCallbackData
+            InteractionCallbackData message = new InteractionCallbackData
             {
                 Flags = interaction.GuildId.HasValue ? MessageFlags.Ephemeral : (MessageFlags?)null
-            }, placeholders);
+            };
+            DiscordMessageTemplate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(this, key, interaction);
+            template.ToMessage(placeholders, message);
+            interaction.CreateResponse(client, InteractionResponseType.ChannelMessageWithSource, message);
         }
     }
 }

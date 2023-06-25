@@ -93,6 +93,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             command.Delete(client).Then(() =>
             {
                 SendTemplateMessage(client, TemplateKeys.Commands.Delete.Success, interaction, GetPlaceholderData().AddCommand(command));
+                _commandCache[interaction.ApplicationId]?.RemoveCommand(command.Id);
             }).Catch(error =>
             {
                 SendTemplateMessage(client, TemplateKeys.Commands.Delete.Errors.DeleteCommandError, interaction, GetPlaceholderData().AddCommand(command));
