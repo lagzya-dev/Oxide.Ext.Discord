@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
@@ -28,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Localized Options for the Command
         /// </summary>
         [JsonProperty("Command Options", NullValueHandling = NullValueHandling.Ignore)]
-        public List<CommandLocalization> Options { get; set; }
+        public Hash<string, CommandLocalization> Options { get; set; }
         
         /// <summary>
         /// Localized Argument Options
@@ -40,14 +39,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public CommandLocalization() { }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        public CommandLocalization(string name, string description)
+        private CommandLocalization() { }
+        
+        private CommandLocalization(string name, string description)
         {
             Name = name;
             Description = description;
@@ -91,10 +85,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             {
                 if (Options == null)
                 {
-                    Options = new List<CommandLocalization>();
+                    Options = new Hash<string, CommandLocalization>();
                 }
-                    
-                Options.Add(new CommandLocalization(option, locale));
+
+                Options[option.Name] = new CommandLocalization(option, locale);
                 return;
             }
 
@@ -115,14 +109,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         {
             create.NameLocalizations[locale.Id] = Name;
             create.DescriptionLocalizations[locale.Id] = Description;
-            if (create.Options == null)
+            if (create.Options != null)
             {
-                return;
-            }
-
-            for (int index = 0; index < create.Options.Count; index++)
-            {
-                Options[index].ApplyOptionLocalization(create.Options[index], locale);
+                for (int index = 0; index < create.Options.Count; index++)
+                {
+                    CommandOption option = create.Options[index];
+                    Options[option.Name].ApplyOptionLocalization(option, locale);
+                }
             }
         }
 
@@ -147,7 +140,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 {
                     for (int index = 0; index < opt.Options.Count; index++)
                     {
-                        Options[index].ApplyOptionLocalization(opt.Options[index], locale);
+                        CommandOption option = opt.Options[index];
+                        Options[option.Name].ApplyOptionLocalization(option, locale);
                     }
                 }
 

@@ -10,8 +10,7 @@ public class CommandLocalization
 
 | name | description |
 | --- | --- |
-| [CommandLocalization](#CommandLocalization-constructor)() | Constructor |
-| [CommandLocalization](#CommandLocalization-constructor)(…) | Constructor (3 constructors) |
+| [CommandLocalization](#CommandLocalization-constructor)(…) | Constructor (2 constructors) |
 | [Arguments](#Arguments-property) { get; set; } | Localized Argument Options |
 | [Description](#Description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
 | [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
@@ -47,16 +46,23 @@ public void ApplyCommandLocalization(CommandCreate create, DiscordLocale locale)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
-# CommandLocalization constructor (1 of 4)
+# CommandLocalization constructor (1 of 2)
 
 Constructor
 
 ```csharp
-public CommandLocalization()
+public CommandLocalization(CommandCreate create, DiscordLocale locale)
 ```
+
+| parameter | description |
+| --- | --- |
+| create | Command to be created |
+| locale | Oxide lang of the localization |
 
 ## See Also
 
+* class [CommandCreate](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md)
+* struct [DiscordLocale](../../Locale/DiscordLocale.md)
 * class [CommandLocalization](./CommandLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
@@ -99,7 +105,7 @@ public string Description { get; set; }
 Localized Options for the Command
 
 ```csharp
-public List<CommandLocalization> Options { get; set; }
+public Hash<string, CommandLocalization> Options { get; set; }
 ```
 
 ## See Also

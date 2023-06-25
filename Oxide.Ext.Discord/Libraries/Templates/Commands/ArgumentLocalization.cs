@@ -33,26 +33,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// Constructor
         /// </summary>
         [JsonConstructor]
-        public ArgumentLocalization() { }
-        
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="description"></param>
-        public ArgumentLocalization(string name, string description)
-        {
-            Name = name;
-            Description = description;
-        }
+        private ArgumentLocalization() { }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="option">Option to create the localization for</param>
         /// <param name="locale">The oxide lang for the localization</param>
-        public ArgumentLocalization(CommandOption option, DiscordLocale locale) : this(option.NameLocalizations[locale.Id], option.DescriptionLocalizations[locale.Id])
+        public ArgumentLocalization(CommandOption option, DiscordLocale locale)
         {
+            Name = option.NameLocalizations[locale.Id];
+            Description = option.DescriptionLocalizations[locale.Id];
             if (option.Choices != null)
             {
                 Choices = new Hash<string, ChoicesLocalization>();

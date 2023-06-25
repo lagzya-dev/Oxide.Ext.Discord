@@ -20558,13 +20558,6 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(System.String,System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="name"></param>
-            <param name="description"></param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.ArgumentLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOption,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
             Constructor
@@ -20643,13 +20636,6 @@
             <summary>
             Constructor
             </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(System.String,System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="name"></param>
-            <param name="description"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.Commands.CommandLocalization.#ctor(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandCreate,Oxide.Ext.Discord.Libraries.Locale.DiscordLocale)">
             <summary>
@@ -24265,27 +24251,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"5a479e57"
+            => @"19966159"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"5a479e57e45ca875bd208fc992595e2d47493280"
+            => @"199661590abf63eb66c55e5a2aa118589a313e46"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-24T15:00:10-05:00"
+            => @"2023-06-25T09:37:15-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"598"
+            => @"600"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-598-g5a479e57"
+            => @"2.1.9-600-g19966159"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24320,7 +24306,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"607"
+            => @"609"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">

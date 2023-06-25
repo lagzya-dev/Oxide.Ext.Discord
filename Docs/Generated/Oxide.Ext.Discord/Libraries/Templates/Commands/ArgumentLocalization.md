@@ -10,8 +10,7 @@ public class ArgumentLocalization
 
 | name | description |
 | --- | --- |
-| [ArgumentLocalization](#ArgumentLocalization-constructor)() | Constructor |
-| [ArgumentLocalization](#ArgumentLocalization-constructor)(…) | Constructor (2 constructors) |
+| [ArgumentLocalization](#ArgumentLocalization-constructor)(…) | Constructor |
 | [Choices](#Choices-property) { get; set; } | Localization for Select Menu Choices |
 | [Description](#Description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
 | [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
@@ -46,21 +45,26 @@ public void ApplyArgumentLocalization(CommandOption option, DiscordLocale locale
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
-# ArgumentLocalization constructor (1 of 3)
+# ArgumentLocalization constructor
 
 Constructor
 
 ```csharp
-public ArgumentLocalization()
+public ArgumentLocalization(CommandOption option, DiscordLocale locale)
 ```
+
+| parameter | description |
+| --- | --- |
+| option | Option to create the localization for |
+| locale | The oxide lang for the localization |
 
 ## See Also
 
+* class [CommandOption](../../../Entities/Interactions/ApplicationCommands/CommandOption.md)
+* struct [DiscordLocale](../../Locale/DiscordLocale.md)
 * class [ArgumentLocalization](./ArgumentLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-
----
    
    
 # Name property
