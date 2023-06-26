@@ -198,8 +198,11 @@ namespace Oxide.Ext.Discord.Hooks
             {
                 plugin.CallHook(name, args);
             }
-            
-            ArrayPool<object>.Instance.Free(ref args);
+
+            if (args.Length != 0)
+            {
+                ArrayPool<object>.Instance.Free(ref args);
+            }
         }
         
         internal static void CallHook(List<Plugin> plugins, string name, object[] args)
@@ -213,7 +216,10 @@ namespace Oxide.Ext.Discord.Hooks
                 }
             }
             
-            ArrayPool<object>.Instance.Free(ref args);
+            if (args.Length != 0)
+            {
+                ArrayPool<object>.Instance.Free(ref args);
+            }
         }
         #endregion
     }

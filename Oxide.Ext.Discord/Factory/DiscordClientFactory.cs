@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord.Factory
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             DiscordPluginCache.Instance.OnPluginLoaded(plugin);
-            OnPluginRemoved(plugin);
+            OnPluginUnloaded(plugin);
 
             // ReSharper disable once SuspiciousTypeConversion.Global
             if (!(plugin is IDiscordPlugin discordPlugin))
@@ -45,7 +46,7 @@ namespace Oxide.Ext.Discord.Factory
             DiscordClient client = _clients[plugin.Id()];
             if (client == null)
             {
-                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(OnPluginAdded)} Creating DiscordClient for plugin {{0}}", plugin.FullName());
+                DiscordExtension.GlobalLogger.Debug($"{nameof(DiscordClient)}.{nameof(CreateClient)} Creating DiscordClient for plugin {{0}}", plugin.FullName());
                 client = new DiscordClient(plugin);
                 _clients[plugin.Id()] = client;
             }
@@ -89,7 +90,7 @@ namespace Oxide.Ext.Discord.Factory
         #endregion
         
         #region Plugin Handling
-        internal void OnPluginAdded(Plugin plugin)
+        internal void OnPluginLoaded(Plugin plugin)
         {
             if (!plugin.IsCorePlugin)
             {
@@ -97,7 +98,7 @@ namespace Oxide.Ext.Discord.Factory
             }
         }
 
-        internal void OnPluginRemoved(Plugin plugin)
+        internal void OnPluginUnloaded(Plugin plugin)
         {
             if (plugin.IsCorePlugin)
             {
