@@ -26,7 +26,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
 Creates the client for the given plugin. If one already exist the existing one is returned
 
 ```csharp
-public void CreateClient(Plugin plugin)
+public DiscordClient CreateClient(Plugin plugin)
 ```
 
 | parameter | description |
@@ -45,6 +45,7 @@ DiscordClient for plugin
 
 ## See Also
 
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordClientFactory](./DiscordClientFactory.md)
 * namespace [Oxide.Ext.Discord.Factory](./FactoryNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
