@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Factory
             }
 
             discordPlugin.Client = client;
-            plugin.Call(DiscordExtHooks.OnDiscordClientCreated);
+            DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordClientCreated);
             return client;
         }
 

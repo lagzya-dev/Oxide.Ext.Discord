@@ -122,10 +122,7 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordEmbedFieldTemplates), DiscordEmbedFieldTemplates);
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
-            
-            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginRemoved;
-            
+
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
             Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
         }
@@ -136,9 +133,6 @@ namespace Oxide.Ext.Discord
         public override void OnShutdown()
         {
             DiscordClientFactory.Instance.OnShutdown();
-            
-            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClientFactory.Instance.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClientFactory.Instance.OnPluginRemoved;
 
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             

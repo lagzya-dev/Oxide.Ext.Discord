@@ -295,9 +295,17 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         #region Hooks
         // ReSharper disable once UnusedMember.Local
+        [HookMethod(nameof(OnPluginLoaded))]
+        private void OnPluginLoaded(Plugin plugin)
+        {
+            DiscordClientFactory.Instance.OnPluginLoaded(plugin);
+        }
+        
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnPluginUnloaded))]
         private void OnPluginUnloaded(Plugin plugin)
         {
+            DiscordClientFactory.Instance.OnPluginUnloaded(plugin);
             if (plugin.Name == "PlaceholderAPI")
             {
                 HandlePlaceholderApiUnloaded();
