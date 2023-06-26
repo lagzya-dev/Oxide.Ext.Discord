@@ -4,14 +4,15 @@
   <PropertyGroup>
     <Version>3.0.0.0</Version>
     <AssemblyName>Oxide.Ext.Discord</AssemblyName>
-    <Authors>Kirollos</Authors>
+    <Authors>MJSU</Authors>
     <Description>An Oxide extension for Discord.</Description>
-    <RepositoryUrl>https://github.com/Kirollos/Oxide.Ext.Discord</RepositoryUrl>
+    <RepositoryUrl>https://github.com/MJSU/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net461;</TargetFrameworks>
     <LangVersion>7.0</LangVersion>
     <PackageVersion>3.0.0.0</PackageVersion>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <FileVersion>3.0.0</FileVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
+    <Company>MJSU</Company>
   </PropertyGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup />

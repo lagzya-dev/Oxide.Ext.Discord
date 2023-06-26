@@ -24327,27 +24327,27 @@
         </member>
         <member name="F:ThisAssembly.Git.Commit">
             <summary>
-            => @"6fa91fff"
+            => @"711d5401"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
             <summary>
-            => @"6fa91fff0269816ada2cd414262a008cdef0908f"
+            => @"711d540176b5bf59fe88b766c6355eabbdcb3884"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.CommitDate">
             <summary>
-            => @"2023-06-25T09:52:53-05:00"
+            => @"2023-06-26T07:12:28-05:00"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
             <summary>
-            => @"601"
+            => @"603"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>
-            => @"2.1.9-601-g6fa91fff"
+            => @"2.1.9-603-g711d5401"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseTag">
@@ -24382,7 +24382,7 @@
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
             <summary>
-            => @"610"
+            => @"612"
             </summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
