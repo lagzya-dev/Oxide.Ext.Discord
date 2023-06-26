@@ -26,6 +26,11 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         private static readonly Permission Permissions = Interface.Oxide.GetLibrary<Permission>();
 
         private readonly InteractionAutoCompleteMessage _message;
+        
+        /// <summary>
+        /// Number of added choices
+        /// </summary>
+        public int Count => _message.Choices.Count;
 
         /// <summary>
         /// Constructor
@@ -101,7 +106,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions
         /// Returns if the Auto Complete can add any more choices
         /// </summary>
         /// <returns></returns>
-        public bool CanAddChoice() => _message.Choices.Count < 25;
+        public bool CanAddChoice() => Count < 25;
 
         /// <summary>
         /// Returns the built message

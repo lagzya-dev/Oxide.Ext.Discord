@@ -11,6 +11,7 @@ public class InteractionAutoCompleteBuilder
 | name | description |
 | --- | --- |
 | [InteractionAutoCompleteBuilder](#InteractionAutoCompleteBuilder-constructor)(…) | Constructor |
+| [Count](#Count-property) { get; } | Number of added choices |
 | [AddAllOnlineFirstPlayers](#AddAllOnlineFirstPlayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
 | [AddAllPlayers](#AddAllPlayers-method)(…) | Adds Any Player to the list |
 | [AddByPlayerId](#AddByPlayerId-method)(…) | Adds a player by player Id to the list |
@@ -544,6 +545,21 @@ public InteractionAutoCompleteBuilder(DiscordInteraction interaction,
 
 * class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
 * class [InteractionAutoCompleteMessage](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md)
+* class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Count property
+
+Number of added choices
+
+```csharp
+public int Count { get; }
+```
+
+## See Also
+
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
