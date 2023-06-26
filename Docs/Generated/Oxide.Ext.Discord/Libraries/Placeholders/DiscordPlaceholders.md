@@ -10,12 +10,12 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 
 | name | description |
 | --- | --- |
-| [CreateData](#createdata-method)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
-| [ProcessPlaceholders](#processplaceholders-method)(…) | Process placeholders for the given Text |
-| [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder |
-| [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder |
-| [RegisterPlaceholder&lt;TData&gt;](#registerplaceholder&amp;lt;tdata&amp;gt;-method)(…) | Registers a placeholder that uses the dataKey value |
-| [RegisterPlaceholder&lt;TData,TResult&gt;](#registerplaceholder&amp;lt;tdata,tresult&amp;gt;-method-1-of-4))(…) | Registers a placeholder of type {T} (4 methods) |
+| [CreateData](#createdata-method)(…) | Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData/ManualPool.md) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData/Clone.md) method. |
+| [ProcessPlaceholders](#processplaceholders-method)(…) | Process placeholders for the given text. |
+| [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder. Static placeholder value can not be changed. |
+| [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder |
+| [RegisterPlaceholder&lt;TData&gt;](#registerplaceholder&amp;lt;tdata&amp;gt;-method)(…) | Registers a placeholder that will take a datakey from [`PlaceholderData`](./PlaceholderData.md) and use that as the placeholder value |
+| [RegisterPlaceholder&lt;TData,TResult&gt;](#registerplaceholder&amp;lt;tdata,tresult&amp;gt;-method-1-of-4))(…) | Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function and will expect a TResult to be returned from that function. (4 methods) |
 
 ## Protected Members
 
@@ -33,7 +33,7 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
    
 # ProcessPlaceholders method
 
-Process placeholders for the given Text
+Process placeholders for the given text.
 
 ```csharp
 public string ProcessPlaceholders(string text, PlaceholderData data)
@@ -58,7 +58,7 @@ string with placeholders replaced. If no placeholders are found the original str
    
 # CreateData method
 
-Creates Pooled [`PlaceholderData`](./PlaceholderData.md)
+Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData/ManualPool) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData/Clone) method.
 
 ```csharp
 public PlaceholderData CreateData(Plugin plugin)
@@ -78,7 +78,7 @@ public PlaceholderData CreateData(Plugin plugin)
    
 # RegisterPlaceholder method (1 of 7)
 
-Registers a placeholder static value placeholder
+Registers a placeholder static value placeholder. Static placeholder value can not be changed.
 
 ```csharp
 public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
@@ -106,7 +106,7 @@ public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
 
 # RegisterPlaceholder&lt;TResult&gt; method (2 of 7)
 
-Registers a placeholder
+Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder
 
 ```csharp
 public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func<TResult> callback)
@@ -134,7 +134,7 @@ public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func
 
 # RegisterPlaceholder&lt;TData&gt; method (3 of 7)
 
-Registers a placeholder that uses the dataKey value
+Registers a placeholder that will take a datakey from [`PlaceholderData`](./PlaceholderData.md) and use that as the placeholder value
 
 ```csharp
 public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string dataKey)
@@ -163,7 +163,7 @@ public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string
 
 # RegisterPlaceholder&lt;TData,TResult&gt; method (4 of 7)
 
-Registers a placeholder of type {T}
+Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function along with the current [`PlaceholderState`](./PlaceholderState.md) and will expect a TResult to be returned from that function.
 
 ```csharp
 public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
@@ -195,7 +195,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 # RegisterPlaceholder&lt;TData,TResult&gt; method (5 of 7)
 
-Registers a placeholder of type {T}
+Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function and will expect a TResult to be returned from that function.
 
 ```csharp
 public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
@@ -226,7 +226,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 # RegisterPlaceholder&lt;TData,TResult&gt; method (6 of 7)
 
-Registers a placeholder of type {T}
+Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will come from the datakey argument Type T will be passed into the callback function along with the current [`PlaceholderState`](./PlaceholderState.md) and will expect a TResult to be returned from that function.
 
 ```csharp
 public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 
@@ -259,7 +259,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 # RegisterPlaceholder&lt;TData,TResult&gt; method (7 of 7)
 
-Registers a placeholder of type {T}
+Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will come from the datakey argument Type T will be passed into the callback function and will expect a TResult to be returned from that function.
 
 ```csharp
 public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 

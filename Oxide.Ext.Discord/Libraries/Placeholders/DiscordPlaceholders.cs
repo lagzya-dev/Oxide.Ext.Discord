@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         /// <summary>
-        /// Process placeholders for the given Text
+        /// Process placeholders for the given text.
         /// </summary>
         /// <param name="text">Text to process placeholders for</param>
         /// <param name="data">Placeholder Data for the placeholders</param>
@@ -121,7 +121,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         /// <summary>
-        /// Creates Pooled <see cref="PlaceholderData"/>
+        /// Returns a pooled <see cref="PlaceholderData"/> for the given plugin.
+        /// If you wish to manually pool call the <see cref="PlaceholderData.ManualPool"/> method.
+        /// If you wish to clone <see cref="PlaceholderData"/> call the <see cref="PlaceholderData.Clone"/> method.
         /// </summary>
         /// <returns><see cref="PlaceholderData"/></returns>
         public PlaceholderData CreateData(Plugin plugin)
@@ -135,7 +137,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         /// <summary>
-        /// Registers a placeholder static value placeholder
+        /// Registers a placeholder static value placeholder.
+        /// Static placeholder value can not be changed.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -157,7 +160,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
         
         /// <summary>
-        /// Registers a placeholder
+        /// Registers a placeholder that will call the callback function when the placeholder is called.
+        /// This function will return TResult data for the placeholder
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -179,9 +183,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _placeholders[placeholder] = holder;
         }
 
-        
         /// <summary>
-        /// Registers a placeholder that uses the dataKey value
+        /// Registers a placeholder that will take a datakey from <see cref="PlaceholderData"/> and use that as the placeholder value
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -208,7 +211,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
 
         /// <summary>
-        /// Registers a placeholder of type {T}
+        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for T will be the T.GetType().Name
+        /// Type T will be passed into the callback function and will expect a TResult to be returned from that function.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -222,7 +226,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
         
         /// <summary>
-        /// Registers a placeholder of type {T}
+        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for T will come from the datakey argument
+        /// Type T will be passed into the callback function and will expect a TResult to be returned from that function.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -253,7 +258,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
         
         /// <summary>
-        /// Registers a placeholder of type {T}
+        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for T will be the T.GetType().Name
+        /// Type T will be passed into the callback function along with the current <see cref="PlaceholderState"/> and will expect a TResult to be returned from that function.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
@@ -267,7 +273,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
         
         /// <summary>
-        /// Registers a placeholder of type {T}
+        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for T will come from the datakey argument
+        /// Type T will be passed into the callback function along with the current <see cref="PlaceholderState"/> and will expect a TResult to be returned from that function.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="placeholder">Placeholder string</param>
