@@ -10,10 +10,10 @@ public class SnowflakeConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [SnowflakeConverter](#SnowflakeConverter-constructor)() | The default constructor. |
-| override [CanConvert](#CanConvert-method)(…) | Returns if we can convert this type |
-| override [ReadJson](#ReadJson-method)(…) | Reads the JSON string and converts it to a snowflake |
-| override [WriteJson](#WriteJson-method)(…) | Writes a snowflake as a JSON string |
+| [SnowflakeConverter](#snowflakeconverter-constructor)() | The default constructor. |
+| override [CanConvert](#canconvert-method)(…) | Returns if we can convert this type |
+| override [ReadJson](#readjson-method)(…) | Reads the JSON string and converts it to a snowflake |
+| override [WriteJson](#writejson-method)(…) | Writes a snowflake as a JSON string |
 
 ## See Also
 

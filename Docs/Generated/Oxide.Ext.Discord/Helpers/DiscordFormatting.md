@@ -10,35 +10,35 @@ public static class DiscordFormatting
 
 | name | description |
 | --- | --- |
-| static [BlockQuoteMultiLine](#BlockQuoteMultiLine-method)(…) | Will display the message in multiline block quote |
-| static [BlockQuoteSingleLine](#BlockQuoteSingleLine-method)(…) | Will display the message in single line block quote |
-| static [Bold](#Bold-method)(…) | Will display the message in bold |
-| static [CodeBlockLanguage](#CodeBlockLanguage-method)(…) | Will display a multiline code bloc with the specified language |
-| static [CodeBlockMultiLine](#CodeBlockMultiLine-method)(…) | Will display the message as a multiline code block |
-| static [CodeBlockOneLine](#CodeBlockOneLine-method)(…) | Will display the message as a one line code block |
-| static [CustomEmojiDataString](#CustomEmojiDataString-method)(…) | Returns formatting string for custom emoji to be used in a url |
-| static [CustomEmojiMessageString](#CustomEmojiMessageString-method)(…) | Returns formatting string for custom emoji to be used in a message |
-| static [EmojiMessageString](#EmojiMessageString-method)(…) | Return the emoji string for a message |
-| static [Header1](#Header1-method)(…) | Creates a Big Header |
-| static [Header2](#Header2-method)(…) | Creates a Medium Header |
-| static [Header3](#Header3-method)(…) | Creates a Small Header |
-| static [Italics](#Italics-method)(…) | Will display the message in italics |
-| static [ItalicsBold](#ItalicsBold-method)(…) | Will display the message in italics and bold |
-| static [List](#List-method)(…) | Creates a list item for the given message |
-| static [MaskLink](#MaskLink-method)(…) | Creates a clickable link displayed as the mask text |
-| static [MentionApplicationCommand](#MentionApplicationCommand-method)(…) | Mention the the Application command |
-| static [MentionApplicationCommandCustom](#MentionApplicationCommandCustom-method)(…) | Mention the application command using a custom command string |
-| static [MentionChannel](#MentionChannel-method)(…) | Mention the the channel with the given ID |
-| static [MentionRole](#MentionRole-method)(…) | Mention the the role with the given ID |
-| static [MentionUser](#MentionUser-method)(…) | Mention the user with the given user ID |
-| static [NumberedList](#NumberedList-method)(…) | Creates a list item for the given message |
-| static [Spoiler](#Spoiler-method)(…) | Will display the text as a spoiler |
-| static [Strikethrough](#Strikethrough-method)(…) | Will display the message with a strikethrough |
-| static [Underline](#Underline-method)(…) | Will display the message in underline |
-| static [UnderlineBold](#UnderlineBold-method)(…) | Will display the message in underline and bold |
-| static [UnderlineBoldItalics](#UnderlineBoldItalics-method)(…) | Will display the message in underline and bold and italics |
-| static [UnderlineItalics](#UnderlineItalics-method)(…) | Will display the message in underline and italics |
-| static [UnixTimestamp](#UnixTimestamp-method)(…) | Displays a timestamp (2 methods) |
+| static [BlockQuoteMultiLine](#blockquotemultiline-method)(…) | Will display the message in multiline block quote |
+| static [BlockQuoteSingleLine](#blockquotesingleline-method)(…) | Will display the message in single line block quote |
+| static [Bold](#bold-method)(…) | Will display the message in bold |
+| static [CodeBlockLanguage](#codeblocklanguage-method)(…) | Will display a multiline code bloc with the specified language |
+| static [CodeBlockMultiLine](#codeblockmultiline-method)(…) | Will display the message as a multiline code block |
+| static [CodeBlockOneLine](#codeblockoneline-method)(…) | Will display the message as a one line code block |
+| static [CustomEmojiDataString](#customemojidatastring-method)(…) | Returns formatting string for custom emoji to be used in a url |
+| static [CustomEmojiMessageString](#customemojimessagestring-method)(…) | Returns formatting string for custom emoji to be used in a message |
+| static [EmojiMessageString](#emojimessagestring-method)(…) | Return the emoji string for a message |
+| static [Header1](#header1-method)(…) | Creates a Big Header |
+| static [Header2](#header2-method)(…) | Creates a Medium Header |
+| static [Header3](#header3-method)(…) | Creates a Small Header |
+| static [Italics](#italics-method)(…) | Will display the message in italics |
+| static [ItalicsBold](#italicsbold-method)(…) | Will display the message in italics and bold |
+| static [List](#list-method)(…) | Creates a list item for the given message |
+| static [MaskLink](#masklink-method)(…) | Creates a clickable link displayed as the mask text |
+| static [MentionApplicationCommand](#mentionapplicationcommand-method)(…) | Mention the the Application command |
+| static [MentionApplicationCommandCustom](#mentionapplicationcommandcustom-method)(…) | Mention the application command using a custom command string |
+| static [MentionChannel](#mentionchannel-method)(…) | Mention the the channel with the given ID |
+| static [MentionRole](#mentionrole-method)(…) | Mention the the role with the given ID |
+| static [MentionUser](#mentionuser-method)(…) | Mention the user with the given user ID |
+| static [NumberedList](#numberedlist-method)(…) | Creates a list item for the given message |
+| static [Spoiler](#spoiler-method)(…) | Will display the text as a spoiler |
+| static [Strikethrough](#strikethrough-method)(…) | Will display the message with a strikethrough |
+| static [Underline](#underline-method)(…) | Will display the message in underline |
+| static [UnderlineBold](#underlinebold-method)(…) | Will display the message in underline and bold |
+| static [UnderlineBoldItalics](#underlinebolditalics-method)(…) | Will display the message in underline and bold and italics |
+| static [UnderlineItalics](#underlineitalics-method)(…) | Will display the message in underline and italics |
+| static [UnixTimestamp](#unixtimestamp-method-1-of-2))(…) | Displays a timestamp (2 methods) |
 
 ## See Also
 
@@ -266,6 +266,27 @@ public static string UnixTimestamp(DateTimeOffset time,
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# UnixTimestamp method (2 of 2)
+
+Displays a timestamp
+
+```csharp
+public static string UnixTimestamp(long timestamp, 
+    TimestampStyles style = TimestampStyles.ShortDateTime)
+```
+
+| parameter | description |
+| --- | --- |
+| timestamp | UNIX Timestamp |
+| style | Display style for the timestamp |
+
+## See Also
+
+* enum [TimestampStyles](./TimestampStyles.md)
+* class [DiscordFormatting](./DiscordFormatting.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Italics method

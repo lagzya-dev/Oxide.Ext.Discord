@@ -10,15 +10,15 @@ public static class PluginPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Author](#Author-method)(…) | Author placeholder |
-| static [Description](#Description-method)(…) | Description placeholder |
-| static [FullName](#FullName-method)(…) | Plugin) placeholder |
-| static [HookTime](#HookTime-method)(…) | TotalHookTime placeholder |
-| static [LangMessage](#LangMessage-method)(…) | Lang message for a plugin |
-| static [Name](#Name-method)(…) | Name placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [Title](#Title-method)(…) | Title placeholder |
-| static [Version](#Version-method)(…) | Version placeholder |
+| static [Author](#author-method)(…) | Author placeholder |
+| static [Description](#description-method)(…) | Description placeholder |
+| static [FullName](#fullname-method)(…) | Plugin) placeholder |
+| static [HookTime](#hooktime-method)(…) | TotalHookTime placeholder |
+| static [LangMessage](#langmessage-method)(…) | Lang message for a plugin |
+| static [Name](#name-method)(…) | Name placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Title](#title-method)(…) | Title placeholder |
+| static [Version](#version-method)(…) | Version placeholder |
 
 ## See Also
 

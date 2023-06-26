@@ -15,10 +15,10 @@ public class HashListConverter<TValue> : JsonConverter
 
 | name | description |
 | --- | --- |
-| [HashListConverter](#HashListConverter-constructor)() | The default constructor. |
-| override [CanConvert](#CanConvert-method)(…) | Can we convert the given type |
-| override [ReadJson](#ReadJson-method)(…) | Read an array in JSON as a hash |
-| override [WriteJson](#WriteJson-method)(…) | Write a hash as a list in JSON |
+| [HashListConverter](#hashlistconverter&amp;lt;tvalue&amp;gt;-constructor)() | The default constructor. |
+| override [CanConvert](#canconvert-method)(…) | Can we convert the given type |
+| override [ReadJson](#readjson-method)(…) | Read an array in JSON as a hash |
+| override [WriteJson](#writejson-method)(…) | Write a hash as a list in JSON |
 
 ## See Also
 

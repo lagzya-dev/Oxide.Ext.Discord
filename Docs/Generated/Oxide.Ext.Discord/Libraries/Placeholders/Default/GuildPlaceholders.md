@@ -10,13 +10,13 @@ public static class GuildPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Banner](#Banner-method)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl.md) placeholder |
-| static [Description](#Description-method)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild/Description.md) placeholder |
-| static [Icon](#Icon-method)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder |
-| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild/Id.md) placeholder |
-| static [MemberCount](#MemberCount-method)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder |
-| static [Name](#Name-method)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild/Name.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Banner](#banner-method)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl.md) placeholder |
+| static [Description](#description-method)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild/Description.md) placeholder |
+| static [Icon](#icon-method)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild/Id.md) placeholder |
+| static [MemberCount](#membercount-method)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild/Name.md) placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

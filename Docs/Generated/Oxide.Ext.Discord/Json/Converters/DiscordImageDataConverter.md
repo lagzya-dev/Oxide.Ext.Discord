@@ -10,10 +10,10 @@ public class DiscordImageDataConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [DiscordImageDataConverter](#DiscordImageDataConverter-constructor)() | The default constructor. |
-| override [CanConvert](#CanConvert-method)(…) |  |
-| override [ReadJson](#ReadJson-method)(…) |  |
-| override [WriteJson](#WriteJson-method)(…) |  |
+| [DiscordImageDataConverter](#discordimagedataconverter-constructor)() | The default constructor. |
+| override [CanConvert](#canconvert-method)(…) |  |
+| override [ReadJson](#readjson-method)(…) |  |
+| override [WriteJson](#writejson-method)(…) |  |
 
 ## See Also
 

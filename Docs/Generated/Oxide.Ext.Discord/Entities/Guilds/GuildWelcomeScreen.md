@@ -10,9 +10,9 @@ public class GuildWelcomeScreen
 
 | name | description |
 | --- | --- |
-| [GuildWelcomeScreen](#GuildWelcomeScreen-constructor)() | The default constructor. |
-| [Description](#Description-property) { get; set; } | The server description shown in the welcome screen |
-| [WelcomeChannels](#WelcomeChannels-property) { get; set; } | The channels shown in the welcome screen Up to 5 |
+| [GuildWelcomeScreen](#guildwelcomescreen-constructor)() | The default constructor. |
+| [Description](#description-property) { get; set; } | The server description shown in the welcome screen |
+| [WelcomeChannels](#welcomechannels-property) { get; set; } | The channels shown in the welcome screen Up to 5 |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class CommandOptionChoice
 
 | name | description |
 | --- | --- |
-| [CommandOptionChoice](#CommandOptionChoice-constructor)() | Default Constructor |
-| [CommandOptionChoice](#CommandOptionChoice-constructor)(…) | Creates a Command Option Choice |
-| [Name](#Name-property) { get; set; } | Choice name (1-100 characters) |
-| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Value](#Value-property) { get; set; } | Type can be string, integer, double or boolean Value of the choice, up to 100 characters if string |
+| [CommandOptionChoice](#commandoptionchoice-constructor)() | Default Constructor |
+| [CommandOptionChoice](#commandoptionchoice-constructor)(…) | Creates a Command Option Choice |
+| [Name](#name-property) { get; set; } | Choice name (1-100 characters) |
+| [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Value](#value-property) { get; set; } | Type can be string, integer, double or boolean Value of the choice, up to 100 characters if string |
 
 ## See Also
 
@@ -38,6 +38,26 @@ public CommandOptionChoice()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# CommandOptionChoice constructor (2 of 2)
+
+Creates a Command Option Choice
+
+```csharp
+public CommandOptionChoice(string name, object value, Hash<string, string> nameLocalizations = null)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the choice |
+| value | Value of the choice |
+| nameLocalizations | Name localizations for the choice |
+
+## See Also
+
+* class [CommandOptionChoice](./CommandOptionChoice.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

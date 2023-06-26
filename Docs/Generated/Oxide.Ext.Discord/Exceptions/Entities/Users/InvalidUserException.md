@@ -10,7 +10,7 @@ public class InvalidUserException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| static readonly [InvalidUserNameCharacters](#InvalidUserNameCharacters-field) | Invalid username characters |
+| static readonly [InvalidUserNameCharacters](#invalidusernamecharacters-field) | Invalid username characters |
 
 ## See Also
 

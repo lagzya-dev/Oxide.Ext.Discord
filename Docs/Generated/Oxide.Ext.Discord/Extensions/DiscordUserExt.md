@@ -10,9 +10,9 @@ public static class DiscordUserExt
 
 | name | description |
 | --- | --- |
-| static [HasPermission](#HasPermission-method)(…) | Return if the discord user has the given oxide permission. If the user is not linked this will return false |
-| static [IsLinked](#IsLinked-method)(…) | Returns true if the player is linked |
-| static [SendChatMessage](#SendChatMessage-method)(…) | Send chat message to the user if they're connected (2 methods) |
+| static [HasPermission](#haspermission-method)(…) | Return if the discord user has the given oxide permission. If the user is not linked this will return false |
+| static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
+| static [SendChatMessage](#sendchatmessage-method-1-of-2))(…) | Send chat message to the user if they're connected (2 methods) |
 
 ## See Also
 
@@ -42,6 +42,29 @@ public static void SendChatMessage(this DiscordUser user, string message)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# SendChatMessage method (2 of 2)
+
+Send chat message to the user if they're connected
+
+```csharp
+public static void SendChatMessage(this DiscordUser user, string message, string prefix, 
+    params object[] args)
+```
+
+| parameter | description |
+| --- | --- |
+| user | User to send the message to on the server |
+| message | Message to send |
+| prefix | Message Prefix |
+| args | Message Args |
+
+## See Also
+
+* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUserExt](./DiscordUserExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # HasPermission method

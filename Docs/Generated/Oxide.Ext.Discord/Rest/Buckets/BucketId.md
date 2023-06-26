@@ -10,15 +10,15 @@ public struct BucketId : IEquatable<BucketId>
 
 | name | description |
 | --- | --- |
-| [BucketId](#BucketId-constructor)(…) | Constructor |
-| [IsValid](#IsValid-property) { get; } | If the bucket ID is valid |
-| readonly [Id](#Id-field) | ID of the bucket |
-| [Equals](#Equals-method)(…) |  |
-| override [Equals](#Equals-method)(…) |  |
-| override [GetHashCode](#GetHashCode-method)() |  |
-| override [ToString](#ToString-method)() |  |
-| [operator ==](#op_Equality-operator) |  |
-| [operator !=](#op_Inequality-operator) |  |
+| [BucketId](#bucketid-constructor)(…) | Constructor |
+| [IsValid](#isvalid-property) { get; } | If the bucket ID is valid |
+| readonly [Id](#id-field) | ID of the bucket |
+| [Equals](#equals-method)(…) |  |
+| override [Equals](#equals-method)(…) |  |
+| override [GetHashCode](#gethashcode-method)() |  |
+| override [ToString](#tostring-method)() |  |
+| [operator ==](#bucketid-equality-operator) |  |
+| [operator !=](#bucketid-inequality-operator) |  |
 
 ## See Also
 
@@ -40,6 +40,18 @@ public bool Equals(BucketId other)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Equals method (2 of 2)
+
+```csharp
+public override bool Equals(object obj)
+```
+
+## See Also
+
+* struct [BucketId](./BucketId.md)
+* namespace [Oxide.Ext.Discord.Rest.Buckets](./BucketsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetHashCode method

@@ -10,15 +10,15 @@ public class SelectMenuTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [SelectMenuTemplate](#SelectMenuTemplate-constructor)(…) | Constructor |
-| [ChannelTypes](#ChannelTypes-property) { get; set; } | ChannelSelect[`ChannelType`](../../../Entities/Channels/ChannelType.md) to show Max 25 options |
-| [CustomId](#CustomId-property) { get; set; } | Command for the Select Menu |
-| [Enabled](#Enabled-property) { get; set; } | If the Button is enabled |
-| [MaxValues](#MaxValues-property) { get; set; } | the maximum number of items that must be chosen Default 1, Min 0, Max 25 |
-| [MinValues](#MinValues-property) { get; set; } | the minimum number of items that must be chosen Default 1, Min 0, Max 25 |
-| [Options](#Options-property) { get; set; } | The choices in the select Max 25 options |
-| [Placeholder](#Placeholder-property) { get; set; } | Custom placeholder text if nothing is selected Max 150 characters |
-| override [ToComponent](#ToComponent-method)(…) |  |
+| [SelectMenuTemplate](#selectmenutemplate-constructor)(…) | Constructor |
+| [ChannelTypes](#channeltypes-property) { get; set; } | ChannelSelect[`ChannelType`](../../../Entities/Channels/ChannelType.md) to show Max 25 options |
+| [CustomId](#customid-property) { get; set; } | Command for the Select Menu |
+| [Enabled](#enabled-property) { get; set; } | If the Button is enabled |
+| [MaxValues](#maxvalues-property) { get; set; } | the maximum number of items that must be chosen Default 1, Min 0, Max 25 |
+| [MinValues](#minvalues-property) { get; set; } | the minimum number of items that must be chosen Default 1, Min 0, Max 25 |
+| [Options](#options-property) { get; set; } | The choices in the select Max 25 options |
+| [Placeholder](#placeholder-property) { get; set; } | Custom placeholder text if nothing is selected Max 150 characters |
+| override [ToComponent](#tocomponent-method)(…) |  |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class StageInstanceCreate
 
 | name | description |
 | --- | --- |
-| [StageInstanceCreate](#StageInstanceCreate-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The id of the Stage channel |
-| [PrivacyLevel](#PrivacyLevel-property) { get; set; } | The privacy level of the Stage instance (default GUILD_ONLY) |
-| [SendStartNotification](#SendStartNotification-property) { get; set; } | Notify @everyone that a Stage instance has started The stage moderator must have the MENTION_EVERYONE permission for this notification to be sent. |
-| [Topic](#Topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
+| [StageInstanceCreate](#stageinstancecreate-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The id of the Stage channel |
+| [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the Stage instance (default GUILD_ONLY) |
+| [SendStartNotification](#sendstartnotification-property) { get; set; } | Notify @everyone that a Stage instance has started The stage moderator must have the MENTION_EVERYONE permission for this notification to be sent. |
+| [Topic](#topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
 
 ## See Also
 

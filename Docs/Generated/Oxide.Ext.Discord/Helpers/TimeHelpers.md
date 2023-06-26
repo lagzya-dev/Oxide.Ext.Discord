@@ -10,10 +10,10 @@ public static class TimeHelpers
 
 | name | description |
 | --- | --- |
-| static [MillisecondsSinceEpoch](#MillisecondsSinceEpoch-method)() | Gets how many seconds since the linux epoch |
-| static [SecondsSinceEpoch](#SecondsSinceEpoch-method)() | Gets how many seconds since the linux epoch |
-| static [ToDateTimeOffsetFromMilliseconds](#ToDateTimeOffsetFromMilliseconds-method)(…) | Converts the milliseconds since linux epoch to a DateTimeOffset |
-| static [ToDateTimeOffsetFromSeconds](#ToDateTimeOffsetFromSeconds-method)(…) | Converts the seconds since linux epoch to a DateTime |
+| static [MillisecondsSinceEpoch](#millisecondssinceepoch-method)() | Gets how many seconds since the linux epoch |
+| static [SecondsSinceEpoch](#secondssinceepoch-method)() | Gets how many seconds since the linux epoch |
+| static [ToDateTimeOffsetFromMilliseconds](#todatetimeoffsetfrommilliseconds-method)(…) | Converts the milliseconds since linux epoch to a DateTimeOffset |
+| static [ToDateTimeOffsetFromSeconds](#todatetimeoffsetfromseconds-method)(…) | Converts the seconds since linux epoch to a DateTime |
 
 ## See Also
 

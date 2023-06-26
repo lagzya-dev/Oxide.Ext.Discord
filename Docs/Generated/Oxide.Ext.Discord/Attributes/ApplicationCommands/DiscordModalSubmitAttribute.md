@@ -19,7 +19,7 @@ public sealed class DiscordModalSubmitAttribute : BaseApplicationCommandAttribut
 
 | name | description |
 | --- | --- |
-| [DiscordModalSubmitAttribute](#DiscordModalSubmitAttribute-constructor)(…) | Constructor |
+| [DiscordModalSubmitAttribute](#discordmodalsubmitattribute-constructor)(…) | Constructor |
 
 ## See Also
 

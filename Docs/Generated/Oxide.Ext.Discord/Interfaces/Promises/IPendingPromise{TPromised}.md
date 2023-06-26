@@ -14,7 +14,7 @@ public interface IPendingPromise<TPromised> : IPromise<TPromised>, IRejectable
 
 | name | description |
 | --- | --- |
-| [Resolve](#Resolve-method)(…) | Resolves the promise with the given value |
+| [Resolve](#resolve-method)(…) | Resolves the promise with the given value |
 
 ## See Also
 

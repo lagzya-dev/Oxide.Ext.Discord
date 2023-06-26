@@ -10,11 +10,11 @@ public class GuildCurrentUserVoiceStateUpdate
 
 | name | description |
 | --- | --- |
-| [GuildCurrentUserVoiceStateUpdate](#GuildCurrentUserVoiceStateUpdate-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel the user is currently in |
-| [RequestToSpeakTimestamp](#RequestToSpeakTimestamp-property) { get; set; } | Sets the user's request to speak |
-| [Suppress](#Suppress-property) { get; set; } | Toggles the user's suppress state |
-| [Validate](#Validate-method)() |  |
+| [GuildCurrentUserVoiceStateUpdate](#guildcurrentuservoicestateupdate-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The id of the channel the user is currently in |
+| [RequestToSpeakTimestamp](#requesttospeaktimestamp-property) { get; set; } | Sets the user's request to speak |
+| [Suppress](#suppress-property) { get; set; } | Toggles the user's suppress state |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

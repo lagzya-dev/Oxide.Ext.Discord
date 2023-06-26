@@ -10,11 +10,11 @@ public class Overwrite : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [Overwrite](#Overwrite-constructor)() | The default constructor. |
-| [Allow](#Allow-property) { get; set; } | Permissions allowed [`PermissionFlags`](../Permissions/PermissionFlags.md) |
-| [Deny](#Deny-property) { get; set; } | Permissions denied [`PermissionFlags`](../Permissions/PermissionFlags.md) |
-| [Id](#Id-property) { get; set; } | Role or user ID |
-| [Type](#Type-property) { get; set; } | Permission Type [`PermissionType`](./PermissionType.md) |
+| [Overwrite](#overwrite-constructor)() | The default constructor. |
+| [Allow](#allow-property) { get; set; } | Permissions allowed [`PermissionFlags`](../Permissions/PermissionFlags.md) |
+| [Deny](#deny-property) { get; set; } | Permissions denied [`PermissionFlags`](../Permissions/PermissionFlags.md) |
+| [Id](#id-property) { get; set; } | Role or user ID |
+| [Type](#type-property) { get; set; } | Permission Type [`PermissionType`](./PermissionType.md) |
 
 ## See Also
 

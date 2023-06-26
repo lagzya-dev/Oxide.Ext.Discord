@@ -10,11 +10,11 @@ public class EmbedFooter
 
 | name | description |
 | --- | --- |
-| [EmbedFooter](#EmbedFooter-constructor)() | Embed Footer Constructor |
-| [EmbedFooter](#EmbedFooter-constructor)(…) | Embed Footer Constructor |
-| [IconUrl](#IconUrl-property) { get; set; } | Url of footer icon (only supports http(s) and attachments) |
-| [ProxyIconUrl](#ProxyIconUrl-property) { get; set; } | A proxied url of footer icon |
-| [Text](#Text-property) { get; set; } | Footer text |
+| [EmbedFooter](#embedfooter-constructor)() | Embed Footer Constructor |
+| [EmbedFooter](#embedfooter-constructor)(…) | Embed Footer Constructor |
+| [IconUrl](#iconurl-property) { get; set; } | Url of footer icon (only supports http(s) and attachments) |
+| [ProxyIconUrl](#proxyiconurl-property) { get; set; } | A proxied url of footer icon |
+| [Text](#text-property) { get; set; } | Footer text |
 
 ## See Also
 
@@ -38,6 +38,26 @@ public EmbedFooter()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedFooter constructor (2 of 2)
+
+Embed Footer Constructor
+
+```csharp
+public EmbedFooter(string text, string iconUrl = null, string proxyIconUrl = null)
+```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+| iconUrl |  |
+| proxyIconUrl |  |
+
+## See Also
+
+* class [EmbedFooter](./EmbedFooter.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Text property

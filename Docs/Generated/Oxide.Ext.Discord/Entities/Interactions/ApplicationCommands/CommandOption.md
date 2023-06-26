@@ -10,22 +10,22 @@ public class CommandOption
 
 | name | description |
 | --- | --- |
-| [CommandOption](#CommandOption-constructor)() | Constructor |
-| [CommandOption](#CommandOption-constructor)(…) | Constructor |
-| [Autocomplete](#Autocomplete-property) { get; set; } | If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option |
-| [ChannelTypes](#ChannelTypes-property) { get; set; } | If the option is a channel type, the channels shown will be restricted to these types See [`ChannelType`](../../Channels/ChannelType.md) |
-| [Choices](#Choices-property) { get; set; } | Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25 See [`CommandOptionChoice`](./CommandOptionChoice.md) |
-| [Description](#Description-property) { get; set; } | Description the command option (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [MaxLength](#MaxLength-property) { get; set; } | For option type STRING, the maximum allowed length (minimum of 1) |
-| [MaxValue](#MaxValue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the maximum value permitted |
-| [MinLength](#MinLength-property) { get; set; } | For option type STRING, the minimum allowed length (minimum of 0) |
-| [MinValue](#MinValue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the minimum value permitted |
-| [Name](#Name-property) { get; set; } | Name of the command option (1-32 characters) |
-| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Options](#Options-property) { get; set; } | If the option is a subcommand or subcommand group type, these nested options will be the parameters See [`CommandOption`](./CommandOption.md) |
-| [Required](#Required-property) { get; set; } | If the parameter is required or optional Defaults to false |
-| [Type](#Type-property) { get; set; } | Type of option See [`CommandOptionType`](./CommandOptionType.md) |
+| [CommandOption](#commandoption-constructor)() | Constructor |
+| [CommandOption](#commandoption-constructor)(…) | Constructor |
+| [Autocomplete](#autocomplete-property) { get; set; } | If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option |
+| [ChannelTypes](#channeltypes-property) { get; set; } | If the option is a channel type, the channels shown will be restricted to these types See [`ChannelType`](../../Channels/ChannelType.md) |
+| [Choices](#choices-property) { get; set; } | Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25 See [`CommandOptionChoice`](./CommandOptionChoice.md) |
+| [Description](#description-property) { get; set; } | Description the command option (1-100 characters) |
+| [DescriptionLocalizations](#descriptionlocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [MaxLength](#maxlength-property) { get; set; } | For option type STRING, the maximum allowed length (minimum of 1) |
+| [MaxValue](#maxvalue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the maximum value permitted |
+| [MinLength](#minlength-property) { get; set; } | For option type STRING, the minimum allowed length (minimum of 0) |
+| [MinValue](#minvalue-property) { get; set; } | If the option is an INTEGER or NUMBER type, the minimum value permitted |
+| [Name](#name-property) { get; set; } | Name of the command option (1-32 characters) |
+| [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Options](#options-property) { get; set; } | If the option is a subcommand or subcommand group type, these nested options will be the parameters See [`CommandOption`](./CommandOption.md) |
+| [Required](#required-property) { get; set; } | If the parameter is required or optional Defaults to false |
+| [Type](#type-property) { get; set; } | Type of option See [`CommandOptionType`](./CommandOptionType.md) |
 
 ## See Also
 
@@ -49,6 +49,22 @@ public CommandOption()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# CommandOption constructor (2 of 2)
+
+Constructor
+
+```csharp
+public CommandOption(string name, string description, CommandOptionType type, 
+    List<CommandOption> options = null)
+```
+
+## See Also
+
+* enum [CommandOptionType](./CommandOptionType.md)
+* class [CommandOption](./CommandOption.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Type property

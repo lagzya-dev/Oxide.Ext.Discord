@@ -10,12 +10,12 @@ public class EmbedFooterTemplate
 
 | name | description |
 | --- | --- |
-| [EmbedFooterTemplate](#EmbedFooterTemplate-constructor)() | Constructor |
-| [EmbedFooterTemplate](#EmbedFooterTemplate-constructor)(…) | Constructor |
-| [Enabled](#Enabled-property) { get; set; } | Show Embed Footer |
-| [IconUrl](#IconUrl-property) { get; set; } | Embed Footer Icon |
-| [Text](#Text-property) { get; set; } | Embed Footer Text |
-| [ToFooter](#ToFooter-method)(…) | Converts the template to a [`EmbedFooter`](../../../Entities/Messages/Embeds/EmbedFooter.md) |
+| [EmbedFooterTemplate](#embedfootertemplate-constructor)() | Constructor |
+| [EmbedFooterTemplate](#embedfootertemplate-constructor)(…) | Constructor |
+| [Enabled](#enabled-property) { get; set; } | Show Embed Footer |
+| [IconUrl](#iconurl-property) { get; set; } | Embed Footer Icon |
+| [Text](#text-property) { get; set; } | Embed Footer Text |
+| [ToFooter](#tofooter-method)(…) | Converts the template to a [`EmbedFooter`](../../../Entities/Messages/Embeds/EmbedFooter.md) |
 
 ## See Also
 
@@ -64,6 +64,26 @@ public EmbedFooterTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedFooterTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public EmbedFooterTemplate(string text = "", string iconUrl = "", bool enabled = false)
+```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+| iconUrl |  |
+| enabled |  |
+
+## See Also
+
+* class [EmbedFooterTemplate](./EmbedFooterTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Enabled property

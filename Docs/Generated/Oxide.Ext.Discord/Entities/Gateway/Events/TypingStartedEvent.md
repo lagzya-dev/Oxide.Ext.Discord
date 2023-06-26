@@ -10,12 +10,12 @@ public class TypingStartedEvent
 
 | name | description |
 | --- | --- |
-| [TypingStartedEvent](#TypingStartedEvent-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | ID of the channel |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [Member](#Member-property) { get; set; } | The member who started typing if this happened in a guild |
-| [Timestamp](#Timestamp-property) { get; set; } | Unix time (in seconds) of when the user started typing |
-| [UserId](#UserId-property) { get; set; } | ID of the user |
+| [TypingStartedEvent](#typingstartedevent-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | ID of the channel |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [Member](#member-property) { get; set; } | The member who started typing if this happened in a guild |
+| [Timestamp](#timestamp-property) { get; set; } | Unix time (in seconds) of when the user started typing |
+| [UserId](#userid-property) { get; set; } | ID of the user |
 
 ## See Also
 

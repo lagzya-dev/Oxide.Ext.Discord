@@ -10,17 +10,17 @@ public class InputTextTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [InputTextTemplate](#InputTextTemplate-constructor)() | Constructor |
-| [InputTextTemplate](#InputTextTemplate-constructor)(…) | Constructor |
-| [CustomId](#CustomId-property) { get; set; } | Custom ID of the input text |
-| [Label](#Label-property) { get; set; } | Text that appears on top of the input text field, max 80 characters |
-| [MaxLength](#MaxLength-property) { get; set; } | The maximum length of the text input |
-| [MinLength](#MinLength-property) { get; set; } | The minimum length of the text input |
-| [Placeholder](#Placeholder-property) { get; set; } | The placeholder for the text input field |
-| [Required](#Required-property) { get; set; } | Is the Input Text Required to be filled out |
-| [Style](#Style-property) { get; set; } | The style of the input text |
-| [Value](#Value-property) { get; set; } | The pre-filled value for text input |
-| override [ToComponent](#ToComponent-method)(…) | Converts the template to a [`InputTextComponent`](../../../Entities/Interactions/MessageComponents/InputTextComponent.md) |
+| [InputTextTemplate](#inputtexttemplate-constructor)() | Constructor |
+| [InputTextTemplate](#inputtexttemplate-constructor)(…) | Constructor |
+| [CustomId](#customid-property) { get; set; } | Custom ID of the input text |
+| [Label](#label-property) { get; set; } | Text that appears on top of the input text field, max 80 characters |
+| [MaxLength](#maxlength-property) { get; set; } | The maximum length of the text input |
+| [MinLength](#minlength-property) { get; set; } | The minimum length of the text input |
+| [Placeholder](#placeholder-property) { get; set; } | The placeholder for the text input field |
+| [Required](#required-property) { get; set; } | Is the Input Text Required to be filled out |
+| [Style](#style-property) { get; set; } | The style of the input text |
+| [Value](#value-property) { get; set; } | The pre-filled value for text input |
+| override [ToComponent](#tocomponent-method)(…) | Converts the template to a [`InputTextComponent`](../../../Entities/Interactions/MessageComponents/InputTextComponent.md) |
 
 ## See Also
 
@@ -66,6 +66,34 @@ public InputTextTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# InputTextTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public InputTextTemplate(string label, string customId, string value = "", 
+    InputTextStyles style = InputTextStyles.Short, bool required = false, string placeholder = "", 
+    int minLength = 0, int maxLength = 4000)
+```
+
+| parameter | description |
+| --- | --- |
+| label |  |
+| customId |  |
+| value |  |
+| style |  |
+| required |  |
+| placeholder |  |
+| minLength |  |
+| maxLength |  |
+
+## See Also
+
+* enum [InputTextStyles](../../../Entities/Interactions/MessageComponents/InputTextStyles.md)
+* class [InputTextTemplate](./InputTextTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # CustomId property

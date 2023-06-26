@@ -10,30 +10,30 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 
 | name | description |
 | --- | --- |
-| [Promise](#Promise-constructor)() | Constructor |
-| static [Create](#Create-method)() | Returns a promise that is currently pending |
-| [Catch](#Catch-method)(…) |  (2 methods) |
-| [Catch&lt;TException&gt;](#Catch-method)(…) |  |
-| [ContinueWith](#ContinueWith-method)(…) |  |
-| [ContinueWith&lt;TConvert&gt;](#ContinueWith-method)(…) |  |
-| [Finally](#Finally-method)(…) |  |
-| [Resolve](#Resolve-method)(…) |  |
-| [Then](#Then-method)(…) |  (4 methods) |
-| [Then&lt;TConvert&gt;](#Then-method)(…) |  (3 methods) |
-| [ThenAll](#ThenAll-method)(…) |  |
-| [ThenAll&lt;TConvert&gt;](#ThenAll-method)(…) |  |
-| static [All](#All-method)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
-| static [Create](#Create-method)(…) |  |
-| static [Create&lt;TConvert&gt;](#Create-method)() | Returns a promise that is currently pending |
-| static [Rejected](#Rejected-method)(…) | Convert an exception directly into a rejected promise. |
-| static [Resolved](#Resolved-method)(…) | Convert a simple value directly into a resolved promise. |
+| [Promise](#promise&amp;lt;tpromised&amp;gt;-constructor)() | Constructor |
+| static [Create](#create-method)() | Returns a promise that is currently pending |
+| [Catch](#catch-method-1-of-2))(…) |  (2 methods) |
+| [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) |  |
+| [ContinueWith](#continuewith-method)(…) |  |
+| [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) |  |
+| [Finally](#finally-method)(…) |  |
+| [Resolve](#resolve-method)(…) |  |
+| [Then](#then-method-1-of-4))(…) |  (4 methods) |
+| [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3))(…) |  (3 methods) |
+| [ThenAll](#thenall-method)(…) |  |
+| [ThenAll&lt;TConvert&gt;](#thenall&amp;lt;tconvert&amp;gt;-method)(…) |  |
+| static [All](#all-method-1-of-2))(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [Create](#create-method)(…) |  |
+| static [Create&lt;TConvert&gt;](#create&amp;lt;tconvert&amp;gt;-method)() | Returns a promise that is currently pending |
+| static [Rejected](#rejected-method)(…) | Convert an exception directly into a rejected promise. |
+| static [Resolved](#resolved-method)(…) | Convert a simple value directly into a resolved promise. |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [ClearHandlers](#ClearHandlers-method)() |  |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [ClearHandlers](#clearhandlers-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 
@@ -59,6 +59,39 @@ public static Promise Create()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Create method (2 of 3)
+
+```csharp
+public static IPromise<TPromised> Create(Action<Action<TPromised>, Action<Exception>> resolver)
+```
+
+| parameter | description |
+| --- | --- |
+| resolver |  |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Create&lt;TConvert&gt; method (3 of 3)
+
+Returns a promise that is currently pending
+
+```csharp
+public static Promise<TConvert> Create<TConvert>()
+```
+
+## See Also
+
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Resolved method
@@ -120,6 +153,35 @@ public IPromise Catch(Action<Exception> onRejected)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Catch method (2 of 3)
+
+```csharp
+public IPromise<TPromised> Catch(Func<Exception, TPromised> onRejected)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Catch&lt;TException&gt; method (3 of 3)
+
+```csharp
+public IPromise Catch<TException>(Action<TException> onRejected)
+    where TException : Exception
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Then method (1 of 7)
@@ -136,6 +198,95 @@ public IPromise<TPromised> Then(Action<TPromised> onResolved)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Then method (2 of 7)
+
+```csharp
+public IPromise<TPromised> Then(IPromise<TPromised> promise)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Then method (3 of 7)
+
+```csharp
+public IPromise<TPromised> Then(Action<TPromised> onResolved, Action<Exception> onRejected)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Then method (4 of 7)
+
+```csharp
+public IPromise Then(Func<TPromised, IPromise> onResolved, Action<Exception> onRejected)
+```
+
+## See Also
+
+* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Then&lt;TConvert&gt; method (5 of 7)
+
+```csharp
+public IPromise<TConvert> Then<TConvert>(Func<TPromised, IPromise<TConvert>> onResolved)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Then&lt;TConvert&gt; method (6 of 7)
+
+```csharp
+public IPromise<TConvert> Then<TConvert>(Func<TPromised, TConvert> transform)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Then&lt;TConvert&gt; method (7 of 7)
+
+```csharp
+public IPromise<TConvert> Then<TConvert>(Func<TPromised, IPromise<TConvert>> onResolved, 
+    Func<Exception, IPromise<TConvert>> onRejected)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ThenAll method (1 of 2)
@@ -152,6 +303,20 @@ public IPromise ThenAll(Func<TPromised, IEnumerable<IPromise>> chain)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# ThenAll&lt;TConvert&gt; method (2 of 2)
+
+```csharp
+public IPromise<IEnumerable<TConvert>> ThenAll<TConvert>(
+    Func<TPromised, IEnumerable<IPromise<TConvert>>> chain)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # All method (1 of 2)
@@ -171,6 +336,21 @@ public static IPromise<IEnumerable<TPromised>> All(
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# All method (2 of 2)
+
+Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results.
+
+```csharp
+public static IPromise<IEnumerable<TPromised>> All(params IPromise<TPromised>[] promises)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Finally method
@@ -201,6 +381,19 @@ public IPromise ContinueWith(Func<IPromise> onComplete)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# ContinueWith&lt;TConvert&gt; method (2 of 2)
+
+```csharp
+public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ClearHandlers method

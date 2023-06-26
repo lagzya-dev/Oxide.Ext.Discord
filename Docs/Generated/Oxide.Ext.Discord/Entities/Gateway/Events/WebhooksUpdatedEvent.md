@@ -10,9 +10,9 @@ public class WebhooksUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [WebhooksUpdatedEvent](#WebhooksUpdatedEvent-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | ID of the channel |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
+| [WebhooksUpdatedEvent](#webhooksupdatedevent-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | ID of the channel |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
 
 ## See Also
 

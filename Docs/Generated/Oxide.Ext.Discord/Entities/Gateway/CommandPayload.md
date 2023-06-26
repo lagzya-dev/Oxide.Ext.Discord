@@ -10,16 +10,16 @@ public class CommandPayload : BasePoolable
 
 | name | description |
 | --- | --- |
-| [CommandPayload](#CommandPayload-constructor)() | The default constructor. |
-| static [CreatePayload](#CreatePayload-method)(…) | Creates a [`CommandPayload`](./CommandPayload.md) for the web socket |
-| [OpCode](#OpCode-field) | Command Code for the payload |
-| [Payload](#Payload-field) | Payload data |
+| [CommandPayload](#commandpayload-constructor)() | The default constructor. |
+| static [CreatePayload](#createpayload-method)(…) | Creates a [`CommandPayload`](./CommandPayload.md) for the web socket |
+| [OpCode](#opcode-field) | Command Code for the payload |
+| [Payload](#payload-field) | Payload data |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

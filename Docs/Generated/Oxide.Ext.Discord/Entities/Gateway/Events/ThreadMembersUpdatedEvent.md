@@ -10,12 +10,12 @@ public class ThreadMembersUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [ThreadMembersUpdatedEvent](#ThreadMembersUpdatedEvent-constructor)() | The default constructor. |
-| [AddedMembers](#AddedMembers-property) { get; set; } | The users who were added to the thread |
-| [GuildId](#GuildId-property) { get; set; } | The ID of the guild |
-| [Id](#Id-property) { get; set; } | The id of the thread |
-| [MemberCount](#MemberCount-property) { get; set; } | The approximate number of members in the thread, capped at 50 |
-| [RemovedMemberIds](#RemovedMemberIds-property) { get; set; } | The id of the users who were removed from the thread |
+| [ThreadMembersUpdatedEvent](#threadmembersupdatedevent-constructor)() | The default constructor. |
+| [AddedMembers](#addedmembers-property) { get; set; } | The users who were added to the thread |
+| [GuildId](#guildid-property) { get; set; } | The ID of the guild |
+| [Id](#id-property) { get; set; } | The id of the thread |
+| [MemberCount](#membercount-property) { get; set; } | The approximate number of members in the thread, capped at 50 |
+| [RemovedMemberIds](#removedmemberids-property) { get; set; } | The id of the users who were removed from the thread |
 
 ## See Also
 

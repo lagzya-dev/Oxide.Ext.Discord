@@ -10,10 +10,10 @@ public class EmbedProvider
 
 | name | description |
 | --- | --- |
-| [EmbedProvider](#EmbedProvider-constructor)() | Embed Provider Constructor |
-| [EmbedProvider](#EmbedProvider-constructor)(…) | Embed Provider Constructor |
-| [Name](#Name-property) { get; set; } | Name of provider |
-| [Url](#Url-property) { get; set; } | Url of provider |
+| [EmbedProvider](#embedprovider-constructor)() | Embed Provider Constructor |
+| [EmbedProvider](#embedprovider-constructor)(…) | Embed Provider Constructor |
+| [Name](#name-property) { get; set; } | Name of provider |
+| [Url](#url-property) { get; set; } | Url of provider |
 
 ## See Also
 
@@ -37,6 +37,25 @@ public EmbedProvider()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedProvider constructor (2 of 2)
+
+Embed Provider Constructor
+
+```csharp
+public EmbedProvider(string name, string url)
+```
+
+| parameter | description |
+| --- | --- |
+| name |  |
+| url |  |
+
+## See Also
+
+* class [EmbedProvider](./EmbedProvider.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

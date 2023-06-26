@@ -10,10 +10,10 @@ public class UserModifyCurrent
 
 | name | description |
 | --- | --- |
-| [UserModifyCurrent](#UserModifyCurrent-constructor)() | The default constructor. |
-| [Avatar](#Avatar-property) { get; set; } | If passed, modifies the user's avatar |
-| [Username](#Username-property) { get; set; } | User's username, if changed may cause the user's discriminator to be randomized. |
-| [Validate](#Validate-method)() |  |
+| [UserModifyCurrent](#usermodifycurrent-constructor)() | The default constructor. |
+| [Avatar](#avatar-property) { get; set; } | If passed, modifies the user's avatar |
+| [Username](#username-property) { get; set; } | User's username, if changed may cause the user's discriminator to be randomized. |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

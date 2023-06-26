@@ -10,9 +10,9 @@ public abstract class BaseInteractionMessage : BaseMessageCreate
 
 | name | description |
 | --- | --- |
-| [BaseInteractionMessage](#BaseInteractionMessage-constructor)() | The default constructor. |
-| override [ValidateFlags](#ValidateFlags-method)() |  |
-| override [ValidateRequiredFields](#ValidateRequiredFields-method)() |  |
+| [BaseInteractionMessage](#baseinteractionmessage-constructor)() | The default constructor. |
+| override [ValidateFlags](#validateflags-method)() |  |
+| override [ValidateRequiredFields](#validaterequiredfields-method)() |  |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public static class RolePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Icon](#Icon-method)(…) | [`Icon`](../../../Entities/Permissions/DiscordRole/Icon.md) placeholder |
-| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Permissions/DiscordRole/Id.md) placeholder |
-| static [Mention](#Mention-method)(…) | [`Mention`](../../../Entities/Permissions/DiscordRole/Mention.md) placeholder |
-| static [Name](#Name-method)(…) | [`Name`](../../../Entities/Permissions/DiscordRole/Name.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Icon](#icon-method)(…) | [`Icon`](../../../Entities/Permissions/DiscordRole/Icon.md) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Permissions/DiscordRole/Id.md) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Permissions/DiscordRole/Mention.md) placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Permissions/DiscordRole/Name.md) placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

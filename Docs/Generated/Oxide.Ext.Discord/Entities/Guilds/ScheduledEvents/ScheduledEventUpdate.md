@@ -10,17 +10,17 @@ public class ScheduledEventUpdate
 
 | name | description |
 | --- | --- |
-| [ScheduledEventUpdate](#ScheduledEventUpdate-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The channel ID in which the scheduled event will be hosted, or null if [`scheduled entity type`](./ScheduledEventEntityType.md) is External |
-| [Description](#Description-property) { get; set; } | The description of the scheduled event (1-1000 characters) |
-| [EntityMetadata](#EntityMetadata-property) { get; set; } | Additional metadata for the guild scheduled event |
-| [EntityType](#EntityType-property) { get; set; } | The type of the scheduled event |
-| [Name](#Name-property) { get; set; } | The name of the scheduled event (1-100 characters) |
-| [PrivacyLevel](#PrivacyLevel-property) { get; set; } | The privacy level of the scheduled event |
-| [ScheduledEndTime](#ScheduledEndTime-property) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType.md) is EXTERNAL |
-| [ScheduledStartTime](#ScheduledStartTime-property) { get; set; } | The time the scheduled event will start |
-| [Status](#Status-property) { get; set; } | The status of the scheduled event |
-| [Validate](#Validate-method)() |  |
+| [ScheduledEventUpdate](#scheduledeventupdate-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The channel ID in which the scheduled event will be hosted, or null if [`scheduled entity type`](./ScheduledEventEntityType.md) is External |
+| [Description](#description-property) { get; set; } | The description of the scheduled event (1-1000 characters) |
+| [EntityMetadata](#entitymetadata-property) { get; set; } | Additional metadata for the guild scheduled event |
+| [EntityType](#entitytype-property) { get; set; } | The type of the scheduled event |
+| [Name](#name-property) { get; set; } | The name of the scheduled event (1-100 characters) |
+| [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the scheduled event |
+| [ScheduledEndTime](#scheduledendtime-property) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType.md) is EXTERNAL |
+| [ScheduledStartTime](#scheduledstarttime-property) { get; set; } | The time the scheduled event will start |
+| [Status](#status-property) { get; set; } | The status of the scheduled event |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

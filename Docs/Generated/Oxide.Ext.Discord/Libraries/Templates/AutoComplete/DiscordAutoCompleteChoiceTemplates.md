@@ -11,18 +11,18 @@ public class DiscordAutoCompleteChoiceTemplates :
 
 | name | description |
 | --- | --- |
-| [DiscordAutoCompleteChoiceTemplates](#DiscordAutoCompleteChoiceTemplates-constructor)(…) | Constructor |
-| [ApplyGlobal](#ApplyGlobal-method)(…) | Applies a Global Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders |
-| [ApplyLocalized](#ApplyLocalized-method)(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
-| [GetGlobalTemplate](#GetGlobalTemplate-method)(…) | Returns a global Auto Complete Template for the given plugin and template name |
-| [RegisterGlobalTemplate](#RegisterGlobalTemplate-method)(…) | Registers a global template for Auto Complete Choices |
-| [RegisterLocalizedTemplate](#RegisterLocalizedTemplate-method)(…) | Registers a global template for Auto Complete Choices |
+| [DiscordAutoCompleteChoiceTemplates](#discordautocompletechoicetemplates-constructor)(…) | Constructor |
+| [ApplyGlobal](#applyglobal-method)(…) | Applies a Global Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders |
+| [ApplyLocalized](#applylocalized-method-1-of-2))(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
+| [GetGlobalTemplate](#getglobaltemplate-method)(…) | Returns a global Auto Complete Template for the given plugin and template name |
+| [RegisterGlobalTemplate](#registerglobaltemplate-method)(…) | Registers a global template for Auto Complete Choices |
+| [RegisterLocalizedTemplate](#registerlocalizedtemplate-method)(…) | Registers a global template for Auto Complete Choices |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 
@@ -185,6 +185,39 @@ public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName,
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# ApplyLocalized method (2 of 2)
+
+Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders
+
+```csharp
+public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, 
+    DiscordInteraction interaction, CommandOptionChoice choice = null, 
+    PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin for the template |
+| templateName | Name of the template |
+| interaction | Interaction for the localization |
+| choice | Choice to be applied to |
+| placeholders | Placeholders to apply |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if plugin or templateName is null/empty |
+
+## See Also
+
+* class [CommandOptionChoice](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md)
+* class [DiscordInteraction](../../../Entities/Interactions/DiscordInteraction.md)
+* class [PlaceholderData](../../Placeholders/PlaceholderData.md)
+* class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.AutoComplete](./AutoCompleteNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # OnPluginUnloaded method

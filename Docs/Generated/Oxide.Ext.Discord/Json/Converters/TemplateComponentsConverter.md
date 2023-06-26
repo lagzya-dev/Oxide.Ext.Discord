@@ -10,11 +10,11 @@ public class TemplateComponentsConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [TemplateComponentsConverter](#TemplateComponentsConverter-constructor)() | The default constructor. |
-| override [CanWrite](#CanWrite-property) { get; } | Message Component Convert does not write JSON |
-| override [CanConvert](#CanConvert-method)(…) | Returns if this can convert the value |
-| override [ReadJson](#ReadJson-method)(…) | Populate the correct types in components instead of just the BaseComponent |
-| override [WriteJson](#WriteJson-method)(…) | Ignored as we don't write JSON |
+| [TemplateComponentsConverter](#templatecomponentsconverter-constructor)() | The default constructor. |
+| override [CanWrite](#canwrite-property) { get; } | Message Component Convert does not write JSON |
+| override [CanConvert](#canconvert-method)(…) | Returns if this can convert the value |
+| override [ReadJson](#readjson-method)(…) | Populate the correct types in components instead of just the BaseComponent |
+| override [WriteJson](#writejson-method)(…) | Ignored as we don't write JSON |
 
 ## See Also
 

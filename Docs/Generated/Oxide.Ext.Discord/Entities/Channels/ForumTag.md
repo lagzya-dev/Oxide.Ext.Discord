@@ -10,13 +10,13 @@ public class ForumTag : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [ForumTag](#ForumTag-constructor)() | The default constructor. |
-| [EmojiId](#EmojiId-property) { get; set; } | The id of a guild's custom emoji |
-| [EmojiName](#EmojiName-property) { get; set; } | The unicode character of the emoji |
-| [Id](#Id-property) { get; set; } | The id of the tag |
-| [Moderated](#Moderated-property) { get; set; } | Whether this tag can only be added to or removed from threads by a member with the MANAGE_THREADS permission |
-| [Name](#Name-property) { get; set; } | The name of the tag (0-20 characters) |
-| [Validate](#Validate-method)() |  |
+| [ForumTag](#forumtag-constructor)() | The default constructor. |
+| [EmojiId](#emojiid-property) { get; set; } | The id of a guild's custom emoji |
+| [EmojiName](#emojiname-property) { get; set; } | The unicode character of the emoji |
+| [Id](#id-property) { get; set; } | The id of the tag |
+| [Moderated](#moderated-property) { get; set; } | Whether this tag can only be added to or removed from threads by a member with the MANAGE_THREADS permission |
+| [Name](#name-property) { get; set; } | The name of the tag (0-20 characters) |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

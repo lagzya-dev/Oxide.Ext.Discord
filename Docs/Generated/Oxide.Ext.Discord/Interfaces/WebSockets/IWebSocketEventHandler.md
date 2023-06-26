@@ -10,10 +10,10 @@ public interface IWebSocketEventHandler
 
 | name | description |
 | --- | --- |
-| [SocketClosed](#SocketClosed-method)(…) | Called when the web socket is closed |
-| [SocketErrored](#SocketErrored-method)(…) | Called when an error occurs on the web socket |
-| [SocketMessage](#SocketMessage-method)(…) | Called when a message is received from the websocket |
-| [SocketOpened](#SocketOpened-method)(…) | Called when the web socket is opened |
+| [SocketClosed](#socketclosed-method)(…) | Called when the web socket is closed |
+| [SocketErrored](#socketerrored-method)(…) | Called when an error occurs on the web socket |
+| [SocketMessage](#socketmessage-method)(…) | Called when a message is received from the websocket |
+| [SocketOpened](#socketopened-method)(…) | Called when the web socket is opened |
 
 ## See Also
 

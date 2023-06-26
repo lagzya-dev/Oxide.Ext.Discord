@@ -10,12 +10,12 @@ public class EmbedThumbnail
 
 | name | description |
 | --- | --- |
-| [EmbedThumbnail](#EmbedThumbnail-constructor)() | Embed Thumbnail constructor |
-| [EmbedThumbnail](#EmbedThumbnail-constructor)(…) | Embed Thumbnail constructor |
-| [Height](#Height-property) { get; set; } | Height of thumbnail |
-| [ProxyUrl](#ProxyUrl-property) { get; set; } | A proxied url of the thumbnail |
-| [Url](#Url-property) { get; set; } | Source url of thumbnail (only supports http(s) and attachments) |
-| [Width](#Width-property) { get; set; } | Width of thumbnail |
+| [EmbedThumbnail](#embedthumbnail-constructor)() | Embed Thumbnail constructor |
+| [EmbedThumbnail](#embedthumbnail-constructor)(…) | Embed Thumbnail constructor |
+| [Height](#height-property) { get; set; } | Height of thumbnail |
+| [ProxyUrl](#proxyurl-property) { get; set; } | A proxied url of the thumbnail |
+| [Url](#url-property) { get; set; } | Source url of thumbnail (only supports http(s) and attachments) |
+| [Width](#width-property) { get; set; } | Width of thumbnail |
 
 ## See Also
 
@@ -39,6 +39,27 @@ public EmbedThumbnail()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedThumbnail constructor (2 of 2)
+
+Embed Thumbnail constructor
+
+```csharp
+public EmbedThumbnail(string url, int? height = null, int? width = null, string proxyUrl = null)
+```
+
+| parameter | description |
+| --- | --- |
+| url |  |
+| height |  |
+| width |  |
+| proxyUrl |  |
+
+## See Also
+
+* class [EmbedThumbnail](./EmbedThumbnail.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Url property

@@ -10,14 +10,14 @@ public class GatewayReadyEvent
 
 | name | description |
 | --- | --- |
-| [GatewayReadyEvent](#GatewayReadyEvent-constructor)() | The default constructor. |
-| [Application](#Application-property) { get; set; } | Contains id and flags See [`Application`](./GatewayReadyEvent/Application.md) |
-| [Guilds](#Guilds-property) { get; set; } | The guilds the user is in |
-| [ResumeSessionUrl](#ResumeSessionUrl-property) { get; set; } | Websocket URL to use when resuming the session |
-| [SessionId](#SessionId-property) { get; set; } | Used for resuming connections |
-| [Shard](#Shard-property) { get; set; } | The shard information associated with this session, if sent when identifying |
-| [User](#User-property) { get; set; } | Information about the user including email See [`DiscordUser`](../../Users/DiscordUser.md) |
-| [Version](#Version-property) { get; set; } | Gateway version See [Gateway Version](https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions) |
+| [GatewayReadyEvent](#gatewayreadyevent-constructor)() | The default constructor. |
+| [Application](#application-property) { get; set; } | Contains id and flags See [`Application`](./GatewayReadyEvent/Application.md) |
+| [Guilds](#guilds-property) { get; set; } | The guilds the user is in |
+| [ResumeSessionUrl](#resumesessionurl-property) { get; set; } | Websocket URL to use when resuming the session |
+| [SessionId](#sessionid-property) { get; set; } | Used for resuming connections |
+| [Shard](#shard-property) { get; set; } | The shard information associated with this session, if sent when identifying |
+| [User](#user-property) { get; set; } | Information about the user including email See [`DiscordUser`](../../Users/DiscordUser.md) |
+| [Version](#version-property) { get; set; } | Gateway version See [Gateway Version](https://discord.com/developers/docs/topics/gateway#gateways-gateway-versions) |
 
 ## See Also
 

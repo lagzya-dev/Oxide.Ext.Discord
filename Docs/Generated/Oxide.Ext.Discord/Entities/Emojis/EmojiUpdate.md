@@ -10,10 +10,10 @@ public class EmojiUpdate
 
 | name | description |
 | --- | --- |
-| [EmojiUpdate](#EmojiUpdate-constructor)() | The default constructor. |
-| [Name](#Name-property) { get; set; } | Emoji name |
-| [Roles](#Roles-property) { get; set; } | Roles this emoji is whitelisted to |
-| [Validate](#Validate-method)() |  |
+| [EmojiUpdate](#emojiupdate-constructor)() | The default constructor. |
+| [Name](#name-property) { get; set; } | Emoji name |
+| [Roles](#roles-property) { get; set; } | Roles this emoji is whitelisted to |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

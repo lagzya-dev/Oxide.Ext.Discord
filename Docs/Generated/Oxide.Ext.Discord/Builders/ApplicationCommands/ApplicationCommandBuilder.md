@@ -10,19 +10,19 @@ public class ApplicationCommandBuilder
 
 | name | description |
 | --- | --- |
-| [ApplicationCommandBuilder](#ApplicationCommandBuilder-constructor)(…) | Creates a new Application Command Builder (2 constructors) |
-| readonly [CommandName](#CommandName-field) | The Name of the command |
-| [AddDefaultPermissions](#AddDefaultPermissions-method)(…) | Adds default command permissions |
-| [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Description Localizations |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Command Name Localizations |
-| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
-| [AddOption](#AddOption-method)(…) | Adds a command option. |
-| [AddSubCommand](#AddSubCommand-method)(…) | Adds a sub command to the root command |
-| [AddSubCommandGroup](#AddSubCommandGroup-method)(…) | Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain |
-| [AllowInDirectMessages](#AllowInDirectMessages-method)(…) | Allows the command to be used in a direct message |
-| [Build](#Build-method)() | Returns the created command |
-| [BuildCommandLocalization](#BuildCommandLocalization-method)(…) | Returns a built [`DiscordCommandLocalization`](../../Libraries/Templates/Commands/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
+| [ApplicationCommandBuilder](#applicationcommandbuilder-constructor-1-of-2))(…) | Creates a new Application Command Builder (2 constructors) |
+| readonly [CommandName](#commandname-field) | The Name of the command |
+| [AddDefaultPermissions](#adddefaultpermissions-method)(…) | Adds default command permissions |
+| [AddDescriptionLocalization](#adddescriptionlocalization-method)(…) | Adds Application Command Description Localizations |
+| [AddDescriptionLocalizations](#adddescriptionlocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#addnamelocalization-method)(…) | Adds Application Command Name Localizations |
+| [AddNameLocalizations](#addnamelocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AddOption](#addoption-method)(…) | Adds a command option. |
+| [AddSubCommand](#addsubcommand-method)(…) | Adds a sub command to the root command |
+| [AddSubCommandGroup](#addsubcommandgroup-method)(…) | Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain |
+| [AllowInDirectMessages](#allowindirectmessages-method)(…) | Allows the command to be used in a direct message |
+| [Build](#build-method)() | Returns the created command |
+| [BuildCommandLocalization](#buildcommandlocalization-method)(…) | Returns a built [`DiscordCommandLocalization`](../../Libraries/Templates/Commands/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
 
 ## See Also
 
@@ -312,6 +312,30 @@ public ApplicationCommandBuilder(string name, string description, ApplicationCom
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# ApplicationCommandBuilder constructor (2 of 2)
+
+Creates a new Application Command Builder
+
+```csharp
+public ApplicationCommandBuilder(string name, string description, ApplicationCommandType type, 
+    ServerLocale defaultLanguage)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the command |
+| description | Description of the command |
+| type | Command type |
+| defaultLanguage | Language the application command is being created in |
+
+## See Also
+
+* enum [ApplicationCommandType](../../Entities/Interactions/ApplicationCommands/ApplicationCommandType.md)
+* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # CommandName field

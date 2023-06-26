@@ -15,7 +15,7 @@ public abstract class BaseDiscordLibrary<TLibrary> : BaseDiscordLibrary
 
 | name | description |
 | --- | --- |
-| [BaseDiscordLibrary](#BaseDiscordLibrary-constructor)() | Constructor |
+| [BaseDiscordLibrary](#basediscordlibrary&amp;lt;tlibrary&amp;gt;-constructor)() | Constructor |
 
 ## See Also
 

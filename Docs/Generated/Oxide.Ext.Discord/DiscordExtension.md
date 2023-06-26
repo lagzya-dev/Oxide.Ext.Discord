@@ -10,12 +10,12 @@ public class DiscordExtension : Extension
 
 | name | description |
 | --- | --- |
-| [DiscordExtension](#DiscordExtension-constructor)(…) | Constructor for the extension |
-| override [Author](#Author-property) { get; } | Authors for the extension |
-| override [Name](#Name-property) { get; } | Name of the extension |
-| override [Version](#Version-property) { get; } | Version number used by oxide |
-| override [OnModLoad](#OnModLoad-method)() | Called when mod is loaded |
-| override [OnShutdown](#OnShutdown-method)() | Called when server is shutdown |
+| [DiscordExtension](#discordextension-constructor)(…) | Constructor for the extension |
+| override [Author](#author-property) { get; } | Authors for the extension |
+| override [Name](#name-property) { get; } | Name of the extension |
+| override [Version](#version-property) { get; } | Version number used by oxide |
+| override [OnModLoad](#onmodload-method)() | Called when mod is loaded |
+| override [OnShutdown](#onshutdown-method)() | Called when server is shutdown |
 
 ## See Also
 

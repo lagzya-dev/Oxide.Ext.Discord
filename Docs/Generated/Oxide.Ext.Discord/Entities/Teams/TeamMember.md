@@ -10,11 +10,11 @@ public class TeamMember
 
 | name | description |
 | --- | --- |
-| [TeamMember](#TeamMember-constructor)() | The default constructor. |
-| [MembershipState](#MembershipState-property) { get; set; } | The user's membership state on the team |
-| [Permissions](#Permissions-property) { get; set; } | The teams permissions Will always be ["*"] |
-| [TeamId](#TeamId-property) { get; set; } | The id of the parent team of which they are a member |
-| [User](#User-property) { get; set; } | The avatar, discriminator, id, and username of the user |
+| [TeamMember](#teammember-constructor)() | The default constructor. |
+| [MembershipState](#membershipstate-property) { get; set; } | The user's membership state on the team |
+| [Permissions](#permissions-property) { get; set; } | The teams permissions Will always be ["*"] |
+| [TeamId](#teamid-property) { get; set; } | The id of the parent team of which they are a member |
+| [User](#user-property) { get; set; } | The avatar, discriminator, id, and username of the user |
 
 ## See Also
 

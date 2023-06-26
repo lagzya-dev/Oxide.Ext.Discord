@@ -10,11 +10,11 @@ public class GuildPruneGet : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [GuildPruneGet](#GuildPruneGet-constructor)() | The default constructor. |
-| [Days](#Days-property) { get; set; } | Number of days to count prune for (1 - 30) |
-| [IncludeRoles](#IncludeRoles-property) { get; set; } | List of roles to include |
-| virtual [ToQueryString](#ToQueryString-method)() |  |
-| [Validate](#Validate-method)() |  |
+| [GuildPruneGet](#guildpruneget-constructor)() | The default constructor. |
+| [Days](#days-property) { get; set; } | Number of days to count prune for (1 - 30) |
+| [IncludeRoles](#includeroles-property) { get; set; } | List of roles to include |
+| virtual [ToQueryString](#toquerystring-method)() |  |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

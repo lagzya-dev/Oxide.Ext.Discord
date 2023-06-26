@@ -10,22 +10,22 @@ public class DiscordLocales : BaseDiscordLibrary<DiscordLocales>
 
 | name | description |
 | --- | --- |
-| [ServerLanguage](#ServerLanguage-property) { get; } | Returns the Oxide Server language |
-| [AddDiscordLocale](#AddDiscordLocale-method)(…) | Adds a one way [`DiscordLocale`](./DiscordLocale.md) -&gt; [`ServerLocale`](./ServerLocale.md) mapping |
-| [AddOxideLocale](#AddOxideLocale-method)(…) | Adds a one way [`ServerLocale`](./ServerLocale.md) -&gt; [`DiscordLocale`](./DiscordLocale.md) mapping |
-| [Contains](#Contains-method)(…) | Returns if the [`ServerLocale`](./ServerLocale.md) mapping exists (2 methods) |
-| [GetDiscordInteractionLangMessage](#GetDiscordInteractionLangMessage-method)(…) | Retrieves the lang message for a Discord Interaction (2 methods) |
-| [GetDiscordLocale](#GetDiscordLocale-method)(…) | Returns the discord locale for a given oxide locale |
-| [GetDiscordLocalizations](#GetDiscordLocalizations-method)(…) | Returns all the discord localizations for a specific lang key in a plugin |
-| [GetPlayerLanguage](#GetPlayerLanguage-method)(…) | Returns the oxide locale for the given IPlayer (2 methods) |
-| [GetServerLanguage](#GetServerLanguage-method)(…) | Returns the oxide locale for a given discord locale |
-| const [DefaultServerLanguage](#DefaultServerLanguage-field) | Default Oxide Lang (English) |
+| [ServerLanguage](#serverlanguage-property) { get; } | Returns the Oxide Server language |
+| [AddDiscordLocale](#adddiscordlocale-method)(…) | Adds a one way [`DiscordLocale`](./DiscordLocale.md) -&gt; [`ServerLocale`](./ServerLocale.md) mapping |
+| [AddOxideLocale](#addoxidelocale-method)(…) | Adds a one way [`ServerLocale`](./ServerLocale.md) -&gt; [`DiscordLocale`](./DiscordLocale.md) mapping |
+| [Contains](#contains-method-1-of-2))(…) | Returns if the [`ServerLocale`](./ServerLocale.md) mapping exists (2 methods) |
+| [GetDiscordInteractionLangMessage](#getdiscordinteractionlangmessage-method-1-of-2))(…) | Retrieves the lang message for a Discord Interaction (2 methods) |
+| [GetDiscordLocale](#getdiscordlocale-method)(…) | Returns the discord locale for a given oxide locale |
+| [GetDiscordLocalizations](#getdiscordlocalizations-method)(…) | Returns all the discord localizations for a specific lang key in a plugin |
+| [GetPlayerLanguage](#getplayerlanguage-method-1-of-2))(…) | Returns the oxide locale for the given IPlayer (2 methods) |
+| [GetServerLanguage](#getserverlanguage-method)(…) | Returns the oxide locale for a given discord locale |
+| const [DefaultServerLanguage](#defaultserverlanguage-field) | Default Oxide Lang (English) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 
@@ -99,6 +99,25 @@ public bool Contains(DiscordLocale locale)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Contains method (2 of 2)
+
+Returns if the [`ServerLocale`](./ServerLocale.md) mapping exists
+
+```csharp
+public bool Contains(ServerLocale locale)
+```
+
+| parameter | description |
+| --- | --- |
+| locale |  |
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* class [DiscordLocales](./DiscordLocales.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetServerLanguage method
@@ -175,6 +194,29 @@ Locale for the given IPlayer
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetPlayerLanguage method (2 of 2)
+
+Returns the oxide locale for the given playerId
+
+```csharp
+public ServerLocale GetPlayerLanguage(string playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | PlayerId to get the locale for |
+
+## Return Value
+
+Locale for the given playerId
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* class [DiscordLocales](./DiscordLocales.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetDiscordLocalizations method
@@ -230,6 +272,39 @@ Localized message if found; Empty string otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetDiscordInteractionLangMessage method (2 of 2)
+
+Retrieves the lang message for a Discord Interaction
+
+```csharp
+public string GetDiscordInteractionLangMessage(Plugin plugin, DiscordInteraction interaction, 
+    string langKey, params object[] args)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin the lang is from |
+| interaction | The interaction to be localized |
+| langKey | The lang key to lookup |
+| args | Localization formatting args |
+
+## Return Value
+
+Localized message if found; Empty string otherwise
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if any of the input arguments are null |
+
+## See Also
+
+* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
+* class [DiscordLocales](./DiscordLocales.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # OnPluginUnloaded method

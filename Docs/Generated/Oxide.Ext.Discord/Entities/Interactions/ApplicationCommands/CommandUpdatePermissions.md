@@ -10,8 +10,8 @@ public class CommandUpdatePermissions
 
 | name | description |
 | --- | --- |
-| [CommandUpdatePermissions](#CommandUpdatePermissions-constructor)() | The default constructor. |
-| [Permissions](#Permissions-property) { get; set; } | Permissions for the command in the guild |
+| [CommandUpdatePermissions](#commandupdatepermissions-constructor)() | The default constructor. |
+| [Permissions](#permissions-property) { get; set; } | Permissions for the command in the guild |
 
 ## See Also
 

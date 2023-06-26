@@ -10,29 +10,29 @@ public static class DiscordCdn
 
 | name | description |
 | --- | --- |
-| const [CdnUrl](#CdnUrl-field) | Base CDN Url |
-| static [GetAchievementIconUrl](#GetAchievementIconUrl-method)(…) | Returns the Url of the Achievement Icon |
-| static [GetApplicationAssetUrl](#GetApplicationAssetUrl-method)(…) | Returns the applications asset icon url |
-| static [GetApplicationCoverUrl](#GetApplicationCoverUrl-method)(…) | Returns the url to the application cover |
-| static [GetApplicationIconUrl](#GetApplicationIconUrl-method)(…) | Returns the url to the application icon |
-| static [GetChannelIcon](#GetChannelIcon-method)(…) | Returns the icon for a given channel |
-| static [GetCustomEmojiUrl](#GetCustomEmojiUrl-method)(…) | Returns the Url to the custom emoji |
-| static [GetExtension](#GetExtension-method)(…) | Returns the extension to use for the image |
-| static [GetGuildBannerUrl](#GetGuildBannerUrl-method)(…) | Returns the Url of the Guild Banner |
-| static [GetGuildDiscoverySplashUrl](#GetGuildDiscoverySplashUrl-method)(…) | Return the Url of the Guild Discovery Splash |
-| static [GetGuildIconUrl](#GetGuildIconUrl-method)(…) | Returns the Url to the Guild Icon |
-| static [GetGuildMemberAvatar](#GetGuildMemberAvatar-method)(…) | Returns the Url of the Guild Member avatar |
-| static [GetGuildMemberBanner](#GetGuildMemberBanner-method)(…) | Returns the guild member banner for the given guild / user ID |
-| static [GetGuildScheduledEventCover](#GetGuildScheduledEventCover-method)(…) | Returns the guild schedule event cover icon with the given ID |
-| static [GetGuildSplashUrl](#GetGuildSplashUrl-method)(…) | Returns the Url of the Guild Splash |
-| static [GetRoleIcon](#GetRoleIcon-method)(…) | Returns the sticker url with the given ID |
-| static [GetSticker](#GetSticker-method)(…) | Returns the sticker url with the given ID |
-| static [GetStickerPackBanner](#GetStickerPackBanner-method)(…) | Returns the banner for a given sticker pack |
-| static [GetStorePageAssetUrl](#GetStorePageAssetUrl-method)(…) | Returns the Store Page Asset Url |
-| static [GetTeamIconUrl](#GetTeamIconUrl-method)(…) | Returns the Url of the Team Icon |
-| static [GetUserAvatarUrl](#GetUserAvatarUrl-method)(…) | Returns the Url of the users avatar |
-| static [GetUserBanner](#GetUserBanner-method)(…) | Returns the Url of the User Banner |
-| static [GetUserDefaultAvatarUrl](#GetUserDefaultAvatarUrl-method)(…) | Returns the Url of the users default avatar |
+| const [CdnUrl](#cdnurl-field) | Base CDN Url |
+| static [GetAchievementIconUrl](#getachievementiconurl-method)(…) | Returns the Url of the Achievement Icon |
+| static [GetApplicationAssetUrl](#getapplicationasseturl-method)(…) | Returns the applications asset icon url |
+| static [GetApplicationCoverUrl](#getapplicationcoverurl-method)(…) | Returns the url to the application cover |
+| static [GetApplicationIconUrl](#getapplicationiconurl-method)(…) | Returns the url to the application icon |
+| static [GetChannelIcon](#getchannelicon-method)(…) | Returns the icon for a given channel |
+| static [GetCustomEmojiUrl](#getcustomemojiurl-method)(…) | Returns the Url to the custom emoji |
+| static [GetExtension](#getextension-method)(…) | Returns the extension to use for the image |
+| static [GetGuildBannerUrl](#getguildbannerurl-method)(…) | Returns the Url of the Guild Banner |
+| static [GetGuildDiscoverySplashUrl](#getguilddiscoverysplashurl-method)(…) | Return the Url of the Guild Discovery Splash |
+| static [GetGuildIconUrl](#getguildiconurl-method)(…) | Returns the Url to the Guild Icon |
+| static [GetGuildMemberAvatar](#getguildmemberavatar-method)(…) | Returns the Url of the Guild Member avatar |
+| static [GetGuildMemberBanner](#getguildmemberbanner-method)(…) | Returns the guild member banner for the given guild / user ID |
+| static [GetGuildScheduledEventCover](#getguildscheduledeventcover-method)(…) | Returns the guild schedule event cover icon with the given ID |
+| static [GetGuildSplashUrl](#getguildsplashurl-method)(…) | Returns the Url of the Guild Splash |
+| static [GetRoleIcon](#getroleicon-method)(…) | Returns the sticker url with the given ID |
+| static [GetSticker](#getsticker-method)(…) | Returns the sticker url with the given ID |
+| static [GetStickerPackBanner](#getstickerpackbanner-method)(…) | Returns the banner for a given sticker pack |
+| static [GetStorePageAssetUrl](#getstorepageasseturl-method)(…) | Returns the Store Page Asset Url |
+| static [GetTeamIconUrl](#getteamiconurl-method)(…) | Returns the Url of the Team Icon |
+| static [GetUserAvatarUrl](#getuseravatarurl-method)(…) | Returns the Url of the users avatar |
+| static [GetUserBanner](#getuserbanner-method)(…) | Returns the Url of the User Banner |
+| static [GetUserDefaultAvatarUrl](#getuserdefaultavatarurl-method)(…) | Returns the Url of the users default avatar |
 
 ## See Also
 

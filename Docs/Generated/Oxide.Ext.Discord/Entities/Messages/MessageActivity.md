@@ -10,9 +10,9 @@ public class MessageActivity
 
 | name | description |
 | --- | --- |
-| [MessageActivity](#MessageActivity-constructor)() | The default constructor. |
-| [PartyId](#PartyId-property) { get; set; } | Party ID from a Rich Presence event |
-| [Type](#Type-property) { get; set; } | Type of message activity [`MessageActivityType`](./MessageActivityType.md) |
+| [MessageActivity](#messageactivity-constructor)() | The default constructor. |
+| [PartyId](#partyid-property) { get; set; } | Party ID from a Rich Presence event |
+| [Type](#type-property) { get; set; } | Type of message activity [`MessageActivityType`](./MessageActivityType.md) |
 
 ## See Also
 

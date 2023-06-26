@@ -10,11 +10,11 @@ public static class ApplicationCommandPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder |
-| static [Mention](#Mention-method)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder |
-| static [MentionCustom](#MentionCustom-method)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder |
-| static [Name](#Name-method)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder |
+| static [MentionCustom](#mentioncustom-method)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

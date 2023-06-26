@@ -10,17 +10,17 @@ public class Connection
 
 | name | description |
 | --- | --- |
-| [Connection](#Connection-constructor)() | The default constructor. |
-| [FriendSync](#FriendSync-property) { get; set; } | Whether friend sync is enabled for this connection |
-| [Id](#Id-property) { get; set; } | ID of the connection account |
-| [Integrations](#Integrations-property) { get; set; } | An array of partial server integrations [`Integration`](../../Integrations/Integration.md) |
-| [Name](#Name-property) { get; set; } | The username of the connection account |
-| [Revoked](#Revoked-property) { get; set; } | Whether the connection is revoked |
-| [ShowActivity](#ShowActivity-property) { get; set; } | Whether activities related to this connection will be shown in presence updates |
-| [TwoWayLink](#TwoWayLink-property) { get; set; } | Whether this connection has a corresponding third party OAuth2 token |
-| [Type](#Type-property) { get; set; } | The service of the connection (twitch, youtube) [`ConnectionType`](./ConnectionType.md) |
-| [Verified](#Verified-property) { get; set; } | Whether the connection is verified |
-| [Visibility](#Visibility-property) { get; set; } | Visibility of this connection [`ConnectionVisibilityType`](./ConnectionVisibilityType.md) |
+| [Connection](#connection-constructor)() | The default constructor. |
+| [FriendSync](#friendsync-property) { get; set; } | Whether friend sync is enabled for this connection |
+| [Id](#id-property) { get; set; } | ID of the connection account |
+| [Integrations](#integrations-property) { get; set; } | An array of partial server integrations [`Integration`](../../Integrations/Integration.md) |
+| [Name](#name-property) { get; set; } | The username of the connection account |
+| [Revoked](#revoked-property) { get; set; } | Whether the connection is revoked |
+| [ShowActivity](#showactivity-property) { get; set; } | Whether activities related to this connection will be shown in presence updates |
+| [TwoWayLink](#twowaylink-property) { get; set; } | Whether this connection has a corresponding third party OAuth2 token |
+| [Type](#type-property) { get; set; } | The service of the connection (twitch, youtube) [`ConnectionType`](./ConnectionType.md) |
+| [Verified](#verified-property) { get; set; } | Whether the connection is verified |
+| [Visibility](#visibility-property) { get; set; } | Visibility of this connection [`ConnectionVisibilityType`](./ConnectionVisibilityType.md) |
 
 ## See Also
 

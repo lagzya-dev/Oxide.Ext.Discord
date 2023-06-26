@@ -10,18 +10,18 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 
 | name | description |
 | --- | --- |
-| [CreateData](#CreateData-method)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
-| [ProcessPlaceholders](#ProcessPlaceholders-method)(…) | Process placeholders for the given Text |
-| [RegisterPlaceholder](#RegisterPlaceholder-method)(…) | Registers a placeholder static value placeholder |
-| [RegisterPlaceholder&lt;TResult&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder |
-| [RegisterPlaceholder&lt;TData&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder that uses the dataKey value |
-| [RegisterPlaceholder&lt;TData,TResult&gt;](#RegisterPlaceholder-method)(…) | Registers a placeholder of type {T} (4 methods) |
+| [CreateData](#createdata-method)(…) | Creates Pooled [`PlaceholderData`](./PlaceholderData.md) |
+| [ProcessPlaceholders](#processplaceholders-method)(…) | Process placeholders for the given Text |
+| [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder |
+| [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder |
+| [RegisterPlaceholder&lt;TData&gt;](#registerplaceholder&amp;lt;tdata&amp;gt;-method)(…) | Registers a placeholder that uses the dataKey value |
+| [RegisterPlaceholder&lt;TData,TResult&gt;](#registerplaceholder&amp;lt;tdata,tresult&amp;gt;-method-1-of-4))(…) | Registers a placeholder of type {T} (4 methods) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 
@@ -103,6 +103,189 @@ public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# RegisterPlaceholder&lt;TResult&gt; method (2 of 7)
+
+Registers a placeholder
+
+```csharp
+public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func<TResult> callback)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| callback | Callback Method for the placeholder |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# RegisterPlaceholder&lt;TData&gt; method (3 of 7)
+
+Registers a placeholder that uses the dataKey value
+
+```csharp
+public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string dataKey)
+```
+
+| parameter | description |
+| --- | --- |
+| TData | Type that is registered in the PlaceholderData |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| dataKey |  |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if placeholder or plugin is null |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# RegisterPlaceholder&lt;TData,TResult&gt; method (4 of 7)
+
+Registers a placeholder of type {T}
+
+```csharp
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
+    Func<PlaceholderState, TData, TResult> callback)
+```
+
+| parameter | description |
+| --- | --- |
+| TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| callback | Callback Method for the placeholder |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* class [PlaceholderState](./PlaceholderState.md)
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# RegisterPlaceholder&lt;TData,TResult&gt; method (5 of 7)
+
+Registers a placeholder of type {T}
+
+```csharp
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
+    Func<TData, TResult> callback)
+```
+
+| parameter | description |
+| --- | --- |
+| TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| callback | Callback Method for the placeholder |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# RegisterPlaceholder&lt;TData,TResult&gt; method (6 of 7)
+
+Registers a placeholder of type {T}
+
+```csharp
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 
+    Func<PlaceholderState, TData, TResult> callback)
+```
+
+| parameter | description |
+| --- | --- |
+| TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| dataKey | The name of the data key in PlaceholderData |
+| callback | Callback Method for the placeholder |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* class [PlaceholderState](./PlaceholderState.md)
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# RegisterPlaceholder&lt;TData,TResult&gt; method (7 of 7)
+
+Registers a placeholder of type {T}
+
+```csharp
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 
+    Func<TData, TResult> callback)
+```
+
+| parameter | description |
+| --- | --- |
+| TData | Type of the data key |
+| TResult | The return type of the placeholder callback |
+| plugin | Plugin this placeholder is for |
+| placeholder | Placeholder string |
+| dataKey | The name of the data key in PlaceholderData |
+| callback | Callback Method for the placeholder |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException |  |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # OnPluginUnloaded method

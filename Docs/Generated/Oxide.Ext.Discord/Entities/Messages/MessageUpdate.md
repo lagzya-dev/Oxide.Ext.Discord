@@ -10,17 +10,17 @@ public class MessageUpdate : IDiscordMessageTemplate, IFileAttachments
 
 | name | description |
 | --- | --- |
-| [MessageUpdate](#MessageUpdate-constructor)() | Constructor |
-| [MessageUpdate](#MessageUpdate-constructor)(…) | Constructor for message to be edited Only sets the Attachments field |
-| [AllowedMentions](#AllowedMentions-property) { get; set; } | Allowed mentions for the message |
-| [Attachments](#Attachments-property) { get; set; } | Attachments for the message |
-| [Components](#Components-property) { get; set; } | Components to include with the message |
-| [Content](#Content-property) { get; set; } | Contents of the message up to 2000 characters |
-| [Embeds](#Embeds-property) { get; set; } | Up to 10 rich embeds (up to 6000 characters) |
-| [FileAttachments](#FileAttachments-property) { get; set; } | Attachments for a discord message |
-| [Flags](#Flags-property) { get; set; } | Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset) |
-| [AddAttachment](#AddAttachment-method)(…) | Adds an attachment to the message |
-| [Validate](#Validate-method)() |  |
+| [MessageUpdate](#messageupdate-constructor)() | Constructor |
+| [MessageUpdate](#messageupdate-constructor)(…) | Constructor for message to be edited Only sets the Attachments field |
+| [AllowedMentions](#allowedmentions-property) { get; set; } | Allowed mentions for the message |
+| [Attachments](#attachments-property) { get; set; } | Attachments for the message |
+| [Components](#components-property) { get; set; } | Components to include with the message |
+| [Content](#content-property) { get; set; } | Contents of the message up to 2000 characters |
+| [Embeds](#embeds-property) { get; set; } | Up to 10 rich embeds (up to 6000 characters) |
+| [FileAttachments](#fileattachments-property) { get; set; } | Attachments for a discord message |
+| [Flags](#flags-property) { get; set; } | Edit the flags of a message (only SUPPRESS_EMBEDS can currently be set/unset) |
+| [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 
@@ -82,6 +82,25 @@ public MessageUpdate()
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# MessageUpdate constructor (2 of 2)
+
+Constructor for message to be edited Only sets the Attachments field
+
+```csharp
+public MessageUpdate(DiscordMessage message)
+```
+
+| parameter | description |
+| --- | --- |
+| message |  |
+
+## See Also
+
+* class [DiscordMessage](./DiscordMessage.md)
+* class [MessageUpdate](./MessageUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # Content property

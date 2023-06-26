@@ -10,9 +10,9 @@ public class BotTokenData
 
 | name | description |
 | --- | --- |
-| [BotTokenData](#BotTokenData-constructor)(…) | Constructor |
-| readonly [ApplicationId](#ApplicationId-field) | Application ID of the token |
-| readonly [HiddenToken](#HiddenToken-field) | Hidden Token. Used when Displaying |
+| [BotTokenData](#bottokendata-constructor)(…) | Constructor |
+| readonly [ApplicationId](#applicationid-field) | Application ID of the token |
+| readonly [HiddenToken](#hiddentoken-field) | Hidden Token. Used when Displaying |
 
 ## See Also
 

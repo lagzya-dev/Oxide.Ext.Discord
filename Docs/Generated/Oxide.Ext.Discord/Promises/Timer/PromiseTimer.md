@@ -10,10 +10,10 @@ public sealed class PromiseTimer : Singleton<PromiseTimer>
 
 | name | description |
 | --- | --- |
-| [Cancel](#Cancel-method)(…) | Cancel a waiting promise and reject it immediately. |
-| [WaitFor](#WaitFor-method)(…) | Resolve the returned promise once the time has elapsed |
-| [WaitUntil](#WaitUntil-method)(…) | Resolve the returned promise once the predicate evaluates to true |
-| [WaitWhile](#WaitWhile-method)(…) | Resolve the returned promise once the predicate evaluates to false |
+| [Cancel](#cancel-method)(…) | Cancel a waiting promise and reject it immediately. |
+| [WaitFor](#waitfor-method)(…) | Resolve the returned promise once the time has elapsed |
+| [WaitUntil](#waituntil-method)(…) | Resolve the returned promise once the predicate evaluates to true |
+| [WaitWhile](#waitwhile-method)(…) | Resolve the returned promise once the predicate evaluates to false |
 
 ## See Also
 

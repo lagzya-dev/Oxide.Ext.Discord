@@ -10,22 +10,22 @@ public class DiscordSticker : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordSticker](#DiscordSticker-constructor)() | The default constructor. |
-| [Available](#Available-property) { get; set; } | Whether or not the sticker is available |
-| [Description](#Description-property) { get; set; } | Description of the sticker |
-| [FormatType](#FormatType-property) { get; set; } | Type of sticker format [`StickerFormatType`](./StickerFormatType.md) |
-| [GuildId](#GuildId-property) { get; set; } | Id of the guild that owns this sticker |
-| [Id](#Id-property) { get; set; } | ID of the sticker |
-| [Name](#Name-property) { get; set; } | Name of the sticker |
-| [PackId](#PackId-property) { get; set; } | ID of the pack the sticker is from |
-| [SortValue](#SortValue-property) { get; set; } | A sticker's sort order within a pack |
-| [StickerUrl](#StickerUrl-property) { get; } | Returns the Url for the sticker |
-| [Tags](#Tags-property) { get; set; } | For guild stickers, a unicode emoji representing the sticker's expression. For nitro stickers, a comma-separated list of related expressions. autocomplete/suggestion tags for the sticker (max 200 characters) |
-| [Type](#Type-property) { get; set; } | Type of sticker. |
-| [User](#User-property) { get; set; } | The user that uploaded the sticker |
-| [DeleteGuildSticker](#DeleteGuildSticker-method)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. See [Delete Guild Sticker](https://discord.com/developers/docs/resources/sticker#delete-guild-sticker) |
-| [ModifyGuildSticker](#ModifyGuildSticker-method)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
-| static [Get](#Get-method)(…) | Returns a sticker object for the given sticker ID. See [Get Sticker](https://discord.com/developers/docs/resources/sticker#get-sticker) |
+| [DiscordSticker](#discordsticker-constructor)() | The default constructor. |
+| [Available](#available-property) { get; set; } | Whether or not the sticker is available |
+| [Description](#description-property) { get; set; } | Description of the sticker |
+| [FormatType](#formattype-property) { get; set; } | Type of sticker format [`StickerFormatType`](./StickerFormatType.md) |
+| [GuildId](#guildid-property) { get; set; } | Id of the guild that owns this sticker |
+| [Id](#id-property) { get; set; } | ID of the sticker |
+| [Name](#name-property) { get; set; } | Name of the sticker |
+| [PackId](#packid-property) { get; set; } | ID of the pack the sticker is from |
+| [SortValue](#sortvalue-property) { get; set; } | A sticker's sort order within a pack |
+| [StickerUrl](#stickerurl-property) { get; } | Returns the Url for the sticker |
+| [Tags](#tags-property) { get; set; } | For guild stickers, a unicode emoji representing the sticker's expression. For nitro stickers, a comma-separated list of related expressions. autocomplete/suggestion tags for the sticker (max 200 characters) |
+| [Type](#type-property) { get; set; } | Type of sticker. |
+| [User](#user-property) { get; set; } | The user that uploaded the sticker |
+| [DeleteGuildSticker](#deleteguildsticker-method)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. See [Delete Guild Sticker](https://discord.com/developers/docs/resources/sticker#delete-guild-sticker) |
+| [ModifyGuildSticker](#modifyguildsticker-method)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
+| static [Get](#get-method)(…) | Returns a sticker object for the given sticker ID. See [Get Sticker](https://discord.com/developers/docs/resources/sticker#get-sticker) |
 
 ## See Also
 

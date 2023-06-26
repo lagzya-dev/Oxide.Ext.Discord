@@ -10,21 +10,21 @@ public class DiscordEmbedTemplate : IBulkTemplate<DiscordEmbed>
 
 | name | description |
 | --- | --- |
-| [DiscordEmbedTemplate](#DiscordEmbedTemplate-constructor)() | Constructor |
-| [DiscordEmbedTemplate](#DiscordEmbedTemplate-constructor)(…) | Constructor |
-| [Color](#Color-property) { get; set; } | The Hex Color for the embed |
-| [Description](#Description-property) { get; set; } | The description of the embed |
-| [Enabled](#Enabled-property) { get; set; } | If this embed is enabled |
-| [Fields](#Fields-property) { get; set; } | Fields for the embed |
-| [Footer](#Footer-property) { get; set; } | Footer for the embed |
-| [ImageUrl](#ImageUrl-property) { get; set; } | Image URL to show in the embed |
-| [ThumbnailUrl](#ThumbnailUrl-property) { get; set; } | Thumbnail url to show in the embed |
-| [TimeStamp](#TimeStamp-property) { get; set; } | Show timestamp in the embed |
-| [Title](#Title-property) { get; set; } | The Tile for the embed |
-| [Url](#Url-property) { get; set; } | This Title Url for the embed |
-| [VideoUrl](#VideoUrl-property) { get; set; } | Video url to show in the embed |
-| [ToEntity](#ToEntity-method)(…) | Converts the template to a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) |
-| [ToEntityBulk](#ToEntityBulk-method)(…) |  |
+| [DiscordEmbedTemplate](#discordembedtemplate-constructor)() | Constructor |
+| [DiscordEmbedTemplate](#discordembedtemplate-constructor)(…) | Constructor |
+| [Color](#color-property) { get; set; } | The Hex Color for the embed |
+| [Description](#description-property) { get; set; } | The description of the embed |
+| [Enabled](#enabled-property) { get; set; } | If this embed is enabled |
+| [Fields](#fields-property) { get; set; } | Fields for the embed |
+| [Footer](#footer-property) { get; set; } | Footer for the embed |
+| [ImageUrl](#imageurl-property) { get; set; } | Image URL to show in the embed |
+| [ThumbnailUrl](#thumbnailurl-property) { get; set; } | Thumbnail url to show in the embed |
+| [TimeStamp](#timestamp-property) { get; set; } | Show timestamp in the embed |
+| [Title](#title-property) { get; set; } | The Tile for the embed |
+| [Url](#url-property) { get; set; } | This Title Url for the embed |
+| [VideoUrl](#videourl-property) { get; set; } | Video url to show in the embed |
+| [ToEntity](#toentity-method)(…) | Converts the template to a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) |
+| [ToEntityBulk](#toentitybulk-method)(…) |  |
 
 ## See Also
 
@@ -88,6 +88,26 @@ public DiscordEmbedTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordEmbedTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public DiscordEmbedTemplate(string title, string description, string titleUrl = "")
+```
+
+| parameter | description |
+| --- | --- |
+| title |  |
+| description |  |
+| titleUrl |  |
+
+## See Also
+
+* class [DiscordEmbedTemplate](./DiscordEmbedTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Enabled property

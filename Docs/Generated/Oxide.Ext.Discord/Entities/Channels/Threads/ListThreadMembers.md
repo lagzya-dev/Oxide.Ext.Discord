@@ -10,11 +10,11 @@ public class ListThreadMembers : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ListThreadMembers](#ListThreadMembers-constructor)() | The default constructor. |
-| [After](#After-property) { get; set; } | Get thread members after this user ID |
-| [Limit](#Limit-property) { get; set; } | Max number of thread members to return (1-100). Defaults to 100. |
-| [WithMember](#WithMember-property) { get; set; } | Whether to include a guild member object for the thread member |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [ListThreadMembers](#listthreadmembers-constructor)() | The default constructor. |
+| [After](#after-property) { get; set; } | Get thread members after this user ID |
+| [Limit](#limit-property) { get; set; } | Max number of thread members to return (1-100). Defaults to 100. |
+| [WithMember](#withmember-property) { get; set; } | Whether to include a guild member object for the thread member |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

@@ -10,29 +10,29 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [IsEnabled](#IsEnabled-property) { get; } | Returns if there is a registered link plugin |
-| [LinkedCount](#LinkedCount-property) { get; } | Returns the number of linked players |
-| readonly [DiscordIds](#DiscordIds-field) | Readonly Collection of all Discord ID's |
-| readonly [DiscordToPlayerIds](#DiscordToPlayerIds-field) | Readonly Dictionary of Discord ID's to Player ID's |
-| readonly [PlayerIds](#PlayerIds-field) | Readonly Collection of all Player ID's |
-| readonly [PlayerToDiscordIds](#PlayerToDiscordIds-field) | Readonly Dictionary of Player ID's to Discord ID's |
-| [AddLinkPlugin](#AddLinkPlugin-method)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
-| [GetDiscordId](#GetDiscordId-method)(…) | Returns the Discord ID for the given Steam ID (2 methods) |
-| [GetDiscordUser](#GetDiscordUser-method)(…) | Returns a minimal Discord User (2 methods) |
-| [GetLinkedMember](#GetLinkedMember-method)(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
-| [GetPlayer](#GetPlayer-method)(…) | Returns the IPlayer for the given Discord ID |
-| [GetPlayerId](#GetPlayerId-method)(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
-| [IsLinked](#IsLinked-method)(…) | Returns if the specified ID is linked (4 methods) |
-| [LogDebug](#LogDebug-method)(…) |  |
-| [OnLinked](#OnLinked-method)(…) | Called by a link plugin when a link occured |
-| [OnUnlinked](#OnUnlinked-method)(…) | Called by a link plugin when an unlink occured |
-| [RemoveLinkPlugin](#RemoveLinkPlugin-method)(…) | Removes a link plugin from the Discord Link library |
+| [IsEnabled](#isenabled-property) { get; } | Returns if there is a registered link plugin |
+| [LinkedCount](#linkedcount-property) { get; } | Returns the number of linked players |
+| readonly [DiscordIds](#discordids-field) | Readonly Collection of all Discord ID's |
+| readonly [DiscordToPlayerIds](#discordtoplayerids-field) | Readonly Dictionary of Discord ID's to Player ID's |
+| readonly [PlayerIds](#playerids-field) | Readonly Collection of all Player ID's |
+| readonly [PlayerToDiscordIds](#playertodiscordids-field) | Readonly Dictionary of Player ID's to Discord ID's |
+| [AddLinkPlugin](#addlinkplugin-method)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
+| [GetDiscordId](#getdiscordid-method-1-of-2))(…) | Returns the Discord ID for the given Steam ID (2 methods) |
+| [GetDiscordUser](#getdiscorduser-method-1-of-2))(…) | Returns a minimal Discord User (2 methods) |
+| [GetLinkedMember](#getlinkedmember-method-1-of-2))(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
+| [GetPlayer](#getplayer-method)(…) | Returns the IPlayer for the given Discord ID |
+| [GetPlayerId](#getplayerid-method-1-of-2))(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
+| [IsLinked](#islinked-method-1-of-4))(…) | Returns if the specified ID is linked (4 methods) |
+| [LogDebug](#logdebug-method)(…) |  |
+| [OnLinked](#onlinked-method)(…) | Called by a link plugin when a link occured |
+| [OnUnlinked](#onunlinked-method)(…) | Called by a link plugin when an unlink occured |
+| [RemoveLinkPlugin](#removelinkplugin-method)(…) | Removes a link plugin from the Discord Link library |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 
@@ -120,6 +120,77 @@ True if the user is linked; false otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# IsLinked method (2 of 4)
+
+Returns if the specified ID is linked
+
+```csharp
+public bool IsLinked(IPlayer player)
+```
+
+| parameter | description |
+| --- | --- |
+| player | Player to check if linked |
+
+## Return Value
+
+True if the player is linked; false otherwise
+
+## See Also
+
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# IsLinked method (3 of 4)
+
+Returns if the specified ID is linked
+
+```csharp
+public bool IsLinked(Snowflake discordId)
+```
+
+| parameter | description |
+| --- | --- |
+| discordId | Discord ID of the player |
+
+## Return Value
+
+True if the ID is linked; false otherwise
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# IsLinked method (4 of 4)
+
+Returns if the specified ID is linked
+
+```csharp
+public bool IsLinked(string playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | Steam ID of the player |
+
+## Return Value
+
+True if the ID is linked; false otherwise
+
+## See Also
+
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetPlayerId method (1 of 2)
@@ -147,6 +218,30 @@ Steam ID of the given given discord ID if linked; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetPlayerId method (2 of 2)
+
+Returns the Player ID of the given Discord ID if there is a link
+
+```csharp
+public PlayerId GetPlayerId(Snowflake discordId)
+```
+
+| parameter | description |
+| --- | --- |
+| discordId | Discord ID to get steam ID for |
+
+## Return Value
+
+Steam ID of the given given discord ID if linked; null otherwise
+
+## See Also
+
+* struct [PlayerId](./PlayerId.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetPlayer method
@@ -197,6 +292,29 @@ Discord ID for the given Steam ID; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetDiscordId method (2 of 2)
+
+Returns the Discord ID for the given Steam ID
+
+```csharp
+public Snowflake GetDiscordId(string playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | Steam ID to get Discord ID for |
+
+## Return Value
+
+Discord ID for the given Steam ID; null otherwise
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetDiscordUser method (1 of 2)
@@ -223,6 +341,29 @@ Discord ID for the given IPlayer; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetDiscordUser method (2 of 2)
+
+Returns a minimal Discord User
+
+```csharp
+public DiscordUser GetDiscordUser(string playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | ID of the in game player |
+
+## Return Value
+
+Discord ID for the given Steam ID; null otherwise
+
+## See Also
+
+* class [DiscordUser](../../Entities/Users/DiscordUser.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetLinkedMember method (1 of 2)
@@ -251,6 +392,31 @@ Discord ID for the given Steam ID; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetLinkedMember method (2 of 2)
+
+Returns a linked guild member for the matching steam id in the given guild
+
+```csharp
+public GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | ID of the in game player |
+| guild | Guild the member is in |
+
+## Return Value
+
+Discord ID for the given Steam ID; null otherwise
+
+## See Also
+
+* class [GuildMember](../../Entities/Guilds/GuildMember.md)
+* class [DiscordGuild](../../Entities/Guilds/DiscordGuild.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # OnLinked method

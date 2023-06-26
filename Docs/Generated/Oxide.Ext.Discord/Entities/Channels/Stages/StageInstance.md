@@ -10,18 +10,18 @@ public class StageInstance : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [StageInstance](#StageInstance-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The ID of the associated Stage channel |
-| [DiscoverableDisabled](#DiscoverableDisabled-property) { get; set; } | Whether or not Stage discovery is disabled (deprecated) |
-| [GuildId](#GuildId-property) { get; set; } | The guild ID of the associated Stage channel |
-| [GuildScheduledEventId](#GuildScheduledEventId-property) { get; set; } | The id of the scheduled event for this Stage instance |
-| [Id](#Id-property) { get; set; } | The ID of this Stage instance |
-| [PrivacyLevel](#PrivacyLevel-property) { get; set; } | The privacy level of the Stage instance |
-| [Topic](#Topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
-| [Delete](#Delete-method)(…) | Deletes the Stage instance. Requires the user to be a moderator of the Stage channel. See [Delete Stage Instance](https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance) |
-| [Edit](#Edit-method)(…) | Modifies fields of an existing Stage instance. Requires the user to be a moderator of the Stage channel. See [Update Stage Instance](https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance) |
-| static [Create](#Create-method)(…) | Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator of the Stage channel. See [Create Stage Instance](https://discord.com/developers/docs/resources/stage-instance#create-stage-instance) |
-| static [Get](#Get-method)(…) | Gets the stage instance associated with the Stage channel, if it exists. See [Get Stage Instance](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) |
+| [StageInstance](#stageinstance-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The ID of the associated Stage channel |
+| [DiscoverableDisabled](#discoverabledisabled-property) { get; set; } | Whether or not Stage discovery is disabled (deprecated) |
+| [GuildId](#guildid-property) { get; set; } | The guild ID of the associated Stage channel |
+| [GuildScheduledEventId](#guildscheduledeventid-property) { get; set; } | The id of the scheduled event for this Stage instance |
+| [Id](#id-property) { get; set; } | The ID of this Stage instance |
+| [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the Stage instance |
+| [Topic](#topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
+| [Delete](#delete-method)(…) | Deletes the Stage instance. Requires the user to be a moderator of the Stage channel. See [Delete Stage Instance](https://discord.com/developers/docs/resources/stage-instance#delete-stage-instance) |
+| [Edit](#edit-method)(…) | Modifies fields of an existing Stage instance. Requires the user to be a moderator of the Stage channel. See [Update Stage Instance](https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance) |
+| static [Create](#create-method)(…) | Creates a new Stage instance associated to a Stage channel. Requires the user to be a moderator of the Stage channel. See [Create Stage Instance](https://discord.com/developers/docs/resources/stage-instance#create-stage-instance) |
+| static [Get](#get-method)(…) | Gets the stage instance associated with the Stage channel, if it exists. See [Get Stage Instance](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) |
 
 ## See Also
 

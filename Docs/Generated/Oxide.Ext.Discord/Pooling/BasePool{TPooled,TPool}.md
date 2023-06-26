@@ -17,23 +17,23 @@ public abstract class BasePool<TPooled, TPool> : IPool<TPooled>
 
 | name | description |
 | --- | --- |
-| [ClearPoolEntities](#ClearPoolEntities-method)() | Clears the pool of all pooled objects and resets state to when the pool was first created |
-| [Free](#Free-method)(…) | Frees an item back to the pool |
-| [Get](#Get-method)() | Returns an element from the pool if it exists else it creates a new one |
-| [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
-| [RemoveAllPools](#RemoveAllPools-method)() | Wipes all the pools for this type |
-| static [ForPlugin](#ForPlugin-method)(…) | Returns a pool for the given plugin pool |
+| [ClearPoolEntities](#clearpoolentities-method)() | Clears the pool of all pooled objects and resets state to when the pool was first created |
+| [Free](#free-method)(…) | Frees an item back to the pool |
+| [Get](#get-method)() | Returns an element from the pool if it exists else it creates a new one |
+| [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
+| [RemoveAllPools](#removeallpools-method)() | Wipes all the pools for this type |
+| static [ForPlugin](#forplugin-method)(…) | Returns a pool for the given plugin pool |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BasePool](#BasePool-constructor)() | The default constructor. |
-| [PluginPool](#PluginPool-field) | Plugin Pool for this pool |
-| abstract [CreateNew](#CreateNew-method)() | Creates new type of T |
-| abstract [GetPoolSize](#GetPoolSize-method)(…) | Returns the pool size from the pool settings for the pool |
-| virtual [OnFreeItem](#OnFreeItem-method)(…) | Returns if an item can be freed to the pool |
-| virtual [OnGetItem](#OnGetItem-method)(…) | Called when an item is retrieved from the pool |
+| [BasePool](#basepool&amp;lt;tpooled,tpool&amp;gt;-constructor)() | The default constructor. |
+| [PluginPool](#pluginpool-field) | Plugin Pool for this pool |
+| abstract [CreateNew](#createnew-method)() | Creates new type of T |
+| abstract [GetPoolSize](#getpoolsize-method)(…) | Returns the pool size from the pool settings for the pool |
+| virtual [OnFreeItem](#onfreeitem-method)(…) | Returns if an item can be freed to the pool |
+| virtual [OnGetItem](#ongetitem-method)(…) | Called when an item is retrieved from the pool |
 
 ## See Also
 

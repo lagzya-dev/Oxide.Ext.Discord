@@ -10,24 +10,24 @@ public class DiscordEmbedBuilder
 
 | name | description |
 | --- | --- |
-| [DiscordEmbedBuilder](#DiscordEmbedBuilder-constructor)() | Constructor for the builder creating a new embed |
-| [DiscordEmbedBuilder](#DiscordEmbedBuilder-constructor)(…) | Constructor for the builder using an existing embed |
-| [AddAuthor](#AddAuthor-method)(…) | Adds an author to the embed message. The author will appear above the title |
-| [AddBlankField](#AddBlankField-method)(…) | Adds a blank field. If inline it will add a blank column. If not inline will add a blank row |
-| [AddColor](#AddColor-method)(…) | Adds a Discord Color to the embed (7 methods) |
-| [AddDescription](#AddDescription-method)(…) | Adds a description to the embed message |
-| [AddField](#AddField-method)(…) | Adds a new field with the name as the title and value as the value. If inline will add a new column. If row will add in a new row. |
-| [AddFooter](#AddFooter-method)(…) | Adds a footer to the embed message |
-| [AddImage](#AddImage-method)(…) | Adds an image to the embed. The url should point to the url of the image. If using attachment image you can make the url: "attachment://{image name}.{image extension} |
-| [AddNowTimestamp](#AddNowTimestamp-method)() | Adds a timestamp to an embed with the current time |
-| [AddProvider](#AddProvider-method)(…) | Adds a provider to the embed |
-| [AddThumbnail](#AddThumbnail-method)(…) | Adds a thumbnail in the top right corner of the embed If using attachment image you can make the url: "attachment://{image name}.{image extension} |
-| [AddTimestamp](#AddTimestamp-method)(…) | Adds a timestamp to an embed with the given time |
-| [AddTitle](#AddTitle-method)(…) | Adds a title to the embed message |
-| [AddUrl](#AddUrl-method)(…) | Adds a url to the embed message |
-| [AddVideo](#AddVideo-method)(…) | Adds a video to the embed |
-| [Build](#Build-method)() | Returns the built embed |
-| [BuildList](#BuildList-method)() | Returns the built embed in a list |
+| [DiscordEmbedBuilder](#discordembedbuilder-constructor)() | Constructor for the builder creating a new embed |
+| [DiscordEmbedBuilder](#discordembedbuilder-constructor)(…) | Constructor for the builder using an existing embed |
+| [AddAuthor](#addauthor-method)(…) | Adds an author to the embed message. The author will appear above the title |
+| [AddBlankField](#addblankfield-method)(…) | Adds a blank field. If inline it will add a blank column. If not inline will add a blank row |
+| [AddColor](#addcolor-method-1-of-7))(…) | Adds a Discord Color to the embed (7 methods) |
+| [AddDescription](#adddescription-method)(…) | Adds a description to the embed message |
+| [AddField](#addfield-method)(…) | Adds a new field with the name as the title and value as the value. If inline will add a new column. If row will add in a new row. |
+| [AddFooter](#addfooter-method)(…) | Adds a footer to the embed message |
+| [AddImage](#addimage-method)(…) | Adds an image to the embed. The url should point to the url of the image. If using attachment image you can make the url: "attachment://{image name}.{image extension} |
+| [AddNowTimestamp](#addnowtimestamp-method)() | Adds a timestamp to an embed with the current time |
+| [AddProvider](#addprovider-method)(…) | Adds a provider to the embed |
+| [AddThumbnail](#addthumbnail-method)(…) | Adds a thumbnail in the top right corner of the embed If using attachment image you can make the url: "attachment://{image name}.{image extension} |
+| [AddTimestamp](#addtimestamp-method)(…) | Adds a timestamp to an embed with the given time |
+| [AddTitle](#addtitle-method)(…) | Adds a title to the embed message |
+| [AddUrl](#addurl-method)(…) | Adds a url to the embed message |
+| [AddVideo](#addvideo-method)(…) | Adds a video to the embed |
+| [Build](#build-method)() | Returns the built embed |
+| [BuildList](#buildlist-method)() | Returns the built embed in a list |
 
 ## See Also
 
@@ -181,6 +181,180 @@ This
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddColor method (2 of 7)
+
+Adds a hex based color. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(string color)
+```
+
+| parameter | description |
+| --- | --- |
+| color | Color in string hex format |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Exception thrown if color is outside of range |
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddColor method (3 of 7)
+
+Adds an int based color to the embed. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(uint color)
+```
+
+| parameter | description |
+| --- | --- |
+| color |  |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddColor method (4 of 7)
+
+Adds a RGB based color. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(byte red, byte green, byte blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red value |
+| green | Green value |
+| blue | Blue value |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddColor method (5 of 7)
+
+Adds a RGB based color. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(double red, double green, double blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red value between 0 - 1 |
+| green | Green value between 0 - 1 |
+| blue | Blue value between 0 - 1 |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Thrown if red, green, or blue is outside of range |
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddColor method (6 of 7)
+
+Adds a RGB based color. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(float red, float green, float blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red value between 0 - 1 |
+| green | Green value between 0 - 1 |
+| blue | Blue value between 0 - 1 |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Thrown if red, green, or blue is outside of range |
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddColor method (7 of 7)
+
+Adds a RGB based color. Color appears as a bar on the left side of the message
+
+```csharp
+public DiscordEmbedBuilder AddColor(int red, int green, int blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red value between 0 - 255 |
+| green | Green value between 0 - 255 |
+| blue | Blue value between 0 - 255 |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Thrown if red, green, or blue is outside of range |
+
+## See Also
+
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddNowTimestamp method
@@ -433,5 +607,24 @@ public DiscordEmbedBuilder()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordEmbedBuilder constructor (2 of 2)
+
+Constructor for the builder using an existing embed
+
+```csharp
+public DiscordEmbedBuilder(DiscordEmbed embed)
+```
+
+| parameter | description |
+| --- | --- |
+| embed |  |
+
+## See Also
+
+* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

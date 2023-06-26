@@ -10,7 +10,7 @@ public static class DiscordColorExt
 
 | name | description |
 | --- | --- |
-| static [ToHex](#ToHex-method)(…) | Returns the color as a hex color code |
+| static [ToHex](#tohex-method)(…) | Returns the color as a hex color code |
 
 ## See Also
 

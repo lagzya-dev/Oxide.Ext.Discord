@@ -10,25 +10,25 @@ public class RestHandler : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [RestHandler](#RestHandler-constructor)(…) | Creates a new REST handler for a bot client |
-| readonly [Buckets](#Buckets-field) | Buckets with Routes we don't know the Hash of yet |
-| readonly [Client](#Client-field) | HttpClient for API Requests |
-| readonly [RateLimit](#RateLimit-field) | Global Rate Limit for the bot |
-| readonly [RouteToBucketId](#RouteToBucketId-field) | Route to Bucket ID |
-| [Delete](#Delete-method)(…) | Performs a HTTP Delete Request |
-| [Delete&lt;TResult&gt;](#Delete-method)(…) | Performs a HTTP Delete Request with TResult response |
-| [Get&lt;TResult&gt;](#Get-method)(…) | Performs a HTTP Get Request with TResult response |
-| [GetBucket](#GetBucket-method)(…) | Returns the bucket with the given ID |
-| [LogDebug](#LogDebug-method)(…) |  |
-| [Patch](#Patch-method)(…) | Performs a HTTP Patch Request |
-| [Patch&lt;TResult&gt;](#Patch-method)(…) | Performs a HTTP Patch Request with TResult response |
-| [Post](#Post-method)(…) | Performs a HTTP Post Request |
-| [Post&lt;TResult&gt;](#Post-method)(…) | Performs a HTTP Post Request with TResult response |
-| [Put](#Put-method)(…) | Performs a HTTP Put Request |
-| [Put&lt;TResult&gt;](#Put-method)(…) | Performs a HTTP Put Request with TResult response |
-| [QueueBucket](#QueueBucket-method)(…) | Queues the request for the bucket |
-| [Shutdown](#Shutdown-method)() | Shutdown the REST handler |
-| [StartRequest](#StartRequest-method)(…) | Starts the request |
+| [RestHandler](#resthandler-constructor)(…) | Creates a new REST handler for a bot client |
+| readonly [Buckets](#buckets-field) | Buckets with Routes we don't know the Hash of yet |
+| readonly [Client](#client-field) | HttpClient for API Requests |
+| readonly [RateLimit](#ratelimit-field) | Global Rate Limit for the bot |
+| readonly [RouteToBucketId](#routetobucketid-field) | Route to Bucket ID |
+| [Delete](#delete-method)(…) | Performs a HTTP Delete Request |
+| [Delete&lt;TResult&gt;](#delete&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Delete Request with TResult response |
+| [Get&lt;TResult&gt;](#get&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Get Request with TResult response |
+| [GetBucket](#getbucket-method)(…) | Returns the bucket with the given ID |
+| [LogDebug](#logdebug-method)(…) |  |
+| [Patch](#patch-method)(…) | Performs a HTTP Patch Request |
+| [Patch&lt;TResult&gt;](#patch&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Patch Request with TResult response |
+| [Post](#post-method)(…) | Performs a HTTP Post Request |
+| [Post&lt;TResult&gt;](#post&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Post Request with TResult response |
+| [Put](#put-method)(…) | Performs a HTTP Put Request |
+| [Put&lt;TResult&gt;](#put&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Put Request with TResult response |
+| [QueueBucket](#queuebucket-method)(…) | Queues the request for the bucket |
+| [Shutdown](#shutdown-method)() | Shutdown the REST handler |
+| [StartRequest](#startrequest-method)(…) | Starts the request |
 
 ## See Also
 
@@ -84,6 +84,29 @@ public IPromise Post(DiscordClient client, string url, object data)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Post&lt;TResult&gt; method (2 of 2)
+
+Performs a HTTP Post Request with TResult response
+
+```csharp
+public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data)
+```
+
+| parameter | description |
+| --- | --- |
+| TResult | Result to be returned from the request |
+| client | Client for the request |
+| url | Url for the request |
+| data | Data to post |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [RestHandler](./RestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Put method (1 of 2)
@@ -109,6 +132,29 @@ public IPromise Put(DiscordClient client, string url, object data)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Put&lt;TResult&gt; method (2 of 2)
+
+Performs a HTTP Put Request with TResult response
+
+```csharp
+public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data)
+```
+
+| parameter | description |
+| --- | --- |
+| TResult | Result to be returned from the request |
+| client | Client for the request |
+| url | Url for the request |
+| data | Data to put |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [RestHandler](./RestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Patch method (1 of 2)
@@ -134,6 +180,29 @@ public IPromise Patch(DiscordClient client, string url, object data)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Patch&lt;TResult&gt; method (2 of 2)
+
+Performs a HTTP Patch Request with TResult response
+
+```csharp
+public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data)
+```
+
+| parameter | description |
+| --- | --- |
+| TResult | Result to be returned from the request |
+| client | Client for the request |
+| url | Url for the request |
+| data | Data to patch |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [RestHandler](./RestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Delete method (1 of 2)
@@ -158,6 +227,28 @@ public IPromise Delete(DiscordClient client, string url)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Delete&lt;TResult&gt; method (2 of 2)
+
+Performs a HTTP Delete Request with TResult response
+
+```csharp
+public IPromise<TResult> Delete<TResult>(DiscordClient client, string url)
+```
+
+| parameter | description |
+| --- | --- |
+| TResult | Result to be returned from the request |
+| client | Client for the request |
+| url | Url for the request |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [RestHandler](./RestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # StartRequest method

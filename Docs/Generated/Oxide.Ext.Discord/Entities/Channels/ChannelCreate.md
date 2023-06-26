@@ -10,23 +10,23 @@ public class ChannelCreate
 
 | name | description |
 | --- | --- |
-| [ChannelCreate](#ChannelCreate-constructor)() | The default constructor. |
-| [AvailableTags](#AvailableTags-property) { get; set; } | Set of tags that can be used in a `GUILD_FORUM` channel |
-| [Bitrate](#Bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
-| [DefaultAutoArchiveDuration](#DefaultAutoArchiveDuration-property) { get; set; } | The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
-| [DefaultForumLayout](#DefaultForumLayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
-| [DefaultReactionEmoji](#DefaultReactionEmoji-property) { get; set; } | Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel |
-| [DefaultSortOrder](#DefaultSortOrder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
-| [Name](#Name-property) { get; set; } | The name of the channel (1-100 characters) |
-| [Nsfw](#Nsfw-property) { get; set; } | Whether the channel is nsfw |
-| [ParentId](#ParentId-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
-| [PermissionOverwrites](#PermissionOverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
-| [Position](#Position-property) { get; set; } | Sorting position of the channel |
-| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
-| [Topic](#Topic-property) { get; set; } | The channel topic (0-1024 characters) |
-| [Type](#Type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
-| [UserLimit](#UserLimit-property) { get; set; } | The user limit of the voice channel 0 refers to no limit, 1 to 99 refers to a user limit |
-| [Validate](#Validate-method)() |  |
+| [ChannelCreate](#channelcreate-constructor)() | The default constructor. |
+| [AvailableTags](#availabletags-property) { get; set; } | Set of tags that can be used in a `GUILD_FORUM` channel |
+| [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
+| [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
+| [DefaultForumLayout](#defaultforumlayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel |
+| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
+| [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
+| [Nsfw](#nsfw-property) { get; set; } | Whether the channel is nsfw |
+| [ParentId](#parentid-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
+| [PermissionOverwrites](#permissionoverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
+| [Position](#position-property) { get; set; } | Sorting position of the channel |
+| [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
+| [Topic](#topic-property) { get; set; } | The channel topic (0-1024 characters) |
+| [Type](#type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
+| [UserLimit](#userlimit-property) { get; set; } | The user limit of the voice channel 0 refers to no limit, 1 to 99 refers to a user limit |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

@@ -10,14 +10,14 @@ public static class PlayerExt
 
 | name | description |
 | --- | --- |
-| static [GetDiscordUser](#GetDiscordUser-method)(…) | Returns a minimal Discord User for the given player |
-| static [GetDiscordUserId](#GetDiscordUserId-method)(…) | Returns the Discord ID of the IPlayer if linked |
-| static [GetGuildMember](#GetGuildMember-method)(…) | Returns a minimal Guild Member for the given player |
-| static [IsDummyPlayer](#IsDummyPlayer-method)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
-| static [IsLinked](#IsLinked-method)(…) | Returns true if the player is linked |
-| static [SendDiscordGlobalTemplateMessage](#SendDiscordGlobalTemplateMessage-method)(…) | Send a message in a DM to the linked user using a global message template |
-| static [SendDiscordMessage](#SendDiscordMessage-method)(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
-| static [SendDiscordTemplateMessage](#SendDiscordTemplateMessage-method)(…) | Send a message in a DM to the linked user using a localized message template |
+| static [GetDiscordUser](#getdiscorduser-method)(…) | Returns a minimal Discord User for the given player |
+| static [GetDiscordUserId](#getdiscorduserid-method)(…) | Returns the Discord ID of the IPlayer if linked |
+| static [GetGuildMember](#getguildmember-method)(…) | Returns a minimal Guild Member for the given player |
+| static [IsDummyPlayer](#isdummyplayer-method)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
+| static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
+| static [SendDiscordGlobalTemplateMessage](#senddiscordglobaltemplatemessage-method)(…) | Send a message in a DM to the linked user using a global message template |
+| static [SendDiscordMessage](#senddiscordmessage-method-1-of-4))(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
+| static [SendDiscordTemplateMessage](#senddiscordtemplatemessage-method)(…) | Send a message in a DM to the linked user using a localized message template |
 
 ## See Also
 
@@ -52,6 +52,84 @@ public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player,
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# SendDiscordMessage method (2 of 4)
+
+Send a Discord Message to an IPlayer if they're registered
+
+```csharp
+public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, 
+    DiscordClient client, List<DiscordEmbed> embeds)
+```
+
+| parameter | description |
+| --- | --- |
+| player | Player to send the discord message to |
+| client | Client to use for sending the message |
+| embeds | Embeds to send |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [PlayerExt](./PlayerExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# SendDiscordMessage method (3 of 4)
+
+Send a Discord Message to an IPlayer if they're registered
+
+```csharp
+public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, 
+    DiscordClient client, MessageCreate message)
+```
+
+| parameter | description |
+| --- | --- |
+| player | Player to send the discord message to |
+| client | Client to use for sending the message |
+| message | Message to send |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [MessageCreate](../Entities/Messages/MessageCreate.md)
+* class [PlayerExt](./PlayerExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# SendDiscordMessage method (4 of 4)
+
+Send a Discord Message to an IPlayer if they're registered
+
+```csharp
+public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player, 
+    DiscordClient client, string message)
+```
+
+| parameter | description |
+| --- | --- |
+| player | Player to send the discord message to |
+| client | Client to use for sending the message |
+| message | Message to send |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [PlayerExt](./PlayerExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # SendDiscordGlobalTemplateMessage method

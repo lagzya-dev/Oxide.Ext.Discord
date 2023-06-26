@@ -10,24 +10,24 @@ public class DiscordActivity
 
 | name | description |
 | --- | --- |
-| [DiscordActivity](#DiscordActivity-constructor)() | The default constructor. |
-| [ApplicationId](#ApplicationId-property) { get; set; } | Application id for the game |
-| [Assets](#Assets-property) { get; set; } | Images for the presence and their hover texts See [`ActivityAssets`](./ActivityAssets.md) |
-| [Buttons](#Buttons-property) { get; set; } | The custom buttons shown in the Rich Presence (max 2) See [`ActivityButton`](./ActivityButton.md) |
-| [CreatedAt](#CreatedAt-property) { get; set; } | Timestamp of when the activity was added to the user's session |
-| [Details](#Details-property) { get; set; } | What the player is currently doing |
-| [Emoji](#Emoji-property) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./DiscordActivity/Emoji.md) |
-| [Flags](#Flags-property) { get; set; } | Describes what the payload includes See [`ActivityFlags`](./ActivityFlags.md) |
-| [GetLargeImageUrl](#GetLargeImageUrl-property) { get; } | Returns the large image url for the presence asset |
-| [GetSmallImageUrl](#GetSmallImageUrl-property) { get; } | Returns the small image url for the presence asset |
-| [Instance](#Instance-property) { get; set; } | Whether or not the activity is an instanced game session |
-| [Name](#Name-property) { get; set; } | The activity's name |
-| [Party](#Party-property) { get; set; } | Information for the current party of the player See [`ActivityParty`](./ActivityParty.md) |
-| [Secrets](#Secrets-property) { get; set; } | Secrets for Rich Presence joining and spectating See [`ActivitySecrets`](./ActivitySecrets.md) |
-| [State](#State-property) { get; set; } | The user's current party status |
-| [Timestamps](#Timestamps-property) { get; set; } | Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md) |
-| [Type](#Type-property) { get; set; } | Activity type See [`ActivityType`](./ActivityType.md) |
-| [Url](#Url-property) { get; set; } | Stream url, is validated when type is 1 |
+| [DiscordActivity](#discordactivity-constructor)() | The default constructor. |
+| [ApplicationId](#applicationid-property) { get; set; } | Application id for the game |
+| [Assets](#assets-property) { get; set; } | Images for the presence and their hover texts See [`ActivityAssets`](./ActivityAssets.md) |
+| [Buttons](#buttons-property) { get; set; } | The custom buttons shown in the Rich Presence (max 2) See [`ActivityButton`](./ActivityButton.md) |
+| [CreatedAt](#createdat-property) { get; set; } | Timestamp of when the activity was added to the user's session |
+| [Details](#details-property) { get; set; } | What the player is currently doing |
+| [Emoji](#emoji-property) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./DiscordActivity/Emoji.md) |
+| [Flags](#flags-property) { get; set; } | Describes what the payload includes See [`ActivityFlags`](./ActivityFlags.md) |
+| [GetLargeImageUrl](#getlargeimageurl-property) { get; } | Returns the large image url for the presence asset |
+| [GetSmallImageUrl](#getsmallimageurl-property) { get; } | Returns the small image url for the presence asset |
+| [Instance](#instance-property) { get; set; } | Whether or not the activity is an instanced game session |
+| [Name](#name-property) { get; set; } | The activity's name |
+| [Party](#party-property) { get; set; } | Information for the current party of the player See [`ActivityParty`](./ActivityParty.md) |
+| [Secrets](#secrets-property) { get; set; } | Secrets for Rich Presence joining and spectating See [`ActivitySecrets`](./ActivitySecrets.md) |
+| [State](#state-property) { get; set; } | The user's current party status |
+| [Timestamps](#timestamps-property) { get; set; } | Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md) |
+| [Type](#type-property) { get; set; } | Activity type See [`ActivityType`](./ActivityType.md) |
+| [Url](#url-property) { get; set; } | Stream url, is validated when type is 1 |
 
 ## See Also
 

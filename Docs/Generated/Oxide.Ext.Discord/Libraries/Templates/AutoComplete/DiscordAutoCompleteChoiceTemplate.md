@@ -10,10 +10,10 @@ public class DiscordAutoCompleteChoiceTemplate
 
 | name | description |
 | --- | --- |
-| [DiscordAutoCompleteChoiceTemplate](#DiscordAutoCompleteChoiceTemplate-constructor)() | The default constructor. |
-| [Name](#Name-property) { get; set; } | Choice Text (1-100 characters) |
-| [ApplyLocalization](#ApplyLocalization-method)(…) | Apply localizations to the auto complete choice |
-| [ApplyName](#ApplyName-method)(…) | Apply the name to the auto complete choice |
+| [DiscordAutoCompleteChoiceTemplate](#discordautocompletechoicetemplate-constructor)() | The default constructor. |
+| [Name](#name-property) { get; set; } | Choice Text (1-100 characters) |
+| [ApplyLocalization](#applylocalization-method)(…) | Apply localizations to the auto complete choice |
+| [ApplyName](#applyname-method)(…) | Apply the name to the auto complete choice |
 
 ## See Also
 

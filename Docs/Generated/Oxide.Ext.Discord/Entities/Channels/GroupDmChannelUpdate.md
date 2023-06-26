@@ -10,10 +10,10 @@ public class GroupDmChannelUpdate
 
 | name | description |
 | --- | --- |
-| [GroupDmChannelUpdate](#GroupDmChannelUpdate-constructor)() | The default constructor. |
-| [Icon](#Icon-property) { get; set; } | Base64 encoded icon |
-| [Name](#Name-property) { get; set; } | The name of the channel (1-100 characters) |
-| [Validate](#Validate-method)() |  |
+| [GroupDmChannelUpdate](#groupdmchannelupdate-constructor)() | The default constructor. |
+| [Icon](#icon-property) { get; set; } | Base64 encoded icon |
+| [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

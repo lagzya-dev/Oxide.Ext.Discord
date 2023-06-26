@@ -10,8 +10,8 @@ public class GuildUpdateMfaLevel
 
 | name | description |
 | --- | --- |
-| [GuildUpdateMfaLevel](#GuildUpdateMfaLevel-constructor)() | The default constructor. |
-| [Level](#Level-property) { get; set; } | [`GuildMfaLevel`](./GuildMfaLevel.md) |
+| [GuildUpdateMfaLevel](#guildupdatemfalevel-constructor)() | The default constructor. |
+| [Level](#level-property) { get; set; } | [`GuildMfaLevel`](./GuildMfaLevel.md) |
 
 ## See Also
 

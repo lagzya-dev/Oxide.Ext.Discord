@@ -10,17 +10,17 @@ public class Bucket : BasePoolable, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [Bucket](#Bucket-constructor)() | The default constructor. |
-| [Init](#Init-method)(…) | Creates a new bucket for the given [`RestHandler`](../RestHandler.md) |
-| [LogDebug](#LogDebug-method)(…) |  |
-| [QueueRequest](#QueueRequest-method)(…) | Queues a new request for the buck |
+| [Bucket](#bucket-constructor)() | The default constructor. |
+| [Init](#init-method)(…) | Creates a new bucket for the given [`RestHandler`](../RestHandler.md) |
+| [LogDebug](#logdebug-method)(…) |  |
+| [QueueRequest](#queuerequest-method)(…) | Queues a new request for the buck |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
-| override [LeavePool](#LeavePool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
+| override [LeavePool](#leavepool-method)() |  |
 
 ## See Also
 

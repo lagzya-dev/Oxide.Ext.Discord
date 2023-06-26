@@ -18,13 +18,13 @@ public abstract class BaseInteractionMessageBuilder<TMessage, TBuilder> :
 
 | name | description |
 | --- | --- |
-| [AsEphemeral](#AsEphemeral-method)() | Marks the response as Ephemeral so only the person who executed the command can see |
+| [AsEphemeral](#asephemeral-method)() | Marks the response as Ephemeral so only the person who executed the command can see |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractionMessageBuilder](#BaseInteractionMessageBuilder-constructor)(…) | Constructor |
+| [BaseInteractionMessageBuilder](#baseinteractionmessagebuilder&amp;lt;tmessage,tbuilder&amp;gt;-constructor)(…) | Constructor |
 
 ## See Also
 

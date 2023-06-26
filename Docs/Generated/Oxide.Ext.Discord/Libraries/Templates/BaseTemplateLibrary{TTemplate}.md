@@ -11,11 +11,11 @@ public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary
 
 | name | description |
 | --- | --- |
-| [BaseTemplateLibrary](#BaseTemplateLibrary-constructor)(…) | Constructor |
-| readonly [Logger](#Logger-field) | Logger for the [`BaseTemplateLibrary`](./BaseTemplateLibrary%7BTTemplate%7D.md) |
-| readonly [TemplateType](#TemplateType-field) | The template type of this template library |
-| [GetTemplateFolder](#GetTemplateFolder-method)(…) | Returns the template folder for a given plugin |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| [BaseTemplateLibrary](#basetemplatelibrary&amp;lt;ttemplate&amp;gt;-constructor)(…) | Constructor |
+| readonly [Logger](#logger-field) | Logger for the [`BaseTemplateLibrary`](./BaseTemplateLibrary%7BTTemplate%7D.md) |
+| readonly [TemplateType](#templatetype-field) | The template type of this template library |
+| [GetTemplateFolder](#gettemplatefolder-method)(…) | Returns the template folder for a given plugin |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public struct PoolSize
 
 | name | description |
 | --- | --- |
-| [PoolSize](#PoolSize-constructor)(…) | Constructor settings the startingSize and maxSize |
-| [IsValid](#IsValid-property) { get; } | If the pool size is valid |
-| readonly [MaxSize](#MaxSize-field) | Max size of the pool |
-| readonly [StartingSize](#StartingSize-field) | Starting size of the pool |
-| [CanResize](#CanResize-method)(…) | Returns true of the current size can be resized |
-| [GetNextSize](#GetNextSize-method)(…) | Returns the next size for the current size |
+| [PoolSize](#poolsize-constructor)(…) | Constructor settings the startingSize and maxSize |
+| [IsValid](#isvalid-property) { get; } | If the pool size is valid |
+| readonly [MaxSize](#maxsize-field) | Max size of the pool |
+| readonly [StartingSize](#startingsize-field) | Starting size of the pool |
+| [CanResize](#canresize-method)(…) | Returns true of the current size can be resized |
+| [GetNextSize](#getnextsize-method)(…) | Returns the next size for the current size |
 
 ## See Also
 

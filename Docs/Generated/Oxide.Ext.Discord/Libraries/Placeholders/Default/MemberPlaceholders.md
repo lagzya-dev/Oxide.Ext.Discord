@@ -10,10 +10,10 @@ public static class MemberPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Id](#Id-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
-| static [Mention](#Mention-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
-| static [Name](#Name-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
+| static [Mention](#mention-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
+| static [Name](#name-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
 

@@ -10,18 +10,18 @@ public class CommandCreate
 
 | name | description |
 | --- | --- |
-| [CommandCreate](#CommandCreate-constructor)() | Constructor |
-| [CommandCreate](#CommandCreate-constructor)(…) | Constructor |
-| [DefaultMemberPermissions](#DefaultMemberPermissions-property) { get; set; } | Set of permissions represented as a bit set |
-| [Description](#Description-property) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](#DmPermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [Name](#Name-property) { get; set; } | 1-32 lowercase character name matching ^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$ |
-| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](#Nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](#Options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
-| [Type](#Type-property) { get; set; } | The [`ApplicationCommandType`](./ApplicationCommandType.md) of the command |
-| [Validate](#Validate-method)() |  |
+| [CommandCreate](#commandcreate-constructor)() | Constructor |
+| [CommandCreate](#commandcreate-constructor)(…) | Constructor |
+| [DefaultMemberPermissions](#defaultmemberpermissions-property) { get; set; } | Set of permissions represented as a bit set |
+| [Description](#description-property) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#descriptionlocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#dmpermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [Name](#name-property) { get; set; } | 1-32 lowercase character name matching ^[-_\p{L}\p{N}\p{sc=Deva}\p{sc=Thai}]{1,32}$ |
+| [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [Type](#type-property) { get; set; } | The [`ApplicationCommandType`](./ApplicationCommandType.md) of the command |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 
@@ -58,6 +58,24 @@ public CommandCreate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# CommandCreate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public CommandCreate(string name, string description, 
+    ApplicationCommandType type = ApplicationCommandType.ChatInput, 
+    List<CommandOption> options = null)
+```
+
+## See Also
+
+* enum [ApplicationCommandType](./ApplicationCommandType.md)
+* class [CommandOption](./CommandOption.md)
+* class [CommandCreate](./CommandCreate.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

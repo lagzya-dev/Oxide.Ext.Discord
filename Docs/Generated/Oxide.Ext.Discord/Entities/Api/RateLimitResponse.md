@@ -10,22 +10,22 @@ public class RateLimitResponse : BasePoolable
 
 | name | description |
 | --- | --- |
-| [RateLimitResponse](#RateLimitResponse-constructor)() | The default constructor. |
-| [BucketId](#BucketId-field) | The Bucket ID of the rate limit |
-| [Code](#Code-field) | Rate Limit Code |
-| [IsGlobalRateLimit](#IsGlobalRateLimit-field) | If we hit the global rate limit with this request |
-| [Limit](#Limit-field) | The number of request for this bucket |
-| [Message](#Message-field) | Rate Limit Message |
-| [Remaining](#Remaining-field) | The number of remaining requests for this bucket |
-| [ResetAt](#ResetAt-field) | The date time when this bucket will reset |
-| [Scope](#Scope-field) | The scope the rate limit is for |
-| [Init](#Init-method)(…) | Initialize the RateLimitResponse |
+| [RateLimitResponse](#ratelimitresponse-constructor)() | The default constructor. |
+| [BucketId](#bucketid-field) | The Bucket ID of the rate limit |
+| [Code](#code-field) | Rate Limit Code |
+| [IsGlobalRateLimit](#isglobalratelimit-field) | If we hit the global rate limit with this request |
+| [Limit](#limit-field) | The number of request for this bucket |
+| [Message](#message-field) | Rate Limit Message |
+| [Remaining](#remaining-field) | The number of remaining requests for this bucket |
+| [ResetAt](#resetat-field) | The date time when this bucket will reset |
+| [Scope](#scope-field) | The scope the rate limit is for |
+| [Init](#init-method)(…) | Initialize the RateLimitResponse |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

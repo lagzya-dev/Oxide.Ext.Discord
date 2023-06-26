@@ -10,36 +10,36 @@ public struct DiscordColor
 
 | name | description |
 | --- | --- |
-| [DiscordColor](#DiscordColor-constructor)(…) | DiscordColor Constructor (7 constructors) |
-| static readonly [Blue](#Blue-field) | Blue Role Color |
-| static readonly [Blurple](#Blurple-field) | Discord Blurple Color |
-| static readonly [BlurpleOld](#BlurpleOld-field) | Discord Old Blurple Color |
-| static readonly [Danger](#Danger-field) | Discord Danger Color |
-| static readonly [DarkBlue](#DarkBlue-field) | Dark Blue Role Color |
-| static readonly [DarkerGrey](#DarkerGrey-field) | Darker Gray Role Color |
-| static readonly [DarkGreen](#DarkGreen-field) | Dark Green Role Color |
-| static readonly [DarkGrey](#DarkGrey-field) | Dark Gray Role Color |
-| static readonly [DarkMagenta](#DarkMagenta-field) | Dark Magenta Role Color |
-| static readonly [DarkOrange](#DarkOrange-field) | Dark Orange Role Color |
-| static readonly [DarkPurple](#DarkPurple-field) | Dark Purple Role Color |
-| static readonly [DarkRed](#DarkRed-field) | Dark Red Role Color |
-| static readonly [DarkTeal](#DarkTeal-field) | Dark Teal Role Color |
-| static readonly [Default](#Default-field) | Default Role Color |
-| static readonly [Fuchsia](#Fuchsia-field) | Discord Fuchsia Color |
-| static readonly [Gold](#Gold-field) | Gold Role Color |
-| static readonly [Green](#Green-field) | Green Role Color |
-| static readonly [LighterGrey](#LighterGrey-field) | Lighter Gray Role Color |
-| static readonly [LightGrey](#LightGrey-field) | Light Gray Role Color |
-| static readonly [LightOrange](#LightOrange-field) | Light Orange Role Color |
-| static readonly [Magenta](#Magenta-field) | Magenta Role Color |
-| static readonly [Orange](#Orange-field) | Orange Role Color |
-| static readonly [Purple](#Purple-field) | Purple Role Color |
-| static readonly [Red](#Red-field) | Red Role Color |
-| static readonly [Success](#Success-field) | Discord Success Color |
-| static readonly [Teal](#Teal-field) | Teal Role Color |
-| static readonly [Warning](#Warning-field) | Discord Warning Color |
-| readonly [Color](#Color-field) | uint value of the hex color code |
-| override [ToString](#ToString-method)() | Returns the color as a string |
+| [DiscordColor](#discordcolor-constructor-1-of-7))(…) | DiscordColor Constructor (7 constructors) |
+| static readonly [Blue](#blue-field) | Blue Role Color |
+| static readonly [Blurple](#blurple-field) | Discord Blurple Color |
+| static readonly [BlurpleOld](#blurpleold-field) | Discord Old Blurple Color |
+| static readonly [Danger](#danger-field) | Discord Danger Color |
+| static readonly [DarkBlue](#darkblue-field) | Dark Blue Role Color |
+| static readonly [DarkerGrey](#darkergrey-field) | Darker Gray Role Color |
+| static readonly [DarkGreen](#darkgreen-field) | Dark Green Role Color |
+| static readonly [DarkGrey](#darkgrey-field) | Dark Gray Role Color |
+| static readonly [DarkMagenta](#darkmagenta-field) | Dark Magenta Role Color |
+| static readonly [DarkOrange](#darkorange-field) | Dark Orange Role Color |
+| static readonly [DarkPurple](#darkpurple-field) | Dark Purple Role Color |
+| static readonly [DarkRed](#darkred-field) | Dark Red Role Color |
+| static readonly [DarkTeal](#darkteal-field) | Dark Teal Role Color |
+| static readonly [Default](#default-field) | Default Role Color |
+| static readonly [Fuchsia](#fuchsia-field) | Discord Fuchsia Color |
+| static readonly [Gold](#gold-field) | Gold Role Color |
+| static readonly [Green](#green-field) | Green Role Color |
+| static readonly [LighterGrey](#lightergrey-field) | Lighter Gray Role Color |
+| static readonly [LightGrey](#lightgrey-field) | Light Gray Role Color |
+| static readonly [LightOrange](#lightorange-field) | Light Orange Role Color |
+| static readonly [Magenta](#magenta-field) | Magenta Role Color |
+| static readonly [Orange](#orange-field) | Orange Role Color |
+| static readonly [Purple](#purple-field) | Purple Role Color |
+| static readonly [Red](#red-field) | Red Role Color |
+| static readonly [Success](#success-field) | Discord Success Color |
+| static readonly [Teal](#teal-field) | Teal Role Color |
+| static readonly [Warning](#warning-field) | Discord Warning Color |
+| readonly [Color](#color-field) | uint value of the hex color code |
+| override [ToString](#tostring-method)() | Returns the color as a string |
 
 ## See Also
 
@@ -88,6 +88,158 @@ public DiscordColor(string color)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordColor constructor (2 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(uint color)
+```
+
+| parameter | description |
+| --- | --- |
+| color | uint value of hex color code |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordColor constructor (3 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(byte red, byte green, byte blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red color (0-255) |
+| green | Green color (0-255) |
+| blue | Blue color (0-255) |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordColor constructor (4 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(double red, double green, double blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red color (0.0 - 1.0) |
+| green | Green color (0.0 - 1.0) |
+| blue | Blue color (0.0 - 1.0) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentOutOfRangeException | Thrown if any of the colors are &lt; 0.0 or &gt; 1.0 |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordColor constructor (5 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(float red, float green, float blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red color (0.0 - 1.0) |
+| green | Green color (0.0 - 1.0) |
+| blue | Blue color (0.0 - 1.0) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentOutOfRangeException | Thrown if any of the colors are &lt; 0.0 or &gt; 1.0 |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordColor constructor (6 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(int red, int green, int blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red color (0-255) |
+| green | Green color (0-255) |
+| blue | Blue color (0-255) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentOutOfRangeException | Thrown if any of the colors are &lt; 0 or &gt; 255 |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordColor constructor (7 of 7)
+
+DiscordColor Constructor
+
+```csharp
+public DiscordColor(uint red, uint green, uint blue)
+```
+
+| parameter | description |
+| --- | --- |
+| red | Red color (0-255) |
+| green | Green color (0-255) |
+| blue | Blue color (0-255) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentOutOfRangeException | Thrown if any of the colors are &gt; 255 |
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Color field

@@ -10,15 +10,15 @@ public abstract class BasePoolable : IDisposable
 
 | name | description |
 | --- | --- |
-| [Dispose](#Dispose-method)() | Disposes the object when used in a using statement |
+| [Dispose](#dispose-method)() | Disposes the object when used in a using statement |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BasePoolable](#BasePoolable-constructor)() | The default constructor. |
-| virtual [EnterPool](#EnterPool-method)() | Called when the object is returned to the pool. Can be overriden in child classes to cleanup used data |
-| virtual [LeavePool](#LeavePool-method)() | Called when the object leaves the pool. Can be overriden in child classes to set the initial object state |
+| [BasePoolable](#basepoolable-constructor)() | The default constructor. |
+| virtual [EnterPool](#enterpool-method)() | Called when the object is returned to the pool. Can be overriden in child classes to cleanup used data |
+| virtual [LeavePool](#leavepool-method)() | Called when the object leaves the pool. Can be overriden in child classes to set the initial object state |
 
 ## See Also
 

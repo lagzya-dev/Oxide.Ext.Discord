@@ -10,17 +10,17 @@ public static class TimeSpanPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Days](#Days-method)(…) | Days placeholder |
-| static [Hours](#Hours-method)(…) | Hours placeholder |
-| static [Milliseconds](#Milliseconds-method)(…) | Milliseconds placeholder |
-| static [Minutes](#Minutes-method)(…) | Minutes placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [Seconds](#Seconds-method)(…) | Seconds placeholder |
-| static [TotalDays](#TotalDays-method)(…) | TotalDays placeholder |
-| static [TotalHours](#TotalHours-method)(…) | TotalHours placeholder |
-| static [TotalMilliseconds](#TotalMilliseconds-method)(…) | TotalMilliseconds placeholder |
-| static [TotalMinutes](#TotalMinutes-method)(…) | TotalMinutes placeholder |
-| static [TotalSeconds](#TotalSeconds-method)(…) | TotalSeconds placeholder |
+| static [Days](#days-method)(…) | Days placeholder |
+| static [Hours](#hours-method)(…) | Hours placeholder |
+| static [Milliseconds](#milliseconds-method)(…) | Milliseconds placeholder |
+| static [Minutes](#minutes-method)(…) | Minutes placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Seconds](#seconds-method)(…) | Seconds placeholder |
+| static [TotalDays](#totaldays-method)(…) | TotalDays placeholder |
+| static [TotalHours](#totalhours-method)(…) | TotalHours placeholder |
+| static [TotalMilliseconds](#totalmilliseconds-method)(…) | TotalMilliseconds placeholder |
+| static [TotalMinutes](#totalminutes-method)(…) | TotalMinutes placeholder |
+| static [TotalSeconds](#totalseconds-method)(…) | TotalSeconds placeholder |
 
 ## See Also
 

@@ -10,20 +10,20 @@ public class GuildCreate
 
 | name | description |
 | --- | --- |
-| [GuildCreate](#GuildCreate-constructor)() | The default constructor. |
-| [AfkChannelId](#AfkChannelId-property) { get; set; } | ID of afk channel |
-| [AfkTimeout](#AfkTimeout-property) { get; set; } | Afk timeout in seconds Can be set to: null, 60, 300, 900, 1800, 3600 |
-| [Channels](#Channels-property) { get; set; } | Channels in the guild |
-| [DefaultMessageNotifications](#DefaultMessageNotifications-property) { get; set; } | Default message notification level |
-| [ExplicitContentFilter](#ExplicitContentFilter-property) { get; set; } | Explicit content filter level |
-| [Icon](#Icon-property) { get; set; } | Base64 128x128 image for the guild icon |
-| [Name](#Name-property) { get; set; } | Name of the guild (2-100 characters) |
-| [Region](#Region-property) { get; set; } | Voice region id |
-| [Roles](#Roles-property) { get; set; } | Roles in the guild |
-| [SystemChannelFlags](#SystemChannelFlags-property) { get; set; } | System channel flags |
-| [SystemChannelId](#SystemChannelId-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
-| [VerificationLevel](#VerificationLevel-property) { get; set; } | Verification level |
-| [Validate](#Validate-method)() |  |
+| [GuildCreate](#guildcreate-constructor)() | The default constructor. |
+| [AfkChannelId](#afkchannelid-property) { get; set; } | ID of afk channel |
+| [AfkTimeout](#afktimeout-property) { get; set; } | Afk timeout in seconds Can be set to: null, 60, 300, 900, 1800, 3600 |
+| [Channels](#channels-property) { get; set; } | Channels in the guild |
+| [DefaultMessageNotifications](#defaultmessagenotifications-property) { get; set; } | Default message notification level |
+| [ExplicitContentFilter](#explicitcontentfilter-property) { get; set; } | Explicit content filter level |
+| [Icon](#icon-property) { get; set; } | Base64 128x128 image for the guild icon |
+| [Name](#name-property) { get; set; } | Name of the guild (2-100 characters) |
+| [Region](#region-property) { get; set; } | Voice region id |
+| [Roles](#roles-property) { get; set; } | Roles in the guild |
+| [SystemChannelFlags](#systemchannelflags-property) { get; set; } | System channel flags |
+| [SystemChannelId](#systemchannelid-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
+| [VerificationLevel](#verificationlevel-property) { get; set; } | Verification level |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

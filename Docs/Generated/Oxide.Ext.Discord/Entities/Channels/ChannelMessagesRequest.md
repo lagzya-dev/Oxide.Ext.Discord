@@ -10,12 +10,12 @@ public class ChannelMessagesRequest : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ChannelMessagesRequest](#ChannelMessagesRequest-constructor)() | The default constructor. |
-| [After](#After-property) { get; set; } | Get messages after this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
-| [Around](#Around-property) { get; set; } | Get messages around this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
-| [Before](#Before-property) { get; set; } | Get messages before this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
-| [Limit](#Limit-property) { get; set; } | Max number of messages to return (1-100) |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [ChannelMessagesRequest](#channelmessagesrequest-constructor)() | The default constructor. |
+| [After](#after-property) { get; set; } | Get messages after this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
+| [Around](#around-property) { get; set; } | Get messages around this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
+| [Before](#before-property) { get; set; } | Get messages before this message ID Before, after, and around keys are mutually exclusive, only one may be passed at a time |
+| [Limit](#limit-property) { get; set; } | Max number of messages to return (1-100) |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

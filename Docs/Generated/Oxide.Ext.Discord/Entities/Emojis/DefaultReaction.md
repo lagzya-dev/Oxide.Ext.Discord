@@ -10,9 +10,9 @@ public class DefaultReaction
 
 | name | description |
 | --- | --- |
-| [DefaultReaction](#DefaultReaction-constructor)() | The default constructor. |
-| [EmojiId](#EmojiId-property) { get; set; } | The id of a guild's custom emoji |
-| [EmojiName](#EmojiName-property) { get; set; } | The unicode character of the emoji |
+| [DefaultReaction](#defaultreaction-constructor)() | The default constructor. |
+| [EmojiId](#emojiid-property) { get; set; } | The id of a guild's custom emoji |
+| [EmojiName](#emojiname-property) { get; set; } | The unicode character of the emoji |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class ActivityAssets
 
 | name | description |
 | --- | --- |
-| [ActivityAssets](#ActivityAssets-constructor)() | The default constructor. |
-| [LargeImage](#LargeImage-property) { get; set; } | The id for a large asset of the activity, usually a snowflake |
-| [LargeText](#LargeText-property) { get; set; } | Text displayed when hovering over the large image of the activity |
-| [SmallImage](#SmallImage-property) { get; set; } | The id for a small asset of the activity, usually a snowflake |
-| [SmallText](#SmallText-property) { get; set; } | Text displayed when hovering over the small image of the activity |
+| [ActivityAssets](#activityassets-constructor)() | The default constructor. |
+| [LargeImage](#largeimage-property) { get; set; } | The id for a large asset of the activity, usually a snowflake |
+| [LargeText](#largetext-property) { get; set; } | Text displayed when hovering over the large image of the activity |
+| [SmallImage](#smallimage-property) { get; set; } | The id for a small asset of the activity, usually a snowflake |
+| [SmallText](#smalltext-property) { get; set; } | Text displayed when hovering over the small image of the activity |
 
 ## See Also
 

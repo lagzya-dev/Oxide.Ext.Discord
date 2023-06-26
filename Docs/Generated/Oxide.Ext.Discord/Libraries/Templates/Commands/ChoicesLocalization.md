@@ -10,10 +10,10 @@ public class ChoicesLocalization
 
 | name | description |
 | --- | --- |
-| [ChoicesLocalization](#ChoicesLocalization-constructor)() | Constructor |
-| [ChoicesLocalization](#ChoicesLocalization-constructor)(…) | Constructor for command option choice localization (2 constructors) |
-| [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
-| [ApplyChoiceLocalization](#ApplyChoiceLocalization-method)(…) | Apply Choice Localizations |
+| [ChoicesLocalization](#choiceslocalization-constructor)() | Constructor |
+| [ChoicesLocalization](#choiceslocalization-constructor-1-of-2))(…) | Constructor for command option choice localization (2 constructors) |
+| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
+| [ApplyChoiceLocalization](#applychoicelocalization-method)(…) | Apply Choice Localizations |
 
 ## See Also
 
@@ -59,6 +59,46 @@ public ChoicesLocalization()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# ChoicesLocalization constructor (2 of 3)
+
+Constructor for command option choice localization
+
+```csharp
+public ChoicesLocalization(string name)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Localized choice name |
+
+## See Also
+
+* class [ChoicesLocalization](./ChoicesLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+
+---
+
+# ChoicesLocalization constructor (3 of 3)
+
+Constructor
+
+```csharp
+public ChoicesLocalization(CommandOption option, string lang)
+```
+
+| parameter | description |
+| --- | --- |
+| option | Option to localize |
+| lang | Oxide lang of the localization |
+
+## See Also
+
+* class [CommandOption](../../../Entities/Interactions/ApplicationCommands/CommandOption.md)
+* class [ChoicesLocalization](./ChoicesLocalization.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

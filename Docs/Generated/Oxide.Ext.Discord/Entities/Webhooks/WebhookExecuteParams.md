@@ -10,12 +10,12 @@ public class WebhookExecuteParams : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [WebhookExecuteParams](#WebhookExecuteParams-constructor)() | The default constructor. |
-| [SendType](#SendType-property) { get; set; } | Which type of webhook are we trying to send (Discord, Slack, Github) Defaults to Discord |
-| [ThreadId](#ThreadId-property) { get; set; } | If you're sending a message to a thread instead of a channel put the ID of the thread here. This field is optional and defaults to null |
-| [Wait](#Wait-property) { get; } | Should we wait for a webhook to return a message or is this a fire and forget. Not settable by devs as it's controlled by which method is called |
-| [GetWebhookFormat](#GetWebhookFormat-method)() | Returns the URL formatting for the webhook type |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [WebhookExecuteParams](#webhookexecuteparams-constructor)() | The default constructor. |
+| [SendType](#sendtype-property) { get; set; } | Which type of webhook are we trying to send (Discord, Slack, Github) Defaults to Discord |
+| [ThreadId](#threadid-property) { get; set; } | If you're sending a message to a thread instead of a channel put the ID of the thread here. This field is optional and defaults to null |
+| [Wait](#wait-property) { get; } | Should we wait for a webhook to return a message or is this a fire and forget. Not settable by devs as it's controlled by which method is called |
+| [GetWebhookFormat](#getwebhookformat-method)() | Returns the URL formatting for the webhook type |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

@@ -10,12 +10,12 @@ public interface ILogger
 
 | name | description |
 | --- | --- |
-| [IsConsoleLogging](#IsConsoleLogging-method)(…) | Returns if the logger is logging for server console |
-| [IsFileLogging](#IsFileLogging-method)(…) | Returns if the logger is logging for file logger |
-| [IsLogging](#IsLogging-method)(…) | Returns true if the logger is logging for the passed log level |
-| [Log](#Log-method)(…) | Log the message with the specified level |
-| [Shutdown](#Shutdown-method)() | Shuts down the logger |
-| [UpdateLogLevel](#UpdateLogLevel-method)(…) | Updates the log level for the current logger |
+| [IsConsoleLogging](#isconsolelogging-method)(…) | Returns if the logger is logging for server console |
+| [IsFileLogging](#isfilelogging-method)(…) | Returns if the logger is logging for file logger |
+| [IsLogging](#islogging-method)(…) | Returns true if the logger is logging for the passed log level |
+| [Log](#log-method)(…) | Log the message with the specified level |
+| [Shutdown](#shutdown-method)() | Shuts down the logger |
+| [UpdateLogLevel](#updateloglevel-method)(…) | Updates the log level for the current logger |
 
 ## See Also
 

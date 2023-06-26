@@ -10,7 +10,7 @@ public class InvalidFileNameException : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| static readonly [FilenameValidation](#FilenameValidation-field) | Regex file name validation ensuring filenames are valid |
+| static readonly [FilenameValidation](#filenamevalidation-field) | Regex file name validation ensuring filenames are valid |
 
 ## See Also
 

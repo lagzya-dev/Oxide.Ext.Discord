@@ -10,16 +10,16 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [RequestHandler](#RequestHandler-constructor)() | Constructor |
-| [Abort](#Abort-method)() | Aborts a currently running request |
-| [LogDebug](#LogDebug-method)(…) |  |
-| static [StartRequest](#StartRequest-method)(…) | Creates a new [`RequestHandler`](./RequestHandler.md) |
+| [RequestHandler](#requesthandler-constructor)() | Constructor |
+| [Abort](#abort-method)() | Aborts a currently running request |
+| [LogDebug](#logdebug-method)(…) |  |
+| static [StartRequest](#startrequest-method)(…) | Creates a new [`RequestHandler`](./RequestHandler.md) |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

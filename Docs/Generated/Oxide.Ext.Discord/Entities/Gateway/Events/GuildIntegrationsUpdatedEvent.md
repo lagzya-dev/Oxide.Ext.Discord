@@ -10,8 +10,8 @@ public class GuildIntegrationsUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [GuildIntegrationsUpdatedEvent](#GuildIntegrationsUpdatedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild whose integrations were updated |
+| [GuildIntegrationsUpdatedEvent](#guildintegrationsupdatedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild whose integrations were updated |
 
 ## See Also
 

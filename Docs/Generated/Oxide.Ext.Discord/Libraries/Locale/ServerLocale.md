@@ -10,18 +10,18 @@ public struct ServerLocale : IEquatable<ServerLocale>
 
 | name | description |
 | --- | --- |
-| static readonly [Default](#Default-field) | The default locale for servers |
-| static [Parse](#Parse-method)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
-| [IsDefault](#IsDefault-property) { get; } | Returns if the Locale is the default server language "en" |
-| [IsValid](#IsValid-property) { get; } | Returns if the Locale is valid |
-| readonly [Id](#Id-field) | ID of the Locale |
-| override [Equals](#Equals-method)(…) |  |
-| [Equals](#Equals-method)(…) |  |
-| [GetDiscordLocale](#GetDiscordLocale-method)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
-| override [GetHashCode](#GetHashCode-method)() |  |
-| override [ToString](#ToString-method)() | Returns the ID of the ServerLocale |
-| [operator ==](#op_Equality-operator) | Returns if two Server Locales are equal to each other |
-| [operator !=](#op_Inequality-operator) | Returns if two Server Locales are not equal to each other |
+| static readonly [Default](#default-field) | The default locale for servers |
+| static [Parse](#parse-method)(…) | Parses a locale returning a [`ServerLocale`](./ServerLocale.md) |
+| [IsDefault](#isdefault-property) { get; } | Returns if the Locale is the default server language "en" |
+| [IsValid](#isvalid-property) { get; } | Returns if the Locale is valid |
+| readonly [Id](#id-field) | ID of the Locale |
+| override [Equals](#equals-method)(…) |  |
+| [Equals](#equals-method)(…) |  |
+| [GetDiscordLocale](#getdiscordlocale-method)() | Returns the [`DiscordLocale`](./DiscordLocale.md) for this server locale |
+| override [GetHashCode](#gethashcode-method)() |  |
+| override [ToString](#tostring-method)() | Returns the ID of the ServerLocale |
+| [operator ==](#serverlocale-equality-operator) | Returns if two Server Locales are equal to each other |
+| [operator !=](#serverlocale-inequality-operator) | Returns if two Server Locales are not equal to each other |
 
 ## See Also
 
@@ -78,6 +78,18 @@ public override bool Equals(object obj)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Equals method (2 of 2)
+
+```csharp
+public bool Equals(ServerLocale other)
+```
+
+## See Also
+
+* struct [ServerLocale](./ServerLocale.md)
+* namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetHashCode method

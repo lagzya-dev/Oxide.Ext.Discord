@@ -19,7 +19,7 @@ public class DiscordApplicationCommandAttribute : BaseApplicationCommandAttribut
 
 | name | description |
 | --- | --- |
-| [DiscordApplicationCommandAttribute](#DiscordApplicationCommandAttribute-constructor)(…) | Constructor |
+| [DiscordApplicationCommandAttribute](#discordapplicationcommandattribute-constructor)(…) | Constructor |
 
 ## See Also
 

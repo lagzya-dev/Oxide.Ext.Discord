@@ -10,12 +10,12 @@ public class GuildMemberAdd
 
 | name | description |
 | --- | --- |
-| [GuildMemberAdd](#GuildMemberAdd-constructor)() | The default constructor. |
-| [AccessToken](#AccessToken-property) { get; set; } | An oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild |
-| [Deaf](#Deaf-property) { get; set; } | Whether the user is deafened in voice channels Requires permission DEAFEN_MEMBERS |
-| [Mute](#Mute-property) { get; set; } | Whether the user is muted in voice channels Requires permission MUTE_MEMBERS |
-| [Nick](#Nick-property) { get; set; } | Value to set users nickname to Requires permission MANAGE_NICKNAMES |
-| [Roles](#Roles-property) { get; set; } | Role ids the member is assigned Requires permission MANAGE_ROLES |
+| [GuildMemberAdd](#guildmemberadd-constructor)() | The default constructor. |
+| [AccessToken](#accesstoken-property) { get; set; } | An oauth2 access token granted with the guilds.join to the bot's application for the user you want to add to the guild |
+| [Deaf](#deaf-property) { get; set; } | Whether the user is deafened in voice channels Requires permission DEAFEN_MEMBERS |
+| [Mute](#mute-property) { get; set; } | Whether the user is muted in voice channels Requires permission MUTE_MEMBERS |
+| [Nick](#nick-property) { get; set; } | Value to set users nickname to Requires permission MANAGE_NICKNAMES |
+| [Roles](#roles-property) { get; set; } | Role ids the member is assigned Requires permission MANAGE_ROLES |
 
 ## See Also
 

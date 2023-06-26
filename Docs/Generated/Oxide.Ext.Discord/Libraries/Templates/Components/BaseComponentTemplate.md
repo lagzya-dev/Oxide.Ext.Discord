@@ -10,15 +10,15 @@ public abstract class BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [Type](#Type-property) { get; set; } | Type of the component |
-| [Visible](#Visible-property) { get; set; } | If the component should be added to the message |
-| abstract [ToComponent](#ToComponent-method)(…) | Returns the built component |
+| [Type](#type-property) { get; set; } | Type of the component |
+| [Visible](#visible-property) { get; set; } | If the component should be added to the message |
+| abstract [ToComponent](#tocomponent-method)(…) | Returns the built component |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseComponentTemplate](#BaseComponentTemplate-constructor)(…) | Represents a base Message Component Template |
+| [BaseComponentTemplate](#basecomponenttemplate-constructor)(…) | Represents a base Message Component Template |
 
 ## See Also
 

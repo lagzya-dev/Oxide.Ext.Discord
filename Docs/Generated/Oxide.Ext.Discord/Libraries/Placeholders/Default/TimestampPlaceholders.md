@@ -10,15 +10,15 @@ public static class TimestampPlaceholders
 
 | name | description |
 | --- | --- |
-| static [LongDate](#LongDate-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [LongDateTime](#LongDateTime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [Longtime](#Longtime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [RelativeTime](#RelativeTime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortDate](#ShortDate-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortDateTime](#ShortDateTime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [ShortTime](#ShortTime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
-| static [Timestamp](#Timestamp-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [LongDate](#longdate-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [LongDateTime](#longdatetime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [Longtime](#longtime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [RelativeTime](#relativetime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortDate](#shortdate-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortDateTime](#shortdatetime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [ShortTime](#shorttime-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
+| static [Timestamp](#timestamp-method)(…) | [`UnixTimestamp`](../../../Helpers/DiscordFormatting/UnixTimestamp.md) placeholder |
 
 ## See Also
 

@@ -10,29 +10,29 @@ public class InteractionAutoCompleteBuilder
 
 | name | description |
 | --- | --- |
-| [InteractionAutoCompleteBuilder](#InteractionAutoCompleteBuilder-constructor)(…) | Constructor |
-| [Count](#Count-property) { get; } | Number of added choices |
-| [AddAllOnlineFirstPlayers](#AddAllOnlineFirstPlayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
-| [AddAllPlayers](#AddAllPlayers-method)(…) | Adds Any Player to the list |
-| [AddByPlayerId](#AddByPlayerId-method)(…) | Adds a player by player Id to the list |
-| [AddChoice](#AddChoice-method)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
-| [AddChoices](#AddChoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
-| [AddGroups](#AddGroups-method)(…) | Adds Oxide Groups to the AutoComplete |
-| [AddGroupsWithoutPermission](#AddGroupsWithoutPermission-method)(…) | Adds The List of Groups that have this permission |
-| [AddGroupsWithoutPlayer](#AddGroupsWithoutPlayer-method)(…) | Adds The List of Groups that playerId has |
-| [AddGroupsWithPermission](#AddGroupsWithPermission-method)(…) | Adds The List of Groups that have this permission |
-| [AddGroupsWithPlayer](#AddGroupsWithPlayer-method)(…) | Adds The List of Groups that playerId has |
-| [AddLoadablePlugins](#AddLoadablePlugins-method)(…) | Adds a list of plugins that can be loaded |
-| [AddLoadedPlugins](#AddLoadedPlugins-method)(…) | Adds a list of plugins that are currently loaded |
-| [AddOfflinePlayers](#AddOfflinePlayers-method)(…) | Adds Online Players to the list |
-| [AddOnlinePlayers](#AddOnlinePlayers-method)(…) | Adds Online Players to the list |
-| [AddPermissions](#AddPermissions-method)(…) | Adds Oxide Permissions to the AutoComplete |
-| [AddPermissionsInGroup](#AddPermissionsInGroup-method)(…) | Adds List of Permissions that are in the given group |
-| [AddPermissionsNotInGroup](#AddPermissionsNotInGroup-method)(…) | Adds a List of Permissions that are not in a given group |
-| [AddPermissionsPlayerIn](#AddPermissionsPlayerIn-method)(…) | Adds The List of Permissions that playerId has |
-| [AddPermissionsPlayerNotIn](#AddPermissionsPlayerNotIn-method)(…) | Adds The List of Permissions that playerId does not have |
-| [Build](#Build-method)() | Returns the built message |
-| [CanAddChoice](#CanAddChoice-method)() | Returns if the Auto Complete can add any more choices |
+| [InteractionAutoCompleteBuilder](#interactionautocompletebuilder-constructor)(…) | Constructor |
+| [Count](#count-property) { get; } | Number of added choices |
+| [AddAllOnlineFirstPlayers](#addallonlinefirstplayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
+| [AddAllPlayers](#addallplayers-method)(…) | Adds Any Player to the list |
+| [AddByPlayerId](#addbyplayerid-method)(…) | Adds a player by player Id to the list |
+| [AddChoice](#addchoice-method-1-of-3))(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
+| [AddChoices](#addchoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
+| [AddGroups](#addgroups-method)(…) | Adds Oxide Groups to the AutoComplete |
+| [AddGroupsWithoutPermission](#addgroupswithoutpermission-method)(…) | Adds The List of Groups that have this permission |
+| [AddGroupsWithoutPlayer](#addgroupswithoutplayer-method)(…) | Adds The List of Groups that playerId has |
+| [AddGroupsWithPermission](#addgroupswithpermission-method)(…) | Adds The List of Groups that have this permission |
+| [AddGroupsWithPlayer](#addgroupswithplayer-method)(…) | Adds The List of Groups that playerId has |
+| [AddLoadablePlugins](#addloadableplugins-method)(…) | Adds a list of plugins that can be loaded |
+| [AddLoadedPlugins](#addloadedplugins-method)(…) | Adds a list of plugins that are currently loaded |
+| [AddOfflinePlayers](#addofflineplayers-method)(…) | Adds Online Players to the list |
+| [AddOnlinePlayers](#addonlineplayers-method)(…) | Adds Online Players to the list |
+| [AddPermissions](#addpermissions-method)(…) | Adds Oxide Permissions to the AutoComplete |
+| [AddPermissionsInGroup](#addpermissionsingroup-method)(…) | Adds List of Permissions that are in the given group |
+| [AddPermissionsNotInGroup](#addpermissionsnotingroup-method)(…) | Adds a List of Permissions that are not in a given group |
+| [AddPermissionsPlayerIn](#addpermissionsplayerin-method)(…) | Adds The List of Permissions that playerId has |
+| [AddPermissionsPlayerNotIn](#addpermissionsplayernotin-method)(…) | Adds The List of Permissions that playerId does not have |
+| [Build](#build-method)() | Returns the built message |
+| [CanAddChoice](#canaddchoice-method)() | Returns if the Auto Complete can add any more choices |
 
 ## See Also
 
@@ -65,6 +65,57 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddChoice method (2 of 3)
+
+Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+
+```csharp
+public InteractionAutoCompleteBuilder AddChoice(string name, object value)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the choice |
+| value | Value of the choice |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# AddChoice method (3 of 3)
+
+Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+
+```csharp
+public InteractionAutoCompleteBuilder AddChoice(string name, object value, Plugin plugin, 
+    string langKey)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the choice |
+| value | Value of the choice |
+| plugin | Plugin to lookup the langkey for |
+| langKey | Lang key for the name |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # AddChoices method

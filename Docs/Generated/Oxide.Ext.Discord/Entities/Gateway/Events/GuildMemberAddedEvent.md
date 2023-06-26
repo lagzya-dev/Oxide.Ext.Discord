@@ -10,8 +10,8 @@ public class GuildMemberAddedEvent : GuildMember
 
 | name | description |
 | --- | --- |
-| [GuildMemberAddedEvent](#GuildMemberAddedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
+| [GuildMemberAddedEvent](#guildmemberaddedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
 
 ## See Also
 

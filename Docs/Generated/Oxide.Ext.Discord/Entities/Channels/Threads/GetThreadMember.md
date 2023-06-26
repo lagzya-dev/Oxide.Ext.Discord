@@ -10,9 +10,9 @@ public class GetThreadMember : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [GetThreadMember](#GetThreadMember-constructor)() | The default constructor. |
-| [WithMember](#WithMember-property) { get; set; } | Whether to include a guild member object for the thread member |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [GetThreadMember](#getthreadmember-constructor)() | The default constructor. |
+| [WithMember](#withmember-property) { get; set; } | Whether to include a guild member object for the thread member |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

@@ -10,10 +10,10 @@ public class IntegrationDeletedEvent
 
 | name | description |
 | --- | --- |
-| [IntegrationDeletedEvent](#IntegrationDeletedEvent-constructor)() | The default constructor. |
-| [ApplicationId](#ApplicationId-property) { get; set; } | Application ID of the integration |
-| [GuildId](#GuildId-property) { get; set; } | Guild ID the integration was in |
-| [Id](#Id-property) { get; set; } | ID of the integration |
+| [IntegrationDeletedEvent](#integrationdeletedevent-constructor)() | The default constructor. |
+| [ApplicationId](#applicationid-property) { get; set; } | Application ID of the integration |
+| [GuildId](#guildid-property) { get; set; } | Guild ID the integration was in |
+| [Id](#id-property) { get; set; } | ID of the integration |
 
 ## See Also
 

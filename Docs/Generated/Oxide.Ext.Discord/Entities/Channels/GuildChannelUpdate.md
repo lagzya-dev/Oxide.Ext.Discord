@@ -10,24 +10,24 @@ public class GuildChannelUpdate
 
 | name | description |
 | --- | --- |
-| [GuildChannelUpdate](#GuildChannelUpdate-constructor)() | The default constructor. |
-| [AvailableTags](#AvailableTags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel |
-| [Bitrate](#Bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
-| [DefaultAutoArchiveDuration](#DefaultAutoArchiveDuration-property) { get; set; } | The default duration for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
-| [DefaultReactionEmoji](#DefaultReactionEmoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
-| [DefaultThreadRateLimitPerUser](#DefaultThreadRateLimitPerUser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
-| [Name](#Name-property) { get; set; } | The name of the channel (1-100 characters) |
-| [Nsfw](#Nsfw-property) { get; set; } | Whether the channel is nsfw |
-| [ParentId](#ParentId-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
-| [PermissionOverwrites](#PermissionOverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
-| [Position](#Position-property) { get; set; } | The position of the channel in the left-hand listing |
-| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
-| [RtcRegion](#RtcRegion-property) { get; set; } | Channel voice region id, automatic when set to null |
-| [Topic](#Topic-property) { get; set; } | The channel topic (0-1024 characters) |
-| [Type](#Type-property) { get; set; } | the type of channel See [`ChannelType`](./ChannelType.md) |
-| [UserLimit](#UserLimit-property) { get; set; } | The user limit of the voice channel |
-| [VideoQualityMode](#VideoQualityMode-property) { get; set; } | The camera video quality mode of the voice channel |
-| [Validate](#Validate-method)() |  |
+| [GuildChannelUpdate](#guildchannelupdate-constructor)() | The default constructor. |
+| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel |
+| [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
+| [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | The default duration for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
+| [DefaultThreadRateLimitPerUser](#defaultthreadratelimitperuser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
+| [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
+| [Nsfw](#nsfw-property) { get; set; } | Whether the channel is nsfw |
+| [ParentId](#parentid-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
+| [PermissionOverwrites](#permissionoverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
+| [Position](#position-property) { get; set; } | The position of the channel in the left-hand listing |
+| [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
+| [RtcRegion](#rtcregion-property) { get; set; } | Channel voice region id, automatic when set to null |
+| [Topic](#topic-property) { get; set; } | The channel topic (0-1024 characters) |
+| [Type](#type-property) { get; set; } | the type of channel See [`ChannelType`](./ChannelType.md) |
+| [UserLimit](#userlimit-property) { get; set; } | The user limit of the voice channel |
+| [VideoQualityMode](#videoqualitymode-property) { get; set; } | The camera video quality mode of the voice channel |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

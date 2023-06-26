@@ -10,11 +10,11 @@ public class RoleSubscription
 
 | name | description |
 | --- | --- |
-| [RoleSubscription](#RoleSubscription-constructor)() | The default constructor. |
-| [IsRenewal](#IsRenewal-property) { get; set; } | Whether this notification is for a renewal rather than a new purchase |
-| [RoleSubscriptionListingId](#RoleSubscriptionListingId-property) { get; set; } | The id of the sku and listing that the user is subscribed to |
-| [TierName](#TierName-property) { get; set; } | The name of the tier that the user is subscribed to |
-| [TotalMonthsSubscribed](#TotalMonthsSubscribed-property) { get; set; } | The cumulative number of months that the user has been subscribed for |
+| [RoleSubscription](#rolesubscription-constructor)() | The default constructor. |
+| [IsRenewal](#isrenewal-property) { get; set; } | Whether this notification is for a renewal rather than a new purchase |
+| [RoleSubscriptionListingId](#rolesubscriptionlistingid-property) { get; set; } | The id of the sku and listing that the user is subscribed to |
+| [TierName](#tiername-property) { get; set; } | The name of the tier that the user is subscribed to |
+| [TotalMonthsSubscribed](#totalmonthssubscribed-property) { get; set; } | The cumulative number of months that the user has been subscribed for |
 
 ## See Also
 

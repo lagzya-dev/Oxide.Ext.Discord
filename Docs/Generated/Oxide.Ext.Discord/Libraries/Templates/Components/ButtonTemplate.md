@@ -10,15 +10,15 @@ public class ButtonTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
-| [ButtonTemplate](#ButtonTemplate-constructor)() | Default Constructor |
-| [ButtonTemplate](#ButtonTemplate-constructor)(…) | Constructor without emoji (2 constructors) |
-| [Command](#Command-property) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
-| [Emoji](#Emoji-property) { get; set; } | Emoji for the button |
-| [Enabled](#Enabled-property) { get; set; } | If the Button is enabled |
-| [Inline](#Inline-property) { get; set; } | Should the button be on the same or new row |
-| [Label](#Label-property) { get; set; } | Display label for the button |
-| [Style](#Style-property) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
-| override [ToComponent](#ToComponent-method)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
+| [ButtonTemplate](#buttontemplate-constructor)() | Default Constructor |
+| [ButtonTemplate](#buttontemplate-constructor-1-of-2))(…) | Constructor without emoji (2 constructors) |
+| [Command](#command-property) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
+| [Emoji](#emoji-property) { get; set; } | Emoji for the button |
+| [Enabled](#enabled-property) { get; set; } | If the Button is enabled |
+| [Inline](#inline-property) { get; set; } | Should the button be on the same or new row |
+| [Label](#label-property) { get; set; } | Display label for the button |
+| [Style](#style-property) { get; set; } | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) for the button |
+| override [ToComponent](#tocomponent-method)(…) | Converts the template to a [`ButtonComponent`](../../../Entities/Interactions/MessageComponents/ButtonComponent.md) |
 
 ## See Also
 
@@ -60,6 +60,57 @@ public ButtonTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# ButtonTemplate constructor (2 of 3)
+
+Constructor without emoji
+
+```csharp
+public ButtonTemplate(string label, ButtonStyle style, string command, bool enabled = true, 
+    bool inline = true)
+```
+
+| parameter | description |
+| --- | --- |
+| label | Button Label |
+| style | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) |
+| command | Button Command |
+| enabled | Is button enabled? |
+| inline | Should the button be on the same row or a new row? |
+
+## See Also
+
+* enum [ButtonStyle](../../../Entities/Interactions/MessageComponents/ButtonStyle.md)
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+
+---
+
+# ButtonTemplate constructor (3 of 3)
+
+Constructor with emoji
+
+```csharp
+public ButtonTemplate(string label, ButtonStyle style, string command, string emoji, 
+    bool enabled = true, bool inline = true)
+```
+
+| parameter | description |
+| --- | --- |
+| label | Button Label |
+| style | [`ButtonStyle`](../../../Entities/Interactions/MessageComponents/ButtonStyle.md) |
+| command | Button Command |
+| emoji | Emoji for the button |
+| enabled | Is button enabled? |
+| inline | Should the button be on the same row or a new row? |
+
+## See Also
+
+* enum [ButtonStyle](../../../Entities/Interactions/MessageComponents/ButtonStyle.md)
+* class [ButtonTemplate](./ButtonTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Label property

@@ -18,14 +18,14 @@ public abstract class BaseWebhookMessageBuilder<TMessage, TBuilder> :
 
 | name | description |
 | --- | --- |
-| [AddAvatarUrl](#AddAvatarUrl-method)(…) | Adds a custom avatar url for the sender |
-| [AddUserName](#AddUserName-method)(…) | Adds a custom username for the sender |
+| [AddAvatarUrl](#addavatarurl-method)(…) | Adds a custom avatar url for the sender |
+| [AddUserName](#addusername-method)(…) | Adds a custom username for the sender |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseWebhookMessageBuilder](#BaseWebhookMessageBuilder-constructor)(…) | Constructor |
+| [BaseWebhookMessageBuilder](#basewebhookmessagebuilder&amp;lt;tmessage,tbuilder&amp;gt;-constructor)(…) | Constructor |
 
 ## See Also
 

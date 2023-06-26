@@ -10,16 +10,16 @@ public class WebhookEditMessage : IDiscordMessageTemplate, IFileAttachments
 
 | name | description |
 | --- | --- |
-| [WebhookEditMessage](#WebhookEditMessage-constructor)() | The default constructor. |
-| [AllowedMentions](#AllowedMentions-property) { get; set; } | Allowed mentions for the message |
-| [Attachments](#Attachments-property) { get; set; } | Attachments for the message |
-| [Components](#Components-property) { get; set; } | Components to include with the message |
-| [Content](#Content-property) { get; set; } | The message contents (up to 2000 characters) |
-| [Embeds](#Embeds-property) { get; set; } | Embedded rich content (Up to 10 embeds) |
-| [FileAttachments](#FileAttachments-property) { get; set; } | Attachments for a discord message |
-| [AddAttachment](#AddAttachment-method)(…) | Adds an attachment to the message |
-| [AddEmbed](#AddEmbed-method)(…) | Adds a new embed to the list of embed to send |
-| [Validate](#Validate-method)() |  |
+| [WebhookEditMessage](#webhookeditmessage-constructor)() | The default constructor. |
+| [AllowedMentions](#allowedmentions-property) { get; set; } | Allowed mentions for the message |
+| [Attachments](#attachments-property) { get; set; } | Attachments for the message |
+| [Components](#components-property) { get; set; } | Components to include with the message |
+| [Content](#content-property) { get; set; } | The message contents (up to 2000 characters) |
+| [Embeds](#embeds-property) { get; set; } | Embedded rich content (Up to 10 embeds) |
+| [FileAttachments](#fileattachments-property) { get; set; } | Attachments for a discord message |
+| [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
+| [AddEmbed](#addembed-method)(…) | Adds a new embed to the list of embed to send |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

@@ -10,83 +10,83 @@ public class DiscordChannel : IDebugLoggable, ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [DiscordChannel](#DiscordChannel-constructor)() | The default constructor. |
-| [ApplicationId](#ApplicationId-property) { get; set; } | Application id of the group DM creator if it is bot-created |
-| [AppliedTags](#AppliedTags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
-| [AvailableTags](#AvailableTags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel Limited to 20 |
-| [Bitrate](#Bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel |
-| [DefaultAutoArchiveDuration](#DefaultAutoArchiveDuration-property) { get; set; } | Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [DefaultForumLayout](#DefaultForumLayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
-| [DefaultReactionEmoji](#DefaultReactionEmoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
-| [DefaultSortOrder](#DefaultSortOrder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
-| [DefaultThreadRateLimitPerUser](#DefaultThreadRateLimitPerUser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
-| [Flags](#Flags-property) { get; set; } | Flags for this channel |
-| [GuildId](#GuildId-property) { get; set; } | the ID of the guild Warning: May be missing for some channel objects received over gateway guild dispatches |
-| [Icon](#Icon-property) { get; set; } | icon hash of the group DM |
-| [IconUrl](#IconUrl-property) { get; } | Returns the Icon URL for the given channel |
-| [Id](#Id-property) { get; set; } | The ID of this channel |
-| [LastMessageId](#LastMessageId-property) { get; set; } | The id of the last message sent in this channel (or thread for GUILD_FORUM channels) May not point to an existing or valid message or thread |
-| [LastPinTimestamp](#LastPinTimestamp-property) { get; set; } | When the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned. |
-| [Managed](#Managed-property) { get; set; } | For group DM channels: whether the channel is managed by an application via the `gdm.join` OAuth2 scope |
-| [Member](#Member-property) { get; set; } | Thread member object for the current user, if they have joined the thread, only included on certain API endpoints |
-| [MemberCount](#MemberCount-property) { get; set; } | An approximate count of users in a thread, stops counting at 50 |
-| [Mention](#Mention-property) { get; } | Returns a string to mention this channel in a message |
-| [MessageCount](#MessageCount-property) { get; set; } | umber of messages (not including the initial messages or deleted messages) in a thread (if the thread was created before July 1, 2022, it stops counting at 50) |
-| [Name](#Name-property) { get; set; } | The name of the channel (1-100 characters) |
-| [Nsfw](#Nsfw-property) { get; set; } | Whether the channel is nsfw |
-| [OwnerId](#OwnerId-property) { get; set; } | ID of the DM creator |
-| [ParentId](#ParentId-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
-| [PermissionOverwrites](#PermissionOverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
-| [Permissions](#Permissions-property) { get; set; } | Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [Position](#Position-property) { get; set; } | Sorting position of the channel |
-| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
-| [Recipients](#Recipients-property) { get; set; } | The recipients of the DM |
-| [RtcRegion](#RtcRegion-property) { get; set; } | Voice region id for the voice channel, automatic when set to null |
-| [ThreadMembers](#ThreadMembers-property) { get; } | List of thread members if channel is thread; Null Otherwise. |
-| [ThreadMetadata](#ThreadMetadata-property) { get; set; } | Thread-specific fields not needed by other channels |
-| [Topic](#Topic-property) { get; set; } | The channel topic (0-1024 characters) |
-| [TotalMessageSent](#TotalMessageSent-property) { get; set; } | Number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted |
-| [Type](#Type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
-| [UserLimit](#UserLimit-property) { get; set; } | The user limit of the voice channel |
-| [VideoQualityMode](#VideoQualityMode-property) { get; set; } | The camera video quality mode of the voice channel 1 when not present |
-| [AddThreadMember](#AddThreadMember-method)(…) | Adds another user to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. See [Add Thread Member](https://discord.com/developers/docs/resources/channel#add-thread-member) |
-| [BulkDeleteMessages](#BulkDeleteMessages-method)(…) | Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission. See [Bulk Delete Messages](https://discord.com/developers/docs/resources/channel#bulk-delete-messages) |
-| [CreateGlobalTemplateMessage](#CreateGlobalTemplateMessage-method)(…) | Creates a message in a text channel using a global message template |
-| [CreateInvite](#CreateInvite-method)(…) | Create a new invite object for the channel. Only usable for guild channels. Requires the CREATE_INSTANT_INVITE permission. See [Create Channel Invite](https://discord.com/developers/docs/resources/channel#create-channel-invite) |
-| [CreateMessage](#CreateMessage-method)(…) | Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message) (4 methods) |
-| [CreateTemplateMessage](#CreateTemplateMessage-method)(…) | Creates a message in a text channel using a localized message template |
-| [Delete](#Delete-method)(…) | Delete a channel, or close a private message. Requires the MANAGE_CHANNELS or MANAGE_THREADS permission for the guild depending on the channel type. See [Delete/Close Channel](https://discord.com/developers/docs/resources/channel#deleteclose-channel) |
-| [DeletePermission](#DeletePermission-method)(…) | Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. See [Delete Channel Permission](https://discord.com/developers/docs/resources/channel#delete-channel-permission) (2 methods) |
-| [EditGroupDmChannel](#EditGroupDmChannel-method)(…) | Update a group dm channel's settings. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
-| [EditGuildChannel](#EditGuildChannel-method)(…) | Update a guild channel's settings. Requires the MANAGE_CHANNELS permission for the guild. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
-| [EditPermissions](#EditPermissions-method)(…) | Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. See [Edit Channel Permissions](https://discord.com/developers/docs/resources/channel#edit-channel-permissions) |
-| [EditThreadChannel](#EditThreadChannel-method)(…) | Update a thread channel's settings. Requires the MANAGE_THREADS permission for the guild. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
-| [FollowNewsChannel](#FollowNewsChannel-method)(…) | Follow a News Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. See [Follow Announcement Channel](https://discord.com/developers/docs/resources/channel#follow-announcement-channel) |
-| [GetInvites](#GetInvites-method)(…) | Returns a list of invite objects (with invite metadata) for the channel. Only usable for guild channels. Requires the MANAGE_CHANNELS permission. See [Get Channel Invites](https://discord.com/developers/docs/resources/channel#get-channel-invites) |
-| [GetMessage](#GetMessage-method)(…) | Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user. See [Get Channel Messages](https://discord.com/developers/docs/resources/channel#get-channel-message) |
-| [GetMessages](#GetMessages-method)(…) | Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user. If the current user is missing the 'READ_MESSAGE_HISTORY' permission in the channel then this will return no messages (since they cannot read the message history). See [Get Channel Messages](https://discord.com/developers/docs/resources/channel#get-channel-messages) |
-| [GetPinnedMessages](#GetPinnedMessages-method)(…) | Returns all pinned messages in the channel See [Get Pinned Messages](https://discord.com/developers/docs/resources/channel#get-pinned-messages) |
-| [GetStageInstance](#GetStageInstance-method)(…) | Gets the stage instance associated with the Stage channel, if it exists. See [Get Stage Instance](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) |
-| [GetThreadMember](#GetThreadMember-method)(…) | Returns a thread member object for the specified user if they are a member of the thread returns a 404 response otherwise. See [Remove Thread Member](https://discord.com/developers/docs/resources/channel#get-thread-member) |
-| [GroupDmAddRecipient](#GroupDmAddRecipient-method)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
-| [GroupDmRemoveRecipient](#GroupDmRemoveRecipient-method)(…) | Removes a recipient from a Group DM See [Group DM Remove Recipient](https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient) |
-| [IsDmChannel](#IsDmChannel-method)() | Returns if a channel is a DM channel |
-| [IsGuildChannel](#IsGuildChannel-method)() | Returns if the channel is a guild channel |
-| [IsThreadChannel](#IsThreadChannel-method)() | Returns if a channel is a thread channel |
-| [JoinThread](#JoinThread-method)(…) | Adds the bot to the thread. Also requires the thread is not archived. See [Join Thread](https://discord.com/developers/docs/resources/channel#join-thread) |
-| [LeaveThread](#LeaveThread-method)(…) | Removes the bot from the thread. Also requires the thread is not archived. See [Leave Thread](https://discord.com/developers/docs/resources/channel#leave-thread) |
-| [ListJoinedPrivateArchivedThreads](#ListJoinedPrivateArchivedThreads-method)(…) | Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission. See [List Joined Private Archived Threads](https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads) |
-| [ListPrivateArchivedThreads](#ListPrivateArchivedThreads-method)(…) | Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions. See [List Private Archived Threads](https://discord.com/developers/docs/resources/channel#list-private-archived-threads) |
-| [ListPublicArchivedThreads](#ListPublicArchivedThreads-method)(…) | Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type GUILD_PUBLIC_THREAD. When called on a GUILD_NEWS channel returns threads of type GUILD_NEWS_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission. See [List Public Archived Threads](https://discord.com/developers/docs/resources/channel#list-public-archived-threads) |
-| [ListThreadMembers](#ListThreadMembers-method)(…) | Returns array of thread members objects that are members of the thread. This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application. See [List Thread Members](https://discord.com/developers/docs/resources/channel#list-thread-members) |
-| [LogDebug](#LogDebug-method)(…) |  |
-| [RemoveThreadMember](#RemoveThreadMember-method)(…) | Removes another user from a thread. Requires the MANAGE_THREADS permission or that you are the creator of the thread. Also requires the thread is not archived. See [Remove Thread Member](https://discord.com/developers/docs/resources/channel#remove-thread-member) |
-| [StartThreadFromMessage](#StartThreadFromMessage-method)(…) | Creates a new public thread from a message See [Start Thread with Message](https://discord.com/developers/docs/resources/channel#start-thread-from-message) |
-| [StartThreadInForumChannel](#StartThreadInForumChannel-method)(…) | Creates a new thread in a forum channel, and sends a message within the created thread. Returns a channel, with a nested message object See [Start Thread in Forum Channel](https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel) |
-| [StartThreadWithoutMessage](#StartThreadWithoutMessage-method)(…) | Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD See [Start Thread without Message](https://discord.com/developers/docs/resources/channel#start-thread-without-message) |
-| [TriggerTypingIndicator](#TriggerTypingIndicator-method)(…) | Post a typing indicator for the specified channel. Generally bots should not implement this route. However, if a bot is responding to a command and expects the computation to take a few seconds, this endpoint may be called to let the user know that the bot is processing their message. See [Trigger Typing Indicator](https://discord.com/developers/docs/resources/channel#trigger-typing-indicator) |
-| static [Create](#Create-method)(…) | Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. See [Create Guild Channel](https://discord.com/developers/docs/resources/guild#create-guild-channel) |
-| static [Get](#Get-method)(…) | Get a channel by ID See [Get Channel](https://discord.com/developers/docs/resources/channel#get-channel) If the channel is a thread, a thread member object is included in the returned result. |
+| [DiscordChannel](#discordchannel-constructor)() | The default constructor. |
+| [ApplicationId](#applicationid-property) { get; set; } | Application id of the group DM creator if it is bot-created |
+| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
+| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel Limited to 20 |
+| [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel |
+| [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [DefaultForumLayout](#defaultforumlayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
+| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
+| [DefaultThreadRateLimitPerUser](#defaultthreadratelimitperuser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
+| [Flags](#flags-property) { get; set; } | Flags for this channel |
+| [GuildId](#guildid-property) { get; set; } | the ID of the guild Warning: May be missing for some channel objects received over gateway guild dispatches |
+| [Icon](#icon-property) { get; set; } | icon hash of the group DM |
+| [IconUrl](#iconurl-property) { get; } | Returns the Icon URL for the given channel |
+| [Id](#id-property) { get; set; } | The ID of this channel |
+| [LastMessageId](#lastmessageid-property) { get; set; } | The id of the last message sent in this channel (or thread for GUILD_FORUM channels) May not point to an existing or valid message or thread |
+| [LastPinTimestamp](#lastpintimestamp-property) { get; set; } | When the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned. |
+| [Managed](#managed-property) { get; set; } | For group DM channels: whether the channel is managed by an application via the `gdm.join` OAuth2 scope |
+| [Member](#member-property) { get; set; } | Thread member object for the current user, if they have joined the thread, only included on certain API endpoints |
+| [MemberCount](#membercount-property) { get; set; } | An approximate count of users in a thread, stops counting at 50 |
+| [Mention](#mention-property) { get; } | Returns a string to mention this channel in a message |
+| [MessageCount](#messagecount-property) { get; set; } | umber of messages (not including the initial messages or deleted messages) in a thread (if the thread was created before July 1, 2022, it stops counting at 50) |
+| [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
+| [Nsfw](#nsfw-property) { get; set; } | Whether the channel is nsfw |
+| [OwnerId](#ownerid-property) { get; set; } | ID of the DM creator |
+| [ParentId](#parentid-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
+| [PermissionOverwrites](#permissionoverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
+| [Permissions](#permissions-property) { get; set; } | Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [Position](#position-property) { get; set; } | Sorting position of the channel |
+| [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
+| [Recipients](#recipients-property) { get; set; } | The recipients of the DM |
+| [RtcRegion](#rtcregion-property) { get; set; } | Voice region id for the voice channel, automatic when set to null |
+| [ThreadMembers](#threadmembers-property) { get; } | List of thread members if channel is thread; Null Otherwise. |
+| [ThreadMetadata](#threadmetadata-property) { get; set; } | Thread-specific fields not needed by other channels |
+| [Topic](#topic-property) { get; set; } | The channel topic (0-1024 characters) |
+| [TotalMessageSent](#totalmessagesent-property) { get; set; } | Number of messages ever sent in a thread, it's similar to message_count on message creation, but will not decrement the number when a message is deleted |
+| [Type](#type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
+| [UserLimit](#userlimit-property) { get; set; } | The user limit of the voice channel |
+| [VideoQualityMode](#videoqualitymode-property) { get; set; } | The camera video quality mode of the voice channel 1 when not present |
+| [AddThreadMember](#addthreadmember-method)(…) | Adds another user to a thread. Requires the ability to send messages in the thread. Also requires the thread is not archived. See [Add Thread Member](https://discord.com/developers/docs/resources/channel#add-thread-member) |
+| [BulkDeleteMessages](#bulkdeletemessages-method)(…) | Delete multiple messages in a single request. This endpoint can only be used on guild channels and requires the MANAGE_MESSAGES permission. See [Bulk Delete Messages](https://discord.com/developers/docs/resources/channel#bulk-delete-messages) |
+| [CreateGlobalTemplateMessage](#createglobaltemplatemessage-method)(…) | Creates a message in a text channel using a global message template |
+| [CreateInvite](#createinvite-method)(…) | Create a new invite object for the channel. Only usable for guild channels. Requires the CREATE_INSTANT_INVITE permission. See [Create Channel Invite](https://discord.com/developers/docs/resources/channel#create-channel-invite) |
+| [CreateMessage](#createmessage-method-1-of-4))(…) | Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message) (4 methods) |
+| [CreateTemplateMessage](#createtemplatemessage-method)(…) | Creates a message in a text channel using a localized message template |
+| [Delete](#delete-method)(…) | Delete a channel, or close a private message. Requires the MANAGE_CHANNELS or MANAGE_THREADS permission for the guild depending on the channel type. See [Delete/Close Channel](https://discord.com/developers/docs/resources/channel#deleteclose-channel) |
+| [DeletePermission](#deletepermission-method-1-of-2))(…) | Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. See [Delete Channel Permission](https://discord.com/developers/docs/resources/channel#delete-channel-permission) (2 methods) |
+| [EditGroupDmChannel](#editgroupdmchannel-method)(…) | Update a group dm channel's settings. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
+| [EditGuildChannel](#editguildchannel-method)(…) | Update a guild channel's settings. Requires the MANAGE_CHANNELS permission for the guild. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
+| [EditPermissions](#editpermissions-method)(…) | Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. See [Edit Channel Permissions](https://discord.com/developers/docs/resources/channel#edit-channel-permissions) |
+| [EditThreadChannel](#editthreadchannel-method)(…) | Update a thread channel's settings. Requires the MANAGE_THREADS permission for the guild. See [Modify Channel](https://discord.com/developers/docs/resources/channel#modify-channel) |
+| [FollowNewsChannel](#follownewschannel-method)(…) | Follow a News Channel to send messages to a target channel. Requires the MANAGE_WEBHOOKS permission in the target channel. See [Follow Announcement Channel](https://discord.com/developers/docs/resources/channel#follow-announcement-channel) |
+| [GetInvites](#getinvites-method)(…) | Returns a list of invite objects (with invite metadata) for the channel. Only usable for guild channels. Requires the MANAGE_CHANNELS permission. See [Get Channel Invites](https://discord.com/developers/docs/resources/channel#get-channel-invites) |
+| [GetMessage](#getmessage-method)(…) | Returns a specific message in the channel. If operating on a guild channel, this endpoint requires the 'READ_MESSAGE_HISTORY' permission to be present on the current user. See [Get Channel Messages](https://discord.com/developers/docs/resources/channel#get-channel-message) |
+| [GetMessages](#getmessages-method)(…) | Returns the messages for a channel. If operating on a guild channel, this endpoint requires the VIEW_CHANNEL permission to be present on the current user. If the current user is missing the 'READ_MESSAGE_HISTORY' permission in the channel then this will return no messages (since they cannot read the message history). See [Get Channel Messages](https://discord.com/developers/docs/resources/channel#get-channel-messages) |
+| [GetPinnedMessages](#getpinnedmessages-method)(…) | Returns all pinned messages in the channel See [Get Pinned Messages](https://discord.com/developers/docs/resources/channel#get-pinned-messages) |
+| [GetStageInstance](#getstageinstance-method)(…) | Gets the stage instance associated with the Stage channel, if it exists. See [Get Stage Instance](https://discord.com/developers/docs/resources/stage-instance#get-stage-instance) |
+| [GetThreadMember](#getthreadmember-method)(…) | Returns a thread member object for the specified user if they are a member of the thread returns a 404 response otherwise. See [Remove Thread Member](https://discord.com/developers/docs/resources/channel#get-thread-member) |
+| [GroupDmAddRecipient](#groupdmaddrecipient-method-1-of-2))(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
+| [GroupDmRemoveRecipient](#groupdmremoverecipient-method)(…) | Removes a recipient from a Group DM See [Group DM Remove Recipient](https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient) |
+| [IsDmChannel](#isdmchannel-method)() | Returns if a channel is a DM channel |
+| [IsGuildChannel](#isguildchannel-method)() | Returns if the channel is a guild channel |
+| [IsThreadChannel](#isthreadchannel-method)() | Returns if a channel is a thread channel |
+| [JoinThread](#jointhread-method)(…) | Adds the bot to the thread. Also requires the thread is not archived. See [Join Thread](https://discord.com/developers/docs/resources/channel#join-thread) |
+| [LeaveThread](#leavethread-method)(…) | Removes the bot from the thread. Also requires the thread is not archived. See [Leave Thread](https://discord.com/developers/docs/resources/channel#leave-thread) |
+| [ListJoinedPrivateArchivedThreads](#listjoinedprivatearchivedthreads-method)(…) | Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD, and the user has joined. Threads are ordered by their id, in descending order. Requires the READ_MESSAGE_HISTORY permission. See [List Joined Private Archived Threads](https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads) |
+| [ListPrivateArchivedThreads](#listprivatearchivedthreads-method)(…) | Returns archived threads in the channel that are of type GUILD_PRIVATE_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires both the READ_MESSAGE_HISTORY and MANAGE_THREADS permissions. See [List Private Archived Threads](https://discord.com/developers/docs/resources/channel#list-private-archived-threads) |
+| [ListPublicArchivedThreads](#listpublicarchivedthreads-method)(…) | Returns archived threads in the channel that are public. When called on a GUILD_TEXT channel, returns threads of type GUILD_PUBLIC_THREAD. When called on a GUILD_NEWS channel returns threads of type GUILD_NEWS_THREAD. Threads are ordered by archive_timestamp, in descending order. Requires the READ_MESSAGE_HISTORY permission. See [List Public Archived Threads](https://discord.com/developers/docs/resources/channel#list-public-archived-threads) |
+| [ListThreadMembers](#listthreadmembers-method)(…) | Returns array of thread members objects that are members of the thread. This endpoint is restricted according to whether the GUILD_MEMBERS Privileged Intent is enabled for your application. See [List Thread Members](https://discord.com/developers/docs/resources/channel#list-thread-members) |
+| [LogDebug](#logdebug-method)(…) |  |
+| [RemoveThreadMember](#removethreadmember-method)(…) | Removes another user from a thread. Requires the MANAGE_THREADS permission or that you are the creator of the thread. Also requires the thread is not archived. See [Remove Thread Member](https://discord.com/developers/docs/resources/channel#remove-thread-member) |
+| [StartThreadFromMessage](#startthreadfrommessage-method)(…) | Creates a new public thread from a message See [Start Thread with Message](https://discord.com/developers/docs/resources/channel#start-thread-from-message) |
+| [StartThreadInForumChannel](#startthreadinforumchannel-method)(…) | Creates a new thread in a forum channel, and sends a message within the created thread. Returns a channel, with a nested message object See [Start Thread in Forum Channel](https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel) |
+| [StartThreadWithoutMessage](#startthreadwithoutmessage-method)(…) | Creates a new thread that is not connected to an existing message. The created thread is always a GUILD_PRIVATE_THREAD See [Start Thread without Message](https://discord.com/developers/docs/resources/channel#start-thread-without-message) |
+| [TriggerTypingIndicator](#triggertypingindicator-method)(…) | Post a typing indicator for the specified channel. Generally bots should not implement this route. However, if a bot is responding to a command and expects the computation to take a few seconds, this endpoint may be called to let the user know that the bot is processing their message. See [Trigger Typing Indicator](https://discord.com/developers/docs/resources/channel#trigger-typing-indicator) |
+| static [Create](#create-method)(…) | Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. See [Create Guild Channel](https://discord.com/developers/docs/resources/guild#create-guild-channel) |
+| static [Get](#get-method)(…) | Get a channel by ID See [Get Channel](https://discord.com/developers/docs/resources/channel#get-channel) If the channel is a thread, a thread member object is included in the returned result. |
 
 ## See Also
 
@@ -355,6 +355,78 @@ public IPromise<DiscordMessage> CreateMessage(DiscordClient client, DiscordEmbed
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# CreateMessage method (2 of 4)
+
+Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message)
+
+```csharp
+public IPromise<DiscordMessage> CreateMessage(DiscordClient client, List<DiscordEmbed> embeds)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| embeds | Embeds to be send in the message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordEmbed](../Messages/Embeds/DiscordEmbed.md)
+* class [DiscordChannel](./DiscordChannel.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# CreateMessage method (3 of 4)
+
+Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message)
+
+```csharp
+public IPromise<DiscordMessage> CreateMessage(DiscordClient client, MessageCreate message)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| message | Message to be created |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [MessageCreate](../Messages/MessageCreate.md)
+* class [DiscordChannel](./DiscordChannel.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# CreateMessage method (4 of 4)
+
+Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message)
+
+```csharp
+public IPromise<DiscordMessage> CreateMessage(DiscordClient client, string message)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| message | Content of the message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Messages/DiscordMessage.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordChannel](./DiscordChannel.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # CreateGlobalTemplateMessage method
@@ -483,6 +555,28 @@ public IPromise DeletePermission(DiscordClient client, Overwrite overwrite)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# DeletePermission method (2 of 2)
+
+Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the MANAGE_ROLES permission. See [Delete Channel Permission](https://discord.com/developers/docs/resources/channel#delete-channel-permission)
+
+```csharp
+public IPromise DeletePermission(DiscordClient client, Snowflake overwriteId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| overwriteId | Overwrite ID to delete |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordChannel](./DiscordChannel.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetInvites method
@@ -628,6 +722,31 @@ public IPromise GroupDmAddRecipient(DiscordClient client, DiscordUser user, stri
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GroupDmAddRecipient method (2 of 2)
+
+Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient)
+
+```csharp
+public IPromise GroupDmAddRecipient(DiscordClient client, Snowflake userId, string accessToken, 
+    string nick)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| userId | User to add |
+| accessToken | Users access token |
+| nick | User nickname |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../Snowflake.md)
+* class [DiscordChannel](./DiscordChannel.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GroupDmRemoveRecipient method

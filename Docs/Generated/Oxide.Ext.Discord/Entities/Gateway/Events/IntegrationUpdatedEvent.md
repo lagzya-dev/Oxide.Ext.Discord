@@ -10,8 +10,8 @@ public class IntegrationUpdatedEvent : Integration
 
 | name | description |
 | --- | --- |
-| [IntegrationUpdatedEvent](#IntegrationUpdatedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | Guild ID the integration was updated In |
+| [IntegrationUpdatedEvent](#integrationupdatedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | Guild ID the integration was updated In |
 
 ## See Also
 

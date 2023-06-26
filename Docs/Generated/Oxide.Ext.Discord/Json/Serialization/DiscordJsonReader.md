@@ -10,19 +10,19 @@ public class DiscordJsonReader : BasePoolable
 
 | name | description |
 | --- | --- |
-| [DiscordJsonReader](#DiscordJsonReader-constructor)() | Constructor |
-| static [Create](#Create-method)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) |
-| static [CreateFromStream](#CreateFromStream-method)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) with stream loaded into it |
-| [CopyFrom](#CopyFrom-method)(…) | Copy from the given stream to our internal stream |
-| [Deserialize&lt;T&gt;](#Deserialize-method)(…) | Deserializes the stream data to {T} |
-| [ReadAsString](#ReadAsString-method)() | Returns the Stream data as a string |
-| static [DeserializeFrom&lt;T&gt;](#DeserializeFrom-method)(…) | Deserialize from stream to type {T} |
+| [DiscordJsonReader](#discordjsonreader-constructor)() | Constructor |
+| static [Create](#create-method)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) |
+| static [CreateFromStream](#createfromstream-method)(…) | Returns a pooled [`DiscordJsonReader`](./DiscordJsonReader.md) with stream loaded into it |
+| [CopyFrom](#copyfrom-method)(…) | Copy from the given stream to our internal stream |
+| [Deserialize&lt;T&gt;](#deserialize&amp;lt;t&amp;gt;-method)(…) | Deserializes the stream data to {T} |
+| [ReadAsString](#readasstring-method)() | Returns the Stream data as a string |
+| static [DeserializeFrom&lt;T&gt;](#deserializefrom&amp;lt;t&amp;gt;-method)(…) | Deserialize from stream to type {T} |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

@@ -10,8 +10,8 @@ public class ThreadMemberUpdateEvent : ThreadMember
 
 | name | description |
 | --- | --- |
-| [ThreadMemberUpdateEvent](#ThreadMemberUpdateEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | The ID of the guild |
+| [ThreadMemberUpdateEvent](#threadmemberupdateevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | The ID of the guild |
 
 ## See Also
 

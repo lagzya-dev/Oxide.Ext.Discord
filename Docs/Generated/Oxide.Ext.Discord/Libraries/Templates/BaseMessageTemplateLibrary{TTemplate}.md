@@ -11,17 +11,17 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 
 | name | description |
 | --- | --- |
-| [GetGlobalTemplate](#GetGlobalTemplate-method)(…) | Returns a global message template for the plugin with the given name |
-| [GetLocalizedTemplate](#GetLocalizedTemplate-method)(…) | Returns a message template for a given language (2 methods) |
-| [GetPlayerTemplate](#GetPlayerTemplate-method)(…) | Returns a message template for a given IPlayer player (2 methods) |
-| [RegisterGlobalTemplateAsync](#RegisterGlobalTemplateAsync-method)(…) | Registers a global message template Global Message templates cannot be localized |
-| [RegisterLocalizedTemplateAsync](#RegisterLocalizedTemplateAsync-method)(…) | Registers a message template with the given name and language |
+| [GetGlobalTemplate](#getglobaltemplate-method)(…) | Returns a global message template for the plugin with the given name |
+| [GetLocalizedTemplate](#getlocalizedtemplate-method-1-of-2))(…) | Returns a message template for a given language (2 methods) |
+| [GetPlayerTemplate](#getplayertemplate-method-1-of-2))(…) | Returns a message template for a given IPlayer player (2 methods) |
+| [RegisterGlobalTemplateAsync](#registerglobaltemplateasync-method)(…) | Registers a global message template Global Message templates cannot be localized |
+| [RegisterLocalizedTemplateAsync](#registerlocalizedtemplateasync-method)(…) | Registers a message template with the given name and language |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [OnPluginUnloaded](#OnPluginUnloaded-method)(…) |  |
+| override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
 
@@ -153,6 +153,32 @@ public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer p
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetPlayerTemplate method (2 of 2)
+
+Returns a message template for a given IPlayer player
+
+```csharp
+public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin the template is for |
+| templateName | Name of the template |
+| playerId | Player ID for the template |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if Plugin is null or name / language is null or empty |
+
+## See Also
+
+* class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetLocalizedTemplate method (1 of 2)
@@ -184,6 +210,32 @@ public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName,
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetLocalizedTemplate method (2 of 2)
+
+Returns a message template for a given language
+
+```csharp
+public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = "en")
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin the template is for |
+| templateName | Name of the template |
+| language | Oxide language of the template |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if Plugin is null or name / language is null or empty |
+
+## See Also
+
+* class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # OnPluginUnloaded method

@@ -10,9 +10,9 @@ public class WebhookMessageParams : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [WebhookMessageParams](#WebhookMessageParams-constructor)() | The default constructor. |
-| [ThreadId](#ThreadId-property) { get; set; } | If the message exists in a thread This field is optional and defaults to null |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [WebhookMessageParams](#webhookmessageparams-constructor)() | The default constructor. |
+| [ThreadId](#threadid-property) { get; set; } | If the message exists in a thread This field is optional and defaults to null |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

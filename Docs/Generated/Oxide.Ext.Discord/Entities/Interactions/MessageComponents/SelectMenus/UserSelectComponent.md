@@ -10,7 +10,7 @@ public class UserSelectComponent : BaseSelectMenuComponent
 
 | name | description |
 | --- | --- |
-| [UserSelectComponent](#UserSelectComponent-constructor)() | Select Menu Component Constructor |
+| [UserSelectComponent](#userselectcomponent-constructor)() | Select Menu Component Constructor |
 
 ## See Also
 

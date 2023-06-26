@@ -10,15 +10,15 @@ public class BotConnection
 
 | name | description |
 | --- | --- |
-| [BotConnection](#BotConnection-constructor)() | Constructor |
-| [BotConnection](#BotConnection-constructor)(…) | Constructor |
-| [ApiToken](#ApiToken-property) { get; set; } | API token for the bot |
-| [ApplicationId](#ApplicationId-property) { get; } | Application ID of the Bot Token |
-| [HiddenToken](#HiddenToken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
-| [Intents](#Intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
-| [LogLevel](#LogLevel-property) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
-| [HasAnyIntent](#HasAnyIntent-method)(…) | Returns if the settings has any intent specified |
-| [HasIntents](#HasIntents-method)(…) | Returns if the settings has the given intents |
+| [BotConnection](#botconnection-constructor)() | Constructor |
+| [BotConnection](#botconnection-constructor)(…) | Constructor |
+| [ApiToken](#apitoken-property) { get; set; } | API token for the bot |
+| [ApplicationId](#applicationid-property) { get; } | Application ID of the Bot Token |
+| [HiddenToken](#hiddentoken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
+| [Intents](#intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
+| [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](./BotConnection/LogLevel.md) |
+| [HasAnyIntent](#hasanyintent-method)(…) | Returns if the settings has any intent specified |
+| [HasIntents](#hasintents-method)(…) | Returns if the settings has the given intents |
 
 ## See Also
 
@@ -90,6 +90,23 @@ public BotConnection()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# BotConnection constructor (2 of 2)
+
+Constructor
+
+```csharp
+public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, 
+    DiscordLogLevel logLevel = DiscordLogLevel.Info)
+```
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [DiscordLogLevel](../Logging/DiscordLogLevel.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ApiToken property

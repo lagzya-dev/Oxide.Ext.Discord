@@ -10,12 +10,12 @@ public class EmbedImage
 
 | name | description |
 | --- | --- |
-| [EmbedImage](#EmbedImage-constructor)() | Embed Image Constructor |
-| [EmbedImage](#EmbedImage-constructor)(…) | Embed Image Constructor |
-| [Height](#Height-property) { get; set; } | Height of image |
-| [ProxyUrl](#ProxyUrl-property) { get; set; } | A proxied url of the image |
-| [Url](#Url-property) { get; set; } | Source url of image (only supports http(s) and attachments) |
-| [Width](#Width-property) { get; set; } | Width of image |
+| [EmbedImage](#embedimage-constructor)() | Embed Image Constructor |
+| [EmbedImage](#embedimage-constructor)(…) | Embed Image Constructor |
+| [Height](#height-property) { get; set; } | Height of image |
+| [ProxyUrl](#proxyurl-property) { get; set; } | A proxied url of the image |
+| [Url](#url-property) { get; set; } | Source url of image (only supports http(s) and attachments) |
+| [Width](#width-property) { get; set; } | Width of image |
 
 ## See Also
 
@@ -39,6 +39,27 @@ public EmbedImage()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedImage constructor (2 of 2)
+
+Embed Image Constructor
+
+```csharp
+public EmbedImage(string url, int? height = null, int? width = null, string proxyUrl = null)
+```
+
+| parameter | description |
+| --- | --- |
+| url |  |
+| height |  |
+| width |  |
+| proxyUrl |  |
+
+## See Also
+
+* class [EmbedImage](./EmbedImage.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Url property

@@ -10,10 +10,10 @@ public class PermissionFlagsStringConverter : JsonConverter
 
 | name | description |
 | --- | --- |
-| [PermissionFlagsStringConverter](#PermissionFlagsStringConverter-constructor)() | The default constructor. |
-| override [CanConvert](#CanConvert-method)(…) | Returns if the type equals PermissionFlags |
-| override [ReadJson](#ReadJson-method)(…) | Converts the ulong JSON string to Permission Flags |
-| override [WriteJson](#WriteJson-method)(…) | Writes Permission Flags as a JSON string |
+| [PermissionFlagsStringConverter](#permissionflagsstringconverter-constructor)() | The default constructor. |
+| override [CanConvert](#canconvert-method)(…) | Returns if the type equals PermissionFlags |
+| override [ReadJson](#readjson-method)(…) | Converts the ulong JSON string to Permission Flags |
+| override [WriteJson](#writejson-method)(…) | Writes Permission Flags as a JSON string |
 
 ## See Also
 

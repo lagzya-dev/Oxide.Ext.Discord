@@ -10,9 +10,9 @@ public class ScheduledEventEntityMetadata
 
 | name | description |
 | --- | --- |
-| [ScheduledEventEntityMetadata](#ScheduledEventEntityMetadata-constructor)() | The default constructor. |
-| [Location](#Location-property) { get; set; } | Location of the event (1-100 characters) |
-| [Validate](#Validate-method)() |  |
+| [ScheduledEventEntityMetadata](#scheduledevententitymetadata-constructor)() | The default constructor. |
+| [Location](#location-property) { get; set; } | Location of the event (1-100 characters) |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

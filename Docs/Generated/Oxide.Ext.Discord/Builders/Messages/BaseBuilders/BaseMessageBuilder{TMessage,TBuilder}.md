@@ -17,24 +17,24 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 
 | name | description |
 | --- | --- |
-| virtual [AddActionRow](#AddActionRow-method)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
-| virtual [AddAllowedMentions](#AddAllowedMentions-method)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
-| virtual [AddAttachment](#AddAttachment-method)(…) | Adds an attachment to the message |
-| virtual [AddComponents](#AddComponents-method)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
-| virtual [AddContent](#AddContent-method)(…) | Adds message text |
-| virtual [AddEmbed](#AddEmbed-method)(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
-| virtual [AddEmbeds](#AddEmbeds-method)(…) | Adds a collection of [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) to the response |
-| virtual [AsTts](#AsTts-method)(…) | Marks the message As Text-To-Speech |
-| [Build](#Build-method)() | Returns the built message |
-| virtual [SuppressEmbeds](#SuppressEmbeds-method)() | Suppresses embeds on this response |
+| virtual [AddActionRow](#addactionrow-method)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
+| virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
+| virtual [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
+| virtual [AddComponents](#addcomponents-method-1-of-2))(…) | Adds a collection MessageComponents/&gt; (2 methods) |
+| virtual [AddContent](#addcontent-method)(…) | Adds message text |
+| virtual [AddEmbed](#addembed-method-1-of-2))(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
+| virtual [AddEmbeds](#addembeds-method)(…) | Adds a collection of [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) to the response |
+| virtual [AsTts](#astts-method)(…) | Marks the message As Text-To-Speech |
+| [Build](#build-method)() | Returns the built message |
+| virtual [SuppressEmbeds](#suppressembeds-method)() | Suppresses embeds on this response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseMessageBuilder](#BaseMessageBuilder-constructor)(…) | Constructor |
-| readonly [Builder](#Builder-field) | This builder |
-| readonly [Message](#Message-field) | Message the builder is for |
+| [BaseMessageBuilder](#basemessagebuilder&amp;lt;tmessage,tbuilder&amp;gt;-constructor)(…) | Constructor |
+| readonly [Builder](#builder-field) | This builder |
+| readonly [Message](#message-field) | Message the builder is for |
 
 ## See Also
 
@@ -114,6 +114,29 @@ This
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddEmbed method (2 of 2)
+
+Adds [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) created from a [`DiscordEmbedBuilder`](../../DiscordEmbedBuilder.md)
+
+```csharp
+public virtual TBuilder AddEmbed(DiscordEmbedBuilder builder)
+```
+
+| parameter | description |
+| --- | --- |
+| builder | Build to add embeds from |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordEmbedBuilder](../../DiscordEmbedBuilder.md)
+* class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # AddEmbeds method
@@ -231,6 +254,29 @@ This
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddComponents method (2 of 2)
+
+Adds MessageComponents from [`MessageComponentBuilder`](../../MessageComponents/MessageComponentBuilder.md)
+
+```csharp
+public virtual TBuilder AddComponents(MessageComponentBuilder builder)
+```
+
+| parameter | description |
+| --- | --- |
+| builder | Build to add components from |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [MessageComponentBuilder](../../MessageComponents/MessageComponentBuilder.md)
+* class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # AddAttachment method

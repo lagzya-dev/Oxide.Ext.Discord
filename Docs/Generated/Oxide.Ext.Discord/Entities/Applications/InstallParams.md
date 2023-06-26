@@ -10,9 +10,9 @@ public class InstallParams
 
 | name | description |
 | --- | --- |
-| [InstallParams](#InstallParams-constructor)() | The default constructor. |
-| [Permissions](#Permissions-property) { get; set; } | The permissions to request for the bot role |
-| [Scopes](#Scopes-property) { get; set; } | The scopes to add the application to the server with |
+| [InstallParams](#installparams-constructor)() | The default constructor. |
+| [Permissions](#permissions-property) { get; set; } | The permissions to request for the bot role |
+| [Scopes](#scopes-property) { get; set; } | The scopes to add the application to the server with |
 
 ## See Also
 

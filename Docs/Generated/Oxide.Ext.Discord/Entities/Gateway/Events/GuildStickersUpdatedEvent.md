@@ -10,9 +10,9 @@ public class GuildStickersUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [GuildStickersUpdatedEvent](#GuildStickersUpdatedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [Stickers](#Stickers-property) { get; set; } | List of emojis |
+| [GuildStickersUpdatedEvent](#guildstickersupdatedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [Stickers](#stickers-property) { get; set; } | List of emojis |
 
 ## See Also
 

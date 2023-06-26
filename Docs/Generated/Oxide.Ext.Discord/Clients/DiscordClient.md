@@ -10,16 +10,16 @@ public class DiscordClient
 
 | name | description |
 | --- | --- |
-| [Bot](#Bot-property) { get; } | The bot client that is unique to the Token used |
-| [Plugin](#Plugin-property) { get; } | Which plugin is the owner of this client |
-| readonly [PluginId](#PluginId-field) | The ID of the plugin |
-| readonly [PluginName](#PluginName-field) | The full plugin name including author and version |
-| [Connect](#Connect-method)(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
-| [Disconnect](#Disconnect-method)() | Disconnects this client from discord |
-| [IsConnected](#IsConnected-method)() | Returns if the client is connected to a bot and if the bot is initialized |
-| [RequestGuildMembers](#RequestGuildMembers-method)(…) | Used to request guild members from discord for a specific guild |
-| [UpdateStatus](#UpdateStatus-method)(…) | Used to update the bots status in discord |
-| [UpdateVoiceState](#UpdateVoiceState-method)(…) | Used to update the voice state for the bot |
+| [Bot](#bot-property) { get; } | The bot client that is unique to the Token used |
+| [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
+| readonly [PluginId](#pluginid-field) | The ID of the plugin |
+| readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
+| [Connect](#connect-method-1-of-2))(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
+| [Disconnect](#disconnect-method)() | Disconnects this client from discord |
+| [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot and if the bot is initialized |
+| [RequestGuildMembers](#requestguildmembers-method)(…) | Used to request guild members from discord for a specific guild |
+| [UpdateStatus](#updatestatus-method)(…) | Used to update the bots status in discord |
+| [UpdateVoiceState](#updatevoicestate-method)(…) | Used to update the voice state for the bot |
 
 ## See Also
 
@@ -48,6 +48,26 @@ public void Connect(BotConnection connection)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Connect method (2 of 2)
+
+Starts a connection to discord with the given apiKey and intents
+
+```csharp
+public void Connect(string apiKey, GatewayIntents intents)
+```
+
+| parameter | description |
+| --- | --- |
+| apiKey | API key for the connecting bot |
+| intents | Intents the bot needs in order to function |
+
+## See Also
+
+* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Disconnect method

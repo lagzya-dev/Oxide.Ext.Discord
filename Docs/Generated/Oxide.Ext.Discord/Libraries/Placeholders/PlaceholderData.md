@@ -10,32 +10,32 @@ public class PlaceholderData : BasePoolable
 
 | name | description |
 | --- | --- |
-| [Add&lt;T&gt;](#Add-method)(…) | Adds the data with the given name |
-| [AddChannel](#AddChannel-method)(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
-| [AddCommand](#AddCommand-method)(…) | Add a [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
-| [AddGuild](#AddGuild-method)(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
-| [AddGuildMember](#AddGuildMember-method)(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
-| [AddInteraction](#AddInteraction-method)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
-| [AddMessage](#AddMessage-method)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
-| [AddPlayer](#AddPlayer-method)(…) | Adds a IPlayer |
-| [AddPlugin](#AddPlugin-method)(…) | Adds a Plugin |
-| [AddRequestError](#AddRequestError-method)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
-| [AddRole](#AddRole-method)(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
-| [AddSnowflake](#AddSnowflake-method)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
-| [AddTarget](#AddTarget-method)(…) | Adds a target IPlayer |
-| [AddTimestamp](#AddTimestamp-method)(…) | Adds a Unix Timestamp |
-| [AddUser](#AddUser-method)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
-| [Clone](#Clone-method)() | Clones the current placeholder data into a new [`PlaceholderData`](./PlaceholderData.md) |
-| [Get&lt;T&gt;](#Get-method)() | Returns the object with the given type of {T} The key name used is |
-| [Get&lt;T&gt;](#Get-method)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
-| [GetKeys](#GetKeys-method)() | Returns comma seperated string of all the registered key Useful for debugging placeholders |
-| [ManualPool](#ManualPool-method)() | Disable automatic pooling and handle manually by plugin |
+| [Add&lt;T&gt;](#add&amp;lt;t&amp;gt;-method)(…) | Adds the data with the given name |
+| [AddChannel](#addchannel-method-1-of-2))(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
+| [AddCommand](#addcommand-method)(…) | Add a [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
+| [AddGuild](#addguild-method-1-of-2))(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
+| [AddGuildMember](#addguildmember-method-1-of-2))(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
+| [AddInteraction](#addinteraction-method)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
+| [AddMessage](#addmessage-method)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
+| [AddPlayer](#addplayer-method)(…) | Adds a IPlayer |
+| [AddPlugin](#addplugin-method)(…) | Adds a Plugin |
+| [AddRequestError](#addrequesterror-method)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
+| [AddRole](#addrole-method-1-of-2))(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
+| [AddSnowflake](#addsnowflake-method)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
+| [AddTarget](#addtarget-method)(…) | Adds a target IPlayer |
+| [AddTimestamp](#addtimestamp-method)(…) | Adds a Unix Timestamp |
+| [AddUser](#adduser-method)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
+| [Clone](#clone-method)() | Clones the current placeholder data into a new [`PlaceholderData`](./PlaceholderData.md) |
+| [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)() | Returns the object with the given type of {T} The key name used is |
+| [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
+| [GetKeys](#getkeys-method)() | Returns comma seperated string of all the registered key Useful for debugging placeholders |
+| [ManualPool](#manualpool-method)() | Disable automatic pooling and handle manually by plugin |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 
@@ -93,6 +93,31 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddGuild method (2 of 2)
+
+Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId
+
+```csharp
+public PlaceholderData AddGuild(DiscordClient client, Snowflake? guildId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Discord Client for the guild |
+| guildId | Guild ID of the guild |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # AddMessage method
@@ -139,6 +164,32 @@ public PlaceholderData AddGuildMember(GuildMember member)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddGuildMember method (2 of 2)
+
+Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId
+
+```csharp
+public PlaceholderData AddGuildMember(DiscordClient client, Snowflake guildId, Snowflake memberId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | DiscordClient for the guild |
+| guildId | Guild ID for the guild |
+| memberId | Member UserId in the guild |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # AddUser method
@@ -189,6 +240,32 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddRole method (2 of 2)
+
+Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId
+
+```csharp
+public PlaceholderData AddRole(DiscordClient client, Snowflake guildId, Snowflake roleId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client for the guild |
+| guildId | Guild ID of the guild |
+| roleId | Role ID of the role |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # AddChannel method (1 of 2)
@@ -215,6 +292,33 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddChannel method (2 of 2)
+
+Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId
+
+```csharp
+public PlaceholderData AddChannel(DiscordClient client, Snowflake channelId, 
+    Snowflake? guildId = default)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client for the channel |
+| channelId | Channel ID of the channel |
+| guildId | Guild ID of the channel if channel is in a guild |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* struct [Snowflake](../../Entities/Snowflake.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # AddInteraction method
@@ -432,6 +536,29 @@ public T Get<T>()
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Get&lt;T&gt; method (2 of 2)
+
+Returns the object with the given type of T If the object is not found the default(T) is returned
+
+```csharp
+public T Get<T>(string name)
+```
+
+| parameter | description |
+| --- | --- |
+| T | Type to return |
+| name | Name of the data key |
+
+## Return Value
+
+{T}
+
+## See Also
+
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetKeys method

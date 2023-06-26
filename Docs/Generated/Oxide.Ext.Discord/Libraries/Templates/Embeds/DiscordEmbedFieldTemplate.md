@@ -10,13 +10,13 @@ public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
 
 | name | description |
 | --- | --- |
-| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate-constructor)() | Constructor |
-| [DiscordEmbedFieldTemplate](#DiscordEmbedFieldTemplate-constructor)(…) | Constructor |
-| [Inline](#Inline-property) { get; set; } | Should the field be on the same row |
-| [Name](#Name-property) { get; set; } | Title of the field |
-| [Value](#Value-property) { get; set; } | Value of the field |
-| [ToEntity](#ToEntity-method)(…) | Converts the template to an [`EmbedField`](../../../Entities/Messages/Embeds/EmbedField.md) |
-| [ToEntityBulk](#ToEntityBulk-method)(…) |  |
+| [DiscordEmbedFieldTemplate](#discordembedfieldtemplate-constructor)() | Constructor |
+| [DiscordEmbedFieldTemplate](#discordembedfieldtemplate-constructor)(…) | Constructor |
+| [Inline](#inline-property) { get; set; } | Should the field be on the same row |
+| [Name](#name-property) { get; set; } | Title of the field |
+| [Value](#value-property) { get; set; } | Value of the field |
+| [ToEntity](#toentity-method)(…) | Converts the template to an [`EmbedField`](../../../Entities/Messages/Embeds/EmbedField.md) |
+| [ToEntityBulk](#toentitybulk-method)(…) |  |
 
 ## See Also
 
@@ -80,6 +80,26 @@ public DiscordEmbedFieldTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordEmbedFieldTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public DiscordEmbedFieldTemplate(string name, string value, bool inline = true)
+```
+
+| parameter | description |
+| --- | --- |
+| name |  |
+| value |  |
+| inline |  |
+
+## See Also
+
+* class [DiscordEmbedFieldTemplate](./DiscordEmbedFieldTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

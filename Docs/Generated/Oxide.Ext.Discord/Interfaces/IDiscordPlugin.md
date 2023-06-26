@@ -10,12 +10,12 @@ public interface IDiscordPlugin
 
 | name | description |
 | --- | --- |
-| [Author](#Author-property) { get; } | Author of the plugin |
-| [Client](#Client-property) { get; set; } | Gets / Sets the DiscordClient on a plugin |
-| [Description](#Description-property) { get; } | Description of the plugin |
-| [Name](#Name-property) { get; } | Name of the plugin |
-| [Title](#Title-property) { get; } | Title of the plugin |
-| [Version](#Version-property) { get; } | Version of the plugin |
+| [Author](#author-property) { get; } | Author of the plugin |
+| [Client](#client-property) { get; set; } | Gets / Sets the DiscordClient on a plugin |
+| [Description](#description-property) { get; } | Description of the plugin |
+| [Name](#name-property) { get; } | Name of the plugin |
+| [Title](#title-property) { get; } | Title of the plugin |
+| [Version](#version-property) { get; } | Version of the plugin |
 
 ## See Also
 

@@ -10,13 +10,13 @@ public class ScheduledEventUsersLookup : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ScheduledEventUsersLookup](#ScheduledEventUsersLookup-constructor)() | The default constructor. |
-| [After](#After-property) { get; set; } | Consider only users after given user id Default null |
-| [Before](#Before-property) { get; set; } | Consider only users before given user id Default null |
-| [Limit](#Limit-property) { get; set; } | Number of users to return (up to maximum 100) |
-| [WithMember](#WithMember-property) { get; set; } | Include guild member data if it exists Default false |
-| [ToQueryString](#ToQueryString-method)() |  |
-| [Validate](#Validate-method)() |  |
+| [ScheduledEventUsersLookup](#scheduledeventuserslookup-constructor)() | The default constructor. |
+| [After](#after-property) { get; set; } | Consider only users after given user id Default null |
+| [Before](#before-property) { get; set; } | Consider only users before given user id Default null |
+| [Limit](#limit-property) { get; set; } | Number of users to return (up to maximum 100) |
+| [WithMember](#withmember-property) { get; set; } | Include guild member data if it exists Default false |
+| [ToQueryString](#toquerystring-method)() |  |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

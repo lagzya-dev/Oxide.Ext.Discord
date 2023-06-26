@@ -10,10 +10,10 @@ public class MessageDeletedEvent
 
 | name | description |
 | --- | --- |
-| [MessageDeletedEvent](#MessageDeletedEvent-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
-| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
-| [Id](#Id-property) { get; set; } | The id of the message |
+| [MessageDeletedEvent](#messagedeletedevent-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The id of the channel |
+| [GuildId](#guildid-property) { get; set; } | The id of the guild |
+| [Id](#id-property) { get; set; } | The id of the message |
 
 ## See Also
 

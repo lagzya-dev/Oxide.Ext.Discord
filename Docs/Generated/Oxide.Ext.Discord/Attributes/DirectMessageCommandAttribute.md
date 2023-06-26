@@ -12,7 +12,7 @@ public class DirectMessageCommandAttribute : BaseCommandAttribute
 
 | name | description |
 | --- | --- |
-| [DirectMessageCommandAttribute](#DirectMessageCommandAttribute-constructor)(…) | Creates a discord command to be used in direct messages to the bot |
+| [DirectMessageCommandAttribute](#directmessagecommandattribute-constructor)(…) | Creates a discord command to be used in direct messages to the bot |
 
 ## See Also
 

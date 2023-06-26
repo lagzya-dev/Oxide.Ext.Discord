@@ -10,23 +10,23 @@ public class DiscordPluginPool
 
 | name | description |
 | --- | --- |
-| [DiscordPluginPool](#DiscordPluginPool-constructor)(…) | Constructor |
-| [FreeHash&lt;TKey,TValue&gt;](#FreeHash-method)(…) | Frees a pooled Hash |
-| [FreeHashSet&lt;T&gt;](#FreeHashSet-method)(…) | Free's a pooled HashSet |
-| [FreeList&lt;T&gt;](#FreeList-method)(…) | Free's a pooled List |
-| [FreeMemoryStream](#FreeMemoryStream-method)(…) | Frees a MemoryStream back to the pool |
-| [FreePlaceholderData](#FreePlaceholderData-method)(…) | Frees a [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) back to the pool |
-| [FreeStringBuilder](#FreeStringBuilder-method)(…) | Frees a StringBuilder back to the pool |
-| [FreeStringBuilderToString](#FreeStringBuilderToString-method)(…) | Frees a StringBuilder back to the pool returning the built String |
-| [Get&lt;T&gt;](#Get-method)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
-| [GetHash&lt;TKey,TValue&gt;](#GetHash-method)() | Returns a pooled Hash |
-| [GetHashSet&lt;T&gt;](#GetHashSet-method)() | Returns a pooled HashSet |
-| [GetList&lt;T&gt;](#GetList-method)() | Returns a pooled List |
-| [GetMemoryStream](#GetMemoryStream-method)() | Returns a pooled MemoryStream |
-| [GetPlaceholderData](#GetPlaceholderData-method)() | Returns a pooled [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) |
-| [GetStringBuilder](#GetStringBuilder-method)() | Returns a pooled StringBuilder |
-| [GetStringBuilder](#GetStringBuilder-method)(…) | Returns a pooled StringBuilder |
-| [SetSettings](#SetSettings-method)(…) | Sets the settings for the pools |
+| [DiscordPluginPool](#discordpluginpool-constructor)(…) | Constructor |
+| [FreeHash&lt;TKey,TValue&gt;](#freehash&amp;lt;tkey,tvalue&amp;gt;-method)(…) | Frees a pooled Hash |
+| [FreeHashSet&lt;T&gt;](#freehashset&amp;lt;t&amp;gt;-method)(…) | Free's a pooled HashSet |
+| [FreeList&lt;T&gt;](#freelist&amp;lt;t&amp;gt;-method)(…) | Free's a pooled List |
+| [FreeMemoryStream](#freememorystream-method)(…) | Frees a MemoryStream back to the pool |
+| [FreePlaceholderData](#freeplaceholderdata-method)(…) | Frees a [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) back to the pool |
+| [FreeStringBuilder](#freestringbuilder-method)(…) | Frees a StringBuilder back to the pool |
+| [FreeStringBuilderToString](#freestringbuildertostring-method)(…) | Frees a StringBuilder back to the pool returning the built String |
+| [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
+| [GetHash&lt;TKey,TValue&gt;](#gethash&amp;lt;tkey,tvalue&amp;gt;-method)() | Returns a pooled Hash |
+| [GetHashSet&lt;T&gt;](#gethashset&amp;lt;t&amp;gt;-method)() | Returns a pooled HashSet |
+| [GetList&lt;T&gt;](#getlist&amp;lt;t&amp;gt;-method)() | Returns a pooled List |
+| [GetMemoryStream](#getmemorystream-method)() | Returns a pooled MemoryStream |
+| [GetPlaceholderData](#getplaceholderdata-method)() | Returns a pooled [`PlaceholderData`](../Libraries/Placeholders/PlaceholderData.md) |
+| [GetStringBuilder](#getstringbuilder-method)() | Returns a pooled StringBuilder |
+| [GetStringBuilder](#getstringbuilder-method)(…) | Returns a pooled StringBuilder |
+| [SetSettings](#setsettings-method)(…) | Sets the settings for the pools |
 
 ## See Also
 
@@ -230,6 +230,28 @@ Pooled StringBuilder
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# GetStringBuilder method (2 of 2)
+
+Returns a pooled StringBuilder
+
+```csharp
+public StringBuilder GetStringBuilder(string initial)
+```
+
+| parameter | description |
+| --- | --- |
+| initial | Initial text for the builder |
+
+## Return Value
+
+Pooled StringBuilder
+
+## See Also
+
+* class [DiscordPluginPool](./DiscordPluginPool.md)
+* namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # FreeStringBuilder method

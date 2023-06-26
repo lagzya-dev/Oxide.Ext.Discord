@@ -10,10 +10,10 @@ public class AutoModActionMetadata
 
 | name | description |
 | --- | --- |
-| [AutoModActionMetadata](#AutoModActionMetadata-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | Associated Action Type: SendAlertMessage Channel to which user content should be logged |
-| [CustomMessage](#CustomMessage-property) { get; set; } | Associated Action Type: BlockMessage Additional explanation that will be shown to members whenever their message is blocked Max 150 characters |
-| [DurationSeconds](#DurationSeconds-property) { get; set; } | Associated Action Type: Timeout Timeout duration in seconds |
+| [AutoModActionMetadata](#automodactionmetadata-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | Associated Action Type: SendAlertMessage Channel to which user content should be logged |
+| [CustomMessage](#custommessage-property) { get; set; } | Associated Action Type: BlockMessage Additional explanation that will be shown to members whenever their message is blocked Max 150 characters |
+| [DurationSeconds](#durationseconds-property) { get; set; } | Associated Action Type: Timeout Timeout duration in seconds |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class ThreadCreateFromMessage
 
 | name | description |
 | --- | --- |
-| [ThreadCreateFromMessage](#ThreadCreateFromMessage-constructor)() | The default constructor. |
-| [AutoArchiveDuration](#AutoArchiveDuration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
-| [Name](#Name-property) { get; set; } | 1-100 character thread name |
-| [RateLimitPerUser](#RateLimitPerUser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
-| [Validate](#Validate-method)() |  |
+| [ThreadCreateFromMessage](#threadcreatefrommessage-constructor)() | The default constructor. |
+| [AutoArchiveDuration](#autoarchiveduration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
+| [Name](#name-property) { get; set; } | 1-100 character thread name |
+| [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600) |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

@@ -10,7 +10,7 @@ public sealed class DiscordEncoding : Singleton<DiscordEncoding>
 
 | name | description |
 | --- | --- |
-| readonly [Encoding](#Encoding-field) | Encoding format used by Discord |
+| readonly [Encoding](#encoding-field) | Encoding format used by Discord |
 
 ## See Also
 

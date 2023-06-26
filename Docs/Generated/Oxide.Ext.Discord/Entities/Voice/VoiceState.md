@@ -10,21 +10,21 @@ public class VoiceState : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [VoiceState](#VoiceState-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The channel id this user is connected to |
-| [Deaf](#Deaf-property) { get; set; } | Whether this user is deafened by the server |
-| [GuildId](#GuildId-property) { get; set; } | The guild id this voice state is for |
-| [Id](#Id-property) { get; } | User ID for the voice state |
-| [Member](#Member-property) { get; set; } | The guild member this voice state is for |
-| [Mute](#Mute-property) { get; set; } | Whether this user is muted by the server |
-| [RequestToSpeakTimestamp](#RequestToSpeakTimestamp-property) { get; set; } | Whether this user is muted by the current user |
-| [SelfDeaf](#SelfDeaf-property) { get; set; } | Whether this user is locally deafened |
-| [SelfMute](#SelfMute-property) { get; set; } | Whether this user is locally muted |
-| [SelfStream](#SelfStream-property) { get; set; } | Whether this user is streaming using "Go Live" |
-| [SelfVideo](#SelfVideo-property) { get; set; } | Whether this user's camera is enabled |
-| [SessionId](#SessionId-property) { get; set; } | The session id for this voice state |
-| [Suppress](#Suppress-property) { get; set; } | whether this user's permission to speak is denied |
-| [UserId](#UserId-property) { get; set; } | The user id this voice state is for |
+| [VoiceState](#voicestate-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The channel id this user is connected to |
+| [Deaf](#deaf-property) { get; set; } | Whether this user is deafened by the server |
+| [GuildId](#guildid-property) { get; set; } | The guild id this voice state is for |
+| [Id](#id-property) { get; } | User ID for the voice state |
+| [Member](#member-property) { get; set; } | The guild member this voice state is for |
+| [Mute](#mute-property) { get; set; } | Whether this user is muted by the server |
+| [RequestToSpeakTimestamp](#requesttospeaktimestamp-property) { get; set; } | Whether this user is muted by the current user |
+| [SelfDeaf](#selfdeaf-property) { get; set; } | Whether this user is locally deafened |
+| [SelfMute](#selfmute-property) { get; set; } | Whether this user is locally muted |
+| [SelfStream](#selfstream-property) { get; set; } | Whether this user is streaming using "Go Live" |
+| [SelfVideo](#selfvideo-property) { get; set; } | Whether this user's camera is enabled |
+| [SessionId](#sessionid-property) { get; set; } | The session id for this voice state |
+| [Suppress](#suppress-property) { get; set; } | whether this user's permission to speak is denied |
+| [UserId](#userid-property) { get; set; } | The user id this voice state is for |
 
 ## See Also
 

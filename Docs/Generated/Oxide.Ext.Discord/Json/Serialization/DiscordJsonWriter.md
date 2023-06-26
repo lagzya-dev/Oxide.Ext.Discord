@@ -10,17 +10,17 @@ public class DiscordJsonWriter : BasePoolable
 
 | name | description |
 | --- | --- |
-| [DiscordJsonWriter](#DiscordJsonWriter-constructor)() | Constructor |
-| static [Get](#Get-method)(…) | Returns a pooled [`DiscordJsonWriter`](./DiscordJsonWriter.md) |
-| readonly [Stream](#Stream-field) | Stream that is written to |
-| [Write](#Write-method)(…) | Writes the payload to the Stream |
-| static [WriteAndCopy](#WriteAndCopy-method)(…) | Serializes the payload to the output stream |
+| [DiscordJsonWriter](#discordjsonwriter-constructor)() | Constructor |
+| static [Get](#get-method)(…) | Returns a pooled [`DiscordJsonWriter`](./DiscordJsonWriter.md) |
+| readonly [Stream](#stream-field) | Stream that is written to |
+| [Write](#write-method)(…) | Writes the payload to the Stream |
+| static [WriteAndCopy](#writeandcopy-method)(…) | Serializes the payload to the output stream |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

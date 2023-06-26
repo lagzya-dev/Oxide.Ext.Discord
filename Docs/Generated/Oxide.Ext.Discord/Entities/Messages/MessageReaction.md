@@ -10,10 +10,10 @@ public class MessageReaction
 
 | name | description |
 | --- | --- |
-| [MessageReaction](#MessageReaction-constructor)() | The default constructor. |
-| [Count](#Count-property) { get; set; } | Times this emoji has been used to react |
-| [Emoji](#Emoji-property) { get; set; } | Emoji information [`Emoji`](./MessageReaction/Emoji.md) |
-| [Me](#Me-property) { get; set; } | Whether the current user reacted using this emoji |
+| [MessageReaction](#messagereaction-constructor)() | The default constructor. |
+| [Count](#count-property) { get; set; } | Times this emoji has been used to react |
+| [Emoji](#emoji-property) { get; set; } | Emoji information [`Emoji`](./MessageReaction/Emoji.md) |
+| [Me](#me-property) { get; set; } | Whether the current user reacted using this emoji |
 
 ## See Also
 

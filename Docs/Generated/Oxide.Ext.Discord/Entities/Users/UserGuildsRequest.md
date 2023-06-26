@@ -10,11 +10,11 @@ public class UserGuildsRequest : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [UserGuildsRequest](#UserGuildsRequest-constructor)() | The default constructor. |
-| [After](#After-property) { get; set; } | Get guilds after this guild ID |
-| [Before](#Before-property) { get; set; } | Get guilds before this guild ID |
-| [Limit](#Limit-property) { get; set; } | Max number of guilds to return (1-200) |
-| virtual [ToQueryString](#ToQueryString-method)() |  |
+| [UserGuildsRequest](#userguildsrequest-constructor)() | The default constructor. |
+| [After](#after-property) { get; set; } | Get guilds after this guild ID |
+| [Before](#before-property) { get; set; } | Get guilds before this guild ID |
+| [Limit](#limit-property) { get; set; } | Max number of guilds to return (1-200) |
+| virtual [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

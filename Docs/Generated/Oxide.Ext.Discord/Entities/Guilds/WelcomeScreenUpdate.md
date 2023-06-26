@@ -10,10 +10,10 @@ public class WelcomeScreenUpdate
 
 | name | description |
 | --- | --- |
-| [WelcomeScreenUpdate](#WelcomeScreenUpdate-constructor)() | The default constructor. |
-| [Description](#Description-property) { get; set; } | The server description shown in the welcome screen |
-| [Enabled](#Enabled-property) { get; set; } | Whether the welcome screen is enabled |
-| [WelcomeChannels](#WelcomeChannels-property) { get; set; } | Channels linked in the welcome screen and their display options Up to 5 |
+| [WelcomeScreenUpdate](#welcomescreenupdate-constructor)() | The default constructor. |
+| [Description](#description-property) { get; set; } | The server description shown in the welcome screen |
+| [Enabled](#enabled-property) { get; set; } | Whether the welcome screen is enabled |
+| [WelcomeChannels](#welcomechannels-property) { get; set; } | Channels linked in the welcome screen and their display options Up to 5 |
 
 ## See Also
 

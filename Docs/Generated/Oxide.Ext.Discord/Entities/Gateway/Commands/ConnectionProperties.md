@@ -10,10 +10,10 @@ public class ConnectionProperties
 
 | name | description |
 | --- | --- |
-| [ConnectionProperties](#ConnectionProperties-constructor)() | The default constructor. |
-| [Browser](#Browser-property) { get; } | Your library name |
-| [Device](#Device-property) { get; } | Your library name |
-| [OperatingSystem](#OperatingSystem-property) { get; } | Your operating system |
+| [ConnectionProperties](#connectionproperties-constructor)() | The default constructor. |
+| [Browser](#browser-property) { get; } | Your library name |
+| [Device](#device-property) { get; } | Your library name |
+| [OperatingSystem](#operatingsystem-property) { get; } | Your operating system |
 
 ## See Also
 

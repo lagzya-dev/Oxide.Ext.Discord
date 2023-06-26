@@ -18,17 +18,17 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 
 | name | description |
 | --- | --- |
-| [AddMessageReference](#AddMessageReference-method)(…) | Adds a [`MessageReference`](../../../Entities/Messages/MessageReference.md) to the message |
-| [AddReply](#AddReply-method)(…) | Adds a [`AddMessageReference`](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D/AddMessageReference.md) to the message (2 methods) |
-| [AddSticker](#AddSticker-method)(…) | Adds a sticker to the message (2 methods) |
-| [AddStickers](#AddStickers-method)(…) | Adds stickers to the message (2 methods) |
-| [SuppressNotifications](#SuppressNotifications-method)(…) | Adds a sticker to the message |
+| [AddMessageReference](#addmessagereference-method)(…) | Adds a [`MessageReference`](../../../Entities/Messages/MessageReference.md) to the message |
+| [AddReply](#addreply-method-1-of-2))(…) | Adds a [`AddMessageReference`](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D/AddMessageReference.md) to the message (2 methods) |
+| [AddSticker](#addsticker-method-1-of-2))(…) | Adds a sticker to the message (2 methods) |
+| [AddStickers](#addstickers-method-1-of-2))(…) | Adds stickers to the message (2 methods) |
+| [SuppressNotifications](#suppressnotifications-method)(…) | Adds a sticker to the message |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseChannelMessageBuilder](#BaseChannelMessageBuilder-constructor)(…) | Constructor |
+| [BaseChannelMessageBuilder](#basechannelmessagebuilder&amp;lt;tmessage,tbuilder&amp;gt;-constructor)(…) | Constructor |
 
 ## See Also
 
@@ -63,6 +63,29 @@ This
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddSticker method (2 of 2)
+
+Adds a sticker to the message
+
+```csharp
+public TBuilder AddSticker(Snowflake stickerId)
+```
+
+| parameter | description |
+| --- | --- |
+| stickerId | Sticker ID to be added |
+
+## Return Value
+
+This
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # AddStickers method (1 of 2)
@@ -89,6 +112,29 @@ This
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddStickers method (2 of 2)
+
+Adds stickers to the message
+
+```csharp
+public TBuilder AddStickers(ICollection<Snowflake> stickerIds)
+```
+
+| parameter | description |
+| --- | --- |
+| stickerIds | Sticker ID's to be added |
+
+## Return Value
+
+This
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # AddMessageReference method
@@ -140,6 +186,32 @@ This
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddReply method (2 of 2)
+
+Adds a [`AddMessageReference`](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D/AddMessageReference) to the message
+
+```csharp
+public TBuilder AddReply(Snowflake messageId, Snowflake? guildId = default, 
+    bool failIfNotExists = true)
+```
+
+| parameter | description |
+| --- | --- |
+| messageId | ID of the message to reply to |
+| guildId | Guild ID of the message if one exists |
+| failIfNotExists | Should the API call error if the message does not exist (Default true) |
+
+## Return Value
+
+This
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
+* namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # SuppressNotifications method

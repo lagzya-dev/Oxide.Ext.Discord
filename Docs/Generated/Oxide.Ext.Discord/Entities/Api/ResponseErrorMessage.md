@@ -10,10 +10,10 @@ public class ResponseErrorMessage
 
 | name | description |
 | --- | --- |
-| [ResponseErrorMessage](#ResponseErrorMessage-constructor)() | The default constructor. |
-| [Code](#Code-property) { get; set; } | Error code from the discord API |
-| [Errors](#Errors-property) { get; set; } | An JObject containing the errors that occured |
-| [Message](#Message-property) { get; set; } | Error message from the discord API |
+| [ResponseErrorMessage](#responseerrormessage-constructor)() | The default constructor. |
+| [Code](#code-property) { get; set; } | Error code from the discord API |
+| [Errors](#errors-property) { get; set; } | An JObject containing the errors that occured |
+| [Message](#message-property) { get; set; } | Error message from the discord API |
 
 ## See Also
 

@@ -19,7 +19,7 @@ public sealed class DiscordAutoCompleteCommandAttribute : DiscordApplicationComm
 
 | name | description |
 | --- | --- |
-| [DiscordAutoCompleteCommandAttribute](#DiscordAutoCompleteCommandAttribute-constructor)(…) | Constructor |
+| [DiscordAutoCompleteCommandAttribute](#discordautocompletecommandattribute-constructor)(…) | Constructor |
 
 ## See Also
 

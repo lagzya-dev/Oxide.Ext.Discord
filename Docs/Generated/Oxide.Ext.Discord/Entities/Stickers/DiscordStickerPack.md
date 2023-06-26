@@ -10,15 +10,15 @@ public class DiscordStickerPack
 
 | name | description |
 | --- | --- |
-| [DiscordStickerPack](#DiscordStickerPack-constructor)() | The default constructor. |
-| [BannerAssetId](#BannerAssetId-property) { get; set; } | ID of the sticker pack's banner image |
-| [CoverStickerId](#CoverStickerId-property) { get; set; } | ID of a sticker in the pack which is shown as the pack's icon |
-| [Description](#Description-property) { get; set; } | Description of the sticker pack |
-| [Id](#Id-property) { get; set; } | ID of the sticker pack |
-| [Name](#Name-property) { get; set; } | Name of the sticker pack |
-| [SkuId](#SkuId-property) { get; set; } | ID of the pack's SKU |
-| [Stickers](#Stickers-property) { get; set; } | The stickers in the pack |
-| static [GetNitroStickerPacks](#GetNitroStickerPacks-method)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
+| [DiscordStickerPack](#discordstickerpack-constructor)() | The default constructor. |
+| [BannerAssetId](#bannerassetid-property) { get; set; } | ID of the sticker pack's banner image |
+| [CoverStickerId](#coverstickerid-property) { get; set; } | ID of a sticker in the pack which is shown as the pack's icon |
+| [Description](#description-property) { get; set; } | Description of the sticker pack |
+| [Id](#id-property) { get; set; } | ID of the sticker pack |
+| [Name](#name-property) { get; set; } | Name of the sticker pack |
+| [SkuId](#skuid-property) { get; set; } | ID of the pack's SKU |
+| [Stickers](#stickers-property) { get; set; } | The stickers in the pack |
+| static [GetNitroStickerPacks](#getnitrostickerpacks-method)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
 
 ## See Also
 

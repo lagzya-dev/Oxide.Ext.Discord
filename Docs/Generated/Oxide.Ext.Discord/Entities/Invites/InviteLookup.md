@@ -10,11 +10,11 @@ public class InviteLookup : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [InviteLookup](#InviteLookup-constructor)() | The default constructor. |
-| [GuildScheduledEventId](#GuildScheduledEventId-property) { get; set; } | The guild scheduled event to include with the invite |
-| [WithCounts](#WithCounts-property) { get; set; } | Whether the invite should contain approximate member counts |
-| [WithExpiration](#WithExpiration-property) { get; set; } | Whether the invite should contain the expiration date |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [InviteLookup](#invitelookup-constructor)() | The default constructor. |
+| [GuildScheduledEventId](#guildscheduledeventid-property) { get; set; } | The guild scheduled event to include with the invite |
+| [WithCounts](#withcounts-property) { get; set; } | Whether the invite should contain approximate member counts |
+| [WithExpiration](#withexpiration-property) { get; set; } | Whether the invite should contain the expiration date |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

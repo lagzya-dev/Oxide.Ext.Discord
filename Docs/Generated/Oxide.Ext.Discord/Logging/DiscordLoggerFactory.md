@@ -10,7 +10,7 @@ public class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
 
 | name | description |
 | --- | --- |
-| [CreateLogger](#CreateLogger-method)(…) | Returns a newly created [`DiscordLogger`](./DiscordLogger.md) for a given plugin |
+| [CreateLogger](#createlogger-method)(…) | Returns a newly created [`DiscordLogger`](./DiscordLogger.md) for a given plugin |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class UpdateVoiceStatusCommand
 
 | name | description |
 | --- | --- |
-| [UpdateVoiceStatusCommand](#UpdateVoiceStatusCommand-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | ID of the voice channel client wants to join (null if disconnecting) |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [SelfDeaf](#SelfDeaf-property) { get; set; } | Is the client deafened |
-| [SelfMute](#SelfMute-property) { get; set; } | Is the client muted |
+| [UpdateVoiceStatusCommand](#updatevoicestatuscommand-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | ID of the voice channel client wants to join (null if disconnecting) |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [SelfDeaf](#selfdeaf-property) { get; set; } | Is the client deafened |
+| [SelfMute](#selfmute-property) { get; set; } | Is the client muted |
 
 ## See Also
 

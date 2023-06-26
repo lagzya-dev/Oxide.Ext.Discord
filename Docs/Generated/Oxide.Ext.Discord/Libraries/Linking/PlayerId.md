@@ -10,13 +10,13 @@ public struct PlayerId : IEquatable<PlayerId>
 
 | name | description |
 | --- | --- |
-| [PlayerId](#PlayerId-constructor)(…) | Constructor (2 constructors) |
-| [IsValid](#IsValid-property) { get; } | Returns true if the ID is valid; false otherwise |
-| [Player](#Player-property) { get; } | Returns the IPlayer for the Player ID |
-| readonly [Id](#Id-field) | ID of the player |
-| override [Equals](#Equals-method)(…) |  |
-| [Equals](#Equals-method)(…) |  |
-| override [GetHashCode](#GetHashCode-method)() |  |
+| [PlayerId](#playerid-constructor-1-of-2))(…) | Constructor (2 constructors) |
+| [IsValid](#isvalid-property) { get; } | Returns true if the ID is valid; false otherwise |
+| [Player](#player-property) { get; } | Returns the IPlayer for the Player ID |
+| readonly [Id](#id-field) | ID of the player |
+| override [Equals](#equals-method)(…) |  |
+| [Equals](#equals-method)(…) |  |
+| override [GetHashCode](#gethashcode-method)() |  |
 
 ## See Also
 
@@ -38,6 +38,18 @@ public override bool Equals(object obj)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Equals method (2 of 2)
+
+```csharp
+public bool Equals(PlayerId other)
+```
+
+## See Also
+
+* struct [PlayerId](./PlayerId.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetHashCode method
@@ -78,6 +90,30 @@ public PlayerId(IPlayer player)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# PlayerId constructor (2 of 2)
+
+Constructor
+
+```csharp
+public PlayerId(string id)
+```
+
+| parameter | description |
+| --- | --- |
+| id | ID of the player |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if ID is null |
+
+## See Also
+
+* struct [PlayerId](./PlayerId.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # IsValid property

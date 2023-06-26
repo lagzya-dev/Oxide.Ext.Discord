@@ -10,7 +10,7 @@ public class MentionableSelectComponent : BaseSelectMenuComponent
 
 | name | description |
 | --- | --- |
-| [MentionableSelectComponent](#MentionableSelectComponent-constructor)() | Select Menu Component Constructor |
+| [MentionableSelectComponent](#mentionableselectcomponent-constructor)() | Select Menu Component Constructor |
 
 ## See Also
 

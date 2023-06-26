@@ -10,22 +10,22 @@ public class ApplicationCommandOptionBuilder
 
 | name | description |
 | --- | --- |
-| readonly [CommandName](#CommandName-field) | The Name of the command |
-| readonly [GroupName](#GroupName-field) | The Name of the group |
-| readonly [OptionName](#OptionName-field) | The Name of the Option |
-| readonly [SubCommandName](#SubCommandName-field) | The Name of the Sub Command |
-| [AddChoice](#AddChoice-method)(…) | Adds a choice to this option of type string (3 methods) |
-| [AddDescriptionLocalization](#AddDescriptionLocalization-method)(…) | Adds Application Command Option Description Localization |
-| [AddDescriptionLocalizations](#AddDescriptionLocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
-| [AddNameLocalization](#AddNameLocalization-method)(…) | Adds Application Command Option Name Localization |
-| [AddNameLocalizations](#AddNameLocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
-| [AutoComplete](#AutoComplete-method)(…) | Enable auto complete for the option |
-| [ChannelTypes](#ChannelTypes-method)(…) | Set's the channel types for the option |
-| [MaxLength](#MaxLength-method)(…) | Max Length for String Option Max Of 6000 |
-| [MaxValue](#MaxValue-method)(…) | Max Value for Integer Option (2 methods) |
-| [MinLength](#MinLength-method)(…) | Min Length for String Option Max Of 6000 |
-| [MinValue](#MinValue-method)(…) | Min Value for Integer Option (2 methods) |
-| [Required](#Required-method)(…) | Set the required state for the option |
+| readonly [CommandName](#commandname-field) | The Name of the command |
+| readonly [GroupName](#groupname-field) | The Name of the group |
+| readonly [OptionName](#optionname-field) | The Name of the Option |
+| readonly [SubCommandName](#subcommandname-field) | The Name of the Sub Command |
+| [AddChoice](#addchoice-method-1-of-3))(…) | Adds a choice to this option of type string (3 methods) |
+| [AddDescriptionLocalization](#adddescriptionlocalization-method)(…) | Adds Application Command Option Description Localization |
+| [AddDescriptionLocalizations](#adddescriptionlocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
+| [AddNameLocalization](#addnamelocalization-method)(…) | Adds Application Command Option Name Localization |
+| [AddNameLocalizations](#addnamelocalizations-method)(…) | Adds command name localizations for a given plugin and lang key |
+| [AutoComplete](#autocomplete-method)(…) | Enable auto complete for the option |
+| [ChannelTypes](#channeltypes-method)(…) | Set's the channel types for the option |
+| [MaxLength](#maxlength-method)(…) | Max Length for String Option Max Of 6000 |
+| [MaxValue](#maxvalue-method-1-of-2))(…) | Max Value for Integer Option (2 methods) |
+| [MinLength](#minlength-method)(…) | Min Length for String Option Max Of 6000 |
+| [MinValue](#minvalue-method-1-of-2))(…) | Min Value for Integer Option (2 methods) |
+| [Required](#required-method)(…) | Set the required state for the option |
 
 ## See Also
 
@@ -196,6 +196,28 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# MinValue method (2 of 2)
+
+Min Value for Integer Option
+
+```csharp
+public ApplicationCommandOptionBuilder MinValue(int minValue)
+```
+
+| parameter | description |
+| --- | --- |
+| minValue | Min Value |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # MaxValue method (1 of 2)
@@ -221,6 +243,28 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# MaxValue method (2 of 2)
+
+Max Value for Integer Option
+
+```csharp
+public ApplicationCommandOptionBuilder MaxValue(int maxValue)
+```
+
+| parameter | description |
+| --- | --- |
+| maxValue | Max Value |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # MinLength method
@@ -331,6 +375,70 @@ This
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# AddChoice method (2 of 3)
+
+Adds a choice to this option of type int
+
+```csharp
+public ApplicationCommandOptionBuilder AddChoice(string name, int value, 
+    Hash<string, string> nameLocalizations = null)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the choice |
+| value | Value of the choice |
+| nameLocalizations | Localizations for the name |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Thrown if option type is not int |
+
+## See Also
+
+* class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# AddChoice method (3 of 3)
+
+Adds a choice to this option of type string
+
+```csharp
+public ApplicationCommandOptionBuilder AddChoice(string name, string value, 
+    Hash<string, string> nameLocalizations = null)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the choice |
+| value | Value of the choice |
+| nameLocalizations | Localizations for the name |
+
+## Return Value
+
+This
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| Exception | Thrown if option type is not string |
+
+## See Also
+
+* class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # CommandName field

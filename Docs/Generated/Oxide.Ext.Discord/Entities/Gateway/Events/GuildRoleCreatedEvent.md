@@ -10,9 +10,9 @@ public class GuildRoleCreatedEvent
 
 | name | description |
 | --- | --- |
-| [GuildRoleCreatedEvent](#GuildRoleCreatedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
-| [Role](#Role-property) { get; set; } | The role created |
+| [GuildRoleCreatedEvent](#guildrolecreatedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | The id of the guild |
+| [Role](#role-property) { get; set; } | The role created |
 
 ## See Also
 

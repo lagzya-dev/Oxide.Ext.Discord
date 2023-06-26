@@ -10,29 +10,29 @@ public class GuildUpdate
 
 | name | description |
 | --- | --- |
-| [GuildUpdate](#GuildUpdate-constructor)() | The default constructor. |
-| [AfkChannelId](#AfkChannelId-property) { get; set; } | ID of afk channel |
-| [AfkTimeout](#AfkTimeout-property) { get; set; } | Afk timeout in seconds Can be set to: null, 60, 300, 900, 1800, 3600 |
-| [Banner](#Banner-property) { get; set; } | Image for the guild banner (when the server has the BANNER feature; can be animated gif when the server has the ANIMATED_BANNER feature) |
-| [DefaultMessageNotifications](#DefaultMessageNotifications-property) { get; set; } | Default message notification level |
-| [Description](#Description-property) { get; set; } | The description for the guild |
-| [DiscoverySplash](#DiscoverySplash-property) { get; set; } | Image for the guild discovery splash (when the server has the DISCOVERABLE feature) |
-| [ExplicitContentFilter](#ExplicitContentFilter-property) { get; set; } | Explicit content filter level |
-| [Features](#Features-property) { get; set; } | Enabled guild features |
-| [Icon](#Icon-property) { get; set; } | Base64 128x128 image for the guild icon |
-| [Name](#Name-property) { get; set; } | Name of the guild (2-100 characters) |
-| [OwnerId](#OwnerId-property) { get; set; } | User id to transfer guild ownership to (must be owner) |
-| [PreferredLocale](#PreferredLocale-property) { get; set; } | The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US" |
-| [PremiumProgressBarEnabled](#PremiumProgressBarEnabled-property) { get; set; } | Whether the guild's boost progress bar should be enabled |
-| [PublicUpdatesChannelId](#PublicUpdatesChannelId-property) { get; set; } | The id of the channel where admins and moderators of Community guilds receive notices from Discord |
-| [Region](#Region-property) { get; set; } | Voice region id |
-| [RulesChannelId](#RulesChannelId-property) { get; set; } | The id of the channel where Community guilds display rules and/or guidelines |
-| [SafetyAlertsChannelId](#SafetyAlertsChannelId-property) { get; set; } | The id of the channel where admins and moderators of Community guilds receive safety alerts from Discord |
-| [Splash](#Splash-property) { get; set; } | Image for the guild splash (when the server has the INVITE_SPLASH feature) |
-| [SystemChannelFlags](#SystemChannelFlags-property) { get; set; } | System channel flags |
-| [SystemChannelId](#SystemChannelId-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
-| [VerificationLevel](#VerificationLevel-property) { get; set; } | Verification level |
-| [Validate](#Validate-method)() |  |
+| [GuildUpdate](#guildupdate-constructor)() | The default constructor. |
+| [AfkChannelId](#afkchannelid-property) { get; set; } | ID of afk channel |
+| [AfkTimeout](#afktimeout-property) { get; set; } | Afk timeout in seconds Can be set to: null, 60, 300, 900, 1800, 3600 |
+| [Banner](#banner-property) { get; set; } | Image for the guild banner (when the server has the BANNER feature; can be animated gif when the server has the ANIMATED_BANNER feature) |
+| [DefaultMessageNotifications](#defaultmessagenotifications-property) { get; set; } | Default message notification level |
+| [Description](#description-property) { get; set; } | The description for the guild |
+| [DiscoverySplash](#discoverysplash-property) { get; set; } | Image for the guild discovery splash (when the server has the DISCOVERABLE feature) |
+| [ExplicitContentFilter](#explicitcontentfilter-property) { get; set; } | Explicit content filter level |
+| [Features](#features-property) { get; set; } | Enabled guild features |
+| [Icon](#icon-property) { get; set; } | Base64 128x128 image for the guild icon |
+| [Name](#name-property) { get; set; } | Name of the guild (2-100 characters) |
+| [OwnerId](#ownerid-property) { get; set; } | User id to transfer guild ownership to (must be owner) |
+| [PreferredLocale](#preferredlocale-property) { get; set; } | The preferred locale of a Community guild used in server discovery and notices from Discord; defaults to "en-US" |
+| [PremiumProgressBarEnabled](#premiumprogressbarenabled-property) { get; set; } | Whether the guild's boost progress bar should be enabled |
+| [PublicUpdatesChannelId](#publicupdateschannelid-property) { get; set; } | The id of the channel where admins and moderators of Community guilds receive notices from Discord |
+| [Region](#region-property) { get; set; } | Voice region id |
+| [RulesChannelId](#ruleschannelid-property) { get; set; } | The id of the channel where Community guilds display rules and/or guidelines |
+| [SafetyAlertsChannelId](#safetyalertschannelid-property) { get; set; } | The id of the channel where admins and moderators of Community guilds receive safety alerts from Discord |
+| [Splash](#splash-property) { get; set; } | Image for the guild splash (when the server has the INVITE_SPLASH feature) |
+| [SystemChannelFlags](#systemchannelflags-property) { get; set; } | System channel flags |
+| [SystemChannelId](#systemchannelid-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
+| [VerificationLevel](#verificationlevel-property) { get; set; } | Verification level |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

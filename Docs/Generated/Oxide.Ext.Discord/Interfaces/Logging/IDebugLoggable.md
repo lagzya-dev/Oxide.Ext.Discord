@@ -10,7 +10,7 @@ public interface IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [LogDebug](#LogDebug-method)(…) | Logs a debug message for the object |
+| [LogDebug](#logdebug-method)(…) | Logs a debug message for the object |
 
 ## See Also
 

@@ -10,7 +10,7 @@ public sealed class SnowflakeIdFactory : Singleton<SnowflakeIdFactory>
 
 | name | description |
 | --- | --- |
-| [Generate](#Generate-method)() | Returns the generated snowflake ID |
+| [Generate](#generate-method)() | Returns the generated snowflake ID |
 
 ## See Also
 

@@ -10,9 +10,9 @@ public class MessageCreate : BaseMessageCreate
 
 | name | description |
 | --- | --- |
-| [MessageCreate](#MessageCreate-constructor)() | The default constructor. |
-| [MessageReference](#MessageReference-property) { get; set; } | Include to make your message a reply |
-| [Nonce](#Nonce-property) { get; set; } | Can be used to verify a message was sent (up to 25 characters). Value will appear in the Message Create event. |
+| [MessageCreate](#messagecreate-constructor)() | The default constructor. |
+| [MessageReference](#messagereference-property) { get; set; } | Include to make your message a reply |
+| [Nonce](#nonce-property) { get; set; } | Can be used to verify a message was sent (up to 25 characters). Value will appear in the Message Create event. |
 
 ## See Also
 

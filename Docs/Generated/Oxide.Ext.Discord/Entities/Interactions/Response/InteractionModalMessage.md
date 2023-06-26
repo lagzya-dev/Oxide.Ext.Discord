@@ -10,10 +10,10 @@ public class InteractionModalMessage
 
 | name | description |
 | --- | --- |
-| [InteractionModalMessage](#InteractionModalMessage-constructor)() | The default constructor. |
-| [Components](#Components-property) { get; set; } | Used to create message components on a message |
-| [CustomId](#CustomId-property) { get; set; } | A developer-defined identifier for the interactable form Max 100 characters |
-| [Title](#Title-property) { get; set; } | Title of the modal if Modal Response Max 45 characters |
+| [InteractionModalMessage](#interactionmodalmessage-constructor)() | The default constructor. |
+| [Components](#components-property) { get; set; } | Used to create message components on a message |
+| [CustomId](#customid-property) { get; set; } | A developer-defined identifier for the interactable form Max 100 characters |
+| [Title](#title-property) { get; set; } | Title of the modal if Modal Response Max 45 characters |
 
 ## See Also
 

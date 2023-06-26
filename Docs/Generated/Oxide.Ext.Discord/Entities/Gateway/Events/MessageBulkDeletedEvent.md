@@ -10,10 +10,10 @@ public class MessageBulkDeletedEvent
 
 | name | description |
 | --- | --- |
-| [MessageBulkDeletedEvent](#MessageBulkDeletedEvent-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | The id of the channel |
-| [GuildId](#GuildId-property) { get; set; } | The id of the guild |
-| [Ids](#Ids-property) { get; set; } | The ids of the messages |
+| [MessageBulkDeletedEvent](#messagebulkdeletedevent-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | The id of the channel |
+| [GuildId](#guildid-property) { get; set; } | The id of the guild |
+| [Ids](#ids-property) { get; set; } | The ids of the messages |
 
 ## See Also
 

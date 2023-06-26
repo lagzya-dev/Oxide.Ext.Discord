@@ -10,11 +10,11 @@ public class GuildCommandPermissions
 
 | name | description |
 | --- | --- |
-| [GuildCommandPermissions](#GuildCommandPermissions-constructor)() | The default constructor. |
-| [ApplicationId](#ApplicationId-property) { get; set; } | ID of the application the command belongs to |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [Id](#Id-property) { get; set; } | ID of the command |
-| [Permissions](#Permissions-property) { get; set; } | Permissions for the command in the guild |
+| [GuildCommandPermissions](#guildcommandpermissions-constructor)() | The default constructor. |
+| [ApplicationId](#applicationid-property) { get; set; } | ID of the application the command belongs to |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [Id](#id-property) { get; set; } | ID of the command |
+| [Permissions](#permissions-property) { get; set; } | Permissions for the command in the guild |
 
 ## See Also
 

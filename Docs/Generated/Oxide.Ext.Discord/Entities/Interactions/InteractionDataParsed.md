@@ -10,19 +10,19 @@ public class InteractionDataParsed
 
 | name | description |
 | --- | --- |
-| [InteractionDataParsed](#InteractionDataParsed-constructor)(…) | Constructor for the data parser. |
-| [Args](#Args-property) { get; } | Interaction Data Supplied Args if ChatInput Command Type if an application command |
-| [CommandGroup](#CommandGroup-property) { get; } | Command group for the interaction if ChatInput Command Type if an application command Null if command group is not used for the command. Defaults to empty string if command does not have a command group |
-| [InGuild](#InGuild-property) { get; } | Returns true if this command was used in a guild; false otherwise. |
-| [SubCommand](#SubCommand-property) { get; } | Sub Command for the interaction if ChatInput Command Typ if an application command Null if sub command group is not used for the command. Defaults to empty string if command does not have sub command |
-| readonly [Command](#Command-field) | Parsed command for the interaction if an application command |
-| readonly [Data](#Data-field) | [`InteractionData`](./InteractionData.md) for the Interaction |
-| readonly [GuildOxideLocale](#GuildOxideLocale-field) | Discord Guild's locale converted to oxide lang locale |
-| readonly [Interaction](#Interaction-field) | Interaction this data is for |
-| readonly [SelectMenuValues](#SelectMenuValues-field) | If a [`BaseSelectMenuComponent`](./MessageComponents/SelectMenus/BaseSelectMenuComponent.md) triggered this interaction. The values selected from the select menu. |
-| readonly [TriggeredComponentId](#TriggeredComponentId-field) | The CustomId of the [`BaseInteractableComponent`](./MessageComponents/BaseInteractableComponent.md) that triggered the interaction if a component triggered this interaction |
-| readonly [Type](#Type-field) | [`ApplicationCommandType`](./ApplicationCommands/ApplicationCommandType.md) The type of interaction that was triggered |
-| readonly [UserOxideLocale](#UserOxideLocale-field) | Discord User's locale converted to oxide lang locale |
+| [InteractionDataParsed](#interactiondataparsed-constructor)(…) | Constructor for the data parser. |
+| [Args](#args-property) { get; } | Interaction Data Supplied Args if ChatInput Command Type if an application command |
+| [CommandGroup](#commandgroup-property) { get; } | Command group for the interaction if ChatInput Command Type if an application command Null if command group is not used for the command. Defaults to empty string if command does not have a command group |
+| [InGuild](#inguild-property) { get; } | Returns true if this command was used in a guild; false otherwise. |
+| [SubCommand](#subcommand-property) { get; } | Sub Command for the interaction if ChatInput Command Typ if an application command Null if sub command group is not used for the command. Defaults to empty string if command does not have sub command |
+| readonly [Command](#command-field) | Parsed command for the interaction if an application command |
+| readonly [Data](#data-field) | [`InteractionData`](./InteractionData.md) for the Interaction |
+| readonly [GuildOxideLocale](#guildoxidelocale-field) | Discord Guild's locale converted to oxide lang locale |
+| readonly [Interaction](#interaction-field) | Interaction this data is for |
+| readonly [SelectMenuValues](#selectmenuvalues-field) | If a [`BaseSelectMenuComponent`](./MessageComponents/SelectMenus/BaseSelectMenuComponent.md) triggered this interaction. The values selected from the select menu. |
+| readonly [TriggeredComponentId](#triggeredcomponentid-field) | The CustomId of the [`BaseInteractableComponent`](./MessageComponents/BaseInteractableComponent.md) that triggered the interaction if a component triggered this interaction |
+| readonly [Type](#type-field) | [`ApplicationCommandType`](./ApplicationCommands/ApplicationCommandType.md) The type of interaction that was triggered |
+| readonly [UserOxideLocale](#useroxidelocale-field) | Discord User's locale converted to oxide lang locale |
 
 ## See Also
 

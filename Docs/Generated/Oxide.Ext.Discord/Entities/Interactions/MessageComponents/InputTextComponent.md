@@ -10,15 +10,15 @@ public class InputTextComponent : BaseInteractableComponent
 
 | name | description |
 | --- | --- |
-| [InputTextComponent](#InputTextComponent-constructor)() | Input Text Constructor |
-| [Label](#Label-property) { get; set; } | Text that appears on top of the input text field, max 80 characters |
-| [MaxLength](#MaxLength-property) { get; set; } | Maximum length of the text input |
-| [MinLength](#MinLength-property) { get; set; } | Minimum length of the text input |
-| [Placeholder](#Placeholder-property) { get; set; } | Custom placeholder text if the input is empty Max 100 characters |
-| [Required](#Required-property) { get; set; } | Whether this component is required to be filled defaults to true |
-| [Style](#Style-property) { get; set; } | Style of the input text |
-| [Value](#Value-property) { get; set; } | Pre-filled value for text input |
-| override [Validate](#Validate-method)() |  |
+| [InputTextComponent](#inputtextcomponent-constructor)() | Input Text Constructor |
+| [Label](#label-property) { get; set; } | Text that appears on top of the input text field, max 80 characters |
+| [MaxLength](#maxlength-property) { get; set; } | Maximum length of the text input |
+| [MinLength](#minlength-property) { get; set; } | Minimum length of the text input |
+| [Placeholder](#placeholder-property) { get; set; } | Custom placeholder text if the input is empty Max 100 characters |
+| [Required](#required-property) { get; set; } | Whether this component is required to be filled defaults to true |
+| [Style](#style-property) { get; set; } | Style of the input text |
+| [Value](#value-property) { get; set; } | Pre-filled value for text input |
+| override [Validate](#validate-method)() |  |
 
 ## See Also
 

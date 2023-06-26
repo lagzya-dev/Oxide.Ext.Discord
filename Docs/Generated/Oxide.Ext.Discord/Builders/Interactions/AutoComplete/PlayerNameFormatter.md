@@ -10,12 +10,12 @@ public class PlayerNameFormatter
 
 | name | description |
 | --- | --- |
-| static readonly [All](#All-field) | Include all name options in the player name |
-| static readonly [ClanName](#ClanName-field) | Include clan name in the player name |
-| static readonly [Default](#Default-field) | Default Player Name Formatter |
-| static readonly [PlayerId](#PlayerId-field) | Include Player Id in the player name |
-| static [Create](#Create-method)(…) | Create a new Player Name formatter with the given Custom Name Function |
-| [Format](#Format-method)(…) | Formats the player name |
+| static readonly [All](#all-field) | Include all name options in the player name |
+| static readonly [ClanName](#clanname-field) | Include clan name in the player name |
+| static readonly [Default](#default-field) | Default Player Name Formatter |
+| static readonly [PlayerId](#playerid-field) | Include Player Id in the player name |
+| static [Create](#create-method)(…) | Create a new Player Name formatter with the given Custom Name Function |
+| [Format](#format-method)(…) | Formats the player name |
 
 ## See Also
 

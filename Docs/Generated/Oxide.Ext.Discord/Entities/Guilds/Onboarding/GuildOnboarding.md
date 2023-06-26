@@ -10,11 +10,11 @@ public class GuildOnboarding
 
 | name | description |
 | --- | --- |
-| [GuildOnboarding](#GuildOnboarding-constructor)() | The default constructor. |
-| [DefaultChannelIds](#DefaultChannelIds-property) { get; set; } | Channel IDs that members get opted into automatically |
-| [Enabled](#Enabled-property) { get; set; } | Whether onboarding is enabled in the guild |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild this onboarding is part of |
-| [Prompts](#Prompts-property) { get; set; } | Prompts shown during onboarding and in customize community |
+| [GuildOnboarding](#guildonboarding-constructor)() | The default constructor. |
+| [DefaultChannelIds](#defaultchannelids-property) { get; set; } | Channel IDs that members get opted into automatically |
+| [Enabled](#enabled-property) { get; set; } | Whether onboarding is enabled in the guild |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild this onboarding is part of |
+| [Prompts](#prompts-property) { get; set; } | Prompts shown during onboarding and in customize community |
 
 ## See Also
 

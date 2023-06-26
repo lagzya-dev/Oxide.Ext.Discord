@@ -10,20 +10,20 @@ public class ResponseError : BaseDiscordException
 
 | name | description |
 | --- | --- |
-| [ContentType](#ContentType-property) { get; } | HTTP Content Type for the request |
-| [DiscordError](#DiscordError-property) { get; } | If discord returned an error this will contain that error message |
-| [Exception](#Exception-property) { get; } | The exception from the request |
-| [HttpStatusCode](#HttpStatusCode-property) { get; } | HTTP Status code |
-| [RateLimitCode](#RateLimitCode-property) { get; } | If error was a rate limit the code from the rate limit |
-| [RateLimitMessage](#RateLimitMessage-property) { get; } | If error was a rate limit the message from the rate limit |
-| [ResponseMessage](#ResponseMessage-property) { get; } | Full string response if we received one |
-| [StringContents](#StringContents-property) { get; } | The string contents of the request |
-| readonly [ErrorDate](#ErrorDate-field) | DateTimeOffset when the error occured |
-| readonly [RequestData](#RequestData-field) | What data was passed to the request |
-| readonly [RequestId](#RequestId-field) | ID of the request |
-| readonly [RequestMethod](#RequestMethod-field) | The request method that was called |
-| readonly [Url](#Url-field) | The URI that was called |
-| [SuppressErrorMessage](#SuppressErrorMessage-method)() | Suppresses the error message from being logged |
+| [ContentType](#contenttype-property) { get; } | HTTP Content Type for the request |
+| [DiscordError](#discorderror-property) { get; } | If discord returned an error this will contain that error message |
+| [Exception](#exception-property) { get; } | The exception from the request |
+| [HttpStatusCode](#httpstatuscode-property) { get; } | HTTP Status code |
+| [RateLimitCode](#ratelimitcode-property) { get; } | If error was a rate limit the code from the rate limit |
+| [RateLimitMessage](#ratelimitmessage-property) { get; } | If error was a rate limit the message from the rate limit |
+| [ResponseMessage](#responsemessage-property) { get; } | Full string response if we received one |
+| [StringContents](#stringcontents-property) { get; } | The string contents of the request |
+| readonly [ErrorDate](#errordate-field) | DateTimeOffset when the error occured |
+| readonly [RequestData](#requestdata-field) | What data was passed to the request |
+| readonly [RequestId](#requestid-field) | ID of the request |
+| readonly [RequestMethod](#requestmethod-field) | The request method that was called |
+| readonly [Url](#url-field) | The URI that was called |
+| [SuppressErrorMessage](#suppresserrormessage-method)() | Suppresses the error message from being logged |
 
 ## See Also
 

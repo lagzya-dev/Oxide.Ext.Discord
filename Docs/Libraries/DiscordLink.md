@@ -1,6 +1,6 @@
 # Discord Link
 
-Discord Link is a library provided by the Discord Extension.
+[Discord Link](../Generated/Oxide.Ext.Discord/Libraries/Linking/DiscordLink.md) is a library provided by the Discord Extension.
 This library allows plugin to access a standardized API to get information about a players who have linked their steam and discord accounts.
 In order for Discord Link to work a plugin must be registered with Discord Link as the link plugin.
 When the Discord Link plugin is unloaded then DiscordLink will remove that plugin as the link plugin.
@@ -72,115 +72,6 @@ public struct PlayerId : IEquatable<PlayerId>
     // Returns the IPlayer for the Player ID
     public IPlayer Player { get; }
 }
-```
-
-
-## Accessing Information
-
-Once you have a reference to discord link you gain access to all the API's that are on it.
-Before accessing information from DiscordLink it is recommended to call IsEnabled() to make sure a link plugin has been registered for the server.
-
-### Fields
-```csharp
-IReadOnlyDictionary<PlayerId, Snowflake> PlayerToDiscordIds
-IReadOnlyDictionary<Snowflake, PlayerId> DiscordToPlayerIds
-ICollection<PlayerId> PlayerIds
-ICollection<Snowflake> DiscordIds
-```
-
-### Properties
-```csharp
-// Returns if Discord Link has a registered link plugin
-bool IsEnabled
-
-// Returns the number of linked accounts
-int LinkedCount
-```
-
-### Methods
-```c#
-// Registers the passed in plugin as the link plugin for the server
-// Only 1 link plugin can be registered at a time
-// If your plugin provides more than just Link functionality it is recommended to have a configuartion option to enable linking for your pluguin
-void AddLinkPlugin(IDiscordLinkPlugin plugin)
-
-//Removes a link plugin from DiscordLink
-void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
-
-// Returns true if the steam Id is linked with a discord account
-bool IsLinked(string steamId)
-
-// Returns true if the discord Id is linked with a steam account
-bool IsLinked(Snowflake discordId)
-
-// Returns true if the IPlayer is linked with a discord account
-bool IsLinked(IPlayer player)
-
-// Returns true if the DiscordUser is linked with a steam account
-bool IsLinked(DiscordUser user)
-
-// Returns a Player Id for a given Discord ID
-// If the Discord ID is not linked then the PlayerId.IsValid property will be false
-PlayerId GetPlayerId(Snowflake discordId)
-
-// Returns a Player Id for a given DiscordUser
-// If the Discord ID is not linked then the PlayerId.IsValid property will be false
-PlayerId GetPlayerId(DiscordUser user)
-
-// Returns the IPlayer for the given Discord ID
-IPlayer GetPlayer(Snowflake discordId)
-
-// Returns the Discord ID for the given Steam ID
-Snowflake GetDiscordId(string playerId)
-
-// Returns the Discord ID for the given IPlayer
-Snowflake GetDiscordId(IPlayer player)
-
-// Returns a minimal Discord User
-DiscordUser GetDiscordUser(string playerId)
-
-// Returns a minimal Discord User
-DiscordUser GetDiscordUser(IPlayer player)
-
-// Returns a linked guild member for the matching steam id in the given guild
-GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
-
-//Returns a linked guild member for the matching Player in the given guild
-GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild)
-
-//Returns the steam ID for the given Discord ID. Null if not found
-string GetSteamId(Snowflake discordId)
-
-//Returns the steam ID for the given DiscordUser. Null if not found
-string GetSteamId(DiscordUser user)
-
-// Returns an IPlayer for the given Discord ID
-// If the Discord ID is not linked then the result will be null
-IPlayer GetPlayer(Snowflake discordId)
-
-// Returns a Discord ID for a given steam ID
-// If the Steam ID is not linked then the result will be null
-Snowflake? GetDiscordId(string steamId)
-
-// Returns a Discord ID for a given player
-// If the player is not linked then the result will be null
-Snowflake? GetDiscordId(IPlayer player)
-
-// Returns a DiscordUser for the given Steam ID.
-// Note: This use will just contain the ID field and can be used in API calls.
-DiscordUser GetDiscordUser(string steamId)
-
-// Returns a DiscordUser for the given player.
-// Note: This use will just contain the ID field and can be used in API calls.
-DiscordUser GetDiscordUser(IPlayer player)
-
-// Returns a guild member for a given Steam ID 
-// If the Steam ID is not link then the result will be null
-GuildMember GetLinkedMember(string steamId, Guild guild)
-
-// Returns a guild member for a given player
-// If the Steam ID is not link then the result will be null
-GuildMember GetLinkedMember(IPlayer player, Guild guild)
 ```
 
 ## Extension Methods

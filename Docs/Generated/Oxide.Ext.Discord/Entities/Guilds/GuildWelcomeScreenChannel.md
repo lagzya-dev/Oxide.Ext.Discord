@@ -10,11 +10,11 @@ public class GuildWelcomeScreenChannel
 
 | name | description |
 | --- | --- |
-| [GuildWelcomeScreenChannel](#GuildWelcomeScreenChannel-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | Channel ID for the channel |
-| [Description](#Description-property) { get; set; } | The description shown for the channel |
-| [EmojiId](#EmojiId-property) { get; set; } | The emoji id, if the emoji is custom |
-| [EmojiName](#EmojiName-property) { get; set; } | The emoji name if custom, the unicode character if standard, or null if no emoji is set |
+| [GuildWelcomeScreenChannel](#guildwelcomescreenchannel-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | Channel ID for the channel |
+| [Description](#description-property) { get; set; } | The description shown for the channel |
+| [EmojiId](#emojiid-property) { get; set; } | The emoji id, if the emoji is custom |
+| [EmojiName](#emojiname-property) { get; set; } | The emoji name if custom, the unicode character if standard, or null if no emoji is set |
 
 ## See Also
 

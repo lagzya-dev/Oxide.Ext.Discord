@@ -10,10 +10,10 @@ public class WebhookCreate
 
 | name | description |
 | --- | --- |
-| [WebhookCreate](#WebhookCreate-constructor)() | The default constructor. |
-| [Avatar](#Avatar-property) { get; set; } | Image for the default webhook avatar |
-| [Name](#Name-property) { get; set; } | Name of the webhook (1-80 characters) |
-| [Validate](#Validate-method)() |  |
+| [WebhookCreate](#webhookcreate-constructor)() | The default constructor. |
+| [Avatar](#avatar-property) { get; set; } | Image for the default webhook avatar |
+| [Name](#name-property) { get; set; } | Name of the webhook (1-80 characters) |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

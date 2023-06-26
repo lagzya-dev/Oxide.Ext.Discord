@@ -10,9 +10,9 @@ public abstract class BaseDiscordLibrary : Library
 
 | name | description |
 | --- | --- |
-| [BaseDiscordLibrary](#BaseDiscordLibrary-constructor)() | Constructor |
-| virtual [OnPluginLoaded](#OnPluginLoaded-method)(…) | Called on the library when a plugin is loaded |
-| virtual [OnPluginUnloaded](#OnPluginUnloaded-method)(…) | Called on the library when a plugin is unloaded |
+| [BaseDiscordLibrary](#basediscordlibrary-constructor)() | Constructor |
+| virtual [OnPluginLoaded](#onpluginloaded-method)(…) | Called on the library when a plugin is loaded |
+| virtual [OnPluginUnloaded](#onpluginunloaded-method)(…) | Called on the library when a plugin is unloaded |
 
 ## See Also
 

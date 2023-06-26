@@ -10,7 +10,7 @@ public interface ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [Id](#Id-property) { get; } | Returns the unique ID for this entity |
+| [Id](#id-property) { get; } | Returns the unique ID for this entity |
 
 ## See Also
 

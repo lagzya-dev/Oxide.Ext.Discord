@@ -10,8 +10,8 @@ public class ChannelSelectComponent : BaseSelectMenuComponent
 
 | name | description |
 | --- | --- |
-| [ChannelSelectComponent](#ChannelSelectComponent-constructor)() | Select Menu Component Constructor |
-| [ChannelTypes](#ChannelTypes-property) { get; set; } | List of channel types to include in the channel select component |
+| [ChannelSelectComponent](#channelselectcomponent-constructor)() | Select Menu Component Constructor |
+| [ChannelTypes](#channeltypes-property) { get; set; } | List of channel types to include in the channel select component |
 
 ## See Also
 

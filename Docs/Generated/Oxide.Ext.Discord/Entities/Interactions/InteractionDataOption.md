@@ -10,16 +10,16 @@ public class InteractionDataOption
 
 | name | description |
 | --- | --- |
-| [InteractionDataOption](#InteractionDataOption-constructor)() | The default constructor. |
-| [Focused](#Focused-property) { get; set; } | True if this option is the currently focused option for autocomplete |
-| [Name](#Name-property) { get; set; } | The name of the parameter |
-| [Options](#Options-property) { get; set; } | Present if this option is a group or subcommand See [`InteractionDataOption`](./InteractionDataOption.md) |
-| [Type](#Type-property) { get; set; } | Value of ApplicationCommandOptionType |
-| [GetBool](#GetBool-method)() | Returns the value as a bool |
-| [GetInt](#GetInt-method)() | Returns the value as an int |
-| [GetNumber](#GetNumber-method)() | Returns the value as a double |
-| [GetSnowflake](#GetSnowflake-method)() | Returns the value as a Snowflake |
-| [GetString](#GetString-method)() | Returns the value as a string |
+| [InteractionDataOption](#interactiondataoption-constructor)() | The default constructor. |
+| [Focused](#focused-property) { get; set; } | True if this option is the currently focused option for autocomplete |
+| [Name](#name-property) { get; set; } | The name of the parameter |
+| [Options](#options-property) { get; set; } | Present if this option is a group or subcommand See [`InteractionDataOption`](./InteractionDataOption.md) |
+| [Type](#type-property) { get; set; } | Value of ApplicationCommandOptionType |
+| [GetBool](#getbool-method)() | Returns the value as a bool |
+| [GetInt](#getint-method)() | Returns the value as an int |
+| [GetNumber](#getnumber-method)() | Returns the value as a double |
+| [GetSnowflake](#getsnowflake-method)() | Returns the value as a Snowflake |
+| [GetString](#getstring-method)() | Returns the value as a string |
 
 ## See Also
 

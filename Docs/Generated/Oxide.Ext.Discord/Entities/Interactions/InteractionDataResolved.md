@@ -10,13 +10,13 @@ public class InteractionDataResolved
 
 | name | description |
 | --- | --- |
-| [InteractionDataResolved](#InteractionDataResolved-constructor)() | The default constructor. |
-| [Attachments](#Attachments-property) { get; set; } | The ids and attachment objects |
-| [Channels](#Channels-property) { get; set; } | The IDs and partial Channel objects |
-| [Members](#Members-property) { get; set; } | The IDs and partial Member objects |
-| [Messages](#Messages-property) { get; set; } | The ids and partial Message objects |
-| [Roles](#Roles-property) { get; set; } | The IDs and Role objects |
-| [Users](#Users-property) { get; set; } | The IDs and User objects |
+| [InteractionDataResolved](#interactiondataresolved-constructor)() | The default constructor. |
+| [Attachments](#attachments-property) { get; set; } | The ids and attachment objects |
+| [Channels](#channels-property) { get; set; } | The IDs and partial Channel objects |
+| [Members](#members-property) { get; set; } | The IDs and partial Member objects |
+| [Messages](#messages-property) { get; set; } | The ids and partial Message objects |
+| [Roles](#roles-property) { get; set; } | The IDs and Role objects |
+| [Users](#users-property) { get; set; } | The IDs and User objects |
 
 ## See Also
 

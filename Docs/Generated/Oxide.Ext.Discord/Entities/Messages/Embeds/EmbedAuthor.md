@@ -10,12 +10,12 @@ public class EmbedAuthor
 
 | name | description |
 | --- | --- |
-| [EmbedAuthor](#EmbedAuthor-constructor)() | Embed Author Constructor |
-| [EmbedAuthor](#EmbedAuthor-constructor)(…) | Embed Author Constructor |
-| [IconUrl](#IconUrl-property) { get; set; } | Url of author icon (only supports http(s) and attachments) |
-| [Name](#Name-property) { get; set; } | Name of author |
-| [ProxyIconUrl](#ProxyIconUrl-property) { get; set; } | A proxied url of author icon |
-| [Url](#Url-property) { get; set; } | Url of author * Only supports http(s) |
+| [EmbedAuthor](#embedauthor-constructor)() | Embed Author Constructor |
+| [EmbedAuthor](#embedauthor-constructor)(…) | Embed Author Constructor |
+| [IconUrl](#iconurl-property) { get; set; } | Url of author icon (only supports http(s) and attachments) |
+| [Name](#name-property) { get; set; } | Name of author |
+| [ProxyIconUrl](#proxyiconurl-property) { get; set; } | A proxied url of author icon |
+| [Url](#url-property) { get; set; } | Url of author * Only supports http(s) |
 
 ## See Also
 
@@ -39,6 +39,28 @@ public EmbedAuthor()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedAuthor constructor (2 of 2)
+
+Embed Author Constructor
+
+```csharp
+public EmbedAuthor(string name, string url = null, string iconUrl = null, 
+    string proxyIconUrl = null)
+```
+
+| parameter | description |
+| --- | --- |
+| name |  |
+| url |  |
+| iconUrl |  |
+| proxyIconUrl |  |
+
+## See Also
+
+* class [EmbedAuthor](./EmbedAuthor.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

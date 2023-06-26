@@ -14,14 +14,14 @@ public interface IReadonlySet<T> : IReadOnlyCollection<T>
 
 | name | description |
 | --- | --- |
-| [Contains](#Contains-method)(…) |  |
-| [CopyTo](#CopyTo-method)(…) |  |
-| [IsProperSubsetOf](#IsProperSubsetOf-method)(…) |  |
-| [IsProperSupersetOf](#IsProperSupersetOf-method)(…) |  |
-| [IsSubsetOf](#IsSubsetOf-method)(…) |  |
-| [IsSupersetOf](#IsSupersetOf-method)(…) |  |
-| [Overlaps](#Overlaps-method)(…) |  |
-| [SetEquals](#SetEquals-method)(…) |  |
+| [Contains](#contains-method)(…) |  |
+| [CopyTo](#copyto-method)(…) |  |
+| [IsProperSubsetOf](#ispropersubsetof-method)(…) |  |
+| [IsProperSupersetOf](#ispropersupersetof-method)(…) |  |
+| [IsSubsetOf](#issubsetof-method)(…) |  |
+| [IsSupersetOf](#issupersetof-method)(…) |  |
+| [Overlaps](#overlaps-method)(…) |  |
+| [SetEquals](#setequals-method)(…) |  |
 
 ## See Also
 

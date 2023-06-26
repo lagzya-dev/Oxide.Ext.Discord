@@ -10,19 +10,19 @@ public class Integration : IntegrationUpdate, ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [Integration](#Integration-constructor)() | The default constructor. |
-| [Account](#Account-property) { get; set; } | Integration account information |
-| [Application](#Application-property) { get; set; } | The bot/OAuth2 application for discord integrations |
-| [Enabled](#Enabled-property) { get; set; } | Is this integration enabled |
-| [Id](#Id-property) { get; set; } | Integration ID |
-| [Name](#Name-property) { get; set; } | Integration Name |
-| [Revoked](#Revoked-property) { get; set; } | Has this integration been revoked |
-| [RoleId](#RoleId-property) { get; set; } | ID that this integration uses for "subscribers" |
-| [SubscriberCount](#SubscriberCount-property) { get; set; } | How many subscribers this integration has |
-| [SyncedAt](#SyncedAt-property) { get; set; } | When this integration was last synced |
-| [Syncing](#Syncing-property) { get; set; } | Is this integration syncing |
-| [Type](#Type-property) { get; set; } | Integration type See [`IntegrationType`](./IntegrationType.md) |
-| [User](#User-property) { get; set; } | User for this integration |
+| [Integration](#integration-constructor)() | The default constructor. |
+| [Account](#account-property) { get; set; } | Integration account information |
+| [Application](#application-property) { get; set; } | The bot/OAuth2 application for discord integrations |
+| [Enabled](#enabled-property) { get; set; } | Is this integration enabled |
+| [Id](#id-property) { get; set; } | Integration ID |
+| [Name](#name-property) { get; set; } | Integration Name |
+| [Revoked](#revoked-property) { get; set; } | Has this integration been revoked |
+| [RoleId](#roleid-property) { get; set; } | ID that this integration uses for "subscribers" |
+| [SubscriberCount](#subscribercount-property) { get; set; } | How many subscribers this integration has |
+| [SyncedAt](#syncedat-property) { get; set; } | When this integration was last synced |
+| [Syncing](#syncing-property) { get; set; } | Is this integration syncing |
+| [Type](#type-property) { get; set; } | Integration type See [`IntegrationType`](./IntegrationType.md) |
+| [User](#user-property) { get; set; } | User for this integration |
 
 ## See Also
 

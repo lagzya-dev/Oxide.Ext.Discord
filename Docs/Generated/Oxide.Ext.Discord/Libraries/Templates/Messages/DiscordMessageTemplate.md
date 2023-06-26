@@ -10,12 +10,12 @@ public class DiscordMessageTemplate
 
 | name | description |
 | --- | --- |
-| [DiscordMessageTemplate](#DiscordMessageTemplate-constructor)() | Constructor |
-| [DiscordMessageTemplate](#DiscordMessageTemplate-constructor)(…) | Constructor |
-| [Components](#Components-property) { get; set; } | Buttons for the message |
-| [Content](#Content-property) { get; set; } | String contents of the message |
-| [Embeds](#Embeds-property) { get; set; } | Embeds for the message |
-| [ToMessage&lt;T&gt;](#ToMessage-method)(…) | Converts the [`DiscordMessageTemplate`](./DiscordMessageTemplate.md) to a {T} message {T} supports all message types |
+| [DiscordMessageTemplate](#discordmessagetemplate-constructor)() | Constructor |
+| [DiscordMessageTemplate](#discordmessagetemplate-constructor)(…) | Constructor |
+| [Components](#components-property) { get; set; } | Buttons for the message |
+| [Content](#content-property) { get; set; } | String contents of the message |
+| [Embeds](#embeds-property) { get; set; } | Embeds for the message |
+| [ToMessage&lt;T&gt;](#tomessage&amp;lt;t&amp;gt;-method)(…) | Converts the [`DiscordMessageTemplate`](./DiscordMessageTemplate.md) to a {T} message {T} supports all message types |
 
 ## See Also
 
@@ -66,6 +66,24 @@ public DiscordMessageTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordMessageTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public DiscordMessageTemplate(string content)
+```
+
+| parameter | description |
+| --- | --- |
+| content |  |
+
+## See Also
+
+* class [DiscordMessageTemplate](./DiscordMessageTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Content property

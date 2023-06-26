@@ -10,12 +10,12 @@ public struct DiscordImageData
 
 | name | description |
 | --- | --- |
-| [DiscordImageData](#DiscordImageData-constructor)(…) | Constructor from a byte[] of the image (3 constructors) |
-| readonly [Image](#Image-field) | The image data |
-| readonly [Type](#Type-field) | The type of image |
-| [GetBase64Image](#GetBase64Image-method)() | Returns the Base64 Image string for the image. |
-| [GetImageSize](#GetImageSize-method)(…) | Returns the image size in the given format |
-| [IsValid](#IsValid-method)() | Returns if this struct has a valid image |
+| [DiscordImageData](#discordimagedata-constructor-1-of-3))(…) | Constructor from a byte[] of the image (3 constructors) |
+| readonly [Image](#image-field) | The image data |
+| readonly [Type](#type-field) | The type of image |
+| [GetBase64Image](#getbase64image-method)() | Returns the Base64 Image string for the image. |
+| [GetImageSize](#getimagesize-method)(…) | Returns the image size in the given format |
+| [IsValid](#isvalid-method)() | Returns if this struct has a valid image |
 
 ## See Also
 
@@ -99,6 +99,50 @@ public DiscordImageData(byte[] image)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# DiscordImageData constructor (2 of 3)
+
+Creates DiscordImageData from a stream
+
+```csharp
+public DiscordImageData(Stream stream)
+```
+
+| parameter | description |
+| --- | --- |
+| stream |  |
+
+## See Also
+
+* struct [DiscordImageData](./DiscordImageData.md)
+* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# DiscordImageData constructor (3 of 3)
+
+Constructor from the discord image data format
+
+```csharp
+public DiscordImageData(string image)
+```
+
+| parameter | description |
+| --- | --- |
+| image | string base64 image |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| [InvalidImageDataException](../../Exceptions/Entities/Images/InvalidImageDataException.md) | Thrown if the image is not a valid base64 image string |
+
+## See Also
+
+* struct [DiscordImageData](./DiscordImageData.md)
+* namespace [Oxide.Ext.Discord.Entities.Images](./ImagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # Type field

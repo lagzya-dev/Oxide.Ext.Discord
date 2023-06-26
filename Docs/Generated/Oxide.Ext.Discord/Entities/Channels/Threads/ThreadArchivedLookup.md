@@ -10,10 +10,10 @@ public class ThreadArchivedLookup : IDiscordQueryString
 
 | name | description |
 | --- | --- |
-| [ThreadArchivedLookup](#ThreadArchivedLookup-constructor)() | The default constructor. |
-| [Before](#Before-property) { get; set; } | Returns threads before this timestamp |
-| [Limit](#Limit-property) { get; set; } | Optional maximum number of threads to return |
-| [ToQueryString](#ToQueryString-method)() |  |
+| [ThreadArchivedLookup](#threadarchivedlookup-constructor)() | The default constructor. |
+| [Before](#before-property) { get; set; } | Returns threads before this timestamp |
+| [Limit](#limit-property) { get; set; } | Optional maximum number of threads to return |
+| [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
 

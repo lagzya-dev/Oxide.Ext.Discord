@@ -10,9 +10,9 @@ public static class IEnumerableExt
 
 | name | description |
 | --- | --- |
-| static [ToHash&lt;TSource,TKey,TElement&gt;](#ToHash-method)(…) | Converts an IEnumerable{TSource} to a Hash{TKey, TElement} |
-| static [ToPooledHash&lt;TSource,TKey,TElement&gt;](#ToPooledHash-method)(…) | Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement} |
-| static [ToPooledList&lt;TSource&gt;](#ToPooledList-method)(…) | Converts an IEnumerable{TSource} to a pooled List |
+| static [ToHash&lt;TSource,TKey,TElement&gt;](#tohash&amp;lt;tsource,tkey,telement&amp;gt;-method)(…) | Converts an IEnumerable{TSource} to a Hash{TKey, TElement} |
+| static [ToPooledHash&lt;TSource,TKey,TElement&gt;](#topooledhash&amp;lt;tsource,tkey,telement&amp;gt;-method)(…) | Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement} |
+| static [ToPooledList&lt;TSource&gt;](#topooledlist&amp;lt;tsource&amp;gt;-method)(…) | Converts an IEnumerable{TSource} to a pooled List |
 
 ## See Also
 

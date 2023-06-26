@@ -10,10 +10,10 @@ public class ScheduledEventUser
 
 | name | description |
 | --- | --- |
-| [ScheduledEventUser](#ScheduledEventUser-constructor)() | The default constructor. |
-| [GuildScheduledEventId](#GuildScheduledEventId-property) { get; set; } | The scheduled event id which the user subscribed to |
-| [Member](#Member-property) { get; set; } | Guild member data for this user for the guild which this event belongs to, if any |
-| [User](#User-property) { get; set; } | User which subscribed to an event |
+| [ScheduledEventUser](#scheduledeventuser-constructor)() | The default constructor. |
+| [GuildScheduledEventId](#guildscheduledeventid-property) { get; set; } | The scheduled event id which the user subscribed to |
+| [Member](#member-property) { get; set; } | Guild member data for this user for the guild which this event belongs to, if any |
+| [User](#user-property) { get; set; } | User which subscribed to an event |
 
 ## See Also
 

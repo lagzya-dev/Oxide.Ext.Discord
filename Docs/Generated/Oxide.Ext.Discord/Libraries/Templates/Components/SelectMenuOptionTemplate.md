@@ -10,14 +10,14 @@ public class SelectMenuOptionTemplate
 
 | name | description |
 | --- | --- |
-| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate-constructor)() | Constructor |
-| [SelectMenuOptionTemplate](#SelectMenuOptionTemplate-constructor)(…) | Constructor |
-| [Default](#Default-property) { get; set; } | Will render this option as selected by default |
-| [Description](#Description-property) { get; set; } | An additional description of the option, Max 100 characters |
-| [Emoji](#Emoji-property) { get; set; } | Emoji in the option |
-| [Label](#Label-property) { get; set; } | The user-facing name of the option, Max 100 characters |
-| [Value](#Value-property) { get; set; } | The dev-define value of the option, Max 100 characters |
-| [ToOption](#ToOption-method)(…) | Converts the template to [`SelectMenuOption`](../../../Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.md) |
+| [SelectMenuOptionTemplate](#selectmenuoptiontemplate-constructor)() | Constructor |
+| [SelectMenuOptionTemplate](#selectmenuoptiontemplate-constructor)(…) | Constructor |
+| [Default](#default-property) { get; set; } | Will render this option as selected by default |
+| [Description](#description-property) { get; set; } | An additional description of the option, Max 100 characters |
+| [Emoji](#emoji-property) { get; set; } | Emoji in the option |
+| [Label](#label-property) { get; set; } | The user-facing name of the option, Max 100 characters |
+| [Value](#value-property) { get; set; } | The dev-define value of the option, Max 100 characters |
+| [ToOption](#tooption-method)(…) | Converts the template to [`SelectMenuOption`](../../../Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.md) |
 
 ## See Also
 
@@ -66,6 +66,30 @@ public SelectMenuOptionTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# SelectMenuOptionTemplate constructor (2 of 2)
+
+Constructor
+
+```csharp
+public SelectMenuOptionTemplate(string label, string value, string description = "", 
+    EmojiTemplate emoji = null, bool @default = false)
+```
+
+| parameter | description |
+| --- | --- |
+| label |  |
+| value |  |
+| description |  |
+| emoji |  |
+| default |  |
+
+## See Also
+
+* class [EmojiTemplate](../Emojis/EmojiTemplate.md)
+* class [SelectMenuOptionTemplate](./SelectMenuOptionTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Label property

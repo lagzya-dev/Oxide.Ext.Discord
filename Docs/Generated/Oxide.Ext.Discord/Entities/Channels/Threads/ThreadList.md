@@ -10,10 +10,10 @@ public class ThreadList
 
 | name | description |
 | --- | --- |
-| [ThreadList](#ThreadList-constructor)() | The default constructor. |
-| [HasMore](#HasMore-property) { get; set; } | Whether there are potentially additional threads that could be returned on a subsequent call |
-| [Members](#Members-property) { get; set; } | A thread member object for each returned thread the current user has joined |
-| [Threads](#Threads-property) { get; set; } | The active threads |
+| [ThreadList](#threadlist-constructor)() | The default constructor. |
+| [HasMore](#hasmore-property) { get; set; } | Whether there are potentially additional threads that could be returned on a subsequent call |
+| [Members](#members-property) { get; set; } | A thread member object for each returned thread the current user has joined |
+| [Threads](#threads-property) { get; set; } | The active threads |
 
 ## See Also
 

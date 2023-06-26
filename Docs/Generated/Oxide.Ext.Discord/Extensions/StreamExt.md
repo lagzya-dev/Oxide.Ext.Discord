@@ -10,7 +10,7 @@ public static class StreamExt
 
 | name | description |
 | --- | --- |
-| static [CopyToPooled](#CopyToPooled-method)(…) | Copies one stream to another using a pooled byte[] buffer |
+| static [CopyToPooled](#copytopooled-method)(…) | Copies one stream to another using a pooled byte[] buffer |
 
 ## See Also
 

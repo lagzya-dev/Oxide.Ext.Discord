@@ -10,12 +10,12 @@ public class PresenceUpdatedEvent
 
 | name | description |
 | --- | --- |
-| [PresenceUpdatedEvent](#PresenceUpdatedEvent-constructor)() | The default constructor. |
-| [Activities](#Activities-property) { get; set; } | User's current activities |
-| [ClientStatus](#ClientStatus-property) { get; set; } | User's platform-dependent status |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [Status](#Status-property) { get; set; } | Users status |
-| [User](#User-property) { get; set; } | The user presence is being updated for |
+| [PresenceUpdatedEvent](#presenceupdatedevent-constructor)() | The default constructor. |
+| [Activities](#activities-property) { get; set; } | User's current activities |
+| [ClientStatus](#clientstatus-property) { get; set; } | User's platform-dependent status |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [Status](#status-property) { get; set; } | Users status |
+| [User](#user-property) { get; set; } | The user presence is being updated for |
 
 ## See Also
 

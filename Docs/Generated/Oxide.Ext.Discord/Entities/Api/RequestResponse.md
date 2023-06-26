@@ -10,16 +10,16 @@ public class RequestResponse : BasePoolable
 
 | name | description |
 | --- | --- |
-| [RequestResponse](#RequestResponse-constructor)() | The default constructor. |
-| static [CreateCancelledResponse](#CreateCancelledResponse-method)(…) | Creates a REST API response for a cancelled request |
-| static [CreateExceptionResponse](#CreateExceptionResponse-method)(…) | Creates a Web Exception REST API response |
-| static [CreateSuccessResponse](#CreateSuccessResponse-method)(…) | Creates a success REST API response |
+| [RequestResponse](#requestresponse-constructor)() | The default constructor. |
+| static [CreateCancelledResponse](#createcancelledresponse-method)(…) | Creates a REST API response for a cancelled request |
+| static [CreateExceptionResponse](#createexceptionresponse-method)(…) | Creates a Web Exception REST API response |
+| static [CreateSuccessResponse](#createsuccessresponse-method)(…) | Creates a success REST API response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| override [EnterPool](#EnterPool-method)() |  |
+| override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
 

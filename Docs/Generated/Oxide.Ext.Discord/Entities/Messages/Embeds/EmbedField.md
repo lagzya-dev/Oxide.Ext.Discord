@@ -10,12 +10,12 @@ public class EmbedField
 
 | name | description |
 | --- | --- |
-| [EmbedField](#EmbedField-constructor)() | Embed Field constructor |
-| [EmbedField](#EmbedField-constructor)(…) | Embed Field constructor |
-| [Inline](#Inline-property) { get; set; } | Whether or not this field should display inline |
-| [Name](#Name-property) { get; set; } | Name of the field |
-| [Value](#Value-property) { get; set; } | Value of the field |
-| const [Blank](#Blank-field) | Represents a blank character to be used in embeds for empty text |
+| [EmbedField](#embedfield-constructor)() | Embed Field constructor |
+| [EmbedField](#embedfield-constructor)(…) | Embed Field constructor |
+| [Inline](#inline-property) { get; set; } | Whether or not this field should display inline |
+| [Name](#name-property) { get; set; } | Name of the field |
+| [Value](#value-property) { get; set; } | Value of the field |
+| const [Blank](#blank-field) | Represents a blank character to be used in embeds for empty text |
 
 ## See Also
 
@@ -39,6 +39,26 @@ public EmbedField()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedField constructor (2 of 2)
+
+Embed Field constructor
+
+```csharp
+public EmbedField(string name, string value, bool inline)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Field Name |
+| value | Field Value |
+| inline | Should field be inlined |
+
+## See Also
+
+* class [EmbedField](./EmbedField.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Name property

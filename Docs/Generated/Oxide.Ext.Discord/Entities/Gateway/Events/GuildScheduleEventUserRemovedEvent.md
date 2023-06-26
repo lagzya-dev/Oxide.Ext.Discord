@@ -10,10 +10,10 @@ public class GuildScheduleEventUserRemovedEvent
 
 | name | description |
 | --- | --- |
-| [GuildScheduleEventUserRemovedEvent](#GuildScheduleEventUserRemovedEvent-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild |
-| [GuildScheduledEventId](#GuildScheduledEventId-property) { get; set; } | ID of the guild scheduled event |
-| [UserId](#UserId-property) { get; set; } | ID of the user |
+| [GuildScheduleEventUserRemovedEvent](#guildscheduleeventuserremovedevent-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild |
+| [GuildScheduledEventId](#guildscheduledeventid-property) { get; set; } | ID of the guild scheduled event |
+| [UserId](#userid-property) { get; set; } | ID of the user |
 
 ## See Also
 

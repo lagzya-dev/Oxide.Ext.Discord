@@ -10,11 +10,11 @@ public class ArgumentLocalization
 
 | name | description |
 | --- | --- |
-| [ArgumentLocalization](#ArgumentLocalization-constructor)(…) | Constructor |
-| [Choices](#Choices-property) { get; set; } | Localization for Select Menu Choices |
-| [Description](#Description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](#Name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
-| [ApplyArgumentLocalization](#ApplyArgumentLocalization-method)(…) | Apply localizations to the command option |
+| [ArgumentLocalization](#argumentlocalization-constructor)(…) | Constructor |
+| [Choices](#choices-property) { get; set; } | Localization for Select Menu Choices |
+| [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
+| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [ApplyArgumentLocalization](#applyargumentlocalization-method)(…) | Apply localizations to the command option |
 
 ## See Also
 

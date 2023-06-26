@@ -11,7 +11,7 @@ public abstract class BaseDiscordAttribute : Attribute
 
 | name | description |
 | --- | --- |
-| [BaseDiscordAttribute](#BaseDiscordAttribute-constructor)() | The default constructor. |
+| [BaseDiscordAttribute](#basediscordattribute-constructor)() | The default constructor. |
 
 ## See Also
 

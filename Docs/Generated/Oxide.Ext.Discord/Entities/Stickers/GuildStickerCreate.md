@@ -10,13 +10,13 @@ public class GuildStickerCreate : IFileAttachments
 
 | name | description |
 | --- | --- |
-| [GuildStickerCreate](#GuildStickerCreate-constructor)() | The default constructor. |
-| [Description](#Description-property) { get; set; } | Description of the sticker (empty or 2-100 characters) |
-| [FileAttachments](#FileAttachments-property) { get; set; } | Sticker image attachment |
-| [Name](#Name-property) { get; set; } | Name of the sticker (2-30 characters) |
-| [Tags](#Tags-property) { get; set; } | Autocomplete/suggestion tags for the sticker (max 200 characters) Each tag should be seperated by a command and space IE ', ' |
-| [AddSticker](#AddSticker-method)(…) | Adds the sticker for guild sticker create |
-| [Validate](#Validate-method)() |  |
+| [GuildStickerCreate](#guildstickercreate-constructor)() | The default constructor. |
+| [Description](#description-property) { get; set; } | Description of the sticker (empty or 2-100 characters) |
+| [FileAttachments](#fileattachments-property) { get; set; } | Sticker image attachment |
+| [Name](#name-property) { get; set; } | Name of the sticker (2-30 characters) |
+| [Tags](#tags-property) { get; set; } | Autocomplete/suggestion tags for the sticker (max 200 characters) Each tag should be seperated by a command and space IE ', ' |
+| [AddSticker](#addsticker-method)(…) | Adds the sticker for guild sticker create |
+| [Validate](#validate-method)() |  |
 
 ## See Also
 

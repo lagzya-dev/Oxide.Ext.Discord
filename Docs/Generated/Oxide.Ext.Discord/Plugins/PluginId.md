@@ -10,15 +10,15 @@ public struct PluginId : IDebugLoggable, IEquatable<PluginId>
 
 | name | description |
 | --- | --- |
-| [IsValid](#IsValid-property) { get; } | Returns if the PluginId is valid |
-| readonly [Id](#Id-field) | Hashcode value of the Plugin Name |
-| override [Equals](#Equals-method)(…) |  |
-| [Equals](#Equals-method)(…) |  |
-| override [GetHashCode](#GetHashCode-method)() |  |
-| [LogDebug](#LogDebug-method)(…) |  |
-| override [ToString](#ToString-method)() | Returns the PluginName |
-| [operator ==](#op_Equality-operator) |  |
-| [operator !=](#op_Inequality-operator) |  |
+| [IsValid](#isvalid-property) { get; } | Returns if the PluginId is valid |
+| readonly [Id](#id-field) | Hashcode value of the Plugin Name |
+| override [Equals](#equals-method)(…) |  |
+| [Equals](#equals-method)(…) |  |
+| override [GetHashCode](#gethashcode-method)() |  |
+| [LogDebug](#logdebug-method)(…) |  |
+| override [ToString](#tostring-method)() | Returns the PluginName |
+| [operator ==](#pluginid-equality-operator) |  |
+| [operator !=](#pluginid-inequality-operator) |  |
 
 ## See Also
 
@@ -41,6 +41,18 @@ public override bool Equals(object obj)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# Equals method (2 of 2)
+
+```csharp
+public bool Equals(PluginId other)
+```
+
+## See Also
+
+* struct [PluginId](./PluginId.md)
+* namespace [Oxide.Ext.Discord.Plugins](./PluginsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # GetHashCode method

@@ -10,13 +10,13 @@ public class GuildMembersRequestCommand
 
 | name | description |
 | --- | --- |
-| [GuildMembersRequestCommand](#GuildMembersRequestCommand-constructor)() | The default constructor. |
-| [GuildId](#GuildId-property) { get; set; } | ID of the guild to get members for |
-| [Limit](#Limit-property) { get; set; } | Maximum number of members to send matching the query; a limit of 0 can be used with an empty string query to return all members |
-| [Nonce](#Nonce-property) { get; set; } | Nonce to identify the Guild Members Chunk response (Up to 25 characters) |
-| [Presences](#Presences-property) { get; set; } | Used to specify if we want the presences of the matched members |
-| [Query](#Query-property) { get; set; } | String that username starts with, or an empty string to return all members |
-| [UserIds](#UserIds-property) { get; set; } | Used to specify which users you wish to fetch |
+| [GuildMembersRequestCommand](#guildmembersrequestcommand-constructor)() | The default constructor. |
+| [GuildId](#guildid-property) { get; set; } | ID of the guild to get members for |
+| [Limit](#limit-property) { get; set; } | Maximum number of members to send matching the query; a limit of 0 can be used with an empty string query to return all members |
+| [Nonce](#nonce-property) { get; set; } | Nonce to identify the Guild Members Chunk response (Up to 25 characters) |
+| [Presences](#presences-property) { get; set; } | Used to specify if we want the presences of the matched members |
+| [Query](#query-property) { get; set; } | String that username starts with, or an empty string to return all members |
+| [UserIds](#userids-property) { get; set; } | Used to specify which users you wish to fetch |
 
 ## See Also
 

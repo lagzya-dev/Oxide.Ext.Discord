@@ -14,10 +14,10 @@ public class BulkTemplateRegistration<T>
 
 | name | description |
 | --- | --- |
-| [BulkTemplateRegistration](#BulkTemplateRegistration-constructor)(…) | Constructor for bulk template registration |
-| [Language](#Language-property) { get; set; } | Language for this template |
-| [Template](#Template-property) { get; set; } | Template to register |
-| [Version](#Version-property) { get; set; } | Version of the template |
+| [BulkTemplateRegistration](#bulktemplateregistration&amp;lt;t&amp;gt;-constructor)(…) | Constructor for bulk template registration |
+| [Language](#language-property) { get; set; } | Language for this template |
+| [Template](#template-property) { get; set; } | Template to register |
+| [Version](#version-property) { get; set; } | Version of the template |
 
 ## See Also
 

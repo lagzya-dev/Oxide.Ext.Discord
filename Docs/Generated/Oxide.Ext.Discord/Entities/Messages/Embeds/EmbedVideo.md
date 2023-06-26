@@ -10,12 +10,12 @@ public class EmbedVideo
 
 | name | description |
 | --- | --- |
-| [EmbedVideo](#EmbedVideo-constructor)() | Embed Video Constructor |
-| [EmbedVideo](#EmbedVideo-constructor)(…) | Embed Video Constructor |
-| [Height](#Height-property) { get; set; } | Height of video |
-| [ProxyUrl](#ProxyUrl-property) { get; set; } | Source url of video |
-| [Url](#Url-property) { get; set; } | Source url of video |
-| [Width](#Width-property) { get; set; } | Width of video |
+| [EmbedVideo](#embedvideo-constructor)() | Embed Video Constructor |
+| [EmbedVideo](#embedvideo-constructor)(…) | Embed Video Constructor |
+| [Height](#height-property) { get; set; } | Height of video |
+| [ProxyUrl](#proxyurl-property) { get; set; } | Source url of video |
+| [Url](#url-property) { get; set; } | Source url of video |
+| [Width](#width-property) { get; set; } | Width of video |
 
 ## See Also
 
@@ -39,6 +39,27 @@ public EmbedVideo()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmbedVideo constructor (2 of 2)
+
+Embed Video Constructor
+
+```csharp
+public EmbedVideo(string url, int? height, int? width, string proxyUrl)
+```
+
+| parameter | description |
+| --- | --- |
+| url |  |
+| proxyUrl |  |
+| height |  |
+| width |  |
+
+## See Also
+
+* class [EmbedVideo](./EmbedVideo.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Url property

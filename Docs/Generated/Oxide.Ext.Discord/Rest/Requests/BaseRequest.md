@@ -10,24 +10,24 @@ public abstract class BaseRequest : BasePoolable, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [Data](#Data-field) | Data to be sent with the request |
-| [Id](#Id-field) | ID of the request. Generated from the DateTimeOffset when the request was created |
-| [Method](#Method-field) | HTTP request method |
-| [Route](#Route-field) | Route on the API |
-| [Status](#Status-field) | Current status of the request |
-| [LogDebug](#LogDebug-method)(…) |  |
+| [Data](#data-field) | Data to be sent with the request |
+| [Id](#id-field) | ID of the request. Generated from the DateTimeOffset when the request was created |
+| [Method](#method-field) | HTTP request method |
+| [Route](#route-field) | Route on the API |
+| [Status](#status-field) | Current status of the request |
+| [LogDebug](#logdebug-method)(…) |  |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseRequest](#BaseRequest-constructor)() | The default constructor. |
-| [Logger](#Logger-field) | Logger for the request |
-| override [EnterPool](#EnterPool-method)() |  |
-| [Init](#Init-method)(…) | Initializes the request |
-| override [LeavePool](#LeavePool-method)() |  |
-| abstract [OnRequestError](#OnRequestError-method)(…) | Callback for API calls that error |
-| abstract [OnRequestSuccess](#OnRequestSuccess-method)(…) | Callback for successful API Calls |
+| [BaseRequest](#baserequest-constructor)() | The default constructor. |
+| [Logger](#logger-field) | Logger for the request |
+| override [EnterPool](#enterpool-method)() |  |
+| [Init](#init-method)(…) | Initializes the request |
+| override [LeavePool](#leavepool-method)() |  |
+| abstract [OnRequestError](#onrequesterror-method)(…) | Callback for API calls that error |
+| abstract [OnRequestSuccess](#onrequestsuccess-method)(…) | Callback for successful API Calls |
 
 ## See Also
 

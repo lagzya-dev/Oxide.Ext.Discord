@@ -10,11 +10,11 @@ public class UpdatePresenceCommand
 
 | name | description |
 | --- | --- |
-| [UpdatePresenceCommand](#UpdatePresenceCommand-constructor)() | The default constructor. |
-| [Activities](#Activities-property) { get; set; } | The user's activities (Required) |
-| [Afk](#Afk-property) { get; set; } | Whether or not the client is afk |
-| [Since](#Since-property) { get; set; } | Unix time (in milliseconds) of when the client went idle, or null if the client is not idle |
-| [Status](#Status-property) { get; set; } | The user's new status [`UserStatusType`](../../Users/UserStatusType.md) |
+| [UpdatePresenceCommand](#updatepresencecommand-constructor)() | The default constructor. |
+| [Activities](#activities-property) { get; set; } | The user's activities (Required) |
+| [Afk](#afk-property) { get; set; } | Whether or not the client is afk |
+| [Since](#since-property) { get; set; } | Unix time (in milliseconds) of when the client went idle, or null if the client is not idle |
+| [Status](#status-property) { get; set; } | The user's new status [`UserStatusType`](../../Users/UserStatusType.md) |
 
 ## See Also
 

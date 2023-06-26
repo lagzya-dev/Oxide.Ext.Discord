@@ -10,8 +10,8 @@ public class GatewayHelloEvent
 
 | name | description |
 | --- | --- |
-| [GatewayHelloEvent](#GatewayHelloEvent-constructor)() | The default constructor. |
-| [HeartbeatInterval](#HeartbeatInterval-property) { get; set; } | The interval (in milliseconds) the client should heartbeat with |
+| [GatewayHelloEvent](#gatewayhelloevent-constructor)() | The default constructor. |
+| [HeartbeatInterval](#heartbeatinterval-property) { get; set; } | The interval (in milliseconds) the client should heartbeat with |
 
 ## See Also
 

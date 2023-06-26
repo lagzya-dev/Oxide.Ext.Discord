@@ -10,11 +10,11 @@ public class EmojiTemplate
 
 | name | description |
 | --- | --- |
-| [EmojiTemplate](#EmojiTemplate-constructor)() | Default constructor |
-| [EmojiTemplate](#EmojiTemplate-constructor)(…) | Unicode emoji constructor (2 constructors) |
-| [Animated](#Animated-property) { get; set; } | If the emoji is Animated |
-| [Emoji](#Emoji-property) { get; set; } | Emoji Name or ID |
-| [ToEmoji](#ToEmoji-method)() | Converts the [`EmojiTemplate`](./EmojiTemplate.md) to a [`DiscordEmoji`](../../../Entities/Emojis/DiscordEmoji.md) |
+| [EmojiTemplate](#emojitemplate-constructor)() | Default constructor |
+| [EmojiTemplate](#emojitemplate-constructor-1-of-2))(…) | Unicode emoji constructor (2 constructors) |
+| [Animated](#animated-property) { get; set; } | If the emoji is Animated |
+| [Emoji](#emoji-property) { get; set; } | Emoji Name or ID |
+| [ToEmoji](#toemoji-method)() | Converts the [`EmojiTemplate`](./EmojiTemplate.md) to a [`DiscordEmoji`](../../../Entities/Emojis/DiscordEmoji.md) |
 
 ## See Also
 
@@ -54,6 +54,46 @@ public EmojiTemplate()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# EmojiTemplate constructor (2 of 3)
+
+Unicode emoji constructor
+
+```csharp
+public EmojiTemplate(string emoji)
+```
+
+| parameter | description |
+| --- | --- |
+| emoji | Unicode Emoji |
+
+## See Also
+
+* class [EmojiTemplate](./EmojiTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Emojis](./EmojisNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+
+---
+
+# EmojiTemplate constructor (3 of 3)
+
+Custom Emoji Constructor
+
+```csharp
+public EmojiTemplate(Snowflake emojiId, bool animated = false)
+```
+
+| parameter | description |
+| --- | --- |
+| emojiId | ID of the emoji |
+| animated | Is the emoji animated? |
+
+## See Also
+
+* struct [Snowflake](../../../Entities/Snowflake.md)
+* class [EmojiTemplate](./EmojiTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates.Emojis](./EmojisNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Emoji property

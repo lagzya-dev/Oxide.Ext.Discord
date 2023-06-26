@@ -10,18 +10,18 @@ public class GuildPreview
 
 | name | description |
 | --- | --- |
-| [GuildPreview](#GuildPreview-constructor)() | The default constructor. |
-| [ApproximateMemberCount](#ApproximateMemberCount-property) { get; set; } | Approximate number of members in this guild |
-| [ApproximatePresenceCount](#ApproximatePresenceCount-property) { get; set; } | Approximate number of non-offline members in this guild |
-| [Description](#Description-property) { get; set; } | The description of a guild |
-| [DiscoverySplash](#DiscoverySplash-property) { get; set; } | Discovery splash hash Only present for guilds with the "DISCOVERABLE" feature |
-| [Emojis](#Emojis-property) { get; set; } | Custom guild emojis |
-| [Features](#Features-property) { get; set; } | Enabled guild features See [`GuildFeatures`](./GuildFeatures.md) |
-| [Icon](#Icon-property) { get; set; } | Base64 128x128 image for the guild icon |
-| [Id](#Id-property) { get; set; } | Guild id |
-| [Name](#Name-property) { get; set; } | Name of the guild (2-100 characters) |
-| [Splash](#Splash-property) { get; set; } | Splash hash |
-| [Stickers](#Stickers-property) { get; set; } | Custom guild stickers |
+| [GuildPreview](#guildpreview-constructor)() | The default constructor. |
+| [ApproximateMemberCount](#approximatemembercount-property) { get; set; } | Approximate number of members in this guild |
+| [ApproximatePresenceCount](#approximatepresencecount-property) { get; set; } | Approximate number of non-offline members in this guild |
+| [Description](#description-property) { get; set; } | The description of a guild |
+| [DiscoverySplash](#discoverysplash-property) { get; set; } | Discovery splash hash Only present for guilds with the "DISCOVERABLE" feature |
+| [Emojis](#emojis-property) { get; set; } | Custom guild emojis |
+| [Features](#features-property) { get; set; } | Enabled guild features See [`GuildFeatures`](./GuildFeatures.md) |
+| [Icon](#icon-property) { get; set; } | Base64 128x128 image for the guild icon |
+| [Id](#id-property) { get; set; } | Guild id |
+| [Name](#name-property) { get; set; } | Name of the guild (2-100 characters) |
+| [Splash](#splash-property) { get; set; } | Splash hash |
+| [Stickers](#stickers-property) { get; set; } | Custom guild stickers |
 
 ## See Also
 

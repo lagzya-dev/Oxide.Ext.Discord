@@ -15,10 +15,10 @@ public sealed class EnumCache<T> : Singleton<EnumCache>
 
 | name | description |
 | --- | --- |
-| readonly [Values](#Values-field) | Readonly Collection of Enum Values |
-| [ToLower](#ToLower-method)(…) | Returns the lowered string representation of the enum |
-| [ToNumber](#ToNumber-method)(…) | Converts the enum to it's number form as a string |
-| [ToString](#ToString-method)(…) | Returns the string representation of the enum |
+| readonly [Values](#values-field) | Readonly Collection of Enum Values |
+| [ToLower](#tolower-method)(…) | Returns the lowered string representation of the enum |
+| [ToNumber](#tonumber-method)(…) | Converts the enum to it's number form as a string |
+| [ToString](#tostring-method)(…) | Returns the string representation of the enum |
 
 ## See Also
 

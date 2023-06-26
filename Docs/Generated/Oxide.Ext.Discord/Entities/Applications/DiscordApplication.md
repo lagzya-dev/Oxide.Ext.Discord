@@ -10,44 +10,44 @@ public class DiscordApplication : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [DiscordApplication](#DiscordApplication-constructor)() | The default constructor. |
-| [BotPublic](#BotPublic-property) { get; set; } | When false only app owner can join the app's bot to guilds |
-| [BotRequireCodeGrant](#BotRequireCodeGrant-property) { get; set; } | When true the app's bot will only join upon completion of the full oauth2 code grant flow |
-| [CoverImage](#CoverImage-property) { get; set; } | If this application is a game sold on Discord, this field will be the hash of the image on store embeds |
-| [CustomInstallUrl](#CustomInstallUrl-property) { get; set; } | The application's default custom authorization link, if enabled |
-| [Description](#Description-property) { get; set; } | The description of the app |
-| [Flags](#Flags-property) { get; set; } | The application's public flags |
-| [GetApplicationCoverUrl](#GetApplicationCoverUrl-property) { get; } | Returns the URL for the application cover |
-| [GetApplicationIconUrl](#GetApplicationIconUrl-property) { get; } | Returns the URL for the applications Icon |
-| [GuildId](#GuildId-property) { get; set; } | If this application is a game sold on Discord, this field will be the guild to which it has been linked |
-| [Icon](#Icon-property) { get; set; } | The icon hash of the app |
-| [Id](#Id-property) { get; set; } | The id of the app |
-| [InstallParams](#InstallParams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
-| [Name](#Name-property) { get; set; } | The name of the app |
-| [Owner](#Owner-property) { get; set; } | Partial user object containing info on the owner of the application |
-| [PrimarySkuId](#PrimarySkuId-property) { get; set; } | If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists |
-| [PrivacyPolicyUrl](#PrivacyPolicyUrl-property) { get; set; } | The url of the app's privacy policy |
-| [RoleConnectionsVerificationUrl](#RoleConnectionsVerificationUrl-property) { get; set; } | The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration |
-| [RpcOrigins](#RpcOrigins-property) { get; set; } | An array of rpc origin urls, if rpc is enabled |
-| [Slug](#Slug-property) { get; set; } | If this application is a game sold on Discord, this field will be the URL slug that links to the store page |
-| [Tags](#Tags-property) { get; set; } | Up to 5 tags describing the content and functionality of the application |
-| [Team](#Team-property) { get; set; } | If the application belongs to a team, this will be a list of the members of that team |
-| [TermsOfServiceUrl](#TermsOfServiceUrl-property) { get; set; } | The url of the app's terms of service |
-| [Verify](#Verify-property) { get; set; } | The hex encoded key for verification in interactions and the GameSDK's GetTicket |
-| [BulkOverwriteGlobalCommands](#BulkOverwriteGlobalCommands-method)(…) | Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour. See [Bulk Overwrite Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands) |
-| [CreateGlobalCommand](#CreateGlobalCommand-method)(…) | Create a new global command. New global commands will be available in all guilds after 1 hour. Note: Creating a command with the same name as an existing command for your application will overwrite the old command. See [Create Global Application Command](https://discord.com/developers/docs/interactions/application-commands#create-global-application-command) |
-| [CreateGuildCommand](#CreateGuildCommand-method)(…) | Create a new guild command. New guild commands will be available in the guild immediately. See [Create Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command) |
-| [EditRoleConnectionMetadata](#EditRoleConnectionMetadata-method)(…) | Updates and returns a list of application role connection metadata objects for the given application. See [Update Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records) |
-| [GetAllCommands](#GetAllCommands-method)(…) | Returns all commands registered to this application |
-| [GetGlobalCommand](#GetGlobalCommand-method)(…) | Fetch global command by ID See [Get Global Application Command](https://discord.com/developers/docs/interactions/application-commands#get-global-application-command) |
-| [GetGlobalCommands](#GetGlobalCommands-method)(…) | Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands) |
-| [GetGuildCommand](#GetGuildCommand-method)(…) | Get guild command by Id See [Get Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command) |
-| [GetGuildCommandPermissions](#GetGuildCommandPermissions-method)(…) | Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects. See [Get Guild Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions) |
-| [GetGuildCommands](#GetGuildCommands-method)(…) | Fetch all of the guild commands for your application for a specific guild. See [Get Guild Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands) |
-| [GetRoleConnectionMetadata](#GetRoleConnectionMetadata-method)(…) | Returns a list of application role connection metadata objects for the given application. See [Get Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records) |
-| [HasAnyApplicationFlags](#HasAnyApplicationFlags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](./DiscordApplication/Flags.md) is null false is returned |
-| [HasApplicationFlag](#HasApplicationFlag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](./DiscordApplication/Flags.md) is null false is returned |
-| [LogDebug](#LogDebug-method)(…) |  |
+| [DiscordApplication](#discordapplication-constructor)() | The default constructor. |
+| [BotPublic](#botpublic-property) { get; set; } | When false only app owner can join the app's bot to guilds |
+| [BotRequireCodeGrant](#botrequirecodegrant-property) { get; set; } | When true the app's bot will only join upon completion of the full oauth2 code grant flow |
+| [CoverImage](#coverimage-property) { get; set; } | If this application is a game sold on Discord, this field will be the hash of the image on store embeds |
+| [CustomInstallUrl](#custominstallurl-property) { get; set; } | The application's default custom authorization link, if enabled |
+| [Description](#description-property) { get; set; } | The description of the app |
+| [Flags](#flags-property) { get; set; } | The application's public flags |
+| [GetApplicationCoverUrl](#getapplicationcoverurl-property) { get; } | Returns the URL for the application cover |
+| [GetApplicationIconUrl](#getapplicationiconurl-property) { get; } | Returns the URL for the applications Icon |
+| [GuildId](#guildid-property) { get; set; } | If this application is a game sold on Discord, this field will be the guild to which it has been linked |
+| [Icon](#icon-property) { get; set; } | The icon hash of the app |
+| [Id](#id-property) { get; set; } | The id of the app |
+| [InstallParams](#installparams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
+| [Name](#name-property) { get; set; } | The name of the app |
+| [Owner](#owner-property) { get; set; } | Partial user object containing info on the owner of the application |
+| [PrimarySkuId](#primaryskuid-property) { get; set; } | If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists |
+| [PrivacyPolicyUrl](#privacypolicyurl-property) { get; set; } | The url of the app's privacy policy |
+| [RoleConnectionsVerificationUrl](#roleconnectionsverificationurl-property) { get; set; } | The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration |
+| [RpcOrigins](#rpcorigins-property) { get; set; } | An array of rpc origin urls, if rpc is enabled |
+| [Slug](#slug-property) { get; set; } | If this application is a game sold on Discord, this field will be the URL slug that links to the store page |
+| [Tags](#tags-property) { get; set; } | Up to 5 tags describing the content and functionality of the application |
+| [Team](#team-property) { get; set; } | If the application belongs to a team, this will be a list of the members of that team |
+| [TermsOfServiceUrl](#termsofserviceurl-property) { get; set; } | The url of the app's terms of service |
+| [Verify](#verify-property) { get; set; } | The hex encoded key for verification in interactions and the GameSDK's GetTicket |
+| [BulkOverwriteGlobalCommands](#bulkoverwriteglobalcommands-method)(…) | Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour. See [Bulk Overwrite Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands) |
+| [CreateGlobalCommand](#createglobalcommand-method)(…) | Create a new global command. New global commands will be available in all guilds after 1 hour. Note: Creating a command with the same name as an existing command for your application will overwrite the old command. See [Create Global Application Command](https://discord.com/developers/docs/interactions/application-commands#create-global-application-command) |
+| [CreateGuildCommand](#createguildcommand-method)(…) | Create a new guild command. New guild commands will be available in the guild immediately. See [Create Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command) |
+| [EditRoleConnectionMetadata](#editroleconnectionmetadata-method)(…) | Updates and returns a list of application role connection metadata objects for the given application. See [Update Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records) |
+| [GetAllCommands](#getallcommands-method)(…) | Returns all commands registered to this application |
+| [GetGlobalCommand](#getglobalcommand-method)(…) | Fetch global command by ID See [Get Global Application Command](https://discord.com/developers/docs/interactions/application-commands#get-global-application-command) |
+| [GetGlobalCommands](#getglobalcommands-method)(…) | Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands) |
+| [GetGuildCommand](#getguildcommand-method)(…) | Get guild command by Id See [Get Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command) |
+| [GetGuildCommandPermissions](#getguildcommandpermissions-method)(…) | Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects. See [Get Guild Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions) |
+| [GetGuildCommands](#getguildcommands-method)(…) | Fetch all of the guild commands for your application for a specific guild. See [Get Guild Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands) |
+| [GetRoleConnectionMetadata](#getroleconnectionmetadata-method)(…) | Returns a list of application role connection metadata objects for the given application. See [Get Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records) |
+| [HasAnyApplicationFlags](#hasanyapplicationflags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](./DiscordApplication/Flags.md) is null false is returned |
+| [HasApplicationFlag](#hasapplicationflag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](./DiscordApplication/Flags.md) is null false is returned |
+| [LogDebug](#logdebug-method)(…) |  |
 
 ## See Also
 

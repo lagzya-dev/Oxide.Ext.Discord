@@ -10,10 +10,10 @@ public class IntegrationUpdate
 
 | name | description |
 | --- | --- |
-| [IntegrationUpdate](#IntegrationUpdate-constructor)() | The default constructor. |
-| [EnableEmoticons](#EnableEmoticons-property) { get; set; } | Whether emoticons should be synced for this integration (twitch only currently) |
-| [ExpireBehaviour](#ExpireBehaviour-property) { get; set; } | The behavior when an integration subscription lapses |
-| [ExpireGracePeriod](#ExpireGracePeriod-property) { get; set; } | Period (in days) where the integration will ignore lapsed subscriptions |
+| [IntegrationUpdate](#integrationupdate-constructor)() | The default constructor. |
+| [EnableEmoticons](#enableemoticons-property) { get; set; } | Whether emoticons should be synced for this integration (twitch only currently) |
+| [ExpireBehaviour](#expirebehaviour-property) { get; set; } | The behavior when an integration subscription lapses |
+| [ExpireGracePeriod](#expiregraceperiod-property) { get; set; } | Period (in days) where the integration will ignore lapsed subscriptions |
 
 ## See Also
 

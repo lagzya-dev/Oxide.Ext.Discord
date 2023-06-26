@@ -10,22 +10,22 @@ public static class PlayerPlaceholders
 
 | name | description |
 | --- | --- |
-| static [BattleMetricsNameUrl](#BattleMetricsNameUrl-method)(…) | Battle metrics Place Name Url Placeholder |
-| static [BattleMetricsSteamIdUrl](#BattleMetricsSteamIdUrl-method)(…) | Battle metrics Steam ID Url Placeholder |
-| static [Connected](#Connected-method)(…) | IsConnected placeholder |
-| static [Groups](#Groups-method)(…) | Player Groups Placeholder |
-| static [Health](#Health-method)(…) | Health placeholder |
-| static [Id](#Id-method)(…) | Id placeholder |
-| static [IsLinked](#IsLinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
-| static [MaxHealth](#MaxHealth-method)(…) | MaxHealth placeholder |
-| static [Name](#Name-method)(…) | Name placeholder |
-| static [Permissions](#Permissions-method)(…) | Player Permissions Placeholder |
-| static [Ping](#Ping-method)(…) | Ping placeholder |
-| static [Position](#Position-method)(…) | Position placeholder |
-| static [RegisterPlaceholders](#RegisterPlaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [ServerArmorUrl](#ServerArmorUrl-method)(…) | Battle metrics Place Name Url Placeholder |
-| static [SteamAvatarUrl](#SteamAvatarUrl-method)(…) | Steam Avatar Url Placeholder |
-| static [SteamProfileUrl](#SteamProfileUrl-method)(…) | Steam Profile Url Placeholder |
+| static [BattleMetricsNameUrl](#battlemetricsnameurl-method)(…) | Battle metrics Place Name Url Placeholder |
+| static [BattleMetricsSteamIdUrl](#battlemetricssteamidurl-method)(…) | Battle metrics Steam ID Url Placeholder |
+| static [Connected](#connected-method)(…) | IsConnected placeholder |
+| static [Groups](#groups-method)(…) | Player Groups Placeholder |
+| static [Health](#health-method)(…) | Health placeholder |
+| static [Id](#id-method)(…) | Id placeholder |
+| static [IsLinked](#islinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
+| static [MaxHealth](#maxhealth-method)(…) | MaxHealth placeholder |
+| static [Name](#name-method)(…) | Name placeholder |
+| static [Permissions](#permissions-method)(…) | Player Permissions Placeholder |
+| static [Ping](#ping-method)(…) | Ping placeholder |
+| static [Position](#position-method)(…) | Position placeholder |
+| static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [ServerArmorUrl](#serverarmorurl-method)(…) | Battle metrics Place Name Url Placeholder |
+| static [SteamAvatarUrl](#steamavatarurl-method)(…) | Steam Avatar Url Placeholder |
+| static [SteamProfileUrl](#steamprofileurl-method)(…) | Steam Profile Url Placeholder |
 
 ## See Also
 

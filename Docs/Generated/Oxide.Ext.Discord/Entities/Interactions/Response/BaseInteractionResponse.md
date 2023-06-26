@@ -10,14 +10,14 @@ public abstract class BaseInteractionResponse
 
 | name | description |
 | --- | --- |
-| [Type](#Type-property) { get; set; } | The type of response |
+| [Type](#type-property) { get; set; } | The type of response |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractionResponse](#BaseInteractionResponse-constructor)() | Constructor |
-| [BaseInteractionResponse](#BaseInteractionResponse-constructor)(…) | Constructor with [`InteractionResponseType`](../InteractionResponseType.md) |
+| [BaseInteractionResponse](#baseinteractionresponse-constructor)() | Constructor |
+| [BaseInteractionResponse](#baseinteractionresponse-constructor)(…) | Constructor with [`InteractionResponseType`](../InteractionResponseType.md) |
 
 ## See Also
 
@@ -41,6 +41,25 @@ protected BaseInteractionResponse()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# BaseInteractionResponse constructor (2 of 2)
+
+Constructor with [`InteractionResponseType`](../InteractionResponseType.md)
+
+```csharp
+protected BaseInteractionResponse(InteractionResponseType type)
+```
+
+| parameter | description |
+| --- | --- |
+| type |  |
+
+## See Also
+
+* enum [InteractionResponseType](../InteractionResponseType.md)
+* class [BaseInteractionResponse](./BaseInteractionResponse.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Type property

@@ -10,19 +10,19 @@ public class MessageAttachment : ISnowflakeEntity
 
 | name | description |
 | --- | --- |
-| [MessageAttachment](#MessageAttachment-constructor)() | The default constructor. |
-| [ContentType](#ContentType-property) { get; set; } | The attachment's [media type](https://en.wikipedia.org/wiki/Media_type) |
-| [Description](#Description-property) { get; set; } | Description for the file |
-| [DurationSecs](#DurationSecs-property) { get; set; } | The duration of the audio file (currently for voice messages) |
-| [Ephemeral](#Ephemeral-property) { get; set; } | Whether this attachment is ephemeral |
-| [Filename](#Filename-property) { get; set; } | Name of file attached |
-| [Height](#Height-property) { get; set; } | Height of file (if image) |
-| [Id](#Id-property) { get; set; } | Attachment ID |
-| [ProxyUrl](#ProxyUrl-property) { get; set; } | A proxied url of file |
-| [Size](#Size-property) { get; set; } | Size of file in bytes |
-| [Url](#Url-property) { get; set; } | Source url of file |
-| [Waveform](#Waveform-property) { get; set; } | base64 encoded bytearray representing a sampled waveform (currently for voice messages) |
-| [Width](#Width-property) { get; set; } | Width of file (if image) |
+| [MessageAttachment](#messageattachment-constructor)() | The default constructor. |
+| [ContentType](#contenttype-property) { get; set; } | The attachment's [media type](https://en.wikipedia.org/wiki/Media_type) |
+| [Description](#description-property) { get; set; } | Description for the file |
+| [DurationSecs](#durationsecs-property) { get; set; } | The duration of the audio file (currently for voice messages) |
+| [Ephemeral](#ephemeral-property) { get; set; } | Whether this attachment is ephemeral |
+| [Filename](#filename-property) { get; set; } | Name of file attached |
+| [Height](#height-property) { get; set; } | Height of file (if image) |
+| [Id](#id-property) { get; set; } | Attachment ID |
+| [ProxyUrl](#proxyurl-property) { get; set; } | A proxied url of file |
+| [Size](#size-property) { get; set; } | Size of file in bytes |
+| [Url](#url-property) { get; set; } | Source url of file |
+| [Waveform](#waveform-property) { get; set; } | base64 encoded bytearray representing a sampled waveform (currently for voice messages) |
+| [Width](#width-property) { get; set; } | Width of file (if image) |
 
 ## See Also
 

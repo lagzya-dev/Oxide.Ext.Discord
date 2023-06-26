@@ -10,21 +10,21 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 
 | name | description |
 | --- | --- |
-| [TemplateVersion](#TemplateVersion-constructor)(…) | Constructor |
-| readonly [Major](#Major-field) | Major Version |
-| readonly [Minor](#Minor-field) | Minor Version |
-| readonly [Revision](#Revision-field) | Revision Version |
-| [CompareTo](#CompareTo-method)(…) |  |
-| override [Equals](#Equals-method)(…) |  |
-| [Equals](#Equals-method)(…) |  |
-| override [GetHashCode](#GetHashCode-method)() |  |
-| override [ToString](#ToString-method)() |  |
-| [operator ==](#op_Equality-operator) | Returns if the template versions are equal |
-| [operator &gt;](#op_GreaterThan-operator) | Returns if the right template version is greater than the left |
-| [operator &gt;=](#op_GreaterThanOrEqual-operator) | Returns if the right template version is greater or equal than the left |
-| [operator !=](#op_Inequality-operator) | Returns if the template versions are not equal |
-| [operator &lt;](#op_LessThan-operator) | Returns if the left template version is less than the right |
-| [operator &lt;=](#op_LessThanOrEqual-operator) | Returns if the left template version is less than or equal the right |
+| [TemplateVersion](#templateversion-constructor)(…) | Constructor |
+| readonly [Major](#major-field) | Major Version |
+| readonly [Minor](#minor-field) | Minor Version |
+| readonly [Revision](#revision-field) | Revision Version |
+| [CompareTo](#compareto-method)(…) |  |
+| override [Equals](#equals-method)(…) |  |
+| [Equals](#equals-method)(…) |  |
+| override [GetHashCode](#gethashcode-method)() |  |
+| override [ToString](#tostring-method)() |  |
+| [operator ==](#templateversion-equality-operator) | Returns if the template versions are equal |
+| [operator &gt;](#templateversion-greaterthan-operator) | Returns if the right template version is greater than the left |
+| [operator &gt;=](#templateversion-greaterthanorequal-operator) | Returns if the right template version is greater or equal than the left |
+| [operator !=](#templateversion-inequality-operator) | Returns if the template versions are not equal |
+| [operator &lt;](#templateversion-lessthan-operator) | Returns if the left template version is less than the right |
+| [operator &lt;=](#templateversion-lessthanorequal-operator) | Returns if the left template version is less than or equal the right |
 
 ## See Also
 
@@ -46,6 +46,18 @@ public override bool Equals(object obj)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 
 ---
+
+# Equals method (2 of 2)
+
+```csharp
+public bool Equals(TemplateVersion other)
+```
+
+## See Also
+
+* struct [TemplateVersion](./TemplateVersion.md)
+* namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # GetHashCode method

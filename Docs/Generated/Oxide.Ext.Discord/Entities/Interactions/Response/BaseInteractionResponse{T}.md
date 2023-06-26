@@ -14,14 +14,14 @@ public abstract class BaseInteractionResponse<T> : BaseInteractionResponse
 
 | name | description |
 | --- | --- |
-| [Data](#Data-property) { get; set; } | Response to the Interaction |
+| [Data](#data-property) { get; set; } | Response to the Interaction |
 
 ## Protected Members
 
 | name | description |
 | --- | --- |
-| [BaseInteractionResponse](#BaseInteractionResponse-constructor)() | Constructor |
-| [BaseInteractionResponse](#BaseInteractionResponse-constructor)(…) | Constructor with Data and response type |
+| [BaseInteractionResponse](#baseinteractionresponse&amp;lt;t&amp;gt;-constructor)() | Constructor |
+| [BaseInteractionResponse](#baseinteractionresponse&amp;lt;t&amp;gt;-constructor)(…) | Constructor with Data and response type |
 
 ## See Also
 
@@ -46,6 +46,26 @@ protected BaseInteractionResponse()
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 
 ---
+
+# BaseInteractionResponse&lt;T&gt; constructor (2 of 2)
+
+Constructor with Data and response type
+
+```csharp
+protected BaseInteractionResponse(InteractionResponseType type, T data)
+```
+
+| parameter | description |
+| --- | --- |
+| type | Response type for the interaction |
+| data | Data for the interaction |
+
+## See Also
+
+* enum [InteractionResponseType](../InteractionResponseType.md)
+* class [BaseInteractionResponse&lt;T&gt;](./BaseInteractionResponse%7BT%7D.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
 # Data property

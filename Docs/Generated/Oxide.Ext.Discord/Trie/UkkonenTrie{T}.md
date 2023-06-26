@@ -14,12 +14,12 @@ public class UkkonenTrie<T>
 
 | name | description |
 | --- | --- |
-| [UkkonenTrie](#UkkonenTrie-constructor)() | Constructor |
-| [UkkonenTrie](#UkkonenTrie-constructor)(…) | Constructor |
-| [Size](#Size-property) { get; } | Size of the Trie |
-| [Add](#Add-method)(…) | Add a new record into the trie |
-| [Remove](#Remove-method)(…) | Removes a record from the trie |
-| [Search](#Search-method)(…) | Search the trie for search value |
+| [UkkonenTrie](#ukkonentrie&amp;lt;t&amp;gt;-constructor)() | Constructor |
+| [UkkonenTrie](#ukkonentrie&amp;lt;t&amp;gt;-constructor)(…) | Constructor |
+| [Size](#size-property) { get; } | Size of the Trie |
+| [Add](#add-method)(…) | Add a new record into the trie |
+| [Remove](#remove-method)(…) | Removes a record from the trie |
+| [Search](#search-method)(…) | Search the trie for search value |
 
 ## See Also
 
@@ -106,6 +106,24 @@ public UkkonenTrie()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
+
+# UkkonenTrie&lt;T&gt; constructor (2 of 2)
+
+Constructor
+
+```csharp
+public UkkonenTrie(Func<T, T, bool> equalsFunc)
+```
+
+| parameter | description |
+| --- | --- |
+| equalsFunc | Function to match values when removing |
+
+## See Also
+
+* class [UkkonenTrie&lt;T&gt;](./UkkonenTrie%7BT%7D.md)
+* namespace [Oxide.Ext.Discord.Trie](./TrieNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Size property

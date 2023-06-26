@@ -10,16 +10,16 @@ public class CommandUpdate
 
 | name | description |
 | --- | --- |
-| [CommandUpdate](#CommandUpdate-constructor)() | The default constructor. |
-| [DefaultMemberPermissions](#DefaultMemberPermissions-property) { get; set; } | Set of permissions represented as a bit set |
-| [DefaultPermissions](#DefaultPermissions-property) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
-| [Description](#Description-property) { get; set; } | Description of the command (1-100 characters) |
-| [DescriptionLocalizations](#DescriptionLocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
-| [DmPermission](#DmPermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
-| [Name](#Name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
-| [NameLocalizations](#NameLocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
-| [Nsfw](#Nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
-| [Options](#Options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
+| [CommandUpdate](#commandupdate-constructor)() | The default constructor. |
+| [DefaultMemberPermissions](#defaultmemberpermissions-property) { get; set; } | Set of permissions represented as a bit set |
+| [DefaultPermissions](#defaultpermissions-property) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
+| [Description](#description-property) { get; set; } | Description of the command (1-100 characters) |
+| [DescriptionLocalizations](#descriptionlocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
+| [DmPermission](#dmpermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [Name](#name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
+| [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
+| [Nsfw](#nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
+| [Options](#options-property) { get; set; } | The parameters for the command See [`CommandOption`](./CommandOption.md) |
 
 ## See Also
 

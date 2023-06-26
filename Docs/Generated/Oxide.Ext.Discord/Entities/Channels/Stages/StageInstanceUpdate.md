@@ -10,9 +10,9 @@ public class StageInstanceUpdate
 
 | name | description |
 | --- | --- |
-| [StageInstanceUpdate](#StageInstanceUpdate-constructor)() | The default constructor. |
-| [PrivacyLevel](#PrivacyLevel-property) { get; set; } | The privacy level of the Stage instance |
-| [Topic](#Topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
+| [StageInstanceUpdate](#stageinstanceupdate-constructor)() | The default constructor. |
+| [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the Stage instance |
+| [Topic](#topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
 
 ## See Also
 

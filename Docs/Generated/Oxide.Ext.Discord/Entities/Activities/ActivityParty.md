@@ -10,11 +10,11 @@ public class ActivityParty
 
 | name | description |
 | --- | --- |
-| [ActivityParty](#ActivityParty-constructor)() | The default constructor. |
-| [CurrentSize](#CurrentSize-property) { get; } | The current party size |
-| [Id](#Id-property) { get; set; } | The id of the party |
-| [MaxSize](#MaxSize-property) { get; } | The maximum party size |
-| [Size](#Size-property) { get; set; } | Used to show the party's current and maximum size |
+| [ActivityParty](#activityparty-constructor)() | The default constructor. |
+| [CurrentSize](#currentsize-property) { get; } | The current party size |
+| [Id](#id-property) { get; set; } | The id of the party |
+| [MaxSize](#maxsize-property) { get; } | The maximum party size |
+| [Size](#size-property) { get; set; } | Used to show the party's current and maximum size |
 
 ## See Also
 

@@ -10,11 +10,11 @@ public class MessageReference
 
 | name | description |
 | --- | --- |
-| [MessageReference](#MessageReference-constructor)() | The default constructor. |
-| [ChannelId](#ChannelId-property) { get; set; } | ID of the originating message's channel Is optional when creating a reply, but will always be present when receiving an event/response that includes this data model. |
-| [FailIfNotExists](#FailIfNotExists-property) { get; set; } | When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true |
-| [GuildId](#GuildId-property) { get; set; } | ID of the originating message's guild |
-| [MessageId](#MessageId-property) { get; set; } | ID of the originating message |
+| [MessageReference](#messagereference-constructor)() | The default constructor. |
+| [ChannelId](#channelid-property) { get; set; } | ID of the originating message's channel Is optional when creating a reply, but will always be present when receiving an event/response that includes this data model. |
+| [FailIfNotExists](#failifnotexists-property) { get; set; } | When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true |
+| [GuildId](#guildid-property) { get; set; } | ID of the originating message's guild |
+| [MessageId](#messageid-property) { get; set; } | ID of the originating message |
 
 ## See Also
 
