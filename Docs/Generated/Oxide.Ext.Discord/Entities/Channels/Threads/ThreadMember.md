@@ -21,7 +21,7 @@ public class ThreadMember
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadMember.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMember.cs)
+* [ThreadMember.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMember.cs)
    
    
 # ThreadMember constructor

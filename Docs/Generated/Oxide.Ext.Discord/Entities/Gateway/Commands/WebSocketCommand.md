@@ -27,7 +27,7 @@ public class WebSocketCommand : BasePoolable, IDebugLoggable
 * interface [IDebugLoggable](../../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [WebSocketCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/WebSocketCommand.cs)
+* [WebSocketCommand.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Commands/WebSocketCommand.cs)
    
    
 # EnterPool method

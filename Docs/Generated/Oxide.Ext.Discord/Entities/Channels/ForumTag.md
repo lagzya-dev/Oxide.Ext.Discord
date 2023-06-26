@@ -23,7 +23,7 @@ public class ForumTag : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ForumTag.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/ForumTag.cs)
+* [ForumTag.cs](../../../../Oxide.Ext.Discord/Entities/Channels/ForumTag.cs)
    
    
 # Validate method

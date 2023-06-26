@@ -40,7 +40,7 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordLink.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Linking/DiscordLink.cs)
+* [DiscordLink.cs](../../../../Oxide.Ext.Discord/Libraries/Linking/DiscordLink.cs)
    
    
 # AddLinkPlugin method

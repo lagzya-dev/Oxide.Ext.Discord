@@ -19,7 +19,7 @@ public class MessageBulkDeletedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [MessageBulkDeletedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/MessageBulkDeletedEvent.cs)
+* [MessageBulkDeletedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/MessageBulkDeletedEvent.cs)
    
    
 # MessageBulkDeletedEvent constructor

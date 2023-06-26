@@ -25,7 +25,7 @@ public class HashListConverter<TValue> : JsonConverter
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [HashListConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/HashListConverter.cs)
+* [HashListConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/HashListConverter.cs)
    
    
 # ReadJson method

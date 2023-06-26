@@ -21,7 +21,7 @@ public class DiscordMessageTemplate
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordMessageTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Messages/DiscordMessageTemplate.cs)
+* [DiscordMessageTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Messages/DiscordMessageTemplate.cs)
    
    
 # ToMessage&lt;T&gt; method

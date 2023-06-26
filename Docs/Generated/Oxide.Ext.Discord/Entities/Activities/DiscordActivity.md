@@ -33,7 +33,7 @@ public class DiscordActivity
 
 * namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordActivity.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Activities/DiscordActivity.cs)
+* [DiscordActivity.cs](../../../../Oxide.Ext.Discord/Entities/Activities/DiscordActivity.cs)
    
    
 # DiscordActivity constructor

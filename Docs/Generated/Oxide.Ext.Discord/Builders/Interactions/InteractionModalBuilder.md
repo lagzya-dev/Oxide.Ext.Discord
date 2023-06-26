@@ -20,7 +20,7 @@ public class InteractionModalBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionModalBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/InteractionModalBuilder.cs)
+* [InteractionModalBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/InteractionModalBuilder.cs)
    
    
 # AddModalCustomId method

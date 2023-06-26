@@ -19,7 +19,7 @@ public class UserModifyCurrent
 
 * namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [UserModifyCurrent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/UserModifyCurrent.cs)
+* [UserModifyCurrent.cs](../../../../Oxide.Ext.Discord/Entities/Users/UserModifyCurrent.cs)
    
    
 # Validate method

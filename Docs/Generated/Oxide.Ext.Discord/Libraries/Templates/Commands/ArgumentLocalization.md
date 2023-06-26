@@ -20,7 +20,7 @@ public class ArgumentLocalization
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ArgumentLocalization.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/ArgumentLocalization.cs)
+* [ArgumentLocalization.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Commands/ArgumentLocalization.cs)
    
    
 # ApplyArgumentLocalization method

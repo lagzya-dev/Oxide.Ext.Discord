@@ -32,7 +32,7 @@ public class ChannelCreate
 
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ChannelCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/ChannelCreate.cs)
+* [ChannelCreate.cs](../../../../Oxide.Ext.Discord/Entities/Channels/ChannelCreate.cs)
    
    
 # Validate method

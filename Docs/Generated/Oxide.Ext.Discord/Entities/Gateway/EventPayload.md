@@ -29,7 +29,7 @@ public class EventPayload : BasePoolable
 * class [BasePoolable](../../Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway](./GatewayNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [EventPayload.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/EventPayload.cs)
+* [EventPayload.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/EventPayload.cs)
    
    
 # GetData&lt;T&gt; method

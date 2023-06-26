@@ -20,7 +20,7 @@ public class GuildPruneBegin : GuildPruneGet
 * class [GuildPruneGet](./GuildPruneGet.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildPruneBegin.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildPruneBegin.cs)
+* [GuildPruneBegin.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildPruneBegin.cs)
    
    
 # ToQueryString method

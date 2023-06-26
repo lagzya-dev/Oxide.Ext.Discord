@@ -25,7 +25,7 @@ public class SelectMenuTemplate : BaseComponentTemplate
 * class [BaseComponentTemplate](./BaseComponentTemplate.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [SelectMenuTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/SelectMenuTemplate.cs)
+* [SelectMenuTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Components/SelectMenuTemplate.cs)
    
    
 # ToComponent method

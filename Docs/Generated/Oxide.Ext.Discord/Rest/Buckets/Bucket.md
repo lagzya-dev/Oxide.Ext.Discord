@@ -28,7 +28,7 @@ public class Bucket : BasePoolable, IDebugLoggable
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Rest.Buckets](./BucketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [Bucket.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/Buckets/Bucket.cs)
+* [Bucket.cs](../../../../Oxide.Ext.Discord/Rest/Buckets/Bucket.cs)
    
    
 # Init method

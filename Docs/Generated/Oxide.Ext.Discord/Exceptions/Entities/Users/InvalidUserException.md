@@ -17,7 +17,7 @@ public class InvalidUserException : BaseDiscordException
 * class [BaseDiscordException](../../BaseDiscordException.md)
 * namespace [Oxide.Ext.Discord.Exceptions.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InvalidUserException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Users/InvalidUserException.cs)
+* [InvalidUserException.cs](../../../../Oxide.Ext.Discord/Exceptions/Entities/Users/InvalidUserException.cs)
    
    
 # InvalidUserNameCharacters field

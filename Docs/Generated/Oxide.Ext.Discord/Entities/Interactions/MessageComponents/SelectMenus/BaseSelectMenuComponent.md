@@ -27,7 +27,7 @@ public abstract class BaseSelectMenuComponent : BaseInteractableComponent
 * class [BaseInteractableComponent](../BaseInteractableComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-* [BaseSelectMenuComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/BaseSelectMenuComponent.cs)
+* [BaseSelectMenuComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/BaseSelectMenuComponent.cs)
    
    
 # Validate method

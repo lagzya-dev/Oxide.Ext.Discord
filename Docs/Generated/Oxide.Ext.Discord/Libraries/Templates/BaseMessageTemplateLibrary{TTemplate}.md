@@ -28,7 +28,7 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 * class [BaseTemplateLibrary&lt;TTemplate&gt;](./BaseTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseMessageTemplateLibrary.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/BaseMessageTemplateLibrary.cs)
+* [BaseMessageTemplateLibrary.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/BaseMessageTemplateLibrary.cs)
    
    
 # RegisterGlobalTemplateAsync method

@@ -26,7 +26,7 @@ public class Request : BaseRequest
 * class [BaseRequest](./BaseRequest.md)
 * namespace [Oxide.Ext.Discord.Rest.Requests](./RequestsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [Request.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/Requests/Request.cs)
+* [Request.cs](../../../../Oxide.Ext.Discord/Rest/Requests/Request.cs)
    
    
 # CreateRequest method

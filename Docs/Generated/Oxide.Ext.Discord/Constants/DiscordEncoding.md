@@ -17,7 +17,7 @@ public sealed class DiscordEncoding : Singleton<DiscordEncoding>
 * class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordEncoding.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Constants/DiscordEncoding.cs)
+* [DiscordEncoding.cs](../../../../Oxide.Ext.Discord/Constants/DiscordEncoding.cs)
    
    
 # Encoding field

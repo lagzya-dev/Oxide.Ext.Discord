@@ -32,7 +32,7 @@ public class AutoModRule
 
 * namespace [Oxide.Ext.Discord.Entities.AutoMod](./AutoModNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [AutoModRule.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/AutoMod/AutoModRule.cs)
+* [AutoModRule.cs](../../../../Oxide.Ext.Discord/Entities/AutoMod/AutoModRule.cs)
    
    
 # GetAll method

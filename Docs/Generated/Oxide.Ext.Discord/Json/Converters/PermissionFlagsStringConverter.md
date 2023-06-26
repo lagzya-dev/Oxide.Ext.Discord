@@ -19,7 +19,7 @@ public class PermissionFlagsStringConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [PermissionFlagsStringConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/PermissionFlagsStringConverter.cs)
+* [PermissionFlagsStringConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/PermissionFlagsStringConverter.cs)
    
    
 # WriteJson method

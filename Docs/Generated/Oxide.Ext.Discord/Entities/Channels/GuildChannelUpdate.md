@@ -33,7 +33,7 @@ public class GuildChannelUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildChannelUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/GuildChannelUpdate.cs)
+* [GuildChannelUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Channels/GuildChannelUpdate.cs)
    
    
 # Validate method

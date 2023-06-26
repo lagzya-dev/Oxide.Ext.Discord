@@ -22,7 +22,7 @@ public class ThreadMetadata
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMetadata.cs)
+* [ThreadMetadata.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadMetadata.cs)
    
    
 # ThreadMetadata constructor

@@ -18,7 +18,7 @@ public class GuildMemberUpdatedEvent : GuildMember
 * class [GuildMember](../../Guilds/GuildMember.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildMemberUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildMemberUpdatedEvent.cs)
+* [GuildMemberUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/GuildMemberUpdatedEvent.cs)
    
    
 # GuildMemberUpdatedEvent constructor

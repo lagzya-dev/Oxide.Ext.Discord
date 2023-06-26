@@ -21,7 +21,7 @@ public interface IDiscordPlugin
 
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IDiscordPlugin.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/IDiscordPlugin.cs)
+* [IDiscordPlugin.cs](../../../../Oxide.Ext.Discord/Interfaces/IDiscordPlugin.cs)
    
    
 # Name property

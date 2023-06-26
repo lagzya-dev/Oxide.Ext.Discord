@@ -20,7 +20,7 @@ public class UpdateVoiceStatusCommand
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [UpdateVoiceStatusCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/UpdateVoiceStatusCommand.cs)
+* [UpdateVoiceStatusCommand.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Commands/UpdateVoiceStatusCommand.cs)
    
    
 # UpdateVoiceStatusCommand constructor

@@ -21,7 +21,7 @@ public class MessageInteraction
 
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [MessageInteraction.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageInteraction.cs)
+* [MessageInteraction.cs](../../../../Oxide.Ext.Discord/Entities/Messages/MessageInteraction.cs)
    
    
 # MessageInteraction constructor

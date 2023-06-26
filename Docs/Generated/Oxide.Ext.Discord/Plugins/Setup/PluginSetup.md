@@ -16,7 +16,7 @@ public class PluginSetup
 
 * namespace [Oxide.Ext.Discord.Plugins.Setup](./SetupNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [PluginSetup.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Plugins/Setup/PluginSetup.cs)
+* [PluginSetup.cs](../../../../Oxide.Ext.Discord/Plugins/Setup/PluginSetup.cs)
    
    
 # PluginSetup constructor

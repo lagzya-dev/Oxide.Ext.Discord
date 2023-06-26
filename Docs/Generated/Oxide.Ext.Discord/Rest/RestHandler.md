@@ -35,7 +35,7 @@ public class RestHandler : IDebugLoggable
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [RestHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/RestHandler.cs)
+* [RestHandler.cs](../../../../Oxide.Ext.Discord/Rest/RestHandler.cs)
    
    
 # Get&lt;TResult&gt; method

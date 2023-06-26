@@ -24,7 +24,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary%7BTLibrary%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordPool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Pooling/DiscordPool.cs)
+* [DiscordPool.cs](../../../../Oxide.Ext.Discord/Libraries/Pooling/DiscordPool.cs)
    
    
 # GetOrCreate method

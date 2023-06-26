@@ -27,7 +27,7 @@ public class WebhookEditMessage : IDiscordMessageTemplate, IFileAttachments
 * interface [IFileAttachments](../../Interfaces/IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [WebhookEditMessage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Webhooks/WebhookEditMessage.cs)
+* [WebhookEditMessage.cs](../../../../Oxide.Ext.Discord/Entities/Webhooks/WebhookEditMessage.cs)
    
    
 # AddEmbed method

@@ -20,7 +20,7 @@ public class GuildCommandPermissions
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildCommandPermissions.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/GuildCommandPermissions.cs)
+* [GuildCommandPermissions.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/GuildCommandPermissions.cs)
    
    
 # GuildCommandPermissions constructor

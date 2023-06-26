@@ -21,7 +21,7 @@ public class AllowedMention
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.AllowedMentions](./AllowedMentionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [AllowedMention.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/AllowedMentions/AllowedMention.cs)
+* [AllowedMention.cs](../../../../Oxide.Ext.Discord/Entities/Messages/AllowedMentions/AllowedMention.cs)
    
    
 # AllowedMention constructor

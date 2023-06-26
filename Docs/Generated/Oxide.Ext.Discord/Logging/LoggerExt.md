@@ -85,7 +85,7 @@ public static class LoggerExt
 
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [LoggerExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Logging/LoggerExt.cs)
+* [LoggerExt.cs](../../../../Oxide.Ext.Discord/Logging/LoggerExt.cs)
    
    
 # Verbose method (1 of 12)

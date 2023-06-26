@@ -32,7 +32,7 @@ public class BasePromise : BasePoolable, IRejectable
 * interface [IRejectable](../Interfaces/Promises/IRejectable.md)
 * namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BasePromise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/BasePromise.cs)
+* [BasePromise.cs](../../../../Oxide.Ext.Discord/Promises/BasePromise.cs)
    
    
 # Reject method

@@ -25,7 +25,7 @@ public class DiscordClient
 
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordClient.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Clients/DiscordClient.cs)
+* [DiscordClient.cs](../../../../Oxide.Ext.Discord/Clients/DiscordClient.cs)
    
    
 # Connect method (1 of 2)

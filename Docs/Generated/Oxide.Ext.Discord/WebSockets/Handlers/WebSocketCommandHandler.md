@@ -17,7 +17,7 @@ public class WebSocketCommandHandler
 
 * namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [WebSocketCommandHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/WebSocketCommandHandler.cs)
+* [WebSocketCommandHandler.cs](../../../../Oxide.Ext.Discord/WebSockets/Handlers/WebSocketCommandHandler.cs)
    
    
 # Enqueue method

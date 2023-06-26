@@ -24,7 +24,7 @@ public class BotConnection
 
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BotConnection.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Connections/BotConnection.cs)
+* [BotConnection.cs](../../../../Oxide.Ext.Discord/Connections/BotConnection.cs)
    
    
 # HasIntents method

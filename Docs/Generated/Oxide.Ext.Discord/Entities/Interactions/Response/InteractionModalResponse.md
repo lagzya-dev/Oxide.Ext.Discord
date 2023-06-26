@@ -19,7 +19,7 @@ public class InteractionModalResponse : BaseInteractionResponse<InteractionModal
 * class [InteractionModalMessage](./InteractionModalMessage.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InteractionModalResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/InteractionModalResponse.cs)
+* [InteractionModalResponse.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/Response/InteractionModalResponse.cs)
    
    
 # InteractionModalResponse constructor (1 of 2)

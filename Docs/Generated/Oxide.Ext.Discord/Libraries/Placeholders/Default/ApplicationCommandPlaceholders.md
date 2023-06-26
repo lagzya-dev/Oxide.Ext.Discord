@@ -20,7 +20,7 @@ public static class ApplicationCommandPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ApplicationCommandPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/ApplicationCommandPlaceholders.cs)
+* [ApplicationCommandPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/ApplicationCommandPlaceholders.cs)
    
    
 # Id method

@@ -19,7 +19,7 @@ public class DiscordMessageBuilder : BaseChannelMessageBuilder<MessageCreate, Di
 * class [MessageCreate](../../Entities/Messages/MessageCreate.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/DiscordMessageBuilder.cs)
+* [DiscordMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/DiscordMessageBuilder.cs)
    
    
 # DiscordMessageBuilder constructor (1 of 2)

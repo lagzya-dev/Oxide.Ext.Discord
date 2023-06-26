@@ -23,7 +23,7 @@ public static class DateTimePlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DateTimePlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/DateTimePlaceholders.cs)
+* [DateTimePlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/DateTimePlaceholders.cs)
    
    
 # Year method

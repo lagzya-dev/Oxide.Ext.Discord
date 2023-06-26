@@ -17,7 +17,7 @@ public class DiscordHeartbeatHandler
 
 * namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordHeartbeatHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/DiscordHeartbeatHandler.cs)
+* [DiscordHeartbeatHandler.cs](../../../../Oxide.Ext.Discord/WebSockets/Handlers/DiscordHeartbeatHandler.cs)
    
    
 # OnSocketShutdown method

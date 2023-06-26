@@ -22,7 +22,7 @@ public class SelectMenuOption
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-* [SelectMenuOption.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.cs)
+* [SelectMenuOption.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.cs)
    
    
 # Validate method

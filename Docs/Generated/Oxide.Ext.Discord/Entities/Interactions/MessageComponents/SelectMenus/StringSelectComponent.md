@@ -19,7 +19,7 @@ public class StringSelectComponent : BaseSelectMenuComponent
 * class [BaseSelectMenuComponent](./BaseSelectMenuComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-* [StringSelectComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/StringSelectComponent.cs)
+* [StringSelectComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/StringSelectComponent.cs)
    
    
 # Validate method

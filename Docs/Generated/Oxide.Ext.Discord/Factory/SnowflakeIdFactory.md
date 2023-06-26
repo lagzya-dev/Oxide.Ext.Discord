@@ -17,7 +17,7 @@ public sealed class SnowflakeIdFactory : Singleton<SnowflakeIdFactory>
 * class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Factory](./FactoryNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [SnowflakeIdFactory.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Factory/SnowflakeIdFactory.cs)
+* [SnowflakeIdFactory.cs](../../../../Oxide.Ext.Discord/Factory/SnowflakeIdFactory.cs)
    
    
 # Generate method

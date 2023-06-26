@@ -22,7 +22,7 @@ public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary
 * class [BaseDiscordLibrary](../BaseDiscordLibrary.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseTemplateLibrary.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/BaseTemplateLibrary.cs)
+* [BaseTemplateLibrary.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/BaseTemplateLibrary.cs)
    
    
 # GetTemplateFolder method

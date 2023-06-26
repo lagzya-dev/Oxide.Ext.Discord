@@ -28,7 +28,7 @@ public class DiscordSubscriptions : BaseDiscordLibrary<DiscordSubscriptions>, ID
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordSubscriptions.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Subscription/DiscordSubscriptions.cs)
+* [DiscordSubscriptions.cs](../../../../Oxide.Ext.Discord/Libraries/Subscription/DiscordSubscriptions.cs)
    
    
 # HasSubscriptions method

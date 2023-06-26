@@ -19,7 +19,7 @@ public class MessageReaction
 
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [MessageReaction.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageReaction.cs)
+* [MessageReaction.cs](../../../../Oxide.Ext.Discord/Entities/Messages/MessageReaction.cs)
    
    
 # MessageReaction constructor

@@ -19,7 +19,7 @@ public class DirectMessageCommandAttribute : BaseCommandAttribute
 * class [BaseCommandAttribute](./BaseCommandAttribute.md)
 * namespace [Oxide.Ext.Discord.Attributes](./AttributesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DirectMessageCommandAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/DirectMessageCommandAttribute.cs)
+* [DirectMessageCommandAttribute.cs](../../../../Oxide.Ext.Discord/Attributes/DirectMessageCommandAttribute.cs)
    
    
 # DirectMessageCommandAttribute constructor

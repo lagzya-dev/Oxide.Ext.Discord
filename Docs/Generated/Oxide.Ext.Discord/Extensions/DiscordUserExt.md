@@ -18,7 +18,7 @@ public static class DiscordUserExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordUserExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/DiscordUserExt.cs)
+* [DiscordUserExt.cs](../../../../Oxide.Ext.Discord/Extensions/DiscordUserExt.cs)
    
    
 # SendChatMessage method (1 of 2)

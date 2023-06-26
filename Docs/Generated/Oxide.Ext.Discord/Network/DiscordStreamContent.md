@@ -24,7 +24,7 @@ public class DiscordStreamContent : HttpContent
 
 * namespace [Oxide.Ext.Discord.Network](./NetworkNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordStreamContent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Network/DiscordStreamContent.cs)
+* [DiscordStreamContent.cs](../../../../Oxide.Ext.Discord/Network/DiscordStreamContent.cs)
    
    
 # SerializeToStreamAsync method

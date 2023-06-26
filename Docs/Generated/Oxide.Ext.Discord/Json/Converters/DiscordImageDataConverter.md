@@ -19,7 +19,7 @@ public class DiscordImageDataConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordImageDataConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/DiscordImageDataConverter.cs)
+* [DiscordImageDataConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/DiscordImageDataConverter.cs)
    
    
 # WriteJson method

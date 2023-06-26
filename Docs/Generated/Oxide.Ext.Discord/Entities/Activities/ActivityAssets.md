@@ -20,7 +20,7 @@ public class ActivityAssets
 
 * namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ActivityAssets.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Activities/ActivityAssets.cs)
+* [ActivityAssets.cs](../../../../Oxide.Ext.Discord/Entities/Activities/ActivityAssets.cs)
    
    
 # ActivityAssets constructor

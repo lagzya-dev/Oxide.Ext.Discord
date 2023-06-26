@@ -35,7 +35,7 @@ public class DiscordApplicationCommand
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordApplicationCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.cs)
+* [DiscordApplicationCommand.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.cs)
    
    
 # MentionCustom method

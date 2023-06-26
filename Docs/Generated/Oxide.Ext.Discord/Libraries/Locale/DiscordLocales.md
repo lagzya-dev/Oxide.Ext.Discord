@@ -32,7 +32,7 @@ public class DiscordLocales : BaseDiscordLibrary<DiscordLocales>
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](../BaseDiscordLibrary%7BTLibrary%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries.Locale](./LocaleNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordLocales.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Locale/DiscordLocales.cs)
+* [DiscordLocales.cs](../../../../Oxide.Ext.Discord/Libraries/Locale/DiscordLocales.cs)
    
    
 # AddOxideLocale method

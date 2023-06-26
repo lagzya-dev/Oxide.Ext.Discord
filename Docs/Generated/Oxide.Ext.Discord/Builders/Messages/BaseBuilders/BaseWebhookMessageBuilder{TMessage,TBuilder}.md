@@ -33,7 +33,7 @@ public abstract class BaseWebhookMessageBuilder<TMessage, TBuilder> :
 * class [WebhookCreateMessage](../../../Entities/Webhooks/WebhookCreateMessage.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [BaseWebhookMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseWebhookMessageBuilder.cs)
+* [BaseWebhookMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseWebhookMessageBuilder.cs)
    
    
 # AddUserName method

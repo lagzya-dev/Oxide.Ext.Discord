@@ -20,7 +20,7 @@ public sealed class PromiseTimer : Singleton<PromiseTimer>
 * class [Singleton&lt;T&gt;](../../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Promises.Timer](./TimerNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [PromiseTimer.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/Timer/PromiseTimer.cs)
+* [PromiseTimer.cs](../../../../Oxide.Ext.Discord/Promises/Timer/PromiseTimer.cs)
    
    
 # WaitFor method

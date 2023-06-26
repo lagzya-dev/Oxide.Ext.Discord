@@ -29,7 +29,7 @@ public class DiscordEmbed
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordEmbed.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/DiscordEmbed.cs)
+* [DiscordEmbed.cs](../../../../Oxide.Ext.Discord/Entities/Messages/Embeds/DiscordEmbed.cs)
    
    
 # DiscordEmbed constructor

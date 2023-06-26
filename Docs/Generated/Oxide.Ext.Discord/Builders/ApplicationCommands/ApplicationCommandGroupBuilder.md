@@ -21,7 +21,7 @@ public class ApplicationCommandGroupBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ApplicationCommandGroupBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandGroupBuilder.cs)
+* [ApplicationCommandGroupBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandGroupBuilder.cs)
    
    
 # AddNameLocalizations method

@@ -20,7 +20,7 @@ public class ServerPlayerCache : Singleton<ServerPlayerCache>
 * class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [ServerPlayerCache.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Cache/ServerPlayerCache.cs)
+* [ServerPlayerCache.cs](../../../../Oxide.Ext.Discord/Cache/ServerPlayerCache.cs)
    
    
 # GetPlayerById method

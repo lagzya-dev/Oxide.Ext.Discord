@@ -29,7 +29,7 @@ public class DiscordInvite
 
 * namespace [Oxide.Ext.Discord.Entities.Invites](./InvitesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordInvite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Invites/DiscordInvite.cs)
+* [DiscordInvite.cs](../../../../Oxide.Ext.Discord/Entities/Invites/DiscordInvite.cs)
    
    
 # Get method

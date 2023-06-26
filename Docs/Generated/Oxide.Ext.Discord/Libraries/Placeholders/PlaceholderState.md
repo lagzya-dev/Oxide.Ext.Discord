@@ -26,7 +26,7 @@ public class PlaceholderState : BasePoolable
 * class [BasePoolable](../../Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [PlaceholderState.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.cs)
+* [PlaceholderState.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.cs)
    
    
 # EnterPool method

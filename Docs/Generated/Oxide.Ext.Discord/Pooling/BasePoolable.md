@@ -24,7 +24,7 @@ public abstract class BasePoolable : IDisposable
 
 * namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BasePoolable.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/BasePoolable.cs)
+* [BasePoolable.cs](../../../../Oxide.Ext.Discord/Pooling/BasePoolable.cs)
    
    
 # EnterPool method

@@ -21,7 +21,7 @@ public class WebSocketEventHandler : IWebSocketEventHandler
 * interface [IWebSocketEventHandler](../../Interfaces/WebSockets/IWebSocketEventHandler.md)
 * namespace [Oxide.Ext.Discord.WebSockets.Handlers](./HandlersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [WebSocketEventHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/Handlers/WebSocketEventHandler.cs)
+* [WebSocketEventHandler.cs](../../../../Oxide.Ext.Discord/WebSockets/Handlers/WebSocketEventHandler.cs)
    
    
 # SocketOpened method

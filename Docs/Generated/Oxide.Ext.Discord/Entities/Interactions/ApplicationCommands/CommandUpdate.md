@@ -25,7 +25,7 @@ public class CommandUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandUpdate.cs)
+* [CommandUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandUpdate.cs)
    
    
 # CommandUpdate constructor

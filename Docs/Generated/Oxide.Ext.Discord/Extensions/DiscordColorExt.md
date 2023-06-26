@@ -16,7 +16,7 @@ public static class DiscordColorExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordColorExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/DiscordColorExt.cs)
+* [DiscordColorExt.cs](../../../../Oxide.Ext.Discord/Extensions/DiscordColorExt.cs)
    
    
 # ToHex method

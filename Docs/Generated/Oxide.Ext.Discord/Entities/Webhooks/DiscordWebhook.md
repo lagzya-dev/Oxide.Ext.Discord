@@ -46,7 +46,7 @@ public class DiscordWebhook
 
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordWebhook.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Webhooks/DiscordWebhook.cs)
+* [DiscordWebhook.cs](../../../../Oxide.Ext.Discord/Entities/Webhooks/DiscordWebhook.cs)
    
    
 # CreateWebhook method

@@ -24,7 +24,7 @@ public static class TimestampPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [TimestampPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/TimestampPlaceholders.cs)
+* [TimestampPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/TimestampPlaceholders.cs)
    
    
 # Timestamp method

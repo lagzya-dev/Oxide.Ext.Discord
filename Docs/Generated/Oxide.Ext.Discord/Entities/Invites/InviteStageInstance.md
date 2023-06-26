@@ -20,7 +20,7 @@ public class InviteStageInstance
 
 * namespace [Oxide.Ext.Discord.Entities.Invites](./InvitesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InviteStageInstance.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Invites/InviteStageInstance.cs)
+* [InviteStageInstance.cs](../../../../Oxide.Ext.Discord/Entities/Invites/InviteStageInstance.cs)
    
    
 # InviteStageInstance constructor

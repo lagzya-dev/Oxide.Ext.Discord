@@ -26,7 +26,7 @@ public class CommandBulkOverwrite
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandBulkOverwrite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandBulkOverwrite.cs)
+* [CommandBulkOverwrite.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandBulkOverwrite.cs)
    
    
 # CommandBulkOverwrite constructor

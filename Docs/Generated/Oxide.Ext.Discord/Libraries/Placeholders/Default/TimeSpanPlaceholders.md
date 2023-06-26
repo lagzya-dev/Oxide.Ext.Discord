@@ -26,7 +26,7 @@ public static class TimeSpanPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [TimeSpanPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/TimeSpanPlaceholders.cs)
+* [TimeSpanPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/TimeSpanPlaceholders.cs)
    
    
 # Days method

@@ -25,7 +25,7 @@ public class ThreadChannelUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadChannelUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadChannelUpdate.cs)
+* [ThreadChannelUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadChannelUpdate.cs)
    
    
 # Validate method

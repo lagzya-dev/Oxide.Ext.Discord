@@ -23,7 +23,7 @@ public class ApplicationRoleConnectionMetadata
 
 * namespace [Oxide.Ext.Discord.Entities.Applications.RoleConnection](./RoleConnectionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ApplicationRoleConnectionMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/RoleConnection/ApplicationRoleConnectionMetadata.cs)
+* [ApplicationRoleConnectionMetadata.cs](../../../../Oxide.Ext.Discord/Entities/Applications/RoleConnection/ApplicationRoleConnectionMetadata.cs)
    
    
 # Validate method

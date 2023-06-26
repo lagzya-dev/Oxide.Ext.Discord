@@ -19,7 +19,7 @@ public class DiscordColorConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordColorConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/DiscordColorConverter.cs)
+* [DiscordColorConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/DiscordColorConverter.cs)
    
    
 # WriteJson method

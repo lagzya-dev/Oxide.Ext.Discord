@@ -22,7 +22,7 @@ public sealed class EntityCache<T> : Singleton<EntityCache>
 * interface [IDiscordCacheable&lt;T&gt;](../../Interfaces/IDiscordCacheable%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Cache.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [EntityCache.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Cache/Entities/EntityCache.cs)
+* [EntityCache.cs](../../../../Oxide.Ext.Discord/Cache/Entities/EntityCache.cs)
    
    
 # Get method

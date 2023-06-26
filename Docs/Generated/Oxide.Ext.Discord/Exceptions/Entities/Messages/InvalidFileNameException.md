@@ -17,7 +17,7 @@ public class InvalidFileNameException : BaseDiscordException
 * class [BaseDiscordException](../../BaseDiscordException.md)
 * namespace [Oxide.Ext.Discord.Exceptions.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InvalidFileNameException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidFileNameException.cs)
+* [InvalidFileNameException.cs](../../../../Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidFileNameException.cs)
    
    
 # FilenameValidation field

@@ -21,7 +21,7 @@ public interface ILogger
 
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [ILogger.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Logging/ILogger.cs)
+* [ILogger.cs](../../../../Oxide.Ext.Discord/Logging/ILogger.cs)
    
    
 # UpdateLogLevel method

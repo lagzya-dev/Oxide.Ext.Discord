@@ -27,7 +27,7 @@ public class InputTextTemplate : BaseComponentTemplate
 * class [BaseComponentTemplate](./BaseComponentTemplate.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InputTextTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/InputTextTemplate.cs)
+* [InputTextTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Components/InputTextTemplate.cs)
    
    
 # ToComponent method

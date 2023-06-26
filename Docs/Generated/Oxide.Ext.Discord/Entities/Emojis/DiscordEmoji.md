@@ -29,7 +29,7 @@ public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Emojis](./EmojisNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordEmoji.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Emojis/DiscordEmoji.cs)
+* [DiscordEmoji.cs](../../../../Oxide.Ext.Discord/Entities/Emojis/DiscordEmoji.cs)
    
    
 # FromCharacter method

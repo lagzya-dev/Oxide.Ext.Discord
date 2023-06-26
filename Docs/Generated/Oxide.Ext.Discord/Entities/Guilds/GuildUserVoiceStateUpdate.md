@@ -19,7 +19,7 @@ public class GuildUserVoiceStateUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildUserVoiceStateUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildUserVoiceStateUpdate.cs)
+* [GuildUserVoiceStateUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildUserVoiceStateUpdate.cs)
    
    
 # Validate method

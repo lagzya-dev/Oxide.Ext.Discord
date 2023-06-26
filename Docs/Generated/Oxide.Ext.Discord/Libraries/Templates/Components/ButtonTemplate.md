@@ -25,7 +25,7 @@ public class ButtonTemplate : BaseComponentTemplate
 * class [BaseComponentTemplate](./BaseComponentTemplate.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ButtonTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/ButtonTemplate.cs)
+* [ButtonTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Components/ButtonTemplate.cs)
    
    
 # ToComponent method

@@ -41,7 +41,7 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 * interface [IPendingPromise&lt;TPromised&gt;](../Interfaces/Promises/IPendingPromise%7BTPromised%7D.md)
 * namespace [Oxide.Ext.Discord.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [Promise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Promises/Promise.cs)
+* [Promise.cs](../../../../Oxide.Ext.Discord/Promises/Promise.cs)
    
    
 # Create method (1 of 3)

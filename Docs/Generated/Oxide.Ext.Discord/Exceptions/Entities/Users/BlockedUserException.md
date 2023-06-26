@@ -18,7 +18,7 @@ public class BlockedUserException : BaseDiscordException
 * class [BaseDiscordException](../../BaseDiscordException.md)
 * namespace [Oxide.Ext.Discord.Exceptions.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [BlockedUserException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Users/BlockedUserException.cs)
+* [BlockedUserException.cs](../../../../Oxide.Ext.Discord/Exceptions/Entities/Users/BlockedUserException.cs)
    
    
 # User field

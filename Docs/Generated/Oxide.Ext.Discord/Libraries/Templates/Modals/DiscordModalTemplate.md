@@ -21,7 +21,7 @@ public class DiscordModalTemplate
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Modals](./ModalsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordModalTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Modals/DiscordModalTemplate.cs)
+* [DiscordModalTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Modals/DiscordModalTemplate.cs)
    
    
 # ToModal method

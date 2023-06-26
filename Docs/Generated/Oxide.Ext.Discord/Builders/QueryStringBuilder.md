@@ -29,7 +29,7 @@ public class QueryStringBuilder : BasePoolable
 * class [BasePoolable](../Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [QueryStringBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/QueryStringBuilder.cs)
+* [QueryStringBuilder.cs](../../../../Oxide.Ext.Discord/Builders/QueryStringBuilder.cs)
    
    
 # Create method

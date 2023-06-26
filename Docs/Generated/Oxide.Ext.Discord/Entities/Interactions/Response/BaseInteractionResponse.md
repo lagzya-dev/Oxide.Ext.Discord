@@ -23,7 +23,7 @@ public abstract class BaseInteractionResponse
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [BaseInteractionResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionResponse.cs)
+* [BaseInteractionResponse.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/Response/BaseInteractionResponse.cs)
    
    
 # BaseInteractionResponse constructor (1 of 2)

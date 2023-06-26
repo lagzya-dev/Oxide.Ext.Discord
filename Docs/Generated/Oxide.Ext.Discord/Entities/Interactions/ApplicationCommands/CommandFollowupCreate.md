@@ -17,7 +17,7 @@ public class CommandFollowupCreate : BaseInteractionMessage
 * class [BaseInteractionMessage](../Response/BaseInteractionMessage.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandFollowupCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandFollowupCreate.cs)
+* [CommandFollowupCreate.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandFollowupCreate.cs)
    
    
 # CommandFollowupCreate constructor

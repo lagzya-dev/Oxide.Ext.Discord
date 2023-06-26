@@ -25,7 +25,7 @@ public struct PluginId : IDebugLoggable, IEquatable<PluginId>
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Plugins](./PluginsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [PluginId.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Plugins/PluginId.cs)
+* [PluginId.cs](../../../../Oxide.Ext.Discord/Plugins/PluginId.cs)
    
    
 # Equals method (1 of 2)

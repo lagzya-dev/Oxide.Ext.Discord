@@ -20,7 +20,7 @@ public class MessageReference
 
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [MessageReference.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/MessageReference.cs)
+* [MessageReference.cs](../../../../Oxide.Ext.Discord/Entities/Messages/MessageReference.cs)
    
    
 # MessageReference constructor

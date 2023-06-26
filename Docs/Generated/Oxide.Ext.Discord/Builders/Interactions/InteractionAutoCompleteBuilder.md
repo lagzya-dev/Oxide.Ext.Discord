@@ -38,7 +38,7 @@ public class InteractionAutoCompleteBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionAutoCompleteBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.cs)
+* [InteractionAutoCompleteBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.cs)
    
    
 # AddChoice method (1 of 3)

@@ -18,7 +18,7 @@ public interface IDiscordMessageTemplate
 
 * namespace [Oxide.Ext.Discord.Interfaces.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [IDiscordMessageTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Entities/Messages/IDiscordMessageTemplate.cs)
+* [IDiscordMessageTemplate.cs](../../../../Oxide.Ext.Discord/Interfaces/Entities/Messages/IDiscordMessageTemplate.cs)
    
    
 # Content property

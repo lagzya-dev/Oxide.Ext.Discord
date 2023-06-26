@@ -28,7 +28,7 @@ public class ApplicationCommandBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ApplicationCommandBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.cs)
+* [ApplicationCommandBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.cs)
    
    
 # AddDefaultPermissions method

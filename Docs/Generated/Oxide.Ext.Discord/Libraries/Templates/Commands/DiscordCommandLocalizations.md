@@ -20,7 +20,7 @@ public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLoc
 * class [DiscordCommandLocalization](./DiscordCommandLocalization.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordCommandLocalizations.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/DiscordCommandLocalizations.cs)
+* [DiscordCommandLocalizations.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Commands/DiscordCommandLocalizations.cs)
    
    
 # RegisterCommandLocalizationAsync method

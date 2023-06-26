@@ -17,7 +17,7 @@ public class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
 * class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordLoggerFactory.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Logging/DiscordLoggerFactory.cs)
+* [DiscordLoggerFactory.cs](../../../../Oxide.Ext.Discord/Logging/DiscordLoggerFactory.cs)
    
    
 # CreateLogger method

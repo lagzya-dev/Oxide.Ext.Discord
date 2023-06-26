@@ -20,7 +20,7 @@ public class TemplateComponentsConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [TemplateComponentsConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/TemplateComponentsConverter.cs)
+* [TemplateComponentsConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/TemplateComponentsConverter.cs)
    
    
 # WriteJson method

@@ -24,7 +24,7 @@ public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
 * class [EmbedField](../../../Entities/Messages/Embeds/EmbedField.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordEmbedFieldTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Embeds/DiscordEmbedFieldTemplate.cs)
+* [DiscordEmbedFieldTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Embeds/DiscordEmbedFieldTemplate.cs)
    
    
 # ToEntity method

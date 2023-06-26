@@ -21,7 +21,7 @@ public class EmbedFooterTemplate
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [EmbedFooterTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Embeds/EmbedFooterTemplate.cs)
+* [EmbedFooterTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Embeds/EmbedFooterTemplate.cs)
    
    
 # ToFooter method

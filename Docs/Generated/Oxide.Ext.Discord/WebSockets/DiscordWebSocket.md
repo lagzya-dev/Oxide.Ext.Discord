@@ -31,7 +31,7 @@ public class DiscordWebSocket : IDebugLoggable
 * interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordWebSocket.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/WebSockets/DiscordWebSocket.cs)
+* [DiscordWebSocket.cs](../../../../Oxide.Ext.Discord/WebSockets/DiscordWebSocket.cs)
    
    
 # Connect method

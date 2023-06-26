@@ -21,7 +21,7 @@ public class EmbedVideo
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [EmbedVideo.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedVideo.cs)
+* [EmbedVideo.cs](../../../../Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedVideo.cs)
    
    
 # EmbedVideo constructor (1 of 2)

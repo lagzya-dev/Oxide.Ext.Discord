@@ -20,7 +20,7 @@ public class RoleSubscription
 
 * namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [RoleSubscription.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Permissions/RoleSubscription.cs)
+* [RoleSubscription.cs](../../../../Oxide.Ext.Discord/Entities/Permissions/RoleSubscription.cs)
    
    
 # RoleSubscription constructor

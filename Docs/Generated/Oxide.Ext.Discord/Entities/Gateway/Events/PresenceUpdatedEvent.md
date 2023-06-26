@@ -21,7 +21,7 @@ public class PresenceUpdatedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [PresenceUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/PresenceUpdatedEvent.cs)
+* [PresenceUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/PresenceUpdatedEvent.cs)
    
    
 # PresenceUpdatedEvent constructor

@@ -26,7 +26,7 @@ public class ScheduledEventUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ScheduledEventUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventUpdate.cs)
+* [ScheduledEventUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventUpdate.cs)
    
    
 # Validate method

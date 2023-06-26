@@ -19,7 +19,7 @@ public class IntegrationUpdate
 
 * namespace [Oxide.Ext.Discord.Entities.Integrations](./IntegrationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [IntegrationUpdate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Integrations/IntegrationUpdate.cs)
+* [IntegrationUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Integrations/IntegrationUpdate.cs)
    
    
 # IntegrationUpdate constructor

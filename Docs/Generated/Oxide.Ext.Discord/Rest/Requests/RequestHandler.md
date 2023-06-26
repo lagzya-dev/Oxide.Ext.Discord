@@ -27,7 +27,7 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Rest.Requests](./RequestsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [RequestHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Rest/Requests/RequestHandler.cs)
+* [RequestHandler.cs](../../../../Oxide.Ext.Discord/Rest/Requests/RequestHandler.cs)
    
    
 # StartRequest method

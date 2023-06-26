@@ -22,7 +22,7 @@ public abstract class BaseDiscordLibrary<TLibrary> : BaseDiscordLibrary
 * class [BaseDiscordLibrary](./BaseDiscordLibrary.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BaseDiscordLibrary.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/BaseDiscordLibrary.cs)
+* [BaseDiscordLibrary.cs](../../../../Oxide.Ext.Discord/Libraries/BaseDiscordLibrary.cs)
    
    
 # BaseDiscordLibrary&lt;TLibrary&gt; constructor

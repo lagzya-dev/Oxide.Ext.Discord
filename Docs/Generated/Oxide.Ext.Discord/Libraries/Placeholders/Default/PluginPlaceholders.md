@@ -24,7 +24,7 @@ public static class PluginPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [PluginPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/PluginPlaceholders.cs)
+* [PluginPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/PluginPlaceholders.cs)
    
    
 # Name method

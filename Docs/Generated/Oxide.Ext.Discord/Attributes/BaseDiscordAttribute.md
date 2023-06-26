@@ -17,7 +17,7 @@ public abstract class BaseDiscordAttribute : Attribute
 
 * namespace [Oxide.Ext.Discord.Attributes](./AttributesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BaseDiscordAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/BaseDiscordAttribute.cs)
+* [BaseDiscordAttribute.cs](../../../../Oxide.Ext.Discord/Attributes/BaseDiscordAttribute.cs)
    
    
 # BaseDiscordAttribute constructor

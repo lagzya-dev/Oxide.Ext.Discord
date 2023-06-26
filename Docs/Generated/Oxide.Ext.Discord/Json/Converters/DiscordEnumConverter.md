@@ -19,7 +19,7 @@ public class DiscordEnumConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordEnumConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/DiscordEnumConverter.cs)
+* [DiscordEnumConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/DiscordEnumConverter.cs)
    
    
 # WriteJson method

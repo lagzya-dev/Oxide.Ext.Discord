@@ -23,7 +23,7 @@ public class ButtonComponent : BaseInteractableComponent
 * class [BaseInteractableComponent](./BaseInteractableComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ButtonComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/ButtonComponent.cs)
+* [ButtonComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/ButtonComponent.cs)
    
    
 # Validate method

@@ -21,7 +21,7 @@ public class PlayerNameFormatter
 
 * namespace [Oxide.Ext.Discord.Builders.Interactions.AutoComplete](./AutoCompleteNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [PlayerNameFormatter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerNameFormatter.cs)
+* [PlayerNameFormatter.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerNameFormatter.cs)
    
    
 # Create method

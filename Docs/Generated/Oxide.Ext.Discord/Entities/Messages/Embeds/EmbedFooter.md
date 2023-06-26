@@ -20,7 +20,7 @@ public class EmbedFooter
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [EmbedFooter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedFooter.cs)
+* [EmbedFooter.cs](../../../../Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedFooter.cs)
    
    
 # EmbedFooter constructor (1 of 2)

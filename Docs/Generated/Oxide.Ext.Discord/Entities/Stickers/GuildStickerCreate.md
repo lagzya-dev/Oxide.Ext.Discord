@@ -23,7 +23,7 @@ public class GuildStickerCreate : IFileAttachments
 * interface [IFileAttachments](../../Interfaces/IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildStickerCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Stickers/GuildStickerCreate.cs)
+* [GuildStickerCreate.cs](../../../../Oxide.Ext.Discord/Entities/Stickers/GuildStickerCreate.cs)
    
    
 # AddSticker method

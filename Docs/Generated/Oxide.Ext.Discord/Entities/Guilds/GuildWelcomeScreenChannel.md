@@ -20,7 +20,7 @@ public class GuildWelcomeScreenChannel
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildWelcomeScreenChannel.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildWelcomeScreenChannel.cs)
+* [GuildWelcomeScreenChannel.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildWelcomeScreenChannel.cs)
    
    
 # GuildWelcomeScreenChannel constructor

@@ -23,7 +23,7 @@ public static class RateLimitHeaders
 
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [RateLimitHeaders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Constants/RateLimitHeaders.cs)
+* [RateLimitHeaders.cs](../../../../Oxide.Ext.Discord/Constants/RateLimitHeaders.cs)
    
    
 # RetryAfter field

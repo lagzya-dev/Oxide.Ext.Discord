@@ -21,7 +21,7 @@ public struct PoolSize
 
 * namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [PoolSize.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/PoolSize.cs)
+* [PoolSize.cs](../../../../Oxide.Ext.Discord/Pooling/PoolSize.cs)
    
    
 # CanResize method

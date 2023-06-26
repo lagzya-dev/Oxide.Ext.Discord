@@ -20,7 +20,7 @@ public class InteractionResponse : BaseInteractionResponse<InteractionCallbackDa
 * class [InteractionCallbackData](./InteractionCallbackData.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InteractionResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/InteractionResponse.cs)
+* [InteractionResponse.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/Response/InteractionResponse.cs)
    
    
 # Validate method

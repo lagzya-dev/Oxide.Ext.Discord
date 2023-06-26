@@ -17,7 +17,7 @@ public class CommandUpdatePermissions
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandUpdatePermissions.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandUpdatePermissions.cs)
+* [CommandUpdatePermissions.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandUpdatePermissions.cs)
    
    
 # CommandUpdatePermissions constructor

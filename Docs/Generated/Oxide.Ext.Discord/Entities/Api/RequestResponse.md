@@ -26,7 +26,7 @@ public class RequestResponse : BasePoolable
 * class [BasePoolable](../../Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [RequestResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Api/RequestResponse.cs)
+* [RequestResponse.cs](../../../../Oxide.Ext.Discord/Entities/Api/RequestResponse.cs)
    
    
 # CreateSuccessResponse method

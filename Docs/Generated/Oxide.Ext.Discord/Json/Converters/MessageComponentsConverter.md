@@ -20,7 +20,7 @@ public class MessageComponentsConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [MessageComponentsConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/MessageComponentsConverter.cs)
+* [MessageComponentsConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/MessageComponentsConverter.cs)
    
    
 # WriteJson method

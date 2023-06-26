@@ -17,7 +17,7 @@ public static class InteractionPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InteractionPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/InteractionPlaceholders.cs)
+* [InteractionPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/InteractionPlaceholders.cs)
    
    
 # Lang method

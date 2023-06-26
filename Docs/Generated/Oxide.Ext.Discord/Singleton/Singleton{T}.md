@@ -27,7 +27,7 @@ public abstract class Singleton<T>
 
 * namespace [Oxide.Ext.Discord.Singleton](./SingletonNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [Singleton.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Singleton/Singleton.cs)
+* [Singleton.cs](../../../../Oxide.Ext.Discord/Singleton/Singleton.cs)
    
    
 # Singleton&lt;T&gt; constructor

@@ -25,7 +25,7 @@ public class InteractionDataOption
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionDataOption.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/InteractionDataOption.cs)
+* [InteractionDataOption.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/InteractionDataOption.cs)
    
    
 # GetString method

@@ -18,7 +18,7 @@ public class GuildEmojisUpdatedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildEmojisUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildEmojisUpdatedEvent.cs)
+* [GuildEmojisUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/GuildEmojisUpdatedEvent.cs)
    
    
 # GuildEmojisUpdatedEvent constructor

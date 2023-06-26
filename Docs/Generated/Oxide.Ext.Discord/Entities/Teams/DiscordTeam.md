@@ -22,7 +22,7 @@ public class DiscordTeam
 
 * namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordTeam.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Teams/DiscordTeam.cs)
+* [DiscordTeam.cs](../../../../Oxide.Ext.Discord/Entities/Teams/DiscordTeam.cs)
    
    
 # DiscordTeam constructor

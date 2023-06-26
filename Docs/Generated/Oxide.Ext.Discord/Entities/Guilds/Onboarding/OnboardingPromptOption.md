@@ -22,7 +22,7 @@ public class OnboardingPromptOption
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [OnboardingPromptOption.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPromptOption.cs)
+* [OnboardingPromptOption.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPromptOption.cs)
    
    
 # OnboardingPromptOption constructor

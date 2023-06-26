@@ -17,7 +17,7 @@ public class GuildIntegrationsUpdatedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildIntegrationsUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildIntegrationsUpdatedEvent.cs)
+* [GuildIntegrationsUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/GuildIntegrationsUpdatedEvent.cs)
    
    
 # GuildIntegrationsUpdatedEvent constructor

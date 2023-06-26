@@ -22,7 +22,7 @@ public class GuildMembersRequestCommand
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildMembersRequestCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/GuildMembersRequestCommand.cs)
+* [GuildMembersRequestCommand.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Commands/GuildMembersRequestCommand.cs)
    
    
 # GuildMembersRequestCommand constructor

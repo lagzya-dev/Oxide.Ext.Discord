@@ -20,7 +20,7 @@ public class WebhookMessageBuilder :
 * class [WebhookCreateMessage](../../Entities/Webhooks/WebhookCreateMessage.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [WebhookMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/WebhookMessageBuilder.cs)
+* [WebhookMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/WebhookMessageBuilder.cs)
    
    
 # WebhookMessageBuilder constructor (1 of 2)

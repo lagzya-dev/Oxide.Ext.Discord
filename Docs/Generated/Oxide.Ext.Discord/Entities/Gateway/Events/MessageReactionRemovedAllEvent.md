@@ -19,7 +19,7 @@ public class MessageReactionRemovedAllEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [MessageReactionRemovedAllEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/MessageReactionRemovedAllEvent.cs)
+* [MessageReactionRemovedAllEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/MessageReactionRemovedAllEvent.cs)
    
    
 # MessageReactionRemovedAllEvent constructor

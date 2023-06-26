@@ -33,7 +33,7 @@ public class DiscordRole : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordRole.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Permissions/DiscordRole.cs)
+* [DiscordRole.cs](../../../../Oxide.Ext.Discord/Entities/Permissions/DiscordRole.cs)
    
    
 # HasPermission method

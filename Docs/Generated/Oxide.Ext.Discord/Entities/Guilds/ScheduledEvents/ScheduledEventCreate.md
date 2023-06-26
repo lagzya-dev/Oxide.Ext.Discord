@@ -26,7 +26,7 @@ public class ScheduledEventCreate
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ScheduledEventCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventCreate.cs)
+* [ScheduledEventCreate.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventCreate.cs)
    
    
 # Validate method

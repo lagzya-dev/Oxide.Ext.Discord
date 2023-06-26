@@ -21,7 +21,7 @@ public class DiscordExtension : Extension
 
 * namespace [Oxide.Ext.Discord](../Oxide.Ext.DiscordNamespace.md)
 * assembly [Oxide.Ext.Discord](../Oxide.Ext.Discord.md)
-* [DiscordExtension.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/DiscordExtension.cs)
+* [DiscordExtension.cs](../../../../Oxide.Ext.Discord/DiscordExtension.cs)
    
    
 # OnModLoad method

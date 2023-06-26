@@ -18,7 +18,7 @@ public static class IEnumerableExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IEnumerableExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/IEnumerableExt.cs)
+* [IEnumerableExt.cs](../../../../Oxide.Ext.Discord/Extensions/IEnumerableExt.cs)
    
    
 # ToPooledList&lt;TSource&gt; method

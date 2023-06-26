@@ -16,7 +16,7 @@ public interface IFileAttachments
 
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IFileAttachments.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/IFileAttachments.cs)
+* [IFileAttachments.cs](../../../../Oxide.Ext.Discord/Interfaces/IFileAttachments.cs)
    
    
 # FileAttachments property

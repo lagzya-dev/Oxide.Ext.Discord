@@ -19,7 +19,7 @@ public class ScheduledEventUser
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ScheduledEventUser.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventUser.cs)
+* [ScheduledEventUser.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventUser.cs)
    
    
 # ScheduledEventUser constructor

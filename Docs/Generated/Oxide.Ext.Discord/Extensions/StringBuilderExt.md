@@ -16,7 +16,7 @@ public static class StringBuilderExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [StringBuilderExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/StringBuilderExt.cs)
+* [StringBuilderExt.cs](../../../../Oxide.Ext.Discord/Extensions/StringBuilderExt.cs)
    
    
 # Trim method

@@ -30,7 +30,7 @@ public class DiscordAutoCompleteChoiceTemplates :
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates.AutoComplete](./AutoCompleteNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [DiscordAutoCompleteChoiceTemplates.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/AutoComplete/DiscordAutoCompleteChoiceTemplates.cs)
+* [DiscordAutoCompleteChoiceTemplates.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/AutoComplete/DiscordAutoCompleteChoiceTemplates.cs)
    
    
 # RegisterGlobalTemplate method

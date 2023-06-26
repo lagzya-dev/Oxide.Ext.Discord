@@ -24,7 +24,7 @@ public class ChannelInvite
 
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ChannelInvite.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/ChannelInvite.cs)
+* [ChannelInvite.cs](../../../../Oxide.Ext.Discord/Entities/Channels/ChannelInvite.cs)
    
    
 # Validate method

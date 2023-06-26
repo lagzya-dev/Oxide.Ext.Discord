@@ -23,7 +23,7 @@ public class SelectMenuOptionTemplate
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Components](./ComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [SelectMenuOptionTemplate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Components/SelectMenuOptionTemplate.cs)
+* [SelectMenuOptionTemplate.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Components/SelectMenuOptionTemplate.cs)
    
    
 # ToOption method

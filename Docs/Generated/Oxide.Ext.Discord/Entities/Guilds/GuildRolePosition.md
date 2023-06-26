@@ -18,7 +18,7 @@ public class GuildRolePosition
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildRolePosition.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildRolePosition.cs)
+* [GuildRolePosition.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildRolePosition.cs)
    
    
 # GuildRolePosition constructor

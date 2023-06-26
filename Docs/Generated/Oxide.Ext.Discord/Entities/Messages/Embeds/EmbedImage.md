@@ -21,7 +21,7 @@ public class EmbedImage
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [EmbedImage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedImage.cs)
+* [EmbedImage.cs](../../../../Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedImage.cs)
    
    
 # EmbedImage constructor (1 of 2)

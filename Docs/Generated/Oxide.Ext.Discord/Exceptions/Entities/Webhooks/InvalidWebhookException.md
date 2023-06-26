@@ -17,7 +17,7 @@ public class InvalidWebhookException : BaseDiscordException
 * class [BaseDiscordException](../../BaseDiscordException.md)
 * namespace [Oxide.Ext.Discord.Exceptions.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InvalidWebhookException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Webhooks/InvalidWebhookException.cs)
+* [InvalidWebhookException.cs](../../../../Oxide.Ext.Discord/Exceptions/Entities/Webhooks/InvalidWebhookException.cs)
    
    
 # InvalidUserNameCharacters field

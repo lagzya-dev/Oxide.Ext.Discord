@@ -29,7 +29,7 @@ public class GuildCreate
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildCreate.cs)
+* [GuildCreate.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildCreate.cs)
    
    
 # Validate method

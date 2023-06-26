@@ -18,7 +18,7 @@ public class GuildStickersUpdatedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildStickersUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildStickersUpdatedEvent.cs)
+* [GuildStickersUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/GuildStickersUpdatedEvent.cs)
    
    
 # GuildStickersUpdatedEvent constructor

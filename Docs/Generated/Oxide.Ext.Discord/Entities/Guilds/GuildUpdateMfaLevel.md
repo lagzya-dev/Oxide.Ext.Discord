@@ -17,7 +17,7 @@ public class GuildUpdateMfaLevel
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildUpdateMfaLevel.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildUpdateMfaLevel.cs)
+* [GuildUpdateMfaLevel.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildUpdateMfaLevel.cs)
    
    
 # GuildUpdateMfaLevel constructor

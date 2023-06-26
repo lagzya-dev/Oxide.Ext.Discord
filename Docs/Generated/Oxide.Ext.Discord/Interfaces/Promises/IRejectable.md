@@ -16,7 +16,7 @@ public interface IRejectable
 
 * namespace [Oxide.Ext.Discord.Interfaces.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [IRejectable.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Promises/IRejectable.cs)
+* [IRejectable.cs](../../../../Oxide.Ext.Discord/Interfaces/Promises/IRejectable.cs)
    
    
 # Reject method

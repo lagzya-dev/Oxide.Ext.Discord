@@ -54,7 +54,7 @@ public class DiscordApplication : IDebugLoggable
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordApplication.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Applications/DiscordApplication.cs)
+* [DiscordApplication.cs](../../../../Oxide.Ext.Discord/Entities/Applications/DiscordApplication.cs)
    
    
 # HasApplicationFlag method

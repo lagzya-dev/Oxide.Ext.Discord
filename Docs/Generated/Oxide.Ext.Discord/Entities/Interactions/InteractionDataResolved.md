@@ -22,7 +22,7 @@ public class InteractionDataResolved
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionDataResolved.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/InteractionDataResolved.cs)
+* [InteractionDataResolved.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/InteractionDataResolved.cs)
    
    
 # InteractionDataResolved constructor

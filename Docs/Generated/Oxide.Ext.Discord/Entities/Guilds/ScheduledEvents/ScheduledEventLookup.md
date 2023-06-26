@@ -19,7 +19,7 @@ public class ScheduledEventLookup : IDiscordQueryString
 * interface [IDiscordQueryString](../../../Interfaces/IDiscordQueryString.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ScheduledEventLookup.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventLookup.cs)
+* [ScheduledEventLookup.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/ScheduledEventLookup.cs)
    
    
 # ToQueryString method

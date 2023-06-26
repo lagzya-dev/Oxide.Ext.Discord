@@ -19,7 +19,7 @@ public interface IWebSocketEventHandler
 
 * namespace [Oxide.Ext.Discord.Interfaces.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [IWebSocketEventHandler.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/WebSockets/IWebSocketEventHandler.cs)
+* [IWebSocketEventHandler.cs](../../../../Oxide.Ext.Discord/Interfaces/WebSockets/IWebSocketEventHandler.cs)
    
    
 # SocketOpened method

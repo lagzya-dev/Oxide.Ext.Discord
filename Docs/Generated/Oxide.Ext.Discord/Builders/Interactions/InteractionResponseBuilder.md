@@ -19,7 +19,7 @@ public class InteractionResponseBuilder :
 * class [InteractionCallbackData](../../Entities/Interactions/Response/InteractionCallbackData.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionResponseBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/InteractionResponseBuilder.cs)
+* [InteractionResponseBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/InteractionResponseBuilder.cs)
    
    
 # InteractionResponseBuilder constructor (1 of 2)

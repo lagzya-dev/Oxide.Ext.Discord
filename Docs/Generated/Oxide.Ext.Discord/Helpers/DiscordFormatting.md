@@ -44,7 +44,7 @@ public static class DiscordFormatting
 
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordFormatting.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Helpers/DiscordFormatting.cs)
+* [DiscordFormatting.cs](../../../../Oxide.Ext.Discord/Helpers/DiscordFormatting.cs)
    
    
 # MentionUser method

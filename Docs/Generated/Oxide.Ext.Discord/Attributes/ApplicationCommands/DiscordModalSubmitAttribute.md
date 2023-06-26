@@ -26,7 +26,7 @@ public sealed class DiscordModalSubmitAttribute : BaseApplicationCommandAttribut
 * class [BaseApplicationCommandAttribute](./BaseApplicationCommandAttribute.md)
 * namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordModalSubmitAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/ApplicationCommands/DiscordModalSubmitAttribute.cs)
+* [DiscordModalSubmitAttribute.cs](../../../../Oxide.Ext.Discord/Attributes/ApplicationCommands/DiscordModalSubmitAttribute.cs)
    
    
 # DiscordModalSubmitAttribute constructor

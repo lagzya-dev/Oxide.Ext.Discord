@@ -49,7 +49,7 @@ public class DiscordInteraction
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordInteraction.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.cs)
+* [DiscordInteraction.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.cs)
    
    
 # GetLangMessage method (1 of 2)

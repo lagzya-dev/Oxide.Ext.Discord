@@ -36,7 +36,7 @@ public abstract class BaseMessageCreate : IDiscordMessageTemplate, IFileAttachme
 * interface [IFileAttachments](../../Interfaces/IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseMessageCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.cs)
+* [BaseMessageCreate.cs](../../../../Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.cs)
    
    
 # AddAttachment method

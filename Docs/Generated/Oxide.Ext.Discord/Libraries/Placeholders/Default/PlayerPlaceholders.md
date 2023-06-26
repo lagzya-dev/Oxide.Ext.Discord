@@ -31,7 +31,7 @@ public static class PlayerPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [PlayerPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/PlayerPlaceholders.cs)
+* [PlayerPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/PlayerPlaceholders.cs)
    
    
 # Id method

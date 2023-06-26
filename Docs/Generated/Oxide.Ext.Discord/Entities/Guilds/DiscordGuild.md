@@ -140,7 +140,7 @@ public class DiscordGuild : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordGuild.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/DiscordGuild.cs)
+* [DiscordGuild.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/DiscordGuild.cs)
    
    
 # GetChannel method (1 of 2)

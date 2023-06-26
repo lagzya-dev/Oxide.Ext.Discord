@@ -19,7 +19,7 @@ public static class MessagePlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [MessagePlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/MessagePlaceholders.cs)
+* [MessagePlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/MessagePlaceholders.cs)
    
    
 # Id method

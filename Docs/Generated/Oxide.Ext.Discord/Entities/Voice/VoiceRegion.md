@@ -23,7 +23,7 @@ public class VoiceRegion
 
 * namespace [Oxide.Ext.Discord.Entities.Voice](./VoiceNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [VoiceRegion.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Voice/VoiceRegion.cs)
+* [VoiceRegion.cs](../../../../Oxide.Ext.Discord/Entities/Voice/VoiceRegion.cs)
    
    
 # ListVoiceRegions method

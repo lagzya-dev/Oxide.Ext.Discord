@@ -27,7 +27,7 @@ public class CommandCreate
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandCreate.cs)
+* [CommandCreate.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/CommandCreate.cs)
    
    
 # Validate method

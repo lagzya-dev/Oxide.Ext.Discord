@@ -22,7 +22,7 @@ public class ThreadForumCreate
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadForumCreate.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadForumCreate.cs)
+* [ThreadForumCreate.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadForumCreate.cs)
    
    
 # Validate method

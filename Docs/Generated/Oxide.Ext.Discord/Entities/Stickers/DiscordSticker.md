@@ -32,7 +32,7 @@ public class DiscordSticker : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Stickers](./StickersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordSticker.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Stickers/DiscordSticker.cs)
+* [DiscordSticker.cs](../../../../Oxide.Ext.Discord/Entities/Stickers/DiscordSticker.cs)
    
    
 # Get method

@@ -17,7 +17,7 @@ public class InvalidAutoCompleteChoiceException : BaseDiscordException
 * class [BaseDiscordException](../../BaseDiscordException.md)
 * namespace [Oxide.Ext.Discord.Exceptions.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InvalidAutoCompleteChoiceException.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Exceptions/Entities/Interactions/InvalidAutoCompleteChoiceException.cs)
+* [InvalidAutoCompleteChoiceException.cs](../../../../Oxide.Ext.Discord/Exceptions/Entities/Interactions/InvalidAutoCompleteChoiceException.cs)
    
    
 # InvalidAutoCompleteChoiceException constructor

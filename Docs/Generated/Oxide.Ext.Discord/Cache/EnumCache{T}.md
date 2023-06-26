@@ -25,7 +25,7 @@ public sealed class EnumCache<T> : Singleton<EnumCache>
 * class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [EnumCache.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Cache/EnumCache.cs)
+* [EnumCache.cs](../../../../Oxide.Ext.Discord/Cache/EnumCache.cs)
    
    
 # ToString method

@@ -18,7 +18,7 @@ public class SelectMenuComponentBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [SelectMenuComponentBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/MessageComponents/SelectMenuComponentBuilder.cs)
+* [SelectMenuComponentBuilder.cs](../../../../Oxide.Ext.Discord/Builders/MessageComponents/SelectMenuComponentBuilder.cs)
    
    
 # AddOption method

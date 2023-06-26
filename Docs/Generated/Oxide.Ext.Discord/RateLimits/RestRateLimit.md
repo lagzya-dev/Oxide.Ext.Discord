@@ -26,7 +26,7 @@ public class RestRateLimit : BaseRateLimit
 * class [BaseRateLimit](./BaseRateLimit.md)
 * namespace [Oxide.Ext.Discord.RateLimits](./RateLimitsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [RestRateLimit.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/RateLimits/RestRateLimit.cs)
+* [RestRateLimit.cs](../../../../Oxide.Ext.Discord/RateLimits/RestRateLimit.cs)
    
    
 # ReachedRateLimit method

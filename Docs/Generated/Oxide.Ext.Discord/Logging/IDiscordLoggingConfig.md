@@ -19,7 +19,7 @@ public interface IDiscordLoggingConfig
 
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IDiscordLoggingConfig.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Logging/IDiscordLoggingConfig.cs)
+* [IDiscordLoggingConfig.cs](../../../../Oxide.Ext.Discord/Logging/IDiscordLoggingConfig.cs)
    
    
 # ConsoleLogLevel property

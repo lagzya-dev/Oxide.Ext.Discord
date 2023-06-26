@@ -35,7 +35,7 @@ public class GuildMember : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildMember.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildMember.cs)
+* [GuildMember.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildMember.cs)
    
    
 # HasRole method (1 of 2)

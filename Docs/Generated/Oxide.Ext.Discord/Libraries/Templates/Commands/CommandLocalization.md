@@ -21,7 +21,7 @@ public class CommandLocalization
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [CommandLocalization.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/Commands/CommandLocalization.cs)
+* [CommandLocalization.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/Commands/CommandLocalization.cs)
    
    
 # ApplyCommandLocalization method

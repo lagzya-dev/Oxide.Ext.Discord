@@ -18,7 +18,7 @@ public static class RequestErrorPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [RequestErrorPlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.cs)
+* [RequestErrorPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.cs)
    
    
 # HttpCode method

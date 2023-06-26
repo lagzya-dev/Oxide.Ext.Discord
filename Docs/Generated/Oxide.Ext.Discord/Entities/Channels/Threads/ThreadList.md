@@ -19,7 +19,7 @@ public class ThreadList
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadList.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadList.cs)
+* [ThreadList.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadList.cs)
    
    
 # ThreadList constructor

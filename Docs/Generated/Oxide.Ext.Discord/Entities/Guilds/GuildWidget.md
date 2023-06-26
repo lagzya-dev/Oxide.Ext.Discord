@@ -22,7 +22,7 @@ public class GuildWidget
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildWidget.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildWidget.cs)
+* [GuildWidget.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildWidget.cs)
    
    
 # GuildWidget constructor

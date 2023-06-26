@@ -27,7 +27,7 @@ public class InteractionData
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [InteractionData.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/InteractionData.cs)
+* [InteractionData.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/InteractionData.cs)
    
    
 # InteractionData constructor

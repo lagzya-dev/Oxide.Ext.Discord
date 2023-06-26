@@ -36,7 +36,7 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 * class [MessageCreate](../../../Entities/Messages/MessageCreate.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [BaseChannelMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseChannelMessageBuilder.cs)
+* [BaseChannelMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/BaseBuilders/BaseChannelMessageBuilder.cs)
    
    
 # AddSticker method (1 of 2)

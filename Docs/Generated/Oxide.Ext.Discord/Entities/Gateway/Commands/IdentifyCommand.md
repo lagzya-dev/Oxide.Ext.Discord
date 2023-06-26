@@ -23,7 +23,7 @@ public class IdentifyCommand
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [IdentifyCommand.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Commands/IdentifyCommand.cs)
+* [IdentifyCommand.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Commands/IdentifyCommand.cs)
    
    
 # IdentifyCommand constructor

@@ -18,7 +18,7 @@ public class GuildChannelPosition
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildChannelPosition.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildChannelPosition.cs)
+* [GuildChannelPosition.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildChannelPosition.cs)
    
    
 # GuildChannelPosition constructor

@@ -23,7 +23,7 @@ public class BulkTemplateRegistration<T>
 
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BulkTemplateRegistration.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Templates/BulkTemplateRegistration.cs)
+* [BulkTemplateRegistration.cs](../../../../Oxide.Ext.Discord/Libraries/Templates/BulkTemplateRegistration.cs)
    
    
 # BulkTemplateRegistration&lt;T&gt; constructor

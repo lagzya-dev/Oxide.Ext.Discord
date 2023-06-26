@@ -28,7 +28,7 @@ public class StageInstance : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Channels.Stages](./StagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [StageInstance.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Stages/StageInstance.cs)
+* [StageInstance.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Stages/StageInstance.cs)
    
    
 # Create method

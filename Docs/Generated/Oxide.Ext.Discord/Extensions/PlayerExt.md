@@ -23,7 +23,7 @@ public static class PlayerExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [PlayerExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/PlayerExt.cs)
+* [PlayerExt.cs](../../../../Oxide.Ext.Discord/Extensions/PlayerExt.cs)
    
    
 # SendDiscordMessage method (1 of 4)

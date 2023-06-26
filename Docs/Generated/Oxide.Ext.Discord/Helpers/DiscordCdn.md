@@ -38,7 +38,7 @@ public static class DiscordCdn
 
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordCdn.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Helpers/DiscordCdn.cs)
+* [DiscordCdn.cs](../../../../Oxide.Ext.Discord/Helpers/DiscordCdn.cs)
    
    
 # GetCustomEmojiUrl method

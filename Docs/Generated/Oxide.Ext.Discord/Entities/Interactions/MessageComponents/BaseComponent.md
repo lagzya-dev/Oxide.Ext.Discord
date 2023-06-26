@@ -23,7 +23,7 @@ public abstract class BaseComponent
 
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [BaseComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/BaseComponent.cs)
+* [BaseComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/BaseComponent.cs)
    
    
 # Validate method

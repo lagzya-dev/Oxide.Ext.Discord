@@ -19,7 +19,7 @@ public class AutoModActionMetadata
 
 * namespace [Oxide.Ext.Discord.Entities.AutoMod](./AutoModNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [AutoModActionMetadata.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/AutoMod/AutoModActionMetadata.cs)
+* [AutoModActionMetadata.cs](../../../../Oxide.Ext.Discord/Entities/AutoMod/AutoModActionMetadata.cs)
    
    
 # AutoModActionMetadata constructor

@@ -18,7 +18,7 @@ public static class MathExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [MathExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/MathExt.cs)
+* [MathExt.cs](../../../../Oxide.Ext.Discord/Extensions/MathExt.cs)
    
    
 # Clamp&lt;T&gt; method

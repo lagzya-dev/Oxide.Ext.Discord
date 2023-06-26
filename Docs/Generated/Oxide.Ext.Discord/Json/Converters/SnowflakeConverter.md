@@ -19,7 +19,7 @@ public class SnowflakeConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [SnowflakeConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/SnowflakeConverter.cs)
+* [SnowflakeConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/SnowflakeConverter.cs)
    
    
 # ReadJson method

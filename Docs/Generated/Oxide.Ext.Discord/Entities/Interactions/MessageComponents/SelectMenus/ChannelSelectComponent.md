@@ -18,7 +18,7 @@ public class ChannelSelectComponent : BaseSelectMenuComponent
 * class [BaseSelectMenuComponent](./BaseSelectMenuComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-* [ChannelSelectComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/ChannelSelectComponent.cs)
+* [ChannelSelectComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/ChannelSelectComponent.cs)
    
    
 # ChannelSelectComponent constructor

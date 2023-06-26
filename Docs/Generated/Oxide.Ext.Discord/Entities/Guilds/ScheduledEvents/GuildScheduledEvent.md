@@ -38,7 +38,7 @@ public class GuildScheduledEvent : ISnowflakeEntity
 * interface [ISnowflakeEntity](../../../Interfaces/ISnowflakeEntity.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents](./ScheduledEventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildScheduledEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/GuildScheduledEvent.cs)
+* [GuildScheduledEvent.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/ScheduledEvents/GuildScheduledEvent.cs)
    
    
 # GetGuildEvents method

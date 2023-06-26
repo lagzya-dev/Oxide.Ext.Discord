@@ -20,7 +20,7 @@ public class InteractionAutoCompleteResponse :
 * class [InteractionAutoCompleteMessage](./InteractionAutoCompleteMessage.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.Response](./ResponseNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [InteractionAutoCompleteResponse.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/Response/InteractionAutoCompleteResponse.cs)
+* [InteractionAutoCompleteResponse.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/Response/InteractionAutoCompleteResponse.cs)
    
    
 # InteractionAutoCompleteResponse constructor (1 of 2)

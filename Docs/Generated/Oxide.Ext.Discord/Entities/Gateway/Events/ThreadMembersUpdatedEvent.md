@@ -21,7 +21,7 @@ public class ThreadMembersUpdatedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadMembersUpdatedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/ThreadMembersUpdatedEvent.cs)
+* [ThreadMembersUpdatedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/ThreadMembersUpdatedEvent.cs)
    
    
 # ThreadMembersUpdatedEvent constructor

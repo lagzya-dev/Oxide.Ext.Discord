@@ -26,7 +26,7 @@ public sealed class DiscordMessageComponentCommandAttribute : BaseApplicationCom
 * class [BaseApplicationCommandAttribute](./BaseApplicationCommandAttribute.md)
 * namespace [Oxide.Ext.Discord.Attributes.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [DiscordMessageComponentCommandAttribute.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Attributes/ApplicationCommands/DiscordMessageComponentCommandAttribute.cs)
+* [DiscordMessageComponentCommandAttribute.cs](../../../../Oxide.Ext.Discord/Attributes/ApplicationCommands/DiscordMessageComponentCommandAttribute.cs)
    
    
 # DiscordMessageComponentCommandAttribute constructor

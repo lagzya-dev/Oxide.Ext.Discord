@@ -19,7 +19,7 @@ public class WebhookMessageParams : IDiscordQueryString
 * interface [IDiscordQueryString](../../Interfaces/IDiscordQueryString.md)
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [WebhookMessageParams.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Webhooks/WebhookMessageParams.cs)
+* [WebhookMessageParams.cs](../../../../Oxide.Ext.Discord/Entities/Webhooks/WebhookMessageParams.cs)
    
    
 # ToQueryString method

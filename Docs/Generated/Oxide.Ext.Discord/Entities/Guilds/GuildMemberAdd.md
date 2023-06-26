@@ -21,7 +21,7 @@ public class GuildMemberAdd
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildMemberAdd.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildMemberAdd.cs)
+* [GuildMemberAdd.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildMemberAdd.cs)
    
    
 # GuildMemberAdd constructor

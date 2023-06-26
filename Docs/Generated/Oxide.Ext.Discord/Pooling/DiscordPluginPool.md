@@ -32,7 +32,7 @@ public class DiscordPluginPool
 
 * namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [DiscordPluginPool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/DiscordPluginPool.cs)
+* [DiscordPluginPool.cs](../../../../Oxide.Ext.Discord/Pooling/DiscordPluginPool.cs)
    
    
 # SetSettings method

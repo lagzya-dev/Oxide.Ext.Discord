@@ -21,7 +21,7 @@ public class EmbedAuthor
 
 * namespace [Oxide.Ext.Discord.Entities.Messages.Embeds](./EmbedsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [EmbedAuthor.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedAuthor.cs)
+* [EmbedAuthor.cs](../../../../Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedAuthor.cs)
    
    
 # EmbedAuthor constructor (1 of 2)

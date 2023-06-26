@@ -19,7 +19,7 @@ public class ActivitySecrets
 
 * namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ActivitySecrets.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Activities/ActivitySecrets.cs)
+* [ActivitySecrets.cs](../../../../Oxide.Ext.Discord/Entities/Activities/ActivitySecrets.cs)
    
    
 # ActivitySecrets constructor

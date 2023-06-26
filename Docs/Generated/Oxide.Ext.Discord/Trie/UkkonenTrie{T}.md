@@ -25,7 +25,7 @@ public class UkkonenTrie<T>
 
 * namespace [Oxide.Ext.Discord.Trie](./TrieNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [UkkonenTrie.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Trie/UkkonenTrie.cs)
+* [UkkonenTrie.cs](../../../../Oxide.Ext.Discord/Trie/UkkonenTrie.cs)
    
    
 # Search method

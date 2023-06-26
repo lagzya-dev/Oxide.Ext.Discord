@@ -18,7 +18,7 @@ public class ActivityTimestamps
 
 * namespace [Oxide.Ext.Discord.Entities.Activities](./ActivitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ActivityTimestamps.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Activities/ActivityTimestamps.cs)
+* [ActivityTimestamps.cs](../../../../Oxide.Ext.Discord/Entities/Activities/ActivityTimestamps.cs)
    
    
 # ActivityTimestamps constructor

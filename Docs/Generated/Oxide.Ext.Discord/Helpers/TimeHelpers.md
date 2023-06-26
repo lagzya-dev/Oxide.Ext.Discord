@@ -19,7 +19,7 @@ public static class TimeHelpers
 
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [TimeHelpers.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Helpers/TimeHelpers.cs)
+* [TimeHelpers.cs](../../../../Oxide.Ext.Discord/Helpers/TimeHelpers.cs)
    
    
 # SecondsSinceEpoch method

@@ -42,7 +42,7 @@ public class PlaceholderData : BasePoolable
 * class [BasePoolable](../../Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [PlaceholderData.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.cs)
+* [PlaceholderData.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.cs)
    
    
 # AddCommand method

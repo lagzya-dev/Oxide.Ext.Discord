@@ -21,7 +21,7 @@ public class UserGuildsRequest : IDiscordQueryString
 * interface [IDiscordQueryString](../../Interfaces/IDiscordQueryString.md)
 * namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [UserGuildsRequest.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Users/UserGuildsRequest.cs)
+* [UserGuildsRequest.cs](../../../../Oxide.Ext.Discord/Entities/Users/UserGuildsRequest.cs)
    
    
 # ToQueryString method

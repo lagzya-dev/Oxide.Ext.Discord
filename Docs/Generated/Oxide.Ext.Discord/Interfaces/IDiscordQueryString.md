@@ -16,7 +16,7 @@ public interface IDiscordQueryString
 
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IDiscordQueryString.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/IDiscordQueryString.cs)
+* [IDiscordQueryString.cs](../../../../Oxide.Ext.Discord/Interfaces/IDiscordQueryString.cs)
    
    
 # ToQueryString method

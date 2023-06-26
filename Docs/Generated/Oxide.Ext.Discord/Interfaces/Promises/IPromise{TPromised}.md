@@ -25,7 +25,7 @@ public interface IPromise<TPromised>
 
 * namespace [Oxide.Ext.Discord.Interfaces.Promises](./PromisesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [IPromise.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/Promises/IPromise.cs)
+* [IPromise.cs](../../../../Oxide.Ext.Discord/Interfaces/Promises/IPromise.cs)
    
    
 # Catch method (1 of 3)

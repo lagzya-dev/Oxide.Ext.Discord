@@ -23,7 +23,7 @@ public class ApplicationSubCommandBuilder
 
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ApplicationSubCommandBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.cs)
+* [ApplicationSubCommandBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.cs)
    
    
 # AddNameLocalizations method

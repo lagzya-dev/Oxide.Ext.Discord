@@ -18,7 +18,7 @@ public class GuildBan
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [GuildBan.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Guilds/GuildBan.cs)
+* [GuildBan.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/GuildBan.cs)
    
    
 # GuildBan constructor

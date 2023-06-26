@@ -16,7 +16,7 @@ public static class StreamExt
 
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [StreamExt.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Extensions/StreamExt.cs)
+* [StreamExt.cs](../../../../Oxide.Ext.Discord/Extensions/StreamExt.cs)
    
    
 # CopyToPooled method

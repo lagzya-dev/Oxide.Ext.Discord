@@ -19,7 +19,7 @@ public class UnixDateTimeConverter : JsonConverter
 
 * namespace [Oxide.Ext.Discord.Json.Converters](./ConvertersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [UnixDateTimeConverter.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Json/Converters/UnixDateTimeConverter.cs)
+* [UnixDateTimeConverter.cs](../../../../Oxide.Ext.Discord/Json/Converters/UnixDateTimeConverter.cs)
    
    
 # WriteJson method

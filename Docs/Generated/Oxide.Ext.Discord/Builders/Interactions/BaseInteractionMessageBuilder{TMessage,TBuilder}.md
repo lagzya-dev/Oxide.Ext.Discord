@@ -32,7 +32,7 @@ public abstract class BaseInteractionMessageBuilder<TMessage, TBuilder> :
 * class [BaseInteractionMessage](../../Entities/Interactions/Response/BaseInteractionMessage.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseInteractionMessageBuilder.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder.cs)
+* [BaseInteractionMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder.cs)
    
    
 # AsEphemeral method

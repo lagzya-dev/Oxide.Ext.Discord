@@ -18,7 +18,7 @@ public class GuildMemberRemovedEvent
 
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildMemberRemovedEvent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Gateway/Events/GuildMemberRemovedEvent.cs)
+* [GuildMemberRemovedEvent.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/Events/GuildMemberRemovedEvent.cs)
    
    
 # GuildMemberRemovedEvent constructor

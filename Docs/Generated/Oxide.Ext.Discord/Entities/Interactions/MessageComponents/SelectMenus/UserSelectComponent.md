@@ -17,7 +17,7 @@ public class UserSelectComponent : BaseSelectMenuComponent
 * class [BaseSelectMenuComponent](./BaseSelectMenuComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
-* [UserSelectComponent.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/UserSelectComponent.cs)
+* [UserSelectComponent.cs](../../../../Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/UserSelectComponent.cs)
    
    
 # UserSelectComponent constructor

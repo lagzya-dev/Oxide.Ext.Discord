@@ -40,7 +40,7 @@ public abstract class BasePool<TPooled, TPool> : IPool<TPooled>
 * interface [IPool&lt;T&gt;](./IPool%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [BasePool.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Pooling/BasePool.cs)
+* [BasePool.cs](../../../../Oxide.Ext.Discord/Pooling/BasePool.cs)
    
    
 # GetPoolSize method

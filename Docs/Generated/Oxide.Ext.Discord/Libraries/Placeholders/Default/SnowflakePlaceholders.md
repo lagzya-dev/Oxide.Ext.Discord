@@ -17,7 +17,7 @@ public static class SnowflakePlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [SnowflakePlaceholders.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Libraries/Placeholders/Default/SnowflakePlaceholders.cs)
+* [SnowflakePlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/SnowflakePlaceholders.cs)
    
    
 # Created method

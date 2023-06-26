@@ -20,7 +20,7 @@ public class ThreadCreateFromMessage
 
 * namespace [Oxide.Ext.Discord.Entities.Channels.Threads](./ThreadsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [ThreadCreateFromMessage.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Entities/Channels/Threads/ThreadCreateFromMessage.cs)
+* [ThreadCreateFromMessage.cs](../../../../Oxide.Ext.Discord/Entities/Channels/Threads/ThreadCreateFromMessage.cs)
    
    
 # Validate method

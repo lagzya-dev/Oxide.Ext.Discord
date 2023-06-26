@@ -16,7 +16,7 @@ public interface ISnowflakeEntity
 
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [ISnowflakeEntity.cs](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Oxide.Ext.Discord/Interfaces/ISnowflakeEntity.cs)
+* [ISnowflakeEntity.cs](../../../../Oxide.Ext.Discord/Interfaces/ISnowflakeEntity.cs)
    
    
 # Id property
