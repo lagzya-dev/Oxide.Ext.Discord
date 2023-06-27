@@ -20,9 +20,9 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 | virtual [AddActionRow](#addactionrow-method)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
 | virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
 | virtual [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
-| virtual [AddComponents](#addcomponents-method-1-of-2))(…) | Adds a collection MessageComponents/&gt; (2 methods) |
+| virtual [AddComponents](#addcomponents-method-1-of-2)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
 | virtual [AddContent](#addcontent-method)(…) | Adds message text |
-| virtual [AddEmbed](#addembed-method-1-of-2))(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
+| virtual [AddEmbed](#addembed-method-1-of-2)(…) | Adds a [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) (2 methods) |
 | virtual [AddEmbeds](#addembeds-method)(…) | Adds a collection of [`DiscordEmbed`](../../../Entities/Messages/Embeds/DiscordEmbed.md) to the response |
 | virtual [AsTts](#astts-method)(…) | Marks the message As Text-To-Speech |
 | [Build](#build-method)() | Returns the built message |

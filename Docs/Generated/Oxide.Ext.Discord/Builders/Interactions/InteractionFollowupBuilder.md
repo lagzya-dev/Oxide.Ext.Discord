@@ -11,7 +11,7 @@ public class InteractionFollowupBuilder :
 
 | name | description |
 | --- | --- |
-| [InteractionFollowupBuilder](#interactionfollowupbuilder-constructor-1-of-2))(…) | Constructor for creating a new CommandFollowupCreate (2 constructors) |
+| [InteractionFollowupBuilder](#interactionfollowupbuilder-constructor-1-of-2)(…) | Constructor for creating a new CommandFollowupCreate (2 constructors) |
 
 ## See Also
 

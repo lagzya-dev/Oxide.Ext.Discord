@@ -10,7 +10,7 @@ public struct DiscordColor
 
 | name | description |
 | --- | --- |
-| [DiscordColor](#discordcolor-constructor-1-of-7))(…) | DiscordColor Constructor (7 constructors) |
+| [DiscordColor](#discordcolor-constructor-1-of-7)(…) | DiscordColor Constructor (7 constructors) |
 | static readonly [Blue](#blue-field) | Blue Role Color |
 | static readonly [Blurple](#blurple-field) | Discord Blurple Color |
 | static readonly [BlurpleOld](#blurpleold-field) | Discord Old Blurple Color |

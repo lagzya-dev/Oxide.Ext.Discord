@@ -10,7 +10,7 @@ public struct DiscordImageData
 
 | name | description |
 | --- | --- |
-| [DiscordImageData](#discordimagedata-constructor-1-of-3))(…) | Constructor from a byte[] of the image (3 constructors) |
+| [DiscordImageData](#discordimagedata-constructor-1-of-3)(…) | Constructor from a byte[] of the image (3 constructors) |
 | readonly [Image](#image-field) | The image data |
 | readonly [Type](#type-field) | The type of image |
 | [GetBase64Image](#getbase64image-method)() | Returns the Base64 Image string for the image. |

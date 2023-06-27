@@ -11,16 +11,16 @@ public class PlaceholderData : BasePoolable
 | name | description |
 | --- | --- |
 | [Add&lt;T&gt;](#add&amp;lt;t&amp;gt;-method)(…) | Adds the data with the given name |
-| [AddChannel](#addchannel-method-1-of-2))(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
+| [AddChannel](#addchannel-method-1-of-2)(…) | Adds a [`DiscordChannel`](../../Entities/Channels/DiscordChannel.md) by [`DiscordClient`](../../Clients/DiscordClient.md), ChannelId, and Optional GuildId (2 methods) |
 | [AddCommand](#addcommand-method)(…) | Add a [`DiscordApplicationCommand`](../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
-| [AddGuild](#addguild-method-1-of-2))(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
-| [AddGuildMember](#addguildmember-method-1-of-2))(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
+| [AddGuild](#addguild-method-1-of-2)(…) | Add a [`DiscordGuild`](../../Entities/Guilds/DiscordGuild.md) by [`DiscordClient`](../../Clients/DiscordClient.md) and GuildId (2 methods) |
+| [AddGuildMember](#addguildmember-method-1-of-2)(…) | Add a [`GuildMember`](../../Entities/Guilds/GuildMember.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
 | [AddInteraction](#addinteraction-method)(…) | Adds a [`DiscordInteraction`](../../Entities/Interactions/DiscordInteraction.md) |
 | [AddMessage](#addmessage-method)(…) | Add a [`DiscordMessage`](../../Entities/Messages/DiscordMessage.md) |
 | [AddPlayer](#addplayer-method)(…) | Adds a IPlayer |
 | [AddPlugin](#addplugin-method)(…) | Adds a Plugin |
 | [AddRequestError](#addrequesterror-method)(…) | Add a [`ResponseError`](../../Entities/Api/ResponseError.md) |
-| [AddRole](#addrole-method-1-of-2))(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
+| [AddRole](#addrole-method-1-of-2)(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
 | [AddSnowflake](#addsnowflake-method)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
 | [AddTarget](#addtarget-method)(…) | Adds a target IPlayer |
 | [AddTimestamp](#addtimestamp-method)(…) | Adds a Unix Timestamp |

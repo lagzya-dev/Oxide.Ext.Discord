@@ -13,7 +13,7 @@ public class DiscordAutoCompleteChoiceTemplates :
 | --- | --- |
 | [DiscordAutoCompleteChoiceTemplates](#discordautocompletechoicetemplates-constructor)(…) | Constructor |
 | [ApplyGlobal](#applyglobal-method)(…) | Applies a Global Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders |
-| [ApplyLocalized](#applylocalized-method-1-of-2))(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
+| [ApplyLocalized](#applylocalized-method-1-of-2)(…) | Applies a Localized Template to a [`CommandOptionChoice`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) with optional placeholders (2 methods) |
 | [GetGlobalTemplate](#getglobaltemplate-method)(…) | Returns a global Auto Complete Template for the given plugin and template name |
 | [RegisterGlobalTemplate](#registerglobaltemplate-method)(…) | Registers a global template for Auto Complete Choices |
 | [RegisterLocalizedTemplate](#registerlocalizedtemplate-method)(…) | Registers a global template for Auto Complete Choices |

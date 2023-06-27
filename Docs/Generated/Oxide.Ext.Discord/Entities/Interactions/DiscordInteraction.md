@@ -29,9 +29,9 @@ public class DiscordInteraction
 | [User](#user-property) { get; } | User object. If in DM then DM user else GuildMember.User |
 | [Version](#version-property) { get; set; } | Read-only property, always 1 |
 | readonly [CreatedDate](#createddate-field) | The UTC DateTime this interaction was created |
-| [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2))(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
+| [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
 | [CreateModalResponse](#createmodalresponse-method)(…) | Creates a interaction modal response from a modal template |
-| [CreateResponse](#createresponse-method-1-of-7))(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
+| [CreateResponse](#createresponse-method-1-of-7)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
 | [CreateTemplateResponse](#createtemplateresponse-method)(…) | Creates a interaction message response from a message template |
 | [DefferResponse](#defferresponse-method)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
 | [DeleteFollowUpMessage](#deletefollowupmessage-method)(…) | Deletes a followup message for an Interaction See [Delete Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#delete-followup-message) |
@@ -41,7 +41,7 @@ public class DiscordInteraction
 | [EditTemplateOriginalResponse](#edittemplateoriginalresponse-method)(…) | Edit a interaction response with a message template |
 | [GetAutoCompleteBuilder](#getautocompletebuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
 | [GetFollowupBuilder](#getfollowupbuilder-method)() | Returns a [`InteractionFollowupBuilder`](../../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
-| [GetLangMessage](#getlangmessage-method-1-of-2))(…) | Returns a localized string for this interaction (2 methods) |
+| [GetLangMessage](#getlangmessage-method-1-of-2)(…) | Returns a localized string for this interaction (2 methods) |
 | [GetModalBuilder](#getmodalbuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
 | [GetResponseBuilder](#getresponsebuilder-method)() | Returns a [`InteractionResponseBuilder`](../../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
 

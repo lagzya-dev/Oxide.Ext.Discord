@@ -11,7 +11,7 @@ public class ButtonTemplate : BaseComponentTemplate
 | name | description |
 | --- | --- |
 | [ButtonTemplate](#buttontemplate-constructor)() | Default Constructor |
-| [ButtonTemplate](#buttontemplate-constructor-1-of-2))(…) | Constructor without emoji (2 constructors) |
+| [ButtonTemplate](#buttontemplate-constructor-1-of-2)(…) | Constructor without emoji (2 constructors) |
 | [Command](#command-property) { get; set; } | Command for the button. If Link then this will set the Url field; Else the CustomId field |
 | [Emoji](#emoji-property) { get; set; } | Emoji for the button |
 | [Enabled](#enabled-property) { get; set; } | If the Button is enabled |

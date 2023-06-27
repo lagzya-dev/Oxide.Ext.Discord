@@ -10,7 +10,7 @@ public class ApplicationCommandBuilder
 
 | name | description |
 | --- | --- |
-| [ApplicationCommandBuilder](#applicationcommandbuilder-constructor-1-of-2))(…) | Creates a new Application Command Builder (2 constructors) |
+| [ApplicationCommandBuilder](#applicationcommandbuilder-constructor-1-of-2)(…) | Creates a new Application Command Builder (2 constructors) |
 | readonly [CommandName](#commandname-field) | The Name of the command |
 | [AddDefaultPermissions](#adddefaultpermissions-method)(…) | Adds default command permissions |
 | [AddDescriptionLocalization](#adddescriptionlocalization-method)(…) | Adds Application Command Description Localizations |

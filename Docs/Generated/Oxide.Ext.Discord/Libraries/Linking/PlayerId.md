@@ -10,7 +10,7 @@ public struct PlayerId : IEquatable<PlayerId>
 
 | name | description |
 | --- | --- |
-| [PlayerId](#playerid-constructor-1-of-2))(…) | Constructor (2 constructors) |
+| [PlayerId](#playerid-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [IsValid](#isvalid-property) { get; } | Returns true if the ID is valid; false otherwise |
 | [Player](#player-property) { get; } | Returns the IPlayer for the Player ID |
 | readonly [Id](#id-field) | ID of the player |

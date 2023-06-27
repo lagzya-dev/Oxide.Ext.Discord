@@ -10,7 +10,7 @@ public class InteractionModalBuilder
 
 | name | description |
 | --- | --- |
-| [InteractionModalBuilder](#interactionmodalbuilder-constructor-1-of-2))(…) | Constructor (2 constructors) |
+| [InteractionModalBuilder](#interactionmodalbuilder-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [AddInputText](#addinputtext-method)(…) | Adds a select menu to a new action row |
 | [AddModalCustomId](#addmodalcustomid-method)(…) | Adds a custom ID for the modal |
 | [AddModalTitle](#addmodaltitle-method)(…) | Adds a custom ID for the modal |

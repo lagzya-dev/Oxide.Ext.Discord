@@ -28,7 +28,7 @@ public class GuildMember : ISnowflakeEntity
 | [PremiumSince](#premiumsince-property) { get; set; } | When the user started boosting the guild |
 | [Roles](#roles-property) { get; set; } | List of member roles |
 | [User](#user-property) { get; set; } | The user this guild member represents |
-| [HasRole](#hasrole-method-1-of-2))(…) | Returns if member has the given role (2 methods) |
+| [HasRole](#hasrole-method-1-of-2)(…) | Returns if member has the given role (2 methods) |
 
 ## See Also
 

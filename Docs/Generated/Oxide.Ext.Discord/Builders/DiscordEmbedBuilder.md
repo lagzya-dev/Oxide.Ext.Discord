@@ -14,7 +14,7 @@ public class DiscordEmbedBuilder
 | [DiscordEmbedBuilder](#discordembedbuilder-constructor)(…) | Constructor for the builder using an existing embed |
 | [AddAuthor](#addauthor-method)(…) | Adds an author to the embed message. The author will appear above the title |
 | [AddBlankField](#addblankfield-method)(…) | Adds a blank field. If inline it will add a blank column. If not inline will add a blank row |
-| [AddColor](#addcolor-method-1-of-7))(…) | Adds a Discord Color to the embed (7 methods) |
+| [AddColor](#addcolor-method-1-of-7)(…) | Adds a Discord Color to the embed (7 methods) |
 | [AddDescription](#adddescription-method)(…) | Adds a description to the embed message |
 | [AddField](#addfield-method)(…) | Adds a new field with the name as the title and value as the value. If inline will add a new column. If row will add in a new row. |
 | [AddFooter](#addfooter-method)(…) | Adds a footer to the embed message |

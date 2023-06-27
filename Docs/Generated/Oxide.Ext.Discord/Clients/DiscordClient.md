@@ -14,7 +14,7 @@ public class DiscordClient
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
-| [Connect](#connect-method-1-of-2))(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
+| [Connect](#connect-method-1-of-2)(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
 | [Disconnect](#disconnect-method)() | Disconnects this client from discord |
 | [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot and if the bot is initialized |
 | [RequestGuildMembers](#requestguildmembers-method)(…) | Used to request guild members from discord for a specific guild |

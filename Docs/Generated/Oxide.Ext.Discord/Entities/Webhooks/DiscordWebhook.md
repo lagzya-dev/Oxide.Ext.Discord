@@ -29,10 +29,10 @@ public class DiscordWebhook
 | [EditWebhookMessage](#editwebhookmessage-method)(…) | Edits a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#edit-webhook-message) |
 | [EditWebhookMessageGlobalTemplate](#editwebhookmessageglobaltemplate-method)(…) | Edit a message from a webhook using a global message template |
 | [EditWebhookMessageTemplate](#editwebhookmessagetemplate-method)(…) | Edit a message from a webhook using a localized message template |
-| [ExecuteWebhook](#executewebhook-method-1-of-2))(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
+| [ExecuteWebhook](#executewebhook-method-1-of-2)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
 | [ExecuteWebhookGlobalTemplate](#executewebhookglobaltemplate-method)(…) | Send a message to a webhook using a global message template |
 | [ExecuteWebhookTemplate](#executewebhooktemplate-method)(…) | Send a message to a webhook using a localized message template |
-| [ExecuteWebhookWithMessage](#executewebhookwithmessage-method-1-of-2))(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
+| [ExecuteWebhookWithMessage](#executewebhookwithmessage-method-1-of-2)(…) | Executes a webhook See [Execute Webhook](https://discord.com/developers/docs/resources/webhook#execute-webhook) (2 methods) |
 | [GetWebhookMessage](#getwebhookmessage-method)(…) | Gets a previously-sent webhook message from the same token. See [Edit Webhook Message](https://discord.com/developers/docs/resources/webhook#get-webhook-message) |
 | [ModifyWebhookWithToken](#modifywebhookwithtoken-method)(…) | Modify a webhook. Requires the MANAGE_WEBHOOKS permission. See [Modify Webhook with Token](https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token) |
 | static [CreateWebhook](#createwebhook-method)(…) | Create a new webhook. Requires the MANAGE_WEBHOOKS permission. See [Create Webhook](https://discord.com/developers/docs/resources/webhook#create-webhook) |

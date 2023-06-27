@@ -11,7 +11,7 @@ public class EmojiTemplate
 | name | description |
 | --- | --- |
 | [EmojiTemplate](#emojitemplate-constructor)() | Default constructor |
-| [EmojiTemplate](#emojitemplate-constructor-1-of-2))(…) | Unicode emoji constructor (2 constructors) |
+| [EmojiTemplate](#emojitemplate-constructor-1-of-2)(…) | Unicode emoji constructor (2 constructors) |
 | [Animated](#animated-property) { get; set; } | If the emoji is Animated |
 | [Emoji](#emoji-property) { get; set; } | Emoji Name or ID |
 | [ToEmoji](#toemoji-method)() | Converts the [`EmojiTemplate`](./EmojiTemplate.md) to a [`DiscordEmoji`](../../../Entities/Emojis/DiscordEmoji.md) |

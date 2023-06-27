@@ -11,7 +11,7 @@ public class ChoicesLocalization
 | name | description |
 | --- | --- |
 | [ChoicesLocalization](#choiceslocalization-constructor)() | Constructor |
-| [ChoicesLocalization](#choiceslocalization-constructor-1-of-2))(…) | Constructor for command option choice localization (2 constructors) |
+| [ChoicesLocalization](#choiceslocalization-constructor-1-of-2)(…) | Constructor for command option choice localization (2 constructors) |
 | [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
 | [ApplyChoiceLocalization](#applychoicelocalization-method)(…) | Apply Choice Localizations |
 

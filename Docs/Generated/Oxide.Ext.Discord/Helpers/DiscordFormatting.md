@@ -38,7 +38,7 @@ public static class DiscordFormatting
 | static [UnderlineBold](#underlinebold-method)(…) | Will display the message in underline and bold |
 | static [UnderlineBoldItalics](#underlinebolditalics-method)(…) | Will display the message in underline and bold and italics |
 | static [UnderlineItalics](#underlineitalics-method)(…) | Will display the message in underline and italics |
-| static [UnixTimestamp](#unixtimestamp-method-1-of-2))(…) | Displays a timestamp (2 methods) |
+| static [UnixTimestamp](#unixtimestamp-method-1-of-2)(…) | Displays a timestamp (2 methods) |
 
 ## See Also
 

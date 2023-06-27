@@ -10,7 +10,7 @@ public class CommandLocalization
 
 | name | description |
 | --- | --- |
-| [CommandLocalization](#commandlocalization-constructor-1-of-2))(…) | Constructor (2 constructors) |
+| [CommandLocalization](#commandlocalization-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [Arguments](#arguments-property) { get; set; } | Localized Argument Options |
 | [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
 | [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |

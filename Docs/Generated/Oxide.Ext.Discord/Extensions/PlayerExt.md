@@ -16,7 +16,7 @@ public static class PlayerExt
 | static [IsDummyPlayer](#isdummyplayer-method)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
 | static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
 | static [SendDiscordGlobalTemplateMessage](#senddiscordglobaltemplatemessage-method)(…) | Send a message in a DM to the linked user using a global message template |
-| static [SendDiscordMessage](#senddiscordmessage-method-1-of-4))(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
+| static [SendDiscordMessage](#senddiscordmessage-method-1-of-4)(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
 | static [SendDiscordTemplateMessage](#senddiscordtemplatemessage-method)(…) | Send a message in a DM to the linked user using a localized message template |
 
 ## See Also

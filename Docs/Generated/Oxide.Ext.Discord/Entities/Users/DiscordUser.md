@@ -41,12 +41,12 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 | [CreateGroupDm](#creategroupdm-method)(…) | Create a Group Direct Message |
 | [GetCurrentUserGuilds](#getcurrentuserguilds-method)(…) | Returns the guilds for the currently logged in user See [Get Current User Guilds](https://discord.com/developers/docs/resources/user#get-current-user-guilds) |
 | [GetUserConnections](#getuserconnections-method)(…) | Returns a list of connection objects. Requires the connections OAuth2 scope. |
-| [GroupDmAddRecipient](#groupdmaddrecipient-method-1-of-2))(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
-| [GroupDmRemoveRecipient](#groupdmremoverecipient-method-1-of-2))(…) | Removes a recipient from a Group DM (2 methods) |
+| [GroupDmAddRecipient](#groupdmaddrecipient-method-1-of-2)(…) | Adds a recipient to a Group DM using their access token See [Group DM Add Recipient](https://discord.com/developers/docs/resources/channel#group-dm-add-recipient) (2 methods) |
+| [GroupDmRemoveRecipient](#groupdmremoverecipient-method-1-of-2)(…) | Removes a recipient from a Group DM (2 methods) |
 | [LeaveGuild](#leaveguild-method)(…) | Leave the guild that the currently logged in user is in See [Leave Guild](https://discord.com/developers/docs/resources/user#leave-guild) |
 | [LogDebug](#logdebug-method)(…) |  |
 | [ModifyCurrentUser](#modifycurrentuser-method)(…) | Modify the currently logged in user See [Modify Current User](https://discord.com/developers/docs/resources/user#modify-current-user) |
-| [SendDirectMessage](#senddirectmessage-method-1-of-3))(…) | Send a message to a user in a direct message channel (3 methods) |
+| [SendDirectMessage](#senddirectmessage-method-1-of-3)(…) | Send a message to a user in a direct message channel (3 methods) |
 | [SendGlobalTemplateDirectMessage](#sendglobaltemplatedirectmessage-method)(…) | Reply to a message using a global message template |
 | [SendTemplateDirectMessage](#sendtemplatedirectmessage-method)(…) | Send a message in a DM to the user using a localized message template |
 | [Update](#update-method)(…) | Updates the user data with the passed in user |

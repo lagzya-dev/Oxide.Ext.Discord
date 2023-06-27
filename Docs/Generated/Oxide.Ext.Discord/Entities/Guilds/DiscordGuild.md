@@ -73,18 +73,18 @@ public class DiscordGuild : ISnowflakeEntity
 | [WidgetChannelId](#widgetchannelid-property) { get; set; } | The channel id that the widget will generate an invite to, or null if set to no invite |
 | [WidgetEnabled](#widgetenabled-property) { get; set; } | True if the server widget is enabled |
 | [AddMember](#addmember-method)(…) | Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. See [Add Guild Member](https://discord.com/developers/docs/resources/guild#add-guild-member) |
-| [AddMemberRole](#addmemberrole-method-1-of-2))(…) | Adds a role to a guild member. Requires the MANAGE_ROLES permission. See [Add Guild Member Role](https://discord.com/developers/docs/resources/guild#add-guild-member-role) (2 methods) |
+| [AddMemberRole](#addmemberrole-method-1-of-2)(…) | Adds a role to a guild member. Requires the MANAGE_ROLES permission. See [Add Guild Member Role](https://discord.com/developers/docs/resources/guild#add-guild-member-role) (2 methods) |
 | [BeginPrune](#beginprune-method)(…) | Begin a prune operation. Requires the KICK_MEMBERS permission. See [Begin Guild Prune](https://discord.com/developers/docs/resources/guild#begin-guild-prune) |
 | [CreateAutoModRule](#createautomodrule-method)(…) |  |
-| [CreateBan](#createban-method-1-of-2))(…) | Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. See [Create Guild Ban](https://discord.com/developers/docs/resources/guild#create-guild-ban) (2 methods) |
+| [CreateBan](#createban-method-1-of-2)(…) | Create a guild ban, and optionally delete previous messages sent by the banned user. Requires the BAN_MEMBERS permission. See [Create Guild Ban](https://discord.com/developers/docs/resources/guild#create-guild-ban) (2 methods) |
 | [CreateChannel](#createchannel-method)(…) | Create a new channel object for the guild. Requires the MANAGE_CHANNELS permission. See [Create Guild Channel](https://discord.com/developers/docs/resources/guild#create-guild-channel) |
 | [CreateEmoji](#createemoji-method)(…) | Create a new emoji for the guild. Requires the MANAGE_EMOJIS permission. Returns the new emoji object on success. See [Create Guild Emoji](https://discord.com/developers/docs/resources/emoji#create-guild-emoji) |
 | [CreateRole](#createrole-method)(…) | Create a new role for the guild. Requires the MANAGE_ROLES permission. Returns the new role object on success. See [Create Guild Role](https://discord.com/developers/docs/resources/guild#create-guild-role) |
 | [CreateSticker](#createsticker-method)(…) | Create a new sticker for the guild. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the new sticker object on success. See [Create Guild Sticker](https://discord.com/developers/docs/resources/sticker#create-guild-sticker) |
 | [Delete](#delete-method)(…) | Delete a guild permanently. User must be owner See [Delete Guild](https://discord.com/developers/docs/resources/guild#delete-guild) |
 | [DeleteEmoji](#deleteemoji-method)(…) | Delete the given emoji. Requires the MANAGE_EMOJIS permission. See [Delete Guild Emoji](https://discord.com/developers/docs/resources/emoji#delete-guild-emoji) |
-| [DeleteIntegration](#deleteintegration-method-1-of-2))(…) | Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. See [Delete Guild Integration](https://discord.com/developers/docs/resources/guild#delete-guild-integration) (2 methods) |
-| [DeleteRole](#deleterole-method-1-of-2))(…) | Delete a guild role. Requires the MANAGE_ROLES permission See [Delete Guild Role](https://discord.com/developers/docs/resources/guild#delete-guild-role) (2 methods) |
+| [DeleteIntegration](#deleteintegration-method-1-of-2)(…) | Delete the attached integration object for the guild. Deletes any associated webhooks and kicks the associated bot if there is one. Requires the MANAGE_GUILD permission. See [Delete Guild Integration](https://discord.com/developers/docs/resources/guild#delete-guild-integration) (2 methods) |
+| [DeleteRole](#deleterole-method-1-of-2)(…) | Delete a guild role. Requires the MANAGE_ROLES permission See [Delete Guild Role](https://discord.com/developers/docs/resources/guild#delete-guild-role) (2 methods) |
 | [DeleteSticker](#deletesticker-method)(…) | Delete the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. |
 | [Edit](#edit-method)(…) | Modify a guild's settings. Requires the MANAGE_GUILD permission. See [Modify Guild](https://discord.com/developers/docs/resources/guild#modify-guild) |
 | [EditChannelPositions](#editchannelpositions-method)(…) | Modify the positions of a set of channel objects for the guild. Requires MANAGE_CHANNELS permission. Only channels to be modified are required, with the minimum being a swap between at least two channels. See [Modify Guild Channel Positions](https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions) |
@@ -94,7 +94,7 @@ public class DiscordGuild : ISnowflakeEntity
 | [EditMember](#editmember-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
 | [EditMemberNick](#editmembernick-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
 | [EditMfaLevel](#editmfalevel-method)(…) | Modify a guild's MFA level. Requires guild ownership. See [Modify Guild MFA Level](https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level) |
-| [EditRole](#editrole-method-1-of-2))(…) | Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. See [Modify Guild Role](https://discord.com/developers/docs/resources/guild#modify-guild-role) (2 methods) |
+| [EditRole](#editrole-method-1-of-2)(…) | Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. See [Modify Guild Role](https://discord.com/developers/docs/resources/guild#modify-guild-role) (2 methods) |
 | [EditRolePositions](#editrolepositions-method)(…) | Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. See [Modify Guild Role Positions](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) |
 | [EditSticker](#editsticker-method)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
 | [EditUserVoiceState](#edituservoicestate-method)(…) | Modifies another user's voice state. See [Update Users Voice State](https://discord.com/developers/docs/resources/guild#modify-user-voice-state) |
@@ -104,12 +104,12 @@ public class DiscordGuild : ISnowflakeEntity
 | [GetBan](#getban-method)(…) | Returns a guild ban for a specific user See [Get Guild Ban](https://discord.com/developers/docs/resources/guild#get-guild-ban) Returns 404 if not found |
 | [GetBans](#getbans-method)(…) | Returns a list of ban objects for the users banned from this guild. See [Get Guild Bans](https://discord.com/developers/docs/resources/guild#get-guild-bans) |
 | [GetBoosterRole](#getboosterrole-method)() | Returns the booster role for the guild if it exists |
-| [GetChannel](#getchannel-method-1-of-2))(…) | Returns a channel with the given name (Case Insensitive) (2 methods) |
+| [GetChannel](#getchannel-method-1-of-2)(…) | Returns a channel with the given name (Case Insensitive) (2 methods) |
 | [GetChannels](#getchannels-method)(…) | Returns a list of guild channel objects. Does not include threads See [Get Guild Channels](https://discord.com/developers/docs/resources/guild#get-guild-channels) |
-| [GetEmoji](#getemoji-method-1-of-2))(…) | Finds guild emoji by name (2 methods) |
+| [GetEmoji](#getemoji-method-1-of-2)(…) | Finds guild emoji by name (2 methods) |
 | [GetIntegrations](#getintegrations-method)(…) | Returns a list of integration objects for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Integrations](https://discord.com/developers/docs/resources/guild#get-guild-integrations) |
 | [GetInvites](#getinvites-method)(…) | Returns a list of invite objects (with invite metadata) for the guild. Requires the MANAGE_GUILD permission. See [Get Guild Invites](https://discord.com/developers/docs/resources/guild#get-guild-invites) |
-| [GetMember](#getmember-method-1-of-3))(…) | Returns a GuildMember with the given username (Case Insensitive) (3 methods) |
+| [GetMember](#getmember-method-1-of-3)(…) | Returns a GuildMember with the given username (Case Insensitive) (3 methods) |
 | [GetOnboarding](#getonboarding-method)(…) | Returns the [`GuildOnboarding`](./Onboarding/GuildOnboarding.md) for the guild. |
 | [GetParentChannel](#getparentchannel-method)(…) | Returns the parent channel for a channel if it exists |
 | [GetPruneCount](#getprunecount-method)(…) | Returns an object with one 'pruned' key indicating the number of members that would be removed in a prune operation. Requires the KICK_MEMBERS permission. See [Get Guild Prune Count](https://discord.com/developers/docs/resources/guild#get-guild-prune-count) |
@@ -128,8 +128,8 @@ public class DiscordGuild : ISnowflakeEntity
 | [ListEmojis](#listemojis-method)(…) | Returns a list of emoji objects for the given guild. See [List Guild Emojis](https://discord.com/developers/docs/resources/emoji#list-guild-emojis) |
 | [ListStickers](#liststickers-method)(…) | Returns an array of sticker objects for the given guild. Includes user fields if the bot has the MANAGE_EMOJIS_AND_STICKERS permission. See [List Guild Stickers](https://discord.com/developers/docs/resources/sticker#list-guild-stickers) |
 | [RemoveBan](#removeban-method)(…) | Remove the ban for a user. Requires the BAN_MEMBERS permissions. See [Remove Guild Ban](https://discord.com/developers/docs/resources/guild#remove-guild-ban) |
-| [RemoveMember](#removemember-method-1-of-2))(…) | Remove a member from a guild. Requires KICK_MEMBERS permission. See [Remove Guild Member](https://discord.com/developers/docs/resources/guild#remove-guild-member) (2 methods) |
-| [RemoveMemberRole](#removememberrole-method-1-of-2))(…) | Removes a role from a guild member. Requires the MANAGE_ROLES permission. See [Remove Guild Member Role](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) (2 methods) |
+| [RemoveMember](#removemember-method-1-of-2)(…) | Remove a member from a guild. Requires KICK_MEMBERS permission. See [Remove Guild Member](https://discord.com/developers/docs/resources/guild#remove-guild-member) (2 methods) |
+| [RemoveMemberRole](#removememberrole-method-1-of-2)(…) | Removes a role from a guild member. Requires the MANAGE_ROLES permission. See [Remove Guild Member Role](https://discord.com/developers/docs/resources/guild#remove-guild-member-role) (2 methods) |
 | [SearchMembers](#searchmembers-method)(…) | Searches for guild members by username or nickname |
 | static [Create](#create-method)(…) | Create a new guild. See [Create Guild](https://discord.com/developers/docs/resources/guild#create-guild) |
 | static [Get](#get-method)(…) | Returns the guild object for the given id See [Get Guild](https://discord.com/developers/docs/resources/guild#get-guild) |

@@ -17,12 +17,12 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 | readonly [PlayerIds](#playerids-field) | Readonly Collection of all Player ID's |
 | readonly [PlayerToDiscordIds](#playertodiscordids-field) | Readonly Dictionary of Player ID's to Discord ID's |
 | [AddLinkPlugin](#addlinkplugin-method)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
-| [GetDiscordId](#getdiscordid-method-1-of-2))(…) | Returns the Discord ID for the given Steam ID (2 methods) |
-| [GetDiscordUser](#getdiscorduser-method-1-of-2))(…) | Returns a minimal Discord User (2 methods) |
-| [GetLinkedMember](#getlinkedmember-method-1-of-2))(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
+| [GetDiscordId](#getdiscordid-method-1-of-2)(…) | Returns the Discord ID for the given Steam ID (2 methods) |
+| [GetDiscordUser](#getdiscorduser-method-1-of-2)(…) | Returns a minimal Discord User (2 methods) |
+| [GetLinkedMember](#getlinkedmember-method-1-of-2)(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
 | [GetPlayer](#getplayer-method)(…) | Returns the IPlayer for the given Discord ID |
-| [GetPlayerId](#getplayerid-method-1-of-2))(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
-| [IsLinked](#islinked-method-1-of-4))(…) | Returns if the specified ID is linked (4 methods) |
+| [GetPlayerId](#getplayerid-method-1-of-2)(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
+| [IsLinked](#islinked-method-1-of-4)(…) | Returns if the specified ID is linked (4 methods) |
 | [LogDebug](#logdebug-method)(…) |  |
 | [OnLinked](#onlinked-method)(…) | Called by a link plugin when a link occured |
 | [OnUnlinked](#onunlinked-method)(…) | Called by a link plugin when an unlink occured |

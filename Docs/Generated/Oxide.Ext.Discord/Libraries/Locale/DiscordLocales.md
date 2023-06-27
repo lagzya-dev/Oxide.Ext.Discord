@@ -13,11 +13,11 @@ public class DiscordLocales : BaseDiscordLibrary<DiscordLocales>
 | [ServerLanguage](#serverlanguage-property) { get; } | Returns the Oxide Server language |
 | [AddDiscordLocale](#adddiscordlocale-method)(…) | Adds a one way [`DiscordLocale`](./DiscordLocale.md) -&gt; [`ServerLocale`](./ServerLocale.md) mapping |
 | [AddOxideLocale](#addoxidelocale-method)(…) | Adds a one way [`ServerLocale`](./ServerLocale.md) -&gt; [`DiscordLocale`](./DiscordLocale.md) mapping |
-| [Contains](#contains-method-1-of-2))(…) | Returns if the [`ServerLocale`](./ServerLocale.md) mapping exists (2 methods) |
-| [GetDiscordInteractionLangMessage](#getdiscordinteractionlangmessage-method-1-of-2))(…) | Retrieves the lang message for a Discord Interaction (2 methods) |
+| [Contains](#contains-method-1-of-2)(…) | Returns if the [`ServerLocale`](./ServerLocale.md) mapping exists (2 methods) |
+| [GetDiscordInteractionLangMessage](#getdiscordinteractionlangmessage-method-1-of-2)(…) | Retrieves the lang message for a Discord Interaction (2 methods) |
 | [GetDiscordLocale](#getdiscordlocale-method)(…) | Returns the discord locale for a given oxide locale |
 | [GetDiscordLocalizations](#getdiscordlocalizations-method)(…) | Returns all the discord localizations for a specific lang key in a plugin |
-| [GetPlayerLanguage](#getplayerlanguage-method-1-of-2))(…) | Returns the oxide locale for the given IPlayer (2 methods) |
+| [GetPlayerLanguage](#getplayerlanguage-method-1-of-2)(…) | Returns the oxide locale for the given IPlayer (2 methods) |
 | [GetServerLanguage](#getserverlanguage-method)(…) | Returns the oxide locale for a given discord locale |
 | const [DefaultServerLanguage](#defaultserverlanguage-field) | Default Oxide Lang (English) |
 

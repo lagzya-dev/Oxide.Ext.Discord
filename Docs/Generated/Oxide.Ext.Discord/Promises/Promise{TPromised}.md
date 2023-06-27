@@ -12,17 +12,17 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | --- | --- |
 | [Promise](#promise&amp;lt;tpromised&amp;gt;-constructor)() | Constructor |
 | static [Create](#create-method)() | Returns a promise that is currently pending |
-| [Catch](#catch-method-1-of-2))(…) |  (2 methods) |
+| [Catch](#catch-method-1-of-2)(…) |  (2 methods) |
 | [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) |  |
 | [ContinueWith](#continuewith-method)(…) |  |
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) |  |
 | [Finally](#finally-method)(…) |  |
 | [Resolve](#resolve-method)(…) |  |
-| [Then](#then-method-1-of-4))(…) |  (4 methods) |
-| [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3))(…) |  (3 methods) |
+| [Then](#then-method-1-of-4)(…) |  (4 methods) |
+| [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3)(…) |  (3 methods) |
 | [ThenAll](#thenall-method)(…) |  |
 | [ThenAll&lt;TConvert&gt;](#thenall&amp;lt;tconvert&amp;gt;-method)(…) |  |
-| static [All](#all-method-1-of-2))(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [All](#all-method-1-of-2)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
 | static [Create](#create-method)(…) |  |
 | static [Create&lt;TConvert&gt;](#create&amp;lt;tconvert&amp;gt;-method)() | Returns a promise that is currently pending |
 | static [Rejected](#rejected-method)(…) | Convert an exception directly into a rejected promise. |

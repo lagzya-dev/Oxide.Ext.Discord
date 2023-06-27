@@ -18,15 +18,15 @@ public sealed class Promise : BasePromise, IPendingPromise
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) |  |
 | [Finally](#finally-method)(…) |  |
 | [Resolve](#resolve-method)() |  |
-| [Then](#then-method-1-of-5))(…) |  (5 methods) |
-| [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-2))(…) |  (2 methods) |
+| [Then](#then-method-1-of-5)(…) |  (5 methods) |
+| [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-2)(…) |  (2 methods) |
 | [ThenAll](#thenall-method)(…) |  |
 | [ThenAll&lt;TConvert&gt;](#thenall&amp;lt;tconvert&amp;gt;-method)(…) |  |
 | [ThenSequence](#thensequence-method)(…) |  |
-| static [All](#all-method-1-of-2))(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [All](#all-method-1-of-2)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
 | static [Rejected](#rejected-method)(…) | Convert an exception directly into a rejected promise. |
 | static [Resolved](#resolved-method)() | Returns a promise that has been resolved |
-| static [Sequence](#sequence-method-1-of-2))(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
+| static [Sequence](#sequence-method-1-of-2)(…) | Chain a number of operations using promises. Takes a number of functions each of which starts an async operation and yields a promise. (2 methods) |
 
 ## Protected Members
 

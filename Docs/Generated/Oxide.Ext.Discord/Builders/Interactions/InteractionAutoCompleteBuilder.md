@@ -15,7 +15,7 @@ public class InteractionAutoCompleteBuilder
 | [AddAllOnlineFirstPlayers](#addallonlinefirstplayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
 | [AddAllPlayers](#addallplayers-method)(…) | Adds Any Player to the list |
 | [AddByPlayerId](#addbyplayerid-method)(…) | Adds a player by player Id to the list |
-| [AddChoice](#addchoice-method-1-of-3))(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
+| [AddChoice](#addchoice-method-1-of-3)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
 | [AddChoices](#addchoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
 | [AddGroups](#addgroups-method)(…) | Adds Oxide Groups to the AutoComplete |
 | [AddGroupsWithoutPermission](#addgroupswithoutpermission-method)(…) | Adds The List of Groups that have this permission |

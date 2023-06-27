@@ -12,8 +12,8 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 | name | description |
 | --- | --- |
 | [GetGlobalTemplate](#getglobaltemplate-method)(…) | Returns a global message template for the plugin with the given name |
-| [GetLocalizedTemplate](#getlocalizedtemplate-method-1-of-2))(…) | Returns a message template for a given language (2 methods) |
-| [GetPlayerTemplate](#getplayertemplate-method-1-of-2))(…) | Returns a message template for a given IPlayer player (2 methods) |
+| [GetLocalizedTemplate](#getlocalizedtemplate-method-1-of-2)(…) | Returns a message template for a given language (2 methods) |
+| [GetPlayerTemplate](#getplayertemplate-method-1-of-2)(…) | Returns a message template for a given IPlayer player (2 methods) |
 | [RegisterGlobalTemplateAsync](#registerglobaltemplateasync-method)(…) | Registers a global message template Global Message templates cannot be localized |
 | [RegisterLocalizedTemplateAsync](#registerlocalizedtemplateasync-method)(…) | Registers a message template with the given name and language |
 

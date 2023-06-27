@@ -12,15 +12,15 @@ public class DebugLogger
 | --- | --- |
 | [DebugLogger](#debuglogger-constructor)() | The default constructor. |
 | [AppendChannelPath](#appendchannelpath-method)(…) | Appends a channel path to the logger. This path will include the guild name / Parent Channel Name (Optional) / Channel Name |
-| [AppendField](#appendfield-method-1-of-11))(…) | Appends a field into the logger (11 methods) |
+| [AppendField](#appendfield-method-1-of-11)(…) | Appends a field into the logger (11 methods) |
 | [AppendFieldEnum&lt;T&gt;](#appendfieldenum&amp;lt;t&amp;gt;-method)(…) | Appends a field with the given name and enum value |
 | [AppendFieldOutOf](#appendfieldoutof-method)(…) | Appends a field with the given name and int amount over int total value |
 | [AppendFieldPrefix](#appendfieldprefix-method)(…) | Appends the field name into the logger |
 | [AppendIndent](#appendindent-method)() | Appends the current indent into the logger |
 | [AppendLine](#appendline-method)() | Appends a line to the logger |
-| [AppendLine](#appendline-method-1-of-2))(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
-| [AppendList](#appendlist-method-1-of-2))(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
-| [AppendList&lt;T&gt;](#appendlist&amp;lt;t&amp;gt;-method-1-of-2))(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
+| [AppendLine](#appendline-method-1-of-2)(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
+| [AppendList](#appendlist-method-1-of-2)(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
+| [AppendList&lt;T&gt;](#appendlist&amp;lt;t&amp;gt;-method-1-of-2)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
 | [AppendMethod](#appendmethod-method)(…) | Appends a field with the given name and method info |
 | [AppendNullField](#appendnullfield-method)(…) | Appends a field with the given name and Null value |
 | [AppendObject](#appendobject-method)(…) | Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name |

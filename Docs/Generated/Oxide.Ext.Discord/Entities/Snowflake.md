@@ -11,11 +11,11 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 
 | name | description |
 | --- | --- |
-| [Snowflake](#snowflake-constructor-1-of-3))(…) | Create a new snowflake from a ulong (3 constructors) |
+| [Snowflake](#snowflake-constructor-1-of-3)(…) | Create a new snowflake from a ulong (3 constructors) |
 | readonly [Id](#id-field) | Snowflake Value |
-| [CompareTo](#compareto-method-1-of-2))(…) | Returns the ID field of num compared to this snowflakes ID field (2 methods) |
+| [CompareTo](#compareto-method-1-of-2)(…) | Returns the ID field of num compared to this snowflakes ID field (2 methods) |
 | override [Equals](#equals-method)(…) | Returns if the obj is snowflake or ulong with matching ID. |
-| [Equals](#equals-method-1-of-2))(…) | Returns if the two snowflakes are the same ID. (2 methods) |
+| [Equals](#equals-method-1-of-2)(…) | Returns if the two snowflakes are the same ID. (2 methods) |
 | [GetCreationDate](#getcreationdate-method)() | Returns when the ID was created |
 | override [GetHashCode](#gethashcode-method)() | Returns the HashCode of the ID |
 | [IsValid](#isvalid-method)() | Returns if the ID value is not 0 |
@@ -23,10 +23,10 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 | static readonly [DiscordEpoch](#discordepoch-field) | DateTimeOffset since discord Epoch |
 | static [TryParse](#tryparse-method)(…) | Try to parse the a string into a snowflake value |
 | [operator ==](#snowflake-equality-operator) | Returns true if left and right are equal |
-| [explicit operator](#snowflake-explicit-operator-1-of-2)) | Converts a ulong to a snowflake (2 operators) |
+| [explicit operator](#snowflake-explicit-operator-1-of-2) | Converts a ulong to a snowflake (2 operators) |
 | [operator &gt;](#snowflake-greaterthan-operator) | Returns true if left snowflake's ID is greater than right's ID |
 | [operator &gt;=](#snowflake-greaterthanorequal-operator) | Returns true if left snowflake's ID is greater or equal to right's ID |
-| [implicit operator](#snowflake-implicit-operator-1-of-2)) | Converts snowflake to a ulong (2 operators) |
+| [implicit operator](#snowflake-implicit-operator-1-of-2) | Converts snowflake to a ulong (2 operators) |
 | [operator !=](#snowflake-inequality-operator) | Returns true if left and right are not equal |
 | [operator &lt;](#snowflake-lessthan-operator) | Returns true if left snowflake's ID is less than right's ID |
 | [operator &lt;=](#snowflake-lessthanorequal-operator) | Returns true if left snowflake's ID is less than right's ID or equal |

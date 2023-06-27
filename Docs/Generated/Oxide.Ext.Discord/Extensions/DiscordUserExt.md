@@ -12,7 +12,7 @@ public static class DiscordUserExt
 | --- | --- |
 | static [HasPermission](#haspermission-method)(…) | Return if the discord user has the given oxide permission. If the user is not linked this will return false |
 | static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
-| static [SendChatMessage](#sendchatmessage-method-1-of-2))(…) | Send chat message to the user if they're connected (2 methods) |
+| static [SendChatMessage](#sendchatmessage-method-1-of-2)(…) | Send chat message to the user if they're connected (2 methods) |
 
 ## See Also
 

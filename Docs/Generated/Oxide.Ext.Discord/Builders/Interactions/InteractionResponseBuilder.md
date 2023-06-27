@@ -11,7 +11,7 @@ public class InteractionResponseBuilder :
 
 | name | description |
 | --- | --- |
-| [InteractionResponseBuilder](#interactionresponsebuilder-constructor-1-of-2))(…) | Constructor for creating a new InteractionCallbackData (2 constructors) |
+| [InteractionResponseBuilder](#interactionresponsebuilder-constructor-1-of-2)(…) | Constructor for creating a new InteractionCallbackData (2 constructors) |
 
 ## See Also
 

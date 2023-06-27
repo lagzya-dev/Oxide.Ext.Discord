@@ -14,7 +14,7 @@ public class ApplicationCommandOptionBuilder
 | readonly [GroupName](#groupname-field) | The Name of the group |
 | readonly [OptionName](#optionname-field) | The Name of the Option |
 | readonly [SubCommandName](#subcommandname-field) | The Name of the Sub Command |
-| [AddChoice](#addchoice-method-1-of-3))(…) | Adds a choice to this option of type string (3 methods) |
+| [AddChoice](#addchoice-method-1-of-3)(…) | Adds a choice to this option of type string (3 methods) |
 | [AddDescriptionLocalization](#adddescriptionlocalization-method)(…) | Adds Application Command Option Description Localization |
 | [AddDescriptionLocalizations](#adddescriptionlocalizations-method)(…) | Adds command description localizations for a given plugin and lang key |
 | [AddNameLocalization](#addnamelocalization-method)(…) | Adds Application Command Option Name Localization |
@@ -22,9 +22,9 @@ public class ApplicationCommandOptionBuilder
 | [AutoComplete](#autocomplete-method)(…) | Enable auto complete for the option |
 | [ChannelTypes](#channeltypes-method)(…) | Set's the channel types for the option |
 | [MaxLength](#maxlength-method)(…) | Max Length for String Option Max Of 6000 |
-| [MaxValue](#maxvalue-method-1-of-2))(…) | Max Value for Integer Option (2 methods) |
+| [MaxValue](#maxvalue-method-1-of-2)(…) | Max Value for Integer Option (2 methods) |
 | [MinLength](#minlength-method)(…) | Min Length for String Option Max Of 6000 |
-| [MinValue](#minvalue-method-1-of-2))(…) | Min Value for Integer Option (2 methods) |
+| [MinValue](#minvalue-method-1-of-2)(…) | Min Value for Integer Option (2 methods) |
 | [Required](#required-method)(…) | Set the required state for the option |
 
 ## See Also
