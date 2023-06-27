@@ -12,7 +12,7 @@ public class MessageReaction
 | --- | --- |
 | [MessageReaction](#messagereaction-constructor)() | The default constructor. |
 | [Count](#count-property) { get; set; } | Times this emoji has been used to react |
-| [Emoji](#emoji-property) { get; set; } | Emoji information [`Emoji`](#emoji-property) |
+| [Emoji](#emoji-property) { get; set; } | Emoji information [`DiscordEmoji`](../Emojis/DiscordEmoji.md) |
 | [Me](#me-property) { get; set; } | Whether the current user reacted using this emoji |
 
 ## See Also
@@ -69,7 +69,7 @@ public bool Me { get; set; }
    
 # Emoji property
 
-Emoji information `Emoji`
+Emoji information [`DiscordEmoji`](../Emojis/DiscordEmoji.md)
 
 ```csharp
 public DiscordEmoji Emoji { get; set; }

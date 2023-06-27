@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         /// <summary>
         /// Emoji information
-        /// <see cref="Emoji"/>
+        /// <see cref="DiscordEmoji"/>
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }

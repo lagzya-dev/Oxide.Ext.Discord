@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Events
         
         /// <summary>
         /// Contains id and flags
-        /// See <see cref="Application"/>
+        /// See <see cref="DiscordApplication"/>
         /// </summary>
         [JsonProperty("application")]
         public DiscordApplication Application { get; set; }

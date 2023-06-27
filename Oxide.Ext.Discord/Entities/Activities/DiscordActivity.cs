@@ -65,8 +65,8 @@ namespace Oxide.Ext.Discord.Entities.Activities
         public string State { get; set; }
         
         /// <summary>
-        /// tTe emoji used for a custom status
-        /// See <see cref="Emoji"/>
+        /// The emoji used for a custom status
+        /// See <see cref="DiscordEmoji"/>
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }

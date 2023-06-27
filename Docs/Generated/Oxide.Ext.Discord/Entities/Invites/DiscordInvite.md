@@ -13,10 +13,10 @@ public class DiscordInvite
 | [DiscordInvite](#discordinvite-constructor)() | The default constructor. |
 | [ApproximateMemberCount](#approximatemembercount-property) { get; set; } | Approximate count of total members |
 | [ApproximatePresenceCount](#approximatepresencecount-property) { get; set; } | Approximate count of online members (only present when target_user is set) |
-| [Channel](#channel-property) { get; set; } | The channel this invite is for See [`Channel`](#channel-property) |
+| [Channel](#channel-property) { get; set; } | The channel this invite is for See [`DiscordChannel`](../Channels/DiscordChannel.md) |
 | [Code](#code-property) { get; set; } | The invite code (unique ID) |
 | [ExpiresAt](#expiresat-property) { get; set; } | When the invite code expires |
-| [Guild](#guild-property) { get; set; } | The guild this invite is for See [`Guild`](#guild-property) |
+| [Guild](#guild-property) { get; set; } | The guild this invite is for See [`DiscordGuild`](../Guilds/DiscordGuild.md) |
 | [GuildScheduledEvent](#guildscheduledevent-property) { get; set; } | Guild scheduled event data, only included if guild_scheduled_event_id contains a valid guild scheduled event id |
 | [Inviter](#inviter-property) { get; set; } | The user who created the invite See [`DiscordUser`](../Users/DiscordUser.md) |
 | [StageInstance](#stageinstance-property) { get; set; } | Stage instance data if there is a public Stage instance in the Stage channel this invite is for |
@@ -110,7 +110,7 @@ public string Code { get; set; }
    
 # Guild property
 
-The guild this invite is for See `Guild`
+The guild this invite is for See [`DiscordGuild`](../Guilds/DiscordGuild.md)
 
 ```csharp
 public DiscordGuild Guild { get; set; }
@@ -126,7 +126,7 @@ public DiscordGuild Guild { get; set; }
    
 # Channel property
 
-The channel this invite is for See `Channel`
+The channel this invite is for See [`DiscordChannel`](../Channels/DiscordChannel.md)
 
 ```csharp
 public DiscordChannel Channel { get; set; }

@@ -135,7 +135,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         /// <summary>
         /// Any embedded content
-        /// <see cref="Embeds"/>
+        /// <see cref="DiscordEmbed"/>
         /// </summary>
         [JsonProperty("embeds")]
         public List<DiscordEmbed> Embeds { get; set; }
@@ -181,7 +181,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         
         /// <summary>
         /// Sent with Rich Presence-related chat embeds
-        /// <see cref="Application"/>
+        /// <see cref="DiscordApplication"/>
         /// </summary>
         [JsonProperty("application")]
         public DiscordApplication Application { get; set; }
@@ -194,7 +194,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         /// <summary>
         /// Data showing the source of a crosspost, channel follow add, pin, or reply message
-        /// <see cref="MessageReference"/>
+        /// <see cref="Messages.MessageReference"/>
         /// </summary>
         [JsonProperty("message_reference")]
         public MessageReference MessageReference { get; set; }

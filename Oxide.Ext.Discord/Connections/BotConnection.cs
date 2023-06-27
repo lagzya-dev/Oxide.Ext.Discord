@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Connections
         
         /// <summary>
         /// Discord Extension Logging Level.
-        /// See <see cref="LogLevel"/>
+        /// See <see cref="DiscordLogLevel"/>
         /// </summary>
         public DiscordLogLevel LogLevel { get; set; }
 

@@ -62,7 +62,7 @@ public class DiscordGuild : ISnowflakeEntity
 | [SplashUrl](#splashurl-property) { get; } | Returns the Guilds Splash Url |
 | [StageInstances](#stageinstances-property) { get; set; } | Stage instances in the guild [`StageInstance`](../Channels/Stages/StageInstance.md) |
 | [Stickers](#stickers-property) { get; set; } | Custom guild stickers [`DiscordSticker`](../Stickers/DiscordSticker.md) |
-| [SystemChannelFlags](#systemchannelflags-property) { get; set; } | System channel flags See [`SystemChannelFlags`](#systemchannelflags-property) |
+| [SystemChannelFlags](#systemchannelflags-property) { get; set; } | System channel flags See [`SystemChannelFlags`](./SystemChannelFlags.md) |
 | [SystemChannelId](#systemchannelid-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
 | [Threads](#threads-property) { get; set; } | All active threads in the guild that current user has permission to view |
 | [Unavailable](#unavailable-property) { get; set; } | True if this guild is unavailable due to an outage |
@@ -2219,7 +2219,7 @@ public Snowflake? SystemChannelId { get; set; }
    
 # SystemChannelFlags property
 
-System channel flags See `SystemChannelFlags`
+System channel flags See [`SystemChannelFlags`](./SystemChannelFlags.md)
 
 ```csharp
 public SystemChannelFlags SystemChannelFlags { get; set; }

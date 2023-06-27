@@ -173,7 +173,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// System channel flags
-        /// See <see cref="SystemChannelFlags"/>
+        /// See <see cref="Guilds.SystemChannelFlags"/>
         /// </summary>
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags SystemChannelFlags { get; set; }

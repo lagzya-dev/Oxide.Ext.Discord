@@ -1633,6 +1633,13 @@
             <param name="value"></param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.Next(`0)">
+            <summary>
+            Returns the next enum values. If the value is the last value it will start from the beginning
+            </summary>
+            <param name="value">Value to get the next enum from</param>
+            <returns>Next enum from the given value</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Cache.FileAttachmentCache">
             <summary>
             Caches file names when sending attachments
@@ -2136,7 +2143,7 @@
         <member name="P:Oxide.Ext.Discord.Connections.BotConnection.LogLevel">
             <summary>
             Discord Extension Logging Level.
-            See <see cref="P:Oxide.Ext.Discord.Connections.BotConnection.LogLevel"/>
+            See <see cref="T:Oxide.Ext.Discord.Logging.DiscordLogLevel"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Connections.BotConnection.HiddenToken">
@@ -3451,8 +3458,8 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.Emoji">
             <summary>
-            tTe emoji used for a custom status
-            See <see cref="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.Emoji"/>
+            The emoji used for a custom status
+            See <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.Party">
@@ -4004,7 +4011,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.HasApplicationFlag(Oxide.Ext.Discord.Entities.Applications.ApplicationFlags)">
             <summary>
             Returns if the given application has the passed in application flag
-            If <see cref="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags"/>  is null false is returned
+            If <see cref="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags"/> is null false is returned
             </summary>
             <param name="flag">Flag to compare against</param>
             <returns>True of application has flag; False Otherwise</returns>
@@ -6917,7 +6924,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Application">
             <summary>
             Contains id and flags
-            See <see cref="P:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayReadyEvent.Application"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.GatewayResumedEvent">
@@ -7875,7 +7882,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.SystemChannelFlags">
             <summary>
             System channel flags
-            See <see cref="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.SystemChannelFlags"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Guilds.SystemChannelFlags"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.RulesChannelId">
@@ -12419,13 +12426,13 @@
         <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Guild">
             <summary>
             The guild this invite is for
-            See <see cref="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Guild"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Channel">
             <summary>
             The channel this invite is for
-            See <see cref="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Channel"/>
+            See <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Invites.DiscordInvite.Inviter">
@@ -12799,7 +12806,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Embeds">
             <summary>
             Any embedded content
-            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Embeds"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Messages.Embeds.DiscordEmbed"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Reactions">
@@ -12838,7 +12845,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Application">
             <summary>
             Sent with Rich Presence-related chat embeds
-            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Application"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.ApplicationId">
@@ -12849,7 +12856,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.MessageReference">
             <summary>
             Data showing the source of a crosspost, channel follow add, pin, or reply message
-            <see cref="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.MessageReference"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Messages.MessageReference"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.DiscordMessage.Flags">
@@ -13828,7 +13835,7 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.Emoji">
             <summary>
             Emoji information
-            <see cref="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.Emoji"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageReference">

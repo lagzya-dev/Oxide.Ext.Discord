@@ -22,14 +22,14 @@ namespace Oxide.Ext.Discord.Entities.Invites
 
         /// <summary>
         /// The guild this invite is for
-        /// See <see cref="Guild"/>
+        /// See <see cref="DiscordGuild"/>
         /// </summary>
         [JsonProperty("guild")]
         public DiscordGuild Guild { get; set; }
         
         /// <summary>
         /// The channel this invite is for
-        /// See <see cref="Channel"/>
+        /// See <see cref="DiscordChannel"/>
         /// </summary>
         [JsonProperty("channel")]
         public DiscordChannel Channel { get; set; }

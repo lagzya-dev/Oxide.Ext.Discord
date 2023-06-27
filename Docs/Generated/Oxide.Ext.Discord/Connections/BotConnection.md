@@ -16,7 +16,7 @@ public class BotConnection
 | [ApplicationId](#applicationid-property) { get; } | Application ID of the Bot Token |
 | [HiddenToken](#hiddentoken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
 | [Intents](#intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
-| [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`LogLevel`](#loglevel-property) |
+| [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md) |
 | [HasAnyIntent](#hasanyintent-method)(…) | Returns if the settings has any intent specified |
 | [HasIntents](#hasintents-method)(…) | Returns if the settings has the given intents |
 
@@ -142,7 +142,7 @@ public GatewayIntents Intents { get; set; }
    
 # LogLevel property
 
-Discord Extension Logging Level. See `LogLevel`
+Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md)
 
 ```csharp
 public DiscordLogLevel LogLevel { get; set; }
