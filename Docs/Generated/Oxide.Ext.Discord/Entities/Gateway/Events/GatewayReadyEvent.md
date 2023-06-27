@@ -11,7 +11,7 @@ public class GatewayReadyEvent
 | name | description |
 | --- | --- |
 | [GatewayReadyEvent](#gatewayreadyevent-constructor)() | The default constructor. |
-| [Application](#application-property) { get; set; } | Contains id and flags See [`Application`](./#application-property) |
+| [Application](#application-property) { get; set; } | Contains id and flags See [`Application`](#application-property) |
 | [Guilds](#guilds-property) { get; set; } | The guilds the user is in |
 | [ResumeSessionUrl](#resumesessionurl-property) { get; set; } | Websocket URL to use when resuming the session |
 | [SessionId](#sessionid-property) { get; set; } | Used for resuming connections |

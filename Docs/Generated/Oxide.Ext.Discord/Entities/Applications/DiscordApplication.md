@@ -45,8 +45,8 @@ public class DiscordApplication : IDebugLoggable
 | [GetGuildCommandPermissions](#getguildcommandpermissions-method)(…) | Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects. See [Get Guild Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions) |
 | [GetGuildCommands](#getguildcommands-method)(…) | Fetch all of the guild commands for your application for a specific guild. See [Get Guild Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands) |
 | [GetRoleConnectionMetadata](#getroleconnectionmetadata-method)(…) | Returns a list of application role connection metadata objects for the given application. See [Get Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records) |
-| [HasAnyApplicationFlags](#hasanyapplicationflags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](./#flags-property) is null false is returned |
-| [HasApplicationFlag](#hasapplicationflag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](./#flags-property) is null false is returned |
+| [HasAnyApplicationFlags](#hasanyapplicationflags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](#flags-property) is null false is returned |
+| [HasApplicationFlag](#hasapplicationflag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](#flags-property) is null false is returned |
 | [LogDebug](#logdebug-method)(…) |  |
 
 ## See Also
@@ -59,7 +59,7 @@ public class DiscordApplication : IDebugLoggable
    
 # HasApplicationFlag method
 
-Returns if the given application has the passed in application flag If [`Flags`](./#flags-property) is null false is returned
+Returns if the given application has the passed in application flag If [`Flags`](#flags-property) is null false is returned
 
 ```csharp
 public bool HasApplicationFlag(ApplicationFlags flag)
@@ -83,7 +83,7 @@ True of application has flag; False Otherwise
    
 # HasAnyApplicationFlags method
 
-Returns if the given application has any of the passed in application flags If [`Flags`](./#flags-property) is null false is returned
+Returns if the given application has any of the passed in application flags If [`Flags`](#flags-property) is null false is returned
 
 ```csharp
 public bool HasAnyApplicationFlags(ApplicationFlags flag)

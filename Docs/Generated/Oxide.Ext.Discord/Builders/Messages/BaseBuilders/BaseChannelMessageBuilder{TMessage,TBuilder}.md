@@ -19,7 +19,7 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 | name | description |
 | --- | --- |
 | [AddMessageReference](#addmessagereference-method)(…) | Adds a [`MessageReference`](../../../Entities/Messages/MessageReference.md) to the message |
-| [AddReply](#addreply-method-1-of-2)(…) | Adds a [`AddMessageReference`](./#addmessagereference-method) to the message (2 methods) |
+| [AddReply](#addreply-method-1-of-2)(…) | Adds a [`AddMessageReference`](#addmessagereference-method) to the message (2 methods) |
 | [AddSticker](#addsticker-method-1-of-2)(…) | Adds a sticker to the message (2 methods) |
 | [AddStickers](#addstickers-method-1-of-2)(…) | Adds stickers to the message (2 methods) |
 | [SuppressNotifications](#suppressnotifications-method)(…) | Adds a sticker to the message |
@@ -163,7 +163,7 @@ This
    
 # AddReply method (1 of 2)
 
-Adds a [`AddMessageReference`](./#addmessagereference-method) to the message
+Adds a [`AddMessageReference`](#addmessagereference-method) to the message
 
 ```csharp
 public TBuilder AddReply(DiscordMessage message, bool failIfNotExists = true)
@@ -189,7 +189,7 @@ This
 
 # AddReply method (2 of 2)
 
-Adds a [`AddMessageReference`](./#addmessagereference-method) to the message
+Adds a [`AddMessageReference`](#addmessagereference-method) to the message
 
 ```csharp
 public TBuilder AddReply(Snowflake messageId, Snowflake? guildId = default, 
