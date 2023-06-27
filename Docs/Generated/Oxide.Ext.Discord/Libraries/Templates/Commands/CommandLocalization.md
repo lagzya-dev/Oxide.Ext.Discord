@@ -12,8 +12,8 @@ public class CommandLocalization
 | --- | --- |
 | [CommandLocalization](#commandlocalization-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [Arguments](#arguments-property) { get; set; } | Localized Argument Options |
-| [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description.md) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name.md) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md#description-property) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#description-property) |
+| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md#name-property) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#name-property) |
 | [Options](#options-property) { get; set; } | Localized Options for the Command |
 | [ApplyCommandLocalization](#applycommandlocalization-method)(…) | Apply Command Localizations to the [`CommandCreate`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md) |
 
@@ -93,7 +93,7 @@ public CommandLocalization(CommandOption opt, DiscordLocale locale)
    
 # Name property
 
-Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Name) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name)
+Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md#name-property) or [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#name-property)
 
 ```csharp
 public string Name { get; set; }
@@ -108,7 +108,7 @@ public string Name { get; set; }
    
 # Description property
 
-Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate/Description) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description)
+Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandCreate.md#description-property) or [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#description-property)
 
 ```csharp
 public string Description { get; set; }

@@ -10,7 +10,7 @@ public static class InteractionPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Lang](#lang-method)(…) | [`GetLangMessage`](../../../Entities/Interactions/DiscordInteraction/GetLangMessage.md) placeholder |
+| static [Lang](#lang-method)(…) | [`GetLangMessage`](../../../Entities/Interactions/DiscordInteraction.md#getlangmessage-method) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -22,7 +22,7 @@ public static class InteractionPlaceholders
    
 # Lang method
 
-[`GetLangMessage`](../../../Entities/Interactions/DiscordInteraction/GetLangMessage) placeholder
+[`GetLangMessage`](../../../Entities/Interactions/DiscordInteraction.md#getlangmessage-method) placeholder
 
 ```csharp
 public static string Lang(PlaceholderState state, DiscordInteraction interaction)

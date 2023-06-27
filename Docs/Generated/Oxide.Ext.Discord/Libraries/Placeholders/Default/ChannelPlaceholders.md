@@ -10,12 +10,12 @@ public static class ChannelPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Icon](#icon-method)(…) | [`IconUrl`](../../../Entities/Channels/DiscordChannel/IconUrl.md) placeholder |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Channels/DiscordChannel/Id.md) placeholder |
-| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Channels/DiscordChannel/Mention.md) placeholder |
-| static [Name](#name-method)(…) | [`Name`](../../../Entities/Channels/DiscordChannel/Name.md) placeholder |
+| static [Icon](#icon-method)(…) | [`IconUrl`](../../../Entities/Channels/DiscordChannel.md#iconurl-property) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Channels/DiscordChannel.md#id-property) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Channels/DiscordChannel.md#mention-property) placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Channels/DiscordChannel.md#name-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [Topic](#topic-method)(…) | [`Topic`](../../../Entities/Channels/DiscordChannel/Topic.md) placeholder |
+| static [Topic](#topic-method)(…) | [`Topic`](../../../Entities/Channels/DiscordChannel.md#topic-property) placeholder |
 
 ## See Also
 
@@ -26,7 +26,7 @@ public static class ChannelPlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Channels/DiscordChannel/Id) placeholder
+[`Id`](../../../Entities/Channels/DiscordChannel.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(DiscordChannel channel)
@@ -43,7 +43,7 @@ public static Snowflake Id(DiscordChannel channel)
    
 # Name method
 
-[`Name`](../../../Entities/Channels/DiscordChannel/Name) placeholder
+[`Name`](../../../Entities/Channels/DiscordChannel.md#name-property) placeholder
 
 ```csharp
 public static string Name(DiscordChannel channel)
@@ -59,7 +59,7 @@ public static string Name(DiscordChannel channel)
    
 # Icon method
 
-[`IconUrl`](../../../Entities/Channels/DiscordChannel/IconUrl) placeholder
+[`IconUrl`](../../../Entities/Channels/DiscordChannel.md#iconurl-property) placeholder
 
 ```csharp
 public static string Icon(DiscordChannel channel)
@@ -75,7 +75,7 @@ public static string Icon(DiscordChannel channel)
    
 # Topic method
 
-[`Topic`](../../../Entities/Channels/DiscordChannel/Topic) placeholder
+[`Topic`](../../../Entities/Channels/DiscordChannel.md#topic-property) placeholder
 
 ```csharp
 public static string Topic(DiscordChannel channel)
@@ -91,7 +91,7 @@ public static string Topic(DiscordChannel channel)
    
 # Mention method
 
-[`Mention`](../../../Entities/Channels/DiscordChannel/Mention) placeholder
+[`Mention`](../../../Entities/Channels/DiscordChannel.md#mention-property) placeholder
 
 ```csharp
 public static string Mention(DiscordChannel channel)

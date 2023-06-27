@@ -10,10 +10,10 @@ public static class RolePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Icon](#icon-method)(…) | [`Icon`](../../../Entities/Permissions/DiscordRole/Icon.md) placeholder |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Permissions/DiscordRole/Id.md) placeholder |
-| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Permissions/DiscordRole/Mention.md) placeholder |
-| static [Name](#name-method)(…) | [`Name`](../../../Entities/Permissions/DiscordRole/Name.md) placeholder |
+| static [Icon](#icon-method)(…) | [`Icon`](../../../Entities/Permissions/DiscordRole.md#icon-property) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Permissions/DiscordRole.md#id-property) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Permissions/DiscordRole.md#mention-property) placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Permissions/DiscordRole.md#name-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -25,7 +25,7 @@ public static class RolePlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Permissions/DiscordRole/Id) placeholder
+[`Id`](../../../Entities/Permissions/DiscordRole.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(DiscordRole role)
@@ -42,7 +42,7 @@ public static Snowflake Id(DiscordRole role)
    
 # Name method
 
-[`Name`](../../../Entities/Permissions/DiscordRole/Name) placeholder
+[`Name`](../../../Entities/Permissions/DiscordRole.md#name-property) placeholder
 
 ```csharp
 public static string Name(DiscordRole role)
@@ -58,7 +58,7 @@ public static string Name(DiscordRole role)
    
 # Mention method
 
-[`Mention`](../../../Entities/Permissions/DiscordRole/Mention) placeholder
+[`Mention`](../../../Entities/Permissions/DiscordRole.md#mention-property) placeholder
 
 ```csharp
 public static string Mention(DiscordRole role)
@@ -74,7 +74,7 @@ public static string Mention(DiscordRole role)
    
 # Icon method
 
-[`Icon`](../../../Entities/Permissions/DiscordRole/Icon) placeholder
+[`Icon`](../../../Entities/Permissions/DiscordRole.md#icon-property) placeholder
 
 ```csharp
 public static string Icon(DiscordRole role)

@@ -10,15 +10,15 @@ public static class UserPlaceholders
 
 | name | description |
 | --- | --- |
-| static [AvatarUrl](#avatarurl-method)(…) | [`GetAvatarUrl`](../../../Entities/Users/DiscordUser/GetAvatarUrl.md) placeholder |
-| static [BannerUrl](#bannerurl-method)(…) | [`GetBannerUrl`](../../../Entities/Users/DiscordUser/GetBannerUrl.md) placeholder |
-| static [Discriminator](#discriminator-method)(…) | [`Discriminator`](../../../Entities/Users/DiscordUser/Discriminator.md) placeholder |
-| static [FullName](#fullname-method)(…) | [`FullUserName`](../../../Entities/Users/DiscordUser/FullUserName.md) placeholder |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Users/DiscordUser/Id.md) placeholder |
-| static [IsLinked](#islinked-method)(…) | [`IsLinked`](../../../Extensions/DiscordUserExt/IsLinked.md) placeholder |
-| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Users/DiscordUser/Mention.md) placeholder |
+| static [AvatarUrl](#avatarurl-method)(…) | [`GetAvatarUrl`](../../../Entities/Users/DiscordUser.md#getavatarurl-property) placeholder |
+| static [BannerUrl](#bannerurl-method)(…) | [`GetBannerUrl`](../../../Entities/Users/DiscordUser.md#getbannerurl-property) placeholder |
+| static [Discriminator](#discriminator-method)(…) | [`Discriminator`](../../../Entities/Users/DiscordUser.md#discriminator-property) placeholder |
+| static [FullName](#fullname-method)(…) | [`FullUserName`](../../../Entities/Users/DiscordUser.md#fullusername-property) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Users/DiscordUser.md#id-property) placeholder |
+| static [IsLinked](#islinked-method)(…) | [`IsLinked`](../../../Extensions/DiscordUserExt.md#islinked-method) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Users/DiscordUser.md#mention-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
-| static [UserName](#username-method)(…) | [`Username`](../../../Entities/Users/DiscordUser/Username.md) placeholder |
+| static [UserName](#username-method)(…) | [`Username`](../../../Entities/Users/DiscordUser.md#username-property) placeholder |
 
 ## See Also
 
@@ -29,7 +29,7 @@ public static class UserPlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Users/DiscordUser/Id) placeholder
+[`Id`](../../../Entities/Users/DiscordUser.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(DiscordUser user)
@@ -46,7 +46,7 @@ public static Snowflake Id(DiscordUser user)
    
 # UserName method
 
-[`Username`](../../../Entities/Users/DiscordUser/Username) placeholder
+[`Username`](../../../Entities/Users/DiscordUser.md#username-property) placeholder
 
 ```csharp
 public static string UserName(DiscordUser user)
@@ -62,7 +62,7 @@ public static string UserName(DiscordUser user)
    
 # Discriminator method
 
-[`Discriminator`](../../../Entities/Users/DiscordUser/Discriminator) placeholder
+[`Discriminator`](../../../Entities/Users/DiscordUser.md#discriminator-property) placeholder
 
 ```csharp
 public static string Discriminator(DiscordUser user)
@@ -78,7 +78,7 @@ public static string Discriminator(DiscordUser user)
    
 # FullName method
 
-[`FullUserName`](../../../Entities/Users/DiscordUser/FullUserName) placeholder
+[`FullUserName`](../../../Entities/Users/DiscordUser.md#fullusername-property) placeholder
 
 ```csharp
 public static string FullName(DiscordUser user)
@@ -94,7 +94,7 @@ public static string FullName(DiscordUser user)
    
 # AvatarUrl method
 
-[`GetAvatarUrl`](../../../Entities/Users/DiscordUser/GetAvatarUrl) placeholder
+[`GetAvatarUrl`](../../../Entities/Users/DiscordUser.md#getavatarurl-property) placeholder
 
 ```csharp
 public static string AvatarUrl(DiscordUser user)
@@ -110,7 +110,7 @@ public static string AvatarUrl(DiscordUser user)
    
 # BannerUrl method
 
-[`GetBannerUrl`](../../../Entities/Users/DiscordUser/GetBannerUrl) placeholder
+[`GetBannerUrl`](../../../Entities/Users/DiscordUser.md#getbannerurl-property) placeholder
 
 ```csharp
 public static string BannerUrl(DiscordUser user)
@@ -126,7 +126,7 @@ public static string BannerUrl(DiscordUser user)
    
 # Mention method
 
-[`Mention`](../../../Entities/Users/DiscordUser/Mention) placeholder
+[`Mention`](../../../Entities/Users/DiscordUser.md#mention-property) placeholder
 
 ```csharp
 public static string Mention(DiscordUser user)
@@ -142,7 +142,7 @@ public static string Mention(DiscordUser user)
    
 # IsLinked method
 
-[`IsLinked`](../../../Extensions/DiscordUserExt/IsLinked) placeholder
+[`IsLinked`](../../../Extensions/DiscordUserExt.md#islinked-method) placeholder
 
 ```csharp
 public static bool IsLinked(DiscordUser user)

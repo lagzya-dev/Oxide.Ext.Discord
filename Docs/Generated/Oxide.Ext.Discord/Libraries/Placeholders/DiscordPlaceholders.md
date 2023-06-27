@@ -10,7 +10,7 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 
 | name | description |
 | --- | --- |
-| [CreateData](#createdata-method)(…) | Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData/ManualPool.md) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData/Clone.md) method. |
+| [CreateData](#createdata-method)(…) | Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData.md#manualpool-method) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData.md#clone-method) method. |
 | [ProcessPlaceholders](#processplaceholders-method)(…) | Process placeholders for the given text. |
 | [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder. Static placeholder value can not be changed. |
 | [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder |
@@ -58,7 +58,7 @@ string with placeholders replaced. If no placeholders are found the original str
    
 # CreateData method
 
-Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData/ManualPool) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData/Clone) method.
+Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData.md#manualpool-method) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData.md#clone-method) method.
 
 ```csharp
 public PlaceholderData CreateData(Plugin plugin)

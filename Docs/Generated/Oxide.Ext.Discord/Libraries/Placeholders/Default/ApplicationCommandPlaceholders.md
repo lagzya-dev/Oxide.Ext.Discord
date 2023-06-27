@@ -10,10 +10,10 @@ public static class ApplicationCommandPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id.md) placeholder |
-| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention.md) placeholder |
-| static [MentionCustom](#mentioncustom-method)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom.md) placeholder |
-| static [Name](#name-method)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name.md) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#id-property) placeholder |
+| static [Mention](#mention-method)(…) | [`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#mention-property) placeholder |
+| static [MentionCustom](#mentioncustom-method)(…) | [`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#mentioncustom-method) placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#name-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -25,7 +25,7 @@ public static class ApplicationCommandPlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Id) placeholder
+[`Id`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(DiscordApplicationCommand command)
@@ -42,7 +42,7 @@ public static Snowflake Id(DiscordApplicationCommand command)
    
 # Name method
 
-[`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Name) placeholder
+[`Name`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#name-property) placeholder
 
 ```csharp
 public static string Name(DiscordApplicationCommand command)
@@ -58,7 +58,7 @@ public static string Name(DiscordApplicationCommand command)
    
 # Mention method
 
-[`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/Mention) placeholder
+[`Mention`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#mention-property) placeholder
 
 ```csharp
 public static string Mention(DiscordApplicationCommand command)
@@ -74,7 +74,7 @@ public static string Mention(DiscordApplicationCommand command)
    
 # MentionCustom method
 
-[`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand/MentionCustom) placeholder
+[`MentionCustom`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md#mentioncustom-method) placeholder
 
 ```csharp
 public static string MentionCustom(PlaceholderState state, DiscordApplicationCommand command)

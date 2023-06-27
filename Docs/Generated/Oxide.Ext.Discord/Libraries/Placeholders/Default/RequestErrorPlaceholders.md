@@ -10,8 +10,8 @@ public static class RequestErrorPlaceholders
 
 | name | description |
 | --- | --- |
-| static [HttpCode](#httpcode-method)(…) | [`HttpStatusCode`](../../../Entities/Api/ResponseError/HttpStatusCode.md) placeholder |
-| static [Message](#message-method)(…) | [`ResponseMessage`](../../../Entities/Api/ResponseError/ResponseMessage.md) placeholder |
+| static [HttpCode](#httpcode-method)(…) | [`HttpStatusCode`](../../../Entities/Api/ResponseError.md#httpstatuscode-property) placeholder |
+| static [Message](#message-method)(…) | [`ResponseMessage`](../../../Entities/Api/ResponseError.md#responsemessage-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -23,7 +23,7 @@ public static class RequestErrorPlaceholders
    
 # HttpCode method
 
-[`HttpStatusCode`](../../../Entities/Api/ResponseError/HttpStatusCode) placeholder
+[`HttpStatusCode`](../../../Entities/Api/ResponseError.md#httpstatuscode-property) placeholder
 
 ```csharp
 public static DiscordHttpStatusCode HttpCode(ResponseError error)
@@ -40,7 +40,7 @@ public static DiscordHttpStatusCode HttpCode(ResponseError error)
    
 # Message method
 
-[`ResponseMessage`](../../../Entities/Api/ResponseError/ResponseMessage) placeholder
+[`ResponseMessage`](../../../Entities/Api/ResponseError.md#responsemessage-property) placeholder
 
 ```csharp
 public static string Message(ResponseError error)

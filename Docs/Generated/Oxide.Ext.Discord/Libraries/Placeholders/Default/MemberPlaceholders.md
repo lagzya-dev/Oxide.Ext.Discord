@@ -10,9 +10,9 @@ public static class MemberPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
-| static [Mention](#mention-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
-| static [Name](#name-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember/Id.md) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder |
+| static [Mention](#mention-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder |
+| static [Name](#name-method)(…) | [`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -24,7 +24,7 @@ public static class MemberPlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Guilds/GuildMember/Id) placeholder
+[`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(GuildMember member)
@@ -41,7 +41,7 @@ public static Snowflake Id(GuildMember member)
    
 # Name method
 
-[`Id`](../../../Entities/Guilds/GuildMember/Id) placeholder
+[`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder
 
 ```csharp
 public static string Name(GuildMember member)
@@ -57,7 +57,7 @@ public static string Name(GuildMember member)
    
 # Mention method
 
-[`Id`](../../../Entities/Guilds/GuildMember/Id) placeholder
+[`Id`](../../../Entities/Guilds/GuildMember.md#id-property) placeholder
 
 ```csharp
 public static string Mention(GuildMember member)

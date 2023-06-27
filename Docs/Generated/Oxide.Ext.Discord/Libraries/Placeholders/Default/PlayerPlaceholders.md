@@ -16,7 +16,7 @@ public static class PlayerPlaceholders
 | static [Groups](#groups-method)(…) | Player Groups Placeholder |
 | static [Health](#health-method)(…) | Health placeholder |
 | static [Id](#id-method)(…) | Id placeholder |
-| static [IsLinked](#islinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt/IsLinked.md) placeholder |
+| static [IsLinked](#islinked-method)(…) | [`IsLinked`](../../../Extensions/PlayerExt.md#islinked-method) placeholder |
 | static [MaxHealth](#maxhealth-method)(…) | MaxHealth placeholder |
 | static [Name](#name-method)(…) | Name placeholder |
 | static [Permissions](#permissions-method)(…) | Player Permissions Placeholder |
@@ -250,7 +250,7 @@ public static string ServerArmorUrl(IPlayer player)
    
 # IsLinked method
 
-[`IsLinked`](../../../Extensions/PlayerExt/IsLinked) placeholder
+[`IsLinked`](../../../Extensions/PlayerExt.md#islinked-method) placeholder
 
 ```csharp
 public static bool IsLinked(PlaceholderState state, IPlayer player)

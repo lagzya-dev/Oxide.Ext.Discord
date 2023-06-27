@@ -12,7 +12,7 @@ public class ChoicesLocalization
 | --- | --- |
 | [ChoicesLocalization](#choiceslocalization-constructor)() | Constructor |
 | [ChoicesLocalization](#choiceslocalization-constructor-1-of-2)(…) | Constructor for command option choice localization (2 constructors) |
-| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name.md) |
+| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md#name-property) |
 | [ApplyChoiceLocalization](#applychoicelocalization-method)(…) | Apply Choice Localizations |
 
 ## See Also
@@ -103,7 +103,7 @@ public ChoicesLocalization(CommandOption option, string lang)
    
 # Name property
 
-Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice/Name)
+Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md#name-property)
 
 ```csharp
 public string Name { get; set; }

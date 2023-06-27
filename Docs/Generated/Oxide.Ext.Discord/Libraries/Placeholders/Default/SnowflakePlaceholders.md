@@ -10,7 +10,7 @@ public static class SnowflakePlaceholders
 
 | name | description |
 | --- | --- |
-| static [Created](#created-method)(…) | [`GetCreationDate`](../../../Entities/Snowflake/GetCreationDate.md) placeholder |
+| static [Created](#created-method)(…) | [`GetCreationDate`](../../../Entities/Snowflake.md#getcreationdate-method) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -22,7 +22,7 @@ public static class SnowflakePlaceholders
    
 # Created method
 
-[`GetCreationDate`](../../../Entities/Snowflake/GetCreationDate) placeholder
+[`GetCreationDate`](../../../Entities/Snowflake.md#getcreationdate-method) placeholder
 
 ```csharp
 public static DateTimeOffset Created(Snowflake id)

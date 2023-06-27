@@ -22,7 +22,7 @@ public class GuildScheduledEvent : ISnowflakeEntity
 | [Id](#id-property) { get; set; } | The ID of the scheduled event |
 | [Name](#name-property) { get; set; } | The name of the scheduled event (1-100 characters) |
 | [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the scheduled event |
-| [ScheduledEndTime](#scheduledendtime-property) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType.md) is EXTERNAL |
+| [ScheduledEndTime](#scheduledendtime-property) { get; set; } | The time the scheduled event will end, required if [`EntityType`](./#entitytype-property) is EXTERNAL |
 | [ScheduledStartTime](#scheduledstarttime-property) { get; set; } | The time the scheduled event will start |
 | [Status](#status-property) { get; set; } | The status of the scheduled event |
 | [UserCount](#usercount-property) { get; set; } | The number of users subscribed to the scheduled event |
@@ -325,7 +325,7 @@ public DateTime ScheduledStartTime { get; set; }
    
 # ScheduledEndTime property
 
-The time the scheduled event will end, required if [`EntityType`](./GuildScheduledEvent/EntityType) is EXTERNAL
+The time the scheduled event will end, required if [`EntityType`](./#entitytype-property) is EXTERNAL
 
 ```csharp
 public DateTime? ScheduledEndTime { get; set; }

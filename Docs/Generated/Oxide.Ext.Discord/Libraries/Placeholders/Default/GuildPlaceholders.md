@@ -10,12 +10,12 @@ public static class GuildPlaceholders
 
 | name | description |
 | --- | --- |
-| static [Banner](#banner-method)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl.md) placeholder |
-| static [Description](#description-method)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild/Description.md) placeholder |
-| static [Icon](#icon-method)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl.md) placeholder |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild/Id.md) placeholder |
-| static [MemberCount](#membercount-method)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild/Members.md) count placeholder |
-| static [Name](#name-method)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild/Name.md) placeholder |
+| static [Banner](#banner-method)(…) | [`BannerUrl`](../../../Entities/Guilds/DiscordGuild.md#bannerurl-property) placeholder |
+| static [Description](#description-method)(…) | [`Description`](../../../Entities/Guilds/DiscordGuild.md#description-property) placeholder |
+| static [Icon](#icon-method)(…) | [`IconUrl`](../../../Entities/Guilds/DiscordGuild.md#iconurl-property) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Guilds/DiscordGuild.md#id-property) placeholder |
+| static [MemberCount](#membercount-method)(…) | [`Members`](../../../Entities/Guilds/DiscordGuild.md#members-property) count placeholder |
+| static [Name](#name-method)(…) | [`Name`](../../../Entities/Guilds/DiscordGuild.md#name-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -27,7 +27,7 @@ public static class GuildPlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Guilds/DiscordGuild/Id) placeholder
+[`Id`](../../../Entities/Guilds/DiscordGuild.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(DiscordGuild guild)
@@ -44,7 +44,7 @@ public static Snowflake Id(DiscordGuild guild)
    
 # Name method
 
-[`Name`](../../../Entities/Guilds/DiscordGuild/Name) placeholder
+[`Name`](../../../Entities/Guilds/DiscordGuild.md#name-property) placeholder
 
 ```csharp
 public static string Name(DiscordGuild guild)
@@ -60,7 +60,7 @@ public static string Name(DiscordGuild guild)
    
 # Description method
 
-[`Description`](../../../Entities/Guilds/DiscordGuild/Description) placeholder
+[`Description`](../../../Entities/Guilds/DiscordGuild.md#description-property) placeholder
 
 ```csharp
 public static string Description(DiscordGuild guild)
@@ -76,7 +76,7 @@ public static string Description(DiscordGuild guild)
    
 # Icon method
 
-[`IconUrl`](../../../Entities/Guilds/DiscordGuild/IconUrl) placeholder
+[`IconUrl`](../../../Entities/Guilds/DiscordGuild.md#iconurl-property) placeholder
 
 ```csharp
 public static string Icon(DiscordGuild guild)
@@ -92,7 +92,7 @@ public static string Icon(DiscordGuild guild)
    
 # Banner method
 
-[`BannerUrl`](../../../Entities/Guilds/DiscordGuild/BannerUrl) placeholder
+[`BannerUrl`](../../../Entities/Guilds/DiscordGuild.md#bannerurl-property) placeholder
 
 ```csharp
 public static string Banner(DiscordGuild guild)
@@ -108,7 +108,7 @@ public static string Banner(DiscordGuild guild)
    
 # MemberCount method
 
-[`Members`](../../../Entities/Guilds/DiscordGuild/Members) count placeholder
+[`Members`](../../../Entities/Guilds/DiscordGuild.md#members-property) count placeholder
 
 ```csharp
 public static int MemberCount(DiscordGuild guild)

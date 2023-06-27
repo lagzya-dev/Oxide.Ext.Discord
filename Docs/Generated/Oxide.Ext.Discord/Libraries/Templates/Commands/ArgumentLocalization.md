@@ -12,8 +12,8 @@ public class ArgumentLocalization
 | --- | --- |
 | [ArgumentLocalization](#argumentlocalization-constructor)(…) | Constructor |
 | [Choices](#choices-property) { get; set; } | Localization for Select Menu Choices |
-| [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description.md) |
-| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name.md) |
+| [Description](#description-property) { get; set; } | Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#description-property) |
+| [Name](#name-property) { get; set; } | Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#name-property) |
 | [ApplyArgumentLocalization](#applyargumentlocalization-method)(…) | Apply localizations to the command option |
 
 ## See Also
@@ -69,7 +69,7 @@ public ArgumentLocalization(CommandOption option, DiscordLocale locale)
    
 # Name property
 
-Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Name)
+Localization for [`Name`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#name-property)
 
 ```csharp
 public string Name { get; set; }
@@ -84,7 +84,7 @@ public string Name { get; set; }
    
 # Description property
 
-Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption/Description)
+Localization for [`Description`](../../../Entities/Interactions/ApplicationCommands/CommandOption.md#description-property)
 
 ```csharp
 public string Description { get; set; }

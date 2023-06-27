@@ -10,9 +10,9 @@ public static class MessagePlaceholders
 
 | name | description |
 | --- | --- |
-| static [ChannelId](#channelid-method)(…) | [`ChannelId`](../../../Entities/Messages/DiscordMessage/ChannelId.md) placeholder |
-| static [Content](#content-method)(…) | [`Content`](../../../Entities/Messages/DiscordMessage/Content.md) placeholder |
-| static [Id](#id-method)(…) | [`Id`](../../../Entities/Messages/DiscordMessage/Id.md) placeholder |
+| static [ChannelId](#channelid-method)(…) | [`ChannelId`](../../../Entities/Messages/DiscordMessage.md#channelid-property) placeholder |
+| static [Content](#content-method)(…) | [`Content`](../../../Entities/Messages/DiscordMessage.md#content-property) placeholder |
+| static [Id](#id-method)(…) | [`Id`](../../../Entities/Messages/DiscordMessage.md#id-property) placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 
 ## See Also
@@ -24,7 +24,7 @@ public static class MessagePlaceholders
    
 # Id method
 
-[`Id`](../../../Entities/Messages/DiscordMessage/Id) placeholder
+[`Id`](../../../Entities/Messages/DiscordMessage.md#id-property) placeholder
 
 ```csharp
 public static Snowflake Id(PlaceholderState state, DiscordMessage message)
@@ -42,7 +42,7 @@ public static Snowflake Id(PlaceholderState state, DiscordMessage message)
    
 # ChannelId method
 
-[`ChannelId`](../../../Entities/Messages/DiscordMessage/ChannelId) placeholder
+[`ChannelId`](../../../Entities/Messages/DiscordMessage.md#channelid-property) placeholder
 
 ```csharp
 public static Snowflake ChannelId(PlaceholderState state, DiscordMessage message)
@@ -60,7 +60,7 @@ public static Snowflake ChannelId(PlaceholderState state, DiscordMessage message
    
 # Content method
 
-[`Content`](../../../Entities/Messages/DiscordMessage/Content) placeholder
+[`Content`](../../../Entities/Messages/DiscordMessage.md#content-property) placeholder
 
 ```csharp
 public static string Content(PlaceholderState state, DiscordMessage message)

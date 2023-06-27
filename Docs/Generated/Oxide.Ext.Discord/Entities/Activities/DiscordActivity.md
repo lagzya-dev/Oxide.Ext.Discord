@@ -16,7 +16,7 @@ public class DiscordActivity
 | [Buttons](#buttons-property) { get; set; } | The custom buttons shown in the Rich Presence (max 2) See [`ActivityButton`](./ActivityButton.md) |
 | [CreatedAt](#createdat-property) { get; set; } | Timestamp of when the activity was added to the user's session |
 | [Details](#details-property) { get; set; } | What the player is currently doing |
-| [Emoji](#emoji-property) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./DiscordActivity/Emoji.md) |
+| [Emoji](#emoji-property) { get; set; } | tTe emoji used for a custom status See [`Emoji`](./#emoji-property) |
 | [Flags](#flags-property) { get; set; } | Describes what the payload includes See [`ActivityFlags`](./ActivityFlags.md) |
 | [GetLargeImageUrl](#getlargeimageurl-property) { get; } | Returns the large image url for the presence asset |
 | [GetSmallImageUrl](#getsmallimageurl-property) { get; } | Returns the small image url for the presence asset |
