@@ -18,6 +18,7 @@ using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins.Core
 {
@@ -70,11 +71,11 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 Lang.RegisterMessages(language.Value, this, language.Key);
             }
-
-            CreateTemplates();
+            
             DiscordPlaceholders.Instance.RegisterPlaceholders();
-
             ServerPlayerCache.Instance.SetSearchService();
+            
+            CreateTemplates();
         }
 
         // ReSharper disable once UnusedMember.Local
