@@ -40,6 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Api
                 RateLimit = DiscordPool.Internal.Get<RateLimitResponse>();
                 RateLimit.Init(client, response.Headers, Code, Content);
                 error?.SetResponse(Code, Content);
+                error?.SetRateLimitResponse(RateLimit.Message, RateLimit.Code);
             }
         }
 

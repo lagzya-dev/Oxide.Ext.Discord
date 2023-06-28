@@ -156,7 +156,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             }
 
             ResponseMessage = content;
-            if (string.IsNullOrEmpty(ResponseMessage) || !ResponseMessage.StartsWith("{"))
+            if (string.IsNullOrEmpty(ResponseMessage) || ResponseMessage[0] != '{')
             {
                 return;
             }

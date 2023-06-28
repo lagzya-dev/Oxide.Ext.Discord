@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Entities.Api
             Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
             ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
 
-            if (code == DiscordHttpStatusCode.TooManyRequests)
+            if (code == DiscordHttpStatusCode.TooManyRequests && !string.IsNullOrEmpty(content) && content[0] == '{')
             {
                 RateLimitContent rateContent = DiscordPool.Internal.Get<RateLimitContent>();
                 JsonConvert.PopulateObject(content, rateContent);
