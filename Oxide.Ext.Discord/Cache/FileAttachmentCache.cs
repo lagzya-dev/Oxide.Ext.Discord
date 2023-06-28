@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Cache
             {
                 for (int i = _cache.Count; i <= index; i++)
                 {
-                    _cache[i] = $"files[{(index + 1).ToString()}]";
+                    _cache.Add($"files[{(index + 1).ToString()}]");
                 }
             }
 
