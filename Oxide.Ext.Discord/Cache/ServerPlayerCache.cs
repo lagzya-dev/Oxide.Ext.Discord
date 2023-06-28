@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Configuration;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Services.PlayerSearch;
 using Oxide.Ext.Discord.Singleton;
@@ -76,21 +75,11 @@ namespace Oxide.Ext.Discord.Cache
         internal void OnUserConnected(IPlayer player)
         {
             _search.OnUserConnected(player);
-            if (player.IsLinked())
-            {
-                SetPlayer(player);
-            }
+            _cache.TryRemove(player.Id, out IPlayer _);
+            _cache.TryAdd(player.Id, player);
         }
 
         internal void OnUserDisconnected(IPlayer player) => _search.OnUserDisconnected(player);
         internal void OnUserNameUpdated(IPlayer player, string oldName, string newName) => _search.OnUserNameUpdated(player, oldName, newName);
-        
-        private void SetPlayer(IPlayer player)
-        {
-            if (!_cache.TryGetValue(player.Id, out IPlayer cached) || cached.IsDummyPlayer())
-            {
-                _cache[player.Id] = player;
-            }
-        }
     }
 }

@@ -28,7 +28,13 @@ namespace Oxide.Ext.Discord.Services.PlayerSearch
 
         public IEnumerable<IPlayer> GetAllPlayers(string name) => _all.Search(name);
 
-        public void OnUserConnected(IPlayer player) => _online.Add(player.Name, player);
+        public void OnUserConnected(IPlayer player)
+        {
+            _all.Remove(player.Name, player);
+            _online.Remove(player.Name, player);
+            _all.Add(player.Name, player);
+            _online.Add(player.Name, player);
+        }
 
         public void OnUserDisconnected(IPlayer player) => _online.Remove(player.Name, player);
 
