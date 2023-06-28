@@ -103,8 +103,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
         private List<ActionRowComponent> CreateComponents(PlaceholderData data)
         {
             List<ActionRowComponent> rows = new List<ActionRowComponent>();
-            ActionRowComponent active = new ActionRowComponent();
-            rows.Add(active);
+            ActionRowComponent active = AddActionRow(rows, -1, Components.Count);
             for (int index = 0; index < Components.Count; index++)
             {
                 BaseComponentTemplate component = Components[index];
@@ -120,20 +119,30 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                     if (!button.Inline || active.Components.Count == 5)
                     {
                         InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
-                        active = new ActionRowComponent();
-                        rows.Add(active);
+                        active = AddActionRow(rows, index, Components.Count);
                     }
-                } 
+                }
                 else if (component is SelectMenuTemplate selectMenu)
                 {
                     active.Components.Add(selectMenu.ToComponent(data));
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
-                    active = new ActionRowComponent();
-                    rows.Add(active);
+                    active = AddActionRow(rows, index, Components.Count);
                 }
             }
 
             return rows;
+        }
+
+        private ActionRowComponent AddActionRow(List<ActionRowComponent> row, int index, int count)
+        {
+            if (index + 1 >= count)
+            {
+                return null;
+            }
+
+            ActionRowComponent comp = new ActionRowComponent();
+            row.Add(comp);
+            return comp;
         }
     }
 }
