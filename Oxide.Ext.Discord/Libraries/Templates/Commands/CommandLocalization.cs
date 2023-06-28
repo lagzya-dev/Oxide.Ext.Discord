@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Plugins;
@@ -107,13 +108,24 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
         /// <param name="locale"></param>
         public void ApplyCommandLocalization(CommandCreate create, DiscordLocale locale)
         {
+            if (create.NameLocalizations == null)
+            {
+                create.NameLocalizations = new Hash<string, string>();
+            }
+
+            if (create.DescriptionLocalizations == null)
+            {
+                create.DescriptionLocalizations = new Hash<string, string>();
+            }
+            
             create.NameLocalizations[locale.Id] = Name;
             create.DescriptionLocalizations[locale.Id] = Description;
-            if (create.Options != null)
+            List<CommandOption> options = create.Options;
+            if (options != null)
             {
-                for (int index = 0; index < create.Options.Count; index++)
+                for (int index = 0; index < options.Count; index++)
                 {
-                    CommandOption option = create.Options[index];
+                    CommandOption option = options[index];
                     Options[option.Name].ApplyOptionLocalization(option, locale);
                 }
             }
