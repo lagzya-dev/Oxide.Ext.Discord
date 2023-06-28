@@ -194,10 +194,7 @@ namespace Oxide.Ext.Discord.Hooks
         #region HandleCall
         internal static void CallHook(Plugin plugin, string name, object[] args)
         {
-            if (plugin != null && plugin.IsLoaded)
-            {
-                plugin.CallHook(name, args);
-            }
+            plugin?.CallHook(name, args);
 
             if (args.Length != 0)
             {
