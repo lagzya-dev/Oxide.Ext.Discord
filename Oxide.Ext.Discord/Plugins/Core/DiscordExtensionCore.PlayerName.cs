@@ -3,19 +3,15 @@ using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins.Core
 {
     internal partial class DiscordExtensionCore
     {
-        [PluginReference("Clans")]
-#pragma warning disable CS0649
         private Plugin _clans;
-#pragma warning restore CS0649
-
         private readonly Hash<PlayerDisplayNameMode, Hash<string, string>> _playerNameCache = new Hash<PlayerDisplayNameMode, Hash<string, string>>();
-        private readonly StringBuilder _sb = new StringBuilder();
 
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnClanCreate))]
@@ -42,14 +38,12 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(OnUserNameUpdated))]
         private void OnUserNameUpdated(string playerId, string oldName, string newName)
         {
-            if (oldName == newName)
+            if (oldName != newName)
             {
-                return;
-            }
-            
-            foreach (KeyValuePair<PlayerDisplayNameMode, Hash<string,string>> cache in _playerNameCache)
-            {
-                cache.Value.Remove(playerId);
+                foreach (KeyValuePair<PlayerDisplayNameMode, Hash<string, string>> cache in _playerNameCache)
+                {
+                    cache.Value.Remove(playerId);
+                }
             }
         }
 
@@ -79,24 +73,30 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 return name;
             }
 
-            _sb.Clear();
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+
+            sb.Clear();
             if (_clans != null && _clans.IsLoaded && HasFlag(options, PlayerDisplayNameMode.IncludeClanName))
             {
-                _sb.Append('[');
-                _sb.Append(_clans.Call<string>("GetClanOf", player.Id));
-                _sb.Append("] ");
+                string clan = _clans.Call<string>("GetClanOf", player.Id);
+                if (!string.IsNullOrEmpty(clan))
+                {
+                    sb.Append('[');
+                    sb.Append(clan);
+                    sb.Append("] ");
+                }
             }
 
-            _sb.Append(player.Name);
+            sb.Append(player.Name);
 
             if (HasFlag(options, PlayerDisplayNameMode.IncludePlayerId))
             {
-                _sb.Append(" (");
-                _sb.Append(player.Id);
-                _sb.Append(')');
+                sb.Append(" (");
+                sb.Append(player.Id);
+                sb.Append(')');
             }
 
-            name = _sb.ToString();
+            name = DiscordPool.Internal.FreeStringBuilderToString(sb);
             cache[player.Id] = name;
             return name;
         }

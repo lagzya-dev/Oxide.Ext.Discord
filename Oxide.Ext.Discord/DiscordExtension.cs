@@ -125,6 +125,9 @@ namespace Oxide.Ext.Discord
 
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
             Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
+            
+            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginLoaded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginUnloaded;
         }
 
         /// <summary>

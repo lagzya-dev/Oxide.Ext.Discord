@@ -28,6 +28,8 @@ namespace Oxide.Ext.Discord.Plugins.Core
         private ILogger _logger;
 
         internal bool IsServerLoaded;
+
+        private readonly Hash<string, Action<Plugin>> _pluginReferences;
         #endregion
         
         #region Setup & Loading
@@ -35,6 +37,12 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             Name = "DiscordExtension";
             Title = "Discord Extension";
+
+            _pluginReferences = new Hash<string, Action<Plugin>>
+            {
+                ["PlaceholderAPI"] = HandlePlaceholderApi,
+                ["Clans"] = plugin => _clans = plugin,
+            };
         }
         
         // ReSharper disable once UnusedMember.Local
@@ -298,18 +306,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(OnPluginLoaded))]
         private void OnPluginLoaded(Plugin plugin)
         {
-            DiscordClientFactory.Instance.OnPluginLoaded(plugin);
+            _pluginReferences[plugin.Name]?.Invoke(plugin);
         }
         
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnPluginUnloaded))]
         private void OnPluginUnloaded(Plugin plugin)
         {
-            DiscordClientFactory.Instance.OnPluginUnloaded(plugin);
-            if (plugin.Name == "PlaceholderAPI")
-            {
-                HandlePlaceholderApiUnloaded();
-            }
+            _pluginReferences[plugin.Name]?.Invoke(null);
         }
 
         // ReSharper disable once UnusedMember.Local
