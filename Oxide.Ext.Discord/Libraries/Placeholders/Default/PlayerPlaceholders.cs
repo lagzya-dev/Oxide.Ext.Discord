@@ -65,6 +65,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
 
         /// <summary>
+        /// Player Groups Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static string ClanTag(IPlayer player) => DiscordExtensionCore.Instance.GetClanTag(player);
+
+        /// <summary>
         /// Steam Profile Url Placeholder 
         /// </summary>
         public static string SteamProfileUrl(IPlayer player) => $"https://steamcommunity.com/profiles/{player.Id}";
@@ -117,6 +124,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health.max", dataKey, MaxHealth);
             placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.clan.tag", dataKey, ClanTag);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.steamid", dataKey, BattleMetricsSteamIdUrl);
