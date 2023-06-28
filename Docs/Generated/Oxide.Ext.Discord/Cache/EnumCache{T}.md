@@ -16,6 +16,7 @@ public sealed class EnumCache<T> : Singleton<EnumCache>
 | name | description |
 | --- | --- |
 | readonly [Values](#values-field) | Readonly Collection of Enum Values |
+| [Next](#next-method)(…) | Returns the next enum values. If the value is the last value it will start from the beginning |
 | [ToLower](#tolower-method)(…) | Returns the lowered string representation of the enum |
 | [ToNumber](#tonumber-method)(…) | Converts the enum to it's number form as a string |
 | [ToString](#tostring-method)(…) | Returns the string representation of the enum |
@@ -85,6 +86,29 @@ public string ToNumber(T value)
 | parameter | description |
 | --- | --- |
 | value |  |
+
+## See Also
+
+* class [EnumCache&lt;T&gt;](./EnumCache%7BT%7D.md)
+* namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Next method
+
+Returns the next enum values. If the value is the last value it will start from the beginning
+
+```csharp
+public T Next(T value)
+```
+
+| parameter | description |
+| --- | --- |
+| value | Value to get the next enum from |
+
+## Return Value
+
+Next enum from the given value
 
 ## See Also
 

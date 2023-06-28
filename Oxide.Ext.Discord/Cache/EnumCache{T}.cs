@@ -19,7 +19,8 @@ namespace Oxide.Ext.Discord.Cache
         /// Readonly Collection of Enum Values
         /// </summary>
         public readonly ReadOnlyCollection<T> Values;
-        
+
+        private readonly T[] _values;
         private readonly Dictionary<T, string> _cachedStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _loweredStrings = new Dictionary<T, string>();
         private readonly Dictionary<T, string> _numberString = new Dictionary<T, string>();
@@ -34,16 +35,16 @@ namespace Oxide.Ext.Discord.Cache
         {
             _type = typeof(T);
             _isFlagsEnum = _type.HasAttribute<FlagsAttribute>(false);
-            T[] values = Enum.GetValues(_type).Cast<T>().ToArray();
-            _typeCode = Convert.GetTypeCode(values[0]);
-            for (int index = 0; index < values.Length; index++)
+            _values = Enum.GetValues(_type).Cast<T>().ToArray();
+            _typeCode = Convert.GetTypeCode(_values[0]);
+            for (int index = 0; index < _values.Length; index++)
             {
-                T value = values[index];
+                T value = _values[index];
                 string enumString = value.ToString();
                 _cachedStrings[value] = enumString;
                 _loweredStrings[value] = enumString.ToLower();
             }
-            Values = new ReadOnlyCollection<T>(values);
+            Values = new ReadOnlyCollection<T>(_values);
         }
         
         /// <summary>
@@ -93,6 +94,28 @@ namespace Oxide.Ext.Discord.Cache
             }
 
             return str;
+        }
+
+        /// <summary>
+        /// Returns the next enum values. If the value is the last value it will start from the beginning
+        /// </summary>
+        /// <param name="value">Value to get the next enum from</param>
+        /// <returns>Next enum from the given value</returns>
+        public T Next(T value)
+        {
+            int index = Array.IndexOf(_values, value) + 1;
+            return _values.Length == index ? _values[0] : _values[index];      
+        }
+        
+        /// <summary>
+        /// Returns the previous enum values.
+        /// </summary>
+        /// <param name="value">Value to get the previous enum from</param>
+        /// <returns>Previous enum from the given value</returns>
+        public T Previous(T value)
+        {
+            int index = Array.IndexOf(_values, value) + 1;
+            return index == 0 ? _values[_values.Length] : _values[index];      
         }
 
         private int GetTypeSize()
