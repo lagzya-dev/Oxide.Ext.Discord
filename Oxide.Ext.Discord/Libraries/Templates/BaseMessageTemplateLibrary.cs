@@ -154,7 +154,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
 
             if (template == null)
             {
-                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}' is not registered", id.GetPluginName(), this.GetType().Name, id.TemplateName);
+                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}/{3}' is not registered", id.GetPluginName(), GetType().Name, id.GetLanguageName(), id.TemplateName);
                 return new TTemplate();
             }
             
