@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Logging;
@@ -12,6 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     {
         public bool IsEmpty => _commands.Count == 0;
         private readonly Hash<AppCommandId, BaseAppCommand> _commands = new Hash<AppCommandId, BaseAppCommand>();
+        private readonly List<ComponentCommand> _components = new List<ComponentCommand>();
         private readonly ILogger _logger;
 
         public AppCommandHandler(ILogger logger) 
@@ -19,18 +21,58 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             _logger = logger;
         }
 
-        public BaseAppCommand GetCommandById(AppCommandId id) => _commands[id];
+        public BaseAppCommand GetCommandById(AppCommandId id)
+        {
+            switch (id.Type)
+            {
+                case InteractionType.ApplicationCommand:
+                case InteractionType.ApplicationCommandAutoComplete:
+                    return _commands[id];
+                case InteractionType.MessageComponent:
+                case InteractionType.ModalSubmit:
+                    return GetComponentCommand(id);
+            }
+
+            return null;
+        }
 
         public void AddAppCommand(BaseAppCommand command)
         {
-            _commands[command.CommandId] = command;
+            if (command is ComponentCommand component)
+            {
+                _components.Add(component);
+            }
+            else
+            {
+                _commands[command.CommandId] = command;
+            }
+            
             _logger.Verbose($"{nameof(AppCommandHandler)}.{nameof(AddAppCommand)} Command: {{0}}", command.CommandId);
         }
 
         public bool RemoveAppCommand(BaseAppCommand command)
         {
             _logger.Verbose($"{nameof(AppCommandHandler)}.{nameof(RemoveAppCommand)} Command: {{0}}", command.CommandId);
+            if (command is ComponentCommand component)
+            {
+                return _components.Remove(component);
+            }
+            
             return _commands.Remove(command.CommandId);
+        }
+
+        private ComponentCommand GetComponentCommand(AppCommandId id)
+        {
+            for (int index = 0; index < _components.Count; index++)
+            {
+                ComponentCommand command = _components[index];
+                if (command.IsForCommand(id))
+                {
+                    return command;
+                }
+            }
+
+            return null;
         }
 
         public IEnumerable<BaseAppCommand> GetCommandsForPlugin(Plugin plugin)
@@ -43,6 +85,15 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                     yield return command;
                 }
             }
+
+            for (int index = 0; index < _components.Count; index++)
+            {
+                ComponentCommand command = _components[index];
+                if (command.IsForPlugin(id))
+                {
+                    yield return command;
+                }
+            }
         }
 
         public IEnumerable<BaseAppCommand> GetCommands()
@@ -50,6 +101,11 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             foreach (BaseAppCommand command in _commands.Values)
             {
                 yield return command;
+            }
+            
+            for (int index = 0; index < _components.Count; index++)
+            {
+                yield return _components[index];
             }
         }
     }

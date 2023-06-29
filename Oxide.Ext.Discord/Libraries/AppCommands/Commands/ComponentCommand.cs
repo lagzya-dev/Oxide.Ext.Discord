@@ -21,6 +21,8 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
 
         protected override string GetExceptionMessage() => $"An error occured during callback. Plugin: {PluginName} Method: {_callback.Method.DeclaringType?.Name}.{_callback.Method.Name}";
 
+        public bool IsForCommand(AppCommandId id) => id.Command.StartsWith(CommandId.Command);
+
         public override void LogDebug(DebugLogger logger)
         {
             base.LogDebug(logger);
