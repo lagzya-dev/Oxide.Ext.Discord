@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             foreach (KeyValuePair<PlayerDisplayNameMode, Hash<string,string>> cache in _playerNameCache)
             {
-                if (HasFlag(cache.Key, PlayerDisplayNameMode.IncludeClanName))
+                if (HasFlag(cache.Key, PlayerDisplayNameMode.Clan))
                 {
                     cache.Value.Clear();
                 }
@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
 
             sb.Clear();
-            if (_clans != null && _clans.IsLoaded && HasFlag(options, PlayerDisplayNameMode.IncludeClanName))
+            if (_clans != null && _clans.IsLoaded && HasFlag(options, PlayerDisplayNameMode.Clan))
             {
                 string clan = _clans.Call<string>("GetClanOf", player.Id);
                 if (!string.IsNullOrEmpty(clan))
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
             sb.Append(player.Name);
 
-            if (HasFlag(options, PlayerDisplayNameMode.IncludePlayerId))
+            if (HasFlag(options, PlayerDisplayNameMode.PlayerId))
             {
                 sb.Append(" (");
                 sb.Append(player.Id);

@@ -55,11 +55,12 @@ public static string Id(IPlayer player)
 Name placeholder
 
 ```csharp
-public static string Name(IPlayer player)
+public static string Name(PlaceholderState state, IPlayer player)
 ```
 
 ## See Also
 
+* class [PlaceholderState](../PlaceholderState.md)
 * class [PlayerPlaceholders](./PlayerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

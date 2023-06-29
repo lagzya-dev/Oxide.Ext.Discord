@@ -3,7 +3,7 @@ using System;
 namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
 {
     /// <summary>
-    /// AutoComplete Player Search Options for <see cref="InteractionAutoCompleteBuilder"/>
+    /// Player Name Formatting options for <see cref="PlayerNameFormatter"/>
     /// </summary>
     [Flags]
     public enum PlayerDisplayNameMode : sbyte
@@ -16,16 +16,16 @@ namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
         /// <summary>
         /// Include Clan Name in search
         /// </summary>
-        IncludeClanName = 1 << 0,
+        Clan = 1 << 0,
         
         /// <summary>
         /// Include Steam ID
         /// </summary>
-        IncludePlayerId = 1 << 1,
-        
+        PlayerId = 1 << 1,
+
         /// <summary>
         /// All display name options
         /// </summary>
-        All = Default | IncludeClanName | IncludePlayerId
+        All = Default | Clan | PlayerId
     }
 }

@@ -20,13 +20,13 @@ namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
         /// <summary>
         /// Include clan name in the player name
         /// </summary>
-        public static readonly PlayerNameFormatter ClanName = Create(PlayerDisplayNameMode.IncludeClanName);
+        public static readonly PlayerNameFormatter ClanName = Create(PlayerDisplayNameMode.Clan);
         
         /// <summary>
         /// Include Player Id in the player name
         /// </summary>
-        public static readonly PlayerNameFormatter PlayerId = Create(PlayerDisplayNameMode.IncludePlayerId);
-        
+        public static readonly PlayerNameFormatter PlayerId = Create(PlayerDisplayNameMode.PlayerId);
+
         /// <summary>
         /// Include all name options in the player name
         /// </summary>

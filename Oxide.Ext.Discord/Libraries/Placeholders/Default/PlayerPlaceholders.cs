@@ -1,7 +1,9 @@
+using System;
 using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins.Core;
 
@@ -25,8 +27,27 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <summary>
         /// <see cref="IPlayer.Name"/> placeholder
         /// </summary>
-        public static string Name(IPlayer player) => player.Name;
-        
+        public static string Name(PlaceholderState state, IPlayer player)
+        {
+            string format = state.Format;
+            if (string.IsNullOrEmpty(format) || !Enum.TryParse(format, true, out PlayerDisplayNameMode mode))
+            {
+                return player.Name;
+            }
+
+            switch (mode)
+            {
+                case PlayerDisplayNameMode.Clan:
+                    return PlayerNameFormatter.ClanName.Format(player);
+                case PlayerDisplayNameMode.PlayerId:
+                    return PlayerNameFormatter.PlayerId.Format(player);
+                case PlayerDisplayNameMode.All:
+                    return PlayerNameFormatter.All.Format(player);
+                default:
+                    return PlayerNameFormatter.Default.Format(player);
+            }
+        }
+
         /// <summary>
         /// <see cref="IPlayer.IsConnected"/> placeholder
         /// </summary>
