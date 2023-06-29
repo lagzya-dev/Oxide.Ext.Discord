@@ -12,6 +12,7 @@ public static class PlayerPlaceholders
 | --- | --- |
 | static [BattleMetricsNameUrl](#battlemetricsnameurl-method)(…) | Battle metrics Place Name Url Placeholder |
 | static [BattleMetricsSteamIdUrl](#battlemetricssteamidurl-method)(…) | Battle metrics Steam ID Url Placeholder |
+| static [ClanTag](#clantag-method)(…) | Player Groups Placeholder |
 | static [Connected](#connected-method)(…) | IsConnected placeholder |
 | static [Groups](#groups-method)(…) | Player Groups Placeholder |
 | static [Health](#health-method)(…) | Health placeholder |
@@ -160,6 +161,25 @@ Player Groups Placeholder
 
 ```csharp
 public static string[] Groups(IPlayer player)
+```
+
+| parameter | description |
+| --- | --- |
+| player |  |
+
+## See Also
+
+* class [PlayerPlaceholders](./PlayerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# ClanTag method
+
+Player Groups Placeholder
+
+```csharp
+public static string ClanTag(IPlayer player)
 ```
 
 | parameter | description |
