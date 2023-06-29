@@ -1,5 +1,6 @@
 using System;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
@@ -58,6 +59,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// </summary>
         public static double TotalMilliseconds(TimeSpan time) => time.TotalMilliseconds;
 
+        internal static void RegisterPlaceholders()
+        {
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "timespan", "timespan");
+        }
+        
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>

@@ -47,6 +47,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             ApplicationCommandPlaceholders.RegisterPlaceholders();
             RequestErrorPlaceholders.RegisterPlaceholders();
             SnowflakePlaceholders.RegisterPlaceholders();
+            TimeSpanPlaceholders.RegisterPlaceholders();
         }
 
         internal IEnumerable<KeyValuePair<string, IPlaceholder>> GetPlaceholders()
@@ -106,9 +107,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 {
                     DiscordExtensionCore.Instance.GetReplacer()?.Invoke(data.Get<IPlayer>(), builder, true);
                 }
-
-                text = builder.ToString();
-                DiscordPool.Internal.FreeStringBuilder(builder);
+                
+                text = DiscordPool.Internal.FreeStringBuilderToString(builder);
                 state.Dispose();
             }
 
