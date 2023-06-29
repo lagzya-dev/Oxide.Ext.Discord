@@ -60,13 +60,13 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         internal string GetClanTag(IPlayer player)
         {
-            string tag = _clans.Call<string>("GetClanOf", player.Id);
-            if (string.IsNullOrEmpty(tag))
+            if (!IsPluginLoaded(_clans))
             {
                 return string.Empty;
             }
-
-            return tag;
+            
+            string tag = _clans.Call<string>("GetClanOf", player.Id);
+            return !string.IsNullOrEmpty(tag) ? tag : string.Empty;
         }
         
         public string GetPlayerName(IPlayer player, PlayerDisplayNameMode options)
