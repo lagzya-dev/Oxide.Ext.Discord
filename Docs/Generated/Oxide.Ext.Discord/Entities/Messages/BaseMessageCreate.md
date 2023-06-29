@@ -10,7 +10,7 @@ public abstract class BaseMessageCreate : IDiscordMessageTemplate, IFileAttachme
 
 | name | description |
 | --- | --- |
-| [AllowedMention](#allowedmention-property) { get; set; } | Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content. |
+| [AllowedMentions](#allowedmentions-property) { get; set; } | Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content. |
 | [Attachments](#attachments-property) { get; set; } | Attachments for the message |
 | [Components](#components-property) { get; set; } | Used to create message components on a message |
 | [Content](#content-property) { get; set; } | Contents of the message |
@@ -172,17 +172,17 @@ public List<DiscordEmbed> Embeds { get; set; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# AllowedMention property
+# AllowedMentions property
 
 Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content.
 
 ```csharp
-public AllowedMention AllowedMention { get; set; }
+public AllowedMentions AllowedMentions { get; set; }
 ```
 
 ## See Also
 
-* class [AllowedMention](./AllowedMentions/AllowedMention.md)
+* class [AllowedMentions](./AllowedMentions.md)
 * class [BaseMessageCreate](./BaseMessageCreate.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

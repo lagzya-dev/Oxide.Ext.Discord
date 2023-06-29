@@ -2,6 +2,8 @@
 
 | public type | description |
 | --- | --- |
+| class [AllowedMentions](./AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
+| enum [AllowedMentionTypes](./AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 | abstract class [BaseMessageCreate](./BaseMessageCreate.md) | Represents a base message in discord |
 | class [DiscordMessage](./DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
 | class [MessageActivity](./MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |

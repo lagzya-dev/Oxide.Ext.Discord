@@ -485,7 +485,7 @@ Edits a previously-sent webhook message from the same token. See [Edit Webhook M
 
 ```csharp
 public IPromise<DiscordMessage> EditWebhookMessage(DiscordClient client, Snowflake messageId, 
-    DiscordMessage message, WebhookMessageParams messageParams = null)
+    WebhookEditMessage message, WebhookMessageParams messageParams = null)
 ```
 
 | parameter | description |
@@ -501,6 +501,7 @@ public IPromise<DiscordMessage> EditWebhookMessage(DiscordClient client, Snowfla
 * class [DiscordMessage](../Messages/DiscordMessage.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
 * struct [Snowflake](../Snowflake.md)
+* class [WebhookEditMessage](./WebhookEditMessage.md)
 * class [WebhookMessageParams](./WebhookMessageParams.md)
 * class [DiscordWebhook](./DiscordWebhook.md)
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
@@ -513,7 +514,7 @@ Edit a message from a webhook using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> EditWebhookMessageGlobalTemplate(DiscordClient client, 
-    Snowflake messageId, Plugin plugin, string templateName, DiscordMessage message = null, 
+    Snowflake messageId, Plugin plugin, string templateName, WebhookEditMessage message = null, 
     PlaceholderData placeholders = null, WebhookMessageParams messageParams = null)
 ```
 
@@ -533,6 +534,7 @@ public IPromise<DiscordMessage> EditWebhookMessageGlobalTemplate(DiscordClient c
 * class [DiscordMessage](../Messages/DiscordMessage.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
 * struct [Snowflake](../Snowflake.md)
+* class [WebhookEditMessage](./WebhookEditMessage.md)
 * class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
 * class [WebhookMessageParams](./WebhookMessageParams.md)
 * class [DiscordWebhook](./DiscordWebhook.md)
@@ -547,7 +549,7 @@ Edit a message from a webhook using a localized message template
 ```csharp
 public IPromise<DiscordMessage> EditWebhookMessageTemplate(DiscordClient client, 
     Snowflake messageId, Plugin plugin, string templateName, string language = "en", 
-    DiscordMessage message = null, PlaceholderData placeholders = null, 
+    WebhookEditMessage message = null, PlaceholderData placeholders = null, 
     WebhookMessageParams messageParams = null)
 ```
 
@@ -568,6 +570,7 @@ public IPromise<DiscordMessage> EditWebhookMessageTemplate(DiscordClient client,
 * class [DiscordMessage](../Messages/DiscordMessage.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
 * struct [Snowflake](../Snowflake.md)
+* class [WebhookEditMessage](./WebhookEditMessage.md)
 * class [PlaceholderData](../../Libraries/Placeholders/PlaceholderData.md)
 * class [WebhookMessageParams](./WebhookMessageParams.md)
 * class [DiscordWebhook](./DiscordWebhook.md)

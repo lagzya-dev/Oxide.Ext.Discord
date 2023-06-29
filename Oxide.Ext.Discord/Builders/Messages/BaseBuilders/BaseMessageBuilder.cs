@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Oxide.Ext.Discord.Builders.MessageComponents;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
@@ -110,14 +109,14 @@ namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
         }
 
         /// <summary>
-        /// Adds <see cref="AllowedMention"/> to the response
+        /// Adds <see cref="AllowedMentions"/> to the response
         /// </summary>
-        /// <param name="mention">Mentions to be added</param>
+        /// <param name="mentions">Mentions to be added</param>
         /// <returns>This</returns>
-        public virtual TBuilder AddAllowedMentions(AllowedMention mention)
+        public virtual TBuilder AddAllowedMentions(AllowedMentions mentions)
         {
-            if (mention == null) throw new ArgumentNullException(nameof(mention));
-            Message.AllowedMention = mention;
+            if (mentions == null) throw new ArgumentNullException(nameof(mentions));
+            Message.AllowedMentions = mentions;
             return Builder;
         }
 

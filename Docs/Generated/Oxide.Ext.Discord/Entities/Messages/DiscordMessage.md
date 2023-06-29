@@ -3,7 +3,7 @@
 Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord..
 
 ```csharp
-public class DiscordMessage : IDiscordMessageTemplate, IFileAttachments
+public class DiscordMessage : IFileAttachments
 ```
 
 ## Public Members
@@ -68,7 +68,6 @@ public class DiscordMessage : IDiscordMessageTemplate, IFileAttachments
 
 ## See Also
 
-* interface [IDiscordMessageTemplate](../../Interfaces/Entities/Messages/IDiscordMessageTemplate.md)
 * interface [IFileAttachments](../../Interfaces/IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

@@ -155,12 +155,12 @@ public MessageFlags? Flags { get; set; }
 Allowed mentions for the message
 
 ```csharp
-public AllowedMention AllowedMentions { get; set; }
+public AllowedMentions AllowedMentions { get; set; }
 ```
 
 ## See Also
 
-* class [AllowedMention](./AllowedMentions/AllowedMention.md)
+* class [AllowedMentions](./AllowedMentions.md)
 * class [MessageUpdate](./MessageUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

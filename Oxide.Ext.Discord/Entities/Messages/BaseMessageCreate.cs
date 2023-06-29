@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages.AllowedMentions;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -38,7 +37,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Allows for more granular control over mentions without various hacks to the message content. 
         /// </summary>
         [JsonProperty("allowed_mentions")]
-        public AllowedMention AllowedMention { get; set; }
+        public AllowedMentions AllowedMentions { get; set; }
         
         /// <summary>
         /// Used to create message components on a message

@@ -10,6 +10,7 @@ public interface IDiscordMessageTemplate
 
 | name | description |
 | --- | --- |
+| [AllowedMentions](#allowedmentions-property) { get; set; } | Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content. |
 | [Components](#components-property) { get; set; } | Components for the message |
 | [Content](#content-property) { get; set; } | Content of the message |
 | [Embeds](#embeds-property) { get; set; } | Embeds for the message |
@@ -31,6 +32,22 @@ public string Content { get; set; }
 
 ## See Also
 
+* interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md)
+* namespace [Oxide.Ext.Discord.Interfaces.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# AllowedMentions property
+
+Allowed mentions for a message Allows for more granular control over mentions without various hacks to the message content.
+
+```csharp
+public AllowedMentions AllowedMentions { get; set; }
+```
+
+## See Also
+
+* class [AllowedMentions](../../../Entities/Messages/AllowedMentions.md)
 * interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md)
 * namespace [Oxide.Ext.Discord.Interfaces.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

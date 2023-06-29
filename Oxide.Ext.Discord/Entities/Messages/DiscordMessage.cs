@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a> sent in a channel within Discord..
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordMessage : IFileAttachments, IDiscordMessageTemplate
+    public class DiscordMessage : IFileAttachments
     {
         /// <summary>
         /// ID of the message

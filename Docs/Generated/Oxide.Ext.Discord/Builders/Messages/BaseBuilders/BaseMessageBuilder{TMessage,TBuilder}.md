@@ -18,7 +18,7 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 | name | description |
 | --- | --- |
 | virtual [AddActionRow](#addactionrow-method)(…) | Adds a single [`ActionRowComponent`](../../../Entities/Interactions/MessageComponents/ActionRowComponent.md) |
-| virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response |
+| virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMentions`](../../../Entities/Messages/AllowedMentions.md) to the response |
 | virtual [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
 | virtual [AddComponents](#addcomponents-method-1-of-2)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
 | virtual [AddContent](#addcontent-method)(…) | Adds message text |
@@ -165,15 +165,15 @@ This
    
 # AddAllowedMentions method
 
-Adds [`AllowedMention`](../../../Entities/Messages/AllowedMentions/AllowedMention.md) to the response
+Adds [`AllowedMentions`](../../../Entities/Messages/AllowedMentions.md) to the response
 
 ```csharp
-public virtual TBuilder AddAllowedMentions(AllowedMention mention)
+public virtual TBuilder AddAllowedMentions(AllowedMentions mentions)
 ```
 
 | parameter | description |
 | --- | --- |
-| mention | Mentions to be added |
+| mentions | Mentions to be added |
 
 ## Return Value
 
@@ -181,7 +181,7 @@ This
 
 ## See Also
 
-* class [AllowedMention](../../../Entities/Messages/AllowedMentions/AllowedMention.md)
+* class [AllowedMentions](../../../Entities/Messages/AllowedMentions.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages.BaseBuilders](./BaseBuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

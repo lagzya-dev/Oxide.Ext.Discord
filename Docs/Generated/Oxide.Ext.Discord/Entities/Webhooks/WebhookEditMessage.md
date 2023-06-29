@@ -147,12 +147,12 @@ public List<DiscordEmbed> Embeds { get; set; }
 Allowed mentions for the message
 
 ```csharp
-public AllowedMention AllowedMentions { get; set; }
+public AllowedMentions AllowedMentions { get; set; }
 ```
 
 ## See Also
 
-* class [AllowedMention](../Messages/AllowedMentions/AllowedMention.md)
+* class [AllowedMentions](../Messages/AllowedMentions.md)
 * class [WebhookEditMessage](./WebhookEditMessage.md)
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
