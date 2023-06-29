@@ -65,9 +65,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
                 field = new EmbedField();
             }
 
+            ProcessingState state = new ProcessingState(data);
+            
             field.Name = PlaceholderFormatting.ApplyPlaceholder(Name, data);
             field.Value = PlaceholderFormatting.ApplyPlaceholder(Value, data);
             field.Inline = Inline;
+            
+            state.Complete();
 
             return field;
         }

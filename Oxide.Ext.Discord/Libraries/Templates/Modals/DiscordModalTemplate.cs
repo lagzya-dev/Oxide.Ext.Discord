@@ -62,6 +62,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 modal = new InteractionModalMessage();
             }
 
+            ProcessingState state = new ProcessingState(data);
+
             modal.Title = PlaceholderFormatting.ApplyPlaceholder(Title, data);
             modal.CustomId = PlaceholderFormatting.ApplyPlaceholder(CustomId, data);
             modal.Components = new List<ActionRowComponent>();
@@ -78,6 +80,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                     });
                 }
             }
+            
+            state.Complete();
 
             return modal;
         }

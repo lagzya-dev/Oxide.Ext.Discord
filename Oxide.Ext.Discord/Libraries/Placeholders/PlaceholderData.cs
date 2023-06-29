@@ -318,6 +318,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 _boxed[index].Dispose();
             }
+            AutoPool = true;
             _data.Clear();
             _boxed.Clear();
         }

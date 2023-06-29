@@ -66,6 +66,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message = new T();
             }
 
+            ProcessingState state = new ProcessingState(data);
+            
             if (!string.IsNullOrEmpty(Content))
             {
                 message.Content = PlaceholderFormatting.ApplyPlaceholder(Content, data);
@@ -80,6 +82,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             {
                 message.Components = CreateComponents(data);
             }
+            
+            state.Complete();
 
             return message;
         }
