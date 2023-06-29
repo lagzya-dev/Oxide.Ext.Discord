@@ -169,9 +169,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         public IPromise<List<DiscordEmbed>> ToEntityBulk(List<PlaceholderData> data = null)
         {
             IPendingPromise<List<DiscordEmbed>> promise = Promise<List<DiscordEmbed>>.Create();
-
             BulkToEntityCallback<DiscordEmbedTemplate, DiscordEmbed>.Start(this, data, promise);
-            
             return promise;
         }
     }

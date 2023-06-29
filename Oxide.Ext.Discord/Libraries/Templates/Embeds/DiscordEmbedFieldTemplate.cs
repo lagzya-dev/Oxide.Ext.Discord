@@ -76,9 +76,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         public IPromise<List<EmbedField>> ToEntityBulk(List<PlaceholderData> data)
         {
             IPendingPromise<List<EmbedField>> promise = Promise<List<EmbedField>>.Create();
-
             BulkToEntityCallback<DiscordEmbedFieldTemplate, EmbedField>.Start(this, data, promise);
-            
             return promise;
         }
     }
