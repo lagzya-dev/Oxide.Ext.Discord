@@ -5,6 +5,7 @@ using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Interfaces.Templates;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Callbacks.Templates
 {
@@ -34,19 +35,19 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         {
             try
             {
-                List<TEntity> entities = new List<TEntity>(_placeholders.Count);
+                List<TEntity> results = new List<TEntity>(_placeholders.Count);
                 for (int index = 0; index < _placeholders.Count; index++)
                 {
-                    PlaceholderData data = _placeholders[index];
-                    entities.Add(_template.ToEntity(data));
+                    results.Add(_template.ToEntity(_placeholders[index]));
                 }
-                _promise.Resolve(entities);
+                _promise.Resolve(results);
             }
             catch (Exception ex)
             {
+                DiscordExtension.GlobalLogger.Exception($"{nameof(BulkToEntityCallback<TTemplate, TEntity>)}.{nameof(HandleCallback)} An error occured processing placeholders.", ex);
                 _promise.Reject(ex);
             }
-            
+
             return Task.CompletedTask;
         }
 
