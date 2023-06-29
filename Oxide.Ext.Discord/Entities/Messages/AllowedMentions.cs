@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
+namespace Oxide.Ext.Discord.Entities.Messages
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object">Allowed Mention Types</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class AllowedMention
+    public class AllowedMentions
     {
         /// <summary>
         /// An array of allowed mention types to parse from the content.
@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.AllowedMentions
         /// <summary>
         /// Prevents all mentions
         /// </summary>
-        public static readonly AllowedMention None = new AllowedMention
+        public static readonly AllowedMentions None = new AllowedMentions
         {
             AllowedTypes = Array.Empty<AllowedMentionTypes>(),
             Roles = Array.Empty<Snowflake>(),
