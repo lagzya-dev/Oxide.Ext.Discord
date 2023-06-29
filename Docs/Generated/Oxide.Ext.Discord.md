@@ -62,7 +62,7 @@
 | public type | description |
 | --- | --- |
 | enum [AutoCompleteSearchMode](./Oxide.Ext.Discord/Builders/Interactions/AutoComplete/AutoCompleteSearchMode.md) | AutoComplete Search Mode for [`InteractionAutoCompleteBuilder`](./Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.md) |
-| [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerDisplayNameMode.md) | AutoComplete Player Search Options for [`InteractionAutoCompleteBuilder`](./Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.md) |
+| [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerNameFormatter.md) |
 | class [PlayerNameFormatter](./Oxide.Ext.Discord/Builders/Interactions/AutoComplete/PlayerNameFormatter.md) | Formatter for player names |
 
 ## Oxide.Ext.Discord.Builders.MessageComponents namespace
@@ -480,6 +480,8 @@
 
 | public type | description |
 | --- | --- |
+| class [AllowedMentions](./Oxide.Ext.Discord/Entities/Messages/AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
+| enum [AllowedMentionTypes](./Oxide.Ext.Discord/Entities/Messages/AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 | abstract class [BaseMessageCreate](./Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.md) | Represents a base message in discord |
 | class [DiscordMessage](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
 | class [MessageActivity](./Oxide.Ext.Discord/Entities/Messages/MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |
@@ -493,13 +495,6 @@
 | class [MessageReference](./Oxide.Ext.Discord/Entities/Messages/MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
 | enum [MessageType](./Oxide.Ext.Discord/Entities/Messages/MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./Oxide.Ext.Discord/Entities/Messages/MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
-
-## Oxide.Ext.Discord.Entities.Messages.AllowedMentions namespace
-
-| public type | description |
-| --- | --- |
-| class [AllowedMention](./Oxide.Ext.Discord/Entities/Messages/AllowedMentions/AllowedMention.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
-| enum [AllowedMentionTypes](./Oxide.Ext.Discord/Entities/Messages/AllowedMentions/AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 
 ## Oxide.Ext.Discord.Entities.Messages.Embeds namespace
 

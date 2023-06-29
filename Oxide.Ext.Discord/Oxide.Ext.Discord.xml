@@ -782,7 +782,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode">
             <summary>
-            AutoComplete Player Search Options for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/>
+            Player Name Formatting options for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerNameFormatter"/>
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.Default">
@@ -790,12 +790,12 @@
             Defaults search options
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.IncludeClanName">
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.Clan">
             <summary>
             Include Clan Name in search
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.IncludePlayerId">
+        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoComplete.PlayerDisplayNameMode.PlayerId">
             <summary>
             Include Steam ID
             </summary>
@@ -1395,11 +1395,11 @@
             <param name="embeds">Embeds to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention)">
+        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.Messages.AllowedMentions)">
             <summary>
-            Adds <see cref="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention"/> to the response
+            Adds <see cref="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions"/> to the response
             </summary>
-            <param name="mention">Mentions to be added</param>
+            <param name="mentions">Mentions to be added</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseBuilders.BaseMessageBuilder`2.SuppressEmbeds">
@@ -12596,58 +12596,58 @@
             Invite is for a go live stream
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention">
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object">Allowed Mention Types</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention.AllowedTypes">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedTypes">
             <summary>
             An array of allowed mention types to parse from the content.
-            <see cref="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes"/>
+            <see cref="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention.Roles">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.Roles">
             <summary>
             Array of Role IDs to mention (Max size of 100)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention.Users">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.Users">
             <summary>
             Array of User IDs to mention (Max size of 100)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention.RepliedUser">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.RepliedUser">
             <summary>
             For replies, whether to mention the author of the message being replied to (default false)
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMention.None">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.None">
             <summary>
             Prevents all mentions
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes">
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes">
             <summary>
              Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes.Unknown">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes.Unknown">
             <summary>
             Discord Extension doesn't currently support this allowed mention type.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes.Roles">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes.Roles">
             <summary>
             Controls role mentions
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes.Users">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes.Users">
             <summary>
             	Controls user mentions
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentions.AllowedMentionTypes.Everyone">
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AllowedMentionTypes.Everyone">
             <summary>
             Controls @everyone and @here mentions
             </summary>
@@ -12673,7 +12673,7 @@
             Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.AllowedMention">
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate.AllowedMentions">
             <summary>
             Allowed mentions for a message
             Allows for more granular control over mentions without various hacks to the message content. 
@@ -16050,7 +16050,7 @@
             <param name="messageId">Message ID to get</param>
             <param name="messageParams">Message Params</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
             <summary>
             Edits a previously-sent webhook message from the same token.
             See <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">Edit Webhook Message</a>
@@ -16060,7 +16060,7 @@
             <param name="messageParams">Message Params</param>
             <param name="message">The updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessageGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessageGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
             <summary>
             Edit a message from a webhook using a global message template
             </summary>
@@ -16072,7 +16072,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="messageParams">Message Params</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessageTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Messages.DiscordMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.Webhooks.DiscordWebhook.EditWebhookMessageTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.Webhooks.WebhookEditMessage,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,Oxide.Ext.Discord.Entities.Webhooks.WebhookMessageParams)">
             <summary>
             Edit a message from a webhook using a localized message template
             </summary>
@@ -17609,6 +17609,12 @@
         <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.Content">
             <summary>
             Content of the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.AllowedMentions">
+            <summary>
+            Allowed mentions for a message
+            Allows for more granular control over mentions without various hacks to the message content. 
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Interfaces.Entities.Messages.IDiscordMessageTemplate.Embeds">
@@ -19464,7 +19470,7 @@
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Id"/> placeholder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Name(Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.Default.PlayerPlaceholders.Name(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             <see cref="P:Oxide.Core.Libraries.Covalence.IPlayer.Name"/> placeholder
             </summary>

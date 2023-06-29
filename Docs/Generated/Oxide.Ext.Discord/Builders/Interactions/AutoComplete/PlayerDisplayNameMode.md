@@ -1,6 +1,6 @@
 # PlayerDisplayNameMode enumeration
 
-AutoComplete Player Search Options for [`InteractionAutoCompleteBuilder`](../InteractionAutoCompleteBuilder.md)
+Player Name Formatting options for [`PlayerNameFormatter`](./PlayerNameFormatter.md)
 
 ```csharp
 [Flags]
@@ -12,8 +12,8 @@ public enum PlayerDisplayNameMode : sbyte
 | name | value | description |
 | --- | --- | --- |
 | Default | `0` | Defaults search options |
-| IncludeClanName | `1 << 0` | Include Clan Name in search |
-| IncludePlayerId | `1 << 1` | Include Steam ID |
+| Clan | `1 << 0` | Include Clan Name in search |
+| PlayerId | `1 << 1` | Include Steam ID |
 | All | `0x03` | All display name options |
 
 ## See Also
