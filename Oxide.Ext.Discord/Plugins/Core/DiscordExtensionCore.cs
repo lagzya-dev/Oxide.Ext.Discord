@@ -332,7 +332,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
         }
         
         // ReSharper disable once UnusedMember.Local
-        [HookMethod(nameof(OnUserDisconnected))]
+        [HookMethod(nameof(OnUserNameUpdated))]
         private void OnUserNameUpdated(IPlayer player, string oldName, string newName)
         {
             ServerPlayerCache.Instance.OnUserNameUpdated(player, oldName, newName);
