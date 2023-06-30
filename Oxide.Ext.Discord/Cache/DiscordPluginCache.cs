@@ -33,7 +33,10 @@ namespace Oxide.Ext.Discord.Cache
                 return _loadedPlugins;
             }
 
-            _loadedPlugins.AddRange(Interface.Oxide.RootPluginManager.GetPlugins().Select(p => p.Name).OrderBy(p => p));
+            _loadedPlugins.AddRange(Interface.Oxide.RootPluginManager.GetPlugins()
+                                             .Where(p => !p.IsCorePlugin)
+                                             .Select(p => p.Name)
+                                             .OrderBy(p => p));
             return _loadedPlugins;
         }
         
@@ -57,6 +60,11 @@ namespace Oxide.Ext.Discord.Cache
 
         internal void OnPluginLoaded(Plugin plugin)
         {
+            if (plugin.IsCorePlugin)
+            {
+                return;
+            }
+            
             _loadablePlugins.Remove(plugin.Name);
             if (!_loadedPlugins.Contains(plugin.Name))
             {
@@ -66,6 +74,11 @@ namespace Oxide.Ext.Discord.Cache
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
+            if (plugin.IsCorePlugin)
+            {
+                return;
+            }
+            
             _nextUpdate = DateTime.UtcNow;
             _loadedPlugins.Remove(plugin.Name);
         }
