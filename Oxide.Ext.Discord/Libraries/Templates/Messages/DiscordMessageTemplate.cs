@@ -66,11 +66,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message = new T();
             }
 
-            ProcessingState state = new ProcessingState(data);
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             
             if (!string.IsNullOrEmpty(Content))
             {
-                message.Content = PlaceholderFormatting.ApplyPlaceholder(Content, data);
+                message.Content = placeholders.ProcessPlaceholders(Content, data);
             }
 
             if (Embeds != null && Embeds.Count != 0)
@@ -83,8 +83,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message.Components = CreateComponents(data);
             }
             
-            state.Complete();
-
+            data?.AutoDispose();
+            
             return message;
         }
 

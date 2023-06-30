@@ -95,11 +95,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// <returns></returns>
         public override BaseComponent ToComponent(PlaceholderData data)
         {
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             return new InputTextComponent
             {
-                Label = PlaceholderFormatting.ApplyPlaceholder(Label, data),
-                Placeholder = PlaceholderFormatting.ApplyPlaceholder(Placeholder, data),
-                Value = PlaceholderFormatting.ApplyPlaceholder(Value, data),
+                Label = placeholders.ProcessPlaceholders(Label, data, false),
+                Placeholder = placeholders.ProcessPlaceholders(Placeholder, data, false),
+                Value = placeholders.ProcessPlaceholders(Value, data, false),
                 Required = Required,
                 Style = Style,
                 MinLength = MinLength,

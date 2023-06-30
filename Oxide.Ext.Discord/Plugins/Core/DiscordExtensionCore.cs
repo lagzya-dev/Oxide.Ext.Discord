@@ -328,7 +328,14 @@ namespace Oxide.Ext.Discord.Plugins.Core
         [HookMethod(nameof(OnUserDisconnected))]
         private void OnUserDisconnected(IPlayer player)
         {
-            ServerPlayerCache.Instance.OnUserDisconnected(player);
+            try
+            {
+                ServerPlayerCache.Instance.OnUserDisconnected(player);
+            }
+            catch (Exception ex)
+            {
+                DiscordExtension.GlobalLogger.Exception("An error occured", ex);
+            }
         }
         
         // ReSharper disable once UnusedMember.Local

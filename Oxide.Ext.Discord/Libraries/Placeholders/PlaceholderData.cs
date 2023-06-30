@@ -322,5 +322,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _data.Clear();
             _boxed.Clear();
         }
+
+        internal void AutoDispose()
+        {
+            if (AutoPool)
+            {
+                Dispose();
+            }
+        }
     }
 }

@@ -36,13 +36,14 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 Process placeholders for the given text.
 
 ```csharp
-public string ProcessPlaceholders(string text, PlaceholderData data)
+public string ProcessPlaceholders(string text, PlaceholderData data, bool autoDispose = true)
 ```
 
 | parameter | description |
 | --- | --- |
 | text | Text to process placeholders for |
 | data | Placeholder Data for the placeholders |
+| autoDispose | Automatically dispose [`PlaceholderData`](./PlaceholderData.md) on completion. [`PlaceholderData`](./PlaceholderData.md) must also have AutoPool enabled |
 
 ## Return Value
 

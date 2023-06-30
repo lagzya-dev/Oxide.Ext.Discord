@@ -65,14 +65,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
                 field = new EmbedField();
             }
 
-            ProcessingState state = new ProcessingState(data);
-            
-            field.Name = PlaceholderFormatting.ApplyPlaceholder(Name, data);
-            field.Value = PlaceholderFormatting.ApplyPlaceholder(Value, data);
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            field.Name = placeholders.ProcessPlaceholders(Name, data, false);
+            field.Value = placeholders.ProcessPlaceholders(Value, data, false);
             field.Inline = Inline;
-            
-            state.Complete();
 
+            data?.AutoDispose();
+            
             return field;
         }
 

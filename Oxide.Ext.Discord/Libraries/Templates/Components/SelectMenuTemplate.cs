@@ -110,8 +110,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
                     throw new ArgumentOutOfRangeException();
             }
 
-            component.CustomId = PlaceholderFormatting.ApplyPlaceholder(CustomId, data);
-            component.Placeholder = PlaceholderFormatting.ApplyPlaceholder(Placeholder, data);
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            component.CustomId = placeholders.ProcessPlaceholders(CustomId, data, false);
+            component.Placeholder = placeholders.ProcessPlaceholders(Placeholder, data, false);
             component.MinValues = MinValues;
             component.MaxValues = MaxValues;
             component.Disabled = !Enabled;

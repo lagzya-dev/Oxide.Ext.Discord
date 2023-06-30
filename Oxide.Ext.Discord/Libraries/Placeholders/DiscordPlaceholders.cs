@@ -63,11 +63,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="text">Text to process placeholders for</param>
         /// <param name="data">Placeholder Data for the placeholders</param>
+        /// <param name="autoDispose">Automatically dispose <see cref="PlaceholderData"/> on completion. <see cref="PlaceholderData"/> must also have AutoPool enabled</param>
         /// <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
-        public string ProcessPlaceholders(string text, PlaceholderData data)
+        public string ProcessPlaceholders(string text, PlaceholderData data, bool autoDispose = true)
         {
             if (string.IsNullOrEmpty(text))
             {
+                DisposeData(data, autoDispose);
                 return text;
             }
             
@@ -112,12 +114,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 state.Dispose();
             }
 
-            if (data.AutoPool)
+            DisposeData(data, autoDispose);
+
+            return text;
+        }
+        
+        private static void DisposeData(PlaceholderData data, bool autoDispose)
+        {
+            if (autoDispose && data.AutoPool)
             {
                 data.Dispose();
             }
-
-            return text;
         }
 
         /// <summary>

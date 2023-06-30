@@ -53,7 +53,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         /// <returns><see cref="EmbedFooter"/></returns>
         public EmbedFooter ToFooter(PlaceholderData data)
         {
-            return new EmbedFooter(PlaceholderFormatting.ApplyPlaceholder(Text, data), PlaceholderFormatting.ApplyPlaceholder(IconUrl, data));
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            EmbedFooter footer = new EmbedFooter(placeholders.ProcessPlaceholders(Text, data, false), placeholders.ProcessPlaceholders(IconUrl, data, false));
+            data?.AutoDispose();
+            return footer;
         }
     }
 }

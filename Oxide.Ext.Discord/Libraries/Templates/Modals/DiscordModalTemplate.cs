@@ -62,10 +62,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 modal = new InteractionModalMessage();
             }
 
-            ProcessingState state = new ProcessingState(data);
-
-            modal.Title = PlaceholderFormatting.ApplyPlaceholder(Title, data);
-            modal.CustomId = PlaceholderFormatting.ApplyPlaceholder(CustomId, data);
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            
+            modal.Title = placeholders.ProcessPlaceholders(Title, data, false);
+            modal.CustomId = placeholders.ProcessPlaceholders(CustomId, data, false);
             modal.Components = new List<ActionRowComponent>();
 
             for (int index = 0; index < Components.Count; index++)
@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Modals
                 }
             }
             
-            state.Complete();
+            data?.AutoDispose();
 
             return modal;
         }

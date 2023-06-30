@@ -77,11 +77,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// <returns><see cref="SelectMenuOption"/></returns>
         public SelectMenuOption ToOption(PlaceholderData data)
         {
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             return new SelectMenuOption
             {
-                Label = PlaceholderFormatting.ApplyPlaceholder(Label, data),
-                Value = PlaceholderFormatting.ApplyPlaceholder(Value, data),
-                Description = PlaceholderFormatting.ApplyPlaceholder(Description, data),
+                Label = placeholders.ProcessPlaceholders(Label, data, false),
+                Value = placeholders.ProcessPlaceholders(Value, data, false),
+                Description = placeholders.ProcessPlaceholders(Description, data, false),
                 Emoji = Emoji.ToEmoji(),
                 Default = Default
             };
