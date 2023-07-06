@@ -3,7 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Singleton;
 

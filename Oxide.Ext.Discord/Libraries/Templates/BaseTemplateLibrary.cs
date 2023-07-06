@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Exceptions.Libraries;
+using Oxide.Ext.Discord.Exceptions.Libraries.Templates;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Json;
@@ -62,20 +62,23 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 Directory.CreateDirectory(_rootDirectory);
             }
         }
-        
+
         internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
         {
             if (version < minVersion)
             {
-                string error = $"Failed to register for plugin: {id.GetPluginName()} Name: {id.TemplateName} Language: {id.GetLanguageName()} because the template version {version} is less than the min supported version {minVersion}";
+                string error = $"Failed to register for template: {id} because the template version {version} is less than the min supported version {minVersion}";
                 Logger.Error(error);
-                promise?.Reject(new Exception(error));
+                promise.Reject(new InvalidTemplateVersionException(error));
                 return;
             }
             
             if (!_registeredTemplates.Add(id))
             {
-                Logger.Warning("Trying to register template multiple times. Type: {0} {1}", TemplateType, id);
+                string error = $"Failed to register template Type: {TemplateType} {id}. Template has already been registered.";
+                Logger.Error(error);
+                promise.Reject(new DuplicateTemplateException(error));
+                return;
             }
 
             DiscordTemplate<TTemplate> registeringTemplate = new DiscordTemplate<TTemplate>(template, version);
@@ -103,16 +106,17 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                 OnTemplateRegistered(id, template);
             }
             
-            promise?.Resolve();
+            promise.Resolve();
         }
         
         internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)
         {
-            foreach (BulkTemplateRegistration<TTemplate> registration in templates)
+            for (int index = 0; index < templates.Count; index++)
             {
+                BulkTemplateRegistration<TTemplate> registration = templates[index];
                 HandleRegisterTemplate(id.WithLanguage(ServerLocale.Parse(registration.Language)), registration.Template, registration.Version, minVersion, null);
             }
-            
+
             promise.Resolve();
         }
 

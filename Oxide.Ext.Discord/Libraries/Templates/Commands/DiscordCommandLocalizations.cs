@@ -5,7 +5,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks.Templates;
 using Oxide.Ext.Discord.Callbacks.Templates.Commands;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Libraries;
+using Oxide.Ext.Discord.Exceptions.Libraries.Templates;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;

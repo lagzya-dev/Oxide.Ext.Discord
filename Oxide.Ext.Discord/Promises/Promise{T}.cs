@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Ext.Discord.Callbacks.Promises;
-using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;

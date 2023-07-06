@@ -1,4 +1,4 @@
-## Oxide.Ext.Discord.Exceptions.Promise namespace
+## Oxide.Ext.Discord.Exceptions.Libraries.Promise namespace
 
 | public type | description |
 | --- | --- |

@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Libraries.Templates;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries
+namespace Oxide.Ext.Discord.Exceptions.Libraries.Templates
 {
     /// <summary>
     /// Exception for Discord Templates

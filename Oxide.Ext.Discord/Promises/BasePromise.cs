@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Exceptions.Promise;
+using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces.Promises;
