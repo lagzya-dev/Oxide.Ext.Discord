@@ -10,6 +10,7 @@ public static class PlayerExt
 
 | name | description |
 | --- | --- |
+| static [CreateDummyPlayer](#createdummyplayer-method)(…) |  |
 | static [GetDiscordUser](#getdiscorduser-method)(…) | Returns a minimal Discord User for the given player |
 | static [GetDiscordUserId](#getdiscorduserid-method)(…) | Returns the Discord ID of the IPlayer if linked |
 | static [GetGuildMember](#getguildmember-method)(…) | Returns a minimal Guild Member for the given player |
@@ -300,6 +301,19 @@ public static bool IsDummyPlayer(this IPlayer player)
 | parameter | description |
 | --- | --- |
 | player |  |
+
+## See Also
+
+* class [PlayerExt](./PlayerExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CreateDummyPlayer method
+
+```csharp
+public static IPlayer CreateDummyPlayer(string id, string name, string ip)
+```
 
 ## See Also
 

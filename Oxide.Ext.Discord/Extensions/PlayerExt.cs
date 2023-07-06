@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
@@ -180,5 +179,10 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player"></param>
         /// <returns></returns>
         public static bool IsDummyPlayer(this IPlayer player) => player is DiscordDummyPlayer;
+
+        public static IPlayer CreateDummyPlayer(string id, string name, string ip)
+        {
+            return new DiscordDummyPlayer(id, name, ip);
+        }
     }
 }

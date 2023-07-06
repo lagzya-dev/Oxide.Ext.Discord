@@ -9,15 +9,10 @@ namespace Oxide.Ext.Discord.Plugins
         private static readonly GenericPosition Default = new GenericPosition();
         
         public string Id { get; }
-        
-        public string Name 
-        {
-            get => "Unknown Player"; 
-            set { }
-        }
-        
+
+        public string Name { get; set; } = "Unknown Player";
         public object Object => null;
-        public string Address => "0.0.0.0";
+        public string Address { get; set; } = "0.0.0.0";
         public int Ping => 0;
         public CultureInfo Language => CultureInfo.GetCultureInfo("en");
         public bool IsConnected => false;
@@ -48,6 +43,13 @@ namespace Oxide.Ext.Discord.Plugins
         public DiscordDummyPlayer(string id)
         {
             Id = id;
+        }
+        
+        public DiscordDummyPlayer(string id, string name, string ip)
+        {
+            Id = id;
+            Name = name ?? "Unknown Player";
+            Address = ip ?? "0.0.0.0";
         }
 
         public void Ban(string reason, TimeSpan duration = new TimeSpan()) {}
