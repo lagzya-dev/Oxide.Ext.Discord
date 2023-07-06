@@ -3,20 +3,17 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Singleton;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Factory
 {
-    internal sealed class BucketIdFactory : Singleton<BucketIdFactory>
+    internal static class BucketIdFactory
     {
         private const char SplitChar = '/';
         private const char QueryStringChar = '?';
         private const string IdReplacement = "id";
         private const string ReactionsRoute =  "reactions";
 
-        private BucketIdFactory() { }
-        
         /// <summary>
         /// Returns the Rate Limit Bucket for the given route
         /// https://discord.com/developers/docs/topics/rate-limits#rate-limits
@@ -24,7 +21,7 @@ namespace Oxide.Ext.Discord.Factory
         /// <param name="method">Request method for the request</param>
         /// <param name="route">API Route</param>
         /// <returns>Bucket ID for route</returns>
-        internal BucketId GenerateId(RequestMethod method, string route)
+        internal static BucketId GenerateId(RequestMethod method, string route)
         {
             int routeLength = route.LastIndexOf(QueryStringChar);
             if (routeLength == -1)
