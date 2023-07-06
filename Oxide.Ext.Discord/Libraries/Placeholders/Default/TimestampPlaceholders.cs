@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}", dataKey, Timestamp);
-            placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}.shortime", dataKey, ShortTime);
+            placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}.shorttime", dataKey, ShortTime);
             placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}.longtime", dataKey, Longtime);
             placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}.shortdate", dataKey, ShortDate);
             placeholders.RegisterPlaceholder<long, string>(plugin, $"{placeholderPrefix}.longdate", dataKey, LongDate);
@@ -81,7 +81,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder(plugin, "timestamp.now", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow));
-            placeholders.RegisterPlaceholder(plugin, "timestamp.now.shortime", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortTime));
+            placeholders.RegisterPlaceholder(plugin, "timestamp.now.shorttime", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortTime));
             placeholders.RegisterPlaceholder(plugin, "timestamp.now.longtime", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.LongTime));
             placeholders.RegisterPlaceholder(plugin, "timestamp.now.shortdate", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.ShortDate));
             placeholders.RegisterPlaceholder(plugin, "timestamp.now.longdate", () => DiscordFormatting.UnixTimestamp(DateTimeOffset.UtcNow, TimestampStyles.LongDate));
