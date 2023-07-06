@@ -77,7 +77,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
         }
 
         /// <summary>
-        /// Queues a new request for the buck
+        /// Queues a new request for the bucket
         /// </summary>
         /// <param name="handler"><see cref="RequestHandler"/> to be queued</param>
         public void QueueRequest(RequestHandler handler)

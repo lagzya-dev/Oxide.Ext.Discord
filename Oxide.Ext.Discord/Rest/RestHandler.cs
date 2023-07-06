@@ -204,7 +204,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
         {
-            BucketId bucketId = BucketIdFactory.Instance.GenerateId(request.Method, request.Route);
+            BucketId bucketId = BucketIdFactory.GenerateId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
             bucket.QueueRequest(handler);

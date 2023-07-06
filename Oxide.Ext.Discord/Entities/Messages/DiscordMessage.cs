@@ -20,7 +20,6 @@ using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Locale;

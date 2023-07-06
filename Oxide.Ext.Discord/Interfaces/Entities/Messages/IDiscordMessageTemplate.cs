@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Messages.Embeds;

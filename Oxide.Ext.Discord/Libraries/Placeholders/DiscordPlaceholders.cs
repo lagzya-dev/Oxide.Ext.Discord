@@ -90,14 +90,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                     if (placeholder == null)
                     {
                         hasNonMatchingPlaceholder = true;
-                        if (_logger.IsLogging(DiscordLogLevel.Debug))
-                        {
-                            _logger.Debug("Failed to find placeholder: '{0}' Format: {1}", state.Name, state.Format);
-                        }
                         continue;
                     }
 
-                    if (_logger.IsLogging(DiscordLogLevel.Debug))
+                    if (_logger.IsLogging(DiscordLogLevel.Verbose))
                     {
                         _logger.Debug("Invoking placeholder: '{0}' Format: {1}", state.Name, state.Format);
                     }

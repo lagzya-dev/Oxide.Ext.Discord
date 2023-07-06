@@ -13,7 +13,7 @@ public class Bucket : BasePoolable, IDebugLoggable
 | [Bucket](#bucket-constructor)() | The default constructor. |
 | [Init](#init-method)(…) | Creates a new bucket for the given [`RestHandler`](../RestHandler.md) |
 | [LogDebug](#logdebug-method)(…) |  |
-| [QueueRequest](#queuerequest-method)(…) | Queues a new request for the buck |
+| [QueueRequest](#queuerequest-method)(…) | Queues a new request for the bucket |
 
 ## Protected Members
 
@@ -57,7 +57,7 @@ public void Init(BucketId bucketId, RestHandler rest, ILogger logger)
    
 # QueueRequest method
 
-Queues a new request for the buck
+Queues a new request for the bucket
 
 ```csharp
 public void QueueRequest(RequestHandler handler)

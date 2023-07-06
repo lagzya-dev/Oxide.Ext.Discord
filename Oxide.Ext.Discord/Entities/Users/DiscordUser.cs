@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Channels;

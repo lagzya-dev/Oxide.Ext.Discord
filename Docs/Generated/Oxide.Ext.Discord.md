@@ -38,6 +38,15 @@
 | class [DiscordEmbedBuilder](./Oxide.Ext.Discord/Builders/DiscordEmbedBuilder.md) | Builds a new DiscordEmbed |
 | class [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
 
+## Oxide.Ext.Discord.Builders.Ansi namespace
+
+| public type | description |
+| --- | --- |
+| class [AnsiBuilder](./Oxide.Ext.Discord/Builders/Ansi/AnsiBuilder.md) |  |
+| enum [BackgroundColor](./Oxide.Ext.Discord/Builders/Ansi/BackgroundColor.md) |  |
+| [Flags] enum [FontStyle](./Oxide.Ext.Discord/Builders/Ansi/FontStyle.md) |  |
+| enum [TextColor](./Oxide.Ext.Discord/Builders/Ansi/TextColor.md) |  |
+
 ## Oxide.Ext.Discord.Builders.ApplicationCommands namespace
 
 | public type | description |
@@ -713,12 +722,6 @@
 | --- | --- |
 | class [DiscordWebSocketException](./Oxide.Ext.Discord/Exceptions/Entities/Websocket/DiscordWebSocketException.md) | Represents an exception that occured with the websocket |
 
-## Oxide.Ext.Discord.Exceptions.Libraries namespace
-
-| public type | description |
-| --- | --- |
-| class [DiscordTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/DiscordTemplateException.md) | Exception for Discord Templates |
-
 ## Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale namespace
 
 | public type | description |
@@ -726,18 +729,26 @@
 | class [DiscordLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/Libraries/DiscordLocale/DiscordLocaleNotFoundException.md) | Exception thrown when Discord Locale is not found |
 | class [ServerLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/Libraries/DiscordLocale/ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 
+## Oxide.Ext.Discord.Exceptions.Libraries.Promise namespace
+
+| public type | description |
+| --- | --- |
+| class [PromiseCancelledException](./Oxide.Ext.Discord/Exceptions/Libraries/Promise/PromiseCancelledException.md) | Exception when a promised is cancelled |
+| class [PromiseException](./Oxide.Ext.Discord/Exceptions/Libraries/Promise/PromiseException.md) | Exceptions for promises |
+
+## Oxide.Ext.Discord.Exceptions.Libraries.Templates namespace
+
+| public type | description |
+| --- | --- |
+| class [DiscordTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/DiscordTemplateException.md) | Exception for Discord Templates |
+| class [DuplicateTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/DuplicateTemplateException.md) |  |
+| class [InvalidTemplateVersionException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/InvalidTemplateVersionException.md) |  |
+
 ## Oxide.Ext.Discord.Exceptions.Pooling namespace
 
 | public type | description |
 | --- | --- |
 | class [InvalidPoolException](./Oxide.Ext.Discord/Exceptions/Pooling/InvalidPoolException.md) | An exception when something is invalid with a pool |
-
-## Oxide.Ext.Discord.Exceptions.Promise namespace
-
-| public type | description |
-| --- | --- |
-| class [PromiseCancelledException](./Oxide.Ext.Discord/Exceptions/Promise/PromiseCancelledException.md) | Exception when a promised is cancelled |
-| class [PromiseException](./Oxide.Ext.Discord/Exceptions/Promise/PromiseException.md) | Exceptions for promises |
 
 ## Oxide.Ext.Discord.Extensions namespace
 

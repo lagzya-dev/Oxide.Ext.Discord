@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Singleton;
 using Oxide.Plugins;
 

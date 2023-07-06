@@ -15,12 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         
         public bool IsGlobal => !Language.IsValid;
         
-        private TemplateId(Plugin plugin, string templateName, ServerLocale language)
-        {
-            PluginId = plugin?.Id() ?? throw new ArgumentNullException(nameof(plugin));
-            TemplateName = templateName;
-            Language = language;
-        }
+        private TemplateId(Plugin plugin, string templateName, ServerLocale language) : this(plugin?.Id() ?? throw new ArgumentNullException(nameof(plugin)), templateName, language) { }
 
         private TemplateId(PluginId pluginName, string templateName, ServerLocale language)
         {
