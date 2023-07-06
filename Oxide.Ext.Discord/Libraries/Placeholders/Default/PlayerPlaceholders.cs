@@ -86,6 +86,20 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
 
         /// <summary>
+        /// Player Country Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static string Country(IPlayer player) => DiscordExtensionCore.Instance.GetCountry(player);
+        
+        /// <summary>
+        /// Player Flag Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static string CountryEmoji(IPlayer player) => DiscordExtensionCore.Instance.GetCountryEmoji(player);
+
+        /// <summary>
         /// Player Groups Placeholder
         /// </summary>
         /// <param name="player"></param>
@@ -145,6 +159,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health.max", dataKey, MaxHealth);
             placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.country", dataKey, Country);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.country.emoji", dataKey, CountryEmoji);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.clan.tag", dataKey, ClanTag);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
