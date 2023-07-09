@@ -16,6 +16,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly ILogger _logger;
         private int _reconnectRetries;
         private CancellationTokenSource _source;
+        private readonly object _lock = new object();
 
         public bool IsPendingReconnect { get; private set; }
         
@@ -52,7 +53,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             
             CancelReconnect();
-            _source = new CancellationTokenSource();
+            lock (_lock)
+            {
+                _source = new CancellationTokenSource();
+            }
 
             try
             {
@@ -77,8 +81,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             catch (OperationCanceledException) { }
             finally
             {
-                _source.Dispose();
-                _source = null;
+                lock (_lock)
+                {
+                    _source.Dispose();
+                    _source = null;
+                }
             }
         }
 
@@ -98,7 +105,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void CancelReconnect()
         {
-            try
+            lock (_lock)
             {
                 if (_source == null)
                 {
@@ -111,14 +118,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
 
                 _source.Dispose();
-            }
-            catch (Exception ex)
-            {
-                _logger.Exception("An error occured cancelling reconnect", ex);
-            }
-            finally
-            {
-                _source = null;
             }
         }
 
