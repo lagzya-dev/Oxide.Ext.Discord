@@ -206,7 +206,6 @@ namespace Oxide.Ext.Discord.Clients
             }
             
             _clients.Add(client);
-            Hooks.AddPlugin(client, setup);
 
             Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
             
@@ -234,6 +233,8 @@ namespace Oxide.Ext.Discord.Clients
                     DisconnectWebsocket(true);
                 }
             }
+            
+            Hooks.AddPlugin(client, setup);
                 
             if (_readyData != null)
             {
