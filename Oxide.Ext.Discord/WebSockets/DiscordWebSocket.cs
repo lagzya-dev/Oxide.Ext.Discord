@@ -321,6 +321,8 @@ namespace Oxide.Ext.Discord.WebSockets
                 SessionId = _sessionId,
                 Token = _client.Connection.ApiToken
             };
+
+            _sessionId = null;
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
 
