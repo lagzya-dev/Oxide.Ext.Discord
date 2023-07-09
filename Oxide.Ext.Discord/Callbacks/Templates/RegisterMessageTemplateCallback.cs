@@ -12,16 +12,16 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
         private TTemplate _template;
         private TemplateVersion _version;
         private TemplateVersion _minVersion;
-        private IPendingPromise _promise;
+        private IPendingPromise<TTemplate> _promise;
         
-        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
+        public static void Start(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise<TTemplate> promise)
         {
             RegisterTemplateCallback<TTemplate> register = DiscordPool.Internal.Get<RegisterTemplateCallback<TTemplate>>();
             register.Init(library, id, template, version, minVersion, promise);
             register.Run();
         }
         
-        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
+        private void Init(BaseTemplateLibrary<TTemplate> library, TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise<TTemplate> promise)
         {
             _library = library;
             _id = id;

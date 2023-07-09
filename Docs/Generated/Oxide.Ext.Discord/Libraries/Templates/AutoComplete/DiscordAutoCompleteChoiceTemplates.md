@@ -38,8 +38,9 @@ public class DiscordAutoCompleteChoiceTemplates :
 Registers a global template for Auto Complete Choices
 
 ```csharp
-public IPromise RegisterGlobalTemplate(Plugin plugin, string templateName, 
-    DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
+public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin plugin, 
+    string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
+    TemplateVersion minVersion)
 ```
 
 | parameter | description |
@@ -58,7 +59,7 @@ public IPromise RegisterGlobalTemplate(Plugin plugin, string templateName,
 
 ## See Also
 
-* interface [IPromise](../../../Interfaces/Promises/IPromise.md)
+* interface [IPromise&lt;TPromised&gt;](../../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
 * struct [TemplateVersion](../TemplateVersion.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
@@ -71,8 +72,8 @@ public IPromise RegisterGlobalTemplate(Plugin plugin, string templateName,
 Registers a global template for Auto Complete Choices
 
 ```csharp
-public IPromise RegisterLocalizedTemplate(Plugin plugin, string templateName, 
-    DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
+public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plugin plugin, 
+    string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
     TemplateVersion minVersion, string language = "en")
 ```
 
@@ -93,7 +94,7 @@ public IPromise RegisterLocalizedTemplate(Plugin plugin, string templateName,
 
 ## See Also
 
-* interface [IPromise](../../../Interfaces/Promises/IPromise.md)
+* interface [IPromise&lt;TPromised&gt;](../../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
 * struct [TemplateVersion](../TemplateVersion.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)

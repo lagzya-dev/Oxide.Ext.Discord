@@ -28,9 +28,9 @@ public class DiscordCommandLocalizations : BaseTemplateLibrary<DiscordCommandLoc
 Registers Application Command Localization for a given language
 
 ```csharp
-public IPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, 
-    DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, 
-    string language = "en")
+public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plugin plugin, 
+    string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, 
+    TemplateVersion minVersion, string language = "en")
 ```
 
 | parameter | description |
@@ -50,7 +50,7 @@ public IPromise RegisterCommandLocalizationAsync(Plugin plugin, string fileNameS
 
 ## See Also
 
-* interface [IPromise](../../../Interfaces/Promises/IPromise.md)
+* interface [IPromise&lt;TPromised&gt;](../../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * class [DiscordCommandLocalization](./DiscordCommandLocalization.md)
 * struct [TemplateVersion](../TemplateVersion.md)
 * class [DiscordCommandLocalizations](./DiscordCommandLocalizations.md)

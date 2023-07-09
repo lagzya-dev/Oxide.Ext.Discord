@@ -63,7 +63,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             }
         }
 
-        internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise promise)
+        internal void HandleRegisterTemplate(TemplateId id, TTemplate template, TemplateVersion version, TemplateVersion minVersion, IPendingPromise<TTemplate> promise)
         {
             if (version < minVersion)
             {
@@ -93,10 +93,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates
                         BackupTemplateFiles(id, minVersion);
                         CreateFile(path, registeringTemplate);
                         OnTemplateRegistered(id, template);
+                        promise.Resolve(template);
                     }
                     else
                     {
                         OnTemplateRegistered(id, existingTemplate.Template);
+                        promise.Resolve(existingTemplate.Template);
                     }
                 }
             }
@@ -104,9 +106,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates
             {
                 CreateFile(path, registeringTemplate);
                 OnTemplateRegistered(id, template);
+                promise.Resolve(template);
             }
-            
-            promise.Resolve();
         }
         
         internal void HandleBulkRegisterTemplate(TemplateId id, List<BulkTemplateRegistration<TTemplate>> templates, TemplateVersion minVersion, IPendingPromise promise)

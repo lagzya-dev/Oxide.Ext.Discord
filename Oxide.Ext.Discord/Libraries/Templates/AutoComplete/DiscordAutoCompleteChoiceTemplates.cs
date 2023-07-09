@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// <param name="minVersion">Minimum supported version of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Throw if plugin or templateName is null</exception>
-        public IPromise RegisterGlobalTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// <param name="language">Server Language for the localized template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Throw if plugin, templateName, or language is null/empty</exception>
-        public IPromise RegisterLocalizedTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
+        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
@@ -71,10 +71,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             return RegisterTemplate(id, template, version, minVersion);
         }
 
-        private IPromise RegisterTemplate(TemplateId id, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        private IPromise<DiscordAutoCompleteChoiceTemplate> RegisterTemplate(TemplateId id, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (template == null) throw new ArgumentNullException(nameof(template));
-            IPendingPromise promise = Promise.Create();
+            IPendingPromise<DiscordAutoCompleteChoiceTemplate> promise = Promise<DiscordAutoCompleteChoiceTemplate>.Create();
             RegisterTemplateCallback<DiscordAutoCompleteChoiceTemplate>.Start(this, id, template, version, minVersion, promise);
             return promise;
         }

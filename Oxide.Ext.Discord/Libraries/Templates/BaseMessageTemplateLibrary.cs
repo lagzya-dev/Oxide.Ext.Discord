@@ -34,13 +34,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <param name="version">Version of the template</param>
         /// <param name="minVersion">Min supported version for this template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
-            IPendingPromise promise = Promise.Create();
+            IPendingPromise<TTemplate> promise = Promise<TTemplate>.Create();
             
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);
@@ -61,13 +61,13 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
+        public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
             
-            IPendingPromise promise = Promise.Create();
+            IPendingPromise<TTemplate> promise = Promise<TTemplate>.Create();
 
             TemplateId id = TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language));
             RegisterTemplateCallback<TTemplate>.Start(this, id, template, version, minVersion, promise);

@@ -36,8 +36,8 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 Registers a global message template Global Message templates cannot be localized
 
 ```csharp
-public IPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, 
-    TemplateVersion version, TemplateVersion minVersion)
+public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string templateName, 
+    TTemplate template, TemplateVersion version, TemplateVersion minVersion)
 ```
 
 | parameter | description |
@@ -56,7 +56,7 @@ public IPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, 
 
 ## See Also
 
-* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
@@ -68,7 +68,7 @@ public IPromise RegisterGlobalTemplateAsync(Plugin plugin, string templateName, 
 Registers a message template with the given name and language
 
 ```csharp
-public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, 
+public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, 
     TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = "en")
 ```
 
@@ -89,7 +89,7 @@ public IPromise RegisterLocalizedTemplateAsync(Plugin plugin, string templateNam
 
 ## See Also
 
-* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries.Templates](./TemplatesNamespace.md)
