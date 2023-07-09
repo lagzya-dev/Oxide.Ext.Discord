@@ -67,6 +67,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
         public string ProcessPlaceholders(string text, PlaceholderData data, bool autoDispose = true)
         {
+            if (data == null)
+            {
+                return text;
+            }
+            
             if (string.IsNullOrEmpty(text))
             {
                 DisposeData(data, autoDispose);
