@@ -34,7 +34,6 @@ namespace Oxide.Ext.Discord.Factory
         public DiscordClient CreateClient(Plugin plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             OnPluginUnloaded(plugin);
 
             // ReSharper disable once SuspiciousTypeConversion.Global
@@ -95,17 +94,13 @@ namespace Oxide.Ext.Discord.Factory
             if (!plugin.IsCorePlugin)
             {
                 CreateClient(plugin);
+                DiscordPluginCache.Instance.OnPluginLoaded(plugin);
             }
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
-            if (plugin.IsCorePlugin)
-            {
-                return;
-            }
-
-            if (DiscordExtension.IsShuttingDown)
+            if (plugin.IsCorePlugin || DiscordExtension.IsShuttingDown)
             {
                 return;
             }

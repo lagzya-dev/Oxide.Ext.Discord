@@ -325,7 +325,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _sessionId = null;
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
-
             await SendImmediatelyAsync(GatewayCommandCode.Resume, resume).ConfigureAwait(false);
         }
         
@@ -365,46 +364,31 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Returns if the websocket is in the connecting state
         /// </summary>
         /// <returns>Returns if the websocket is in connecting state</returns>
-        public bool IsConnecting()
-        {
-            return Handler.SocketState == SocketState.Connecting;
-        }
-        
+        public bool IsConnecting() => Handler.SocketState == SocketState.Connecting;
+
         /// <summary>
         /// Returns if the websocket is in the open state
         /// </summary>
         /// <returns>Returns if the websocket is in open state</returns>
-        public bool IsConnected()
-        {
-            return Handler.SocketState == SocketState.Connected;
-        }
-        
+        public bool IsConnected() => Handler.SocketState == SocketState.Connected;
+
         /// <summary>
         /// Returns if the socket is waiting to reconnect
         /// </summary>
         /// <returns>Returns if the socket is waiting to reconnect</returns>
-        public bool IsPendingReconnect()
-        {
-            return _reconnect.IsPendingReconnect;
-        }
-        
-        /// <summary>
-        /// Returns if the websocket is null or is currently closing / closed
-        /// </summary>
-        /// <returns>Returns if the websocket is null or is currently closing / closed</returns>
-        public bool IsDisconnecting()
-        {
-            return Handler.SocketState == SocketState.Disconnecting;
-        }
+        public bool IsPendingReconnect() => _reconnect.IsPendingReconnect;
 
         /// <summary>
         /// Returns if the websocket is null or is currently closing / closed
         /// </summary>
         /// <returns>Returns if the websocket is null or is currently closing / closed</returns>
-        public bool IsDisconnected()
-        {
-            return Handler.SocketState == SocketState.Disconnected;
-        }
+        public bool IsDisconnecting() => Handler.SocketState == SocketState.Disconnecting;
+
+        /// <summary>
+        /// Returns if the websocket is null or is currently closing / closed
+        /// </summary>
+        /// <returns>Returns if the websocket is null or is currently closing / closed</returns>
+        public bool IsDisconnected() => Handler.SocketState == SocketState.Disconnected;
 
         ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
