@@ -1,5 +1,7 @@
 # FontStyle enumeration
 
+Font Styles for ANSI text
+
 ```csharp
 [Flags]
 public enum FontStyle : byte
@@ -9,9 +11,9 @@ public enum FontStyle : byte
 
 | name | value | description |
 | --- | --- | --- |
-| Default | `0` |  |
-| Bold | `1 << 1` |  |
-| Underline | `1 << 2` |  |
+| Default | `0` | Default |
+| Bold | `1 << 1` | Bold |
+| Underline | `1 << 2` | Underline |
 
 ## See Also
 

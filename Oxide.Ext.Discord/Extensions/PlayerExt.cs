@@ -180,6 +180,13 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns></returns>
         public static bool IsDummyPlayer(this IPlayer player) => player is DiscordDummyPlayer;
 
+        /// <summary>
+        /// Allows plugins to create dummy IPlayers
+        /// </summary>
+        /// <param name="id">ID of the player</param>
+        /// <param name="name">Name of the player</param>
+        /// <param name="ip">IP of the player</param>
+        /// <returns></returns>
         public static IPlayer CreateDummyPlayer(string id, string name, string ip)
         {
             return new DiscordDummyPlayer(id, name, ip);

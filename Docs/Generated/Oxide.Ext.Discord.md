@@ -42,10 +42,10 @@
 
 | public type | description |
 | --- | --- |
-| class [AnsiBuilder](./Oxide.Ext.Discord/Builders/Ansi/AnsiBuilder.md) |  |
-| enum [BackgroundColor](./Oxide.Ext.Discord/Builders/Ansi/BackgroundColor.md) |  |
-| [Flags] enum [FontStyle](./Oxide.Ext.Discord/Builders/Ansi/FontStyle.md) |  |
-| enum [TextColor](./Oxide.Ext.Discord/Builders/Ansi/TextColor.md) |  |
+| class [AnsiBuilder](./Oxide.Ext.Discord/Builders/Ansi/AnsiBuilder.md) | Builder for ANSI colored text |
+| enum [BackgroundColor](./Oxide.Ext.Discord/Builders/Ansi/BackgroundColor.md) | Ansi Background colors |
+| [Flags] enum [FontStyle](./Oxide.Ext.Discord/Builders/Ansi/FontStyle.md) | Font Styles for ANSI text |
+| enum [TextColor](./Oxide.Ext.Discord/Builders/Ansi/TextColor.md) | Text Colors for Ansi Text |
 
 ## Oxide.Ext.Discord.Builders.ApplicationCommands namespace
 
@@ -741,8 +741,8 @@
 | public type | description |
 | --- | --- |
 | class [DiscordTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/DiscordTemplateException.md) | Exception for Discord Templates |
-| class [DuplicateTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/DuplicateTemplateException.md) |  |
-| class [InvalidTemplateVersionException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/InvalidTemplateVersionException.md) |  |
+| class [DuplicateTemplateException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/DuplicateTemplateException.md) | Thrown when duplicate templates have been registered for the same type, plugin, and name |
+| class [InvalidTemplateVersionException](./Oxide.Ext.Discord/Exceptions/Libraries/Templates/InvalidTemplateVersionException.md) | Thrown when the minimum template version is higher than the current template version |
 
 ## Oxide.Ext.Discord.Exceptions.Pooling namespace
 

@@ -10,7 +10,7 @@ public static class PlayerExt
 
 | name | description |
 | --- | --- |
-| static [CreateDummyPlayer](#createdummyplayer-method)(…) |  |
+| static [CreateDummyPlayer](#createdummyplayer-method)(…) | Allows plugins to create dummy IPlayers |
 | static [GetDiscordUser](#getdiscorduser-method)(…) | Returns a minimal Discord User for the given player |
 | static [GetDiscordUserId](#getdiscorduserid-method)(…) | Returns the Discord ID of the IPlayer if linked |
 | static [GetGuildMember](#getguildmember-method)(…) | Returns a minimal Guild Member for the given player |
@@ -311,9 +311,17 @@ public static bool IsDummyPlayer(this IPlayer player)
    
 # CreateDummyPlayer method
 
+Allows plugins to create dummy IPlayers
+
 ```csharp
 public static IPlayer CreateDummyPlayer(string id, string name, string ip)
 ```
+
+| parameter | description |
+| --- | --- |
+| id | ID of the player |
+| name | Name of the player |
+| ip | IP of the player |
 
 ## See Also
 

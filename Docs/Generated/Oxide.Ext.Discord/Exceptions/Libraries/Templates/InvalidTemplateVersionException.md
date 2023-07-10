@@ -1,5 +1,7 @@
 # InvalidTemplateVersionException class
 
+Thrown when the minimum template version is higher than the current template version
+
 ```csharp
 public class InvalidTemplateVersionException : BaseDiscordException
 ```

@@ -1,5 +1,7 @@
 # DuplicateTemplateException class
 
+Thrown when duplicate templates have been registered for the same type, plugin, and name
+
 ```csharp
 public class DuplicateTemplateException : BaseDiscordException
 ```

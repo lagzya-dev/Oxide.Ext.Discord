@@ -1,17 +1,32 @@
 ﻿using System.Text;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Libraries.Pooling;
 
 namespace Oxide.Ext.Discord.Builders.Ansi
 {
-public class AnsiBuilder
+    /// <summary>
+    /// Builder for ANSI colored text
+    /// </summary>
+    public class AnsiBuilder
     {
-        private readonly StringBuilder _sb = new StringBuilder();
+        private readonly StringBuilder _sb;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public AnsiBuilder()
         {
+            _sb = DiscordPool.Internal.GetStringBuilder();
             _sb.AppendLine("```ansi");
         }
 
+        /// <summary>
+        /// Appends text with the given color, background, and font style
+        /// </summary>
+        /// <param name="text">Text to add</param>
+        /// <param name="color">Color of the text</param>
+        /// <param name="background">Background color of the text</param>
+        /// <param name="style">Font style of the text</param>
         public void Append(string text, TextColor color = TextColor.Default, BackgroundColor background = BackgroundColor.Default, FontStyle style = FontStyle.Default)
         {
             _sb.Append("\u001b[");
@@ -36,12 +51,22 @@ public class AnsiBuilder
             Reset();
         }
 
+        /// <summary>
+        /// Appends text with a line terminator with the given color, background, and font style
+        /// </summary>
+        /// <param name="text">Text to add</param>
+        /// <param name="color">Color of the text</param>
+        /// <param name="background">Background color of the text</param>
+        /// <param name="style">Font style of the text</param>
         public void AppendLine(string text, TextColor color = TextColor.Default, BackgroundColor background = BackgroundColor.Default, FontStyle style = FontStyle.Default)
         {
             Append(text, color, background, style);
             _sb.AppendLine();
         }
 
+        /// <summary>
+        /// Appends a line
+        /// </summary>
         public void AppendLine()
         {
             _sb.AppendLine();
@@ -76,11 +101,15 @@ public class AnsiBuilder
             return (style & flag) == flag;
         }
 
+        /// <summary>
+        /// Returns the build Ansi Text
+        /// </summary>
+        /// <returns></returns>
         public string Build()
         {
             _sb.AppendLine();
             _sb.Append("```");
-            return _sb.ToString();
+            return DiscordPool.Internal.FreeStringBuilderToString(_sb);
         }
     }
 }

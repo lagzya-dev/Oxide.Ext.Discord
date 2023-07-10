@@ -1,5 +1,7 @@
 # AnsiBuilder class
 
+Builder for ANSI colored text
+
 ```csharp
 public class AnsiBuilder
 ```
@@ -8,11 +10,11 @@ public class AnsiBuilder
 
 | name | description |
 | --- | --- |
-| [AnsiBuilder](#ansibuilder-constructor)() | The default constructor. |
-| [Append](#append-method)(…) |  |
-| [AppendLine](#appendline-method)() |  |
-| [AppendLine](#appendline-method)(…) |  |
-| [Build](#build-method)() |  |
+| [AnsiBuilder](#ansibuilder-constructor)() | Constructor |
+| [Append](#append-method)(…) | Appends text with the given color, background, and font style |
+| [AppendLine](#appendline-method)() | Appends a line |
+| [AppendLine](#appendline-method)(…) | Appends text with a line terminator with the given color, background, and font style |
+| [Build](#build-method)() | Returns the build Ansi Text |
 
 ## See Also
 
@@ -23,10 +25,19 @@ public class AnsiBuilder
    
 # Append method
 
+Appends text with the given color, background, and font style
+
 ```csharp
 public void Append(string text, TextColor color = TextColor.Default, 
     BackgroundColor background = BackgroundColor.Default, FontStyle style = FontStyle.Default)
 ```
+
+| parameter | description |
+| --- | --- |
+| text | Text to add |
+| color | Color of the text |
+| background | Background color of the text |
+| style | Font style of the text |
 
 ## See Also
 
@@ -39,6 +50,8 @@ public void Append(string text, TextColor color = TextColor.Default,
    
    
 # AppendLine method (1 of 2)
+
+Appends a line
 
 ```csharp
 public void AppendLine()
@@ -54,10 +67,19 @@ public void AppendLine()
 
 # AppendLine method (2 of 2)
 
+Appends text with a line terminator with the given color, background, and font style
+
 ```csharp
 public void AppendLine(string text, TextColor color = TextColor.Default, 
     BackgroundColor background = BackgroundColor.Default, FontStyle style = FontStyle.Default)
 ```
+
+| parameter | description |
+| --- | --- |
+| text | Text to add |
+| color | Color of the text |
+| background | Background color of the text |
+| style | Font style of the text |
 
 ## See Also
 
@@ -70,6 +92,8 @@ public void AppendLine(string text, TextColor color = TextColor.Default,
    
    
 # Build method
+
+Returns the build Ansi Text
 
 ```csharp
 public string Build()
@@ -84,7 +108,7 @@ public string Build()
    
 # AnsiBuilder constructor
 
-The default constructor.
+Constructor
 
 ```csharp
 public AnsiBuilder()

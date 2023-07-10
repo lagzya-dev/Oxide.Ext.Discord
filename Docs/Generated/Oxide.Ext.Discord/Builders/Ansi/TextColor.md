@@ -1,5 +1,7 @@
 # TextColor enumeration
 
+Text Colors for Ansi Text
+
 ```csharp
 public enum TextColor : byte
 ```
@@ -8,15 +10,15 @@ public enum TextColor : byte
 
 | name | value | description |
 | --- | --- | --- |
-| Default | `Default` |  |
-| Gray | `Gray` |  |
-| Red | `Red` |  |
-| Green | `Green` |  |
-| Yellow | `Yellow` |  |
-| Blue | `Blue` |  |
-| Pink | `Pink` |  |
-| Cyan | `Cyan` |  |
-| White | `White` |  |
+| Default | `Default` | Default |
+| Gray | `Gray` | Gray |
+| Red | `Red` | Red |
+| Green | `Green` | Green |
+| Yellow | `Yellow` | Yellow |
+| Blue | `Blue` | Blue |
+| Pink | `Pink` | Pink |
+| Cyan | `Cyan` | Cyan |
+| White | `White` | White |
 
 ## See Also
 

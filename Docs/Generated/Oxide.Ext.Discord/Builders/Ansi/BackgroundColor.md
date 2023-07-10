@@ -1,5 +1,7 @@
 # BackgroundColor enumeration
 
+Ansi Background colors
+
 ```csharp
 public enum BackgroundColor : byte
 ```
@@ -8,15 +10,15 @@ public enum BackgroundColor : byte
 
 | name | value | description |
 | --- | --- | --- |
-| Default | `Default` |  |
-| DarkBlue | `DarkBlue` |  |
-| Orange | `Orange` |  |
-| MarbleBlue | `MarbleBlue` |  |
-| GreyTurquoise | `GreyTurquoise` |  |
-| Gray | `Gray` |  |
-| Indigo | `Indigo` |  |
-| LightGray | `LightGray` |  |
-| White | `White` |  |
+| Default | `Default` | Default |
+| DarkBlue | `DarkBlue` | Dark Blue |
+| Orange | `Orange` | Orange |
+| MarbleBlue | `MarbleBlue` | Marble Blue |
+| GreyTurquoise | `GreyTurquoise` | Grey Turquoise |
+| Gray | `Gray` | Gray |
+| Indigo | `Indigo` | Indigo |
+| LightGray | `LightGray` | Light Gray |
+| White | `White` | White |
 
 ## See Also
 
