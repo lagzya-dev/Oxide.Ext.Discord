@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Hooks
 
         private void AddPluginHook(DiscordClient client, string hook)
         {
-            BotConnection connection = client.Bot.Connection;
+            BotConnection connection = client.Connection;
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
             if (intent != GatewayIntents.None && !connection.HasAnyIntent(intent))
             {
