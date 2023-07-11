@@ -64,7 +64,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         /// <summary>
         /// Video url to show in the embed
         /// </summary>
-        [JsonProperty("Embed View Url")]
+        [JsonProperty("Embed Video Url")]
         public string VideoUrl { get; set; } = string.Empty;
 
         /// <summary>
