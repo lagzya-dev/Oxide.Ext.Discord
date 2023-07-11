@@ -76,6 +76,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             ServerPlayerCache.Instance.SetSearchService();
             
             CreateTemplates();
+            RegisterApplicationCommands();
         }
 
         // ReSharper disable once UnusedMember.Local

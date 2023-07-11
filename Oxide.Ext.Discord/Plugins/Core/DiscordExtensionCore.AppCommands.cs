@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes.ApplicationCommands;
 using Oxide.Ext.Discord.Builders.ApplicationCommands;
@@ -15,6 +16,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates;
 using Oxide.Ext.Discord.Libraries.Templates.Commands;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core.AppCommands;
 using Oxide.Ext.Discord.Plugins.Core.Templates;
 using Oxide.Ext.Discord.Plugins.Setup;
@@ -25,9 +27,12 @@ namespace Oxide.Ext.Discord.Plugins.Core
     internal partial class DiscordExtensionCore
     {
         private readonly Hash<Snowflake, CommandCache> _commandCache = new Hash<Snowflake, CommandCache>();
+        private CommandCreate _create;
+        private PluginSetup _setup;
 
-        public void RegisterApplicationCommands(BotClient client)
+        private void RegisterApplicationCommands()
         {
+            _setup = new PluginSetup(this);
             ApplicationCommandBuilder builder = new ApplicationCommandBuilder(AppCommandKeys.DeCommand, "Discord Extension Commands", ApplicationCommandType.ChatInput)
                                                 .AddDefaultPermissions(PermissionFlags.Administrator)
                                                 .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands",
@@ -41,10 +46,23 @@ namespace Oxide.Ext.Discord.Plugins.Core
             {
                 DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, null).Then(() =>
                 {
-                    client.Application.CreateGlobalCommand(client.GetFirstClient(), builder.Build());
-                    DiscordAppCommand.Instance.RegisterApplicationCommands(new PluginSetup(this), client.Connection);
+                    _create = create;
+                    foreach (BotClient client in BotClientFactory.Instance.Clients.ToList())
+                    {
+                        ApplyApplicationCommands(client);
+                    }
                 });
             });
+        }
+
+        public void ApplyApplicationCommands(BotClient client)
+        {
+            _logger.Verbose($"{nameof(DiscordExtensionCore)}.{nameof(ApplyApplicationCommands)} Create Exists: {{0}} Client Is Ready: {{1}}", _create != null, client.IsReady);
+            if (_create != null && client.IsReady)
+            {
+                client.Application.CreateGlobalCommand(client.GetFirstClient(), _create);
+                DiscordAppCommand.Instance.RegisterApplicationCommands(_setup, client.Connection);
+            }
         }
 
         // ReSharper disable once UnusedMember.Local

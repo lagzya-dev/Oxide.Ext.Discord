@@ -76,6 +76,8 @@ namespace Oxide.Ext.Discord.Clients
         /// </summary>
         public bool IsFullyLoaded { get; private set; }
         
+        public bool IsReady => _readyData != null;
+        
         internal readonly DiscordHook Hooks;
         internal readonly ILogger Logger;
         internal readonly BotConnection Connection;
@@ -338,7 +340,8 @@ namespace Oxide.Ext.Discord.Clients
             Application = ready.Application;
             BotUser = ready.User;
 
-            if (_readyData == null)
+            bool isFirst = _readyData == null;
+            if (isFirst)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
                 if (DiscordUserData.Instance.Bots.TryGetValue(ready.User.Id, out BotData botData))
@@ -352,12 +355,15 @@ namespace Oxide.Ext.Discord.Clients
                         userData.ClearBlockIfExpired();
                     }
                 }
-
-                DiscordExtensionCore.Instance.RegisterApplicationCommands(this);
             }
             
             _readyData = ready;
             _readyData.Guilds = Servers;
+
+            if (isFirst)
+            {
+                DiscordExtensionCore.Instance.ApplyApplicationCommands(this);
+            }
 
             if (Connection.Intents != WebSocket.Intents)
             {
