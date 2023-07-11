@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -55,6 +56,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="guild">Guild to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddGuild(DiscordGuild guild) => Add(nameof(DiscordGuild), guild);
+        
+        public PlaceholderData RemoveGuild() => Remove(nameof(DiscordGuild));
 
         /// <summary>
         /// Add a <see cref="DiscordMessage"/>
@@ -72,6 +75,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             
             return this;
         }
+        
+        public PlaceholderData RemoveMessage() => Remove(nameof(DiscordMessage));
 
         /// <summary>
         /// Add a <see cref="GuildMember"/> by <see cref="DiscordClient"/>, GuildId, and UserId
@@ -97,6 +102,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
 
             return this;
         }
+        
+        public PlaceholderData RemoveGuildMember() => Remove(nameof(GuildMember));
 
         /// <summary>
         /// Adds a <see cref="DiscordUser"/>
@@ -113,6 +120,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
 
             return this;
         }
+        
+        public PlaceholderData RemoveUser() => Remove(nameof(DiscordUser));
 
         /// <summary>
         /// Adds a <see cref="DiscordRole"/> by <see cref="DiscordClient"/>, GuildId, and RoleId
@@ -129,6 +138,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="role">Role to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddRole(DiscordRole role) => Add(nameof(DiscordRole), role);
+        
+        public PlaceholderData RemoveRole() => Remove(nameof(DiscordRole));
 
         /// <summary>
         /// Adds a <see cref="DiscordChannel"/> by <see cref="DiscordClient"/>, ChannelId, and Optional GuildId
@@ -145,6 +156,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="channel">Channel to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddChannel(DiscordChannel channel) => Add(nameof(DiscordChannel), channel);
+        
+        public PlaceholderData RemoveChannel() => Remove(nameof(DiscordChannel));
         
         /// <summary>
         /// Adds a <see cref="DiscordInteraction"/>
@@ -170,7 +183,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="player">player to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddPlayer(IPlayer player) => Add(nameof(IPlayer), player);
-        
+
+        public PlaceholderData RemovePlayer() => Remove(nameof(IPlayer));
+
         /// <summary>
         /// Adds a target <see cref="IPlayer"/>
         /// </summary>
@@ -185,6 +200,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddPlugin(Plugin plugin) => Add(nameof(Plugin), plugin);
 
+        /// <summary>
+        /// Adds a Unix Timestamp
+        /// </summary>
+        /// <param name="timestamp">Unix timestamp</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddTimestamp(DateTimeOffset timestamp) => AddTimestamp(timestamp.ToUnixTimeSeconds());
+        
         /// <summary>
         /// Adds a Unix Timestamp
         /// </summary>
@@ -229,12 +251,26 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
 
-        internal void AddBoxed(string name, IBoxed boxed)
+        private void AddBoxed(string name, IBoxed boxed)
         {
             _data[name] = boxed;
             _boxed.Add(boxed);
         }
 
+        public PlaceholderData Remove(string name)
+        {
+            if (_data.TryGetValue(name, out object value))
+            {
+                _data.Remove(name);
+                if (value is IBoxed boxed)
+                {
+                    boxed.Dispose();
+                }
+            }
+
+            return this;
+        }
+        
         /// <summary>
         /// Returns the object with the given type of {T}
         /// The key name used is <code>nameof(T)</code>

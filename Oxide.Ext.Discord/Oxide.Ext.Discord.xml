@@ -20305,6 +20305,13 @@
             <param name="plugin">Plugin to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.DateTimeOffset)">
+            <summary>
+            Adds a Unix Timestamp
+            </summary>
+            <param name="timestamp">Unix timestamp</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimestamp(System.Int64)">
             <summary>
             Adds a Unix Timestamp

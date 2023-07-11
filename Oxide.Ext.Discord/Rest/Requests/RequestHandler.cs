@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Interfaces;
@@ -42,15 +43,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         {
             _runner = StartRequest;
         }
-        
-        private static readonly Hash<RequestMethod, HttpMethod> HttpMethods = new Hash<RequestMethod, HttpMethod>
-        {
-            [RequestMethod.GET] = HttpMethod.Get,
-            [RequestMethod.PUT] = HttpMethod.Put,
-            [RequestMethod.POST] = HttpMethod.Post,
-            [RequestMethod.PATCH] = new HttpMethod("PATCH"),
-            [RequestMethod.DELETE] = HttpMethod.Delete,
-        };
 
         /// <summary>
         /// Creates a new <see cref="RequestHandler"/>
@@ -245,7 +237,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
 
         private HttpRequestMessage CreateRequest()
         {
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethods[Request.Method], Request.Route);
+            HttpRequestMessage request = new HttpRequestMessage(DiscordHttpMethods.GetMethod(Request.Method), Request.Route);
             object data = Request.Data;
             if (data != null)
             {
