@@ -1,7 +1,9 @@
 using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
@@ -105,19 +107,37 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         public void CancelReconnect()
         {
-            lock (_lock)
+            StringBuilder debug = DiscordPool.Internal.GetStringBuilder();
+            try
             {
-                if (_source == null)
+                lock (_lock)
                 {
-                    return;
-                }
+                    debug.Append("A");
+                    if (_source == null)
+                    {
+                        debug.Append("B");
+                        return;
+                    }
 
-                if (!_source.IsCancellationRequested)
-                {
-                    _source.Cancel();
-                }
+                    debug.Append("C");
+                    if (!_source.IsCancellationRequested)
+                    {
+                        debug.Append("D");
+                        _source.Cancel();
+                    }
 
-                _source.Dispose();
+                    debug.Append("E");
+                    _source.Dispose();
+                    debug.Append("F");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Exception($"{nameof(WebSocketReconnectHandler)}.{nameof(CancelReconnect)} An error occured. Websocket: {{0}} Source: {{1}} Debug: \n{{2}}", WebSocket == null, _source == null, debug.ToString(), ex);
+            }
+            finally
+            {
+                DiscordPool.Internal.FreeStringBuilder(debug);
             }
         }
 
