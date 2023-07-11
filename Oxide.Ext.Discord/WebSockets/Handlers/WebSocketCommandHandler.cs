@@ -105,10 +105,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
                     _rateLimit.FiredRequest(command);
                     
-                    if (await _webSocket.SendAsync(command.Payload).ConfigureAwait(false))
-                    {
-                        RemoveCommand(command);
-                    }
+                    await _webSocket.SendAsync(command.Payload).ConfigureAwait(false);
+                    RemoveCommand(command);
                 }
                 catch (Exception ex)
                 {
