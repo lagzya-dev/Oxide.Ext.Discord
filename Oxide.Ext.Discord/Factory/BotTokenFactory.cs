@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Factory
         {
             try
             {
-                string appId = Encoding.UTF8.GetString(Convert.FromBase64String(base64AppId));
+                string appId = Encoding.UTF8.GetString(ConvertFromBase64(base64AppId));
                 id = new Snowflake(appId);
                 return true;
             }
@@ -84,6 +84,16 @@ namespace Oxide.Ext.Discord.Factory
                 id = default(Snowflake);
                 return false;
             }
+        }
+
+        private byte[] ConvertFromBase64(string base64)
+        {
+            if (base64.Length % 4 != 0)
+            {
+                base64 += new string('=', (4 - base64.Length % 4));
+            }
+
+            return Convert.FromBase64String(base64);
         }
     }
 }
