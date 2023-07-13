@@ -232,7 +232,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 DiscordConfig.Instance.Logging.FileLogLevel = log;
                 DiscordConfig.Instance.Save();
 
-                Chat(player, LangKeys.Log.Set, "Console", log);
+                Chat(player, LangKeys.Log.Set, "File", log);
             }
             catch
             {
