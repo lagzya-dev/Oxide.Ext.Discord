@@ -137,30 +137,21 @@ namespace Oxide.Ext.Discord.Extensions
         /// </summary>
         /// <param name="player">Player to check if they're linked</param>
         /// <returns>True if linked; False otherwise</returns>
-        public static bool IsLinked(this IPlayer player)
-        {
-            return DiscordLink.Instance.IsLinked(player.Id);
-        }
+        public static bool IsLinked(this IPlayer player) => player != null && DiscordLink.Instance.IsLinked(player.Id);
 
         /// <summary>
         /// Returns the Discord ID of the IPlayer if linked
         /// </summary>
         /// <param name="player">Player to get Discord ID for</param>
         /// <returns>Discord ID if linked; null otherwise</returns>
-        public static Snowflake? GetDiscordUserId(this IPlayer player)
-        {
-            return DiscordLink.Instance.GetDiscordId(player);
-        }
-        
+        public static Snowflake GetDiscordUserId(this IPlayer player) => player != null ? DiscordLink.Instance.GetDiscordId(player) : default(Snowflake);
+
         /// <summary>
         /// Returns a minimal Discord User for the given player
         /// </summary>
         /// <param name="player">Player to get Discord User for</param>
         /// <returns>Discord User if linked; null otherwise</returns>
-        public static DiscordUser GetDiscordUser(this IPlayer player)
-        {
-            return DiscordLink.Instance.GetDiscordUser(player);
-        }
+        public static DiscordUser GetDiscordUser(this IPlayer player) => player != null ? DiscordLink.Instance.GetDiscordUser(player) : null;
 
         /// <summary>
         /// Returns a minimal Guild Member for the given player
@@ -168,10 +159,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="player">Player to get Discord User for</param>
         /// <param name="guild">Guild the member is in</param>
         /// <returns>GuildMember if linked and in guild; null otherwise</returns>
-        public static GuildMember GetGuildMember(this IPlayer player, DiscordGuild guild)
-        {
-            return DiscordLink.Instance.GetLinkedMember(player, guild);
-        }
+        public static GuildMember GetGuildMember(this IPlayer player, DiscordGuild guild) => player != null ? DiscordLink.Instance.GetLinkedMember(player, guild) : null;
 
         /// <summary>
         /// Returns if the IPlayer is a <see cref="DiscordDummyPlayer"/>
@@ -187,9 +175,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="name">Name of the player</param>
         /// <param name="ip">IP of the player</param>
         /// <returns></returns>
-        public static IPlayer CreateDummyPlayer(string id, string name, string ip)
-        {
-            return new DiscordDummyPlayer(id, name, ip);
-        }
+        public static IPlayer CreateDummyPlayer(string id, string name, string ip) => new DiscordDummyPlayer(id, name, ip);
     }
 }
