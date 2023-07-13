@@ -57,6 +57,41 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 yield return placeholder;
             }
         }
+        
+        /// <summary>
+        /// Returns true if the text contains placeholders
+        /// </summary>
+        /// <param name="text">Text to check for placeholders</param>
+        /// <returns></returns>
+        public bool HasPlaceholders(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return false;
+            }
+            
+            MatchCollection matches = _placeholderRegex.Matches(text);
+            return matches.Count != 0;
+        }
+        
+        /// <summary>
+        /// Returns placeholders found in the given text
+        /// </summary>
+        /// <param name="text">Text to get placeholders for</param>
+        /// <returns></returns>
+        public IEnumerable<string> GetPlaceholders(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                yield break;
+            }
+            
+            MatchCollection matches = _placeholderRegex.Matches(text);
+            foreach (Match match in matches)
+            {
+                yield return match.Groups[1].Value;
+            }
+        }
 
         /// <summary>
         /// Process placeholders for the given text.
@@ -98,11 +133,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                         continue;
                     }
 
-                    if (_logger.IsLogging(DiscordLogLevel.Verbose))
-                    {
-                        _logger.Debug("Invoking placeholder: '{0}' Format: {1}", state.Name, state.Format);
-                    }
-                    
                     placeholder.Invoke(builder, state);
                 }
 

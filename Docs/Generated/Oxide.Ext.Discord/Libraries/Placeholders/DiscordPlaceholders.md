@@ -11,6 +11,8 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 | name | description |
 | --- | --- |
 | [CreateData](#createdata-method)(…) | Returns a pooled [`PlaceholderData`](./PlaceholderData.md) for the given plugin. If you wish to manually pool call the [`ManualPool`](./PlaceholderData.md#manualpool-method) method. If you wish to clone [`PlaceholderData`](./PlaceholderData.md) call the [`Clone`](./PlaceholderData.md#clone-method) method. |
+| [GetPlaceholders](#getplaceholders-method)(…) | Returns placeholders found in the given text |
+| [HasPlaceholders](#hasplaceholders-method)(…) | Returns true if the text contains placeholders |
 | [ProcessPlaceholders](#processplaceholders-method)(…) | Process placeholders for the given text. |
 | [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder. Static placeholder value can not be changed. |
 | [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder |
@@ -29,6 +31,44 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.cs)
+   
+   
+# HasPlaceholders method
+
+Returns true if the text contains placeholders
+
+```csharp
+public bool HasPlaceholders(string text)
+```
+
+| parameter | description |
+| --- | --- |
+| text | Text to check for placeholders |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetPlaceholders method
+
+Returns placeholders found in the given text
+
+```csharp
+public IEnumerable<string> GetPlaceholders(string text)
+```
+
+| parameter | description |
+| --- | --- |
+| text | Text to get placeholders for |
+
+## See Also
+
+* class [DiscordPlaceholders](./DiscordPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
 # ProcessPlaceholders method
