@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Attributes.ApplicationCommands;
+using Oxide.Ext.Discord.Attributes.Pooling;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Plugins.Setup
 {
@@ -24,7 +27,7 @@ namespace Oxide.Ext.Discord.Plugins.Setup
         /// Constructor
         /// </summary>
         /// <param name="plugin">Plugin the data is for</param>
-        public PluginSetup(Plugin plugin)
+        public PluginSetup(Plugin plugin, ILogger logger)
         {
             Plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
             PluginName = Plugin.Name;
@@ -33,11 +36,6 @@ namespace Oxide.Ext.Discord.Plugins.Setup
             {
                 MemberInfo member = methods[index];
                 Attribute[] attributes = Attribute.GetCustomAttributes(member);
-                if (attributes.Length == 0)
-                {
-                    continue;
-                }
-                
                 switch (member)
                 {
                     case MethodInfo hook:
@@ -46,30 +44,35 @@ namespace Oxide.Ext.Discord.Plugins.Setup
                         {
                             if (DiscordExtHooks.IsDiscordHook(name))
                             {
+                                
                                 if (DiscordExtHooks.IsGlobalHook(name))
                                 {
                                     GlobalHooks.Add(name);
+                                    logger.Verbose("Adding Global Hook: {0}.{1}", Plugin.Name, name);
                                 }
                                 else
                                 {
                                     PluginHooks.Add(name);
+                                    logger.Verbose("Adding Plugin Hook: {0}.{1}", Plugin.Name, name);
                                 }
                             }
                            
                             if (IsCallbackMethod(attributes))
                             {
+                                logger.Verbose("Adding Callback Hook: {0}.{1}", Plugin.Name, name);
                                 _callbacks.Add(new PluginCallback(name, hook, attributes));
                             }
                         }
                         break;
                     }
 
-                    case FieldInfo field:
-                        _fields.Add(new PluginField(field));
-                        break;
-                    
-                    case PropertyInfo property:
-                        _fields.Add(new PluginField(property));
+                    case FieldInfo _:
+                    case PropertyInfo _:
+                        if (IsFieldAttribute(attributes))
+                        {
+                            logger.Verbose("Adding Plugin Field: {0}.{1}", Plugin.Name, member.Name);
+                            _fields.Add(new PluginField(member, attributes));
+                        }
                         break;
                 }
             }
@@ -103,14 +106,34 @@ namespace Oxide.Ext.Discord.Plugins.Setup
 
         private bool IsCallbackMethod(Attribute[] attributes)
         {
-            switch (attributes.Length)
+            for (int index = 0; index < attributes.Length; index++)
             {
-                case 0:
-                case 1 when attributes[0] is HookMethodAttribute:
-                    return false;
-                default:
-                    return true;
+                Attribute attribute = attributes[index];
+                switch (attribute)
+                {
+                    case BaseApplicationCommandAttribute _:
+                    case GuildCommandAttribute _:
+                    case DirectMessageCommandAttribute _:
+                        return true;
+                }
             }
+
+            return false;
+        }
+
+        private bool IsFieldAttribute(Attribute[] attributes)
+        {
+            for (int index = 0; index < attributes.Length; index++)
+            {
+                Attribute attribute = attributes[index];
+                switch (attribute)
+                {
+                    case DiscordPoolAttribute _:
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         internal IEnumerable<PluginHookResult<T>> GetHooksWithAttribute<T>() where T : BaseDiscordAttribute

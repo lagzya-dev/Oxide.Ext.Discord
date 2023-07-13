@@ -87,7 +87,7 @@ namespace Oxide.Ext.Discord.Clients
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
 
             Connection.Initialize(this);
-            PluginSetup setup = new PluginSetup(Plugin);
+            PluginSetup setup = new PluginSetup(Plugin, Logger);
             BaseDiscordLibrary.ProcessPluginLoaded(setup, Connection);
             Bot = BotClientFactory.Instance.InitializeBotClient(this);
             Bot.AddClient(this, setup);

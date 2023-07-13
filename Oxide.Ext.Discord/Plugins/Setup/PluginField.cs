@@ -10,11 +10,10 @@ namespace Oxide.Ext.Discord.Plugins.Setup
         public readonly MemberInfo Member;
         private readonly List<Attribute> _attributes;
 
-        public PluginField(MemberInfo member)
+        public PluginField(MemberInfo member, Attribute[] attributes)
         {
             Member = member;
             _attributes = new List<Attribute>(0);
-            Attribute[] attributes = Attribute.GetCustomAttributes(member);
             for (int index = 0; index < attributes.Length; index++)
             {
                 Attribute attribute = attributes[index];

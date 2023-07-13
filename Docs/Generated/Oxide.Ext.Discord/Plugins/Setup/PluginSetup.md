@@ -24,7 +24,7 @@ public class PluginSetup
 Constructor
 
 ```csharp
-public PluginSetup(Plugin plugin)
+public PluginSetup(Plugin plugin, ILogger logger)
 ```
 
 | parameter | description |
@@ -33,6 +33,7 @@ public PluginSetup(Plugin plugin)
 
 ## See Also
 
+* interface [ILogger](../../Logging/ILogger.md)
 * class [PluginSetup](./PluginSetup.md)
 * namespace [Oxide.Ext.Discord.Plugins.Setup](./SetupNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

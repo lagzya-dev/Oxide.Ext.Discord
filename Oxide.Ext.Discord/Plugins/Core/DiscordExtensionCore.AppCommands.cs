@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
 
         private void RegisterApplicationCommands()
         {
-            _setup = new PluginSetup(this);
+            _setup = new PluginSetup(this, DiscordExtension.GlobalLogger);
             ApplicationCommandBuilder builder = new ApplicationCommandBuilder(AppCommandKeys.DeCommand, "Discord Extension Commands", ApplicationCommandType.ChatInput)
                                                 .AddDefaultPermissions(PermissionFlags.Administrator)
                                                 .AddSubCommandGroup(AppCommandKeys.AppCommandGroup, "Application Commands",
