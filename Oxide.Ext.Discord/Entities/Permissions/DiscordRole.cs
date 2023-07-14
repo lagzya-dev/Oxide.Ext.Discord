@@ -79,6 +79,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         public RoleTags Tags { get; set; }
         
         /// <summary>
+        /// The flags for the given role
+        /// </summary>
+        [JsonProperty("flags")]
+        public RoleFlags Flags { get; set; }
+        
+        /// <summary>
         /// Returns a string to mention this role in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionRole(Id);
@@ -125,7 +131,8 @@ namespace Oxide.Ext.Discord.Entities.Permissions
             Permissions = role.Permissions;
             Managed = role.Managed;
             Mentionable = role.Mentionable;
-
+            Flags = role.Flags;
+            
             if (role.Tags != null)
             {
                 Tags = role.Tags;
