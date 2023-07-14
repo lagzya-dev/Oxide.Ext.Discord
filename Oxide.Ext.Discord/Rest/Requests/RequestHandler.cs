@@ -30,7 +30,6 @@ namespace Oxide.Ext.Discord.Rest.Requests
         
         private Bucket _bucket;
         private RestHandler _rest;
-        private DiscordJsonWriter _json;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
@@ -238,46 +237,44 @@ namespace Oxide.Ext.Discord.Rest.Requests
         private HttpRequestMessage CreateRequest()
         {
             HttpRequestMessage request = new HttpRequestMessage(DiscordHttpMethods.GetMethod(Request.Method), Request.Route);
-            object data = Request.Data;
-            if (data != null)
-            {
-                if (data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
-                {
-                    MultipartFormDataContent content = new MultipartFormDataContent();
-                    
-                    DiscordStreamContent json = GetJsonContent(data);
-                    content.Add(json, "payload_json");
-
-                    for (int index = 0; index < attachments.FileAttachments.Count; index++)
-                    {
-                        MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                        ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
-                        content.Add(file, FileAttachmentCache.Instance.GetName(index), fileAttachment.FileName);
-                        file.Headers.ContentType = MediaTypeHeaderCache.Instance.Get(fileAttachment.ContentType);
-                    }
-
-                    request.Content = content;
-                }
-                else
-                {
-                    request.Content = GetJsonContent(data);
-                }
-            }
-
+            CreateContent(request);
             return request;
         }
-
-        private DiscordStreamContent GetJsonContent(object data)
+        
+        private void CreateContent(HttpRequestMessage request)
         {
-            _json = DiscordJsonWriter.Get(PluginPool);
-            _json.Write(Request.Client.Bot.JsonSerializer, data);
-            
-            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            object data = Request.Data;
+            if (data == null)
             {
-                _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Creating JSON Body: {{0}}", _json.ReadAsString());
+                return;
             }
+            
+            if (data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
+            {
+                MultipartFormDataContent content = new MultipartFormDataContent();
 
-            DiscordStreamContent content = new DiscordStreamContent(_json.Stream);
+                HttpContent json = GetJsonContent(data);
+                content.Add(json, "payload_json");
+
+                for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                {
+                    MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
+                    ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
+                    content.Add(file, FileAttachmentCache.Instance.GetName(index), fileAttachment.FileName);
+                    file.Headers.ContentType = MediaTypeHeaderCache.Instance.Get(fileAttachment.ContentType);
+                }
+
+                request.Content = content;
+            }
+            else
+            {
+                request.Content = GetJsonContent(data);
+            }
+        }
+
+        private StringContent GetJsonContent(object data)
+        {
+            StringContent content = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings));
             content.Headers.ContentType = MediaTypeHeaderCache.Instance.Get("application/json");
             return content;
         }
@@ -296,12 +293,10 @@ namespace Oxide.Ext.Discord.Rest.Requests
         /// <inheritdoc/>
         protected override void EnterPool()
         {
-            _json?.Dispose();
             Request.Dispose();
             _response.Dispose();
             _bucket = null;
             _rest = null;
-            _json = null;
             Request = null;
             _response = null;
             _logger = null;
