@@ -113,8 +113,7 @@ namespace Oxide.Ext.Discord.Plugins.Setup
                 switch (attribute)
                 {
                     case BaseApplicationCommandAttribute _:
-                    case GuildCommandAttribute _:
-                    case DirectMessageCommandAttribute _:
+                    case BaseCommandAttribute _:
                         return true;
                 }
             }
