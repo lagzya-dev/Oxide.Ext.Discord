@@ -4,6 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Teams;
 using Oxide.Ext.Discord.Entities.Users;
@@ -94,12 +95,18 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("team")]
         public DiscordTeam Team { get; set; }
-        
+
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// Partial Guild for the application
+        /// </summary>
+        [JsonProperty("guild")]
+        public DiscordGuild Guild { get; set; }
         
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -124,6 +131,12 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("flags")]
         public ApplicationFlags? Flags { get; set; }
+        
+        /// <summary>
+        /// An approximate count of the app's guild membership.
+        /// </summary>
+        [JsonProperty("approximate_guild_count")]
+        public int? ApproximateGuildCount { get; set; } 
         
         /// <summary>
         /// Up to 5 tags describing the content and functionality of the application
@@ -182,12 +195,21 @@ namespace Oxide.Ext.Discord.Entities.Applications
         }
 
         /// <summary>
+        /// Returns the current users application
+        /// See <a href="">Get Current Application</a>
+        /// </summary>
+        public static IPromise<DiscordApplication> Get(DiscordClient client)
+        {
+            return client.Bot.Rest.Get<DiscordApplication>(client,"applications/@me");
+        }
+        
+        /// <summary>
         /// Fetch all of the global commands for your application.
         /// Returns a list of ApplicationCommand.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
-        /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="withLocalizations">Include Command Localizations</param>
+        /// </summary>
         public IPromise<List<DiscordApplicationCommand>> GetGlobalCommands(DiscordClient client, bool withLocalizations = false)
         {
             return client.Bot.Rest.Get<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands?with_localizations={withLocalizations}");
