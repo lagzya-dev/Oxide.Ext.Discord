@@ -134,6 +134,22 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         }
         
         /// <summary>
+        /// Adds a <see cref="DiscordUser"/>
+        /// </summary>
+        /// <param name="user">User to add</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddUserTarget(DiscordUser user)
+        {
+            if (user != null)
+            {
+                AddTarget(user.Player);
+                Add(UserPlaceholders.TargetUserKey, user);
+            }
+
+            return this;
+        }
+        
+        /// <summary>
         /// Removes user placeholder data
         /// </summary>
         /// <returns>This</returns>
@@ -241,6 +257,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
         public PlaceholderData AddTimestamp(long timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
+        
+        /// <summary>
+        /// Adds a <see cref="TimeSpan"/>
+        /// </summary>
+        /// <param name="timespan">Timespan</param>
+        /// <returns>This</returns>
+        public PlaceholderData AddTimeSpan(TimeSpan timespan) => Add(TimeSpanPlaceholders.TimeSpanKey, timespan);
 
         /// <summary>
         /// Adds a <see cref="Snowflake"/>

@@ -11,6 +11,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class UserPlaceholders
     {
+        internal const string TargetUserKey = "TargetUser";
+        
         /// <summary>
         /// <see cref="DiscordUser.Id"/> placeholder
         /// </summary>
@@ -54,6 +56,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         internal static void RegisterPlaceholders()
         {
             RegisterPlaceholders(DiscordExtensionCore.Instance, "user", nameof(DiscordUser));
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "user.target", "user.target");
         }
         
         /// <summary>

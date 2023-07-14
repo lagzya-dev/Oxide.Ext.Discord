@@ -9,6 +9,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class TimeSpanPlaceholders
     {
+        internal const string TimeSpanKey = "timespan";
+        
         /// <summary>
         /// <see cref="TimeSpan.Days"/> placeholder
         /// </summary>
@@ -61,7 +63,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "timespan", "timespan");
+            RegisterPlaceholders(DiscordExtensionCore.Instance, "timespan", TimeSpanKey);
         }
         
         /// <summary>

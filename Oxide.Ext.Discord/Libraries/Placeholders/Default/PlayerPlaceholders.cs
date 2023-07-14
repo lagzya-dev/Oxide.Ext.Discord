@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class PlayerPlaceholders
     {
-        internal const string TargetPlayerKey = "TargetPlayerKey";
+        internal const string TargetPlayerKey = "TargetPlayer";
         
         private static Permission _permission;
         private static Permission Permission => _permission ?? (_permission = Interface.Oxide.GetLibrary<Permission>());

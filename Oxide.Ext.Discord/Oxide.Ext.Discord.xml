@@ -20414,6 +20414,13 @@
             <param name="user">User to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddUserTarget(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
+            <summary>
+            Adds a <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
+            </summary>
+            <param name="user">User to add</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveUser">
             <summary>
             Removes user placeholder data
@@ -20510,6 +20517,13 @@
             Adds a Unix Timestamp
             </summary>
             <param name="timestamp">Unix timestamp</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTimeSpan(System.TimeSpan)">
+            <summary>
+            Adds a <see cref="T:System.TimeSpan"/>
+            </summary>
+            <param name="timespan">Timespan</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddSnowflake(Oxide.Ext.Discord.Entities.Snowflake)">

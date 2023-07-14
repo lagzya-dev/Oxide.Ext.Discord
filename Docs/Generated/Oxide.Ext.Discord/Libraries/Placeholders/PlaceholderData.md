@@ -23,8 +23,10 @@ public class PlaceholderData : BasePoolable
 | [AddRole](#addrole-method-1-of-2)(…) | Adds a [`DiscordRole`](../../Entities/Permissions/DiscordRole.md) by [`DiscordClient`](../../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
 | [AddSnowflake](#addsnowflake-method)(…) | Adds a [`Snowflake`](../../Entities/Snowflake.md) |
 | [AddTarget](#addtarget-method)(…) | Adds a target IPlayer |
+| [AddTimeSpan](#addtimespan-method)(…) | Adds a TimeSpan |
 | [AddTimestamp](#addtimestamp-method-1-of-2)(…) | Adds a Unix Timestamp (2 methods) |
 | [AddUser](#adduser-method)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
+| [AddUserTarget](#addusertarget-method)(…) | Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md) |
 | [Clone](#clone-method)() | Clones the current placeholder data into a new [`PlaceholderData`](./PlaceholderData.md) |
 | [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)() | Returns the object with the given type of {T} The key name used is |
 | [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
@@ -263,6 +265,30 @@ Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md)
 
 ```csharp
 public PlaceholderData AddUser(DiscordUser user)
+```
+
+| parameter | description |
+| --- | --- |
+| user | User to add |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [DiscordUser](../../Entities/Users/DiscordUser.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddUserTarget method
+
+Adds a [`DiscordUser`](../../Entities/Users/DiscordUser.md)
+
+```csharp
+public PlaceholderData AddUserTarget(DiscordUser user)
 ```
 
 | parameter | description |
@@ -590,6 +616,29 @@ public PlaceholderData AddTimestamp(long timestamp)
 | parameter | description |
 | --- | --- |
 | timestamp | Unix timestamp |
+
+## Return Value
+
+This
+
+## See Also
+
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddTimeSpan method
+
+Adds a TimeSpan
+
+```csharp
+public PlaceholderData AddTimeSpan(TimeSpan timespan)
+```
+
+| parameter | description |
+| --- | --- |
+| timespan | Timespan |
 
 ## Return Value
 
