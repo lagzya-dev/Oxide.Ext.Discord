@@ -131,6 +131,12 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
+        
+        /// <summary>
+        /// The user's avatar decoration hash
+        /// </summary>
+        [JsonProperty("avatar_decoration")]
+        public string AvatarDecoration { get; set; }
         #endregion
 
         #region Helper Properties
@@ -148,6 +154,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Avatar Url for the user
         /// </summary>
         public string GetAvatarUrl => DiscordCdn.GetUserAvatarUrl(Id, Avatar);
+        
+        /// <summary>
+        /// Avatar Decoration Url for the user
+        /// </summary>
+        public string GetAvatarDecorationUrl => DiscordCdn.GetUserAvatarDecoration(Id, AvatarDecoration);
         
         /// <summary>
         /// Banner Url for the user
@@ -439,6 +450,7 @@ namespace Oxide.Ext.Discord.Entities.Users
             if (update.Flags.HasValue) Flags = update.Flags;
             if (update.PremiumType.HasValue) PremiumType = update.PremiumType;
             if (update.PublicFlags.HasValue) PublicFlags = update.PublicFlags;
+            if (update.AvatarDecoration != null) AvatarDecoration = update.AvatarDecoration;
         }
         
         ///<inheritdoc/>

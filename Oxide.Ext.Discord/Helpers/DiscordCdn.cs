@@ -213,6 +213,26 @@ namespace Oxide.Ext.Discord.Helpers
         }
         
         /// <summary>
+        /// Returns the Url of the User Avatar Decoration
+        /// </summary>
+        /// <param name="userId">Discord User ID</param>
+        /// <param name="decorationHash">Guild Member avatar</param>
+        /// <param name="format">Format the avatar is in</param>
+        /// <returns>Url of the Guild Member avatar</returns>
+        public static string GetUserAvatarDecoration(Snowflake userId, string decorationHash, DiscordImageFormat format = DiscordImageFormat.Auto)
+        {
+            switch (format)
+            {
+                case DiscordImageFormat.Auto:
+                case DiscordImageFormat.Png:
+                    return $"{CdnUrl}/avatar-decorations/{userId}/{decorationHash}.{GetExtension(format, decorationHash)}";
+
+                default:
+                    throw new ArgumentException("ImageFormat is not valid for User Avatar Decoration. Valid types are (Auto, Png)", nameof(format));
+            }
+        }
+        
+        /// <summary>
         /// Returns the url to the application icon
         /// </summary>
         /// <param name="applicationId">Application ID</param>
