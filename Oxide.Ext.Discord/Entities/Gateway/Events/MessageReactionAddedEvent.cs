@@ -45,5 +45,11 @@ namespace Oxide.Ext.Discord.Entities.Gateway.Events
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }
+        
+        /// <summary>
+        /// ID of the user who authored the message which was reacted to
+        /// </summary>
+        [JsonProperty("message_author_id")]
+        public Snowflake? MessageAuthorId { get; set; }
     }
 }
