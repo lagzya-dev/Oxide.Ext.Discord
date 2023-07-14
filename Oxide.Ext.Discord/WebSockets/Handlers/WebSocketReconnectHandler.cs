@@ -18,7 +18,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly ILogger _logger;
         private int _reconnectRetries;
         private CancellationTokenSource _source;
-        private readonly object _lock = new object();
 
         public bool IsPendingReconnect { get; private set; }
         
@@ -55,12 +54,9 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
             
             CancelReconnect();
-            lock (_lock)
-            {
-                _source = new CancellationTokenSource();
-            }
+            _source = new CancellationTokenSource();
 
-            try
+                try
             {
                 int delay = GetReconnectDelay();
 
@@ -83,11 +79,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             catch (OperationCanceledException) { }
             finally
             {
-                lock (_lock)
-                {
-                    _source.Dispose();
-                    _source = null;
-                }
+                _source.Dispose();
+                _source = null;
             }
         }
 
@@ -110,30 +103,28 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             StringBuilder debug = DiscordPool.Internal.GetStringBuilder();
             try
             {
-                lock (_lock)
+                debug.Append("A");
+                if (_source == null)
                 {
-                    debug.Append("A");
-                    if (_source == null)
-                    {
-                        debug.Append("B");
-                        return;
-                    }
-
-                    debug.Append("C");
-                    if (!_source.IsCancellationRequested)
-                    {
-                        debug.Append("D");
-                        _source.Cancel();
-                    }
-
-                    debug.Append("E");
-                    _source.Dispose();
-                    debug.Append("F");
+                    debug.Append("B");
+                    return;
                 }
+
+                debug.Append("C");
+                if (!_source.IsCancellationRequested)
+                {
+                    debug.Append("D");
+                    _source.Cancel();
+                }
+
+                debug.Append("E");
+                _source.Dispose();
+                debug.Append("F");
             }
             catch (Exception ex)
             {
                 _logger.Exception($"{nameof(WebSocketReconnectHandler)}.{nameof(CancelReconnect)} An error occured. Websocket: {{0}} Source: {{1}} Debug: \n{{2}}", WebSocket == null, _source == null, debug.ToString(), ex);
+                throw;
             }
             finally
             {

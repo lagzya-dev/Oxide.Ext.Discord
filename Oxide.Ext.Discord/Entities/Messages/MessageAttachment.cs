@@ -80,5 +80,11 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("waveform")]
         public string Waveform { get; set; }
+        
+        /// <summary>
+        /// Attachment Flags
+        /// </summary>
+        [JsonProperty("flags")]
+        public AttachmentFlags? Flags { get; set; }
     }
 }
