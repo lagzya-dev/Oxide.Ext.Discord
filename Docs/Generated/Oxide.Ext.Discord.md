@@ -524,6 +524,7 @@
 | --- | --- |
 | class [DiscordRole](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) | Represents [Role Structure](https://discord.com/developers/docs/topics/permissions#role-object) |
 | [Flags] enum [PermissionFlags](./Oxide.Ext.Discord/Entities/Permissions/PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
+| [Flags] enum [RoleFlags](./Oxide.Ext.Discord/Entities/Permissions/RoleFlags.md) | Represents [Role Flags](https://discord.com/developers/docs/topics/permissions#role-flags) |
 | class [RoleSubscription](./Oxide.Ext.Discord/Entities/Permissions/RoleSubscription.md) | Represents [Role Subscription Structure](https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure) |
 | class [RoleTags](./Oxide.Ext.Discord/Entities/Permissions/RoleTags.md) | Represents [Role Tags Structure](https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure) |
 

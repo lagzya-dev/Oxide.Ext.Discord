@@ -4,6 +4,7 @@
 | --- | --- |
 | class [DiscordRole](./DiscordRole.md) | Represents [Role Structure](https://discord.com/developers/docs/topics/permissions#role-object) |
 | [Flags] enum [PermissionFlags](./PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
+| [Flags] enum [RoleFlags](./RoleFlags.md) | Represents [Role Flags](https://discord.com/developers/docs/topics/permissions#role-flags) |
 | class [RoleSubscription](./RoleSubscription.md) | Represents [Role Subscription Structure](https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure) |
 | class [RoleTags](./RoleTags.md) | Represents [Role Tags Structure](https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure) |
 

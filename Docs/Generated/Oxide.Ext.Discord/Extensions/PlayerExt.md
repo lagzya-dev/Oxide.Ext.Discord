@@ -221,7 +221,7 @@ True if linked; False otherwise
 Returns the Discord ID of the IPlayer if linked
 
 ```csharp
-public static Snowflake? GetDiscordUserId(this IPlayer player)
+public static Snowflake GetDiscordUserId(this IPlayer player)
 ```
 
 | parameter | description |

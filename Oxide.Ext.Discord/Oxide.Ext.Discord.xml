@@ -14319,6 +14319,11 @@
             The tags this role has
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Flags">
+            <summary>
+            The flags for the given role
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Permissions.DiscordRole.Mention">
             <summary>
             Returns a string to mention this role in a message
@@ -14638,6 +14643,21 @@
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.SendVoiceMessages">
             <summary>
             Allows sending voice messages
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleFlags">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/permissions#role-flags">Role Flags</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.RoleFlags.None">
+            <summary>
+            No Role Flags
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.RoleFlags.InPrompt">
+            <summary>
+            Role can be selected by members in an onboarding
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleSubscription">
@@ -20088,6 +20108,20 @@
             Discord Placeholders Library
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.HasPlaceholders(System.String)">
+            <summary>
+            Returns true if the text contains placeholders
+            </summary>
+            <param name="text">Text to check for placeholders</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.GetPlaceholders(System.String)">
+            <summary>
+            Returns placeholders found in the given text
+            </summary>
+            <param name="text">Text to get placeholders for</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.ProcessPlaceholders(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,System.Boolean)">
             <summary>
             Process placeholders for the given text.
@@ -22245,7 +22279,7 @@
             Build Discord Extension Setup Data for a plugin
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.Setup.PluginSetup.#ctor(Oxide.Core.Plugins.Plugin)">
+        <member name="M:Oxide.Ext.Discord.Plugins.Setup.PluginSetup.#ctor(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Logging.ILogger)">
             <summary>
             Constructor
             </summary>

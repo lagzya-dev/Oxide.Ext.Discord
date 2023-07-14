@@ -12,6 +12,7 @@ public class DiscordRole : ISnowflakeEntity
 | --- | --- |
 | [DiscordRole](#discordrole-constructor)() | The default constructor. |
 | [Color](#color-property) { get; set; } | Role Color |
+| [Flags](#flags-property) { get; set; } | The flags for the given role |
 | [Hoist](#hoist-property) { get; set; } | If this role is pinned in the user listing |
 | [Icon](#icon-property) { get; set; } | The role's icon image (if the guild has the ROLE_ICONS feature) |
 | [Id](#id-property) { get; set; } | Role id |
@@ -271,6 +272,22 @@ public RoleTags Tags { get; set; }
 ## See Also
 
 * class [RoleTags](./RoleTags.md)
+* class [DiscordRole](./DiscordRole.md)
+* namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Flags property
+
+The flags for the given role
+
+```csharp
+public RoleFlags Flags { get; set; }
+```
+
+## See Also
+
+* enum [RoleFlags](./RoleFlags.md)
 * class [DiscordRole](./DiscordRole.md)
 * namespace [Oxide.Ext.Discord.Entities.Permissions](./PermissionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
