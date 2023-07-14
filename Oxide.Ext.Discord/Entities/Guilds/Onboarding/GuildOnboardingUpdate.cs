@@ -4,17 +4,11 @@ using Newtonsoft.Json;
 namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-guild-onboarding-structure">Guild Onboarding Structure</a>
+    /// Represents <a href="">Guild Onboarding Update Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildOnboarding
+    public class GuildOnboardingUpdate
     {
-        /// <summary>
-        /// ID of the guild this onboarding is part of
-        /// </summary>
-        [JsonProperty("guild_id")]
-        public Snowflake GuildId { get; set; }
-        
         /// <summary>
         /// Prompts shown during onboarding and in customize community
         /// </summary>

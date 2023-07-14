@@ -1360,13 +1360,23 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// Returns the <see cref="GuildOnboarding"/> for the guild.
-        /// 
         /// </summary>
         /// <param name="client">Client to use</param>
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-onboarding">Get Guild Onboarding</a>
         public IPromise<GuildOnboarding> GetOnboarding(DiscordClient client)
         {
             return client.Bot.Rest.Get<GuildOnboarding>(client,$"guilds/{Id}/onboarding");
+        }
+
+        /// <summary>
+        /// Modifies the onboarding configuration of the guild.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update for the guild onboarding</param>
+        /// See <a href="">Modify Guild Onboarding</a>
+        public IPromise<GuildOnboarding> EditOnboarding(DiscordClient client, GuildOnboardingUpdate update)
+        {
+            return client.Bot.Rest.Put<GuildOnboarding>(client,$"guilds/{Id}/onboarding", update);
         }
         #endregion
 
