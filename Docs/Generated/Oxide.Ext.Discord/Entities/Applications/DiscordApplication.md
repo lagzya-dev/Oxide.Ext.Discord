@@ -11,6 +11,7 @@ public class DiscordApplication : IDebugLoggable
 | name | description |
 | --- | --- |
 | [DiscordApplication](#discordapplication-constructor)() | The default constructor. |
+| [ApproximateGuildCount](#approximateguildcount-property) { get; set; } | An approximate count of the app's guild membership. |
 | [BotPublic](#botpublic-property) { get; set; } | When false only app owner can join the app's bot to guilds |
 | [BotRequireCodeGrant](#botrequirecodegrant-property) { get; set; } | When true the app's bot will only join upon completion of the full oauth2 code grant flow |
 | [CoverImage](#coverimage-property) { get; set; } | If this application is a game sold on Discord, this field will be the hash of the image on store embeds |
@@ -19,6 +20,7 @@ public class DiscordApplication : IDebugLoggable
 | [Flags](#flags-property) { get; set; } | The application's public flags |
 | [GetApplicationCoverUrl](#getapplicationcoverurl-property) { get; } | Returns the URL for the application cover |
 | [GetApplicationIconUrl](#getapplicationiconurl-property) { get; } | Returns the URL for the applications Icon |
+| [Guild](#guild-property) { get; set; } | Partial Guild for the application |
 | [GuildId](#guildid-property) { get; set; } | If this application is a game sold on Discord, this field will be the guild to which it has been linked |
 | [Icon](#icon-property) { get; set; } | The icon hash of the app |
 | [Id](#id-property) { get; set; } | The id of the app |
@@ -40,7 +42,7 @@ public class DiscordApplication : IDebugLoggable
 | [EditRoleConnectionMetadata](#editroleconnectionmetadata-method)(…) | Updates and returns a list of application role connection metadata objects for the given application. See [Update Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records) |
 | [GetAllCommands](#getallcommands-method)(…) | Returns all commands registered to this application |
 | [GetGlobalCommand](#getglobalcommand-method)(…) | Fetch global command by ID See [Get Global Application Command](https://discord.com/developers/docs/interactions/application-commands#get-global-application-command) |
-| [GetGlobalCommands](#getglobalcommands-method)(…) | Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands) |
+| [GetGlobalCommands](#getglobalcommands-method)(…) | Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands)Client to useInclude Command Localizations |
 | [GetGuildCommand](#getguildcommand-method)(…) | Get guild command by Id See [Get Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command) |
 | [GetGuildCommandPermissions](#getguildcommandpermissions-method)(…) | Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects. See [Get Guild Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions) |
 | [GetGuildCommands](#getguildcommands-method)(…) | Fetch all of the guild commands for your application for a specific guild. See [Get Guild Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-commands) |
@@ -48,6 +50,7 @@ public class DiscordApplication : IDebugLoggable
 | [HasAnyApplicationFlags](#hasanyapplicationflags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](#flags-property) is null false is returned |
 | [HasApplicationFlag](#hasapplicationflag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](#flags-property) is null false is returned |
 | [LogDebug](#logdebug-method)(…) |  |
+| static [Get](#get-method)(…) | Returns the current users application See [Get Current Application]() |
 
 ## See Also
 
@@ -105,19 +108,31 @@ True of application has flag; False Otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
+# Get method
+
+Returns the current users application See [Get Current Application]()
+
+```csharp
+public static IPromise<DiscordApplication> Get(DiscordClient client)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
 # GetGlobalCommands method
 
-Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands)
+Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands)Client to useInclude Command Localizations
 
 ```csharp
 public IPromise<List<DiscordApplicationCommand>> GetGlobalCommands(DiscordClient client, 
     bool withLocalizations = false)
 ```
-
-| parameter | description |
-| --- | --- |
-| client | Client to use |
-| withLocalizations | Include Command Localizations |
 
 ## See Also
 
@@ -607,6 +622,22 @@ public Snowflake? GuildId { get; set; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
+# Guild property
+
+Partial Guild for the application
+
+```csharp
+public DiscordGuild Guild { get; set; }
+```
+
+## See Also
+
+* class [DiscordGuild](../Guilds/DiscordGuild.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
 # PrimarySkuId property
 
 If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -663,6 +694,21 @@ public ApplicationFlags? Flags { get; set; }
 ## See Also
 
 * enum [ApplicationFlags](./ApplicationFlags.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# ApproximateGuildCount property
+
+An approximate count of the app's guild membership.
+
+```csharp
+public int? ApproximateGuildCount { get; set; }
+```
+
+## See Also
+
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

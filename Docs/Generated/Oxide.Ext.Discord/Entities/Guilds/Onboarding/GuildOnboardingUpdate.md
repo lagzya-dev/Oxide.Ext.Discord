@@ -1,19 +1,18 @@
-# GuildOnboarding class
+# GuildOnboardingUpdate class
 
-Represents [Guild Onboarding Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-guild-onboarding-structure)
+Represents [Guild Onboarding Update Structure]()
 
 ```csharp
-public class GuildOnboarding
+public class GuildOnboardingUpdate
 ```
 
 ## Public Members
 
 | name | description |
 | --- | --- |
-| [GuildOnboarding](#guildonboarding-constructor)() | The default constructor. |
+| [GuildOnboardingUpdate](#guildonboardingupdate-constructor)() | The default constructor. |
 | [DefaultChannelIds](#defaultchannelids-property) { get; set; } | Channel IDs that members get opted into automatically |
 | [Enabled](#enabled-property) { get; set; } | Whether onboarding is enabled in the guild |
-| [GuildId](#guildid-property) { get; set; } | ID of the guild this onboarding is part of |
 | [Mode](#mode-property) { get; set; } | Current mode of onboarding |
 | [Prompts](#prompts-property) { get; set; } | Prompts shown during onboarding and in customize community |
 
@@ -21,36 +20,20 @@ public class GuildOnboarding
 
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [GuildOnboarding.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/Onboarding/GuildOnboarding.cs)
+* [GuildOnboardingUpdate.cs](../../../../Oxide.Ext.Discord/Entities/Guilds/Onboarding/GuildOnboardingUpdate.cs)
    
    
-# GuildOnboarding constructor
+# GuildOnboardingUpdate constructor
 
 The default constructor.
 
 ```csharp
-public GuildOnboarding()
+public GuildOnboardingUpdate()
 ```
 
 ## See Also
 
-* class [GuildOnboarding](./GuildOnboarding.md)
-* namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-   
-   
-# GuildId property
-
-ID of the guild this onboarding is part of
-
-```csharp
-public Snowflake GuildId { get; set; }
-```
-
-## See Also
-
-* struct [Snowflake](../../Snowflake.md)
-* class [GuildOnboarding](./GuildOnboarding.md)
+* class [GuildOnboardingUpdate](./GuildOnboardingUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -66,7 +49,7 @@ public List<OnboardingPrompt> Prompts { get; set; }
 ## See Also
 
 * class [OnboardingPrompt](./OnboardingPrompt.md)
-* class [GuildOnboarding](./GuildOnboarding.md)
+* class [GuildOnboardingUpdate](./GuildOnboardingUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -82,7 +65,7 @@ public List<Snowflake> DefaultChannelIds { get; set; }
 ## See Also
 
 * struct [Snowflake](../../Snowflake.md)
-* class [GuildOnboarding](./GuildOnboarding.md)
+* class [GuildOnboardingUpdate](./GuildOnboardingUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -97,7 +80,7 @@ public bool Enabled { get; set; }
 
 ## See Also
 
-* class [GuildOnboarding](./GuildOnboarding.md)
+* class [GuildOnboardingUpdate](./GuildOnboardingUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -113,7 +96,7 @@ public GuildOnboardingMode Mode { get; set; }
 ## See Also
 
 * enum [GuildOnboardingMode](./GuildOnboardingMode.md)
-* class [GuildOnboarding](./GuildOnboarding.md)
+* class [GuildOnboardingUpdate](./GuildOnboardingUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds.Onboarding](./OnboardingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 

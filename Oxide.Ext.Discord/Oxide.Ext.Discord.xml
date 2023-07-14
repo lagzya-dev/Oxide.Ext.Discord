@@ -2007,6 +2007,11 @@
             All guilds are loaded and if <see cref="F:Oxide.Ext.Discord.Entities.Gateway.GatewayIntents.GuildMembers"/> is specified all guild members have been loaded
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Clients.BotClient.IsReady">
+            <summary>
+            Returns if ReadyData is set
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Clients.BotClient.Clients">
             <summary>
             List of all clients that are using this bot client
@@ -4124,6 +4129,11 @@
             If this application is a game sold on Discord, this field will be the guild to which it has been linked
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Guild">
+            <summary>
+            Partial Guild for the application
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.PrimarySkuId">
             <summary>
             If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -4142,6 +4152,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags">
             <summary>
             The application's public flags
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.ApproximateGuildCount">
+            <summary>
+            An approximate count of the app's guild membership.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Tags">
@@ -4190,14 +4205,20 @@
             <param name="flag">Flag to compare against</param>
             <returns>True of application has flag; False Otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Get(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Returns the current users application
+            See <a href="">Get Current Application</a>
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.Clients.DiscordClient,System.Boolean)">
             <summary>
             Fetch all of the global commands for your application.
             Returns a list of ApplicationCommand.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
-            </summary>
             <param name="client">Client to use</param>
             <param name="withLocalizations">Include Command Localizations</param>
+            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommand(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
@@ -7510,6 +7531,11 @@
             The emoji used to react
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionAddedEvent.MessageAuthorId">
+            <summary>
+            ID of the user who authored the message which was reacted to
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Gateway.Events.MessageReactionRemovedAllEmojiEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji">Message Reaction Remove All</a>
@@ -8857,10 +8883,17 @@
         <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.GetOnboarding(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Returns the <see cref="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding"/> for the guild.
-            
             </summary>
             <param name="client">Client to use</param>
             See <a href="https://discord.com/developers/docs/resources/guild#get-guild-onboarding">Get Guild Onboarding</a>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Guilds.DiscordGuild.EditOnboarding(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate)">
+            <summary>
+            Modifies the onboarding configuration of the guild.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="update">Update for the guild onboarding</param>
+            See <a href="">Modify Guild Onboarding</a>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.ExplicitContentFilterLevel">
             <summary>
@@ -9943,6 +9976,51 @@
         <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.Enabled">
             <summary>
             Whether onboarding is enabled in the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboarding.Mode">
+            <summary>
+            Current mode of onboarding
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingMode">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/guild#onboarding-mode">Guild Onboarding Mode Structure</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingMode.OnboardingDefault">
+            <summary>
+            Counts only Default Channels towards constraints
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingMode.OnboardingAdvanced">
+            <summary>
+            Counts Default Channels and Questions towards constraints
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate">
+            <summary>
+            Represents <a href="">Guild Onboarding Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate.Prompts">
+            <summary>
+            Prompts shown during onboarding and in customize community
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate.DefaultChannelIds">
+            <summary>
+            Channel IDs that members get opted into automatically
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate.Enabled">
+            <summary>
+            Whether onboarding is enabled in the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Guilds.Onboarding.GuildOnboardingUpdate.Mode">
+            <summary>
+            Current mode of onboarding
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.Onboarding.OnboardingPrompt">
@@ -12811,6 +12889,21 @@
             Controls @everyone and @here mentions
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.AttachmentFlags">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channelattachment-flags">Attachment flags for an attachment</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AttachmentFlags.None">
+            <summary>
+            No Attachment Flags
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Messages.AttachmentFlags.IsRemix">
+            <summary>
+            This attachment has been edited using the remix feature on mobile
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.BaseMessageCreate">
             <summary>
             Represents a base message in discord
@@ -13842,6 +13935,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Waveform">
             <summary>
             base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageAttachment.Flags">
+            <summary>
+            Attachment Flags
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageCreate">
@@ -15462,6 +15560,11 @@
             <see cref="T:Oxide.Ext.Discord.Entities.Users.UserFlags"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.AvatarDecoration">
+            <summary>
+            The user's avatar decoration hash
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.Mention">
             <summary>
             Returns a string to mention this users nickname in a message
@@ -15475,6 +15578,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetAvatarUrl">
             <summary>
             Avatar Url for the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetAvatarDecorationUrl">
+            <summary>
+            Avatar Decoration Url for the user
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Users.DiscordUser.GetBannerUrl">
@@ -17368,6 +17476,15 @@
             <param name="guildId">Guild ID of the Guild Member</param>
             <param name="userId">Discord User ID</param>
             <param name="memberAvatar">Guild Member avatar</param>
+            <param name="format">Format the avatar is in</param>
+            <returns>Url of the Guild Member avatar</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserAvatarDecoration(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.Images.DiscordImageFormat)">
+            <summary>
+            Returns the Url of the User Avatar Decoration
+            </summary>
+            <param name="userId">Discord User ID</param>
+            <param name="decorationHash">Guild Member avatar</param>
             <param name="format">Format the avatar is in</param>
             <returns>Url of the Guild Member avatar</returns>
         </member>
@@ -20249,11 +20366,23 @@
             <param name="guild">Guild to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveGuild">
+            <summary>
+            Removes guild placeholder data
+            </summary>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddMessage(Oxide.Ext.Discord.Entities.Messages.DiscordMessage)">
             <summary>
             Add a <see cref="T:Oxide.Ext.Discord.Entities.Messages.DiscordMessage"/>
             </summary>
             <param name="message">Message to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveMessage">
+            <summary>
+            Removes message placeholder data
+            </summary>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddGuildMember(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
@@ -20272,11 +20401,23 @@
             <param name="member">Member to add</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveGuildMember">
+            <summary>
+            Removes guild member data
+            </summary>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddUser(Oxide.Ext.Discord.Entities.Users.DiscordUser)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.Users.DiscordUser"/>
             </summary>
             <param name="user">User to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveUser">
+            <summary>
+            Removes user placeholder data
+            </summary>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddRole(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake)">
@@ -20295,6 +20436,12 @@
             <param name="role">Role to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveRole">
+            <summary>
+            Removes role placeholder data
+            </summary>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddChannel(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel"/> by <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/>, ChannelId, and Optional GuildId
@@ -20311,6 +20458,12 @@
             <param name="channel">Channel to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemoveChannel">
+            <summary>
+            Removes channel placeholder data
+            </summary>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddInteraction(Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction"/>
@@ -20323,6 +20476,12 @@
             Adds a <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
             </summary>
             <param name="player">player to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.RemovePlayer">
+            <summary>
+            Removes player placeholder data
+            </summary>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.AddTarget(Oxide.Core.Libraries.Covalence.IPlayer)">
@@ -20373,6 +20532,12 @@
             </summary>
             <param name="name">Name of the data key</param>
             <param name="obj">Object to add</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Remove(System.String)">
+            <summary>
+            Removes placeholder data key with the given name
+            </summary>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData.Get``1">
@@ -22284,6 +22449,7 @@
             Constructor
             </summary>
             <param name="plugin">Plugin the data is for</param>
+            <param name="logger">Logger</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Pooling.BasePool`2">
             <summary>

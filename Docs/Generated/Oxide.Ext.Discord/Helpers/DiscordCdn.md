@@ -30,6 +30,7 @@ public static class DiscordCdn
 | static [GetStickerPackBanner](#getstickerpackbanner-method)(…) | Returns the banner for a given sticker pack |
 | static [GetStorePageAssetUrl](#getstorepageasseturl-method)(…) | Returns the Store Page Asset Url |
 | static [GetTeamIconUrl](#getteamiconurl-method)(…) | Returns the Url of the Team Icon |
+| static [GetUserAvatarDecoration](#getuseravatardecoration-method)(…) | Returns the Url of the User Avatar Decoration |
 | static [GetUserAvatarUrl](#getuseravatarurl-method)(…) | Returns the Url of the users avatar |
 | static [GetUserBanner](#getuserbanner-method)(…) | Returns the Url of the User Banner |
 | static [GetUserDefaultAvatarUrl](#getuserdefaultavatarurl-method)(…) | Returns the Url of the users default avatar |
@@ -302,6 +303,34 @@ public static string GetGuildMemberAvatar(Snowflake guildId, Snowflake userId, s
 | guildId | Guild ID of the Guild Member |
 | userId | Discord User ID |
 | memberAvatar | Guild Member avatar |
+| format | Format the avatar is in |
+
+## Return Value
+
+Url of the Guild Member avatar
+
+## See Also
+
+* struct [Snowflake](../Entities/Snowflake.md)
+* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* class [DiscordCdn](./DiscordCdn.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetUserAvatarDecoration method
+
+Returns the Url of the User Avatar Decoration
+
+```csharp
+public static string GetUserAvatarDecoration(Snowflake userId, string decorationHash, 
+    DiscordImageFormat format = DiscordImageFormat.Auto)
+```
+
+| parameter | description |
+| --- | --- |
+| userId | Discord User ID |
+| decorationHash | Guild Member avatar |
 | format | Format the avatar is in |
 
 ## Return Value

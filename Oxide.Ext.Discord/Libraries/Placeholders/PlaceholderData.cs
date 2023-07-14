@@ -57,6 +57,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddGuild(DiscordGuild guild) => Add(nameof(DiscordGuild), guild);
         
+        /// <summary>
+        /// Removes guild placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveGuild() => Remove(nameof(DiscordGuild));
 
         /// <summary>
@@ -76,6 +80,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
         
+        /// <summary>
+        /// Removes message placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveMessage() => Remove(nameof(DiscordMessage));
 
         /// <summary>
@@ -103,6 +111,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
         
+        /// <summary>
+        /// Removes guild member data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveGuildMember() => Remove(nameof(GuildMember));
 
         /// <summary>
@@ -121,6 +133,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
         
+        /// <summary>
+        /// Removes user placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveUser() => Remove(nameof(DiscordUser));
 
         /// <summary>
@@ -139,6 +155,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddRole(DiscordRole role) => Add(nameof(DiscordRole), role);
         
+        /// <summary>
+        /// Removes role placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveRole() => Remove(nameof(DiscordRole));
 
         /// <summary>
@@ -157,6 +177,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddChannel(DiscordChannel channel) => Add(nameof(DiscordChannel), channel);
         
+        /// <summary>
+        /// Removes channel placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemoveChannel() => Remove(nameof(DiscordChannel));
         
         /// <summary>
@@ -184,6 +208,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData AddPlayer(IPlayer player) => Add(nameof(IPlayer), player);
 
+        /// <summary>
+        /// Removes player placeholder data
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData RemovePlayer() => Remove(nameof(IPlayer));
 
         /// <summary>
@@ -257,6 +285,10 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             _boxed.Add(boxed);
         }
 
+        /// <summary>
+        /// Removes placeholder data key with the given name
+        /// </summary>
+        /// <returns>This</returns>
         public PlaceholderData Remove(string name)
         {
             if (_data.TryGetValue(name, out object value))

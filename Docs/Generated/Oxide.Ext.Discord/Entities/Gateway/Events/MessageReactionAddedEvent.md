@@ -15,6 +15,7 @@ public class MessageReactionAddedEvent
 | [Emoji](#emoji-property) { get; set; } | The emoji used to react |
 | [GuildId](#guildid-property) { get; set; } | The id of the guild |
 | [Member](#member-property) { get; set; } | The member who reacted if this happened in a guild |
+| [MessageAuthorId](#messageauthorid-property) { get; set; } | ID of the user who authored the message which was reacted to |
 | [MessageId](#messageid-property) { get; set; } | The id of the message |
 | [UserId](#userid-property) { get; set; } | The id of the user |
 
@@ -131,6 +132,22 @@ public DiscordEmoji Emoji { get; set; }
 ## See Also
 
 * class [DiscordEmoji](../../Emojis/DiscordEmoji.md)
+* class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# MessageAuthorId property
+
+ID of the user who authored the message which was reacted to
+
+```csharp
+public Snowflake? MessageAuthorId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
 * class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Events](./EventsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

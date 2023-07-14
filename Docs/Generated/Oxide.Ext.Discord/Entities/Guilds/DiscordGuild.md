@@ -94,6 +94,7 @@ public class DiscordGuild : ISnowflakeEntity
 | [EditMember](#editmember-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
 | [EditMemberNick](#editmembernick-method)(…) | Modify attributes of a guild member See [Modify Guild Member](https://discord.com/developers/docs/resources/guild#modify-guild-member) |
 | [EditMfaLevel](#editmfalevel-method)(…) | Modify a guild's MFA level. Requires guild ownership. See [Modify Guild MFA Level](https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level) |
+| [EditOnboarding](#editonboarding-method)(…) | Modifies the onboarding configuration of the guild. |
 | [EditRole](#editrole-method-1-of-2)(…) | Modify a guild role. Requires the MANAGE_ROLES permission. Returns the updated role on success. See [Modify Guild Role](https://discord.com/developers/docs/resources/guild#modify-guild-role) (2 methods) |
 | [EditRolePositions](#editrolepositions-method)(…) | Modify the positions of a set of role objects for the guild. Requires the MANAGE_ROLES permission. Returns a list of all of the guild's role objects on success. See [Modify Guild Role Positions](https://discord.com/developers/docs/resources/guild#modify-guild-role-positions) |
 | [EditSticker](#editsticker-method)(…) | Modify the given sticker. Requires the MANAGE_EMOJIS_AND_STICKERS permission. Returns the updated sticker object on success. See [Modify Guild Sticker](https://discord.com/developers/docs/resources/sticker#modify-guild-sticker) |
@@ -1852,6 +1853,30 @@ public IPromise<GuildOnboarding> GetOnboarding(DiscordClient client)
 * interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * class [GuildOnboarding](./Onboarding/GuildOnboarding.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordGuild](./DiscordGuild.md)
+* namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# EditOnboarding method
+
+Modifies the onboarding configuration of the guild.
+
+```csharp
+public IPromise<GuildOnboarding> EditOnboarding(DiscordClient client, GuildOnboardingUpdate update)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| update | Update for the guild onboarding |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [GuildOnboarding](./Onboarding/GuildOnboarding.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [GuildOnboardingUpdate](./Onboarding/GuildOnboardingUpdate.md)
 * class [DiscordGuild](./DiscordGuild.md)
 * namespace [Oxide.Ext.Discord.Entities.Guilds](./GuildsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

@@ -30,14 +30,14 @@ public class PlaceholderData : BasePoolable
 | [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)(…) | Returns the object with the given type of T If the object is not found the default(T) is returned |
 | [GetKeys](#getkeys-method)() | Returns comma seperated string of all the registered key Useful for debugging placeholders |
 | [ManualPool](#manualpool-method)() | Disable automatic pooling and handle manually by plugin |
-| [Remove](#remove-method)(…) |  |
-| [RemoveChannel](#removechannel-method)() |  |
-| [RemoveGuild](#removeguild-method)() |  |
-| [RemoveGuildMember](#removeguildmember-method)() |  |
-| [RemoveMessage](#removemessage-method)() |  |
-| [RemovePlayer](#removeplayer-method)() |  |
-| [RemoveRole](#removerole-method)() |  |
-| [RemoveUser](#removeuser-method)() |  |
+| [Remove](#remove-method)(…) | Removes placeholder data key with the given name |
+| [RemoveChannel](#removechannel-method)() | Removes channel placeholder data |
+| [RemoveGuild](#removeguild-method)() | Removes guild placeholder data |
+| [RemoveGuildMember](#removeguildmember-method)() | Removes guild member data |
+| [RemoveMessage](#removemessage-method)() | Removes message placeholder data |
+| [RemovePlayer](#removeplayer-method)() | Removes player placeholder data |
+| [RemoveRole](#removerole-method)() | Removes role placeholder data |
+| [RemoveUser](#removeuser-method)() | Removes user placeholder data |
 
 ## Protected Members
 
@@ -130,9 +130,15 @@ This
    
 # RemoveGuild method
 
+Removes guild placeholder data
+
 ```csharp
 public PlaceholderData RemoveGuild()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -167,9 +173,15 @@ This
    
 # RemoveMessage method
 
+Removes message placeholder data
+
 ```csharp
 public PlaceholderData RemoveMessage()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -228,9 +240,15 @@ This
    
 # RemoveGuildMember method
 
+Removes guild member data
+
 ```csharp
 public PlaceholderData RemoveGuildMember()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -265,9 +283,15 @@ This
    
 # RemoveUser method
 
+Removes user placeholder data
+
 ```csharp
 public PlaceholderData RemoveUser()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -330,9 +354,15 @@ This
    
 # RemoveRole method
 
+Removes role placeholder data
+
 ```csharp
 public PlaceholderData RemoveRole()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -396,9 +426,15 @@ This
    
 # RemoveChannel method
 
+Removes channel placeholder data
+
 ```csharp
 public PlaceholderData RemoveChannel()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -456,9 +492,15 @@ This
    
 # RemovePlayer method
 
+Removes player placeholder data
+
 ```csharp
 public PlaceholderData RemovePlayer()
 ```
+
+## Return Value
+
+This
 
 ## See Also
 
@@ -634,9 +676,15 @@ This
    
 # Remove method
 
+Removes placeholder data key with the given name
+
 ```csharp
 public PlaceholderData Remove(string name)
 ```
+
+## Return Value
+
+This
 
 ## See Also
 

@@ -30,6 +30,7 @@ public PluginSetup(Plugin plugin, ILogger logger)
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the data is for |
+| logger | Logger |
 
 ## See Also
 

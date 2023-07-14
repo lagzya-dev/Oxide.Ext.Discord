@@ -366,6 +366,8 @@
 | public type | description |
 | --- | --- |
 | class [GuildOnboarding](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/GuildOnboarding.md) | Represents [Guild Onboarding Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-guild-onboarding-structure) |
+| enum [GuildOnboardingMode](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/GuildOnboardingMode.md) | Represents [Guild Onboarding Mode Structure](https://discord.com/developers/docs/resources/guild#onboarding-mode) |
+| class [GuildOnboardingUpdate](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/GuildOnboardingUpdate.md) | Represents [Guild Onboarding Update Structure]() |
 | class [OnboardingPrompt](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPrompt.md) | Represents [Onboarding Prompt Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure) |
 | class [OnboardingPromptOption](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPromptOption.md) | Represents [Prompt Option Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-option-structure) |
 | enum [OnboardingPromptType](./Oxide.Ext.Discord/Entities/Guilds/Onboarding/OnboardingPromptType.md) | Represents [Prompt Types](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types) |
@@ -491,6 +493,7 @@
 | --- | --- |
 | class [AllowedMentions](./Oxide.Ext.Discord/Entities/Messages/AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
 | enum [AllowedMentionTypes](./Oxide.Ext.Discord/Entities/Messages/AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
+| [Flags] enum [AttachmentFlags](./Oxide.Ext.Discord/Entities/Messages/AttachmentFlags.md) | Represents a [Attachment flags for an attachment](https://discord.com/developers/docs/resources/channelattachment-flags) |
 | abstract class [BaseMessageCreate](./Oxide.Ext.Discord/Entities/Messages/BaseMessageCreate.md) | Represents a base message in discord |
 | class [DiscordMessage](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
 | class [MessageActivity](./Oxide.Ext.Discord/Entities/Messages/MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |

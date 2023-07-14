@@ -27,6 +27,7 @@ namespace Oxide.Ext.Discord.Plugins.Setup
         /// Constructor
         /// </summary>
         /// <param name="plugin">Plugin the data is for</param>
+        /// <param name="logger">Logger</param>
         public PluginSetup(Plugin plugin, ILogger logger)
         {
             Plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));

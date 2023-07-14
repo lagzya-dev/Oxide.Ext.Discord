@@ -16,6 +16,7 @@ public class MessageAttachment : ISnowflakeEntity
 | [DurationSecs](#durationsecs-property) { get; set; } | The duration of the audio file (currently for voice messages) |
 | [Ephemeral](#ephemeral-property) { get; set; } | Whether this attachment is ephemeral |
 | [Filename](#filename-property) { get; set; } | Name of file attached |
+| [Flags](#flags-property) { get; set; } | Attachment Flags |
 | [Height](#height-property) { get; set; } | Height of file (if image) |
 | [Id](#id-property) { get; set; } | Attachment ID |
 | [ProxyUrl](#proxyurl-property) { get; set; } | A proxied url of file |
@@ -223,6 +224,22 @@ public string Waveform { get; set; }
 
 ## See Also
 
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Flags property
+
+Attachment Flags
+
+```csharp
+public AttachmentFlags? Flags { get; set; }
+```
+
+## See Also
+
+* enum [AttachmentFlags](./AttachmentFlags.md)
 * class [MessageAttachment](./MessageAttachment.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

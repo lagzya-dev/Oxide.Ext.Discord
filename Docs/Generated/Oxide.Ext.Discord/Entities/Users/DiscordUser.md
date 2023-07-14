@@ -13,6 +13,7 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 | [DiscordUser](#discorduser-constructor)() | The default constructor. |
 | [AccentColor](#accentcolor-property) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
 | [Avatar](#avatar-property) { get; set; } | The user's avatar hash |
+| [AvatarDecoration](#avatardecoration-property) { get; set; } | The user's avatar decoration hash |
 | [Banner](#banner-property) { get; set; } | The user's banner, or null if unset |
 | [Bot](#bot-property) { get; set; } | Whether the user belongs to an OAuth2 application |
 | [Discriminator](#discriminator-property) { get; set; } | The user's 4-digit discord-tag |
@@ -20,6 +21,7 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 | [Email](#email-property) { get; set; } | The user's email |
 | [Flags](#flags-property) { get; set; } | The flags on a user's account [`UserFlags`](./UserFlags.md) |
 | [FullUserName](#fullusername-property) { get; } | Returns the username#discriminator for the user |
+| [GetAvatarDecorationUrl](#getavatardecorationurl-property) { get; } | Avatar Decoration Url for the user |
 | [GetAvatarUrl](#getavatarurl-property) { get; } | Avatar Url for the user |
 | [GetBannerUrl](#getbannerurl-property) { get; } | Banner Url for the user |
 | [GetDefaultAvatarUrl](#getdefaultavatarurl-property) { get; } | Default Avatar Url for the User |
@@ -799,6 +801,21 @@ public UserFlags? PublicFlags { get; set; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
+# AvatarDecoration property
+
+The user's avatar decoration hash
+
+```csharp
+public string AvatarDecoration { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
 # Mention property
 
 Returns a string to mention this users nickname in a message
@@ -835,6 +852,21 @@ Avatar Url for the user
 
 ```csharp
 public string GetAvatarUrl { get; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* namespace [Oxide.Ext.Discord.Entities.Users](./UsersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# GetAvatarDecorationUrl property
+
+Avatar Decoration Url for the user
+
+```csharp
+public string GetAvatarDecorationUrl { get; }
 ```
 
 ## See Also

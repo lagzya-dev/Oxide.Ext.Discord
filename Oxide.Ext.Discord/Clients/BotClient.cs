@@ -76,6 +76,9 @@ namespace Oxide.Ext.Discord.Clients
         /// </summary>
         public bool IsFullyLoaded { get; private set; }
         
+        /// <summary>
+        /// Returns if ReadyData is set
+        /// </summary>
         public bool IsReady => _readyData != null;
         
         internal readonly DiscordHook Hooks;

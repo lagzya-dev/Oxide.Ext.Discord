@@ -15,7 +15,7 @@ public class BotClient : IDebugLoggable
 | [BotUser](#botuser-property) { get; } | Bot User |
 | [Initialized](#initialized-property) { get; } | If the connection is initialized and not disconnected |
 | [IsFullyLoaded](#isfullyloaded-property) { get; } | Returns if the bot has fully loaded. All guilds are loaded and if GuildMembers is specified all guild members have been loaded |
-| [IsReady](#isready-property) { get; } |  |
+| [IsReady](#isready-property) { get; } | Returns if ReadyData is set |
 | [Rest](#rest-property) { get; } | Rest handler for all discord API calls |
 | readonly [Clients](#clients-field) | List of all clients that are using this bot client |
 | readonly [DirectMessagesByChannelId](#directmessagesbychannelid-field) | All the direct messages that we have seen by channel Id |
@@ -398,6 +398,8 @@ public bool IsFullyLoaded { get; }
    
    
 # IsReady property
+
+Returns if ReadyData is set
 
 ```csharp
 public bool IsReady { get; }
