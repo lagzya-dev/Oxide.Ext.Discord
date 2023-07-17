@@ -1,5 +1,6 @@
 using System;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
 using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class TimeSpanPlaceholders
     {
-        internal const string TimeSpanKey = "timespan";
+        internal static readonly PlaceholderDataKey TimeSpanKey = new PlaceholderDataKey("timespan");
         
         /// <summary>
         /// <see cref="TimeSpan.Days"/> placeholder
@@ -63,29 +64,29 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "timespan", TimeSpanKey);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.Timespan, TimeSpanKey);
         }
         
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>
         /// <param name="plugin">Plugin to register placeholders for</param>
-        /// <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+        /// <param name="keys">Prefix to use for the placeholders</param>
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
-        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        public static void RegisterPlaceholders(Plugin plugin, TimespanKeys keys, PlaceholderDataKey dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<TimeSpan>(plugin, $"{placeholderPrefix}.time", dataKey);
-            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, $"{placeholderPrefix}.days", dataKey, Days);
-            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, $"{placeholderPrefix}.hours", dataKey, Hours);
-            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, $"{placeholderPrefix}.minutes", dataKey, Minutes);
-            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, $"{placeholderPrefix}.seconds", dataKey, Seconds);
-            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, $"{placeholderPrefix}.milliseconds", dataKey, Milliseconds);
-            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, $"{placeholderPrefix}.total.days", dataKey, TotalDays);
-            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, $"{placeholderPrefix}.total.hours", dataKey, TotalHours);
-            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, $"{placeholderPrefix}.total.minutes", dataKey, TotalMinutes);
-            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, $"{placeholderPrefix}.total.seconds", dataKey, TotalSeconds);
-            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, $"{placeholderPrefix}.total.milliseconds", dataKey, TotalMilliseconds);
+            placeholders.RegisterPlaceholder<TimeSpan>(plugin, keys.Time, dataKey);
+            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Days, dataKey, Days);
+            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Hours, dataKey, Hours);
+            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Minutes, dataKey, Minutes);
+            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Seconds, dataKey, Seconds);
+            placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Milliseconds, dataKey, Milliseconds);
+            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, keys.TotalDays, dataKey, TotalDays);
+            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, keys.TotalHours, dataKey, TotalHours);
+            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, keys.TotalMinutes, dataKey, TotalMinutes);
+            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, keys.TotalSeconds, dataKey, TotalSeconds);
+            placeholders.RegisterPlaceholder<TimeSpan, double>(plugin, keys.TotalMilliseconds, dataKey, TotalMilliseconds);
         }
     }
 }

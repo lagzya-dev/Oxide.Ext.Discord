@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="PlaceholderState"/> for the placeholder</param>
         /// <param name="value">Placeholder value to replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderState state, string value)
+        private static void Replace(StringBuilder builder, PlaceholderState state, string value)
         {
             builder.Remove(state.Index, state.Length);
             if (value == null)
@@ -31,8 +31,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
             builder.Insert(state.Index, value);
         }
-        
-        public static void Replace(StringBuilder builder, PlaceholderState state, string[] values)
+
+        private static void Replace(StringBuilder builder, PlaceholderState state, string[] values)
         {
             builder.Remove(state.Index, state.Length);
             if (values == null)
@@ -50,8 +50,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 builder.Append(values[index]);
             }
         }
-        
-        public static void Replace(StringBuilder builder, PlaceholderState state, object[] values)
+
+        private static void Replace(StringBuilder builder, PlaceholderState state, object[] values)
         {
             builder.Remove(state.Index, state.Length);
             if (values == null)
@@ -76,7 +76,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="match"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Placeholder value to replace</param>
-        public static void Replace(StringBuilder builder, Match match, string value)
+        private static void Replace(StringBuilder builder, Match match, string value)
         {
             builder.Remove(match.Index, match.Length);
             builder.Insert(match.Index, value);
@@ -88,7 +88,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Snowflake value to replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderState state, bool value)
+        private static void Replace(StringBuilder builder, PlaceholderState state, bool value)
         {
             Replace(builder, state, value ? "true" : "false");
         }
@@ -99,7 +99,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Snowflake value to replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderState state, Snowflake value)
+        private static void Replace(StringBuilder builder, PlaceholderState state, Snowflake value)
         {
             Replace(builder, state, value.ToString());
         }
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value"><see cref="IFormattable"/> value to use with formatting</param>
-        public static void Replace(StringBuilder builder, PlaceholderState state, IFormattable value)
+        private static void Replace(StringBuilder builder, PlaceholderState state, IFormattable value)
         {
             if (string.IsNullOrEmpty(state.Format))
             {
@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="placeholderState"><see cref="PlaceholderState"/> for the placeholder</param>
         /// <param name="position"><see cref="GenericPosition"/> position to format and replace</param>
-        public static void Replace(StringBuilder builder, PlaceholderState placeholderState, GenericPosition position)
+        private static void Replace(StringBuilder builder, PlaceholderState placeholderState, GenericPosition position)
         {
             if (string.IsNullOrEmpty(placeholderState.Format))
             {

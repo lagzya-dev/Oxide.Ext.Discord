@@ -1,6 +1,7 @@
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
 using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
@@ -32,22 +33,22 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "role");
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.Role, new PlaceholderDataKey(nameof(DiscordRole)));
         }
         
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>
         /// <param name="plugin">Plugin to register placeholders for</param>
-        /// <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+        /// <param name="keys">Prefix to use for the placeholders</param>
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
-        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(DiscordRole))
+        public static void RegisterPlaceholders(Plugin plugin, RoleKeys keys, PlaceholderDataKey dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DiscordRole, Snowflake>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.mention", dataKey, Mention);
-            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, $"{placeholderPrefix}.icon", dataKey, Icon);
+            placeholders.RegisterPlaceholder<DiscordRole, Snowflake>(plugin, keys.Id, dataKey, Id);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, keys.Name, dataKey, Name);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, keys.Mention, dataKey, Mention);
+            placeholders.RegisterPlaceholder<DiscordRole, string>(plugin, keys.Icon, dataKey, Icon);
         }
     }
 }

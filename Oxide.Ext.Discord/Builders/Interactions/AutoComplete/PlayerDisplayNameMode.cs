@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
         Clan = 1 << 0,
         
         /// <summary>
-        /// Include Steam ID
+        /// Include Player ID
         /// </summary>
         PlayerId = 1 << 1,
 

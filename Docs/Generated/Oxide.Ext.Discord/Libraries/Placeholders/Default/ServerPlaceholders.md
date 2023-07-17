@@ -10,11 +10,14 @@ public static class ServerPlaceholders
 
 | name | description |
 | --- | --- |
+| static [Address](#address-method)(…) | Address placeholder |
 | static [MaxPlayers](#maxplayers-method)(…) | MaxPlayers placeholder |
 | static [Name](#name-method)(…) | Name placeholder |
 | static [Players](#players-method)(…) | Players placeholder |
+| static [Port](#port-method)(…) | Port placeholder |
 | static [Protocol](#protocol-method)(…) | Protocol placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
+| static [Time](#time-method)(…) | Time placeholder |
 | static [Version](#version-method)(…) | Version placeholder |
 
 ## See Also
@@ -99,23 +102,69 @@ public static string Protocol(IServer server)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
+# Address method
+
+Address placeholder
+
+```csharp
+public static IPAddress Address(IServer server)
+```
+
+## See Also
+
+* class [ServerPlaceholders](./ServerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Port method
+
+Port placeholder
+
+```csharp
+public static ushort Port(IServer server)
+```
+
+## See Also
+
+* class [ServerPlaceholders](./ServerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Time method
+
+Time placeholder
+
+```csharp
+public static DateTime Time(IServer server)
+```
+
+## See Also
+
+* class [ServerPlaceholders](./ServerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
 # RegisterPlaceholders method
 
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "IServer")
+public static void RegisterPlaceholders(Plugin plugin, ServerKeys keys, PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [ServerKeys](../Keys/ServerKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [ServerPlaceholders](./ServerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

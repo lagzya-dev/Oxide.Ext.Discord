@@ -4,6 +4,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
 using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
@@ -57,26 +58,26 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "plugin");
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.Plugin, new PlaceholderDataKey(nameof(Plugin)));
         }
         
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>
         /// <param name="plugin">Plugin to register placeholders for</param>
-        /// <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+        /// <param name="keys">Prefix to use for the placeholders</param>
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
-        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(Plugin))
+        public static void RegisterPlaceholders(Plugin plugin, PluginKeys keys, PlaceholderDataKey dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.title", dataKey, Title);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.author", dataKey, Author);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.version", dataKey, Version);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.description", dataKey, Description);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.fullname", dataKey, FullName);
-            placeholders.RegisterPlaceholder<Plugin, TimeSpan>(plugin, $"{placeholderPrefix}.hooktime", dataKey, HookTime);
-            placeholders.RegisterPlaceholder<Plugin, string>(plugin, $"{placeholderPrefix}.lang", dataKey, LangMessage);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Name, dataKey, Name);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Title, dataKey, Title);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Author, dataKey, Author);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Version, dataKey, Version);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Description, dataKey, Description);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Fullname, dataKey, FullName);
+            placeholders.RegisterPlaceholder<Plugin, TimeSpan>(plugin, keys.HookTime, dataKey, HookTime);
+            placeholders.RegisterPlaceholder<Plugin, string>(plugin, keys.Lang, dataKey, LangMessage);
         }
     }
 }

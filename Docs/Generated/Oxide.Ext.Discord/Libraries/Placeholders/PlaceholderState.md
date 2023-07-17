@@ -13,7 +13,7 @@ public class PlaceholderState : BasePoolable
 | [PlaceholderState](#placeholderstate-constructor)() | The default constructor. |
 | [Data](#data-property) { get; } | Placeholder Data for the state |
 | [Format](#format-property) { get; } | Format specified in the placeholder |
-| [Name](#name-property) { get; } | Name of the placeholder |
+| [Key](#key-property) { get; } | Key of the placeholder |
 
 ## Protected Members
 
@@ -73,16 +73,17 @@ public PlaceholderData Data { get; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# Name property
+# Key property
 
-Name of the placeholder
+Key of the placeholder
 
 ```csharp
-public string Name { get; }
+public PlaceholderKey Key { get; }
 ```
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
 * class [PlaceholderState](./PlaceholderState.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

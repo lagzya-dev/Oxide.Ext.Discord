@@ -1,5 +1,7 @@
 using System;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
+using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 {
@@ -43,23 +45,28 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// </summary>
         public static int Millisecond(DateTime date) => date.Millisecond;
 
+        internal static void RegisterPlaceholders()
+        {
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.DateTime, new PlaceholderDataKey(nameof(DateTime)));
+        }
+        
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>
         /// <param name="plugin">Plugin to register placeholders for</param>
-        /// <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+        /// <param name="keys">Prefix to use for the placeholders</param>
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
-        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+        public static void RegisterPlaceholders(Plugin plugin, DateTimeKeys keys, PlaceholderDataKey dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<DateTime>(plugin, $"{placeholderPrefix}.date", dataKey);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.year", dataKey, Year);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.month", dataKey, Month);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.day", dataKey, Day);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.hour", dataKey, Hour);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.minute", dataKey, Minute);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.second", dataKey, Second);
-            placeholders.RegisterPlaceholder<DateTime, int>(plugin, $"{placeholderPrefix}.millisecond", dataKey, Millisecond);
+            placeholders.RegisterPlaceholder<DateTime>(plugin, keys.Date, dataKey);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Year, dataKey, Year);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Month, dataKey, Month);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Day, dataKey, Day);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Hour, dataKey, Hour);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Minute, dataKey, Minute);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Second, dataKey, Second);
+            placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Millisecond, dataKey, Millisecond);
         }
     }
 }

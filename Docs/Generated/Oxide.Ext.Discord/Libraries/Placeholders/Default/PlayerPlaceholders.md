@@ -10,6 +10,7 @@ public static class PlayerPlaceholders
 
 | name | description |
 | --- | --- |
+| static [Address](#address-method)(…) | Player Address Placeholder |
 | static [BattleMetricsNameUrl](#battlemetricsnameurl-method)(…) | Battle metrics Place Name Url Placeholder |
 | static [BattleMetricsSteamIdUrl](#battlemetricssteamidurl-method)(…) | Battle metrics Steam ID Url Placeholder |
 | static [ClanTag](#clantag-method)(…) | Player Groups Placeholder |
@@ -177,6 +178,25 @@ public static string[] Groups(IPlayer player)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
+# Address method
+
+Player Address Placeholder
+
+```csharp
+public static string Address(IPlayer player)
+```
+
+| parameter | description |
+| --- | --- |
+| player |  |
+
+## See Also
+
+* class [PlayerPlaceholders](./PlayerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
 # Country method
 
 Player Country Placeholder
@@ -330,18 +350,19 @@ public static bool IsLinked(PlaceholderState state, IPlayer player)
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "IPlayer")
+public static void RegisterPlaceholders(Plugin plugin, PlayerKeys keys, PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [PlayerKeys](../Keys/PlayerKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [PlayerPlaceholders](./PlayerPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

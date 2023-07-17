@@ -76,18 +76,19 @@ public static string Mention(GuildMember member)
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "GuildMember")
+public static void RegisterPlaceholders(Plugin plugin, MemberKeys keys, PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [MemberKeys](../Keys/MemberKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [MemberPlaceholders](./MemberPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

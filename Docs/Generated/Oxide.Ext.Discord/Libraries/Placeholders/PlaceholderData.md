@@ -704,7 +704,7 @@ This
 Adds the data with the given name
 
 ```csharp
-public PlaceholderData Add<T>(string name, T obj)
+public PlaceholderData Add<T>(PlaceholderDataKey name, T obj)
 ```
 
 | parameter | description |
@@ -718,6 +718,7 @@ This
 
 ## See Also
 
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -728,7 +729,7 @@ This
 Removes placeholder data key with the given name
 
 ```csharp
-public PlaceholderData Remove(string name)
+public PlaceholderData Remove(PlaceholderDataKey name)
 ```
 
 ## Return Value
@@ -737,6 +738,7 @@ This
 
 ## See Also
 
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -775,7 +777,7 @@ public T Get<T>()
 Returns the object with the given type of T If the object is not found the default(T) is returned
 
 ```csharp
-public T Get<T>(string name)
+public T Get<T>(PlaceholderDataKey name)
 ```
 
 | parameter | description |
@@ -789,6 +791,7 @@ public T Get<T>(string name)
 
 ## See Also
 
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

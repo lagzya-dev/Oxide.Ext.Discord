@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription
 {
@@ -19,6 +20,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
     public class DiscordSubscription : IDebugLoggable
     {
         private readonly Snowflake _channelId;
+        private readonly PluginId _pluginId;
         private readonly DiscordClient _client;
         private readonly Action<DiscordMessage> _callback;
         
@@ -35,6 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
             _client = client;
             _plugin = client.Plugin;
             _channelId = channelId;
+            _pluginId = _plugin.Id();
             _callback = callback;
         }
 
@@ -48,6 +51,20 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         {
             return client != null && _client.Bot == client;
         }
+
+        /// <summary>
+        /// Returns if this subscription is for this plugin
+        /// </summary>
+        /// <param name="plugin">Plugin to check</param>
+        /// <returns>True if the subscription is for this plugin; False otherwise</returns>
+        public bool IsForPlugin(Plugin plugin) => plugin != null && plugin.Id() == _pluginId;
+
+        /// <summary>
+        /// Returns if this subscription is for the given channel
+        /// </summary>
+        /// <param name="channelId">Channel ID to check</param>
+        /// <returns>True if the subscription is for this channel; False otherwise</returns>
+        public bool IsForChannel(Snowflake channelId) => _channelId == channelId;
 
         /// <summary>
         /// Invokes the callback with the message

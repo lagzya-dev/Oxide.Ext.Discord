@@ -15,9 +15,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData Data { get; private set; }
         
         /// <summary>
-        /// Name of the placeholder
+        /// Key of the placeholder
         /// </summary>
-        public string Name { get; private set; }
+        public PlaceholderKey Key { get; private set; }
         
         /// <summary>
         /// Format specified in the placeholder
@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         internal void UpdateState(Match match)
         {
             GroupCollection groups = match.Groups;
-            Name = groups[1].Value;
+            Key = new PlaceholderKey(groups[1].Value);
             Group formatGroup = groups[2];
             Format = formatGroup.Success ? formatGroup.Value : null;
             Index = (ushort)match.Index;
@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         protected override void EnterPool()
         {
             Data = null;
-            Name = null;
+            Key = default(PlaceholderKey);
             Format = null;
             Index = default(ushort);
             Length = default(ushort);

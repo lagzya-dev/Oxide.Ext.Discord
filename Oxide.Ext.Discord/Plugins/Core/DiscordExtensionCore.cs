@@ -15,6 +15,7 @@ using Oxide.Ext.Discord.Libraries.AppCommands;
 using Oxide.Ext.Discord.Libraries.Command;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Libraries.Subscription;
 using Oxide.Ext.Discord.Logging;
@@ -167,10 +168,10 @@ namespace Oxide.Ext.Discord.Plugins.Core
         {
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             string extensionName = this.PluginName();
-            foreach (KeyValuePair<string, IPlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
+            foreach (KeyValuePair<PlaceholderKey, IPlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
             {
                 sb.Append('{');
-                sb.Append(placeholder.Key);
+                sb.Append(placeholder.Key.Placeholder);
                 sb.Append("} - Return Type: ");
                 sb.Append(placeholder.Value.GetReturnType().Name);
                 sb.Append(" Plugin: ");

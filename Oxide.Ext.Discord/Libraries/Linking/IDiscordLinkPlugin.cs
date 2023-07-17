@@ -13,6 +13,6 @@ namespace Oxide.Ext.Discord.Libraries.Linking
         /// Returns a <see cref="IDictionary{TKey,TValue}"/> of Steam ID's to Discord ID's
         /// </summary>
         /// <returns></returns>
-        IDictionary<string, Snowflake> GetSteamToDiscordIds();
+        IDictionary<string, Snowflake> GetPlayerIdToDiscordIds();
     }
 }

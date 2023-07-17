@@ -42,18 +42,20 @@ public static string Lang(PlaceholderState state, DiscordInteraction interaction
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "DiscordInteraction")
+public static void RegisterPlaceholders(Plugin plugin, InteractionKeys keys, 
+    PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [InteractionKeys](../Keys/InteractionKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [InteractionPlaceholders](./InteractionPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

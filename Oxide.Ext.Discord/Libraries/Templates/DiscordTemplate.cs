@@ -21,9 +21,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// </summary>
         [JsonProperty("Template Version", Order = 1000)]
         public TemplateVersion Version { get; set; } = new TemplateVersion(1, 0, 0);
-
-        [JsonConstructor]
+        
         // ReSharper disable once UnusedMember.Local
+        [JsonConstructor]
         private DiscordTemplate() { }
         
         public DiscordTemplate(TTemplate template, TemplateVersion version)

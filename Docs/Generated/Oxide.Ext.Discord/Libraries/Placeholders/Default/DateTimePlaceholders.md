@@ -136,17 +136,20 @@ public static int Millisecond(DateTime date)
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey)
+public static void RegisterPlaceholders(Plugin plugin, DateTimeKeys keys, 
+    PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [DateTimeKeys](../Keys/DateTimeKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [DateTimePlaceholders](./DateTimePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

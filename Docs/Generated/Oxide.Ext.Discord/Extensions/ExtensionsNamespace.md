@@ -6,6 +6,7 @@
 | static class [DiscordUserExt](./DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
 | static class [IEnumerableExt](./IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./MathExt.md) | Extensions for math operations |
+| static class [PlaceholderKeyExt](./PlaceholderKeyExt.md) | Extensions for placeholder keys |
 | static class [PlayerExt](./PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
 | static class [PluginExt](./PluginExt.md) | Extension methods for plugins |
 | static class [StreamExt](./StreamExt.md) | Stream Extension Methods |

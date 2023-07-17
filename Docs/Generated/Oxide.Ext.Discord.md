@@ -762,6 +762,7 @@
 | static class [DiscordUserExt](./Oxide.Ext.Discord/Extensions/DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
 | static class [IEnumerableExt](./Oxide.Ext.Discord/Extensions/IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./Oxide.Ext.Discord/Extensions/MathExt.md) | Extensions for math operations |
+| static class [PlaceholderKeyExt](./Oxide.Ext.Discord/Extensions/PlaceholderKeyExt.md) | Extensions for placeholder keys |
 | static class [PlayerExt](./Oxide.Ext.Discord/Extensions/PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
 | static class [PluginExt](./Oxide.Ext.Discord/Extensions/PluginExt.md) | Extension methods for plugins |
 | static class [StreamExt](./Oxide.Ext.Discord/Extensions/StreamExt.md) | Stream Extension Methods |
@@ -897,6 +898,8 @@
 | --- | --- |
 | class [DiscordPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md) | Discord Placeholders Library |
 | class [PlaceholderData](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md) | Placeholder Data for placeholders |
+| struct [PlaceholderDataKey](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderDataKey.md) | Represents a Placeholder Data Key This is the key used to store a value into Placeholder Data |
+| struct [PlaceholderKey](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderKey.md) | Represents a Placeholder Key. This is the key for placeholder usage and lookup |
 | class [PlaceholderState](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.md) | Represents the current state for a matched placeholder |
 
 ## Oxide.Ext.Discord.Libraries.Placeholders.Default namespace
@@ -912,13 +915,35 @@
 | static class [MessagePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/MessagePlaceholders.md) | [`DiscordMessage`](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) placeholders |
 | static class [PlayerPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/PlayerPlaceholders.md) | IPlayer placeholders |
 | static class [PluginPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/PluginPlaceholders.md) | Plugin placeholders |
-| static class [RequestErrorPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
+| static class [ResponseErrorPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/ResponseErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
 | static class [RolePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/RolePlaceholders.md) | [`DiscordRole`](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) placeholders |
 | static class [ServerPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/ServerPlaceholders.md) | IServer placeholders |
 | static class [SnowflakePlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
 | static class [TimeSpanPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/TimeSpanPlaceholders.md) | TimeSpan placeholders |
 | static class [TimestampPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/TimestampPlaceholders.md) | Timestamp placeholders |
 | static class [UserPlaceholders](./Oxide.Ext.Discord/Libraries/Placeholders/Default/UserPlaceholders.md) | [`DiscordUser`](./Oxide.Ext.Discord/Entities/Users/DiscordUser.md) placeholders |
+
+## Oxide.Ext.Discord.Libraries.Placeholders.Keys namespace
+
+| public type | description |
+| --- | --- |
+| class [AppCommandKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/AppCommandKeys.md) | Placeholder Keys for [`DiscordApplicationCommand`](./Oxide.Ext.Discord/Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) |
+| class [ChannelKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/ChannelKeys.md) | Placeholder Keys for [`DiscordChannel`](./Oxide.Ext.Discord/Entities/Channels/DiscordChannel.md) |
+| class [DateTimeKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/DateTimeKeys.md) | Placeholder Keys for DateTime |
+| static class [DefaultKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/DefaultKeys.md) | Default Discord Extension provided Placeholder Keys |
+| class [GuildKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/GuildKeys.md) | Placeholder Keys for [`DiscordGuild`](./Oxide.Ext.Discord/Entities/Guilds/DiscordGuild.md) |
+| class [InteractionKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/InteractionKeys.md) | Placeholder Keys for [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.md) |
+| class [MemberKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/MemberKeys.md) | Placeholder Keys for [`GuildMember`](./Oxide.Ext.Discord/Entities/Guilds/GuildMember.md) |
+| class [MessageKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/MessageKeys.md) | Placeholder Keys for [`DiscordMessage`](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) |
+| class [PlayerKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/PlayerKeys.md) | Placeholder Keys for IPlayer |
+| class [PluginKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/PluginKeys.md) | Placeholder Keys for Plugin |
+| class [ResponseErrorKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/ResponseErrorKeys.md) | Placeholder Keys for [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) |
+| class [RoleKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/RoleKeys.md) | Placeholder Keys for [`DiscordRole`](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) |
+| class [ServerKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/ServerKeys.md) | Placeholder Keys for IServer |
+| class [SnowflakeKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/SnowflakeKeys.md) | Placeholder Keys for [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) |
+| class [TimespanKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/TimespanKeys.md) | Placeholder Keys for TimeSpan |
+| class [TimestampKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/TimestampKeys.md) | Placeholder Keys for Int64 |
+| class [UserKeys](./Oxide.Ext.Discord/Libraries/Placeholders/Keys/UserKeys.md) | Placeholder Keys for [`DiscordUser`](./Oxide.Ext.Discord/Entities/Users/DiscordUser.md) |
 
 ## Oxide.Ext.Discord.Libraries.Pooling namespace
 

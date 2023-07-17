@@ -122,13 +122,13 @@ public PlaceholderData CreateData(Plugin plugin)
 Registers a placeholder static value placeholder. Static placeholder value can not be changed.
 
 ```csharp
-public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
+public void RegisterPlaceholder(Plugin plugin, PlaceholderKey key, string value)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | value | Static string value |
 
 ## Exceptions
@@ -139,6 +139,7 @@ public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -150,13 +151,13 @@ public void RegisterPlaceholder(Plugin plugin, string placeholder, string value)
 Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder
 
 ```csharp
-public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func<TResult> callback)
+public void RegisterPlaceholder<TResult>(Plugin plugin, PlaceholderKey key, Func<TResult> callback)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | callback | Callback Method for the placeholder |
 
 ## Exceptions
@@ -167,6 +168,7 @@ public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -178,14 +180,15 @@ public void RegisterPlaceholder<TResult>(Plugin plugin, string placeholder, Func
 Registers a placeholder that will take a datakey from [`PlaceholderData`](./PlaceholderData.md) and use that as the placeholder value
 
 ```csharp
-public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string dataKey)
+public void RegisterPlaceholder<TData>(Plugin plugin, PlaceholderKey key, 
+    PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | TData | Type that is registered in the PlaceholderData |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | dataKey |  |
 
 ## Exceptions
@@ -196,6 +199,8 @@ public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -207,7 +212,7 @@ public void RegisterPlaceholder<TData>(Plugin plugin, string placeholder, string
 Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function along with the current [`PlaceholderState`](./PlaceholderState.md) and will expect a TResult to be returned from that function.
 
 ```csharp
-public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, 
     Func<PlaceholderState, TData, TResult> callback)
 ```
 
@@ -216,7 +221,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | TData | Type of the data key |
 | TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | callback | Callback Method for the placeholder |
 
 ## Exceptions
@@ -227,6 +232,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
 * class [PlaceholderState](./PlaceholderState.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
@@ -239,7 +245,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function and will expect a TResult to be returned from that function.
 
 ```csharp
-public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, 
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, 
     Func<TData, TResult> callback)
 ```
 
@@ -248,7 +254,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | TData | Type of the data key |
 | TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | callback | Callback Method for the placeholder |
 
 ## Exceptions
@@ -259,6 +265,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -270,8 +277,8 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will come from the datakey argument Type T will be passed into the callback function along with the current [`PlaceholderState`](./PlaceholderState.md) and will expect a TResult to be returned from that function.
 
 ```csharp
-public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 
-    Func<PlaceholderState, TData, TResult> callback)
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, 
+    PlaceholderDataKey dataKey, Func<PlaceholderState, TData, TResult> callback)
 ```
 
 | parameter | description |
@@ -279,7 +286,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | TData | Type of the data key |
 | TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder key |
 | dataKey | The name of the data key in PlaceholderData |
 | callback | Callback Method for the placeholder |
 
@@ -291,6 +298,8 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [PlaceholderState](./PlaceholderState.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
@@ -303,8 +312,8 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will come from the datakey argument Type T will be passed into the callback function and will expect a TResult to be returned from that function.
 
 ```csharp
-public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholder, string dataKey, 
-    Func<TData, TResult> callback)
+public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, 
+    PlaceholderDataKey dataKey, Func<TData, TResult> callback)
 ```
 
 | parameter | description |
@@ -312,7 +321,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 | TData | Type of the data key |
 | TResult | The return type of the placeholder callback |
 | plugin | Plugin this placeholder is for |
-| placeholder | Placeholder string |
+| key | Placeholder Key |
 | dataKey | The name of the data key in PlaceholderData |
 | callback | Callback Method for the placeholder |
 
@@ -324,6 +333,8 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, string placeholde
 
 ## See Also
 
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* struct [PlaceholderDataKey](./PlaceholderDataKey.md)
 * class [DiscordPlaceholders](./DiscordPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

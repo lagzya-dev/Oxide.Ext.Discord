@@ -13,6 +13,8 @@ public class DiscordSubscription : IDebugLoggable
 | [DiscordSubscription](#discordsubscription-constructor)(…) | Constructor |
 | [CanRun](#canrun-method)(…) | Returns if a subscription can run. They can only run for the client that they were created for. |
 | [Invoke](#invoke-method)(…) | Invokes the callback with the message |
+| [IsForChannel](#isforchannel-method)(…) | Returns if this subscription is for the given channel |
+| [IsForPlugin](#isforplugin-method)(…) | Returns if this subscription is for this plugin |
 | [LogDebug](#logdebug-method)(…) |  |
 
 ## See Also
@@ -42,6 +44,53 @@ True if same bot client; false otherwise
 ## See Also
 
 * class [BotClient](../../Clients/BotClient.md)
+* class [DiscordSubscription](./DiscordSubscription.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsForPlugin method
+
+Returns if this subscription is for this plugin
+
+```csharp
+public bool IsForPlugin(Plugin plugin)
+```
+
+| parameter | description |
+| --- | --- |
+| plugin | Plugin to check |
+
+## Return Value
+
+True if the subscription is for this plugin; False otherwise
+
+## See Also
+
+* class [DiscordSubscription](./DiscordSubscription.md)
+* namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# IsForChannel method
+
+Returns if this subscription is for the given channel
+
+```csharp
+public bool IsForChannel(Snowflake channelId)
+```
+
+| parameter | description |
+| --- | --- |
+| channelId | Channel ID to check |
+
+## Return Value
+
+True if the subscription is for this channel; False otherwise
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
 * class [DiscordSubscription](./DiscordSubscription.md)
 * namespace [Oxide.Ext.Discord.Libraries.Subscription](./SubscriptionNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

@@ -10,7 +10,7 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 
 | name | description |
 | --- | --- |
-| [GetSteamToDiscordIds](#getsteamtodiscordids-method)() | Returns a IDictionary of Steam ID's to Discord ID's |
+| [GetPlayerIdToDiscordIds](#getplayeridtodiscordids-method)() | Returns a IDictionary of Steam ID's to Discord ID's |
 
 ## See Also
 
@@ -20,12 +20,12 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 * [IDiscordLinkPlugin.cs](../../../../Oxide.Ext.Discord/Libraries/Linking/IDiscordLinkPlugin.cs)
    
    
-# GetSteamToDiscordIds method
+# GetPlayerIdToDiscordIds method
 
 Returns a IDictionary of Steam ID's to Discord ID's
 
 ```csharp
-public IDictionary<string, Snowflake> GetSteamToDiscordIds()
+public IDictionary<string, Snowflake> GetPlayerIdToDiscordIds()
 ```
 
 ## See Also

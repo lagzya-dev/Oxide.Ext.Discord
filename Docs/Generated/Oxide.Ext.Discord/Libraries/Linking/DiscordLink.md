@@ -17,12 +17,12 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 | readonly [PlayerIds](#playerids-field) | Readonly Collection of all Player ID's |
 | readonly [PlayerToDiscordIds](#playertodiscordids-field) | Readonly Dictionary of Player ID's to Discord ID's |
 | [AddLinkPlugin](#addlinkplugin-method)(…) | Adds a link plugin to be the plugin used with the Discord Link library |
-| [GetDiscordId](#getdiscordid-method-1-of-2)(…) | Returns the Discord ID for the given Steam ID (2 methods) |
-| [GetDiscordUser](#getdiscorduser-method-1-of-2)(…) | Returns a minimal Discord User (2 methods) |
-| [GetLinkedMember](#getlinkedmember-method-1-of-2)(…) | Returns a linked guild member for the matching steam id in the given guild (2 methods) |
+| [GetDiscordId](#getdiscordid-method-1-of-3)(…) | Returns the Discord ID for the given Player ID (3 methods) |
+| [GetDiscordUser](#getdiscorduser-method-1-of-3)(…) | Returns a minimal Discord User (3 methods) |
+| [GetLinkedMember](#getlinkedmember-method-1-of-3)(…) | Returns a linked guild member for the matching player id in the given guild (3 methods) |
 | [GetPlayer](#getplayer-method)(…) | Returns the IPlayer for the given Discord ID |
 | [GetPlayerId](#getplayerid-method-1-of-2)(…) | Returns the Player ID of the given Discord ID if there is a link (2 methods) |
-| [IsLinked](#islinked-method-1-of-4)(…) | Returns if the specified ID is linked (4 methods) |
+| [IsLinked](#islinked-method-1-of-5)(…) | Returns if the specified ID is linked (5 methods) |
 | [LogDebug](#logdebug-method)(…) |  |
 | [OnLinked](#onlinked-method)(…) | Called by a link plugin when a link occured |
 | [OnUnlinked](#onunlinked-method)(…) | Called by a link plugin when an unlink occured |
@@ -96,7 +96,7 @@ protected override void OnPluginUnloaded(Plugin plugin)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# IsLinked method (1 of 4)
+# IsLinked method (1 of 5)
 
 Returns if the specified ID is linked
 
@@ -121,7 +121,7 @@ True if the user is linked; false otherwise
 
 ---
 
-# IsLinked method (2 of 4)
+# IsLinked method (2 of 5)
 
 Returns if the specified ID is linked
 
@@ -145,7 +145,32 @@ True if the player is linked; false otherwise
 
 ---
 
-# IsLinked method (3 of 4)
+# IsLinked method (3 of 5)
+
+Returns if the specified ID is linked
+
+```csharp
+public bool IsLinked(PlayerId playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | Player ID of the player |
+
+## Return Value
+
+True if the ID is linked; false otherwise
+
+## See Also
+
+* struct [PlayerId](./PlayerId.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# IsLinked method (4 of 5)
 
 Returns if the specified ID is linked
 
@@ -170,7 +195,7 @@ True if the ID is linked; false otherwise
 
 ---
 
-# IsLinked method (4 of 4)
+# IsLinked method (5 of 5)
 
 Returns if the specified ID is linked
 
@@ -180,7 +205,7 @@ public bool IsLinked(string playerId)
 
 | parameter | description |
 | --- | --- |
-| playerId | Steam ID of the player |
+| playerId | Player ID of the player |
 
 ## Return Value
 
@@ -203,11 +228,11 @@ public PlayerId GetPlayerId(DiscordUser user)
 
 | parameter | description |
 | --- | --- |
-| user | [`DiscordUser`](../../Entities/Users/DiscordUser.md) to get steam Id for |
+| user | [`DiscordUser`](../../Entities/Users/DiscordUser.md) to get player Id for |
 
 ## Return Value
 
-Steam ID of the given given discord ID if linked; null otherwise
+Player ID of the given given discord ID if linked; null otherwise
 
 ## See Also
 
@@ -229,11 +254,11 @@ public PlayerId GetPlayerId(Snowflake discordId)
 
 | parameter | description |
 | --- | --- |
-| discordId | Discord ID to get steam ID for |
+| discordId | Discord ID to get player ID for |
 
 ## Return Value
 
-Steam ID of the given given discord ID if linked; null otherwise
+Player ID of the given given discord ID if linked; null otherwise
 
 ## See Also
 
@@ -268,7 +293,7 @@ IPlayer for the given Discord ID; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# GetDiscordId method (1 of 2)
+# GetDiscordId method (1 of 3)
 
 Returns the Discord ID for the given IPlayer
 
@@ -282,7 +307,7 @@ public Snowflake GetDiscordId(IPlayer player)
 
 ## Return Value
 
-Discord ID for the given Steam ID; null otherwise
+Discord ID for the given Player ID; null otherwise
 
 ## See Also
 
@@ -293,9 +318,35 @@ Discord ID for the given Steam ID; null otherwise
 
 ---
 
-# GetDiscordId method (2 of 2)
+# GetDiscordId method (2 of 3)
 
-Returns the Discord ID for the given Steam ID
+Returns the Discord ID for the given Player ID
+
+```csharp
+public Snowflake GetDiscordId(PlayerId playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | Player ID to get Discord ID for |
+
+## Return Value
+
+Discord ID for the given Player ID; null otherwise
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
+* struct [PlayerId](./PlayerId.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# GetDiscordId method (3 of 3)
+
+Returns the Discord ID for the given Player ID
 
 ```csharp
 public Snowflake GetDiscordId(string playerId)
@@ -303,11 +354,11 @@ public Snowflake GetDiscordId(string playerId)
 
 | parameter | description |
 | --- | --- |
-| playerId | Steam ID to get Discord ID for |
+| playerId | Player ID to get Discord ID for |
 
 ## Return Value
 
-Discord ID for the given Steam ID; null otherwise
+Discord ID for the given Player ID; null otherwise
 
 ## See Also
 
@@ -317,7 +368,7 @@ Discord ID for the given Steam ID; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# GetDiscordUser method (1 of 2)
+# GetDiscordUser method (1 of 3)
 
 Returns a minimal Discord User
 
@@ -342,7 +393,33 @@ Discord ID for the given IPlayer; null otherwise
 
 ---
 
-# GetDiscordUser method (2 of 2)
+# GetDiscordUser method (2 of 3)
+
+Returns a minimal Discord User
+
+```csharp
+public DiscordUser GetDiscordUser(PlayerId playerId)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | ID of the in game player |
+
+## Return Value
+
+Discord ID for the given Player ID; null otherwise
+
+## See Also
+
+* class [DiscordUser](../../Entities/Users/DiscordUser.md)
+* struct [PlayerId](./PlayerId.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# GetDiscordUser method (3 of 3)
 
 Returns a minimal Discord User
 
@@ -356,7 +433,7 @@ public DiscordUser GetDiscordUser(string playerId)
 
 ## Return Value
 
-Discord ID for the given Steam ID; null otherwise
+Discord ID for the given Player ID; null otherwise
 
 ## See Also
 
@@ -366,7 +443,7 @@ Discord ID for the given Steam ID; null otherwise
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# GetLinkedMember method (1 of 2)
+# GetLinkedMember method (1 of 3)
 
 Returns a linked guild member for the matching IPlayer in the given guild
 
@@ -381,7 +458,7 @@ public GuildMember GetLinkedMember(IPlayer player, DiscordGuild guild)
 
 ## Return Value
 
-Discord ID for the given Steam ID; null otherwise
+Discord ID for the given Player ID; null otherwise
 
 ## See Also
 
@@ -393,9 +470,37 @@ Discord ID for the given Steam ID; null otherwise
 
 ---
 
-# GetLinkedMember method (2 of 2)
+# GetLinkedMember method (2 of 3)
 
-Returns a linked guild member for the matching steam id in the given guild
+Returns a linked guild member for the matching player id in the given guild
+
+```csharp
+public GuildMember GetLinkedMember(PlayerId playerId, DiscordGuild guild)
+```
+
+| parameter | description |
+| --- | --- |
+| playerId | ID of the in game player |
+| guild | Guild the member is in |
+
+## Return Value
+
+Discord ID for the given Player ID; null otherwise
+
+## See Also
+
+* class [GuildMember](../../Entities/Guilds/GuildMember.md)
+* struct [PlayerId](./PlayerId.md)
+* class [DiscordGuild](../../Entities/Guilds/DiscordGuild.md)
+* class [DiscordLink](./DiscordLink.md)
+* namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+
+---
+
+# GetLinkedMember method (3 of 3)
+
+Returns a linked guild member for the matching player id in the given guild
 
 ```csharp
 public GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
@@ -408,7 +513,7 @@ public GuildMember GetLinkedMember(string playerId, DiscordGuild guild)
 
 ## Return Value
 
-Discord ID for the given Steam ID; null otherwise
+Discord ID for the given Player ID; null otherwise
 
 ## See Also
 

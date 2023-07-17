@@ -5,17 +5,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
 {
     internal class Placeholder<T, TResult> : BasePlaceholder<TResult>
     {
-        private readonly string _dataKey;
+        private readonly PlaceholderDataKey _dataKey;
         private readonly Func<PlaceholderState, T, TResult> _dataCallback;
         private readonly Func<T, TResult> _callback;
 
-        public Placeholder(string dataKey, Plugin plugin, Func<PlaceholderState, T, TResult> callback) : base(plugin)
+        public Placeholder(PlaceholderDataKey dataKey, Plugin plugin, Func<PlaceholderState, T, TResult> callback) : base(plugin)
         {
             _dataKey = dataKey;
             _dataCallback = callback;
         }
         
-        public Placeholder(string dataKey, Plugin plugin, Func<T, TResult> callback) : base(plugin)
+        public Placeholder(PlaceholderDataKey dataKey, Plugin plugin, Func<T, TResult> callback) : base(plugin)
         {
             _dataKey = dataKey;
             _callback = callback;

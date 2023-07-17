@@ -80,18 +80,19 @@ public static string Content(PlaceholderState state, DiscordMessage message)
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "DiscordMessage")
+public static void RegisterPlaceholders(Plugin plugin, MessageKeys keys, PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
+* class [MessageKeys](../Keys/MessageKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
 * class [MessagePlaceholders](./MessagePlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

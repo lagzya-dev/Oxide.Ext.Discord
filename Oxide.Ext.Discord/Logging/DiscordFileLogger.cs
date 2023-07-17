@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Logging
                 Directory.CreateDirectory(logPath);
             }
             
-            _logFileName = Path.Combine(logPath, $"{pluginName}-{DateTime.Now:yyyy-MM-dd_h-mm-ss-tt}.txt");
+            _logFileName = Path.Combine(logPath, $"{pluginName}-{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.txt");
         }
 
         internal void AddMessage(DiscordLogLevel level, string message, Exception ex)

@@ -1,9 +1,9 @@
-# RequestErrorPlaceholders class
+# ResponseErrorPlaceholders class
 
 [`ResponseError`](../../../Entities/Api/ResponseError.md) placeholders
 
 ```csharp
-public static class RequestErrorPlaceholders
+public static class ResponseErrorPlaceholders
 ```
 
 ## Public Members
@@ -18,7 +18,7 @@ public static class RequestErrorPlaceholders
 
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-* [RequestErrorPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/RequestErrorPlaceholders.cs)
+* [ResponseErrorPlaceholders.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/Default/ResponseErrorPlaceholders.cs)
    
    
 # HttpCode method
@@ -33,7 +33,7 @@ public static DiscordHttpStatusCode HttpCode(ResponseError error)
 
 * enum [DiscordHttpStatusCode](../../../Entities/Api/DiscordHttpStatusCode.md)
 * class [ResponseError](../../../Entities/Api/ResponseError.md)
-* class [RequestErrorPlaceholders](./RequestErrorPlaceholders.md)
+* class [ResponseErrorPlaceholders](./ResponseErrorPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -49,7 +49,7 @@ public static string Message(ResponseError error)
 ## See Also
 
 * class [ResponseError](../../../Entities/Api/ResponseError.md)
-* class [RequestErrorPlaceholders](./RequestErrorPlaceholders.md)
+* class [ResponseErrorPlaceholders](./ResponseErrorPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
@@ -59,19 +59,21 @@ public static string Message(ResponseError error)
 Registers placeholders for the given plugin.
 
 ```csharp
-public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, 
-    string dataKey = "ResponseError")
+public static void RegisterPlaceholders(Plugin plugin, ResponseErrorKeys keys, 
+    PlaceholderDataKey dataKey)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin to register placeholders for |
-| placeholderPrefix | Prefix to use for the placeholders |
+| keys | Prefix to use for the placeholders |
 | dataKey | Data key in [`PlaceholderData`](../PlaceholderData.md) |
 
 ## See Also
 
-* class [RequestErrorPlaceholders](./RequestErrorPlaceholders.md)
+* class [ResponseErrorKeys](../Keys/ResponseErrorKeys.md)
+* struct [PlaceholderDataKey](../PlaceholderDataKey.md)
+* class [ResponseErrorPlaceholders](./ResponseErrorPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
 

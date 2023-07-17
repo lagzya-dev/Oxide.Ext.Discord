@@ -5,6 +5,7 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
 using Oxide.Ext.Discord.Plugins.Core;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
@@ -14,7 +15,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class PlayerPlaceholders
     {
-        internal const string TargetPlayerKey = "TargetPlayer";
+        internal static readonly PlaceholderDataKey TargetPlayerKey = new PlaceholderDataKey("TargetPlayer");
         
         private static Permission _permission;
         private static Permission Permission => _permission ?? (_permission = Interface.Oxide.GetLibrary<Permission>());
@@ -86,6 +87,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
 
         /// <summary>
+        /// Player Address Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static string Address(IPlayer player) => player.Address;
+        
+        /// <summary>
         /// Player Country Placeholder
         /// </summary>
         /// <param name="player"></param>
@@ -137,37 +145,38 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
 
         internal static void RegisterPlaceholders()
         {
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "player");
-            RegisterPlaceholders(DiscordExtensionCore.Instance, "target", TargetPlayerKey);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.Player, new PlaceholderDataKey(nameof(IPlayer)));
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.PlayerTarget, TargetPlayerKey);
         }
         
         /// <summary>
         /// Registers placeholders for the given plugin. 
         /// </summary>
         /// <param name="plugin">Plugin to register placeholders for</param>
-        /// <param name="placeholderPrefix">Prefix to use for the placeholders</param>
+        /// <param name="keys">Prefix to use for the placeholders</param>
         /// <param name="dataKey">Data key in <see cref="PlaceholderData"/></param>
-        public static void RegisterPlaceholders(Plugin plugin, string placeholderPrefix, string dataKey = nameof(IPlayer))
+        public static void RegisterPlaceholders(Plugin plugin, PlayerKeys keys, PlaceholderDataKey dataKey)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.id", dataKey, Id);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.name", dataKey, Name);
-            placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.connected", dataKey, Connected);
-            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, $"{placeholderPrefix}.permissions", dataKey, Permissions);
-            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, $"{placeholderPrefix}.groups", dataKey, Groups);
-            placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health", dataKey, Health);
-            placeholders.RegisterPlaceholder<IPlayer, float>(plugin, $"{placeholderPrefix}.health.max", dataKey, MaxHealth);
-            placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, $"{placeholderPrefix}.position", dataKey, Position);
-            placeholders.RegisterPlaceholder<IPlayer, int>(plugin, $"{placeholderPrefix}.ping", dataKey, Ping);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.country", dataKey, Country);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.country.emoji", dataKey, CountryEmoji);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.clan.tag", dataKey, ClanTag);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.profile", dataKey, SteamProfileUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.steam.avatar", dataKey, SteamAvatarUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.steamid", dataKey, BattleMetricsSteamIdUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.battlemetrics.name", dataKey, BattleMetricsNameUrl);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, $"{placeholderPrefix}.serverarmor.profile", dataKey, ServerArmorUrl);
-            placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, $"{placeholderPrefix}.islinked", dataKey, IsLinked);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Id, dataKey, Id);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Name, dataKey, Name);
+            placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, keys.Connected, dataKey, Connected);
+            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, keys.Permissions, dataKey, Permissions);
+            placeholders.RegisterPlaceholder<IPlayer, string[]>(plugin, keys.Groups, dataKey, Groups);
+            placeholders.RegisterPlaceholder<IPlayer, float>(plugin, keys.Health, dataKey, Health);
+            placeholders.RegisterPlaceholder<IPlayer, float>(plugin, keys.MaxHealth, dataKey, MaxHealth);
+            placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, keys.Position, dataKey, Position);
+            placeholders.RegisterPlaceholder<IPlayer, int>(plugin, keys.Ping, dataKey, Ping);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Address, dataKey, Country);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Country, dataKey, Country);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.CountryEmoji, dataKey, CountryEmoji);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.ClanTag, dataKey, ClanTag);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.SteamProfile, dataKey, SteamProfileUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.SteamAvatar, dataKey, SteamAvatarUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.BattleMetricsPlayerId, dataKey, BattleMetricsSteamIdUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.BattleMetricsName, dataKey, BattleMetricsNameUrl);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.ServerArmorProfile, dataKey, ServerArmorUrl);
+            placeholders.RegisterPlaceholder<IPlayer, bool>(plugin, keys.IsLinked, dataKey, IsLinked);
         }
     }
 }

@@ -11,7 +11,7 @@
 | static class [MessagePlaceholders](./MessagePlaceholders.md) | [`DiscordMessage`](./Oxide.Ext.Discord/Entities/Messages/DiscordMessage.md) placeholders |
 | static class [PlayerPlaceholders](./PlayerPlaceholders.md) | IPlayer placeholders |
 | static class [PluginPlaceholders](./PluginPlaceholders.md) | Plugin placeholders |
-| static class [RequestErrorPlaceholders](./RequestErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
+| static class [ResponseErrorPlaceholders](./ResponseErrorPlaceholders.md) | [`ResponseError`](./Oxide.Ext.Discord/Entities/Api/ResponseError.md) placeholders |
 | static class [RolePlaceholders](./RolePlaceholders.md) | [`DiscordRole`](./Oxide.Ext.Discord/Entities/Permissions/DiscordRole.md) placeholders |
 | static class [ServerPlaceholders](./ServerPlaceholders.md) | IServer placeholders |
 | static class [SnowflakePlaceholders](./SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |

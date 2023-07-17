@@ -27,20 +27,20 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     /// </summary>
     public class PlaceholderData : BasePoolable
     {
-        private readonly Hash<string, object> _data = new Hash<string, object>();
+        private readonly Hash<PlaceholderDataKey, object> _data = new Hash<PlaceholderDataKey, object>();
         private readonly List<IBoxed> _boxed = new List<IBoxed>();
         internal bool AutoPool { get; private set; } = true;
 
         internal PlaceholderData() { }
 
-        internal void AddServer(IServer server) => Add(nameof(IServer), server);
+        internal void AddServer(IServer server) => Add(new PlaceholderDataKey(nameof(IServer)), server);
         
         /// <summary>
         /// Add a <see cref="DiscordApplicationCommand"/>
         /// </summary>
         /// <param name="command">Application Command to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddCommand(DiscordApplicationCommand command) => Add(nameof(DiscordApplicationCommand), command);
+        public PlaceholderData AddCommand(DiscordApplicationCommand command) => Add(new PlaceholderDataKey(nameof(DiscordApplicationCommand)), command);
 
         /// <summary>
         /// Add a <see cref="DiscordGuild"/> by <see cref="DiscordClient"/> and GuildId
@@ -55,13 +55,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="guild">Guild to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddGuild(DiscordGuild guild) => Add(nameof(DiscordGuild), guild);
+        public PlaceholderData AddGuild(DiscordGuild guild) => Add(new PlaceholderDataKey(nameof(DiscordGuild)), guild);
         
         /// <summary>
         /// Removes guild placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveGuild() => Remove(nameof(DiscordGuild));
+        public PlaceholderData RemoveGuild() => Remove(new PlaceholderDataKey(nameof(DiscordGuild)));
 
         /// <summary>
         /// Add a <see cref="DiscordMessage"/>
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 AddGuildMember(message.Member);
                 AddUser(message.Author);
-                Add(nameof(DiscordMessage), message);
+                Add(new PlaceholderDataKey(nameof(DiscordMessage)), message);
             }
             
             return this;
@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Removes message placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveMessage() => Remove(nameof(DiscordMessage));
+        public PlaceholderData RemoveMessage() => Remove(new PlaceholderDataKey(nameof(DiscordMessage)));
 
         /// <summary>
         /// Add a <see cref="GuildMember"/> by <see cref="DiscordClient"/>, GuildId, and UserId
@@ -105,7 +105,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (member != null)
             {
                 AddUser(member.User);
-                Add(nameof(GuildMember), member);
+                Add(new PlaceholderDataKey(nameof(GuildMember)), member);
             }
 
             return this;
@@ -115,7 +115,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Removes guild member data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveGuildMember() => Remove(nameof(GuildMember));
+        public PlaceholderData RemoveGuildMember() => Remove(new PlaceholderDataKey(nameof(GuildMember)));
 
         /// <summary>
         /// Adds a <see cref="DiscordUser"/>
@@ -127,7 +127,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             if (user != null)
             {
                 AddPlayer(user.Player);
-                Add(nameof(DiscordUser), user);
+                Add(new PlaceholderDataKey(nameof(DiscordUser)), user);
             }
 
             return this;
@@ -153,7 +153,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Removes user placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveUser() => Remove(nameof(DiscordUser));
+        public PlaceholderData RemoveUser() => Remove(new PlaceholderDataKey(nameof(DiscordUser)));
 
         /// <summary>
         /// Adds a <see cref="DiscordRole"/> by <see cref="DiscordClient"/>, GuildId, and RoleId
@@ -169,13 +169,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="role">Role to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddRole(DiscordRole role) => Add(nameof(DiscordRole), role);
+        public PlaceholderData AddRole(DiscordRole role) => Add(new PlaceholderDataKey(nameof(DiscordRole)), role);
         
         /// <summary>
         /// Removes role placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveRole() => Remove(nameof(DiscordRole));
+        public PlaceholderData RemoveRole() => Remove(new PlaceholderDataKey(nameof(DiscordRole)));
 
         /// <summary>
         /// Adds a <see cref="DiscordChannel"/> by <see cref="DiscordClient"/>, ChannelId, and Optional GuildId
@@ -191,13 +191,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="channel">Channel to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddChannel(DiscordChannel channel) => Add(nameof(DiscordChannel), channel);
+        public PlaceholderData AddChannel(DiscordChannel channel) => Add(new PlaceholderDataKey(nameof(DiscordChannel)), channel);
         
         /// <summary>
         /// Removes channel placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemoveChannel() => Remove(nameof(DiscordChannel));
+        public PlaceholderData RemoveChannel() => Remove(new PlaceholderDataKey(nameof(DiscordChannel)));
         
         /// <summary>
         /// Adds a <see cref="DiscordInteraction"/>
@@ -211,7 +211,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                 AddGuildMember(interaction.Member);
                 AddUser(interaction.User);
                 AddMessage(interaction.Message);
-                Add(nameof(DiscordInteraction), interaction);
+                Add(new PlaceholderDataKey(nameof(DiscordInteraction)), interaction);
             }
 
             return this;
@@ -222,13 +222,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="player">player to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddPlayer(IPlayer player) => Add(nameof(IPlayer), player);
+        public PlaceholderData AddPlayer(IPlayer player) => Add(new PlaceholderDataKey(nameof(IPlayer)), player);
 
         /// <summary>
         /// Removes player placeholder data
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData RemovePlayer() => Remove(nameof(IPlayer));
+        public PlaceholderData RemovePlayer() => Remove(new PlaceholderDataKey(nameof(IPlayer)));
 
         /// <summary>
         /// Adds a target <see cref="IPlayer"/>
@@ -242,7 +242,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="plugin">Plugin to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddPlugin(Plugin plugin) => Add(nameof(Plugin), plugin);
+        public PlaceholderData AddPlugin(Plugin plugin) => Add(new PlaceholderDataKey(nameof(Plugin)), plugin);
 
         /// <summary>
         /// Adds a Unix Timestamp
@@ -256,7 +256,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="timestamp">Unix timestamp</param>
         /// <returns>This</returns>
-        public PlaceholderData AddTimestamp(long timestamp) => Add(TimestampPlaceholders.TimestampName, timestamp);
+        public PlaceholderData AddTimestamp(long timestamp) => Add(TimestampPlaceholders.TimestampKey, timestamp);
         
         /// <summary>
         /// Adds a <see cref="TimeSpan"/>
@@ -270,14 +270,14 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="id"><see cref="Snowflake"/> ID</param>
         /// <returns>This</returns>
-        public PlaceholderData AddSnowflake(Snowflake id) => Add(nameof(Snowflake), id);
+        public PlaceholderData AddSnowflake(Snowflake id) => Add(new PlaceholderDataKey(nameof(Snowflake)), id);
         
         /// <summary>
         /// Add a <see cref="ResponseError"/>
         /// </summary>
         /// <param name="error">RequestError to add</param>
         /// <returns>This</returns>
-        public PlaceholderData AddRequestError(ResponseError error) => Add(nameof(ResponseError), error);
+        public PlaceholderData AddRequestError(ResponseError error) => Add(new PlaceholderDataKey(nameof(ResponseError)), error);
 
         /// <summary>
         /// Adds the data with the given name
@@ -285,7 +285,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="name">Name of the data key</param>
         /// <param name="obj">Object to add</param>
         /// <returns>This</returns>
-        public PlaceholderData Add<T>(string name, T obj)
+        public PlaceholderData Add<T>(PlaceholderDataKey name, T obj)
         {
             if (typeof(T).IsValueType())
             {
@@ -302,7 +302,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             return this;
         }
 
-        private void AddBoxed(string name, IBoxed boxed)
+        private void AddBoxed(PlaceholderDataKey name, IBoxed boxed)
         {
             _data[name] = boxed;
             _boxed.Add(boxed);
@@ -312,7 +312,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// Removes placeholder data key with the given name
         /// </summary>
         /// <returns>This</returns>
-        public PlaceholderData Remove(string name)
+        public PlaceholderData Remove(PlaceholderDataKey name)
         {
             if (_data.TryGetValue(name, out object value))
             {
@@ -334,7 +334,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>{T}</returns>
         public T Get<T>()
         {
-            return Get<T>(typeof(T).Name);
+            return Get<T>(new PlaceholderDataKey(typeof(T).Name));
         }
         
         /// <summary>
@@ -344,7 +344,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="name">Name of the data key</param>
         /// <typeparam name="T">Type to return</typeparam>
         /// <returns>{T}</returns>
-        public T Get<T>(string name)
+        public T Get<T>(PlaceholderDataKey name)
         {
             if (_data.TryGetValue(name, out object obj))
             {
@@ -388,7 +388,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         public PlaceholderData Clone()
         {
             PlaceholderData clone = PluginPool.GetPlaceholderData();
-            foreach (KeyValuePair<string, object> data in _data)
+            foreach (KeyValuePair<PlaceholderDataKey, object> data in _data)
             {
                 if (data.Value is IBoxed boxed)
                 {

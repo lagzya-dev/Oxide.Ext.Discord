@@ -13,7 +13,7 @@ public enum PlayerDisplayNameMode : sbyte
 | --- | --- | --- |
 | Default | `0` | Defaults search options |
 | Clan | `1 << 0` | Include Clan Name in search |
-| PlayerId | `1 << 1` | Include Steam ID |
+| PlayerId | `1 << 1` | Include Player ID |
 | All | `0x03` | All display name options |
 
 ## See Also
