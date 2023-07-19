@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Exceptions.Libraries.Placeholders;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -287,6 +288,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>This</returns>
         public PlaceholderData Add<T>(PlaceholderDataKey name, T obj)
         {
+            InvalidPlaceholderDataException.ThrowIfInvalid(name);
+            
             if (typeof(T).IsValueType())
             {
                 AddBoxed(name, DiscordPool.Internal.GetBoxed(obj));
@@ -346,6 +349,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <returns>{T}</returns>
         public T Get<T>(PlaceholderDataKey name)
         {
+            InvalidPlaceholderDataException.ThrowIfInvalid(name);
             if (_data.TryGetValue(name, out object obj))
             {
                 if (obj is T value)

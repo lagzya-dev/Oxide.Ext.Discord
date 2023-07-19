@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Exceptions.Libraries.Placeholders;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
@@ -185,7 +186,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder(Plugin plugin, PlaceholderKey key, string value)
         {
-            if (!key.IsValid) throw new ArgumentNullException(nameof(key));
+            InvalidPlaceholderException.ThrowIfInvalid(key);
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (value == null) throw new ArgumentNullException(nameof(value));
             
@@ -208,7 +209,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TResult>(Plugin plugin, PlaceholderKey key, Func<TResult> callback)
         {
-            if (!key.IsValid) throw new ArgumentNullException(nameof(key));
+            InvalidPlaceholderException.ThrowIfInvalid(key);
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
             
@@ -232,7 +233,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <exception cref="ArgumentNullException">Thrown if placeholder or plugin is null</exception>
         public void RegisterPlaceholder<TData>(Plugin plugin, PlaceholderKey key, PlaceholderDataKey dataKey)
         {
-            if (!key.IsValid) throw new ArgumentNullException(nameof(key));
+            InvalidPlaceholderException.ThrowIfInvalid(key);
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
             Placeholder<TData, TData> holder = new Placeholder<TData, TData>(dataKey, plugin, data => data);
@@ -277,7 +278,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, PlaceholderDataKey dataKey, Func<TData, TResult> callback)
         {
-            if (!key.IsValid) throw new ArgumentNullException(nameof(key));
+            InvalidPlaceholderException.ThrowIfInvalid(key);
             if (!dataKey.IsValid) throw new ArgumentNullException(nameof(dataKey));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
@@ -324,7 +325,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <exception cref="ArgumentNullException"></exception>
         public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, PlaceholderDataKey dataKey, Func<PlaceholderState, TData, TResult> callback)
         {
-            if (!key.IsValid) throw new ArgumentNullException(nameof(key));
+            InvalidPlaceholderException.ThrowIfInvalid(key);
             if (!dataKey.IsValid) throw new ArgumentNullException(nameof(dataKey));
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (callback == null) throw new ArgumentNullException(nameof(callback));
