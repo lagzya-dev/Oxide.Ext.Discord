@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Extensions
 {
     internal static class CastExt
     {
-        public static TDestination Cast<TSource, TDestination>(this TSource source)
+        internal static TDestination Cast<TSource, TDestination>(this TSource source)
         {
             CastImpl<TSource, TDestination>.Value = source;
             return CastImpl<TDestination, TSource>.Value;
@@ -17,10 +17,7 @@ namespace Oxide.Ext.Discord.Extensions
 
             static CastImpl()
             {
-                if (typeof(TSource) != typeof(TDestination))
-                {
-                    throw new InvalidCastException($"{typeof(TSource)} != {typeof(TDestination)}");
-                }
+                if (typeof(TSource) != typeof(TDestination)) throw new InvalidCastException($"{typeof(TSource)} != {typeof(TDestination)}");
             }
         }
     }

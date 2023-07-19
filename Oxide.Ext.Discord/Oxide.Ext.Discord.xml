@@ -16910,6 +16910,16 @@
             Exception thrown when Server Locale is not found
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.Placeholders.InvalidPlaceholderDataException">
+            <summary>
+            Exception thrown if <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderDataKey"/> is not valid
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.Placeholders.InvalidPlaceholderException">
+            <summary>
+            Exception thrown if <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderKey"/> is not valid
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Libraries.Promise.PromiseCancelledException">
             <summary>
             Exception when a promised is cancelled
@@ -21549,12 +21559,18 @@
             If <see cref="F:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderKey.Placeholder"/> Is a Valid Key
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderKey.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="placeholder">Placeholder Value</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderKey.#ctor(System.String,System.String)">
             <summary>
             Constructor
             </summary>
             <param name="placeholder">Placeholder Value</param>
-            <param name="format">Format to be applied (Optional)</param>
+            <param name="format">Format to be applied</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderKey.#ctor(System.String,System.String,System.String)">
             <summary>

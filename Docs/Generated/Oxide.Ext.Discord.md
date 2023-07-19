@@ -733,6 +733,13 @@
 | class [DiscordLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/Libraries/DiscordLocale/DiscordLocaleNotFoundException.md) | Exception thrown when Discord Locale is not found |
 | class [ServerLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/Libraries/DiscordLocale/ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 
+## Oxide.Ext.Discord.Exceptions.Libraries.Placeholders namespace
+
+| public type | description |
+| --- | --- |
+| class [InvalidPlaceholderDataException](./Oxide.Ext.Discord/Exceptions/Libraries/Placeholders/InvalidPlaceholderDataException.md) | Exception thrown if [`PlaceholderDataKey`](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderDataKey.md) is not valid |
+| class [InvalidPlaceholderException](./Oxide.Ext.Discord/Exceptions/Libraries/Placeholders/InvalidPlaceholderException.md) | Exception thrown if [`PlaceholderKey`](./Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderKey.md) is not valid |
+
 ## Oxide.Ext.Discord.Exceptions.Libraries.Promise namespace
 
 | public type | description |
