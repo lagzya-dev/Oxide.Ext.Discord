@@ -123,7 +123,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public ApplicationSubCommandBuilder AddOption(CommandOptionType type, string name, string description, Action<ApplicationCommandOptionBuilder> builder = null)
         {
             ApplicationCommandBuilderException.ThrowIfInvalidCommandOptionType(type);
-            builder?.Invoke(new ApplicationCommandOptionBuilder(_subCommand.Options, type, name, description, _defaultLanguage, CommandName, GroupName, SubCommandName));
+            ApplicationCommandOptionBuilder option = new ApplicationCommandOptionBuilder(_subCommand.Options, type, name, description, _defaultLanguage, CommandName, GroupName, SubCommandName);
+            builder?.Invoke(option);
             return this;
         }
     }

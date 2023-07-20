@@ -166,7 +166,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
             ApplicationCommandBuilderException.ThrowIfAddingSubCommandToMessageOrUser(this);
 
             _chosenType = CommandOptionType.SubCommandGroup;
-            builder(new ApplicationCommandGroupBuilder(Command.Options, name, description, _defaultLanguage, CommandName));
+            ApplicationCommandGroupBuilder group = new ApplicationCommandGroupBuilder(Command.Options, name, description, _defaultLanguage, CommandName);
+            builder?.Invoke(group);
 
             return this;
         }
@@ -189,7 +190,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
 
             _chosenType = CommandOptionType.SubCommand;
 
-            builder?.Invoke(new ApplicationSubCommandBuilder(Command.Options, name, description, _defaultLanguage, CommandName, null));
+            ApplicationSubCommandBuilder sub = new ApplicationSubCommandBuilder(Command.Options, name, description, _defaultLanguage, CommandName, null);
+            builder?.Invoke(sub);
                 
             return this;
         }
@@ -205,7 +207,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         public ApplicationCommandBuilder AddOption(CommandOptionType type, string name, string description, Action<ApplicationCommandOptionBuilder> builder = null)
         {
             ApplicationCommandBuilderException.ThrowIfMixingCommandOptions(_chosenType);
-            builder?.Invoke(new ApplicationCommandOptionBuilder(Command.Options, type, name, description, _defaultLanguage, CommandName, null, null));
+            ApplicationCommandOptionBuilder option = new ApplicationCommandOptionBuilder(Command.Options, type, name, description, _defaultLanguage, CommandName, null, null);
+            builder?.Invoke(option);
             return this;
         }
 

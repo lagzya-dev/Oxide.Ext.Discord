@@ -104,7 +104,8 @@ namespace Oxide.Ext.Discord.Builders.ApplicationCommands
         /// <returns>this</returns>
         public ApplicationCommandGroupBuilder AddSubCommand(string name, string description, Action<ApplicationSubCommandBuilder> builder = null)
         {
-            builder?.Invoke(new ApplicationSubCommandBuilder(_option.Options, name, description, _defaultLanguage, CommandName, GroupName));
+            ApplicationSubCommandBuilder sub = new ApplicationSubCommandBuilder(_option.Options, name, description, _defaultLanguage, CommandName, GroupName);
+            builder?.Invoke(sub);
             return this;
         }
     }
