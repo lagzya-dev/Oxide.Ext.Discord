@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
@@ -183,9 +184,24 @@ namespace Oxide.Ext.Discord.Rest
 
         private void PerformValidation(object data)
         {
-            if (DiscordConfig.Instance.Validation.EnableValidation && data is IDiscordValidation validate)
+            if (!DiscordConfig.Instance.Validation.EnableValidation || !(data is IDiscordValidation validate))
+            {
+                return;
+            }
+            
+            try
             {
                 validate.Validate();
+            }
+            catch (Exception)
+            {
+                JsonSerializerSettings settings = new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore,
+                    Formatting = Formatting.Indented
+                };
+                _logger.Error($"An error occured duration object validation.\n{JsonConvert.SerializeObject(data, settings)}");
+                throw;
             }
         }
 
