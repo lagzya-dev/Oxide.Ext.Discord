@@ -16,6 +16,7 @@ public static class PlayerExt
 | static [GetGuildMember](#getguildmember-method)(…) | Returns a minimal Guild Member for the given player |
 | static [IsDummyPlayer](#isdummyplayer-method)(…) | Returns if the IPlayer is a DiscordDummyPlayer |
 | static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
+| static [PlayerId](#playerid-method)(…) | Returns the PlayerId for a given IPlayer |
 | static [SendDiscordGlobalTemplateMessage](#senddiscordglobaltemplatemessage-method)(…) | Send a message in a DM to the linked user using a global message template |
 | static [SendDiscordMessage](#senddiscordmessage-method-1-of-4)(…) | Send a Discord Message to an IPlayer if they're registered (4 methods) |
 | static [SendDiscordTemplateMessage](#senddiscordtemplatemessage-method)(…) | Send a message in a DM to the linked user using a localized message template |
@@ -285,6 +286,26 @@ GuildMember if linked and in guild; null otherwise
 
 * class [GuildMember](../Entities/Guilds/GuildMember.md)
 * class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [PlayerExt](./PlayerExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# PlayerId method
+
+Returns the PlayerId for a given IPlayer
+
+```csharp
+public static PlayerId PlayerId(this IPlayer player)
+```
+
+| parameter | description |
+| --- | --- |
+| player |  |
+
+## See Also
+
+* struct [PlayerId](../Libraries/Linking/PlayerId.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

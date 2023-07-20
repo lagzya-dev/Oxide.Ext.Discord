@@ -162,6 +162,13 @@ namespace Oxide.Ext.Discord.Extensions
         public static GuildMember GetGuildMember(this IPlayer player, DiscordGuild guild) => player != null ? DiscordLink.Instance.GetLinkedMember(player, guild) : null;
 
         /// <summary>
+        /// Returns the PlayerId for a given <see cref="IPlayer"/>
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static PlayerId PlayerId(this IPlayer player) => player != null ? new PlayerId(player.Id) : default(PlayerId);
+        
+        /// <summary>
         /// Returns if the IPlayer is a <see cref="DiscordDummyPlayer"/>
         /// </summary>
         /// <param name="player"></param>
