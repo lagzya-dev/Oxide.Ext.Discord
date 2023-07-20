@@ -25,11 +25,12 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 Returns a IDictionary of Steam ID's to Discord ID's
 
 ```csharp
-public IDictionary<string, Snowflake> GetPlayerIdToDiscordIds()
+public IDictionary<PlayerId, Snowflake> GetPlayerIdToDiscordIds()
 ```
 
 ## See Also
 
+* struct [PlayerId](./PlayerId.md)
 * struct [Snowflake](../../Entities/Snowflake.md)
 * interface [IDiscordLinkPlugin](./IDiscordLinkPlugin.md)
 * namespace [Oxide.Ext.Discord.Libraries.Linking](./LinkingNamespace.md)
