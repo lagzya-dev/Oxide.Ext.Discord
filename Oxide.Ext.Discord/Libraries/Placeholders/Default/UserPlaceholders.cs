@@ -13,6 +13,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     public static class UserPlaceholders
     {
         internal static readonly PlaceholderDataKey TargetUserKey = new PlaceholderDataKey("TargetUser");
+        internal static readonly PlaceholderDataKey BotUserKey = new PlaceholderDataKey("BotUser");
         
         /// <summary>
         /// <see cref="DiscordUser.Id"/> placeholder
@@ -58,6 +59,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         {
             RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.User, new PlaceholderDataKey(nameof(DiscordUser)));
             RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.UserTarget, TargetUserKey);
+            RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.Bot, BotUserKey);
         }
         
         /// <summary>

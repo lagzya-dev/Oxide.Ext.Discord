@@ -18,6 +18,7 @@ public class ServerKeys
 | readonly [Port](#port-field) | [`PlaceholderKey`](../PlaceholderKey.md) for Port |
 | readonly [Protocol](#protocol-field) | [`PlaceholderKey`](../PlaceholderKey.md) for Protocol |
 | readonly [Time](#time-field) | [`PlaceholderKey`](../PlaceholderKey.md) for Time |
+| readonly [TotalPlayers](#totalplayers-field) | [`PlaceholderKey`](../PlaceholderKey.md) for Total Players |
 | readonly [Version](#version-field) | [`PlaceholderKey`](../PlaceholderKey.md) for Version |
 
 ## See Also
@@ -84,6 +85,22 @@ public readonly PlaceholderKey Players;
 
 ```csharp
 public readonly PlaceholderKey MaxPlayers;
+```
+
+## See Also
+
+* struct [PlaceholderKey](../PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Keys](./KeysNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# TotalPlayers field
+
+[`PlaceholderKey`](../PlaceholderKey.md) for Total Players
+
+```csharp
+public readonly PlaceholderKey TotalPlayers;
 ```
 
 ## See Also

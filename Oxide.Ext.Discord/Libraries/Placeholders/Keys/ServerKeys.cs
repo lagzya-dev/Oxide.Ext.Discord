@@ -23,6 +23,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
         public readonly PlaceholderKey MaxPlayers;
         
         /// <summary>
+        /// <see cref="PlaceholderKey"/> for Total Players
+        /// </summary>
+        public readonly PlaceholderKey TotalPlayers;
+        
+        /// <summary>
         /// <see cref="PlaceholderKey"/> for <see cref="IServer.Version"/>
         /// </summary>
         public readonly PlaceholderKey Version;
@@ -56,6 +61,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
             Name = new PlaceholderKey(prefix, "name");
             Players = new PlaceholderKey(prefix, "players");
             MaxPlayers = new PlaceholderKey(prefix, "players.max");
+            TotalPlayers = new PlaceholderKey(prefix, "players.total");
             Version = new PlaceholderKey(prefix, "version");
             Protocol = new PlaceholderKey(prefix, "protocol");
             Address = new PlaceholderKey(prefix, "address");

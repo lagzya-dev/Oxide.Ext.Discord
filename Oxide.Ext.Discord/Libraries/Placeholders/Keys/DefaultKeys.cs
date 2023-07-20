@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
         /// <summary>
         /// <see cref="IPlayer"/> Target Placeholder Keys
         /// </summary>
-        public static readonly PlayerKeys PlayerTarget = new PlayerKeys("player.target");
+        public static readonly PlayerKeys PlayerTarget = new PlayerKeys("target.player");
         
         /// <summary>
         /// <see cref="Plugin"/> Placeholder Keys
@@ -106,8 +106,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
         public static readonly UserKeys User = new UserKeys("user");
         
         /// <summary>
+        /// <see cref="DiscordUser"/> Bot User Placeholder Keys
+        /// </summary>
+        public static readonly UserKeys Bot = new UserKeys("bot");
+        
+        /// <summary>
         /// <see cref="DiscordUser"/> Target Placeholder Keys
         /// </summary>
-        public static readonly UserKeys UserTarget = new UserKeys("user.target");
+        public static readonly UserKeys UserTarget = new UserKeys("target.user");
     }
 }

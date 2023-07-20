@@ -5,8 +5,10 @@ using System.Text.RegularExpressions;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Libraries.Placeholders;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -173,6 +175,13 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             PlaceholderData data = DiscordPool.Instance.GetOrCreate(plugin).GetPlaceholderData();
             data.AddServer(_covalence.Server);
             data.AddPlugin(plugin);
+            
+            DiscordUser bot = DiscordClientFactory.Instance.GetClient(plugin)?.Bot?.BotUser;
+            if (bot != null)
+            {
+                data.AddBotUser(bot);
+            }
+
             return data;
         }
 

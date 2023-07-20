@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Net;
+using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
@@ -12,6 +14,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
     /// </summary>
     public static class ServerPlaceholders
     {
+        private static Covalence _covalence;
+        private static Covalence Covalence => _covalence ?? (_covalence = Interface.Oxide.GetLibrary<Covalence>());
+        
         /// <summary>
         /// <see cref="IServer.Name"/> placeholder
         /// </summary>
@@ -26,6 +31,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         /// <see cref="IServer.MaxPlayers"/> placeholder
         /// </summary>
         public static int MaxPlayers(IServer server) => server.MaxPlayers;
+        
+        /// <summary>
+        /// <see cref="IServer.MaxPlayers"/> placeholder
+        /// </summary>
+        public static int TotalPlayers(IServer server) => Covalence.Players.All.Count();
 
         /// <summary>
         /// <see cref="IServer.Version"/> placeholder
@@ -69,6 +79,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<IServer, string>(plugin, keys.Name, dataKey, Name);
             placeholders.RegisterPlaceholder<IServer, int>(plugin, keys.Players, dataKey, Players);
             placeholders.RegisterPlaceholder<IServer, int>(plugin, keys.MaxPlayers, dataKey, MaxPlayers);
+            placeholders.RegisterPlaceholder<IServer, int>(plugin, keys.TotalPlayers, dataKey, TotalPlayers);
             placeholders.RegisterPlaceholder<IServer, string>(plugin, keys.Version, dataKey, Version);
             placeholders.RegisterPlaceholder<IServer, string>(plugin, keys.Protocol, dataKey, Protocol);
             placeholders.RegisterPlaceholder<IServer, IPAddress>(plugin, keys.Address, dataKey, Address);

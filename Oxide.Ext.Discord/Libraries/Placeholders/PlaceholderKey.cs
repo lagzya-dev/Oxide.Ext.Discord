@@ -25,16 +25,6 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         {
             Placeholder = placeholder;
         }
-        
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="placeholder">Placeholder Value</param>
-        /// <param name="format">Format to be applied</param>
-        public PlaceholderKey(string placeholder, string format) 
-        {
-            Placeholder = string.IsNullOrEmpty(format) ? placeholder : $"{placeholder}:{format}";
-        }
 
         /// <summary>
         /// Constructor

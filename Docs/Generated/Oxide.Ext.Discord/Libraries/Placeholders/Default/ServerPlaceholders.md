@@ -18,6 +18,7 @@ public static class ServerPlaceholders
 | static [Protocol](#protocol-method)(…) | Protocol placeholder |
 | static [RegisterPlaceholders](#registerplaceholders-method)(…) | Registers placeholders for the given plugin. |
 | static [Time](#time-method)(…) | Time placeholder |
+| static [TotalPlayers](#totalplayers-method)(…) | MaxPlayers placeholder |
 | static [Version](#version-method)(…) | Version placeholder |
 
 ## See Also
@@ -63,6 +64,21 @@ MaxPlayers placeholder
 
 ```csharp
 public static int MaxPlayers(IServer server)
+```
+
+## See Also
+
+* class [ServerPlaceholders](./ServerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Default](./DefaultNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# TotalPlayers method
+
+MaxPlayers placeholder
+
+```csharp
+public static int TotalPlayers(IServer server)
 ```
 
 ## See Also

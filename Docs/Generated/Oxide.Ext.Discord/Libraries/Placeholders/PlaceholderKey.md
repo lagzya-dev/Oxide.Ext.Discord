@@ -10,7 +10,7 @@ public struct PlaceholderKey : IEquatable<PlaceholderKey>
 
 | name | description |
 | --- | --- |
-| [PlaceholderKey](#placeholderkey-constructor-1-of-3)(…) | Constructor (3 constructors) |
+| [PlaceholderKey](#placeholderkey-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [IsValid](#isvalid-property) { get; } | If [`Placeholder`](#placeholder-field) Is a Valid Key |
 | readonly [Placeholder](#placeholder-field) | Placeholder Key |
 | override [Equals](#equals-method)(…) |  |
@@ -100,7 +100,7 @@ public static implicit operator string(PlaceholderKey key)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# PlaceholderKey constructor (1 of 3)
+# PlaceholderKey constructor (1 of 2)
 
 Constructor
 
@@ -120,28 +120,7 @@ public PlaceholderKey(string placeholder)
 
 ---
 
-# PlaceholderKey constructor (2 of 3)
-
-Constructor
-
-```csharp
-public PlaceholderKey(string placeholder, string format)
-```
-
-| parameter | description |
-| --- | --- |
-| placeholder | Placeholder Value |
-| format | Format to be applied |
-
-## See Also
-
-* struct [PlaceholderKey](./PlaceholderKey.md)
-* namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-
----
-
-# PlaceholderKey constructor (3 of 3)
+# PlaceholderKey constructor (2 of 2)
 
 Constructor
 

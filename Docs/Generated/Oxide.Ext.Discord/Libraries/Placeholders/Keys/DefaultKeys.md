@@ -11,6 +11,7 @@ public static class DefaultKeys
 | name | description |
 | --- | --- |
 | static readonly [AppCommand](#appcommand-field) | [`DiscordApplicationCommand`](../../../Entities/Interactions/ApplicationCommands/DiscordApplicationCommand.md) Placeholder Keys |
+| static readonly [Bot](#bot-field) | [`DiscordUser`](../../../Entities/Users/DiscordUser.md) Bot User Placeholder Keys |
 | static readonly [Channel](#channel-field) | [`DiscordChannel`](../../../Entities/Channels/DiscordChannel.md) Placeholder Keys |
 | static readonly [DateTime](#datetime-field) | [`DateTime`](#datetime-field) Placeholder Keys |
 | static readonly [Guild](#guild-field) | [`DiscordGuild`](../../../Entities/Guilds/DiscordGuild.md) Placeholder Keys |
@@ -315,6 +316,22 @@ public static readonly TimestampKeys TimestampNow;
 
 ```csharp
 public static readonly UserKeys User;
+```
+
+## See Also
+
+* class [UserKeys](./UserKeys.md)
+* class [DefaultKeys](./DefaultKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Keys](./KeysNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# Bot field
+
+[`DiscordUser`](../../../Entities/Users/DiscordUser.md) Bot User Placeholder Keys
+
+```csharp
+public static readonly UserKeys Bot;
 ```
 
 ## See Also

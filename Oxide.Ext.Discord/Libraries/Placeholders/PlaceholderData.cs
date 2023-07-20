@@ -139,6 +139,21 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// </summary>
         /// <param name="user">User to add</param>
         /// <returns>This</returns>
+        internal PlaceholderData AddBotUser(DiscordUser user)
+        {
+            if (user != null)
+            {
+                Add(UserPlaceholders.BotUserKey, user);
+            }
+
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds a <see cref="DiscordUser"/>
+        /// </summary>
+        /// <param name="user">User to add</param>
+        /// <returns>This</returns>
         public PlaceholderData AddUserTarget(DiscordUser user)
         {
             if (user != null)
