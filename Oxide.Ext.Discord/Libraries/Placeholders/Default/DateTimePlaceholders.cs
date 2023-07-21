@@ -48,6 +48,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
         internal static void RegisterPlaceholders()
         {
             RegisterPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.DateTime, new PlaceholderDataKey(nameof(DateTime)));
+            RegisterNowPlaceholders(DiscordExtensionCore.Instance, DefaultKeys.DateTimeNow);
         }
         
         /// <summary>
@@ -67,6 +68,19 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
             placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Minute, dataKey, Minute);
             placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Second, dataKey, Second);
             placeholders.RegisterPlaceholder<DateTime, int>(plugin, keys.Millisecond, dataKey, Millisecond);
+        }
+        
+        private static void RegisterNowPlaceholders(Plugin plugin, DateTimeKeys keys)
+        {
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            placeholders.RegisterPlaceholder(plugin, keys.Date, () => DateTime.Now);
+            placeholders.RegisterPlaceholder(plugin, keys.Year, () => DateTime.Now.Year);
+            placeholders.RegisterPlaceholder(plugin, keys.Month, () => DateTime.Now.Month);
+            placeholders.RegisterPlaceholder(plugin, keys.Day, () => DateTime.Now.Day);
+            placeholders.RegisterPlaceholder(plugin, keys.Hour, () => DateTime.Now.Hour);
+            placeholders.RegisterPlaceholder(plugin, keys.Minute, () => DateTime.Now.Minute);
+            placeholders.RegisterPlaceholder(plugin, keys.Second, () => DateTime.Now.Second);
+            placeholders.RegisterPlaceholder(plugin, keys.Millisecond, () => DateTime.Now.Millisecond);
         }
     }
 }

@@ -31,6 +31,11 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
         public static readonly DateTimeKeys DateTime = new DateTimeKeys("datetime");
         
         /// <summary>
+        /// <see cref="DateTime"/> Placeholder Keys
+        /// </summary>
+        public static readonly DateTimeKeys DateTimeNow = new DateTimeKeys("datetime.now");
+        
+        /// <summary>
         /// <see cref="DiscordGuild"/> Placeholder Keys
         /// </summary>
         public static readonly GuildKeys Guild = new GuildKeys("guild");
