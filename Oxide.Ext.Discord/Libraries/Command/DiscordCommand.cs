@@ -324,7 +324,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
         ///<inheritdoc/>
         protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
         {
-            foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetHooksWithAttribute<DirectMessageCommandAttribute>())
+            foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetCallbacksWithAttribute<DirectMessageCommandAttribute>())
             {
                 if (!result.IsValid)
                 {
@@ -344,7 +344,7 @@ namespace Oxide.Ext.Discord.Libraries.Command
                 }
             }
             
-            foreach (PluginHookResult<GuildCommandAttribute> result in data.GetHooksWithAttribute<GuildCommandAttribute>())
+            foreach (PluginHookResult<GuildCommandAttribute> result in data.GetCallbacksWithAttribute<GuildCommandAttribute>())
             {
                 if (!result.IsValid)
                 {
