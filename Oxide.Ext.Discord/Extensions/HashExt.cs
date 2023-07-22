@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Hash extensions
     /// </summary>
-    internal static class HashExt
+    public static class HashExt
     {
         /// <summary>
         /// Remove all records from the hash with the given predicate filter
@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="predicate">Filter of which values to remove</param>
         /// <typeparam name="TKey">Key type of the hash</typeparam>
         /// <typeparam name="TValue">Value type of the hash</typeparam>
-        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TKey, bool> predicate)
+        public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> hash, Func<TKey, bool> predicate)
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
 
@@ -46,7 +46,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="onRemove">Action to call when an element is removed</param>
         /// <typeparam name="TKey">Key type of the hash</typeparam>
         /// <typeparam name="TValue">Value type of the hash</typeparam>
-        internal static void RemoveAll<TKey, TValue>(this Hash<TKey, TValue> hash, Func<TValue, bool> predicate, Action<TValue> onRemove = null)
+        public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> hash, Func<TValue, bool> predicate, Action<TValue> onRemove = null)
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
 
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Extensions
             return copy;
         }
 
-        internal static void CopyTo<TKey, TValue>(this Hash<TKey, TValue> hash, Hash<TKey, TValue> target)
+        internal static void CopyTo<TKey, TValue>(this IDictionary<TKey, TValue> hash, Hash<TKey, TValue> target)
         {
             foreach (KeyValuePair<TKey, TValue> value in hash)
             {

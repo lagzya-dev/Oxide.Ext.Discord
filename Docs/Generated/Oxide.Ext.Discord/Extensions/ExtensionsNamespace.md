@@ -4,6 +4,7 @@
 | --- | --- |
 | static class [DiscordColorExt](./DiscordColorExt.md) | Extensions for Discord Color |
 | static class [DiscordUserExt](./DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
+| static class [HashExt](./HashExt.md) | Hash extensions |
 | static class [IEnumerableExt](./IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./MathExt.md) | Extensions for math operations |
 | static class [PlaceholderKeyExt](./PlaceholderKeyExt.md) | Extensions for placeholder keys |
