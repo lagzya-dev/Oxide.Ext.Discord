@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                 for (int index = 0; index < options.Count; index++)
                 {
                     CommandOption option = options[index];
-                    Options[option.Name].ApplyOptionLocalization(option, locale);
+                    Options[option.Name]?.ApplyOptionLocalization(option, locale);
                 }
             }
         }
@@ -153,7 +153,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
                     for (int index = 0; index < opt.Options.Count; index++)
                     {
                         CommandOption option = opt.Options[index];
-                        Options[option.Name].ApplyOptionLocalization(option, locale);
+                        Options[option.Name]?.ApplyOptionLocalization(option, locale);
                     }
                 }
 
