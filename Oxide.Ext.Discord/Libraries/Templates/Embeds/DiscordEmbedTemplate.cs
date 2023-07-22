@@ -168,6 +168,22 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             return embed;
         }
 
+        internal DiscordEmbed ToEntityInternal(PlaceholderData data = null, DiscordEmbed embed = null)
+        {
+            bool autoPool = false;
+            if (data != null)
+            {
+                autoPool = data.AutoPool;
+                data.AutoPool = false;
+            }
+            embed = ToEntity(data, embed);
+            if (autoPool)
+            {
+                data.AutoPool = true;
+            }
+            return embed;
+        }
+
         ///<inheritdoc/>
         public IPromise<List<DiscordEmbed>> ToEntityBulk(List<PlaceholderData> data = null)
         {

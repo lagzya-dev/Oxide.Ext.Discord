@@ -30,7 +30,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     {
         private readonly Hash<PlaceholderDataKey, object> _data = new Hash<PlaceholderDataKey, object>();
         private readonly List<IBoxed> _boxed = new List<IBoxed>();
-        internal bool AutoPool { get; private set; } = true;
+        internal bool AutoPool { get; set; } = true;
 
         internal PlaceholderData() { }
 

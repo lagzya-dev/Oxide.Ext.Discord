@@ -188,8 +188,6 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
 
         private void ApplyLocalizations(TemplateId id, CommandOptionChoice choice, PlaceholderData placeholders)
         {
-            placeholders?.ManualPool();
-            
             if (choice.NameLocalizations == null)
             {
                 choice.NameLocalizations = new Hash<string, string>();
@@ -205,7 +203,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
                 template.Template.ApplyLocalization(template.Locale, choice, placeholders);
             }
 
-            placeholders?.Dispose();
+            placeholders?.AutoDispose();
         }
 
         private List<LocalizedTemplate> GetLocalizedTemplates(TemplateId id)

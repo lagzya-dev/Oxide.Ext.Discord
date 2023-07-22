@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// <param name="placeholders">Placeholders for be applied</param>
         public void ApplyLocalization(DiscordLocale locale, CommandOptionChoice choice, PlaceholderData placeholders = null)
         {
-            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders);
+            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders, false);
             choice.NameLocalizations[locale.Id] = name.TrimIfLargerThan(100);
         }
         
@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// <param name="placeholders">Placeholders for be applied</param>
         public void ApplyName(CommandOptionChoice choice, PlaceholderData placeholders = null)
         {
-            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders);
+            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders, false);
             choice.Name = name.TrimIfLargerThan(100);
         }
     }

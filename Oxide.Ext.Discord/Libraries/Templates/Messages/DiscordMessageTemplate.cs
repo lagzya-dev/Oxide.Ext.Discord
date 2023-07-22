@@ -67,10 +67,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             }
 
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            
+
             if (!string.IsNullOrEmpty(Content))
             {
-                message.Content = placeholders.ProcessPlaceholders(Content, data);
+                message.Content = placeholders.ProcessPlaceholders(Content, data, false);
             }
 
             if (Embeds != null && Embeds.Count != 0)
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             {
                 message.Components = CreateComponents(data);
             }
-            
+
             data?.AutoDispose();
             
             return message;
@@ -97,7 +97,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 DiscordEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
-                    embeds.Add(template.ToEntity(data));
+                    embeds.Add(template.ToEntityInternal(data));
                 }
             }
 
@@ -111,16 +111,20 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             for (int index = 0; index < Components.Count; index++)
             {
                 BaseComponentTemplate component = Components[index];
-                if (!component.Visible)
+                if (!component.Visible || active == null)
                 {
                     continue;
                 }
 
-                if (component is ButtonTemplate button)
+                if (component is ButtonTemplate template)
                 {
-                    active.Components.Add(button.ToComponent(data));
+                    BaseComponent button = template.ToComponent(data);
+                    if (button != null)
+                    {
+                        active.Components.Add(button);
+                    }
                     
-                    if (!button.Inline || active.Components.Count == 5)
+                    if (!template.Inline || active.Components.Count == 5)
                     {
                         InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
                         active = AddActionRow(rows, index, Components.Count);
@@ -132,6 +136,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(rows.Count);
                     active = AddActionRow(rows, index, Components.Count);
                 }
+            }
+
+            if (active != null && active.Components.Count == 0)
+            {
+                rows.Remove(active);
             }
 
             return rows;
