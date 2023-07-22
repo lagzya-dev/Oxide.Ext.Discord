@@ -14,6 +14,7 @@ public static class DefaultKeys
 | static readonly [Bot](#bot-field) | [`DiscordUser`](../../../Entities/Users/DiscordUser.md) Bot User Placeholder Keys |
 | static readonly [Channel](#channel-field) | [`DiscordChannel`](../../../Entities/Channels/DiscordChannel.md) Placeholder Keys |
 | static readonly [DateTime](#datetime-field) | [`DateTime`](#datetime-field) Placeholder Keys |
+| static readonly [DateTimeNow](#datetimenow-field) | [`DateTime`](#datetime-field) Placeholder Keys |
 | static readonly [Guild](#guild-field) | [`DiscordGuild`](../../../Entities/Guilds/DiscordGuild.md) Placeholder Keys |
 | static readonly [Interaction](#interaction-field) | [`DiscordInteraction`](../../../Entities/Interactions/DiscordInteraction.md) Placeholder Keys |
 | static readonly [Member](#member-field) | [`GuildMember`](../../../Entities/Guilds/GuildMember.md) Placeholder Keys |
@@ -76,6 +77,22 @@ public static readonly ChannelKeys Channel;
 
 ```csharp
 public static readonly DateTimeKeys DateTime;
+```
+
+## See Also
+
+* class [DateTimeKeys](./DateTimeKeys.md)
+* class [DefaultKeys](./DefaultKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries.Placeholders.Keys](./KeysNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# DateTimeNow field
+
+[`DateTime`](#datetime-field) Placeholder Keys
+
+```csharp
+public static readonly DateTimeKeys DateTimeNow;
 ```
 
 ## See Also

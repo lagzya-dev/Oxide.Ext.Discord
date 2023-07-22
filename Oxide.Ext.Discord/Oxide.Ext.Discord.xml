@@ -17038,7 +17038,7 @@
             Hash extensions
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``0,System.Boolean})">
+        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``0,System.Boolean})">
             <summary>
             Remove all records from the hash with the given predicate filter
             </summary>
@@ -17047,7 +17047,7 @@
             <typeparam name="TKey">Key type of the hash</typeparam>
             <typeparam name="TValue">Value type of the hash</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(Oxide.Plugins.Hash{``0,``1},System.Func{``1,System.Boolean},System.Action{``1})">
+        <member name="M:Oxide.Ext.Discord.Extensions.HashExt.RemoveAll``2(System.Collections.Generic.IDictionary{``0,``1},System.Func{``1,System.Boolean},System.Action{``1})">
             <summary>
             Remove all records from the hash with the given predicate filter
             </summary>
@@ -20559,6 +20559,11 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.Keys.DefaultKeys.DateTime">
+            <summary>
+            <see cref="F:Oxide.Ext.Discord.Libraries.Placeholders.Keys.DefaultKeys.DateTime"/> Placeholder Keys
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.Placeholders.Keys.DefaultKeys.DateTimeNow">
             <summary>
             <see cref="F:Oxide.Ext.Discord.Libraries.Placeholders.Keys.DefaultKeys.DateTime"/> Placeholder Keys
             </summary>

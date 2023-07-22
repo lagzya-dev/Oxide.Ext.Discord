@@ -4,6 +4,7 @@
 | --- | --- |
 | static class [DiscordCdn](./DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
+| static class [ServerFormatting](./ServerFormatting.md) |  |
 | static class [TimeHelpers](./TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./TimestampStyles.md) | Available flags for timestamp formatting |
 

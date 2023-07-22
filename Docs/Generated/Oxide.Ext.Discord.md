@@ -767,6 +767,7 @@
 | --- | --- |
 | static class [DiscordColorExt](./Oxide.Ext.Discord/Extensions/DiscordColorExt.md) | Extensions for Discord Color |
 | static class [DiscordUserExt](./Oxide.Ext.Discord/Extensions/DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
+| static class [HashExt](./Oxide.Ext.Discord/Extensions/HashExt.md) | Hash extensions |
 | static class [IEnumerableExt](./Oxide.Ext.Discord/Extensions/IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./Oxide.Ext.Discord/Extensions/MathExt.md) | Extensions for math operations |
 | static class [PlaceholderKeyExt](./Oxide.Ext.Discord/Extensions/PlaceholderKeyExt.md) | Extensions for placeholder keys |
@@ -788,6 +789,7 @@
 | --- | --- |
 | static class [DiscordCdn](./Oxide.Ext.Discord/Helpers/DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./Oxide.Ext.Discord/Helpers/DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
+| static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) |  |
 | static class [TimeHelpers](./Oxide.Ext.Discord/Helpers/TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./Oxide.Ext.Discord/Helpers/TimestampStyles.md) | Available flags for timestamp formatting |
 
