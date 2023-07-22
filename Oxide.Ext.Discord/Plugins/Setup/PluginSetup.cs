@@ -136,13 +136,12 @@ namespace Oxide.Ext.Discord.Plugins.Setup
             return false;
         }
 
-        internal IEnumerable<PluginHookResult<T>> GetHooksWithAttribute<T>() where T : BaseDiscordAttribute
+        internal IEnumerable<PluginHookResult<T>> GetCallbacksWithAttribute<T>() where T : BaseDiscordAttribute
         {
             for (int index = 0; index < _callbacks.Count; index++)
             {
                 PluginCallback callback = _callbacks[index];
-                T attribute = callback.GetAttribute<T>();
-                if (attribute != null)
+                foreach (T attribute in callback.GetAttributes<T>())
                 {
                     yield return new PluginHookResult<T>(callback, attribute);
                 }

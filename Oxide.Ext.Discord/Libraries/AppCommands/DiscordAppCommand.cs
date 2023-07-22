@@ -217,7 +217,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
             Plugin plugin = data.Plugin;
             Snowflake applicationId = connection.ApplicationId;
-            foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in data.GetHooksWithAttribute<BaseApplicationCommandAttribute>())
+            foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in data.GetCallbacksWithAttribute<BaseApplicationCommandAttribute>())
             {
                 switch (hook.Attribute)
                 {

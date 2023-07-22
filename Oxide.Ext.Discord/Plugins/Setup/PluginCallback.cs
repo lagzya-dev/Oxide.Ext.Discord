@@ -26,18 +26,16 @@ namespace Oxide.Ext.Discord.Plugins.Setup
             }
         }
 
-        public T GetAttribute<T>() where T : Attribute
+        public IEnumerable<T> GetAttributes<T>() where T : Attribute
         {
             for (int index = 0; index < Attributes.Count; index++)
             {
                 Attribute attribute = Attributes[index];
                 if (attribute is T tAttribute)
                 {
-                    return tAttribute;
+                    yield return tAttribute;
                 }
             }
-
-            return default(T);
         }
     }
 }
