@@ -116,19 +116,21 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             {
                 embed = new DiscordEmbed();
             }
+            
+            data?.IncrementDepth();
 
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            embed.Title = placeholders.ProcessPlaceholders(Title, data, false);
-            embed.Url = placeholders.ProcessPlaceholders(Url, data, false);
-            embed.Description = placeholders.ProcessPlaceholders(Description, data, false);
-            embed.Color = !string.IsNullOrEmpty(Color) ? new DiscordColor(placeholders.ProcessPlaceholders(Color, data, false)) : (DiscordColor?)null;
+            embed.Title = placeholders.ProcessPlaceholders(Title, data);
+            embed.Url = placeholders.ProcessPlaceholders(Url, data);
+            embed.Description = placeholders.ProcessPlaceholders(Description, data);
+            embed.Color = !string.IsNullOrEmpty(Color) ? new DiscordColor(placeholders.ProcessPlaceholders(Color, data)) : (DiscordColor?)null;
             embed.Timestamp = TimeStamp ? DateTime.UtcNow : (DateTime?)null;
 
             if (!string.IsNullOrEmpty(ImageUrl))
             {
                 embed.Image = new EmbedImage
                 {
-                    Url = placeholders.ProcessPlaceholders(Url, data, false)
+                    Url = placeholders.ProcessPlaceholders(Url, data)
                 };
             }
 
@@ -136,7 +138,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             {
                 embed.Thumbnail = new EmbedThumbnail
                 {
-                    Url = placeholders.ProcessPlaceholders(ThumbnailUrl, data, false)
+                    Url = placeholders.ProcessPlaceholders(ThumbnailUrl, data)
                 };
             }
 
@@ -144,7 +146,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             {
                 embed.Video = new EmbedVideo
                 {
-                    Url = placeholders.ProcessPlaceholders(ThumbnailUrl, data, false)
+                    Url = placeholders.ProcessPlaceholders(ThumbnailUrl, data)
                 };
             }
 
@@ -163,24 +165,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
                 embed.Footer = Footer.ToFooter(data);
             }
 
+            data?.DecrementDepth();
             data?.AutoDispose();
             
-            return embed;
-        }
-
-        internal DiscordEmbed ToEntityInternal(PlaceholderData data = null, DiscordEmbed embed = null)
-        {
-            bool autoPool = false;
-            if (data != null)
-            {
-                autoPool = data.AutoPool;
-                data.AutoPool = false;
-            }
-            embed = ToEntity(data, embed);
-            if (autoPool)
-            {
-                data.AutoPool = true;
-            }
             return embed;
         }
 

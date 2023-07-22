@@ -64,12 +64,15 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
             {
                 field = new EmbedField();
             }
+            
+            data?.IncrementDepth();
 
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            field.Name = placeholders.ProcessPlaceholders(Name, data, false);
-            field.Value = placeholders.ProcessPlaceholders(Value, data, false);
+            field.Name = placeholders.ProcessPlaceholders(Name, data);
+            field.Value = placeholders.ProcessPlaceholders(Value, data);
             field.Inline = Inline;
 
+            data?.DecrementDepth();
             data?.AutoDispose();
             
             return field;

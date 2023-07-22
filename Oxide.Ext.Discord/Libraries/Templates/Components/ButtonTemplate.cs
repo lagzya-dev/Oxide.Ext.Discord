@@ -94,15 +94,16 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         public override BaseComponent ToComponent(PlaceholderData data)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            string command = placeholders.ProcessPlaceholders(Command, data, false);
+            string command = placeholders.ProcessPlaceholders(Command, data);
             if (string.IsNullOrEmpty(command))
             {
                 return null;
             }
 
+            data?.IncrementDepth();
             ButtonComponent button = new ButtonComponent
             {
-                Label = placeholders.ProcessPlaceholders(Label, data, false),
+                Label = placeholders.ProcessPlaceholders(Label, data),
                 Style = Style,
                 Disabled = !Enabled,
                 Emoji = Emoji?.ToEmoji()
@@ -116,6 +117,9 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             {
                 button.CustomId = command;
             }
+            
+            data?.DecrementDepth();
+            data?.AutoDispose();
 
             return button;
         }

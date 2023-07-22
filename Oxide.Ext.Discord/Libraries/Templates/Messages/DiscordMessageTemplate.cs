@@ -65,12 +65,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
             {
                 message = new T();
             }
+            
+            data?.IncrementDepth();
 
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
 
             if (!string.IsNullOrEmpty(Content))
             {
-                message.Content = placeholders.ProcessPlaceholders(Content, data, false);
+                message.Content = placeholders.ProcessPlaceholders(Content, data);
             }
 
             if (Embeds != null && Embeds.Count != 0)
@@ -83,6 +85,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 message.Components = CreateComponents(data);
             }
 
+            data?.DecrementDepth();
             data?.AutoDispose();
             
             return message;
@@ -97,7 +100,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Messages
                 DiscordEmbedTemplate template = Embeds[index];
                 if (template.Enabled)
                 {
-                    embeds.Add(template.ToEntityInternal(data));
+                    embeds.Add(template.ToEntity(data));
                 }
             }
 

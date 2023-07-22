@@ -78,14 +78,18 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         public SelectMenuOption ToOption(PlaceholderData data)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            return new SelectMenuOption
+            data?.IncrementDepth();
+            SelectMenuOption option = new SelectMenuOption
             {
-                Label = placeholders.ProcessPlaceholders(Label, data, false),
-                Value = placeholders.ProcessPlaceholders(Value, data, false),
-                Description = placeholders.ProcessPlaceholders(Description, data, false),
+                Label = placeholders.ProcessPlaceholders(Label, data),
+                Value = placeholders.ProcessPlaceholders(Value, data),
+                Description = placeholders.ProcessPlaceholders(Description, data),
                 Emoji = Emoji.ToEmoji(),
                 Default = Default
             };
+            data?.DecrementDepth();
+            data?.AutoDispose();
+            return option;
         }
     }
 }

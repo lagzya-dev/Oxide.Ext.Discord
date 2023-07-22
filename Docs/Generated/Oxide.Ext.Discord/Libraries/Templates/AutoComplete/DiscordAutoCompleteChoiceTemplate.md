@@ -28,14 +28,14 @@ Apply localizations to the auto complete choice
 
 ```csharp
 public void ApplyLocalization(DiscordLocale locale, CommandOptionChoice choice, 
-    PlaceholderData placeholders = null)
+    PlaceholderData data = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | locale | DiscordLocale being applied |
 | choice | Choice to apply the template to |
-| placeholders | Placeholders for be applied |
+| data | Placeholders for be applied |
 
 ## See Also
 
@@ -52,13 +52,13 @@ public void ApplyLocalization(DiscordLocale locale, CommandOptionChoice choice,
 Apply the name to the auto complete choice
 
 ```csharp
-public void ApplyName(CommandOptionChoice choice, PlaceholderData placeholders = null)
+public void ApplyName(CommandOptionChoice choice, PlaceholderData data = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | choice | Choice to apply the template to |
-| placeholders | Placeholders for be applied |
+| data | Placeholders for be applied |
 
 ## See Also
 

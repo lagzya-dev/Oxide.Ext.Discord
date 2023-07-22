@@ -55,8 +55,8 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             EmbedFooter footer = new EmbedFooter(
-                placeholders.ProcessPlaceholders(Text, data, false), 
-                placeholders.ProcessPlaceholders(IconUrl, data, false));
+                placeholders.ProcessPlaceholders(Text, data), 
+                placeholders.ProcessPlaceholders(IconUrl, data));
             data?.AutoDispose();
             return footer;
         }

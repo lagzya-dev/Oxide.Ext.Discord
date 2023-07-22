@@ -186,24 +186,27 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
             return choice;
         }
 
-        private void ApplyLocalizations(TemplateId id, CommandOptionChoice choice, PlaceholderData placeholders)
+        private void ApplyLocalizations(TemplateId id, CommandOptionChoice choice, PlaceholderData data)
         {
             if (choice.NameLocalizations == null)
             {
                 choice.NameLocalizations = new Hash<string, string>();
             }
             
+            data?.IncrementDepth();
+            
             //Apply global template to the name field if it exists
-            ApplyGlobal(id, choice, placeholders);
+            ApplyGlobal(id, choice, data);
 
             List<LocalizedTemplate> list = GetLocalizedTemplates(id);
             for (int index = 0; index < list.Count; index++)
             {
                 LocalizedTemplate template = list[index];
-                template.Template.ApplyLocalization(template.Locale, choice, placeholders);
+                template.Template.ApplyLocalization(template.Locale, choice, data);
             }
 
-            placeholders?.AutoDispose();
+            data?.DecrementDepth();
+            data?.AutoDispose();
         }
 
         private List<LocalizedTemplate> GetLocalizedTemplates(TemplateId id)

@@ -23,10 +23,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// </summary>
         /// <param name="locale">DiscordLocale being applied</param>
         /// <param name="choice">Choice to apply the template to</param>
-        /// <param name="placeholders">Placeholders for be applied</param>
-        public void ApplyLocalization(DiscordLocale locale, CommandOptionChoice choice, PlaceholderData placeholders = null)
+        /// <param name="data">Placeholders for be applied</param>
+        public void ApplyLocalization(DiscordLocale locale, CommandOptionChoice choice, PlaceholderData data = null)
         {
-            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders, false);
+            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, data);
             choice.NameLocalizations[locale.Id] = name.TrimIfLargerThan(100);
         }
         
@@ -34,10 +34,10 @@ namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
         /// Apply the name to the auto complete choice
         /// </summary>
         /// <param name="choice">Choice to apply the template to</param>
-        /// <param name="placeholders">Placeholders for be applied</param>
-        public void ApplyName(CommandOptionChoice choice, PlaceholderData placeholders = null)
+        /// <param name="data">Placeholders for be applied</param>
+        public void ApplyName(CommandOptionChoice choice, PlaceholderData data = null)
         {
-            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, placeholders, false);
+            string name = DiscordPlaceholders.Instance.ProcessPlaceholders(Name, data);
             choice.Name = name.TrimIfLargerThan(100);
         }
     }

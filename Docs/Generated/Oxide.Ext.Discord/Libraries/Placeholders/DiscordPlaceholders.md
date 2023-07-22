@@ -76,14 +76,13 @@ public IEnumerable<string> GetPlaceholders(string text)
 Process placeholders for the given text.
 
 ```csharp
-public string ProcessPlaceholders(string text, PlaceholderData data, bool autoDispose = true)
+public string ProcessPlaceholders(string text, PlaceholderData data)
 ```
 
 | parameter | description |
 | --- | --- |
 | text | Text to process placeholders for |
 | data | Placeholder Data for the placeholders |
-| autoDispose | Automatically dispose [`PlaceholderData`](./PlaceholderData.md) on completion. [`PlaceholderData`](./PlaceholderData.md) must also have AutoPool enabled |
 
 ## Return Value
 

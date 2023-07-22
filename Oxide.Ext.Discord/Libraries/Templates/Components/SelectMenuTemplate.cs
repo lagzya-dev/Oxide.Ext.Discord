@@ -73,6 +73,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         ///<inheritdoc/>
         public override BaseComponent ToComponent(PlaceholderData data)
         {
+            data?.IncrementDepth();
             BaseSelectMenuComponent component;
             switch (Type)
             {
@@ -111,11 +112,14 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
             }
 
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
-            component.CustomId = placeholders.ProcessPlaceholders(CustomId, data, false);
-            component.Placeholder = placeholders.ProcessPlaceholders(Placeholder, data, false);
+            component.CustomId = placeholders.ProcessPlaceholders(CustomId, data);
+            component.Placeholder = placeholders.ProcessPlaceholders(Placeholder, data);
             component.MinValues = MinValues;
             component.MaxValues = MaxValues;
             component.Disabled = !Enabled;
+            
+            data?.DecrementDepth();
+            data?.AutoDispose();
             
             return component;
         }

@@ -30,7 +30,8 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
     {
         private readonly Hash<PlaceholderDataKey, object> _data = new Hash<PlaceholderDataKey, object>();
         private readonly List<IBoxed> _boxed = new List<IBoxed>();
-        internal bool AutoPool { get; set; } = true;
+        internal bool AutoPool { get; private set; } = true;
+        private int _processDepth;
 
         internal PlaceholderData() { }
 
@@ -400,6 +401,9 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             AutoPool = false;
         }
 
+        internal void IncrementDepth() => _processDepth++;
+        internal void DecrementDepth() => _processDepth--;
+
         /// <summary>
         /// Clones the current placeholder data into a new <see cref="PlaceholderData"/>
         /// </summary>
@@ -435,7 +439,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
 
         internal void AutoDispose()
         {
-            if (AutoPool)
+            if (AutoPool && _processDepth == 0)
             {
                 Dispose();
             }

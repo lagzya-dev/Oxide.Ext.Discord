@@ -20325,13 +20325,12 @@
             <param name="text">Text to get placeholders for</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.ProcessPlaceholders(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.ProcessPlaceholders(System.String,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Process placeholders for the given text.
             </summary>
             <param name="text">Text to process placeholders for</param>
             <param name="data">Placeholder Data for the placeholders</param>
-            <param name="autoDispose">Automatically dispose <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> on completion. <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> must also have AutoPool enabled</param>
             <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.DiscordPlaceholders.CreateData(Oxide.Core.Plugins.Plugin)">
@@ -21802,14 +21801,14 @@
             </summary>
             <param name="locale">DiscordLocale being applied</param>
             <param name="choice">Choice to apply the template to</param>
-            <param name="placeholders">Placeholders for be applied</param>
+            <param name="data">Placeholders for be applied</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplate.ApplyName(Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands.CommandOptionChoice,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
             <summary>
             Apply the name to the auto complete choice
             </summary>
             <param name="choice">Choice to apply the template to</param>
-            <param name="placeholders">Placeholders for be applied</param>
+            <param name="data">Placeholders for be applied</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.Templates.AutoComplete.DiscordAutoCompleteChoiceTemplates">
             <summary>
