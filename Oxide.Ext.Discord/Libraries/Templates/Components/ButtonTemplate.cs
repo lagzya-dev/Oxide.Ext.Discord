@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Libraries.Templates.Emojis;
@@ -26,6 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         /// <summary>
         /// <see cref="ButtonStyle"/> for the button
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Button Style")]
         public ButtonStyle Style { get; set; } = ButtonStyle.Primary;
 
@@ -92,6 +94,12 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
         public override BaseComponent ToComponent(PlaceholderData data)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            string command = placeholders.ProcessPlaceholders(Command, data, false);
+            if (string.IsNullOrEmpty(command))
+            {
+                return null;
+            }
+
             ButtonComponent button = new ButtonComponent
             {
                 Label = placeholders.ProcessPlaceholders(Label, data, false),
@@ -102,11 +110,11 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Components
 
             if (Style == ButtonStyle.Link)
             {
-                button.Url = placeholders.ProcessPlaceholders(Command, data, false);
+                button.Url = command;
             }
             else
             {
-                button.CustomId = placeholders.ProcessPlaceholders(Command, data, false);
+                button.CustomId = command;
             }
 
             return button;
