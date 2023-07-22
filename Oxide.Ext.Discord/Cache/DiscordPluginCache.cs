@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Cache
         /// <returns></returns>
         public IReadOnlyList<string> GetLoadedPlugins()
         {
-            if (_loadedPlugins.Count != 0 && _nextUpdate > DateTime.UtcNow)
+            if (_loadedPlugins.Count != 0)
             {
                 return _loadedPlugins;
             }
@@ -60,22 +60,20 @@ namespace Oxide.Ext.Discord.Cache
 
         internal void OnPluginLoaded(Plugin plugin)
         {
-            if (plugin.IsCorePlugin)
+            if (!plugin.IsCorePlugin)
             {
-                return;
+                _nextUpdate = DateTime.UtcNow;
+                _loadedPlugins.Clear();
             }
-            
-            _nextUpdate = DateTime.UtcNow;
         }
 
         internal void OnPluginUnloaded(Plugin plugin)
         {
-            if (plugin.IsCorePlugin)
+            if (!plugin.IsCorePlugin)
             {
-                return;
+                _nextUpdate = DateTime.UtcNow;
+                _loadedPlugins.Clear();
             }
-            
-            _nextUpdate = DateTime.UtcNow;
         }
     }
 }
