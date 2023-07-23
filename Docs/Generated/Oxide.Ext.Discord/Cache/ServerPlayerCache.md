@@ -3,7 +3,7 @@
 Cache for server IPlayer
 
 ```csharp
-public class ServerPlayerCache : Singleton<ServerPlayerCache>
+public sealed class ServerPlayerCache : Singleton<ServerPlayerCache>
 ```
 
 ## Public Members

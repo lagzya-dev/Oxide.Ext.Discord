@@ -2576,6 +2576,14 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGatewayReconnected">
+            <code>
+            void OnDiscordGatewayReconnected()
+            {
+                Puts("OnDiscordGatewayReconnected Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordDirectChannelCreated">
             <code>
             void OnDiscordDirectChannelCreated(Channel channel)

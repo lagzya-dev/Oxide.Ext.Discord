@@ -35,6 +35,7 @@ public static class DiscordExtHooks
 | const [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted-field) |  |
 | const [OnDiscordDirectVoiceStateUpdated](#ondiscorddirectvoicestateupdated-field) |  |
 | const [OnDiscordGatewayReady](#ondiscordgatewayready-field) |  |
+| const [OnDiscordGatewayReconnected](#ondiscordgatewayreconnected-field) |  |
 | const [OnDiscordGatewayResumed](#ondiscordgatewayresumed-field) |  |
 | const [OnDiscordGuildChannelCreated](#ondiscordguildchannelcreated-field) |  |
 | const [OnDiscordGuildChannelDeleted](#ondiscordguildchanneldeleted-field) |  |
@@ -344,6 +345,19 @@ public const string OnDiscordGatewayReady;
 
 ```csharp
 public const string OnDiscordGatewayResumed;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordGatewayReconnected field
+
+```csharp
+public const string OnDiscordGatewayReconnected;
 ```
 
 ## See Also
