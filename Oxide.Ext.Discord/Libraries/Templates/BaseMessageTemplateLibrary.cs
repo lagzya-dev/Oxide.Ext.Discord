@@ -123,7 +123,7 @@ namespace Oxide.Ext.Discord.Libraries.Templates
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, DiscordInteraction interaction) => HandleGetLocalizedTemplate(TemplateId.CreateInteraction(plugin, templateName, interaction), interaction);
 
-        internal TTemplate HandleGetLocalizedTemplate(TemplateId id, DiscordInteraction interaction)
+        private TTemplate HandleGetLocalizedTemplate(TemplateId id, DiscordInteraction interaction)
         {
             TTemplate cachedTemplate = LoadFromCache(id);
             if (cachedTemplate != null)
