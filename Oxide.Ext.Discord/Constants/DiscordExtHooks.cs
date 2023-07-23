@@ -323,6 +323,14 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordGatewayResumed = nameof(OnDiscordGatewayResumed);
         
         /// <code>
+        /// void OnDiscordGatewayReconnected()
+        /// {
+        ///     Puts("OnDiscordGatewayReconnected Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordGatewayReconnected = nameof(OnDiscordGatewayReconnected);
+        
+        /// <code>
         /// void OnDiscordDirectChannelCreated(Channel channel)
         /// {
         ///     Puts("OnDiscordDirectChannelCreated Works!");

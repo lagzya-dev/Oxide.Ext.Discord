@@ -359,6 +359,10 @@ namespace Oxide.Ext.Discord.Clients
                     }
                 }
             }
+            else
+            {
+                Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReconnected);
+            }
             
             _readyData = ready;
             _readyData.Guilds = Servers;
