@@ -36,7 +36,7 @@ namespace Oxide.Ext.Discord.Hooks
             GatewayIntents intent = DiscordExtHooks.HookGatewayIntent[hook];
             if (intent != GatewayIntents.None && !connection.HasAnyIntent(intent))
             {
-                _logger.Warning("{0} is trying to add hook {1} which requires one of the following GatewayIntents \"{2}\", but only specified {3} intents " +
+                _logger.Warning("{0} is trying to add hook {1} which requires one of the following GatewayIntents \"{2}\", but only specified \"{3}\" intents " +
                                 "This hook will not work correctly until it is corrected. " +
                                 "Please contact the plugin author {4} with this message.", client.PluginName, hook, EnumCache<GatewayIntents>.Instance.ToString(intent), EnumCache<GatewayIntents>.Instance.ToString(connection.Intents), client.Plugin?.Author);
             }

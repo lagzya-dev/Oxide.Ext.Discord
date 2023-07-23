@@ -789,7 +789,7 @@
 | --- | --- |
 | static class [DiscordCdn](./Oxide.Ext.Discord/Helpers/DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./Oxide.Ext.Discord/Helpers/DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
-| static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) |  |
+| static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) | Server Text Formatting |
 | static class [TimeHelpers](./Oxide.Ext.Discord/Helpers/TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./Oxide.Ext.Discord/Helpers/TimestampStyles.md) | Available flags for timestamp formatting |
 

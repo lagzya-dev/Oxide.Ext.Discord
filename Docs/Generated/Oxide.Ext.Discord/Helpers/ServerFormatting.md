@@ -1,5 +1,7 @@
 # ServerFormatting class
 
+Server Text Formatting
+
 ```csharp
 public static class ServerFormatting
 ```
@@ -8,7 +10,7 @@ public static class ServerFormatting
 
 | name | description |
 | --- | --- |
-| static [Color](#color-method-1-of-2)(…) |  (2 methods) |
+| static [Color](#color-method-1-of-2)(…) | Color Text with the given color (2 methods) |
 
 ## See Also
 
@@ -19,9 +21,16 @@ public static class ServerFormatting
    
 # Color method (1 of 2)
 
+Color the placeholder text with a given color
+
 ```csharp
 public static string Color(this PlaceholderKey key, DiscordColor color)
 ```
+
+| parameter | description |
+| --- | --- |
+| key | PlaceholderKey to color |
+| color | Color of the text |
 
 ## See Also
 
@@ -35,9 +44,16 @@ public static string Color(this PlaceholderKey key, DiscordColor color)
 
 # Color method (2 of 2)
 
+Color Text with the given color
+
 ```csharp
 public static string Color(string text, DiscordColor color)
 ```
+
+| parameter | description |
+| --- | --- |
+| text | Text to color |
+| color | Color of the text |
 
 ## See Also
 
