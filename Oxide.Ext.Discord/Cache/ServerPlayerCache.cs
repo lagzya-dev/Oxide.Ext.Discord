@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Cache
     /// <summary>
     /// Cache for server <see cref="IPlayer"/>
     /// </summary>
-    public class ServerPlayerCache : Singleton<ServerPlayerCache>
+    public sealed class ServerPlayerCache : Singleton<ServerPlayerCache>
     {
         private readonly ConcurrentDictionary<string, IPlayer> _cache = new ConcurrentDictionary<string, IPlayer>();
         private readonly Func<string, IPlayer> _valueFactory = id => Players.FindPlayerById(id) ?? new DiscordDummyPlayer(id);
