@@ -15,7 +15,7 @@ namespace Oxide.Ext.Discord.Plugins.Core.AppCommands
             Commands = commands;
         }
         
-        public bool IsExpired => _cachedDateTime + TimeSpan.FromMinutes(5) < DateTime.UtcNow;
+        public bool IsExpired => _cachedDateTime + TimeSpan.FromSeconds(15) < DateTime.UtcNow;
 
         public void RemoveCommand(Snowflake id)
         {
