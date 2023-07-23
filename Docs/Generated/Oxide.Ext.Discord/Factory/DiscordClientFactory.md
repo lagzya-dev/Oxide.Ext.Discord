@@ -15,7 +15,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
 
 ## See Also
 
-* class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
+* class [Singleton&lt;T&gt;](../Types/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Factory](./FactoryNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordClientFactory.cs](../../../../Oxide.Ext.Discord/Factory/DiscordClientFactory.cs)

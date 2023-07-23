@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Cache.Entities
 {

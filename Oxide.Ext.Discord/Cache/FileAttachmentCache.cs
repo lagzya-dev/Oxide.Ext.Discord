@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Cache
 {

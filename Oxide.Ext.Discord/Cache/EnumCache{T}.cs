@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Cache
 {

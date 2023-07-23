@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Oxide.Ext.Discord.Singleton
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a singleton of type {T}

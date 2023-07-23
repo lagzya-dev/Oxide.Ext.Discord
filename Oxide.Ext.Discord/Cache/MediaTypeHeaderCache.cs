@@ -1,6 +1,6 @@
 using System.Net.Http.Headers;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache

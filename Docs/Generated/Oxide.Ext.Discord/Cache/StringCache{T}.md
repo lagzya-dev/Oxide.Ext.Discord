@@ -19,7 +19,7 @@ public sealed class StringCache<T> : Singleton<StringCache>
 
 ## See Also
 
-* class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
+* class [Singleton&lt;T&gt;](../Types/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [StringCache.cs](../../../../Oxide.Ext.Discord/Cache/StringCache.cs)

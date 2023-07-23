@@ -18,7 +18,7 @@ public sealed class EntityCache<T> : Singleton<EntityCache>
 
 ## See Also
 
-* class [Singleton&lt;T&gt;](../../Singleton/Singleton%7BT%7D.md)
+* class [Singleton&lt;T&gt;](../../Types/Singleton%7BT%7D.md)
 * interface [IDiscordCacheable&lt;T&gt;](../../Interfaces/IDiscordCacheable%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Cache.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

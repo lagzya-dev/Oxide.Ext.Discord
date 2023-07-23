@@ -14,7 +14,7 @@ public sealed class DiscordEncoding : Singleton<DiscordEncoding>
 
 ## See Also
 
-* class [Singleton&lt;T&gt;](../Singleton/Singleton%7BT%7D.md)
+* class [Singleton&lt;T&gt;](../Types/Singleton%7BT%7D.md)
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordEncoding.cs](../../../../Oxide.Ext.Discord/Constants/DiscordEncoding.cs)

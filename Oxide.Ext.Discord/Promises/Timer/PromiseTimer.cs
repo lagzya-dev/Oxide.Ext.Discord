@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Promises.Timer
 {

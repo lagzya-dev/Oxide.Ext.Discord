@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Logging
 {

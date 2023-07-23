@@ -1130,17 +1130,17 @@
 | class [RequestHandler](./Oxide.Ext.Discord/Rest/Requests/RequestHandler.md) | Represent a Discord API request |
 | enum [RequestStatus](./Oxide.Ext.Discord/Rest/Requests/RequestStatus.md) | Discord API Request Status |
 
-## Oxide.Ext.Discord.Singleton namespace
-
-| public type | description |
-| --- | --- |
-| abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Singleton/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
-
 ## Oxide.Ext.Discord.Trie namespace
 
 | public type | description |
 | --- | --- |
 | class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Trie/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
+
+## Oxide.Ext.Discord.Types namespace
+
+| public type | description |
+| --- | --- |
+| abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Types/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
 
 ## Oxide.Ext.Discord.WebSockets namespace
 

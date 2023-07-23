@@ -1,5 +1,5 @@
 using System.Text;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Constants
 {

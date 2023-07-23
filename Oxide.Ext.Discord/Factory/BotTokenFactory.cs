@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Singleton;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Factory

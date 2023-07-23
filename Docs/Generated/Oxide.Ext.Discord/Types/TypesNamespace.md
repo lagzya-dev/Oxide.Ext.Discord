@@ -1,4 +1,4 @@
-## Oxide.Ext.Discord.Singleton namespace
+## Oxide.Ext.Discord.Types namespace
 
 | public type | description |
 | --- | --- |
