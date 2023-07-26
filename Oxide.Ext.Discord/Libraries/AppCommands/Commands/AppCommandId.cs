@@ -67,10 +67,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
                 sb.Append(Argument);
             }
 
-            string cmd = sb.ToString();
-            DiscordPool.Internal.FreeStringBuilder(sb);
-
-            return cmd;
+            return DiscordPool.Internal.FreeStringBuilderToString(sb);
         }
     }
 }
