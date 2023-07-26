@@ -118,7 +118,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 }
 
                 debug.Append("E");
-                _source.Dispose();
+                //This can be null here. No idea why.
+                _source?.Dispose();
                 debug.Append("F");
             }
             catch (Exception ex)
