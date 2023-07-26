@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes.ApplicationCommands;
 using Oxide.Ext.Discord.Connections;
@@ -274,13 +275,30 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         ///<inheritdoc/>
         protected override void OnPluginUnloaded(Plugin plugin)
         {
-            List<BaseAppCommand> appCommands = DiscordPool.Internal.GetList<BaseAppCommand>();
-            foreach (AppCommandHandler handler in _handlers.Values)
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            try
             {
-                appCommands.AddRange(handler.GetCommandsForPlugin(plugin));
+                sb.AppendLine($"A - {plugin == null}");
+                List<BaseAppCommand> appCommands = DiscordPool.Internal.GetList<BaseAppCommand>();
+                sb.AppendLine($"B - {_handlers == null}");
+                foreach (AppCommandHandler handler in _handlers.Values)
+                {
+                    sb.AppendLine($"C - {handler == null}");
+                    appCommands.AddRange(handler.GetCommandsForPlugin(plugin));
+                }
+
+                sb.AppendLine("D");
+                RemoveAppCommandsInternal(appCommands);
+                sb.AppendLine("E");
             }
-            
-            RemoveAppCommandsInternal(appCommands);
+            catch (Exception ex)
+            {
+                _logger.Exception($"An error occured during unload\n{sb}", ex);
+            }
+            finally
+            {
+                DiscordPool.Internal.FreeStringBuilder(sb);
+            }
         }
 
         private void RemoveAppCommandsInternal(IEnumerable<BaseAppCommand> commandList)
