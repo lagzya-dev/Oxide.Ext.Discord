@@ -123,10 +123,22 @@ namespace Oxide.Ext.Discord.Libraries.Templates.Commands
             List<CommandOption> options = create.Options;
             if (options != null)
             {
-                for (int index = 0; index < options.Count; index++)
+                if (Options != null)
                 {
-                    CommandOption option = options[index];
-                    Options[option.Name]?.ApplyOptionLocalization(option, locale);
+                    for (int index = 0; index < options.Count; index++)
+                    {
+                        CommandOption option = options[index];
+                        Options[option.Name]?.ApplyOptionLocalization(option, locale);
+                    }
+                }
+
+                if (Arguments != null)
+                {
+                    for (int index = 0; index < options.Count; index++)
+                    {
+                        CommandOption option = options[index];
+                        Arguments[option.Name]?.ApplyArgumentLocalization(option, locale);
+                    }
                 }
             }
         }
