@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Extensions;
+using Oxide.Ext.Discord.Cache.Emoji;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Users;
 using Oxide.Ext.Discord.Extensions;
@@ -123,6 +124,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
 
+            EmojiCache.Instance.Build();
+            
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
             Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
             
