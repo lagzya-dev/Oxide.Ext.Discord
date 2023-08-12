@@ -511,6 +511,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="messageId">Message ID to cross post</param>
         public IPromise<DiscordMessage> CrossPostMessage(DiscordClient client, Snowflake messageId)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
             return client.Bot.Rest.Post<DiscordMessage>(client,$"channels/{Id}/messages/{messageId}/crosspost", null);
         }
@@ -554,6 +555,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="emoji">Emoji to react with.</param>
         public IPromise CreateReaction(DiscordClient client, string emoji)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
             return client.Bot.Rest.Put(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me", null);
         }
@@ -580,6 +583,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="emoji">Emoji to delete</param>
         public IPromise DeleteOwnReaction(DiscordClient client, string emoji)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/@me");
         }
@@ -595,7 +600,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="userId">User ID who add the reaction</param>
         public IPromise DeleteUserReaction(DiscordClient client, DiscordEmoji emoji, Snowflake userId)
         {
-            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             return DeleteUserReaction(client, emoji.ToDataString(), userId);
         }
 
@@ -610,6 +614,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="userId">User ID who add the reaction</param>
         public IPromise DeleteUserReaction(DiscordClient client, string emoji, Snowflake userId)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             InvalidEmojiException.ThrowIfInvalidEmojiString(emoji);
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions/{emoji}/{userId}");
@@ -648,6 +654,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         public IPromise DeleteAllReactions(DiscordClient client)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}/reactions");
         }
         
@@ -691,6 +699,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="update">Update to be applied to the message</param>
         public IPromise<DiscordMessage> Edit(DiscordClient client, MessageUpdate update)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             return client.Bot.Rest.Patch<DiscordMessage>(client,$"channels/{ChannelId}/messages/{Id}", update);
         }
 
@@ -729,6 +739,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         public IPromise Delete(DiscordClient client)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             InvalidMessageException.ThrowIfCantBeDeleted(this);
             return client.Bot.Rest.Delete(client,$"channels/{ChannelId}/messages/{Id}");
         }
@@ -741,6 +753,8 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <param name="client">Client to use</param>
         public IPromise Pin(DiscordClient client)
         {
+            InvalidSnowflakeException.ThrowIfInvalid(Id, nameof(Id));
+            InvalidSnowflakeException.ThrowIfInvalid(ChannelId, nameof(ChannelId));
             return client.Bot.Rest.Put(client,$"channels/{ChannelId}/pins/{Id}", null);
         }
 
