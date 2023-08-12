@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// If a <see cref="BaseSelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
         /// </summary>
-        public readonly List<SelectMenuOption> SelectMenuValues;
+        public readonly List<string> SelectMenuValues;
 
         /// <summary>
         /// Discord User's locale converted to oxide lang locale
