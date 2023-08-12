@@ -50,7 +50,6 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// Set of permissions represented as a bit set
         /// </summary>
         [JsonProperty("default_member_permissions")]
-        [JsonConverter(typeof(PermissionFlagsStringConverter))]
         public PermissionFlags DefaultMemberPermissions { get; set; }
 
         /// <summary>
