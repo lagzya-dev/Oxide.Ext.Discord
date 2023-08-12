@@ -14,11 +14,13 @@ namespace Oxide.Ext.Discord.Data
         private readonly string _dataPath;
         private bool DataUpdated { get; set; }
         private readonly Hash<int, string> _backupPaths = new Hash<int, string>();
+        
+        private static readonly string RootPath = Path.Combine(Interface.Oxide.DataDirectory, "DiscordExtension");
 
         protected BaseDataFile()
         {
             // ReSharper disable once VirtualMemberCallInConstructor
-            _dataPath = Path.Combine(Interface.Oxide.DataDirectory, GetFileName());
+            _dataPath = Path.Combine(RootPath, GetFileName());
         }
 
         protected abstract string GetFileName();
@@ -33,6 +35,11 @@ namespace Oxide.Ext.Discord.Data
                 try
                 {
                     string path = GetPathForIndex(data._dataPath, index, data._backupPaths);
+                    if (!Directory.Exists(RootPath))
+                    {
+                        Directory.CreateDirectory(RootPath);
+                    }
+                    
                     if (!File.Exists(path))
                     {
                         break;
@@ -72,6 +79,11 @@ namespace Oxide.Ext.Discord.Data
             {
                 int numBackups = GetNumBackups();
                 string path = GetPathForIndex(numBackups);
+                if (!Directory.Exists(RootPath))
+                {
+                    Directory.CreateDirectory(RootPath);
+                }
+                
                 if (File.Exists(path))
                 {
                     File.Delete(path);
