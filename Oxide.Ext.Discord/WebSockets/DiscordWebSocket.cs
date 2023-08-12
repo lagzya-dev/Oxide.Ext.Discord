@@ -350,6 +350,10 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             bool shouldResume = !string.IsNullOrEmpty(_sessionId) && resume;
             _logger.Warning("Invalid Session ID opcode received! Attempting to reconnect. Should Resume? {0}", shouldResume);
+            if (!resume)
+            {
+                _sessionId = null;
+            }
             Disconnect(true, shouldResume);
         }
 
@@ -396,6 +400,5 @@ namespace Oxide.Ext.Discord.WebSockets
             logger.AppendFieldEnum("State", Handler.SocketState);
             logger.AppendList("Pending Commands", _commands.GetPendingCommands());
         }
-
     }
 }
