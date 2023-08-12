@@ -195,12 +195,11 @@ public readonly string TriggeredComponentId;
 If a [`BaseSelectMenuComponent`](./MessageComponents/SelectMenus/BaseSelectMenuComponent.md) triggered this interaction. The values selected from the select menu.
 
 ```csharp
-public readonly List<SelectMenuOption> SelectMenuValues;
+public readonly List<string> SelectMenuValues;
 ```
 
 ## See Also
 
-* class [SelectMenuOption](./MessageComponents/SelectMenus/SelectMenuOption.md)
 * class [InteractionDataParsed](./InteractionDataParsed.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

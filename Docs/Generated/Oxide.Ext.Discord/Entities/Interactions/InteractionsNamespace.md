@@ -3,7 +3,7 @@
 | public type | description |
 | --- | --- |
 | class [DiscordInteraction](./DiscordInteraction.md) | Represents [Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure) |
-| class [InteractionData](./InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure) |
+| class [InteractionData](./InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data) |
 | class [InteractionDataArgs](./InteractionDataArgs.md) | Args supplied for the interaction |
 | class [InteractionDataOption](./InteractionDataOption.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure) |
 | class [InteractionDataParsed](./InteractionDataParsed.md) | Parses Interaction Data to make it easier to process for application commands |

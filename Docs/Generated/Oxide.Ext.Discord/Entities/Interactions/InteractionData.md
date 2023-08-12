@@ -1,6 +1,6 @@
 # InteractionData class
 
-Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure)
+Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data)
 
 ```csharp
 public class InteractionData
@@ -176,12 +176,11 @@ public MessageComponentType? ComponentType { get; set; }
 For components, the values for the select menu component
 
 ```csharp
-public List<SelectMenuOption> Values { get; set; }
+public List<string> Values { get; set; }
 ```
 
 ## See Also
 
-* class [SelectMenuOption](./MessageComponents/SelectMenus/SelectMenuOption.md)
 * class [InteractionData](./InteractionData.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

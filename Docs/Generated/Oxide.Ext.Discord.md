@@ -105,6 +105,12 @@
 | class [ServerPlayerCache](./Oxide.Ext.Discord/Cache/ServerPlayerCache.md) | Cache for server IPlayer |
 | class [StringCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/StringCache%7BT%7D.md) | Caches strings from {T} ToString method |
 
+## Oxide.Ext.Discord.Cache.Emoji namespace
+
+| public type | description |
+| --- | --- |
+| class [EmojiCache](./Oxide.Ext.Discord/Cache/Emoji/EmojiCache.md) |  |
+
 ## Oxide.Ext.Discord.Cache.Entities namespace
 
 | public type | description |
@@ -411,7 +417,7 @@
 | public type | description |
 | --- | --- |
 | class [DiscordInteraction](./Oxide.Ext.Discord/Entities/Interactions/DiscordInteraction.md) | Represents [Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure) |
-| class [InteractionData](./Oxide.Ext.Discord/Entities/Interactions/InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure) |
+| class [InteractionData](./Oxide.Ext.Discord/Entities/Interactions/InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data) |
 | class [InteractionDataArgs](./Oxide.Ext.Discord/Entities/Interactions/InteractionDataArgs.md) | Args supplied for the interaction |
 | class [InteractionDataOption](./Oxide.Ext.Discord/Entities/Interactions/InteractionDataOption.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure) |
 | class [InteractionDataParsed](./Oxide.Ext.Discord/Entities/Interactions/InteractionDataParsed.md) | Parses Interaction Data to make it easier to process for application commands |
@@ -765,6 +771,7 @@
 
 | public type | description |
 | --- | --- |
+| static class [DateTimeOffsetExt](./Oxide.Ext.Discord/Extensions/DateTimeOffsetExt.md) | DateTimeOffset Extensions |
 | static class [DiscordColorExt](./Oxide.Ext.Discord/Extensions/DiscordColorExt.md) | Extensions for Discord Color |
 | static class [DiscordUserExt](./Oxide.Ext.Discord/Extensions/DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
 | static class [HashExt](./Oxide.Ext.Discord/Extensions/HashExt.md) | Hash extensions |
