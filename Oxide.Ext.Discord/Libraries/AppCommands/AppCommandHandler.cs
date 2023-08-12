@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands
 {
     internal class AppCommandHandler
     {
         public bool IsEmpty => _commands.Count == 0;
-        private readonly Hash<AppCommandId, BaseAppCommand> _commands = new Hash<AppCommandId, BaseAppCommand>();
+        private readonly ConcurrentDictionary<AppCommandId, BaseAppCommand> _commands = new ConcurrentDictionary<AppCommandId, BaseAppCommand>();
         private readonly List<ComponentCommand> _components = new List<ComponentCommand>();
         private readonly ILogger _logger;
 
@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             {
                 case InteractionType.ApplicationCommand:
                 case InteractionType.ApplicationCommandAutoComplete:
-                    return _commands[id];
+                    return _commands.TryGetValue(id, out BaseAppCommand command) ? command : null;
                 case InteractionType.MessageComponent:
                 case InteractionType.ModalSubmit:
                     return GetComponentCommand(id);
@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
                 return _components.Remove(component);
             }
             
-            return _commands.Remove(command.CommandId);
+            return _commands.TryRemove(command.CommandId, out _);
         }
 
         private ComponentCommand GetComponentCommand(AppCommandId id)

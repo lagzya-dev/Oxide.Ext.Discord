@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Plugins;
@@ -24,7 +25,8 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
     /// </summary>
     public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLoggable
     {
-        private readonly Hash<Snowflake, AppCommandHandler> _handlers = new Hash<Snowflake, AppCommandHandler>();
+        private readonly ConcurrentDictionary<Snowflake, AppCommandHandler> _handlers = new ConcurrentDictionary<Snowflake, AppCommandHandler>();
+        private readonly Func<Snowflake, AppCommandHandler> _create;
         private readonly ILogger _logger;
 
         /// <summary>
@@ -34,21 +36,12 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
         internal DiscordAppCommand(ILogger logger) 
         {
             _logger = logger;
+            _create = id => new AppCommandHandler(_logger);
         }
 
-        private AppCommandHandler GetCommandHandler(Snowflake applicationId) => _handlers[applicationId];
+        private AppCommandHandler GetCommandHandler(Snowflake applicationId) => _handlers.TryGetValue(applicationId, out AppCommandHandler handler) ? handler : null;
 
-        private AppCommandHandler GetOrAddCommandHandler(Snowflake applicationId)
-        {
-            AppCommandHandler handler = _handlers[applicationId];
-            if (handler == null)
-            {
-                handler = new AppCommandHandler(_logger);
-                _handlers[applicationId] = handler;
-            }
-
-            return handler;
-        }
+        private AppCommandHandler GetOrAddCommandHandler(Snowflake applicationId) => _handlers.GetOrAdd(applicationId, _create);
 
         /// <summary>
         /// Registers a new Application Command for the given plugin
@@ -208,7 +201,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
 
             if (handler.IsEmpty)
             {
-                _handlers.Remove(appCommand.AppId);
+                _handlers.TryRemove(appCommand.AppId, out _);
             }
         }
 
@@ -278,18 +271,20 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             try
             {
-                sb.AppendLine($"A - {plugin == null}");
-                List<BaseAppCommand> appCommands = DiscordPool.Internal.GetList<BaseAppCommand>();
-                sb.AppendLine($"B - {_handlers == null}");
-                foreach (AppCommandHandler handler in _handlers.Values)
+                List<BaseAppCommand> commands = DiscordPool.Internal.GetList<BaseAppCommand>();
+                foreach (KeyValuePair<Snowflake, AppCommandHandler> handler in _handlers)
                 {
-                    sb.AppendLine($"C - {handler == null}");
-                    appCommands.AddRange(handler.GetCommandsForPlugin(plugin));
+                    sb.AppendLine($"C - {handler.Key} = {handler.Value == null}");
+                    commands.AddRange(handler.Value.GetCommandsForPlugin(plugin));
                 }
-
-                sb.AppendLine("D");
-                RemoveAppCommandsInternal(appCommands);
-                sb.AppendLine("E");
+                
+                for (int index = 0; index < commands.Count; index++)
+                {
+                    BaseAppCommand command = commands[index];
+                    RemoveApplicationCommandInternal(command);
+                }
+                
+                DiscordPool.Internal.FreeList(commands);
             }
             catch (Exception ex)
             {
@@ -299,20 +294,6 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands
             {
                 DiscordPool.Internal.FreeStringBuilder(sb);
             }
-        }
-
-        private void RemoveAppCommandsInternal(IEnumerable<BaseAppCommand> commandList)
-        {
-            List<BaseAppCommand> commands = DiscordPool.Internal.GetList<BaseAppCommand>();
-            commands.AddRange(commandList);
-
-            for (int index = 0; index < commands.Count; index++)
-            {
-                BaseAppCommand command = commands[index];
-                RemoveApplicationCommandInternal(command);
-            }
-
-            DiscordPool.Internal.FreeList(commands);
         }
 
         internal bool HandleInteraction(DiscordInteraction interaction)
