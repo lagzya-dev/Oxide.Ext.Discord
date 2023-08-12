@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Data.Users;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Messages;
@@ -12,6 +14,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Entities.Users.Connections;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Exceptions.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
@@ -332,6 +335,16 @@ namespace Oxide.Ext.Discord.Entities.Users
             InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
             InvalidChannelException.ThrowIfChannelToSelf(userId, client);
 
+            UserData userData = client.Bot.DirectMessagesByUserId[userId]?.UserData;
+            DateTime? isBlocked = userData?.GetBlockedUntil();
+            
+            if (isBlocked.HasValue && isBlocked.Value > DateTime.UtcNow)
+            {
+                DiscordUser user = userData.GetUser();
+                client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
+                return Promise<DiscordChannel>.Rejected(new BlockedUserException(userData.GetUser(), isBlocked.Value));
+            }
+            
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
@@ -343,10 +356,28 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            return client.Bot.Rest.Post<DiscordChannel>(client, "users/@me/channels", data).Then(newChannel =>
+            IPromise<DiscordChannel> response = client.Bot.Rest.Post<DiscordChannel>(client, "users/@me/channels", data).Then(newChannel =>
             {
                 client.Bot.AddDirectChannel(newChannel);
             });
+
+            response.Catch<ResponseError>(error =>
+            {
+                if (error.DiscordError == null || error.DiscordError.Code != 50007)
+                {
+                    return;
+                }
+
+                if (userData == null)
+                {
+                    BotData bot = DiscordUserData.Instance.GetBotData(client.Bot.BotUser.Id);
+                    userData = bot.GetUserData(userId);
+                }
+                
+                userData.ProcessError(client, error);
+            });
+
+            return response;
         }
 
         /// <summary>
