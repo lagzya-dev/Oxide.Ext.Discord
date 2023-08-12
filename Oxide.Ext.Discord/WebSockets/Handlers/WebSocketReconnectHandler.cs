@@ -52,12 +52,19 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 _logger.Debug("Skipping reconnect. Websocket is not Disconnected or Disconnecting");
                 return;
             }
-            
-            CancelReconnect();
-            _source = new CancellationTokenSource();
 
-                try
+            if (IsPendingReconnect)
             {
+                _logger.Debug("Skipping reconnect. Reconnect is already in progress.");
+                return;
+            }
+
+            try
+            {
+                IsPendingReconnect = true;
+                CancelReconnect();
+                _source = new CancellationTokenSource();
+
                 int delay = GetReconnectDelay();
 
                 if (_reconnectRetries == 0)
@@ -68,18 +75,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 {
                     _logger.Info("Reconnecting to Discord. Retry: #{0} Delay: {1}ms", _reconnectRetries, delay);
                 }
-                
+
                 _reconnectRetries++;
-                
                 await Task.Delay(delay, _source.Token).ConfigureAwait(false);
-                IsPendingReconnect = false;
                 Connect();
             }
             catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
             finally
             {
-                _source.Dispose();
+                IsPendingReconnect = false;
+                _source?.Dispose();
                 _source = null;
             }
         }
