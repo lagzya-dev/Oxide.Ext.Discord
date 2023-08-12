@@ -3,6 +3,7 @@
 
 using System;
 using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Promises
 {
@@ -35,6 +36,7 @@ namespace Oxide.Ext.Discord.Promises
             }
             catch (Exception ex)
             {
+                DiscordExtension.GlobalLogger.Exception("An error occured during reject of Promise", ex);
                 _rejectable.Reject(ex);
             }
         }

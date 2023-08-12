@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Logging;
 
 #if PROMISE_DEBUG
 using Oxide.Ext.Discord.Logging;
@@ -26,7 +27,7 @@ namespace Oxide.Ext.Discord.Promises
         /// <summary>
         /// Completed handlers that accept no value.
         /// </summary>
-        private readonly List<ResolveHandler> _resolves = new List<ResolveHandler>();
+        private readonly List<ResolveHandler> _resolves = new List<ResolveHandler>(1);
 
         private readonly Action _onResolve;
         private readonly Action _onResolveInternal;
@@ -140,6 +141,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then catch reject of Promise", ex);
                     resultPromise.Reject(ex);
                 }
             }
@@ -182,6 +184,7 @@ namespace Oxide.Ext.Discord.Promises
                 } 
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then then resolved of Promise", ex);
                     return Promise<TConvert>.Rejected(ex);
                 }
             }
@@ -209,6 +212,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during then convert Promise to Promise<{typeof(TConvert).Name}>", ex);
                     resultPromise.Reject(ex);
                 }
             }
@@ -230,6 +234,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then then resolved of Promise", ex);
                     return Rejected(ex);
                 }
             }
@@ -290,6 +295,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then then resolved of Promise", ex);
                     return Rejected(ex);
                 }
             }
@@ -410,6 +416,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then complete finally of Promise", ex);
                     return Rejected(ex);
                 }
             }
@@ -426,6 +433,7 @@ namespace Oxide.Ext.Discord.Promises
                 } 
                 catch (Exception ex) 
                 {
+                    DiscordExtension.GlobalLogger.Exception("An error occured during then catch finally of Promise", ex);
                     promise.Reject(ex);
                 }
             });

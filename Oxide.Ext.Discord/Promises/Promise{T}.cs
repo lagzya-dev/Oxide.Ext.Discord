@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Logging;
 
 #if PROMISE_DEBUG
 using Oxide.Ext.Discord.Logging;
@@ -32,7 +33,7 @@ namespace Oxide.Ext.Discord.Promises
         /// <summary>
         /// Completed handlers that accept a value.
         /// </summary>
-        private readonly List<ResolveHandler<TPromised>> _resolves = new List<ResolveHandler<TPromised>>();
+        private readonly List<ResolveHandler<TPromised>> _resolves = new List<ResolveHandler<TPromised>>(1);
 
         private readonly Action<TPromised> _onResolve;
         private readonly Action _onResolveInternal;
@@ -80,6 +81,7 @@ namespace Oxide.Ext.Discord.Promises
             }
             catch (Exception ex)
             {
+                DiscordExtension.GlobalLogger.Exception($"An error occured during create of Promise<{typeof(TPromised).Name}>", ex);
                 promise.Reject(ex);
             }
 
@@ -172,6 +174,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception cbEx)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during catch reject of Promise<{typeof(TPromised).Name}>", ex);
                     resultPromise.Reject(cbEx);
                 }
             }
@@ -211,6 +214,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception cbEx)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during catch reject of Promise<{typeof(TPromised).Name}>", ex);
                     resultPromise.Reject(cbEx);
                 }
             }
@@ -237,6 +241,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during then resolved of Promise<{typeof(TPromised).Name}>", ex);
                     return Promise<TConvert>.Rejected(ex);
                 }
             }
@@ -264,6 +269,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception callbackEx)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during convert of Promise<{typeof(TPromised).Name}> to Promise<{typeof(TConvert).Name}>", ex);
                     resultPromise.Reject(callbackEx);
                 }
             }
@@ -284,6 +290,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during then reject of Promise<{typeof(TPromised).Name}>", ex);
                     return Promise.Rejected(ex);
                 }
             }
@@ -342,6 +349,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during resolve of Promise<{typeof(TPromised).Name}>", ex);
                     return Rejected(ex);
                 }
             }
@@ -454,6 +462,7 @@ namespace Oxide.Ext.Discord.Promises
                 }
                 catch (Exception ex)
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during resolved finally of Promise<{typeof(TPromised).Name}>", ex);
                     return Rejected(ex);
                 }
             }
@@ -470,6 +479,7 @@ namespace Oxide.Ext.Discord.Promises
                 } 
                 catch (Exception ex) 
                 {
+                    DiscordExtension.GlobalLogger.Exception($"An error occured during catch finally of Promise<{typeof(TPromised).Name}>", ex);
                     promise.Reject(ex);
                 }
             });
