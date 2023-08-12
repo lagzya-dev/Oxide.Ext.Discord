@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
         {
             if (DateTime.UtcNow - createdDate > MaxInitialResponseDuration)
             {
-                throw new InvalidInteractionResponseException($"This interaction has expired as it took longer than {MaxInitialResponseDuration.TotalSeconds:0} seconds to respond to the interaction");
+                throw new InvalidInteractionResponseException($"This interaction has expired as it took longer than {MaxInitialResponseDuration.TotalSeconds:0} seconds to respond to the interaction. The interaction took: {(DateTime.UtcNow - createdDate).TotalSeconds:0.0000} seconds to respond.");
             }
         }
         
