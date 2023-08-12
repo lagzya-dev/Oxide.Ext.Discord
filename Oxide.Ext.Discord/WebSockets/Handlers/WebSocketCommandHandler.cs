@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.RateLimits;
 
@@ -75,7 +76,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                         DateTimeOffset reset = _rateLimit.NextReset();
                         if (reset > DateTimeOffset.UtcNow)
                         {
-                            await Task.Delay(reset - DateTimeOffset.UtcNow, _token).ConfigureAwait(false);
+                            await reset.DelayUntil(_token).ConfigureAwait(false);
                         }
                     
                         continue;

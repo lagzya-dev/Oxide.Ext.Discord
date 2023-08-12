@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
@@ -141,7 +142,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
                         if (resetAt > DateTimeOffset.UtcNow)
                         {
-                            await Task.Delay(resetAt - DateTimeOffset.UtcNow, token).ConfigureAwait(false);
+                            await resetAt.DelayUntil(token).ConfigureAwait(false);
                         }
 
                         continue;
@@ -152,7 +153,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
                         if (ResetAt > DateTimeOffset.UtcNow)
                         {
-                            await Task.Delay(ResetAt - DateTimeOffset.UtcNow, token).ConfigureAwait(false);
+                            await ResetAt.DelayUntil(token).ConfigureAwait(false);
                         }
                         continue;
                     }
