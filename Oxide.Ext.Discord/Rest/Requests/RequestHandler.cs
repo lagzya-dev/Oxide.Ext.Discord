@@ -195,7 +195,7 @@ namespace Oxide.Ext.Discord.Rest.Requests
                     }
                 }
             }
-            catch (TaskCanceledException)
+            catch (OperationCanceledException)
             {
                 return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
             }

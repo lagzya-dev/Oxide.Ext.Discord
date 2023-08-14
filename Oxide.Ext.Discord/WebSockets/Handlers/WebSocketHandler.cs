@@ -86,10 +86,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     DisposeSocket();
                 }
             }
-            catch (TaskCanceledException)
-            {
-                DisposeSocket();
-            }
             catch (OperationCanceledException)
             {
                 DisposeSocket();

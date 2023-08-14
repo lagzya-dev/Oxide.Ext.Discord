@@ -80,8 +80,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 await Task.Delay(delay, _source.Token).ConfigureAwait(false);
                 Connect();
             }
-            catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
+            catch (Exception ex)
+            {
+                _logger.Exception("An error occured during websocket reconnect", ex);
+            }
             finally
             {
                 IsPendingReconnect = false;

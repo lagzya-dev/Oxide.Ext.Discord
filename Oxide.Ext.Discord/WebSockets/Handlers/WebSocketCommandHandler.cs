@@ -53,7 +53,6 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 await SendCommandsInternal().ConfigureAwait(false);
             }
-            catch (TaskCanceledException) { }
             catch (OperationCanceledException) { }
             catch (Exception ex)
             {
@@ -109,6 +108,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     await _webSocket.SendAsync(command.Payload).ConfigureAwait(false);
                     RemoveCommand(command);
                 }
+                catch(OperationCanceledException) {}
                 catch (Exception ex)
                 {
                     _logger.Exception("An error occured sending commands", ex);
