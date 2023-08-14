@@ -62,6 +62,7 @@ public enum PermissionFlags : ulong
 | UseSoundboard | `1 << 42` | Allows for using soundboard in a voice channel |
 | UseExternalSounds | `1 << 45` | Allows the usage of custom soundboard sounds from other servers |
 | SendVoiceMessages | `1 << 46` | Allows sending voice messages |
+| UseClydeAI | `1 << 47` | Allows members to interact with the Clyde AI bot |
 
 ## See Also
 

@@ -351,5 +351,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("SEND_VOICE_MESSAGES")]
         SendVoiceMessages = 1ul << 46,
+            
+        /// <summary>
+        /// Allows members to interact with the Clyde AI bot
+        /// </summary>
+        [Description("USE_CLYDE_AI")]
+        UseClydeAI = 1ul << 47,
     }
 }
