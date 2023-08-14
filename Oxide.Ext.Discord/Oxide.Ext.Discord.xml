@@ -14751,6 +14751,11 @@
             Allows sending voice messages
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseClydeAI">
+            <summary>
+            Allows members to interact with the Clyde AI bot
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.RoleFlags">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/permissions#role-flags">Role Flags</a>
