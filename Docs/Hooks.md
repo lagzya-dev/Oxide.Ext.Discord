@@ -804,7 +804,7 @@ void OnDiscordGuildMessageUpdated(DiscordMessage message, DiscordChannel channel
   - `channel` may be null if we haven't seen it yet
 
 ```c#
-void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
+void OnDiscordDirectMessageDeleted(MessageDeletedEvent message, DiscordChannel channel)
 {
     Puts("OnDiscordDirectMessageDeleted Works!");
 }
@@ -815,7 +815,7 @@ void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channe
 - Called when a message is deleted in a guild channel
 
 ```c#
-void OnDiscordGuildMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+void OnDiscordGuildMessageDeleted(MessageDeletedEvent message, DiscordChannel channel, DiscordGuild guild)
 {
     Puts("OnDiscordGuildMessageDeleted Works!");
 }
