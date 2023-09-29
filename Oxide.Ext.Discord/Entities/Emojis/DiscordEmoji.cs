@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Images;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
@@ -75,6 +76,21 @@ namespace Oxide.Ext.Discord.Entities.Emojis
                 Name = emoji
             };
         }
+
+        /// <summary>
+        /// Returns an Emoji object from a custom emoji ID and Animated flag
+        /// </summary>
+        /// <param name="id">ID of the emoji</param>
+        /// <param name="animated">If the emoji is animated</param>
+        /// <returns></returns>
+        public static DiscordEmoji FromCustom(Snowflake id, bool animated = false)
+        {
+            return new DiscordEmoji
+            {
+                EmojiId = id,
+                Animated = animated
+            };
+        }
         
         /// <summary>
         /// Returns the data string to be used in the API request
@@ -87,31 +103,18 @@ namespace Oxide.Ext.Discord.Entities.Emojis
                 return Name;
             }
 
-            return DiscordFormatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
+            return Uri.EscapeDataString(DiscordFormatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false));
         }
 
         internal void Update(DiscordEmoji emoji)
         {
-            if (emoji.Name != null)
-                Name = emoji.Name;
-
-            if (emoji.Roles != null)
-                Roles = emoji.Roles;
-            
-            if (emoji.User != null)
-                User = emoji.User;
-
-            if (emoji.RequireColons != null)
-                RequireColons = emoji.RequireColons;
-
-            if (emoji.Managed != null)
-                Managed = emoji.Managed;
-
-            if (emoji.Animated != null)
-                Animated = emoji.Animated;
-
-            if (emoji.Available != null)
-                Available = emoji.Available;
+            if (emoji.Name != null) Name = emoji.Name;
+            if (emoji.Roles != null) Roles = emoji.Roles;
+            if (emoji.User != null) User = emoji.User;
+            if (emoji.RequireColons != null) RequireColons = emoji.RequireColons;
+            if (emoji.Managed != null) Managed = emoji.Managed;
+            if (emoji.Animated != null) Animated = emoji.Animated;
+            if (emoji.Available != null) Available = emoji.Available;
         }
     }
 }

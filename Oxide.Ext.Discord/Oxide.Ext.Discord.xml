@@ -6580,6 +6580,14 @@
             <param name="emoji"></param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji.FromCustom(Oxide.Ext.Discord.Entities.Snowflake,System.Boolean)">
+            <summary>
+            Returns an Emoji object from a custom emoji ID and Animated flag
+            </summary>
+            <param name="id">ID of the emoji</param>
+            <param name="animated">If the emoji is animated</param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji.ToDataString">
             <summary>
             Returns the data string to be used in the API request

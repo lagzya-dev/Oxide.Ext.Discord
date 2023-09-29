@@ -12,6 +12,7 @@ public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
 | --- | --- |
 | [DiscordEmoji](#discordemoji-constructor)() | The default constructor. |
 | static [FromCharacter](#fromcharacter-method)(…) | Returns an emoji object for the given emoji character |
+| static [FromCustom](#fromcustom-method)(…) | Returns an Emoji object from a custom emoji ID and Animated flag |
 | [Animated](#animated-property) { get; set; } | Whether this emoji is animated |
 | [Available](#available-property) { get; set; } | Whether this emoji can be used, may be false due to loss of Server Boosts |
 | [EmojiId](#emojiid-property) { get; set; } | Emoji id |
@@ -46,6 +47,27 @@ public static DiscordEmoji FromCharacter(string emoji)
 
 ## See Also
 
+* class [DiscordEmoji](./DiscordEmoji.md)
+* namespace [Oxide.Ext.Discord.Entities.Emojis](./EmojisNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# FromCustom method
+
+Returns an Emoji object from a custom emoji ID and Animated flag
+
+```csharp
+public static DiscordEmoji FromCustom(Snowflake id, bool animated = false)
+```
+
+| parameter | description |
+| --- | --- |
+| id | ID of the emoji |
+| animated | If the emoji is animated |
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
 * class [DiscordEmoji](./DiscordEmoji.md)
 * namespace [Oxide.Ext.Discord.Entities.Emojis](./EmojisNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
