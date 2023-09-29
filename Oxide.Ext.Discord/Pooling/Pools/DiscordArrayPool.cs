@@ -146,7 +146,7 @@ namespace Oxide.Ext.Discord.Pooling.Pools
 
             internal T[] Rent()
             {
-                if (_index < _buffers.Length)
+                if (_index >= 0 && _index < _buffers.Length)
                 {
                     T[] array = _buffers[_index];
                     _buffers[_index] = null;
@@ -161,8 +161,8 @@ namespace Oxide.Ext.Discord.Pooling.Pools
 
             internal void Return(T[] array)
             {
-                if (array.Length != BufferLength)  throw new ArgumentException("Buffer not from pool", nameof(array));
-                if (_index != 0)
+                if (array.Length != BufferLength) throw new ArgumentException("Buffer not from pool", nameof(array));
+                if (_index > 0)
                 {
                     _index--;
                     _buffers[_index] = array;
