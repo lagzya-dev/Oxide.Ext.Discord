@@ -108,6 +108,12 @@ namespace Oxide.Ext.Discord.Entities.Channels
         [JsonProperty("default_forum_layout")]
         public ForumLayoutTypes? DefaultForumLayout { get; set; }
         
+        /// <summary>
+        /// The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
+        /// </summary>
+        [JsonProperty("default_thread_rate_limit_per_user")]
+        public int? DefaultThreadRateLimitPerUser { get; set; }
+        
         /// <inheritdoc/>
         public void Validate()
         {
