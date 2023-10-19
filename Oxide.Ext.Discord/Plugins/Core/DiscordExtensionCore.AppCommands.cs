@@ -39,6 +39,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                                                     group => group.AddSubCommand(AppCommandKeys.DeleteAppCommand, "Delete a registered application command",
                                                         sub => sub.AddOption(CommandOptionType.String, AppCommandKeys.DeleteAppCommandArgument, "Application Command To Delete",
                                                             options => options.AutoComplete().Required())));
+            builder.AllowInDirectMessages(false);
 
             CommandCreate create = builder.Build();
             DiscordCommandLocalization localization = builder.BuildCommandLocalization();
