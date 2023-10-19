@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
 
@@ -15,6 +16,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
         /// </summary>
         [JsonProperty("placeholder")]
         public string Placeholder { get; set; }
+        
+        /// <summary>
+        /// List of default values for auto-populated select menu components; number of default values must be in the range defined by min_values and max_values
+        /// Max 150 characters
+        /// </summary>
+        [JsonProperty("default_values")]
+        public List<SelectMenuDefaultValue> DefaultValues { get; set; }
 
         /// <summary>
         /// the minimum number of items that must be chosen;

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
@@ -63,6 +65,35 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
 
             ChannelSelectComponent text = (ChannelSelectComponent)_menu;
             text.ChannelTypes.Add(type);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds an allow channel type for <see cref="MessageComponentType.ChannelSelect"/>
+        /// </summary>
+        /// <param name="id">ID of the default value to add</param>
+        /// <returns>This</returns>
+        public SelectMenuComponentBuilder AddDefaultValue(Snowflake id)
+        {
+            InvalidSelectMenuComponentException.ThrowIfCantAddDefaultValue(_menu.Type);
+            if (_menu.DefaultValues == null)
+            {
+                _menu.DefaultValues = new List<SelectMenuDefaultValue>();
+            }
+            
+            switch (_menu.Type)
+            {
+                case MessageComponentType.UserSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.User));
+                    break;
+                case MessageComponentType.RoleSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.Role));
+                    break;
+                case MessageComponentType.ChannelSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.Channel));
+                    break;
+            }
+            
             return this;
         }
 

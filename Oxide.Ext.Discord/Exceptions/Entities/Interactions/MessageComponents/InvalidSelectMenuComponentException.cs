@@ -140,5 +140,13 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
                 throw new InvalidSelectMenuComponentException($"Select Menu Type '{type}' is not allowed to add Channel Types. Channel Types can only be added on {nameof(MessageComponentType)}{MessageComponentType.ChannelSelect}");
             }
         }
+        
+        internal static void ThrowIfCantAddDefaultValue(MessageComponentType type)
+        {
+            if (type != MessageComponentType.ChannelSelect && type != MessageComponentType.RoleSelect && type != MessageComponentType.UserSelect)
+            {
+                throw new InvalidSelectMenuComponentException($"Select Menu Default Value can only be used on {nameof(MessageComponentType)}{MessageComponentType.ChannelSelect} or {nameof(MessageComponentType)}{MessageComponentType.RoleSelect} or {nameof(MessageComponentType)}{MessageComponentType.UserSelect}");
+            }
+        }
     }
 }
