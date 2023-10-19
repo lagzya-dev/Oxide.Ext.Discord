@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
     public enum StickerType : byte
     {
         /// <summary>
-        /// An official sticker in a pack, part of Nitro or in a removed purchasable pack
+        /// An official sticker in a pack
         /// </summary>
         Standard = 1,
         

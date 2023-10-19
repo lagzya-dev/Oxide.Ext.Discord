@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs">List Nitro Sticker Packs</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        public static IPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
+        public static IPromise<List<DiscordStickerPack>> GetStickerPacks(DiscordClient client)
         {
             return client.Bot.Rest.Get<List<DiscordStickerPack>>(client,"sticker-packs");
         }
