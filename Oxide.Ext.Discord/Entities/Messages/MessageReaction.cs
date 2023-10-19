@@ -10,16 +10,28 @@ namespace Oxide.Ext.Discord.Entities.Messages
     public class MessageReaction
     {
         /// <summary>
-        /// Times this emoji has been used to react
+        /// Total number of times this emoji has been used to react (including super reacts)
         /// </summary>
         [JsonProperty("count")]
         public int Count { get; set; }
+        
+        /// <summary>
+        /// Reaction Count Details
+        /// </summary>
+        [JsonProperty("count_details")]
+        public ReactionCountDetails count_details { get; set; }
 
         /// <summary>
         /// Whether the current user reacted using this emoji
         /// </summary>
         [JsonProperty("me")]
         public bool Me { get; set; }
+        
+        /// <summary>
+        ///  	Whether the current user super-reacted using this emoji
+        /// </summary>
+        [JsonProperty("me_burst")]
+        public bool me_burst { get; set; }
 
         /// <summary>
         /// Emoji information
@@ -27,5 +39,12 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }
+        
+        /// <summary>
+        /// HEX colors used for super reaction
+        /// TODO: Find out the array type
+        /// </summary>
+        [JsonProperty("burst_colors")]
+        public object[] BurstColors { get; set; }
     }
 }
