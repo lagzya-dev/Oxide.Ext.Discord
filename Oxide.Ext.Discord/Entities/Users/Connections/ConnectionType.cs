@@ -102,6 +102,11 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         [Description("twitter")] Twitter,   
         
         /// <summary>
+        /// Connection type is X (Twitter)
+        /// </summary>
+        [Description("twitter")] X,   
+        
+        /// <summary>
         /// Connection type is Xbox
         /// </summary>
         [Description("xbox")] Xbox,        
