@@ -2,6 +2,7 @@ using System;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Emojis;
+using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Exceptions.Entities;
 
 namespace Oxide.Ext.Discord.Helpers
@@ -140,6 +141,16 @@ namespace Oxide.Ext.Discord.Helpers
             }
 
             return 'f';
+        }
+
+        /// <summary>
+        /// Guild Navigation Format
+        /// </summary>
+        /// <param name="type">Type to navigate to</param>
+        /// <returns>string with navigation to the navigation type</returns>
+        public static string GuildNavigation(GuildNavigationType type)
+        {
+            return $"<id:{EnumCache<GuildNavigationType>.Instance.ToLower(type)}>";
         }
         
         /// <summary>
