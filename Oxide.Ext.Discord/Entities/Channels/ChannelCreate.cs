@@ -25,7 +25,9 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public ChannelType Type { get; set; }
         
         /// <summary>
-        /// The channel topic (0-1024 characters)
+        /// The channel topic
+        /// (0-4096 characters for GUILD_FORUM & GUILD_MEDIA Channels)
+        /// (0-1024 characters for all others)
         /// </summary>
         [JsonProperty("topic")]        
         public string Topic { get; set; }
@@ -82,19 +84,19 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public int DefaultAutoArchiveDuration { get; set; }
         
         /// <summary>
-        /// Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel
+        /// Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel
         /// </summary>
         [JsonProperty("default_reaction_emoji")]
         public DefaultReaction DefaultReactionEmoji { get; set; }
         
         /// <summary>
-        /// Set of tags that can be used in a `GUILD_FORUM` channel
+        /// Set of tags that can be used in a `GUILD_FORUM` or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("available_tags")]
         public List<ForumTag> AvailableTags { get; set; }
         
         /// <summary>
-        /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+        /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
         /// </summary>
         [JsonProperty("default_sort_order")]
         public SortOrderType? DefaultSortOrder { get; set; }

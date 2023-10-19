@@ -36,11 +36,11 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
                 throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)}  cannot be less than 1 character");
             }
 
-            if (type == ChannelType.GuildForum)
+            if (type == ChannelType.GuildForum || type == ChannelType.GuildMedia)
             {
                 if (topic.Length > MaxForumLength)
                 {
-                    throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {MaxForumLength} characters for Guild Forum Channels");
+                    throw new InvalidChannelException($"{nameof(DiscordChannel)}.{nameof(DiscordChannel.Topic)} cannot be more than {MaxForumLength} characters for Guild Forum or Guild Media Channels");
                 }
 
                 return;

@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public bool? Nsfw { get; set; }
         
         /// <summary>
-        /// The id of the last message sent in this channel (or thread for GUILD_FORUM channels)
+        /// The id of the last message sent in this channel (or thread for GUILD_FORUM or GUILD_MEDIA channels)
         /// May not point to an existing or valid message or thread
         /// </summary>
         [JsonProperty("last_message_id")]        
@@ -217,20 +217,20 @@ namespace Oxide.Ext.Discord.Entities.Channels
         private Hash<Snowflake, ThreadMember> _threadMembers;
         
         /// <summary>
-        /// The set of tags that can be used in a GUILD_FORUM channel
+        /// The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel
         /// Limited to 20
         /// </summary>
         [JsonProperty("available_tags")]
         public List<ForumTag> AvailableTags { get; set; }
         
         /// <summary>
-        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("applied_tags")]
         public List<Snowflake> AppliedTags { get; set; }
         
         /// <summary>
-        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("default_reaction_emoji")]
         public DefaultReaction DefaultReactionEmoji { get; set; }
@@ -242,7 +242,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public int? DefaultThreadRateLimitPerUser { get; set; }
         
         /// <summary>
-        /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+        /// The default <see cref="SortOrderType"/> used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
         /// </summary>
         [JsonProperty("default_sort_order")]
         public SortOrderType? DefaultSortOrder { get; set; }

@@ -58,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         public ChannelFlags? Flags { get; set; }
         
         /// <summary>
-        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+        /// The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("applied_tags")]
         public List<Snowflake> AppliedTags { get; set; }

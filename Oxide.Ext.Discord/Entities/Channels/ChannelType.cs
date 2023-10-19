@@ -61,8 +61,13 @@
         GuildDirectory = 14,
         
         /// <summary>
-        /// (still in development) a channel that can only contain threads
+        /// A channel that can only contain threads
         /// </summary>
         GuildForum = 15,
+        
+        /// <summary>
+        /// Channel that can only contain threads, similar to `GUILD_FORUM` channels
+        /// </summary>
+        GuildMedia = 16,
     }
 }

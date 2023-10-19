@@ -5,7 +5,8 @@ using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Entities.Channels
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure">Overwrite Structure</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#forum-tag-object">Forum Tag Structure</a>
+    /// An object that represents a tag that is able to be applied to a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ForumTag : ISnowflakeEntity, IDiscordValidation

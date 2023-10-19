@@ -93,13 +93,13 @@ namespace Oxide.Ext.Discord.Entities.Channels
         public int? DefaultAutoArchiveDuration { get; set; }
         
         /// <summary>
-        /// The set of tags that can be used in a GUILD_FORUM channel
+        /// The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("available_tags")]
         public List<ForumTag> AvailableTags { get; set; }
 
         /// <summary>
-        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+        /// The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
         /// </summary>
         [JsonProperty("default_reaction_emoji")]
         public DefaultReaction DefaultReactionEmoji { get; set; }
