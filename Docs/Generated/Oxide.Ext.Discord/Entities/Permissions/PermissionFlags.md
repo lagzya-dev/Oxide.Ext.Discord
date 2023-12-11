@@ -43,11 +43,11 @@ public enum PermissionFlags : ulong
 | ManageNicknames | `1 << 27` | Allows for modification of other users nicknames |
 | ManageRoles | `1 << 28` | Allows management and editing of roles Channel Type (Text, Voice, Stage) |
 | ManageWebhooks | `1 << 29` | Allows management and editing of webhooks Channel Type (Text) |
-| ManageGuildExpressions | `1 << 30` | Allows management and editing of emojis, stickers, and soundboard sounds |
+| ManageGuildExpressions | `1 << 30` | Allows for editing and deleting emojis, stickers, and soundboard sounds created by all users |
 | ManageEmojisAndStickers | `1 << 30` | Allows management and editing of emojis |
 | UseSlashCommands | `1 << 31` | Allows members to use application commands, including slash commands and context menu commands. |
 | RequestToSpeak | `1 << 32` | Allows for requesting to speak in stage channels. Channel Type (Stage) (This permission is under active development and may be changed or removed.) |
-| ManageEvents | `1 << 33` | Allows for creating, editing, and deleting scheduled events Channel Type (Voice, Stage) |
+| ManageEvents | `1 << 33` | Allows for editing and deleting scheduled events created by all users Channel Type (Voice, Stage) |
 | ManageThreads | `1 << 34` | Allows for deleting and archiving threads, and viewing all private threads Channel Type (Text) |
 | UsePublicThreads | `1 << 35` | Allows for creating and participating in threads Channel Type (Text) |
 | CreatePublicThreads | `1 << 35` | Allows for creating threads Channel Type (Text) |
@@ -60,6 +60,8 @@ public enum PermissionFlags : ulong
 | ModerateMembers | `1 << 40` | Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels |
 | ViewCreatorMonetizationAnalytics | `1 << 41` | Allows for viewing role subscription insights |
 | UseSoundboard | `1 << 42` | Allows for using soundboard in a voice channel |
+| CreateGuildExpressions | `1 << 43` | Allows for creating emojis, stickers, and soundboard sounds, and editing and deleting those created by the current user |
+| CreateEvents | `1 << 44` | Allows for creating scheduled events, and editing and deleting those created by the current user |
 | UseExternalSounds | `1 << 45` | Allows the usage of custom soundboard sounds from other servers |
 | SendVoiceMessages | `1 << 46` | Allows sending voice messages |
 | UseClydeAI | `1 << 47` | Allows members to interact with the Clyde AI bot |

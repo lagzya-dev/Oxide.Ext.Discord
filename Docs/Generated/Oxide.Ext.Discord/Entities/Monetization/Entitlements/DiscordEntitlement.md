@@ -12,7 +12,7 @@ public class DiscordEntitlement
 | --- | --- |
 | [DiscordEntitlement](#discordentitlement-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | ID of the parent application |
-| [Consumed](#consumed-property) { get; set; } | Not applicable for App Subscriptions. Subscriptions are not consumed and will be false |
+| [Deleted](#deleted-property) { get; set; } | Entitlement was deleted |
 | [EndsAt](#endsat-property) { get; set; } | Date at which the entitlement is no longer valid. Not present when using test entitlements. |
 | [GuildId](#guildid-property) { get; set; } | ID of the guild that is granted access to the entitlement's sku |
 | [Id](#id-property) { get; set; } | ID of the entitlement |
@@ -149,44 +149,28 @@ public Snowflake SkuId { get; set; }
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
-# UserId property
-
-ID of the user that is granted access to the entitlement's sku
-
-```csharp
-public Snowflake? UserId { get; set; }
-```
-
-## See Also
-
-* struct [Snowflake](../../Snowflake.md)
-* class [DiscordEntitlement](./DiscordEntitlement.md)
-* namespace [Oxide.Ext.Discord.Entities.Monetization.Entitlements](./EntitlementsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-   
-   
-# GuildId property
-
-ID of the guild that is granted access to the entitlement's sku
-
-```csharp
-public Snowflake? GuildId { get; set; }
-```
-
-## See Also
-
-* struct [Snowflake](../../Snowflake.md)
-* class [DiscordEntitlement](./DiscordEntitlement.md)
-* namespace [Oxide.Ext.Discord.Entities.Monetization.Entitlements](./EntitlementsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
-   
-   
 # ApplicationId property
 
 ID of the parent application
 
 ```csharp
 public Snowflake ApplicationId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
+* class [DiscordEntitlement](./DiscordEntitlement.md)
+* namespace [Oxide.Ext.Discord.Entities.Monetization.Entitlements](./EntitlementsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# UserId property
+
+ID of the user that is granted access to the entitlement's sku
+
+```csharp
+public Snowflake? UserId { get; set; }
 ```
 
 ## See Also
@@ -213,12 +197,12 @@ public EntitlementType Type { get; set; }
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
    
    
-# Consumed property
+# Deleted property
 
-Not applicable for App Subscriptions. Subscriptions are not consumed and will be false
+Entitlement was deleted
 
 ```csharp
-public bool Consumed { get; set; }
+public bool Deleted { get; set; }
 ```
 
 ## See Also
@@ -253,6 +237,22 @@ public DateTime EndsAt { get; set; }
 
 ## See Also
 
+* class [DiscordEntitlement](./DiscordEntitlement.md)
+* namespace [Oxide.Ext.Discord.Entities.Monetization.Entitlements](./EntitlementsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildId property
+
+ID of the guild that is granted access to the entitlement's sku
+
+```csharp
+public Snowflake? GuildId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
 * class [DiscordEntitlement](./DiscordEntitlement.md)
 * namespace [Oxide.Ext.Discord.Entities.Monetization.Entitlements](./EntitlementsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

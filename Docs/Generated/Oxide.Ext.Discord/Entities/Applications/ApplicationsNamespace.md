@@ -3,6 +3,7 @@
 | public type | description |
 | --- | --- |
 | [Flags] enum [ApplicationFlags](./ApplicationFlags.md) | Represents [Application Flags](https://discord.com/developers/docs/resources/application#application-object-application-flags) |
+| class [ApplicationUpdate](./ApplicationUpdate.md) | Represents [Edit Application Structure](https://discord.com/developers/docs/resources/application#edit-current-application-json-params) |
 | class [DiscordApplication](./DiscordApplication.md) | Represents [Application Structure](https://discord.com/developers/docs/resources/application#application-object) |
 | class [InstallParams](./InstallParams.md) | Represents a [Install Params Structure](https://discord.com/developers/docs/resources/application#install-params-object) |
 

@@ -11,9 +11,9 @@ public class GetEntitlements : IDiscordQueryString
 | name | description |
 | --- | --- |
 | [GetEntitlements](#getentitlements-constructor)() | The default constructor. |
-| [After](#after-property) { get; set; } | Retrieve entitlements after this time |
-| [Before](#before-property) { get; set; } | Retrieve entitlements before this time |
-| [ExcludeEnded](#excludeended-property) { get; set; } | Whether entitlements should be omitted |
+| [After](#after-property) { get; set; } | Retrieve entitlements after this entitlement ID |
+| [Before](#before-property) { get; set; } | Retrieve entitlements before this entitlement ID |
+| [ExcludeEnded](#excludeended-property) { get; set; } | Whether expired entitlements should be omitted |
 | [GuildId](#guildid-property) { get; set; } | Guild ID to look up entitlements for |
 | [Limit](#limit-property) { get; set; } | Number of entitlements to return, 1-100, default 100 |
 | [SkuIds](#skuids-property) { get; set; } | Optional list of SKU IDs to check entitlements for |
@@ -104,7 +104,7 @@ public List<Snowflake> SkuIds { get; set; }
    
 # Before property
 
-Retrieve entitlements before this time
+Retrieve entitlements before this entitlement ID
 
 ```csharp
 public Snowflake? Before { get; set; }
@@ -120,7 +120,7 @@ public Snowflake? Before { get; set; }
    
 # After property
 
-Retrieve entitlements after this time
+Retrieve entitlements after this entitlement ID
 
 ```csharp
 public Snowflake? After { get; set; }
@@ -167,7 +167,7 @@ public Snowflake? GuildId { get; set; }
    
 # ExcludeEnded property
 
-Whether entitlements should be omitted
+Whether expired entitlements should be omitted
 
 ```csharp
 public bool? ExcludeEnded { get; set; }

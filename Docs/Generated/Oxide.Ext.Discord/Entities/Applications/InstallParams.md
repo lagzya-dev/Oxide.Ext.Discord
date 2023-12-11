@@ -11,8 +11,8 @@ public class InstallParams
 | name | description |
 | --- | --- |
 | [InstallParams](#installparams-constructor)() | The default constructor. |
-| [Permissions](#permissions-property) { get; set; } | The permissions to request for the bot role |
-| [Scopes](#scopes-property) { get; set; } | The scopes to add the application to the server with |
+| [Permissions](#permissions-property) { get; set; } | Permissions to request for the bot role |
+| [Scopes](#scopes-property) { get; set; } | Scopes to add the application to the server with |
 
 ## See Also
 
@@ -38,7 +38,7 @@ public InstallParams()
    
 # Scopes property
 
-The scopes to add the application to the server with
+Scopes to add the application to the server with
 
 ```csharp
 public List<string> Scopes { get; set; }
@@ -53,7 +53,7 @@ public List<string> Scopes { get; set; }
    
 # Permissions property
 
-The permissions to request for the bot role
+Permissions to request for the bot role
 
 ```csharp
 public string Permissions { get; set; }

@@ -12,33 +12,37 @@ public class DiscordApplication : IDebugLoggable
 | --- | --- |
 | [DiscordApplication](#discordapplication-constructor)() | The default constructor. |
 | [ApproximateGuildCount](#approximateguildcount-property) { get; set; } | An approximate count of the app's guild membership. |
+| [Bot](#bot-property) { get; set; } | Partial user object for the bot user associated with the app |
 | [BotPublic](#botpublic-property) { get; set; } | When false only app owner can join the app's bot to guilds |
 | [BotRequireCodeGrant](#botrequirecodegrant-property) { get; set; } | When true the app's bot will only join upon completion of the full oauth2 code grant flow |
 | [CoverImage](#coverimage-property) { get; set; } | If this application is a game sold on Discord, this field will be the hash of the image on store embeds |
 | [CustomInstallUrl](#custominstallurl-property) { get; set; } | The application's default custom authorization link, if enabled |
-| [Description](#description-property) { get; set; } | The description of the app |
-| [Flags](#flags-property) { get; set; } | The application's public flags |
+| [Description](#description-property) { get; set; } | Description of the app |
+| [Flags](#flags-property) { get; set; } | App's public flags |
 | [GetApplicationCoverUrl](#getapplicationcoverurl-property) { get; } | Returns the URL for the application cover |
 | [GetApplicationIconUrl](#getapplicationiconurl-property) { get; } | Returns the URL for the applications Icon |
 | [Guild](#guild-property) { get; set; } | Partial Guild for the application |
-| [GuildId](#guildid-property) { get; set; } | If this application is a game sold on Discord, this field will be the guild to which it has been linked |
-| [Icon](#icon-property) { get; set; } | The icon hash of the app |
-| [Id](#id-property) { get; set; } | The id of the app |
+| [GuildId](#guildid-property) { get; set; } | Guild associated with the app. For example, a developer support server. |
+| [Icon](#icon-property) { get; set; } | Icon hash of the app |
+| [Id](#id-property) { get; set; } | ID of the app |
 | [InstallParams](#installparams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
-| [Name](#name-property) { get; set; } | The name of the app |
+| [InteractionsEndpointUrl](#interactionsendpointurl-property) { get; set; } | Interactions endpoint URL for the app |
+| [Name](#name-property) { get; set; } | Name of the app |
 | [Owner](#owner-property) { get; set; } | Partial user object containing info on the owner of the application |
 | [PrimarySkuId](#primaryskuid-property) { get; set; } | If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists |
-| [PrivacyPolicyUrl](#privacypolicyurl-property) { get; set; } | The url of the app's privacy policy |
-| [RoleConnectionsVerificationUrl](#roleconnectionsverificationurl-property) { get; set; } | The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration |
-| [RpcOrigins](#rpcorigins-property) { get; set; } | An array of rpc origin urls, if rpc is enabled |
+| [PrivacyPolicyUrl](#privacypolicyurl-property) { get; set; } | URL of the app's privacy policy |
+| [RedirectUris](#redirecturis-property) { get; set; } | Array of redirect URIs for the app |
+| [RoleConnectionsVerificationUrl](#roleconnectionsverificationurl-property) { get; set; } | Role connection verification URL for the app |
+| [RpcOrigins](#rpcorigins-property) { get; set; } | List of RPC origin URLs, if RPC is enabled |
 | [Slug](#slug-property) { get; set; } | If this application is a game sold on Discord, this field will be the URL slug that links to the store page |
 | [Tags](#tags-property) { get; set; } | Up to 5 tags describing the content and functionality of the application |
 | [Team](#team-property) { get; set; } | If the application belongs to a team, this will be a list of the members of that team |
-| [TermsOfServiceUrl](#termsofserviceurl-property) { get; set; } | The url of the app's terms of service |
-| [Verify](#verify-property) { get; set; } | The hex encoded key for verification in interactions and the GameSDK's GetTicket |
+| [TermsOfServiceUrl](#termsofserviceurl-property) { get; set; } | URL of the app's terms of service |
+| [Verify](#verify-property) { get; set; } | Hex encoded key for verification in interactions and the GameSDK's GetTicket |
 | [BulkOverwriteGlobalCommands](#bulkoverwriteglobalcommands-method)(…) | Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour. See [Bulk Overwrite Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands) |
 | [CreateGlobalCommand](#createglobalcommand-method)(…) | Create a new global command. New global commands will be available in all guilds after 1 hour. Note: Creating a command with the same name as an existing command for your application will overwrite the old command. See [Create Global Application Command](https://discord.com/developers/docs/interactions/application-commands#create-global-application-command) |
 | [CreateGuildCommand](#createguildcommand-method)(…) | Create a new guild command. New guild commands will be available in the guild immediately. See [Create Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command) |
+| [Edit](#edit-method)(…) | Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. |
 | [EditRoleConnectionMetadata](#editroleconnectionmetadata-method)(…) | Updates and returns a list of application role connection metadata objects for the given application. See [Update Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records) |
 | [GetAllCommands](#getallcommands-method)(…) | Returns all commands registered to this application |
 | [GetGlobalCommand](#getglobalcommand-method)(…) | Fetch global command by ID See [Get Global Application Command](https://discord.com/developers/docs/interactions/application-commands#get-global-application-command) |
@@ -120,6 +124,29 @@ public static IPromise<DiscordApplication> Get(DiscordClient client)
 
 * interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Edit method
+
+Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated.
+
+```csharp
+public IPromise<DiscordApplication> Edit(DiscordClient client, ApplicationUpdate update)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| update | Update to apply |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [ApplicationUpdate](./ApplicationUpdate.md)
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -425,7 +452,7 @@ public DiscordApplication()
    
 # Id property
 
-The id of the app
+ID of the app
 
 ```csharp
 public Snowflake Id { get; set; }
@@ -441,7 +468,7 @@ public Snowflake Id { get; set; }
    
 # Name property
 
-The name of the app
+Name of the app
 
 ```csharp
 public string Name { get; set; }
@@ -456,7 +483,7 @@ public string Name { get; set; }
    
 # Icon property
 
-The icon hash of the app
+Icon hash of the app
 
 ```csharp
 public string Icon { get; set; }
@@ -471,7 +498,7 @@ public string Icon { get; set; }
    
 # Description property
 
-The description of the app
+Description of the app
 
 ```csharp
 public string Description { get; set; }
@@ -486,7 +513,7 @@ public string Description { get; set; }
    
 # RpcOrigins property
 
-An array of rpc origin urls, if rpc is enabled
+List of RPC origin URLs, if RPC is enabled
 
 ```csharp
 public List<string> RpcOrigins { get; set; }
@@ -529,9 +556,25 @@ public bool BotRequireCodeGrant { get; set; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
+# Bot property
+
+Partial user object for the bot user associated with the app
+
+```csharp
+public DiscordUser Bot { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](../Users/DiscordUser.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
 # TermsOfServiceUrl property
 
-The url of the app's terms of service
+URL of the app's terms of service
 
 ```csharp
 public string TermsOfServiceUrl { get; set; }
@@ -546,7 +589,7 @@ public string TermsOfServiceUrl { get; set; }
    
 # PrivacyPolicyUrl property
 
-The url of the app's privacy policy
+URL of the app's privacy policy
 
 ```csharp
 public string PrivacyPolicyUrl { get; set; }
@@ -577,7 +620,7 @@ public DiscordUser Owner { get; set; }
    
 # Verify property
 
-The hex encoded key for verification in interactions and the GameSDK's GetTicket
+Hex encoded key for verification in interactions and the GameSDK's GetTicket
 
 ```csharp
 public string Verify { get; set; }
@@ -608,7 +651,7 @@ public DiscordTeam Team { get; set; }
    
 # GuildId property
 
-If this application is a game sold on Discord, this field will be the guild to which it has been linked
+Guild associated with the app. For example, a developer support server.
 
 ```csharp
 public Snowflake? GuildId { get; set; }
@@ -685,7 +728,7 @@ public string CoverImage { get; set; }
    
 # Flags property
 
-The application's public flags
+App's public flags
 
 ```csharp
 public ApplicationFlags? Flags { get; set; }
@@ -705,6 +748,51 @@ An approximate count of the app's guild membership.
 
 ```csharp
 public int? ApproximateGuildCount { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# RedirectUris property
+
+Array of redirect URIs for the app
+
+```csharp
+public List<string> RedirectUris { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# InteractionsEndpointUrl property
+
+Interactions endpoint URL for the app
+
+```csharp
+public string InteractionsEndpointUrl { get; set; }
+```
+
+## See Also
+
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# RoleConnectionsVerificationUrl property
+
+Role connection verification URL for the app
+
+```csharp
+public string RoleConnectionsVerificationUrl { get; set; }
 ```
 
 ## See Also
@@ -751,21 +839,6 @@ The application's default custom authorization link, if enabled
 
 ```csharp
 public string CustomInstallUrl { get; set; }
-```
-
-## See Also
-
-* class [DiscordApplication](./DiscordApplication.md)
-* namespace [Oxide.Ext.Discord.Entities.Applications](./ApplicationsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-   
-   
-# RoleConnectionsVerificationUrl property
-
-The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration
-
-```csharp
-public string RoleConnectionsVerificationUrl { get; set; }
 ```
 
 ## See Also

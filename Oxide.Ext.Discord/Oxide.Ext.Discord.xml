@@ -4098,6 +4098,56 @@
             Indicates if an app has registered global application commands
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/application#edit-current-application-json-params">Edit Application Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.CustomInstallUrl">
+            <summary>
+            Default custom authorization URL for the app, if enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.Description">
+            <summary>
+            Description of the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.RoleConnectionsVerificationUrl">
+            <summary>
+            Role connection verification URL for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.InstallParams">
+            <summary>
+            Settings for the application's default in-app authorization link, if enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.Flags">
+            <summary>
+            App's public flags
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.Icon">
+            <summary>
+            Icon for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.CoverImage">
+            <summary>
+            Default rich presence invite cover image for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.InteractionsEndpointUrl">
+            <summary>
+            Interactions endpoint URL for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate.Tags">
+            <summary>
+            List of tags describing the content and functionality of the app (max of 20 characters per tag). Max of 5 tags.
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.DiscordApplication">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
@@ -4105,27 +4155,27 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Id">
             <summary>
-            The id of the app
+            ID of the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Name">
             <summary>
-            The name of the app
+            Name of the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Icon">
             <summary>
-            The icon hash of the app
+            Icon hash of the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Description">
             <summary>
-            The description of the app
+            Description of the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.RpcOrigins">
             <summary>
-            An array of rpc origin urls, if rpc is enabled
+            List of RPC origin URLs, if RPC is enabled
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.BotPublic">
@@ -4138,14 +4188,19 @@
             When true the app's bot will only join upon completion of the full oauth2 code grant flow
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Bot">
+            <summary>
+            Partial user object for the bot user associated with the app
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.TermsOfServiceUrl">
             <summary>
-            The url of the app's terms of service
+            URL of the app's terms of service
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.PrivacyPolicyUrl">
             <summary>
-            The url of the app's privacy policy
+            URL of the app's privacy policy
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Owner">
@@ -4155,7 +4210,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Verify">
             <summary>
-            The hex encoded key for verification in interactions and the GameSDK's GetTicket
+            Hex encoded key for verification in interactions and the GameSDK's GetTicket
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Team">
@@ -4165,7 +4220,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GuildId">
             <summary>
-            If this application is a game sold on Discord, this field will be the guild to which it has been linked
+            Guild associated with the app. For example, a developer support server.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Guild">
@@ -4190,12 +4245,27 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Flags">
             <summary>
-            The application's public flags
+            App's public flags
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.ApproximateGuildCount">
             <summary>
             An approximate count of the app's guild membership.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.RedirectUris">
+            <summary>
+            Array of redirect URIs for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.InteractionsEndpointUrl">
+            <summary>
+            Interactions endpoint URL for the app
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.RoleConnectionsVerificationUrl">
+            <summary>
+            Role connection verification URL for the app
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Tags">
@@ -4211,11 +4281,6 @@
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.CustomInstallUrl">
             <summary>
             The application's default custom authorization link, if enabled
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.RoleConnectionsVerificationUrl">
-            <summary>
-            The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetApplicationIconUrl">
@@ -4249,6 +4314,13 @@
             Returns the current users application
             See <a href="">Get Current Application</a>
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.Edit(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Applications.ApplicationUpdate)">
+            <summary>
+            Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="update">Update to apply</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Applications.DiscordApplication.GetGlobalCommands(Oxide.Ext.Discord.Clients.DiscordClient,System.Boolean)">
             <summary>
@@ -4353,12 +4425,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.InstallParams.Scopes">
             <summary>
-            The scopes to add the application to the server with
+            Scopes to add the application to the server with
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Applications.InstallParams.Permissions">
             <summary>
-            The permissions to request for the bot role
+            Permissions to request for the bot role
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Applications.RoleConnection.ApplicationRoleConnectionMetadata">
@@ -6020,6 +6092,11 @@
             The stage moderator must have the MENTION_EVERYONE permission for this notification to be sent.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceCreate.GuildScheduledEventId">
+            <summary>
+            The guild scheduled event associated with this Stage instance  
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.Stages.StageInstanceUpdate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/stage-instance#modify-stage-instance-json-params">Modify Stage Instance</a> Structure
@@ -6231,6 +6308,25 @@
             <summary>
             The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.FileAttachments">
+            <summary>
+            Attachments for a discord message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Attachments">
+            <summary>
+            Attachments for the message
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+            <summary>
+            Adds an attachment to the message
+            </summary>
+            <param name="filename">Name of the file</param>
+            <param name="data">byte[] of the attachment</param>
+            <param name="contentType">Attachment content type</param>
+            <param name="description">Description for the attachment</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Validate">
             <summary>
@@ -14587,29 +14683,24 @@
             ID of the SKU
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.UserId">
-            <summary>
-            ID of the user that is granted access to the entitlement's sku
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.GuildId">
-            <summary>
-            ID of the guild that is granted access to the entitlement's sku
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.ApplicationId">
             <summary>
             ID of the parent application
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Type">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.UserId">
             <summary>
-             	Type of entitlement
+            ID of the user that is granted access to the entitlement's sku
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Consumed">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Type">
             <summary>
-            Not applicable for App Subscriptions. Subscriptions are not consumed and will be false
+            Type of entitlement
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Deleted">
+            <summary>
+            Entitlement was deleted
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.StartsAt">
@@ -14620,6 +14711,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.EndsAt">
             <summary>
             Date at which the entitlement is no longer valid. Not present when using test entitlements.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.GuildId">
+            <summary>
+            ID of the guild that is granted access to the entitlement's sku
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.GetEntitlements(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements)">
@@ -14685,12 +14781,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.Before">
             <summary>
-            Retrieve entitlements before this time
+            Retrieve entitlements before this entitlement ID
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.After">
             <summary>
-            Retrieve entitlements after this time
+            Retrieve entitlements after this entitlement ID
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.Limit">
@@ -14705,7 +14801,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.ExcludeEnded">
             <summary>
-            Whether entitlements should be omitted
+            Whether expired entitlements should be omitted
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.ToQueryString">
@@ -15077,7 +15173,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageGuildExpressions">
             <summary>
-            Allows management and editing of emojis, stickers, and soundboard sounds
+            Allows for editing and deleting emojis, stickers, and soundboard sounds created by all users
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEmojisAndStickers">
@@ -15099,7 +15195,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.ManageEvents">
             <summary>
-            Allows for creating, editing, and deleting scheduled events
+            Allows for editing and deleting scheduled events created by all users
             Channel Type (Voice, Stage)
             </summary>
         </member>
@@ -15170,6 +15266,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseSoundboard">
             <summary>
             Allows for using soundboard in a voice channel
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreateGuildExpressions">
+            <summary>
+            Allows for creating emojis, stickers, and soundboard sounds, and editing and deleting those created by the current user
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.CreateEvents">
+            <summary>
+            Allows for creating scheduled events, and editing and deleting those created by the current user
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Permissions.PermissionFlags.UseExternalSounds">
@@ -16895,6 +17001,12 @@
             <summary>
             Name of thread to create
             Requires the webhook channel to be a forum channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.AppliedTags">
+            <summary>
+            Array of tag ids to apply to the thread
+            requires the webhook channel to be a forum or media channel
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Webhooks.WebhookCreateMessage.ValidateFlags">

@@ -12,6 +12,7 @@ public class StageInstanceCreate
 | --- | --- |
 | [StageInstanceCreate](#stageinstancecreate-constructor)() | The default constructor. |
 | [ChannelId](#channelid-property) { get; set; } | The id of the Stage channel |
+| [GuildScheduledEventId](#guildscheduledeventid-property) { get; set; } | The guild scheduled event associated with this Stage instance |
 | [PrivacyLevel](#privacylevel-property) { get; set; } | The privacy level of the Stage instance (default GUILD_ONLY) |
 | [SendStartNotification](#sendstartnotification-property) { get; set; } | Notify @everyone that a Stage instance has started The stage moderator must have the MENTION_EVERYONE permission for this notification to be sent. |
 | [Topic](#topic-property) { get; set; } | The topic of the Stage instance (1-120 characters) |
@@ -95,6 +96,22 @@ public bool SendStartNotification { get; set; }
 
 ## See Also
 
+* class [StageInstanceCreate](./StageInstanceCreate.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels.Stages](./StagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)
+   
+   
+# GuildScheduledEventId property
+
+The guild scheduled event associated with this Stage instance
+
+```csharp
+public Snowflake GuildScheduledEventId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../../Snowflake.md)
 * class [StageInstanceCreate](./StageInstanceCreate.md)
 * namespace [Oxide.Ext.Discord.Entities.Channels.Stages](./StagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

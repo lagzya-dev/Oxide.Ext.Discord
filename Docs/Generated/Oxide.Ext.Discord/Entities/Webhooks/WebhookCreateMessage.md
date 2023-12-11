@@ -11,6 +11,7 @@ public class WebhookCreateMessage : MessageCreate
 | name | description |
 | --- | --- |
 | [WebhookCreateMessage](#webhookcreatemessage-constructor)() | The default constructor. |
+| [AppliedTags](#appliedtags-property) { get; set; } | Array of tag ids to apply to the thread requires the webhook channel to be a forum or media channel |
 | [AvatarUrl](#avatarurl-property) { get; set; } | Override the default avatar of the webhook |
 | [ThreadName](#threadname-property) { get; set; } | Name of thread to create Requires the webhook channel to be a forum channel |
 | [Username](#username-property) { get; set; } | Override the default username of the webhook |
@@ -97,6 +98,22 @@ public string ThreadName { get; set; }
 
 ## See Also
 
+* class [WebhookCreateMessage](./WebhookCreateMessage.md)
+* namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AppliedTags property
+
+Array of tag ids to apply to the thread requires the webhook channel to be a forum or media channel
+
+```csharp
+public List<Snowflake> AppliedTags { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](../Snowflake.md)
 * class [WebhookCreateMessage](./WebhookCreateMessage.md)
 * namespace [Oxide.Ext.Discord.Entities.Webhooks](./WebhooksNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

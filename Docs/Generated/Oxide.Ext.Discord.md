@@ -185,6 +185,7 @@
 | public type | description |
 | --- | --- |
 | [Flags] enum [ApplicationFlags](./Oxide.Ext.Discord/Entities/Applications/ApplicationFlags.md) | Represents [Application Flags](https://discord.com/developers/docs/resources/application#application-object-application-flags) |
+| class [ApplicationUpdate](./Oxide.Ext.Discord/Entities/Applications/ApplicationUpdate.md) | Represents [Edit Application Structure](https://discord.com/developers/docs/resources/application#edit-current-application-json-params) |
 | class [DiscordApplication](./Oxide.Ext.Discord/Entities/Applications/DiscordApplication.md) | Represents [Application Structure](https://discord.com/developers/docs/resources/application#application-object) |
 | class [InstallParams](./Oxide.Ext.Discord/Entities/Applications/InstallParams.md) | Represents a [Install Params Structure](https://discord.com/developers/docs/resources/application#install-params-object) |
 
