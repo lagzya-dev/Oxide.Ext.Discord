@@ -23,12 +23,12 @@ namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
         public List<Snowflake> SkuIds { get; set; }
         
         /// <summary>
-        /// Retrieve entitlements before this time
+        /// Retrieve entitlements before this entitlement ID
         /// </summary>
         public Snowflake? Before { get; set; }
         
         /// <summary>
-        /// Retrieve entitlements after this time
+        /// Retrieve entitlements after this entitlement ID
         /// </summary>
         public Snowflake? After { get; set; }
         

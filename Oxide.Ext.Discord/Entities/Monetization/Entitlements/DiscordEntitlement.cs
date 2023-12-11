@@ -26,34 +26,28 @@ namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
         public Snowflake SkuId { get; set; }
         
         /// <summary>
-        /// ID of the user that is granted access to the entitlement's sku
-        /// </summary>
-        [JsonProperty("user_id")]
-        public Snowflake? UserId { get; set; }
-        
-        /// <summary>
-        /// ID of the guild that is granted access to the entitlement's sku
-        /// </summary>
-        [JsonProperty("guild_id")]
-        public Snowflake? GuildId { get; set; }
-        
-        /// <summary>
         /// ID of the parent application
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
         
         /// <summary>
-        ///  	Type of entitlement
+        /// ID of the user that is granted access to the entitlement's sku
+        /// </summary>
+        [JsonProperty("user_id")]
+        public Snowflake? UserId { get; set; }
+        
+        /// <summary>
+        /// Type of entitlement
         /// </summary>
         [JsonProperty("type")]
         public EntitlementType Type { get; set; }
         
         /// <summary>
-        /// Not applicable for App Subscriptions. Subscriptions are not consumed and will be false
+        /// Entitlement was deleted
         /// </summary>
-        [JsonProperty("consumed")]
-        public bool Consumed { get; set; }
+        [JsonProperty("deleted")]
+        public bool Deleted { get; set; }
         
         /// <summary>
         /// Start date at which the entitlement is valid. Not present when using test entitlements.
@@ -66,6 +60,12 @@ namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
         /// </summary>
         [JsonProperty("ends_at")]
         public DateTime EndsAt { get; set; }
+        
+        /// <summary>
+        /// ID of the guild that is granted access to the entitlement's sku
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public Snowflake? GuildId { get; set; }
 
         /// <summary>
         /// Returns all entitlements for a given app, active and expired.
