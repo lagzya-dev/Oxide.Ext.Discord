@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities.Messages;
 
@@ -28,6 +29,13 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         [JsonProperty("thread_name")]
         public string ThreadName { get; set; }
+        
+        /// <summary>
+        /// Array of tag ids to apply to the thread
+        /// requires the webhook channel to be a forum or media channel
+        /// </summary>
+        [JsonProperty("applied_tags")]
+        public List<Snowflake> AppliedTags { get; set; }
 
         /// <inheritdoc/>
         protected override void ValidateFlags()
