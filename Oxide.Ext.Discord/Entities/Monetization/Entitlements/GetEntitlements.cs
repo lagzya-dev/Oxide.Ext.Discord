@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
         public Snowflake? GuildId { get; set; }
         
         /// <summary>
-        /// Whether entitlements should be omitted
+        /// Whether expired entitlements should be omitted
         /// </summary>
         public bool? ExcludeEnded { get; set; }
         
