@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Callbacks
 {

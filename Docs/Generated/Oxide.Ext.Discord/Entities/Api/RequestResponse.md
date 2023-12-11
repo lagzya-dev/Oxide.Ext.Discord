@@ -23,7 +23,7 @@ public class RequestResponse : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Entities.Api](./ApiNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [RequestResponse.cs](../../../../Oxide.Ext.Discord/Entities/Api/RequestResponse.cs)

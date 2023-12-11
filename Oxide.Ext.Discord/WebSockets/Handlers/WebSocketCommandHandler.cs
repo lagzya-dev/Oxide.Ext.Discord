@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.RateLimits;
+using Oxide.Ext.Discord.Types.RateLimits;
 
 namespace Oxide.Ext.Discord.WebSockets.Handlers
 {

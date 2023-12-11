@@ -12,10 +12,9 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Json.Serialization;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Network;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Threading;
+using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types.Threading;
 using Oxide.Plugins;
 using HttpMethod = System.Net.Http.HttpMethod;
 

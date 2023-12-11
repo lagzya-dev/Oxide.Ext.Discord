@@ -24,7 +24,7 @@ public class Bucket : BasePoolable, IDebugLoggable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * interface [IDebugLoggable](../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Rest.Buckets](./BucketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

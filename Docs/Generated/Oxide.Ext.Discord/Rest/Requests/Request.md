@@ -40,7 +40,7 @@ public static Request CreateRequest(DiscordPluginPool pluginPool, DiscordClient 
 
 | parameter | description |
 | --- | --- |
-| pluginPool | [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) for the request |
+| pluginPool | [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) for the request |
 | client | Client making the request |
 | httpClient | HttpClient for the request |
 | method | HTTP web method |
@@ -54,7 +54,7 @@ A [`Request`](./Request%7BT%7D.md)
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordClient](../../Clients/DiscordClient.md)
 * interface [IPendingPromise](../../Interfaces/Promises/IPendingPromise.md)
 * class [Request](./Request.md)

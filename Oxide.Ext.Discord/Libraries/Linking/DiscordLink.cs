@@ -9,11 +9,11 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
+using Oxide.Ext.Discord.Types.Hooks;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Linking

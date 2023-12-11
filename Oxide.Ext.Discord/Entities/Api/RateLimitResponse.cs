@@ -5,8 +5,8 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Buckets;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {

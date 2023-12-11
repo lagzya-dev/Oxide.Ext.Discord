@@ -21,7 +21,7 @@ using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 using Oxide.Plugins;
 using UserData = Oxide.Ext.Discord.Data.Users.UserData;
 

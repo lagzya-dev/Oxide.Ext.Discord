@@ -386,7 +386,7 @@ public readonly RestRateLimit RateLimit;
 
 ## See Also
 
-* class [RestRateLimit](../RateLimits/RestRateLimit.md)
+* class [RestRateLimit](../Types/RateLimits/RestRateLimit.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

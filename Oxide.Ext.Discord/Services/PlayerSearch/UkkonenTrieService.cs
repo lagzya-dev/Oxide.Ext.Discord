@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Trie;
+using Oxide.Ext.Discord.Types.Trie;
 
 namespace Oxide.Ext.Discord.Services.PlayerSearch
 {

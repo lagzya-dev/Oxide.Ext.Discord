@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Json.Serialization
 {

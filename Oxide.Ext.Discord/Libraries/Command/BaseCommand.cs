@@ -3,9 +3,9 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types.Hooks;
 
 namespace Oxide.Ext.Discord.Libraries.Command
 {

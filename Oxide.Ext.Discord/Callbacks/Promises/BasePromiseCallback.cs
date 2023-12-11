@@ -1,7 +1,7 @@
 ﻿using System;
 using Oxide.Core;
-using Oxide.Ext.Discord.Pooling;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types.Promises;
 
 namespace Oxide.Ext.Discord.Callbacks.Promises
 {

@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 
 namespace Oxide.Ext.Discord.Entities.Applications
 {

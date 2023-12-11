@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands

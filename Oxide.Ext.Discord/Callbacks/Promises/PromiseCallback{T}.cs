@@ -1,6 +1,6 @@
 ﻿using System;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 
 namespace Oxide.Ext.Discord.Callbacks.Promises
 {

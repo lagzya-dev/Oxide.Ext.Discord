@@ -10,7 +10,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 
 | name | description |
 | --- | --- |
-| [GetOrCreate](#getorcreate-method)(…) | Returns an existing [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) for the given plugin or returns a new one |
+| [GetOrCreate](#getorcreate-method)(…) | Returns an existing [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) for the given plugin or returns a new one |
 
 ## Protected Members
 
@@ -29,7 +29,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
    
 # GetOrCreate method
 
-Returns an existing [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) for the given plugin or returns a new one
+Returns an existing [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) for the given plugin or returns a new one
 
 ```csharp
 public DiscordPluginPool GetOrCreate(Plugin plugin)
@@ -47,7 +47,7 @@ public DiscordPluginPool GetOrCreate(Plugin plugin)
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordPool](./DiscordPool.md)
 * namespace [Oxide.Ext.Discord.Libraries.Pooling](./PoolingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

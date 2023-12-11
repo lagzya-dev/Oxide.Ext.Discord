@@ -2,7 +2,7 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Gateway.Commands
 {

@@ -1,5 +1,5 @@
 using System;
-using Oxide.Ext.Discord.Pooling.Pools;
+using Oxide.Ext.Discord.Types.Pooling.Pools;
 
 #pragma warning disable CS1591
 

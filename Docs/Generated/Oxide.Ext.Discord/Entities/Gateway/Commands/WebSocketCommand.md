@@ -23,7 +23,7 @@ public class WebSocketCommand : BasePoolable, IDebugLoggable
 
 ## See Also
 
-* class [BasePoolable](../../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../../Types/Pooling/BasePoolable.md)
 * interface [IDebugLoggable](../../../Interfaces/Logging/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway.Commands](./CommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../Oxide.Ext.Discord.md)

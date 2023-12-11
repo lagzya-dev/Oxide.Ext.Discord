@@ -24,7 +24,7 @@ public class DiscordJsonWriter : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordJsonWriter.cs](../../../../Oxide.Ext.Discord/Json/Serialization/DiscordJsonWriter.cs)
@@ -40,7 +40,7 @@ public static DiscordJsonWriter Get(DiscordPluginPool pluginPool)
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordJsonWriter](./DiscordJsonWriter.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -57,14 +57,14 @@ public static void WriteAndCopy(DiscordPluginPool pluginPool, JsonSerializer ser
 
 | parameter | description |
 | --- | --- |
-| pluginPool | The [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) to pool from |
+| pluginPool | The [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) to pool from |
 | serializer | Serializer to use |
 | payload | Payload to serialize |
 | output | Output stream to write to |
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordJsonWriter](./DiscordJsonWriter.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

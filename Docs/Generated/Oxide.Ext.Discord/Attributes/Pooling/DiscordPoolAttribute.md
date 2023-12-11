@@ -1,6 +1,6 @@
 # DiscordPoolAttribute class
 
-Attribute for setting [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) on a plugin
+Attribute for setting [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) on a plugin
 
 ```csharp
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]

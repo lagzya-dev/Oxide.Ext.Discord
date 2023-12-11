@@ -17,8 +17,8 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries.Placeholders.Default;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
-using Oxide.Ext.Discord.Pooling.Entities;
+using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types.Pooling.Entities;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders

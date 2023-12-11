@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Libraries.Placeholders
 {

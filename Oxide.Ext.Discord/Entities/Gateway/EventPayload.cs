@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities.Gateway.Events;
 using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.Entities.Gateway

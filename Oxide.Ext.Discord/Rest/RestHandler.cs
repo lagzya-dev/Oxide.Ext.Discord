@@ -15,10 +15,10 @@ using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promises;
-using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Buckets;
 using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types.RateLimits;
 
 namespace Oxide.Ext.Discord.Rest
 {

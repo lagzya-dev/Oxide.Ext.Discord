@@ -143,7 +143,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Attributes.Pooling.DiscordPoolAttribute">
             <summary>
-            Attribute for setting <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> on a plugin
+            Attribute for setting <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> on a plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.Ansi.AnsiBuilder">
@@ -1674,7 +1674,7 @@
             Builder used to build query strings for urls
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.Create(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.Create(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
             <summary>
             Creates a pooled <see cref="T:Oxide.Ext.Discord.Builders.QueryStringBuilder"/>
             </summary>
@@ -2210,6 +2210,11 @@
             </summary>
             <param name="presenceUpdate"></param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordBotConfig">
+            <summary>
+            Represents Discord Extension Bot Config
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordCommandsConfig">
             <summary>
             Represents discord extension command configuration
@@ -2242,12 +2247,17 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Search">
             <summary>
-            Discord Logging Options
+            Discord Search Options
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Validation">
             <summary>
-            Discord Logging Options
+            Discord Validation Options
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Bot">
+            <summary>
+            Discord Bot Options
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Configuration.DiscordConfig.#ctor(System.String)">
@@ -17681,12 +17691,12 @@
             Represents Extension to IEnumerable
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledList``1(System.Collections.Generic.IEnumerable{``0},Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledList``1(System.Collections.Generic.IEnumerable{``0},Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
             <summary>
             Converts an IEnumerable{TSource} to a pooled List
             </summary>
             <param name="source">IEnumerable to convert</param>
-            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> to pool from</param>
             <typeparam name="TSource">Type of the list</typeparam>
             <returns>Pooled List{TSource}</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
@@ -17704,12 +17714,12 @@
             <returns>Pooled Hash{TKey, TElement}</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledHash``3(System.Collections.Generic.IEnumerable{``0},Oxide.Ext.Discord.Pooling.DiscordPluginPool,System.Func{``0,``1},System.Func{``0,``2})">
+        <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledHash``3(System.Collections.Generic.IEnumerable{``0},Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool,System.Func{``0,``1},System.Func{``0,``2})">
             <summary>
             Converts an IEnumerable{TSource} to a pooled Hash{TKey, TElement}
             </summary>
             <param name="source">IEnumerable to convert</param>
-            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="keySelector">Selector for the key</param>
             <param name="elementSelector">Selector for the value</param>
             <typeparam name="TSource">Type of the source</typeparam>
@@ -19398,17 +19408,17 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.Create(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.Create(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader"/>
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CreateFromStream(Oxide.Ext.Discord.Pooling.DiscordPluginPool,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader.CreateFromStream(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool,System.IO.Stream)">
             <summary>
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonReader"/> with stream loaded into it
             </summary>
-            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="stream">Stream to load</param>
             <returns></returns>
         </member>
@@ -19459,17 +19469,17 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.Get(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.Get(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
             <summary>
             Returns a pooled <see cref="T:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter"/>
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAndCopy(Oxide.Ext.Discord.Pooling.DiscordPluginPool,Newtonsoft.Json.JsonSerializer,System.Object,System.IO.Stream)">
+        <member name="M:Oxide.Ext.Discord.Json.Serialization.DiscordJsonWriter.WriteAndCopy(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool,Newtonsoft.Json.JsonSerializer,System.Object,System.IO.Stream)">
             <summary>
             Serializes the payload to the output stream
             </summary>
-            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to pool from</param>
+            <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> to pool from</param>
             <param name="serializer">Serializer to use</param>
             <param name="payload">Payload to serialize</param>
             <param name="output">Output stream to write to</param>
@@ -22317,7 +22327,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.Pooling.DiscordPool.GetOrCreate(Oxide.Core.Plugins.Plugin)">
             <summary>
-            Returns an existing <see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the given plugin or returns a new one
+            Returns an existing <see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> for the given plugin or returns a new one
             </summary>
             <param name="plugin">The pool the plugin is for</param>
             <returns></returns>
@@ -24021,28 +24031,6 @@
             Shuts down the logger
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Network.DiscordStreamContent">
-            <summary>
-            Stream content that is sent over HTTP
-            This is used because <see cref="T:System.Net.Http.StreamContent"/> disposes the underlying stream when disposed and we don't want that since we cache our stream
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Network.DiscordStreamContent.#ctor(System.IO.MemoryStream)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="content">Stream content to send over HTTP</param>
-            <exception cref="T:System.ArgumentNullException">Throws if content is null</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Network.DiscordStreamContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Network.DiscordStreamContent.TryComputeLength(System.Int64@)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Network.DiscordStreamContent.CreateContentReadStreamAsync">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Plugins.PluginId">
             <summary>
             Represents a Plugin ID
@@ -24103,977 +24091,6 @@
             </summary>
             <param name="plugin">Plugin the data is for</param>
             <param name="logger">Logger</param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.BasePool`2">
-            <summary>
-            Represents a BasePool in Discord
-            </summary>
-            <typeparam name="TPooled">Type being pooled</typeparam>
-            <typeparam name="TPool">Type of the pool</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.BasePool`2.PluginPool">
-            <summary>
-            Plugin Pool for this pool
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.GetPoolSize(Oxide.Ext.Discord.Pooling.PoolSettings)">
-            <summary>
-            Returns the pool size from the pool settings for the pool
-            </summary>
-            <param name="settings"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ForPlugin(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
-            <summary>
-            Returns a pool for the given plugin pool
-            </summary>
-            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> to get the pool from</param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Get">
-            <summary>
-            Returns an element from the pool if it exists else it creates a new one
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.CreateNew">
-            <summary>
-            Creates new type of T
-            </summary>
-            <returns>Newly created type of T</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.Free(`0)">
-            <summary>
-            Frees an item back to the pool
-            </summary>
-            <param name="item">Item being freed</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.ClearPoolEntities">
-            <summary>
-            Clears the pool of all pooled objects and resets state to when the pool was first created
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.RemoveAllPools">
-            <summary>
-            Wipes all the pools for this type
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnGetItem(`0)">
-            <summary>
-            Called when an item is retrieved from the pool
-            </summary>
-            <param name="item">Item being retrieved</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePool`2.OnFreeItem(`0@)">
-            <summary>
-            Returns if an item can be freed to the pool
-            </summary>
-            <param name="item">Item to be freed</param>
-            <returns>True if can be freed; false otherwise</returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.BasePoolable">
-            <summary>
-            Represents a poolable object
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.BasePoolable._shouldPool">
-            <summary>
-            Returns if the object should be pooled.
-            This field is set to true when leaving the pool.
-            If the object instantiated using new() outside the pool it will be false
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.EnterPool">
-            <summary>
-            Called when the object is returned to the pool.
-            Can be overriden in child classes to cleanup used data
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.LeavePool">
-            <summary>
-            Called when the object leaves the pool.
-            Can be overriden in child classes to set the initial object state
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.BasePoolable.Dispose">
-            <summary>
-            Disposes the object when used in a using statement
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool">
-            <summary>
-            Built in pooling for discord entities
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.#ctor(Oxide.Core.Plugins.Plugin)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="plugin">Plugin the pool is for</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.SetSettings(Oxide.Ext.Discord.Pooling.PoolSettings)">
-            <summary>
-            Sets the settings for the pools
-            </summary>
-            <param name="settings"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Get``1">
-            <summary>
-            Returns a pooled object of {T} type
-            Must inherit from <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> and have an empty default constructor
-            </summary>
-            <typeparam name="T">Type to be returned</typeparam>
-            <returns>Pooled object of type T</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.Free``1(``0)">
-            <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Pooling.BasePoolable"/> back into the pool
-            </summary>
-            <param name="value">Object to free</param>
-            <typeparam name="T">Type of object being freed</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetList``1">
-            <summary>
-            Returns a pooled <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <typeparam name="T">Type for the list</typeparam>
-            <returns>Pooled List</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeList``1(System.Collections.Generic.List{``0})">
-            <summary>
-            Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
-            </summary>
-            <param name="list">List to be freed</param>
-            <typeparam name="T">Type of the list</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetHash``2">
-            <summary>
-            Returns a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
-            </summary>
-            <typeparam name="TKey">Type for the key</typeparam>
-            <typeparam name="TValue">Type for the value</typeparam>
-            <returns>Pooled Hash</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
-            <summary>
-            Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
-            </summary>
-            <param name="hash">Hash to be freed</param>
-            <typeparam name="TKey">Type for key</typeparam>
-            <typeparam name="TValue">Type for value</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetHashSet``1">
-            <summary>
-            Returns a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <typeparam name="T">Type for the HashSet</typeparam>
-            <returns>Pooled List</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
-            <summary>
-            Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
-            </summary>
-            <param name="list">HashSet to be freed</param>
-            <typeparam name="T">Type of the HashSet</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetStringBuilder">
-            <summary>
-            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
-            </summary>
-            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetStringBuilder(System.String)">
-            <summary>
-            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
-            </summary>
-            <param name="initial">Initial text for the builder</param>
-            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeStringBuilder(System.Text.StringBuilder)">
-            <summary>
-            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
-            </summary>
-            <param name="sb">StringBuilder being freed</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeStringBuilderToString(System.Text.StringBuilder)">
-            <summary>
-            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the built <see cref="T:System.String"/>
-            </summary>
-            <param name="sb"><see cref="T:System.Text.StringBuilder"/> being freed</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetMemoryStream">
-            <summary>
-            Returns a pooled <see cref="T:System.IO.MemoryStream"/>
-            </summary>
-            <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeMemoryStream(System.IO.MemoryStream)">
-            <summary>
-            Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
-            </summary>
-            <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetPlaceholderData">
-            <summary>
-            Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
-            </summary>
-            <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
-            <summary>
-            Frees a <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> back to the pool
-            </summary>
-            <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> being freed</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.GetBoxed``1(``0)">
-            <summary>
-            Returns a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>
-            </summary>
-            <typeparam name="T">Type for the Boxed</typeparam>
-            <returns>Pooled Boxed</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.DiscordPluginPool.FreeBoxed``1(Oxide.Ext.Discord.Pooling.Entities.Boxed{``0})">
-            <summary>
-            Free's a pooled <see cref="T:Oxide.Ext.Discord.Pooling.Pools.BoxedPool`1"/>
-            </summary>
-            <param name="boxed">Boxed to be freed</param>
-            <typeparam name="T">Type of the Boxed</typeparam>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.IPool">
-            <summary>
-            Represents a pool
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.OnPluginUnloaded(Oxide.Ext.Discord.Pooling.DiscordPluginPool)">
-            <summary>
-            Called on a pool when a plugin is unloaded
-            </summary>
-            <param name="pluginPool"></param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.ClearPoolEntities">
-            <summary>
-            Clears the pool of all items
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool.RemoveAllPools">
-            <summary>
-            Wipes all pools of the given type
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.IPool`1">
-            <summary>
-            Represents a pool of type T
-            </summary>
-            <typeparam name="T">Type to be pooled</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool`1.Get">
-            <summary>
-            Returns the Pooled type or a new instance if pool is empty.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.IPool`1.Free(`0)">
-            <summary>
-            Returns the pooled type back to the pool
-            </summary>
-            <param name="poolable"></param>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.PoolSettings">
-            <summary>
-            Settings for the pools
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.PoolSettings.HashPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashPool`2"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.HashSetPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.ListPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.ListPool`1"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.MemoryStreamPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.ObjectPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.ObjectPool`1"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.PlaceholderDataPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.PlaceholderDataPool"/>
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSettings.StringBuilderPoolSize">
-            <summary>
-            Size of the <see cref="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool"/>
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.PoolSize">
-            <summary>
-            Represents size constraints for a pool
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.PoolSize.StartingSize">
-            <summary>
-            Starting size of the pool
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.PoolSize.MaxSize">
-            <summary>
-            Max size of the pool
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Pooling.PoolSize.IsValid">
-            <summary>
-            If the pool size is valid
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.PoolSize.#ctor(System.Int32,System.Int32)">
-            <summary>
-            Constructor settings the startingSize and maxSize
-            </summary>
-            <param name="startingSize">Starting size of the pool</param>
-            <param name="maxSize">Max size of the pool</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.PoolSize.CanResize(System.Int32)">
-            <summary>
-            Returns true of the current size can be resized
-            </summary>
-            <param name="currentSize"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.PoolSize.GetNextSize(System.Int32)">
-            <summary>
-            Returns the next size for the current size
-            </summary>
-            <param name="currentSize"></param>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.BoxedPool`1">
-            <summary>
-            Represents a pool for <see cref="T:Oxide.Ext.Discord.Pooling.Entities.Boxed`1"/>;
-            </summary>
-            <typeparam name="T">Type that will be in the boxed object</typeparam>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1">
-            <summary>
-            Represents a <see cref="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1"/>
-            </summary>
-            <typeparam name="T">Type of the array pool</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Shared">
-            <summary>
-            <see cref="T:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1"/> Instance
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Rent(System.Int32)">
-            <summary>
-            Rents an array from the pool
-            </summary>
-            <param name="minimumLength"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.DiscordArrayPool`1.Return(`0[])">
-            <summary>
-            Returns an array to the pool
-            </summary>
-            <param name="array"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.HashPool`2">
-            <summary>
-            Represents a pool for Hash&lt;TKey, TValue&gt;
-            </summary>
-            <typeparam name="TKey"></typeparam>
-            <typeparam name="TValue"></typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.HashPool`2.OnFreeItem(Oxide.Plugins.Hash{`0,`1}@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1">
-            <summary>
-            Represents a pool for Hash&lt;TKey, TValue&gt;
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.HashSetPool`1.OnFreeItem(System.Collections.Generic.HashSet{`0}@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.ListPool`1">
-            <summary>
-            Represents a pool for list&lt;T&gt;
-            </summary>
-            <typeparam name="T">Type that will be in the list</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.ListPool`1.OnFreeItem(System.Collections.Generic.List{`0}@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool">
-            <summary>
-            Represents a pool for MemoryStream
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.MemoryStreamPool.OnFreeItem(System.IO.MemoryStream@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool">
-            <summary>
-            Pool for StringBuilders
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Pooling.Pools.StringBuilderPool.OnFreeItem(System.Text.StringBuilder@)">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.BasePromise">
-            <summary>
-            Represents the base class for all promises
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Promises.BasePromise.Id">
-            <summary>
-            ID of the promise
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Promises.BasePromise.State">
-            <summary>
-            Tracks the current state of the promise.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.BasePromise.Exception">
-            <summary>
-            The exception when the promise is rejected.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.BasePromise.Rejects">
-            <summary>
-            Collection of handlers for rejected promises
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.Reject(System.Exception)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.InvokeRejectHandlers(System.Exception)">
-            <summary>
-            Invoke all resolve handlers.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.ClearHandlers">
-            <summary>
-            Clears all the handlers for the promises
-            Called after completion
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.DelayedDispose">
-            <summary>
-            Delays disposing the promise till NextTick
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.LeavePool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.BasePromise.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.Promise">
-            <summary>
-            Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.
-            https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Promise._resolves">
-            <summary>
-            Completed handlers that accept no value.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.#ctor">
-            <summary>
-            Constructor for the promise
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Create">
-            <summary>
-            Creates a Promise
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Resolved">
-            <summary>
-            Returns a promise that has been resolved
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Rejected(System.Exception)">
-            <summary>
-            Convert an exception directly into a rejected promise.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ClearHandlers">
-            <summary>
-            Helper function clear out all handlers after resolution or rejection.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.InvokeResolveHandlers">
-            <summary>
-            Invoke all resolve handlers.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Resolve">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Catch(System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Catch``1(System.Action{``0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Action)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Then(System.Action,System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.AddHandlers(Oxide.Ext.Discord.Promises.ResolveHandler,Oxide.Ext.Discord.Promises.RejectHandler)">
-            <summary>
-            Helper function to invoke or register resolve/reject handlers.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenAll(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenAll``1(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise[])">
-            <summary>
-            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
-            Returns a promise of a collection of the resolved results.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.All(System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
-            <summary>
-            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
-            Returns a promise of a collection of the resolved results.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ThenSequence(System.Func{System.Collections.Generic.IEnumerable{System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Sequence(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}[])">
-            <summary>
-            Chain a number of operations using promises.
-            Takes a number of functions each of which starts an async operation and yields a promise.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Sequence(System.Collections.Generic.IEnumerable{System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
-            <summary>
-            Chain a sequence of operations using promises.
-            Takes a collection of functions each of which starts an async operation and yields a promise.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.Finally(System.Action)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.PromiseState">
-            <summary>
-            Specifies the state of a promise.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.PromiseState.Pending">
-            The promise is in-flight.
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.PromiseState.Rejected">
-            The promise has been rejected.
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.PromiseState.Resolved">
-            The promise has been resolved.
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.Promise`1">
-            <summary>
-            Implements a C# promise.
-            https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Promise`1._resolveValue">
-            <summary>
-            The value when the promises is resolved.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Promise`1._resolves">
-            <summary>
-            Completed handlers that accept a value.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Create">
-            <summary>
-            Returns a promise that is currently pending
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Create``1">
-            <summary>
-            Returns a promise that is currently pending
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Create(System.Action{System.Action{`0},System.Action{System.Exception}})">
-            <summary>
-            
-            </summary>
-            <param name="resolver"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolved(`0)">
-            <summary>
-            Convert a simple value directly into a resolved promise.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Rejected(System.Exception)">
-            <summary>
-            Convert an exception directly into a rejected promise.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Resolve(`0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.InvokeResolveHandlers(`0)">
-            <summary>
-            Invoke all resolve handlers.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch(System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch``1(System.Action{``0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Catch(System.Func{System.Exception,`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Action{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then(System.Action{`0},System.Action{System.Exception})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Then``1(System.Func{`0,``0})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.AddHandlers(Oxide.Ext.Discord.Promises.ResolveHandler{`0},Oxide.Ext.Discord.Promises.RejectHandler)">
-            <summary>
-            Helper function to invoke or register resolve/reject handlers.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ThenAll``1(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ThenAll(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0}[])">
-            <summary>
-            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
-            Returns a promise of a collection of the resolved results.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.All(System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0}})">
-            <summary>
-            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
-            Returns a promise of a collection of the resolved results.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.Finally(System.Action)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.ClearHandlers">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Promise`1.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.RejectHandler">
-            <summary>
-            Represents a handler invoked when the promise is rejected.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler._callback">
-            <summary>
-            Callback fn.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.RejectHandler._rejectable">
-            <summary>
-            The promise that is rejected when there is an error while invoking the handler.
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.ResolveHandler">
-            <summary>
-            Represents a handler invoked when the promise is resolved.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.ResolveHandler._resolve">
-            <summary>
-            Callback fn.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.ResolveHandler._rejectable">
-            <summary>
-            The promise that is rejected when there is an error while invoking the handler.
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.ResolveHandler`1">
-            <summary>
-            Represents a handler invoked when the promise is resolved.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.ResolveHandler`1._resolve">
-            <summary>
-            Callback fn.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.ResolveHandler`1._rejectable">
-            <summary>
-            The promise that is rejected when there is an error while invoking the handler.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Timer.BaseTimerInstance.PendingPromise">
-            <summary>
-            The pending promise which is an interface for a promise that can be rejected or resolved.
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Timer.EventTimerInstance._predicate">
-            <summary>
-            Predicate for resolving the promise
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Timer.EventTimerInstance._timeStarted">
-            <summary>
-            The time the promise was started
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Promises.Timer.PromiseTimer">
-            <summary>
-            Timer Implementation using promises
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Timer.PromiseTimer._currentTime">
-            <summary>
-            The current running total for time that this PromiseTimer has run for
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Promises.Timer.PromiseTimer._waiting">
-            <summary>
-            Currently pending promises
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitFor(System.Single)">
-            <summary>
-            Resolve the returned promise once the time has elapsed
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitWhile(System.Func{System.Single,System.Boolean})">
-            <summary>
-            Resolve the returned promise once the predicate evaluates to false
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.WaitUntil(System.Func{System.Single,System.Boolean})">
-            <summary>
-            Resolve the returned promise once the predicate evaluates to true
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.Cancel(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
-            <summary>
-            Cancel a waiting promise and reject it immediately.
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Promises.Timer.PromiseTimer.Update(System.Single)">
-            <summary>
-            Update all pending promises. Must be called for the promises to progress and resolve at all.
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.RateLimits.BaseRateLimit">
-            <summary>
-            Represents a base rate limit for websocket and rest api requests
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NumRequests">
-            <summary>
-            The number of requests that have executed since the last reset
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.LastReset">
-            <summary>
-            Returns when the last reset occured
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.MaxRequests">
-            <summary>
-            The max number of requests this rate limit can handle per interval
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.ResetInterval">
-            <summary>
-            The interval in which this resets at
-            </summary>
-        </member>
-        <member name="F:Oxide.Ext.Discord.RateLimits.BaseRateLimit.Logger">
-            <summary>
-            Logger for the rate limit
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Int64,Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Base Rate Limit Constructor
-            </summary>
-            <param name="maxRequests">Max requests per interval</param>
-            <param name="interval">Reset Interval in milliseconds</param>
-            <param name="logger">Logger</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.NextReset">
-            <summary>
-            Returns the next reset for the rate limit
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.FiredRequestInternal">
-            <summary>
-            Called when an API request is fired
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.OnRateLimitReset">
-            <summary>
-            Called when the rate limit is reset
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.RateLimits.BaseRateLimit.HasReachedRateLimit">
-            <summary>
-            Returns true if we have reached the global rate limit 
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.BaseRateLimit.Shutdown">
-            <summary>
-            Called when a bot is shutting down
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.RateLimits.RestRateLimit">
-            <summary>
-            Represents a rate limit for rest requests
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Constructor for RestRateLimit
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.ReachedRateLimit(System.DateTimeOffset)">
-            <summary>
-            Called if we receive a header notifying us of hitting the rate limit
-            </summary>
-            <param name="retryAfter">How long until we should retry API request again</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.OnRateLimitReset">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.NextReset">
-            <summary>
-            Returns how long until the current rate limit period will expire
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.RestRateLimit.FiredRequest">
-            <summary>
-            Called when an API request is fired
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit">
-            <summary>
-            Represents a WebSocket Rate Limit
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
-            <summary>
-            Constructor for WebsocketRateLimit
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.FiredRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
-            <summary>
-            Called when an API request is fired
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.CanFireRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
-            <summary>
-            Returns if the client can return the given command.
-            This is used to limit plugins to a certain number of websocket commands per rate limit tick
-            </summary>
-            <param name="command">Command that is to be ran</param>
-            <returns>True if the command can run; False otherwise</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.RateLimits.WebsocketRateLimit.OnRateLimitReset">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Buckets.Bucket">
             <summary>
@@ -25249,11 +24266,11 @@
             Represents a Request that does not return data
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.Pooling.DiscordPluginPool,Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,Oxide.Ext.Discord.Interfaces.Promises.IPendingPromise)">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request.CreateRequest(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool,Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,Oxide.Ext.Discord.Interfaces.Promises.IPendingPromise)">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
-            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the request</param>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> for the request</param>
             <param name="client">Client making the request</param>
             <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
@@ -25370,11 +24387,11 @@
             Callback to call if the request completed successfully
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.Pooling.DiscordPluginPool,Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,Oxide.Ext.Discord.Interfaces.Promises.IPendingPromise{`0})">
+        <member name="M:Oxide.Ext.Discord.Rest.Requests.Request`1.CreateRequest(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool,Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpClient,Oxide.Core.Libraries.RequestMethod,System.String,System.Object,Oxide.Ext.Discord.Interfaces.Promises.IPendingPromise{`0})">
             <summary>
             Creates a REST API request that returns type of T from the response
             </summary>
-            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Pooling.DiscordPluginPool"/> for the request</param>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> for the request</param>
             <param name="client">Client making the request</param>
             <param name="httpClient"><see cref="T:System.Net.Http.HttpClient"/> for the request</param>
             <param name="method">HTTP web method</param>
@@ -25543,55 +24560,6 @@
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
-        <member name="M:Oxide.Ext.Discord.Trie.Node`1.GetData">
-            <summary>
-            Gets the data of the whole sub-tree rooted on this node.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Trie.UkkonenTrie`1">
-            <summary>
-            A Ukkonen Suffix Trie
-            </summary>
-            <typeparam name="T">Type to store in the Trie</typeparam>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Trie.UkkonenTrie`1.#ctor">
-            <summary>
-            Constructor
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Trie.UkkonenTrie`1.#ctor(System.Func{`0,`0,System.Boolean})">
-            <summary>
-            Constructor
-            </summary>
-            <param name="equalsFunc">Function to match values when removing</param>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Trie.UkkonenTrie`1.Size">
-            <summary>
-            Size of the Trie
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Trie.UkkonenTrie`1.Search(System.String)">
-            <summary>
-            Search the trie for search value
-            </summary>
-            <param name="search">Text to search for</param>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/> of matches</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Trie.UkkonenTrie`1.Add(System.String,`0)">
-            <summary>
-            Add a new record into the trie
-            </summary>
-            <param name="key">Key for the record</param>
-            <param name="value">Value to be added</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Trie.UkkonenTrie`1.Remove(System.String,`0)">
-            <summary>
-            Removes a record from the trie
-            </summary>
-            <param name="key">Key for the record</param>
-            <param name="value">Value of the record</param>
-        </member>
         <member name="T:Oxide.Ext.Discord.Types.BidirectionalDictionary`2">
             <summary>
             A Dictionary that stores the keys -> values and values -> keys
@@ -25618,6 +24586,999 @@
             <param name="key">Key to check for</param>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Types.Network.DiscordStreamContent">
+            <summary>
+            Stream content that is sent over HTTP
+            This is used because <see cref="T:System.Net.Http.StreamContent"/> disposes the underlying stream when disposed and we don't want that since we cache our stream
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Network.DiscordStreamContent.#ctor(System.IO.MemoryStream)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="content">Stream content to send over HTTP</param>
+            <exception cref="T:System.ArgumentNullException">Throws if content is null</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Network.DiscordStreamContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Network.DiscordStreamContent.TryComputeLength(System.Int64@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Network.DiscordStreamContent.CreateContentReadStreamAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.BasePool`2">
+            <summary>
+            Represents a BasePool in Discord
+            </summary>
+            <typeparam name="TPooled">Type being pooled</typeparam>
+            <typeparam name="TPool">Type of the pool</typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.BasePool`2.PluginPool">
+            <summary>
+            Plugin Pool for this pool
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.GetPoolSize(Oxide.Ext.Discord.Types.Pooling.PoolSettings)">
+            <summary>
+            Returns the pool size from the pool settings for the pool
+            </summary>
+            <param name="settings"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.ForPlugin(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
+            <summary>
+            Returns a pool for the given plugin pool
+            </summary>
+            <param name="pluginPool"><see cref="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool"/> to get the pool from</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.Get">
+            <summary>
+            Returns an element from the pool if it exists else it creates a new one
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.CreateNew">
+            <summary>
+            Creates new type of T
+            </summary>
+            <returns>Newly created type of T</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.Free(`0)">
+            <summary>
+            Frees an item back to the pool
+            </summary>
+            <param name="item">Item being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.OnPluginUnloaded(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.ClearPoolEntities">
+            <summary>
+            Clears the pool of all pooled objects and resets state to when the pool was first created
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.RemoveAllPools">
+            <summary>
+            Wipes all the pools for this type
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.OnGetItem(`0)">
+            <summary>
+            Called when an item is retrieved from the pool
+            </summary>
+            <param name="item">Item being retrieved</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePool`2.OnFreeItem(`0@)">
+            <summary>
+            Returns if an item can be freed to the pool
+            </summary>
+            <param name="item">Item to be freed</param>
+            <returns>True if can be freed; false otherwise</returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.BasePoolable">
+            <summary>
+            Represents a poolable object
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.BasePoolable._shouldPool">
+            <summary>
+            Returns if the object should be pooled.
+            This field is set to true when leaving the pool.
+            If the object instantiated using new() outside the pool it will be false
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePoolable.EnterPool">
+            <summary>
+            Called when the object is returned to the pool.
+            Can be overriden in child classes to cleanup used data
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePoolable.LeavePool">
+            <summary>
+            Called when the object leaves the pool.
+            Can be overriden in child classes to set the initial object state
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.BasePoolable.Dispose">
+            <summary>
+            Disposes the object when used in a using statement
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool">
+            <summary>
+            Built in pooling for discord entities
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.#ctor(Oxide.Core.Plugins.Plugin)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="plugin">Plugin the pool is for</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.SetSettings(Oxide.Ext.Discord.Types.Pooling.PoolSettings)">
+            <summary>
+            Sets the settings for the pools
+            </summary>
+            <param name="settings"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.Get``1">
+            <summary>
+            Returns a pooled object of {T} type
+            Must inherit from <see cref="T:Oxide.Ext.Discord.Types.Pooling.BasePoolable"/> and have an empty default constructor
+            </summary>
+            <typeparam name="T">Type to be returned</typeparam>
+            <returns>Pooled object of type T</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.Free``1(``0)">
+            <summary>
+            Returns a <see cref="T:Oxide.Ext.Discord.Types.Pooling.BasePoolable"/> back into the pool
+            </summary>
+            <param name="value">Object to free</param>
+            <typeparam name="T">Type of object being freed</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetList``1">
+            <summary>
+            Returns a pooled <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <typeparam name="T">Type for the list</typeparam>
+            <returns>Pooled List</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeList``1(System.Collections.Generic.List{``0})">
+            <summary>
+            Free's a pooled <see cref="T:System.Collections.Generic.List`1"/>
+            </summary>
+            <param name="list">List to be freed</param>
+            <typeparam name="T">Type of the list</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetHash``2">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
+            </summary>
+            <typeparam name="TKey">Type for the key</typeparam>
+            <typeparam name="TValue">Type for the value</typeparam>
+            <returns>Pooled Hash</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeHash``2(Oxide.Plugins.Hash{``0,``1})">
+            <summary>
+            Frees a pooled <see cref="T:Oxide.Plugins.Hash`2"/>
+            </summary>
+            <param name="hash">Hash to be freed</param>
+            <typeparam name="TKey">Type for key</typeparam>
+            <typeparam name="TValue">Type for value</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetHashSet``1">
+            <summary>
+            Returns a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <typeparam name="T">Type for the HashSet</typeparam>
+            <returns>Pooled List</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeHashSet``1(System.Collections.Generic.HashSet{``0})">
+            <summary>
+            Free's a pooled <see cref="T:System.Collections.Generic.HashSet`1"/>
+            </summary>
+            <param name="list">HashSet to be freed</param>
+            <typeparam name="T">Type of the HashSet</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetStringBuilder">
+            <summary>
+            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
+            </summary>
+            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetStringBuilder(System.String)">
+            <summary>
+            Returns a pooled <see cref="T:System.Text.StringBuilder"/>
+            </summary>
+            <param name="initial">Initial text for the builder</param>
+            <returns>Pooled <see cref="T:System.Text.StringBuilder"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeStringBuilder(System.Text.StringBuilder)">
+            <summary>
+            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool
+            </summary>
+            <param name="sb">StringBuilder being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeStringBuilderToString(System.Text.StringBuilder)">
+            <summary>
+            Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the built <see cref="T:System.String"/>
+            </summary>
+            <param name="sb"><see cref="T:System.Text.StringBuilder"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetMemoryStream">
+            <summary>
+            Returns a pooled <see cref="T:System.IO.MemoryStream"/>
+            </summary>
+            <returns>Pooled <see cref="T:System.IO.MemoryStream"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeMemoryStream(System.IO.MemoryStream)">
+            <summary>
+            Frees a <see cref="T:System.IO.MemoryStream"/> back to the pool
+            </summary>
+            <param name="stream"><see cref="T:System.IO.MemoryStream"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetPlaceholderData">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/>
+            </summary>
+            <returns>Pooled <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreePlaceholderData(Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData)">
+            <summary>
+            Frees a <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> back to the pool
+            </summary>
+            <param name="data"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderData"/> being freed</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.GetBoxed``1(``0)">
+            <summary>
+            Returns a pooled <see cref="T:Oxide.Ext.Discord.Types.Pooling.Entities.Boxed`1"/>
+            </summary>
+            <typeparam name="T">Type for the Boxed</typeparam>
+            <returns>Pooled Boxed</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeBoxed``1(Oxide.Ext.Discord.Types.Pooling.Entities.Boxed{``0})">
+            <summary>
+            Free's a pooled <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.BoxedPool`1"/>
+            </summary>
+            <param name="boxed">Boxed to be freed</param>
+            <typeparam name="T">Type of the Boxed</typeparam>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.IPool">
+            <summary>
+            Represents a pool
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.IPool.OnPluginUnloaded(Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool)">
+            <summary>
+            Called on a pool when a plugin is unloaded
+            </summary>
+            <param name="pluginPool"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.IPool.ClearPoolEntities">
+            <summary>
+            Clears the pool of all items
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.IPool.RemoveAllPools">
+            <summary>
+            Wipes all pools of the given type
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.IPool`1">
+            <summary>
+            Represents a pool of type T
+            </summary>
+            <typeparam name="T">Type to be pooled</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.IPool`1.Get">
+            <summary>
+            Returns the Pooled type or a new instance if pool is empty.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.IPool`1.Free(`0)">
+            <summary>
+            Returns the pooled type back to the pool
+            </summary>
+            <param name="poolable"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.PoolSettings">
+            <summary>
+            Settings for the pools
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.PoolSettings.HashPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.HashPool`2"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.HashSetPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.HashSetPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.ListPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.ListPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.MemoryStreamPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.MemoryStreamPool"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.ObjectPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.ObjectPool`1"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.PlaceholderDataPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.PlaceholderDataPool"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSettings.StringBuilderPoolSize">
+            <summary>
+            Size of the <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.StringBuilderPool"/>
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.PoolSize">
+            <summary>
+            Represents size constraints for a pool
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.PoolSize.StartingSize">
+            <summary>
+            Starting size of the pool
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.PoolSize.MaxSize">
+            <summary>
+            Max size of the pool
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Pooling.PoolSize.IsValid">
+            <summary>
+            If the pool size is valid
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.PoolSize.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor settings the startingSize and maxSize
+            </summary>
+            <param name="startingSize">Starting size of the pool</param>
+            <param name="maxSize">Max size of the pool</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.PoolSize.CanResize(System.Int32)">
+            <summary>
+            Returns true of the current size can be resized
+            </summary>
+            <param name="currentSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.PoolSize.GetNextSize(System.Int32)">
+            <summary>
+            Returns the next size for the current size
+            </summary>
+            <param name="currentSize"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.BoxedPool`1">
+            <summary>
+            Represents a pool for <see cref="T:Oxide.Ext.Discord.Types.Pooling.Entities.Boxed`1"/>;
+            </summary>
+            <typeparam name="T">Type that will be in the boxed object</typeparam>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1">
+            <summary>
+            Represents a <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1"/>
+            </summary>
+            <typeparam name="T">Type of the array pool</typeparam>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Shared">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1"/> Instance
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Rent(System.Int32)">
+            <summary>
+            Rents an array from the pool
+            </summary>
+            <param name="minimumLength"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Return(`0[])">
+            <summary>
+            Returns an array to the pool
+            </summary>
+            <param name="array"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.HashPool`2">
+            <summary>
+            Represents a pool for Hash&lt;TKey, TValue&gt;
+            </summary>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.HashPool`2.OnFreeItem(Oxide.Plugins.Hash{`0,`1}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.HashSetPool`1">
+            <summary>
+            Represents a pool for Hash&lt;TKey, TValue&gt;
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.HashSetPool`1.OnFreeItem(System.Collections.Generic.HashSet{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.ListPool`1">
+            <summary>
+            Represents a pool for list&lt;T&gt;
+            </summary>
+            <typeparam name="T">Type that will be in the list</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.ListPool`1.OnFreeItem(System.Collections.Generic.List{`0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.MemoryStreamPool">
+            <summary>
+            Represents a pool for MemoryStream
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.MemoryStreamPool.OnFreeItem(System.IO.MemoryStream@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.StringBuilderPool">
+            <summary>
+            Pool for StringBuilders
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.StringBuilderPool.OnFreeItem(System.Text.StringBuilder@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.BasePromise">
+            <summary>
+            Represents the base class for all promises
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Promises.BasePromise.Id">
+            <summary>
+            ID of the promise
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Promises.BasePromise.State">
+            <summary>
+            Tracks the current state of the promise.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.BasePromise.Exception">
+            <summary>
+            The exception when the promise is rejected.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.BasePromise.Rejects">
+            <summary>
+            Collection of handlers for rejected promises
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.Reject(System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.InvokeRejectHandlers(System.Exception)">
+            <summary>
+            Invoke all resolve handlers.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.ClearHandlers">
+            <summary>
+            Clears all the handlers for the promises
+            Called after completion
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.DelayedDispose">
+            <summary>
+            Delays disposing the promise till NextTick
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.LeavePool">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.BasePromise.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.Promise">
+            <summary>
+            Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.
+            https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Promise._resolves">
+            <summary>
+            Completed handlers that accept no value.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.#ctor">
+            <summary>
+            Constructor for the promise
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Create">
+            <summary>
+            Creates a Promise
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Resolved">
+            <summary>
+            Returns a promise that has been resolved
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Rejected(System.Exception)">
+            <summary>
+            Convert an exception directly into a rejected promise.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ClearHandlers">
+            <summary>
+            Helper function clear out all handlers after resolution or rejection.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.InvokeResolveHandlers">
+            <summary>
+            Invoke all resolve handlers.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Resolve">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Catch(System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Catch``1(System.Action{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Then(System.Action,System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.AddHandlers(Oxide.Ext.Discord.Types.Promises.ResolveHandler,Oxide.Ext.Discord.Types.Promises.RejectHandler)">
+            <summary>
+            Helper function to invoke or register resolve/reject handlers.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ThenAll(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ThenAll``1(System.Func{System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise[])">
+            <summary>
+            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
+            Returns a promise of a collection of the resolved results.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.All(System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <summary>
+            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
+            Returns a promise of a collection of the resolved results.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ThenSequence(System.Func{System.Collections.Generic.IEnumerable{System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Sequence(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}[])">
+            <summary>
+            Chain a number of operations using promises.
+            Takes a number of functions each of which starts an async operation and yields a promise.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Sequence(System.Collections.Generic.IEnumerable{System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
+            <summary>
+            Chain a sequence of operations using promises.
+            Takes a collection of functions each of which starts an async operation and yields a promise.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.Finally(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.PromiseState">
+            <summary>
+            Specifies the state of a promise.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.PromiseState.Pending">
+            The promise is in-flight.
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.PromiseState.Rejected">
+            The promise has been rejected.
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.PromiseState.Resolved">
+            The promise has been resolved.
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.Promise`1">
+            <summary>
+            Implements a C# promise.
+            https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Promise`1._resolveValue">
+            <summary>
+            The value when the promises is resolved.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Promise`1._resolves">
+            <summary>
+            Completed handlers that accept a value.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Create">
+            <summary>
+            Returns a promise that is currently pending
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Create``1">
+            <summary>
+            Returns a promise that is currently pending
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Create(System.Action{System.Action{`0},System.Action{System.Exception}})">
+            <summary>
+            
+            </summary>
+            <param name="resolver"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Resolved(`0)">
+            <summary>
+            Convert a simple value directly into a resolved promise.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Rejected(System.Exception)">
+            <summary>
+            Convert an exception directly into a rejected promise.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Resolve(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.InvokeResolveHandlers(`0)">
+            <summary>
+            Invoke all resolve handlers.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Catch(System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Catch``1(System.Action{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Catch(System.Func{System.Exception,`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then(System.Action{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then``1(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}},System.Func{System.Exception,Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then(System.Func{`0,Oxide.Ext.Discord.Interfaces.Promises.IPromise},System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then(Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then(System.Action{`0},System.Action{System.Exception})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Then``1(System.Func{`0,``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.AddHandlers(Oxide.Ext.Discord.Types.Promises.ResolveHandler{`0},Oxide.Ext.Discord.Types.Promises.RejectHandler)">
+            <summary>
+            Helper function to invoke or register resolve/reject handlers.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.ThenAll``1(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.ThenAll(System.Func{`0,System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.All(Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0}[])">
+            <summary>
+            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
+            Returns a promise of a collection of the resolved results.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.All(System.Collections.Generic.IEnumerable{Oxide.Ext.Discord.Interfaces.Promises.IPromise{`0}})">
+            <summary>
+            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
+            Returns a promise of a collection of the resolved results.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.Finally(System.Action)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.ContinueWith(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.Promises.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.ClearHandlers">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Promise`1.EnterPool">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.RejectHandler">
+            <summary>
+            Represents a handler invoked when the promise is rejected.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.RejectHandler._callback">
+            <summary>
+            Callback fn.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.RejectHandler._rejectable">
+            <summary>
+            The promise that is rejected when there is an error while invoking the handler.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.ResolveHandler">
+            <summary>
+            Represents a handler invoked when the promise is resolved.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.ResolveHandler._resolve">
+            <summary>
+            Callback fn.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.ResolveHandler._rejectable">
+            <summary>
+            The promise that is rejected when there is an error while invoking the handler.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.ResolveHandler`1">
+            <summary>
+            Represents a handler invoked when the promise is resolved.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.ResolveHandler`1._resolve">
+            <summary>
+            Callback fn.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.ResolveHandler`1._rejectable">
+            <summary>
+            The promise that is rejected when there is an error while invoking the handler.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Timer.BaseTimerInstance.PendingPromise">
+            <summary>
+            The pending promise which is an interface for a promise that can be rejected or resolved.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Timer.EventTimerInstance._predicate">
+            <summary>
+            Predicate for resolving the promise
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Timer.EventTimerInstance._timeStarted">
+            <summary>
+            The time the promise was started
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer">
+            <summary>
+            Timer Implementation using promises
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer._currentTime">
+            <summary>
+            The current running total for time that this PromiseTimer has run for
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer._waiting">
+            <summary>
+            Currently pending promises
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer.WaitFor(System.Single)">
+            <summary>
+            Resolve the returned promise once the time has elapsed
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer.WaitWhile(System.Func{System.Single,System.Boolean})">
+            <summary>
+            Resolve the returned promise once the predicate evaluates to false
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer.WaitUntil(System.Func{System.Single,System.Boolean})">
+            <summary>
+            Resolve the returned promise once the predicate evaluates to true
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer.Cancel(Oxide.Ext.Discord.Interfaces.Promises.IPromise)">
+            <summary>
+            Cancel a waiting promise and reject it immediately.
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promises.Timer.PromiseTimer.Update(System.Single)">
+            <summary>
+            Update all pending promises. Must be called for the promises to progress and resolve at all.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit">
+            <summary>
+            Represents a base rate limit for websocket and rest api requests
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.NumRequests">
+            <summary>
+            The number of requests that have executed since the last reset
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.LastReset">
+            <summary>
+            Returns when the last reset occured
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.MaxRequests">
+            <summary>
+            The max number of requests this rate limit can handle per interval
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.ResetInterval">
+            <summary>
+            The interval in which this resets at
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.Logger">
+            <summary>
+            Logger for the rate limit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.#ctor(System.Int32,System.Int64,Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Base Rate Limit Constructor
+            </summary>
+            <param name="maxRequests">Max requests per interval</param>
+            <param name="interval">Reset Interval in milliseconds</param>
+            <param name="logger">Logger</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.NextReset">
+            <summary>
+            Returns the next reset for the rate limit
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.FiredRequestInternal">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.OnRateLimitReset">
+            <summary>
+            Called when the rate limit is reset
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.HasReachedRateLimit">
+            <summary>
+            Returns true if we have reached the global rate limit 
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.BaseRateLimit.Shutdown">
+            <summary>
+            Called when a bot is shutting down
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit">
+            <summary>
+            Represents a rate limit for rest requests
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor for RestRateLimit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit.ReachedRateLimit(System.DateTimeOffset)">
+            <summary>
+            Called if we receive a header notifying us of hitting the rate limit
+            </summary>
+            <param name="retryAfter">How long until we should retry API request again</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit.OnRateLimitReset">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit.NextReset">
+            <summary>
+            Returns how long until the current rate limit period will expire
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.RestRateLimit.FiredRequest">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.RateLimits.WebsocketRateLimit">
+            <summary>
+            Represents a WebSocket Rate Limit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.WebsocketRateLimit.#ctor(Oxide.Ext.Discord.Logging.ILogger)">
+            <summary>
+            Constructor for WebsocketRateLimit
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.WebsocketRateLimit.FiredRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
+            <summary>
+            Called when an API request is fired
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.WebsocketRateLimit.CanFireRequest(Oxide.Ext.Discord.Entities.Gateway.Commands.WebSocketCommand)">
+            <summary>
+            Returns if the client can return the given command.
+            This is used to limit plugins to a certain number of websocket commands per rate limit tick
+            </summary>
+            <param name="command">Command that is to be ran</param>
+            <returns>True if the command can run; False otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.RateLimits.WebsocketRateLimit.OnRateLimitReset">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Types.Singleton`1">
             <summary>
             Represents a singleton of type {T}
@@ -25628,6 +25589,55 @@
             <summary>
             Retrieves the instance of the singleton
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.Node`1.GetData">
+            <summary>
+            Gets the data of the whole sub-tree rooted on this node.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1">
+            <summary>
+            A Ukkonen Suffix Trie
+            </summary>
+            <typeparam name="T">Type to store in the Trie</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.#ctor(System.Func{`0,`0,System.Boolean})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="equalsFunc">Function to match values when removing</param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.Size">
+            <summary>
+            Size of the Trie
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.Search(System.String)">
+            <summary>
+            Search the trie for search value
+            </summary>
+            <param name="search">Text to search for</param>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/> of matches</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.Add(System.String,`0)">
+            <summary>
+            Add a new record into the trie
+            </summary>
+            <param name="key">Key for the record</param>
+            <param name="value">Value to be added</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Trie.UkkonenTrie`1.Remove(System.String,`0)">
+            <summary>
+            Removes a record from the trie
+            </summary>
+            <param name="key">Key for the record</param>
+            <param name="value">Value of the record</param>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebSocket">
             <summary>

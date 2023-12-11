@@ -14,7 +14,7 @@ using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Linking;
 using Oxide.Ext.Discord.Libraries.Placeholders;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 
 namespace Oxide.Ext.Discord.Extensions
 {

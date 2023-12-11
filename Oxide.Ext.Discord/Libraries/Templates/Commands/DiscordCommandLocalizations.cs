@@ -9,7 +9,7 @@ using Oxide.Ext.Discord.Exceptions.Libraries.Templates;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Commands

@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities.Messages.Embeds;
 using Oxide.Ext.Discord.Interfaces.Promises;
 using Oxide.Ext.Discord.Interfaces.Templates;
 using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Promises;
+using Oxide.Ext.Discord.Types.Promises;
 
 namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
 {

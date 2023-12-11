@@ -1,5 +1,5 @@
 ﻿using System;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Attributes.Pooling
 {

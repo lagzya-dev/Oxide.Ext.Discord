@@ -49,7 +49,7 @@ public class PlaceholderData : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PlaceholderData.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.cs)

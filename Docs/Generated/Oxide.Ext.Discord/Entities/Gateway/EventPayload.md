@@ -26,7 +26,7 @@ public class EventPayload : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Entities.Gateway](./GatewayNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [EventPayload.cs](../../../../Oxide.Ext.Discord/Entities/Gateway/EventPayload.cs)

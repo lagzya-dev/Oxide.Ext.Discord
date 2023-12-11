@@ -26,7 +26,7 @@ public class DiscordJsonReader : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordJsonReader.cs](../../../../Oxide.Ext.Discord/Json/Serialization/DiscordJsonReader.cs)
@@ -42,7 +42,7 @@ public static DiscordJsonReader Create(DiscordPluginPool pluginPool)
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordJsonReader](./DiscordJsonReader.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -58,12 +58,12 @@ public static DiscordJsonReader CreateFromStream(DiscordPluginPool pluginPool, S
 
 | parameter | description |
 | --- | --- |
-| pluginPool | The [`DiscordPluginPool`](../../Pooling/DiscordPluginPool.md) to pool from |
+| pluginPool | The [`DiscordPluginPool`](../../Types/Pooling/DiscordPluginPool.md) to pool from |
 | stream | Stream to load |
 
 ## See Also
 
-* class [DiscordPluginPool](../../Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../../Types/Pooling/DiscordPluginPool.md)
 * class [DiscordJsonReader](./DiscordJsonReader.md)
 * namespace [Oxide.Ext.Discord.Json.Serialization](./SerializationNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

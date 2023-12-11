@@ -20,7 +20,7 @@ using Oxide.Ext.Discord.Libraries.Templates.Messages;
 using Oxide.Ext.Discord.Libraries.Templates.Modals;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Promises.Timer;
+using Oxide.Ext.Discord.Types.Promises.Timer;
 
 namespace Oxide.Ext.Discord
 {

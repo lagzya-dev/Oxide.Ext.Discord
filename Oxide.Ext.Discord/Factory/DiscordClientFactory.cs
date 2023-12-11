@@ -5,12 +5,12 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
+using Oxide.Ext.Discord.Types.Hooks;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Factory

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Types.Hooks;
 
 namespace Oxide.Ext.Discord.Callbacks.Hooks
 {

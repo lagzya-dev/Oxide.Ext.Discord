@@ -18,13 +18,13 @@ using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Hooks;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Core;
 using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Ext.Discord.Rest;
+using Oxide.Ext.Discord.Types.Hooks;
 using Oxide.Ext.Discord.WebSockets;
 using Oxide.Plugins;
 

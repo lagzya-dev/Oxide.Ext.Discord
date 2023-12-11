@@ -11,10 +11,10 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Pooling;
-using Oxide.Ext.Discord.RateLimits;
 using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Threading;
+using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types.RateLimits;
+using Oxide.Ext.Discord.Types.Threading;
 
 namespace Oxide.Ext.Discord.Rest.Buckets
 {

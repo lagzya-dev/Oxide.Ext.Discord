@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Plugins.Setup;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Pooling

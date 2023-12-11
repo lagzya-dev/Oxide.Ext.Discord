@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling;
 using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {

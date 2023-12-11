@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Gateway.Commands;
 using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Gateway
 {

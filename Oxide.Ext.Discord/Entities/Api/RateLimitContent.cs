@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Pooling;
+using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Entities.Api
 {

@@ -29,7 +29,7 @@
 
 | public type | description |
 | --- | --- |
-| class [DiscordPoolAttribute](./Oxide.Ext.Discord/Attributes/Pooling/DiscordPoolAttribute.md) | Attribute for setting [`DiscordPluginPool`](./Oxide.Ext.Discord/Pooling/DiscordPluginPool.md) on a plugin |
+| class [DiscordPoolAttribute](./Oxide.Ext.Discord/Attributes/Pooling/DiscordPoolAttribute.md) | Attribute for setting [`DiscordPluginPool`](./Oxide.Ext.Discord/Types/Pooling/DiscordPluginPool.md) on a plugin |
 
 ## Oxide.Ext.Discord.Builders namespace
 
@@ -1085,12 +1085,6 @@
 | interface [ILogger](./Oxide.Ext.Discord/Logging/ILogger.md) | Represents an interface for a logger |
 | static class [LoggerExt](./Oxide.Ext.Discord/Logging/LoggerExt.md) |  |
 
-## Oxide.Ext.Discord.Network namespace
-
-| public type | description |
-| --- | --- |
-| class [DiscordStreamContent](./Oxide.Ext.Discord/Network/DiscordStreamContent.md) | Stream content that is sent over HTTP This is used because StreamContent disposes the underlying stream when disposed and we don't want that since we cache our stream |
-
 ## Oxide.Ext.Discord.Plugins namespace
 
 | public type | description |
@@ -1102,48 +1096,6 @@
 | public type | description |
 | --- | --- |
 | class [PluginSetup](./Oxide.Ext.Discord/Plugins/Setup/PluginSetup.md) | Build Discord Extension Setup Data for a plugin |
-
-## Oxide.Ext.Discord.Pooling namespace
-
-| public type | description |
-| --- | --- |
-| abstract class [BasePool&lt;TPooled,TPool&gt;](./Oxide.Ext.Discord/Pooling/BasePool%7BTPooled,TPool%7D.md) | Represents a BasePool in Discord |
-| abstract class [BasePoolable](./Oxide.Ext.Discord/Pooling/BasePoolable.md) | Represents a poolable object |
-| class [DiscordPluginPool](./Oxide.Ext.Discord/Pooling/DiscordPluginPool.md) | Built in pooling for discord entities |
-| interface [IPool](./Oxide.Ext.Discord/Pooling/IPool.md) | Represents a pool |
-| interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/IPool%7BT%7D.md) | Represents a pool of type T |
-| class [PoolSettings](./Oxide.Ext.Discord/Pooling/PoolSettings.md) | Settings for the pools |
-| struct [PoolSize](./Oxide.Ext.Discord/Pooling/PoolSize.md) | Represents size constraints for a pool |
-
-## Oxide.Ext.Discord.Pooling.Pools namespace
-
-| public type | description |
-| --- | --- |
-| class [DiscordArrayPool&lt;T&gt;](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool%7BT%7D.md) | Represents a [`DiscordArrayPool`](./Oxide.Ext.Discord/Pooling/Pools/DiscordArrayPool%7BT%7D.md) |
-
-## Oxide.Ext.Discord.Promises namespace
-
-| public type | description |
-| --- | --- |
-| class [BasePromise](./Oxide.Ext.Discord/Promises/BasePromise.md) | Represents the base class for all promises |
-| class [Promise](./Oxide.Ext.Discord/Promises/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
-| class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Promises/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
-| enum [PromiseState](./Oxide.Ext.Discord/Promises/PromiseState.md) | Specifies the state of a promise. |
-| struct [RejectHandler](./Oxide.Ext.Discord/Promises/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
-
-## Oxide.Ext.Discord.Promises.Timer namespace
-
-| public type | description |
-| --- | --- |
-| class [PromiseTimer](./Oxide.Ext.Discord/Promises/Timer/PromiseTimer.md) | Timer Implementation using promises |
-
-## Oxide.Ext.Discord.RateLimits namespace
-
-| public type | description |
-| --- | --- |
-| abstract class [BaseRateLimit](./Oxide.Ext.Discord/RateLimits/BaseRateLimit.md) | Represents a base rate limit for websocket and rest api requests |
-| class [RestRateLimit](./Oxide.Ext.Discord/RateLimits/RestRateLimit.md) | Represents a rate limit for rest requests |
-| class [WebsocketRateLimit](./Oxide.Ext.Discord/RateLimits/WebsocketRateLimit.md) | Represents a WebSocket Rate Limit |
 
 ## Oxide.Ext.Discord.Rest namespace
 
@@ -1169,17 +1121,65 @@
 | class [RequestHandler](./Oxide.Ext.Discord/Rest/Requests/RequestHandler.md) | Represent a Discord API request |
 | enum [RequestStatus](./Oxide.Ext.Discord/Rest/Requests/RequestStatus.md) | Discord API Request Status |
 
-## Oxide.Ext.Discord.Trie namespace
-
-| public type | description |
-| --- | --- |
-| class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Trie/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
-
 ## Oxide.Ext.Discord.Types namespace
 
 | public type | description |
 | --- | --- |
 | abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Types/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
+
+## Oxide.Ext.Discord.Types.Network namespace
+
+| public type | description |
+| --- | --- |
+| class [DiscordStreamContent](./Oxide.Ext.Discord/Types/Network/DiscordStreamContent.md) | Stream content that is sent over HTTP This is used because StreamContent disposes the underlying stream when disposed and we don't want that since we cache our stream |
+
+## Oxide.Ext.Discord.Types.Pooling namespace
+
+| public type | description |
+| --- | --- |
+| abstract class [BasePool&lt;TPooled,TPool&gt;](./Oxide.Ext.Discord/Types/Pooling/BasePool%7BTPooled,TPool%7D.md) | Represents a BasePool in Discord |
+| abstract class [BasePoolable](./Oxide.Ext.Discord/Types/Pooling/BasePoolable.md) | Represents a poolable object |
+| class [DiscordPluginPool](./Oxide.Ext.Discord/Types/Pooling/DiscordPluginPool.md) | Built in pooling for discord entities |
+| interface [IPool](./Oxide.Ext.Discord/Types/Pooling/IPool.md) | Represents a pool |
+| interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Types/Pooling/IPool%7BT%7D.md) | Represents a pool of type T |
+| class [PoolSettings](./Oxide.Ext.Discord/Types/Pooling/PoolSettings.md) | Settings for the pools |
+| struct [PoolSize](./Oxide.Ext.Discord/Types/Pooling/PoolSize.md) | Represents size constraints for a pool |
+
+## Oxide.Ext.Discord.Types.Pooling.Pools namespace
+
+| public type | description |
+| --- | --- |
+| class [DiscordArrayPool&lt;T&gt;](./Oxide.Ext.Discord/Types/Pooling/Pools/DiscordArrayPool%7BT%7D.md) | Represents a [`DiscordArrayPool`](./Oxide.Ext.Discord/Types/Pooling/Pools/DiscordArrayPool%7BT%7D.md) |
+
+## Oxide.Ext.Discord.Types.Promises namespace
+
+| public type | description |
+| --- | --- |
+| class [BasePromise](./Oxide.Ext.Discord/Types/Promises/BasePromise.md) | Represents the base class for all promises |
+| class [Promise](./Oxide.Ext.Discord/Types/Promises/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Types/Promises/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| enum [PromiseState](./Oxide.Ext.Discord/Types/Promises/PromiseState.md) | Specifies the state of a promise. |
+| struct [RejectHandler](./Oxide.Ext.Discord/Types/Promises/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
+
+## Oxide.Ext.Discord.Types.Promises.Timer namespace
+
+| public type | description |
+| --- | --- |
+| class [PromiseTimer](./Oxide.Ext.Discord/Types/Promises/Timer/PromiseTimer.md) | Timer Implementation using promises |
+
+## Oxide.Ext.Discord.Types.RateLimits namespace
+
+| public type | description |
+| --- | --- |
+| abstract class [BaseRateLimit](./Oxide.Ext.Discord/Types/RateLimits/BaseRateLimit.md) | Represents a base rate limit for websocket and rest api requests |
+| class [RestRateLimit](./Oxide.Ext.Discord/Types/RateLimits/RestRateLimit.md) | Represents a rate limit for rest requests |
+| class [WebsocketRateLimit](./Oxide.Ext.Discord/Types/RateLimits/WebsocketRateLimit.md) | Represents a WebSocket Rate Limit |
+
+## Oxide.Ext.Discord.Types.Trie namespace
+
+| public type | description |
+| --- | --- |
+| class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Types/Trie/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
 
 ## Oxide.Ext.Discord.WebSockets namespace
 

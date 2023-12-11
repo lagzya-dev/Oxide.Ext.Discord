@@ -23,7 +23,7 @@ public class PlaceholderState : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../../Pooling/BasePoolable.md)
+* class [BasePoolable](../../Types/Pooling/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Libraries.Placeholders](./PlaceholdersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [PlaceholderState.cs](../../../../Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.cs)
