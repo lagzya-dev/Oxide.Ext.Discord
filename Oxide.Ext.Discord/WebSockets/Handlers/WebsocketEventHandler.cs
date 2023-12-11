@@ -598,13 +598,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             ApplicationFlags flags = app.Flags ?? ApplicationFlags.None;
             if (_client.Connection.HasIntents(GatewayIntents.GuildMessages) && !app.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
             {
-                _logger.Warning("Applying GatewayMessageContent App Flag since it is currently disabled");
+                _logger.Info("Applying GatewayMessageContent App Flag since it is currently disabled");
                 flags |= ApplicationFlags.GatewayMessageContentLimited;
             }
 
             if (app.HasAnyApplicationFlags(ApplicationFlags.GatewayGuildMembersLimited | ApplicationFlags.GatewayGuildMembers))
             {
-                _logger.Warning("Applying GatewayGuildMembers App Flag since it is currently disabled");
+                _logger.Info("Applying GatewayGuildMembers App Flag since it is currently disabled");
                 flags |= ApplicationFlags.GatewayGuildMembersLimited;
             }
 
