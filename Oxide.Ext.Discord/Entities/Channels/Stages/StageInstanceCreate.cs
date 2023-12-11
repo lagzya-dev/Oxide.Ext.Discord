@@ -31,5 +31,11 @@ namespace Oxide.Ext.Discord.Entities.Channels.Stages
         /// </summary>
         [JsonProperty("send_start_notification")]
         public bool SendStartNotification { get; set; }
+        
+        /// <summary>
+        /// The guild scheduled event associated with this Stage instance  
+        /// </summary>
+        [JsonProperty("guild_scheduled_event_id")]
+        public Snowflake GuildScheduledEventId { get; set; }
     }
 }
