@@ -8,13 +8,13 @@ namespace Oxide.Ext.Discord.Entities.Applications
     public class InstallParams
     {
         /// <summary>
-        /// The scopes to add the application to the server with
+        /// Scopes to add the application to the server with
         /// </summary>
         [JsonProperty("scopes")]
         public List<string> Scopes { get; set; } 
         
         /// <summary>
-        /// The permissions to request for the bot role
+        /// Permissions to request for the bot role
         /// </summary>
         [JsonProperty("permissions")]
         public string Permissions { get; set; } 

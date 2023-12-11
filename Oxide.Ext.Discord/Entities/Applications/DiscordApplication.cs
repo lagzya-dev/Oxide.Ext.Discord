@@ -25,31 +25,31 @@ namespace Oxide.Ext.Discord.Entities.Applications
     public class DiscordApplication : IDebugLoggable
     {
         /// <summary>
-        /// The id of the app
+        /// ID of the app
         /// </summary>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// The name of the app
+        /// Name of the app
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
         
         /// <summary>
-        /// The icon hash of the app
+        /// Icon hash of the app
         /// </summary>
         [JsonProperty("icon")]
         public string Icon { get; set; }
         
         /// <summary>
-        /// The description of the app
+        /// Description of the app
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
         
         /// <summary>
-        /// An array of rpc origin urls, if rpc is enabled
+        /// List of RPC origin URLs, if RPC is enabled
         /// </summary>
         [JsonProperty("rpc_origins")]
         public List<string> RpcOrigins { get; set; }
@@ -67,13 +67,19 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public bool BotRequireCodeGrant { get; set; }
         
         /// <summary>
-        /// The url of the app's terms of service
+        /// Partial user object for the bot user associated with the app
+        /// </summary>
+        [JsonProperty("bot")]
+        public DiscordUser Bot { get; set; }
+        
+        /// <summary>
+        /// URL of the app's terms of service
         /// </summary>
         [JsonProperty("terms_of_service_url")]
         public string TermsOfServiceUrl { get; set; }
         
         /// <summary>
-        /// The url of the app's privacy policy
+        /// URL of the app's privacy policy
         /// </summary>
         [JsonProperty("privacy_policy_url")]
         public string PrivacyPolicyUrl { get; set; }
@@ -85,7 +91,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public DiscordUser Owner { get; set; }
 
         /// <summary>
-        /// The hex encoded key for verification in interactions and the GameSDK's GetTicket
+        /// Hex encoded key for verification in interactions and the GameSDK's GetTicket
         /// </summary>
         [JsonProperty("verify_key")]
         public string Verify { get; set; }
@@ -97,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public DiscordTeam Team { get; set; }
 
         /// <summary>
-        /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
+        /// Guild associated with the app. For example, a developer support server.
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
@@ -127,7 +133,7 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public string CoverImage { get; set; } 
         
         /// <summary>
-        /// The application's public flags
+        /// App's public flags
         /// </summary>
         [JsonProperty("flags")]
         public ApplicationFlags? Flags { get; set; }
@@ -137,6 +143,24 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("approximate_guild_count")]
         public int? ApproximateGuildCount { get; set; } 
+                
+        /// <summary>
+        /// Array of redirect URIs for the app
+        /// </summary>
+        [JsonProperty("redirect_uris")]
+        public List<string> RedirectUris { get; set; } 
+        
+        /// <summary>
+        /// Interactions endpoint URL for the app
+        /// </summary>
+        [JsonProperty("interactions_endpoint_url")]
+        public string InteractionsEndpointUrl { get; set; } 
+        
+        /// <summary>
+        /// Role connection verification URL for the app
+        /// </summary>
+        [JsonProperty("role_connections_verification_url")]
+        public string RoleConnectionsVerificationUrl { get; set; } 
         
         /// <summary>
         /// Up to 5 tags describing the content and functionality of the application
@@ -155,12 +179,6 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("custom_install_url")]
         public string CustomInstallUrl { get; set; } 
-        
-        /// <summary>
-        /// The application's role connection verification entry point, which when configured will render the app as a verification method in the guild role verification configuration
-        /// </summary>
-        [JsonProperty("role_connections_verification_url")]
-        public string RoleConnectionsVerificationUrl { get; set; } 
 
         /// <summary>
         /// Returns the URL for the applications Icon
@@ -201,6 +219,16 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public static IPromise<DiscordApplication> Get(DiscordClient client)
         {
             return client.Bot.Rest.Get<DiscordApplication>(client,"applications/@me");
+        }
+
+        /// <summary>
+        /// Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update to apply</param>
+        public IPromise<DiscordApplication> Edit(DiscordClient client, ApplicationUpdate update)
+        {
+            return client.Bot.Rest.Patch<DiscordApplication>(client, "applications/@me", update);
         }
         
         /// <summary>
