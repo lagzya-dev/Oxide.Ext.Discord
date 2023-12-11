@@ -223,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         ManageWebhooks = 1 << 29,
         
         /// <summary>
-        /// Allows management and editing of emojis, stickers, and soundboard sounds
+        /// Allows for editing and deleting emojis, stickers, and soundboard sounds created by all users
         /// </summary>
         [Description("MANAGE_GUILD_EXPRESSIONS")]
         ManageGuildExpressions = 1 << 30,
@@ -250,7 +250,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         RequestToSpeak = 1ul << 32,
         
         /// <summary>
-        /// Allows for creating, editing, and deleting scheduled events
+        /// Allows for editing and deleting scheduled events created by all users
         /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("MANAGE_EVENTS")]
@@ -339,6 +339,18 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// </summary>
         [Description("USE_SOUNDBOARD")]
         UseSoundboard = 1ul << 42,
+        
+        /// <summary>
+        /// Allows for creating emojis, stickers, and soundboard sounds, and editing and deleting those created by the current user
+        /// </summary>
+        [Description("CREATE_GUILD_EXPRESSIONS")]
+        CreateGuildExpressions = 1ul << 43,
+        
+        /// <summary>
+        /// Allows for creating scheduled events, and editing and deleting those created by the current user
+        /// </summary>
+        [Description("CREATE_EVENTS")]
+        CreateEvents = 1ul << 44,
         
         /// <summary>
         /// Allows the usage of custom soundboard sounds from other servers
