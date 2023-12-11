@@ -585,9 +585,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             _client.OnClientReady(ready);
 
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
-            if (_client.Connection.HasIntents(GatewayIntents.GuildMessages) && !_client.Application.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
+           ProcessGatewayIntents(ready.Application);
+        }
+
+        private void ProcessGatewayIntents(DiscordApplication app)
+        {
+            ApplicationFlags flags = app.Flags ?? ApplicationFlags.None;
+            if (_client.Connection.HasIntents(GatewayIntents.GuildMessages) && !app.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
             {
-                _logger.Error("You need to enable \"Message Content Intent\" for {0} @ https://discord.com/developers/applications or plugins using this intent will not function correctly", _client.BotUser.Username);
+                _logger.Warning("Applying GatewayMessageContent App Flag since it is currently disabled");
+                flags |= ApplicationFlags.GatewayMessageContentLimited;
+            }
+
+            if (app.HasAnyApplicationFlags(ApplicationFlags.GatewayGuildMembersLimited | ApplicationFlags.GatewayGuildMembers))
+            {
+                _logger.Warning("Applying GatewayGuildMembers App Flag since it is currently disabled");
+                flags |= ApplicationFlags.GatewayGuildMembersLimited;
+            }
+
+            if (flags != app.Flags)
+            {
+                app.Edit(_client.GetFirstClient(), new ApplicationUpdate { Flags = flags });
             }
         }
 
