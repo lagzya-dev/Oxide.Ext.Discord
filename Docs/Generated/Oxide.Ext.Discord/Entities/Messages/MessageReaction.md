@@ -11,9 +11,12 @@ public class MessageReaction
 | name | description |
 | --- | --- |
 | [MessageReaction](#messagereaction-constructor)() | The default constructor. |
-| [Count](#count-property) { get; set; } | Times this emoji has been used to react |
+| [BurstColors](#burstcolors-property) { get; set; } | HEX colors used for super reaction TODO: Find out the array type |
+| [Count](#count-property) { get; set; } | Total number of times this emoji has been used to react (including super reacts) |
+| [count_details](#count_details-property) { get; set; } | Reaction Count Details |
 | [Emoji](#emoji-property) { get; set; } | Emoji information [`DiscordEmoji`](../Emojis/DiscordEmoji.md) |
 | [Me](#me-property) { get; set; } | Whether the current user reacted using this emoji |
+| [me_burst](#me_burst-property) { get; set; } | Whether the current user super-reacted using this emoji |
 
 ## See Also
 
@@ -39,7 +42,7 @@ public MessageReaction()
    
 # Count property
 
-Times this emoji has been used to react
+Total number of times this emoji has been used to react (including super reacts)
 
 ```csharp
 public int Count { get; set; }
@@ -47,6 +50,22 @@ public int Count { get; set; }
 
 ## See Also
 
+* class [MessageReaction](./MessageReaction.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# count_details property
+
+Reaction Count Details
+
+```csharp
+public ReactionCountDetails count_details { get; set; }
+```
+
+## See Also
+
+* class [ReactionCountDetails](./ReactionCountDetails.md)
 * class [MessageReaction](./MessageReaction.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -67,6 +86,21 @@ public bool Me { get; set; }
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
+# me_burst property
+
+Whether the current user super-reacted using this emoji
+
+```csharp
+public bool me_burst { get; set; }
+```
+
+## See Also
+
+* class [MessageReaction](./MessageReaction.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
 # Emoji property
 
 Emoji information [`DiscordEmoji`](../Emojis/DiscordEmoji.md)
@@ -78,6 +112,21 @@ public DiscordEmoji Emoji { get; set; }
 ## See Also
 
 * class [DiscordEmoji](../Emojis/DiscordEmoji.md)
+* class [MessageReaction](./MessageReaction.md)
+* namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# BurstColors property
+
+HEX colors used for super reaction TODO: Find out the array type
+
+```csharp
+public object[] BurstColors { get; set; }
+```
+
+## See Also
+
 * class [MessageReaction](./MessageReaction.md)
 * namespace [Oxide.Ext.Discord.Entities.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

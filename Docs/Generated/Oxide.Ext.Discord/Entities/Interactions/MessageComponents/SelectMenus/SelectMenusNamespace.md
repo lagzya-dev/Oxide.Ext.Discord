@@ -6,6 +6,8 @@
 | class [ChannelSelectComponent](./ChannelSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [MentionableSelectComponent](./MentionableSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [RoleSelectComponent](./RoleSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
+| class [SelectMenuDefaultValue](./SelectMenuDefaultValue.md) | Represents a [Select Default Value Structure](https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure) within discord. |
+| enum [SelectMenuDefaultValueType](./SelectMenuDefaultValueType.md) | Represents a [Select Menus Default Value Type](https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure) within discord. |
 | class [SelectMenuOption](./SelectMenuOption.md) | Represents a [Select Menu Option Structure](https://discord.com/developers/docs/interactions/message-components#select-option-structure) within discord. |
 | class [StringSelectComponent](./StringSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [UserSelectComponent](./UserSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |

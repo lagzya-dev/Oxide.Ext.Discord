@@ -1418,6 +1418,13 @@
             <param name="type">Channel Type to add</param>
             <returns>This</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddDefaultValue(Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Adds an allow channel type for <see cref="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.MessageComponentType.ChannelSelect"/>
+            </summary>
+            <param name="id">ID of the default value to add</param>
+            <returns>This</returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.Build">
             <summary>
             Returns the root builder
@@ -3590,7 +3597,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Activities.DiscordActivity">
             <summary>
-            Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway-events#activity-object">Activity Structure</a>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Activities.DiscordActivity.Name">
@@ -4795,11 +4802,7 @@
             the type of channel <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Topic">
-            <summary>
-            The channel topic (0-1024 characters)
-            </summary>
-        </member>
+        <!-- Badly formed XML comment ignored for member "P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Topic" -->
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Bitrate">
             <summary>
             The bitrate (in bits) of the voice channel
@@ -4845,23 +4848,28 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultReactionEmoji">
             <summary>
-            Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel
+            Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.AvailableTags">
             <summary>
-            Set of tags that can be used in a `GUILD_FORUM` channel
+            Set of tags that can be used in a `GUILD_FORUM` or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultSortOrder">
             <summary>
-            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultForumLayout">
             <summary>
             The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes"/> used to display posts in GUILD_FORUM channels.
             Defaults to <see cref="F:Oxide.Ext.Discord.Entities.Channels.ForumLayoutTypes.NotSet"/>, which indicates a layout view has not been set by a channel admin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.DefaultThreadRateLimitPerUser">
+            <summary>
+            The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Validate">
@@ -4885,6 +4893,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.RequireTag">
             <summary>
             Whether a tag is required to be specified when creating a thread in a GUILD_FORUM channel. Tags are specified in the applied_tags field.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelFlags.HideMediaDownloadOptions">
+            <summary>
+            When set hides the embedded media download options. Available only for media channels
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ChannelInvite">
@@ -5050,7 +5063,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildForum">
             <summary>
-            (still in development) a channel that can only contain threads
+            A channel that can only contain threads
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Channels.ChannelType.GuildMedia">
+            <summary>
+            Channel that can only contain threads, similar to `GUILD_FORUM` channels
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.DiscordChannel">
@@ -5101,7 +5119,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.LastMessageId">
             <summary>
-            The id of the last message sent in this channel (or thread for GUILD_FORUM channels)
+            The id of the last message sent in this channel (or thread for GUILD_FORUM or GUILD_MEDIA channels)
             May not point to an existing or valid message or thread
             </summary>
         </member>
@@ -5210,18 +5228,18 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AvailableTags">
             <summary>
-            The set of tags that can be used in a GUILD_FORUM channel
+            The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel
             Limited to 20
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.AppliedTags">
             <summary>
-            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultReactionEmoji">
             <summary>
-            The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+            The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultThreadRateLimitPerUser">
@@ -5231,7 +5249,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultSortOrder">
             <summary>
-            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` channels
+            The default <see cref="T:Oxide.Ext.Discord.Entities.Channels.SortOrderType"/> used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.DiscordChannel.DefaultForumLayout">
@@ -5667,7 +5685,8 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Channels.ForumTag">
             <summary>
-            Represents a <a href="https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure">Overwrite Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#forum-tag-object">Forum Tag Structure</a>
+            An object that represents a tag that is able to be applied to a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ForumTag.Id">
@@ -5791,12 +5810,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.AvailableTags">
             <summary>
-            The set of tags that can be used in a GUILD_FORUM channel
+            The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultReactionEmoji">
             <summary>
-            The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+            The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.GuildChannelUpdate.DefaultThreadRateLimitPerUser">
@@ -6094,7 +6113,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.AppliedTags">
             <summary>
-            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadChannelUpdate.Validate">
@@ -6186,7 +6205,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.AppliedTags">
             <summary>
-            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+            The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Channels.Threads.ThreadForumCreate.Validate">
@@ -9504,6 +9523,26 @@
             Guild requires elevated MFA
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildNavigationType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/reference#message-formatting-guild-navigation-types">Guild Navigation Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildNavigationType.Customize">
+            <summary>
+            Customize tab with the server's onboarding prompts
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildNavigationType.Browse">
+            <summary>
+            	Browse Channels tab
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Guilds.GuildNavigationType.Guide">
+            <summary>
+            <a href="https://support.discord.com/hc/en-us/articles/13497665141655">	Server Guide</a>
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Guilds.GuildNsfwLevel">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/guild#guild-nsfw-level">Guild NSFW Level</a>
@@ -12403,6 +12442,12 @@
             Max 150 characters
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.DefaultValues">
+            <summary>
+            List of default values for auto-populated select menu components; number of default values must be in the range defined by min_values and max_values
+            Max 150 characters
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.BaseSelectMenuComponent.MinValues">
             <summary>
             the minimum number of items that must be chosen;
@@ -12462,6 +12507,54 @@
         <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.RoleSelectComponent.#ctor">
             <summary>
             Select Menu Component Constructor
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValue">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure">Select Default Value Structure</a> within discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValue.Id">
+            <summary>
+            ID of a user, role, or channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValue.Type">
+            <summary>
+            Type of value that id represents. Either "user", "role", or "channel"
+            Default 1, Min 0, Max 25
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValue.#ctor">
+            <summary>
+            Default Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValue.#ctor(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValueType)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="id">ID of the default value</param>
+            <param name="type">Type of the ID</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValueType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure">Select Menus Default Value Type</a> within discord.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValueType.User">
+            <summary>
+            Select Menu Default Value Type is User
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValueType.Role">
+            <summary>
+            Select Menu Default Value Type is Role
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuDefaultValueType.Channel">
+            <summary>
+            Select Menu Default Value Type is Channel
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus.SelectMenuOption">
@@ -14104,7 +14197,12 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.Count">
             <summary>
-            Times this emoji has been used to react
+            Total number of times this emoji has been used to react (including super reacts)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.count_details">
+            <summary>
+            Reaction Count Details
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.Me">
@@ -14112,10 +14210,21 @@
             Whether the current user reacted using this emoji
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.me_burst">
+            <summary>
+             	Whether the current user super-reacted using this emoji
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.Emoji">
             <summary>
             Emoji information
             <see cref="T:Oxide.Ext.Discord.Entities.Emojis.DiscordEmoji"/>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.MessageReaction.BurstColors">
+            <summary>
+            HEX colors used for super reaction
+            TODO: Find out the array type
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Messages.MessageReference">
@@ -14372,6 +14481,81 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Messages.MessageUpdate.Validate">
             <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Messages.ReactionCountDetails">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-count-details-object">Reaction Count Details Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.ReactionCountDetails.Burst">
+            <summary>
+            Count of super reactions
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Messages.ReactionCountDetails.Normal">
+            <summary>
+            Count of normal reactions
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement">
+            <summary>
+            Represents a <a href="">Entitlement Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Id">
+            <summary>
+            ID of the entitlement
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.SkuId">
+            <summary>
+            ID of the SKU
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.UserId">
+            <summary>
+            ID of the user that is granted access to the entitlement's sku
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.GuildId">
+            <summary>
+            ID of the guild that is granted access to the entitlement's sku
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.ApplicationId">
+            <summary>
+            ID of the parent application
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Type">
+            <summary>
+             	Type of entitlement
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Consumed">
+            <summary>
+            Not applicable for App Subscriptions. Subscriptions are not consumed and will be false
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.StartsAt">
+            <summary>
+            Start date at which the entitlement is valid. Not present when using test entitlements.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.EndsAt">
+            <summary>
+            Date at which the entitlement is no longer valid. Not present when using test entitlements.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.EntitlementType">
+            <summary>
+            Represents a <a href="">Entitlement Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.EntitlementType.ApplicationSubscription">
+            <summary>
+            Entitlement was purchased as an app subscription
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
             <summary>
@@ -15149,7 +15333,7 @@
             ID of the sticker pack's banner image
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.GetNitroStickerPacks(Oxide.Ext.Discord.Clients.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.Stickers.DiscordStickerPack.GetStickerPacks(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Returns the list of sticker packs available to Nitro subscribers.
             See <a href="https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs">List Nitro Sticker Packs</a>
@@ -15230,7 +15414,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerType.Standard">
             <summary>
-            An official sticker in a pack, part of Nitro or in a removed purchasable pack
+            An official sticker in a pack
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Stickers.StickerType.Guild">
@@ -15245,28 +15429,33 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.Id">
             <summary>
-            The unique id of the team
+            Unique ID of the team
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.Icon">
             <summary>
-            A hash of the image of the team's icon
+            Hash of the image of the team's icon
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.Members">
             <summary>
-            The members of the team
+            Members of the team
             See <see cref="T:Oxide.Ext.Discord.Entities.Teams.TeamMember"/>
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.Name">
             <summary>
-             The name of the team
+            Name of the team
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.OwnerUserId">
             <summary>
-            The user id of the current team owner
+            User ID of the current team owner
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.Role">
+            <summary>
+            Role of the team member
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.Teams.DiscordTeam.GetTeamIconUrl">
@@ -15313,6 +15502,31 @@
         <member name="F:Oxide.Ext.Discord.Entities.Teams.TeamMembershipState.Accepted">
             <summary>
             If the is part of the team
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Teams.TeamRole">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types">Team Role Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Teams.TeamRole.Owner">
+            <summary>
+            Owners are the most permissible role, and can take destructive, irreversible actions like deleting team-owned apps or the team itself. Teams are limited to 1 owner.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Teams.TeamRole.Admin">
+            <summary>
+            Admins have similar access as owners, except they cannot take destructive actions on the team or team-owned apps.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Teams.TeamRole.Developer">
+            <summary>
+            Developers can access information about team-owned apps, like the client secret or public key. They can also take limited actions on team-owned apps, like configuring interaction endpoints or resetting the bot token. Members with the Developer role cannot manage the team or its members, or take destructive actions on team-owned apps.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Teams.TeamRole.ReadOnly">
+            <summary>
+            Read-only members can access information about a team and any team-owned apps. Some examples include getting the IDs of applications and exporting payout records.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Users.Connections.Connection">
@@ -15466,6 +15680,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Twitter">
             <summary>
             Connection type is Twitter
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.X">
+            <summary>
+            Connection type is X (Twitter)
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.Users.Connections.ConnectionType.Xbox">
@@ -17758,6 +17977,13 @@
             <param name="timestamp">UNIX Timestamp</param>
             <param name="style">Display style for the timestamp</param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.GuildNavigation(Oxide.Ext.Discord.Entities.Guilds.GuildNavigationType)">
+            <summary>
+            Guild Navigation Format
+            </summary>
+            <param name="type">Type to navigate to</param>
+            <returns>string with navigation to the navigation type</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.Italics(System.String)">
             <summary>

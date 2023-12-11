@@ -12,11 +12,12 @@ public class DiscordTeam
 | --- | --- |
 | [DiscordTeam](#discordteam-constructor)() | The default constructor. |
 | [GetTeamIconUrl](#getteamiconurl-property) { get; } | Returns the url for the team icon |
-| [Icon](#icon-property) { get; set; } | A hash of the image of the team's icon |
-| [Id](#id-property) { get; set; } | The unique id of the team |
-| [Members](#members-property) { get; set; } | The members of the team See [`TeamMember`](./TeamMember.md) |
-| [Name](#name-property) { get; set; } | The name of the team |
-| [OwnerUserId](#owneruserid-property) { get; set; } | The user id of the current team owner |
+| [Icon](#icon-property) { get; set; } | Hash of the image of the team's icon |
+| [Id](#id-property) { get; set; } | Unique ID of the team |
+| [Members](#members-property) { get; set; } | Members of the team See [`TeamMember`](./TeamMember.md) |
+| [Name](#name-property) { get; set; } | Name of the team |
+| [OwnerUserId](#owneruserid-property) { get; set; } | User ID of the current team owner |
+| [Role](#role-property) { get; set; } | Role of the team member |
 
 ## See Also
 
@@ -42,7 +43,7 @@ public DiscordTeam()
    
 # Id property
 
-The unique id of the team
+Unique ID of the team
 
 ```csharp
 public Snowflake Id { get; set; }
@@ -58,7 +59,7 @@ public Snowflake Id { get; set; }
    
 # Icon property
 
-A hash of the image of the team's icon
+Hash of the image of the team's icon
 
 ```csharp
 public string Icon { get; set; }
@@ -73,7 +74,7 @@ public string Icon { get; set; }
    
 # Members property
 
-The members of the team See [`TeamMember`](./TeamMember.md)
+Members of the team See [`TeamMember`](./TeamMember.md)
 
 ```csharp
 public List<TeamMember> Members { get; set; }
@@ -89,7 +90,7 @@ public List<TeamMember> Members { get; set; }
    
 # Name property
 
-The name of the team
+Name of the team
 
 ```csharp
 public string Name { get; set; }
@@ -104,7 +105,7 @@ public string Name { get; set; }
    
 # OwnerUserId property
 
-The user id of the current team owner
+User ID of the current team owner
 
 ```csharp
 public Snowflake OwnerUserId { get; set; }
@@ -113,6 +114,22 @@ public Snowflake OwnerUserId { get; set; }
 ## See Also
 
 * struct [Snowflake](../Snowflake.md)
+* class [DiscordTeam](./DiscordTeam.md)
+* namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Role property
+
+Role of the team member
+
+```csharp
+public TeamRole Role { get; set; }
+```
+
+## See Also
+
+* enum [TeamRole](./TeamRole.md)
 * class [DiscordTeam](./DiscordTeam.md)
 * namespace [Oxide.Ext.Discord.Entities.Teams](./TeamsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

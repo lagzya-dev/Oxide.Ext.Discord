@@ -1,6 +1,6 @@
 # ForumTag class
 
-Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure)
+Represents a [Forum Tag Structure](https://discord.com/developers/docs/resources/channel#forum-tag-object) An object that represents a tag that is able to be applied to a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel.
 
 ```csharp
 public class ForumTag : ISnowflakeEntity

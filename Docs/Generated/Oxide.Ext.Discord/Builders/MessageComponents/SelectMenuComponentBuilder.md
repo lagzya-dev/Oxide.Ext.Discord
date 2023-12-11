@@ -11,6 +11,7 @@ public class SelectMenuComponentBuilder
 | name | description |
 | --- | --- |
 | [AddChannelType](#addchanneltype-method)(…) | Adds an allow channel type for ChannelSelect |
+| [AddDefaultValue](#adddefaultvalue-method)(…) | Adds an allow channel type for ChannelSelect |
 | [AddOption](#addoption-method)(…) | Adds an option to a select menu; |
 | [Build](#build-method)() | Returns the root builder |
 
@@ -71,6 +72,30 @@ This
 ## See Also
 
 * enum [ChannelType](../../Entities/Channels/ChannelType.md)
+* class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# AddDefaultValue method
+
+Adds an allow channel type for ChannelSelect
+
+```csharp
+public SelectMenuComponentBuilder AddDefaultValue(Snowflake id)
+```
+
+| parameter | description |
+| --- | --- |
+| id | ID of the default value to add |
+
+## Return Value
+
+This
+
+## See Also
+
+* struct [Snowflake](../../Entities/Snowflake.md)
 * class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

@@ -11,10 +11,10 @@ public class GuildChannelUpdate
 | name | description |
 | --- | --- |
 | [GuildChannelUpdate](#guildchannelupdate-constructor)() | The default constructor. |
-| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel |
+| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel |
 | [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
 | [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | The default duration for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
-| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel |
 | [DefaultThreadRateLimitPerUser](#defaultthreadratelimitperuser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
 | [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
 | [Nsfw](#nsfw-property) { get; set; } | Whether the channel is nsfw |
@@ -265,7 +265,7 @@ public int? DefaultAutoArchiveDuration { get; set; }
    
 # AvailableTags property
 
-The set of tags that can be used in a GUILD_FORUM channel
+The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public List<ForumTag> AvailableTags { get; set; }
@@ -281,7 +281,7 @@ public List<ForumTag> AvailableTags { get; set; }
    
 # DefaultReactionEmoji property
 
-The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public DefaultReaction DefaultReactionEmoji { get; set; }

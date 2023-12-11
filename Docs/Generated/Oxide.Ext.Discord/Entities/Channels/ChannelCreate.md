@@ -11,19 +11,20 @@ public class ChannelCreate
 | name | description |
 | --- | --- |
 | [ChannelCreate](#channelcreate-constructor)() | The default constructor. |
-| [AvailableTags](#availabletags-property) { get; set; } | Set of tags that can be used in a `GUILD_FORUM` channel |
+| [AvailableTags](#availabletags-property) { get; set; } | Set of tags that can be used in a `GUILD_FORUM` or GUILD_MEDIA channel |
 | [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel 8000 to 96000 (128000 for VIP servers) |
 | [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | The default duration that the clients use (not the API) for newly created threads in the channel, in minutes, to automatically archive the thread after recent activity |
 | [DefaultForumLayout](#defaultforumlayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
-| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel |
-| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel |
+| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels |
+| [DefaultThreadRateLimitPerUser](#defaultthreadratelimitperuser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
 | [Name](#name-property) { get; set; } | The name of the channel (1-100 characters) |
 | [Nsfw](#nsfw-property) { get; set; } | Whether the channel is nsfw |
 | [ParentId](#parentid-property) { get; set; } | ID of the parent category for a channel (each parent category can contain up to 50 channels) |
 | [PermissionOverwrites](#permissionoverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
 | [Position](#position-property) { get; set; } | Sorting position of the channel |
 | [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
-| [Topic](#topic-property) { get; set; } | The channel topic (0-1024 characters) |
+| [Topic](#topic-property) { get; set; } |  |
 | [Type](#type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
 | [UserLimit](#userlimit-property) { get; set; } | The user limit of the voice channel 0 refers to no limit, 1 to 99 refers to a user limit |
 | [Validate](#validate-method)() |  |
@@ -95,8 +96,6 @@ public ChannelType Type { get; set; }
    
    
 # Topic property
-
-The channel topic (0-1024 characters)
 
 ```csharp
 public string Topic { get; set; }
@@ -233,7 +232,7 @@ public int DefaultAutoArchiveDuration { get; set; }
    
 # DefaultReactionEmoji property
 
-Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` channel
+Emoji to show in the add reaction button on a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel
 
 ```csharp
 public DefaultReaction DefaultReactionEmoji { get; set; }
@@ -249,7 +248,7 @@ public DefaultReaction DefaultReactionEmoji { get; set; }
    
 # AvailableTags property
 
-Set of tags that can be used in a `GUILD_FORUM` channel
+Set of tags that can be used in a `GUILD_FORUM` or GUILD_MEDIA channel
 
 ```csharp
 public List<ForumTag> AvailableTags { get; set; }
@@ -265,7 +264,7 @@ public List<ForumTag> AvailableTags { get; set; }
    
 # DefaultSortOrder property
 
-The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels
+The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
 
 ```csharp
 public SortOrderType? DefaultSortOrder { get; set; }
@@ -290,6 +289,21 @@ public ForumLayoutTypes? DefaultForumLayout { get; set; }
 ## See Also
 
 * enum [ForumLayoutTypes](./ForumLayoutTypes.md)
+* class [ChannelCreate](./ChannelCreate.md)
+* namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# DefaultThreadRateLimitPerUser property
+
+The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update.
+
+```csharp
+public int? DefaultThreadRateLimitPerUser { get; set; }
+```
+
+## See Also
+
 * class [ChannelCreate](./ChannelCreate.md)
 * namespace [Oxide.Ext.Discord.Entities.Channels](./ChannelsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

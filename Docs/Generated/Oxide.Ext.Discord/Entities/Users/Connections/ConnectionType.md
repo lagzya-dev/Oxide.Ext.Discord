@@ -28,6 +28,7 @@ public enum ConnectionType : byte
 | TikTok | `TikTok` | Connection type is TikTok |
 | Twitch | `Twitch` | Connection type is Twitch |
 | Twitter | `Twitter` | Connection type is Twitter |
+| X | `X` | Connection type is X (Twitter) |
 | Xbox | `Xbox` | Connection type is Xbox |
 | Youtube | `Youtube` | Connection type is Youtube |
 

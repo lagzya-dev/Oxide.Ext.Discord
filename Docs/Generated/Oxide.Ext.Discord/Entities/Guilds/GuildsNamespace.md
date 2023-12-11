@@ -18,6 +18,7 @@
 | [Flags] enum [GuildMemberFlags](./GuildMemberFlags.md) | Represents [Guild Member Flags](https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags) |
 | class [GuildMemberUpdate](./GuildMemberUpdate.md) | Represents [Guild Member Update Structure](https://discord.com/developers/docs/resources/guild#modify-guild-member-json-params) |
 | enum [GuildMfaLevel](./GuildMfaLevel.md) | Represents [MFA Level](https://discord.com/developers/docs/resources/guild#guild-object-mfa-level) |
+| enum [GuildNavigationType](./GuildNavigationType.md) | Represents [Guild Navigation Types](https://discord.com/developers/docs/reference#message-formatting-guild-navigation-types) |
 | enum [GuildNsfwLevel](./GuildNsfwLevel.md) | Represents [Guild NSFW Level](https://discord.com/developers/docs/resources/guild#guild-nsfw-level) |
 | enum [GuildPremiumTier](./GuildPremiumTier.md) | Represents [Verification Level](https://discord.com/developers/docs/resources/guild#guild-object-verification-level) |
 | class [GuildPreview](./GuildPreview.md) | Represents [Guild Preview Structure](https://discord.com/developers/docs/resources/guild#guild-preview-object) |

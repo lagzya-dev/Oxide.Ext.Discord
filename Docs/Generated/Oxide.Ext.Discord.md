@@ -167,7 +167,7 @@
 | class [ActivitySecrets](./Oxide.Ext.Discord/Entities/Activities/ActivitySecrets.md) | Represents [Activity Secrets](https://discord.com/developers/docs/topics/gateway#activity-object-activity-secrets) |
 | class [ActivityTimestamps](./Oxide.Ext.Discord/Entities/Activities/ActivityTimestamps.md) | Represents [Activity Timestamps](https://discord.com/developers/docs/topics/gateway#activity-object-activity-timestamps) |
 | enum [ActivityType](./Oxide.Ext.Discord/Entities/Activities/ActivityType.md) | Represents [Activity Types](https://discord.com/developers/docs/topics/gateway#activity-object-activity-types) |
-| class [DiscordActivity](./Oxide.Ext.Discord/Entities/Activities/DiscordActivity.md) | Represents [Activity Structure](https://discord.com/developers/docs/topics/gateway#activity-object) |
+| class [DiscordActivity](./Oxide.Ext.Discord/Entities/Activities/DiscordActivity.md) | Represents [Activity Structure](https://discord.com/developers/docs/topics/gateway-events#activity-object) |
 
 ## Oxide.Ext.Discord.Entities.Api namespace
 
@@ -223,7 +223,7 @@
 | class [DiscordChannel](./Oxide.Ext.Discord/Entities/Channels/DiscordChannel.md) | Represents a guild or DM [Channel Structure](https://discord.com/developers/docs/resources/channel#channel-object) within Discord. |
 | class [FollowedChannel](./Oxide.Ext.Discord/Entities/Channels/FollowedChannel.md) | Represents a [Followed Channel Structure](https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure) from an API response |
 | enum [ForumLayoutTypes](./Oxide.Ext.Discord/Entities/Channels/ForumLayoutTypes.md) | Represents a [Forum Layout Types](https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types) |
-| class [ForumTag](./Oxide.Ext.Discord/Entities/Channels/ForumTag.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
+| class [ForumTag](./Oxide.Ext.Discord/Entities/Channels/ForumTag.md) | Represents a [Forum Tag Structure](https://discord.com/developers/docs/resources/channel#forum-tag-object) An object that represents a tag that is able to be applied to a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel. |
 | class [GroupDmChannelUpdate](./Oxide.Ext.Discord/Entities/Channels/GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
 | class [GuildChannelUpdate](./Oxide.Ext.Discord/Entities/Channels/GuildChannelUpdate.md) | Represents a [Guild Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel) |
 | class [Overwrite](./Oxide.Ext.Discord/Entities/Channels/Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
@@ -348,6 +348,7 @@
 | [Flags] enum [GuildMemberFlags](./Oxide.Ext.Discord/Entities/Guilds/GuildMemberFlags.md) | Represents [Guild Member Flags](https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-flags) |
 | class [GuildMemberUpdate](./Oxide.Ext.Discord/Entities/Guilds/GuildMemberUpdate.md) | Represents [Guild Member Update Structure](https://discord.com/developers/docs/resources/guild#modify-guild-member-json-params) |
 | enum [GuildMfaLevel](./Oxide.Ext.Discord/Entities/Guilds/GuildMfaLevel.md) | Represents [MFA Level](https://discord.com/developers/docs/resources/guild#guild-object-mfa-level) |
+| enum [GuildNavigationType](./Oxide.Ext.Discord/Entities/Guilds/GuildNavigationType.md) | Represents [Guild Navigation Types](https://discord.com/developers/docs/reference#message-formatting-guild-navigation-types) |
 | enum [GuildNsfwLevel](./Oxide.Ext.Discord/Entities/Guilds/GuildNsfwLevel.md) | Represents [Guild NSFW Level](https://discord.com/developers/docs/resources/guild#guild-nsfw-level) |
 | enum [GuildPremiumTier](./Oxide.Ext.Discord/Entities/Guilds/GuildPremiumTier.md) | Represents [Verification Level](https://discord.com/developers/docs/resources/guild#guild-object-verification-level) |
 | class [GuildPreview](./Oxide.Ext.Discord/Entities/Guilds/GuildPreview.md) | Represents [Guild Preview Structure](https://discord.com/developers/docs/resources/guild#guild-preview-object) |
@@ -465,6 +466,8 @@
 | class [ChannelSelectComponent](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/ChannelSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [MentionableSelectComponent](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/MentionableSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [RoleSelectComponent](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/RoleSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
+| class [SelectMenuDefaultValue](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/SelectMenuDefaultValue.md) | Represents a [Select Default Value Structure](https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure) within discord. |
+| enum [SelectMenuDefaultValueType](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/SelectMenuDefaultValueType.md) | Represents a [Select Menus Default Value Type](https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure) within discord. |
 | class [SelectMenuOption](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/SelectMenuOption.md) | Represents a [Select Menu Option Structure](https://discord.com/developers/docs/interactions/message-components#select-option-structure) within discord. |
 | class [StringSelectComponent](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/StringSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [UserSelectComponent](./Oxide.Ext.Discord/Entities/Interactions/MessageComponents/SelectMenus/UserSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
@@ -513,6 +516,7 @@
 | class [MessageReference](./Oxide.Ext.Discord/Entities/Messages/MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
 | enum [MessageType](./Oxide.Ext.Discord/Entities/Messages/MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./Oxide.Ext.Discord/Entities/Messages/MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
+| class [ReactionCountDetails](./Oxide.Ext.Discord/Entities/Messages/ReactionCountDetails.md) | Represents a [Reaction Count Details Structure](https://discord.com/developers/docs/resources/channel#reaction-count-details-object) |
 
 ## Oxide.Ext.Discord.Entities.Messages.Embeds namespace
 
@@ -526,6 +530,13 @@
 | class [EmbedProvider](./Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedProvider.md) | Represents [Embed Provider Structure](https://discord.com/developers/docs/resources/channel#embed-object-embed-provider-structure) |
 | class [EmbedThumbnail](./Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedThumbnail.md) | Represents [Embed Thumbnail Structure](https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure) |
 | class [EmbedVideo](./Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedVideo.md) | Represents [Embed Video Structure](https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure) |
+
+## Oxide.Ext.Discord.Entities.Monetization namespace
+
+| public type | description |
+| --- | --- |
+| class [DiscordEntitlement](./Oxide.Ext.Discord/Entities/Monetization/DiscordEntitlement.md) | Represents a [Entitlement Structure]() |
+| enum [EntitlementType](./Oxide.Ext.Discord/Entities/Monetization/EntitlementType.md) | Represents a [Entitlement Type]() |
 
 ## Oxide.Ext.Discord.Entities.Permissions namespace
 
@@ -554,6 +565,7 @@
 | class [DiscordTeam](./Oxide.Ext.Discord/Entities/Teams/DiscordTeam.md) | Represents a [Team Object](https://discord.com/developers/docs/topics/teams#data-models-team-object) |
 | class [TeamMember](./Oxide.Ext.Discord/Entities/Teams/TeamMember.md) | Represents [Team Members Object](https://discord.com/developers/docs/topics/teams#data-models-team-members-object) |
 | enum [TeamMembershipState](./Oxide.Ext.Discord/Entities/Teams/TeamMembershipState.md) | Represents [Membership State Enum](https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum) |
+| enum [TeamRole](./Oxide.Ext.Discord/Entities/Teams/TeamRole.md) | Represents [Team Role Types](https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types) |
 
 ## Oxide.Ext.Discord.Entities.Users namespace
 

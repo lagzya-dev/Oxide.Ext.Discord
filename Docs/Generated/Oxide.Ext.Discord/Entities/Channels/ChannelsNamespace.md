@@ -11,7 +11,7 @@
 | class [DiscordChannel](./DiscordChannel.md) | Represents a guild or DM [Channel Structure](https://discord.com/developers/docs/resources/channel#channel-object) within Discord. |
 | class [FollowedChannel](./FollowedChannel.md) | Represents a [Followed Channel Structure](https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure) from an API response |
 | enum [ForumLayoutTypes](./ForumLayoutTypes.md) | Represents a [Forum Layout Types](https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types) |
-| class [ForumTag](./ForumTag.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
+| class [ForumTag](./ForumTag.md) | Represents a [Forum Tag Structure](https://discord.com/developers/docs/resources/channel#forum-tag-object) An object that represents a tag that is able to be applied to a thread in a `GUILD_FORUM` or `GUILD_MEDIA` channel. |
 | class [GroupDmChannelUpdate](./GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
 | class [GuildChannelUpdate](./GuildChannelUpdate.md) | Represents a [Guild Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel) |
 | class [Overwrite](./Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |

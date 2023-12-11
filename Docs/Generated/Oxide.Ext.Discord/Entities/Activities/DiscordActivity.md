@@ -1,6 +1,6 @@
 # DiscordActivity class
 
-Represents [Activity Structure](https://discord.com/developers/docs/topics/gateway#activity-object)
+Represents [Activity Structure](https://discord.com/developers/docs/topics/gateway-events#activity-object)
 
 ```csharp
 public class DiscordActivity

@@ -19,6 +19,7 @@ public static class DiscordFormatting
 | static [CustomEmojiDataString](#customemojidatastring-method)(…) | Returns formatting string for custom emoji to be used in a url |
 | static [CustomEmojiMessageString](#customemojimessagestring-method)(…) | Returns formatting string for custom emoji to be used in a message |
 | static [EmojiMessageString](#emojimessagestring-method)(…) | Return the emoji string for a message |
+| static [GuildNavigation](#guildnavigation-method)(…) | Guild Navigation Format |
 | static [Header1](#header1-method)(…) | Creates a Big Header |
 | static [Header2](#header2-method)(…) | Creates a Medium Header |
 | static [Header3](#header3-method)(…) | Creates a Small Header |
@@ -284,6 +285,30 @@ public static string UnixTimestamp(long timestamp,
 ## See Also
 
 * enum [TimestampStyles](./TimestampStyles.md)
+* class [DiscordFormatting](./DiscordFormatting.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GuildNavigation method
+
+Guild Navigation Format
+
+```csharp
+public static string GuildNavigation(GuildNavigationType type)
+```
+
+| parameter | description |
+| --- | --- |
+| type | Type to navigate to |
+
+## Return Value
+
+string with navigation to the navigation type
+
+## See Also
+
+* enum [GuildNavigationType](../Entities/Guilds/GuildNavigationType.md)
 * class [DiscordFormatting](./DiscordFormatting.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

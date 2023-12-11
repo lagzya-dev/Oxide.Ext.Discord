@@ -8,7 +8,7 @@ using Oxide.Ext.Discord.Json.Converters;
 namespace Oxide.Ext.Discord.Entities.Activities
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway-events#activity-object">Activity Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordActivity

@@ -11,7 +11,7 @@ public class ThreadForumCreate
 | name | description |
 | --- | --- |
 | [ThreadForumCreate](#threadforumcreate-constructor)() | The default constructor. |
-| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
+| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel |
 | [AutoArchiveDuration](#autoarchiveduration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
 | [Message](#message-property) { get; set; } | Contents of the first message in the forum thread |
 | [Name](#name-property) { get; set; } | 1-100 character thread name |
@@ -118,7 +118,7 @@ public MessageCreate Message { get; set; }
    
 # AppliedTags property
 
-The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public List<Snowflake> AppliedTags { get; set; }

@@ -11,7 +11,7 @@ public class ThreadChannelUpdate
 | name | description |
 | --- | --- |
 | [ThreadChannelUpdate](#threadchannelupdate-constructor)() | The default constructor. |
-| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
+| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel |
 | [Archived](#archived-property) { get; set; } | Whether the channel is archived |
 | [AutoArchiveDuration](#autoarchiveduration-property) { get; set; } | Duration in minutes to automatically archive the thread after recent activity Can be set to: 60, 1440, 4320, 10080 |
 | [Flags](#flags-property) { get; set; } | Channel flags combined as a bitfield; PINNED can only be set for threads in forum channels |
@@ -164,7 +164,7 @@ public ChannelFlags? Flags { get; set; }
    
 # AppliedTags property
 
-The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public List<Snowflake> AppliedTags { get; set; }

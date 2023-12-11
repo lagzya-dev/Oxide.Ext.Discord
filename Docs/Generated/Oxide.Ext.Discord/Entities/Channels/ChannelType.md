@@ -21,7 +21,8 @@ public enum ChannelType : byte
 | GuildPrivateThread | `GuildPrivateThread` | A temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission |
 | GuildStageVoice | `GuildStageVoice` | A voice channel for [hosting events with an audience](https://support.discord.com/hc/en-us/articles/1500005513722) |
 | GuildDirectory | `GuildDirectory` | The channel in a [hub](https://support.discord.com/hc/en-us/articles/4406046651927-Discord-Student-Hubs-FAQ) |
-| GuildForum | `GuildForum` | (still in development) a channel that can only contain threads |
+| GuildForum | `GuildForum` | A channel that can only contain threads |
+| GuildMedia | `GuildMedia` | Channel that can only contain threads, similar to `GUILD_FORUM` channels |
 
 ## See Also
 

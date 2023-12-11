@@ -10,6 +10,7 @@ public abstract class BaseSelectMenuComponent : BaseInteractableComponent
 
 | name | description |
 | --- | --- |
+| [DefaultValues](#defaultvalues-property) { get; set; } | List of default values for auto-populated select menu components; number of default values must be in the range defined by min_values and max_values Max 150 characters |
 | [Disabled](#disabled-property) { get; set; } | Disable the select Default false |
 | [MaxValues](#maxvalues-property) { get; set; } | the maximum number of items that must be chosen; Default 1, Min 0, Max 25 |
 | [MinValues](#minvalues-property) { get; set; } | the minimum number of items that must be chosen; Default 1, Min 0, Max 25 |
@@ -69,6 +70,22 @@ public string Placeholder { get; set; }
 
 ## See Also
 
+* class [BaseSelectMenuComponent](./BaseSelectMenuComponent.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)
+   
+   
+# DefaultValues property
+
+List of default values for auto-populated select menu components; number of default values must be in the range defined by min_values and max_values Max 150 characters
+
+```csharp
+public List<SelectMenuDefaultValue> DefaultValues { get; set; }
+```
+
+## See Also
+
+* class [SelectMenuDefaultValue](./SelectMenuDefaultValue.md)
 * class [BaseSelectMenuComponent](./BaseSelectMenuComponent.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus](./SelectMenusNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../../../Oxide.Ext.Discord.md)

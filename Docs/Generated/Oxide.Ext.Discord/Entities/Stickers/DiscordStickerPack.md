@@ -18,7 +18,7 @@ public class DiscordStickerPack
 | [Name](#name-property) { get; set; } | Name of the sticker pack |
 | [SkuId](#skuid-property) { get; set; } | ID of the pack's SKU |
 | [Stickers](#stickers-property) { get; set; } | The stickers in the pack |
-| static [GetNitroStickerPacks](#getnitrostickerpacks-method)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
+| static [GetStickerPacks](#getstickerpacks-method)(…) | Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs) |
 
 ## See Also
 
@@ -27,12 +27,12 @@ public class DiscordStickerPack
 * [DiscordStickerPack.cs](../../../../Oxide.Ext.Discord/Entities/Stickers/DiscordStickerPack.cs)
    
    
-# GetNitroStickerPacks method
+# GetStickerPacks method
 
 Returns the list of sticker packs available to Nitro subscribers. See [List Nitro Sticker Packs](https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs)
 
 ```csharp
-public static IPromise<List<DiscordStickerPack>> GetNitroStickerPacks(DiscordClient client)
+public static IPromise<List<DiscordStickerPack>> GetStickerPacks(DiscordClient client)
 ```
 
 | parameter | description |

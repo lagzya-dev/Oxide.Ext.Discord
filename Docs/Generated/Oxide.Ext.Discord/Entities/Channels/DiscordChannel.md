@@ -12,20 +12,20 @@ public class DiscordChannel : IDebugLoggable, ISnowflakeEntity
 | --- | --- |
 | [DiscordChannel](#discordchannel-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | Application id of the group DM creator if it is bot-created |
-| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel |
-| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM channel Limited to 20 |
+| [AppliedTags](#appliedtags-property) { get; set; } | The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel |
+| [AvailableTags](#availabletags-property) { get; set; } | The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel Limited to 20 |
 | [Bitrate](#bitrate-property) { get; set; } | The bitrate (in bits) of the voice channel |
 | [DefaultAutoArchiveDuration](#defaultautoarchiveduration-property) { get; set; } | Default duration for newly created threads, in minutes, to automatically archive the thread after recent activity, can be set to: 60, 1440, 4320, 10080 |
 | [DefaultForumLayout](#defaultforumlayout-property) { get; set; } | The default [`ForumLayoutTypes`](./ForumLayoutTypes.md) used to display posts in GUILD_FORUM channels. Defaults to NotSet, which indicates a layout view has not been set by a channel admin |
-| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel |
-| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels |
+| [DefaultReactionEmoji](#defaultreactionemoji-property) { get; set; } | The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel |
+| [DefaultSortOrder](#defaultsortorder-property) { get; set; } | The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels |
 | [DefaultThreadRateLimitPerUser](#defaultthreadratelimitperuser-property) { get; set; } | The initial rate_limit_per_user to set on newly created threads in a channel. this field is copied to the thread at creation time and does not live update. |
 | [Flags](#flags-property) { get; set; } | Flags for this channel |
 | [GuildId](#guildid-property) { get; set; } | the ID of the guild Warning: May be missing for some channel objects received over gateway guild dispatches |
 | [Icon](#icon-property) { get; set; } | icon hash of the group DM |
 | [IconUrl](#iconurl-property) { get; } | Returns the Icon URL for the given channel |
 | [Id](#id-property) { get; set; } | The ID of this channel |
-| [LastMessageId](#lastmessageid-property) { get; set; } | The id of the last message sent in this channel (or thread for GUILD_FORUM channels) May not point to an existing or valid message or thread |
+| [LastMessageId](#lastmessageid-property) { get; set; } | The id of the last message sent in this channel (or thread for GUILD_FORUM or GUILD_MEDIA channels) May not point to an existing or valid message or thread |
 | [LastPinTimestamp](#lastpintimestamp-property) { get; set; } | When the last pinned message was pinned. This may be null in events such as GUILD_CREATE when a message is not pinned. |
 | [Managed](#managed-property) { get; set; } | For group DM channels: whether the channel is managed by an application via the `gdm.join` OAuth2 scope |
 | [Member](#member-property) { get; set; } | Thread member object for the current user, if they have joined the thread, only included on certain API endpoints |
@@ -1238,7 +1238,7 @@ public bool? Nsfw { get; set; }
    
 # LastMessageId property
 
-The id of the last message sent in this channel (or thread for GUILD_FORUM channels) May not point to an existing or valid message or thread
+The id of the last message sent in this channel (or thread for GUILD_FORUM or GUILD_MEDIA channels) May not point to an existing or valid message or thread
 
 ```csharp
 public Snowflake? LastMessageId { get; set; }
@@ -1563,7 +1563,7 @@ public int? TotalMessageSent { get; set; }
    
 # AvailableTags property
 
-The set of tags that can be used in a GUILD_FORUM channel Limited to 20
+The set of tags that can be used in a GUILD_FORUM or GUILD_MEDIA channel Limited to 20
 
 ```csharp
 public List<ForumTag> AvailableTags { get; set; }
@@ -1579,7 +1579,7 @@ public List<ForumTag> AvailableTags { get; set; }
    
 # AppliedTags property
 
-The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM channel
+The IDs of the set of tags that have been applied to a thread in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public List<Snowflake> AppliedTags { get; set; }
@@ -1595,7 +1595,7 @@ public List<Snowflake> AppliedTags { get; set; }
    
 # DefaultReactionEmoji property
 
-The emoji to show in the add reaction button on a thread in a GUILD_FORUM channel
+The emoji to show in the add reaction button on a thread in a GUILD_FORUM or GUILD_MEDIA channel
 
 ```csharp
 public DefaultReaction DefaultReactionEmoji { get; set; }
@@ -1626,7 +1626,7 @@ public int? DefaultThreadRateLimitPerUser { get; set; }
    
 # DefaultSortOrder property
 
-The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` channels
+The default [`SortOrderType`](./SortOrderType.md) used to order posts in `GUILD_FORUM` or `GUILD_MEDIA` channels
 
 ```csharp
 public SortOrderType? DefaultSortOrder { get; set; }
