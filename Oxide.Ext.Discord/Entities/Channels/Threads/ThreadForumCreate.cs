@@ -2,13 +2,15 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Exceptions.Entities.Messages;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Entities.Channels.Threads
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-in-forum-channel-jsonform-params">Start Thread in Forum Channel</a> Structure
     /// </summary>
-    public class ThreadForumCreate
+    public class ThreadForumCreate : IFileAttachments
     {
         /// <summary>
         /// 1-100 character thread name
@@ -39,6 +41,43 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// </summary>
         [JsonProperty("applied_tags")]
         public List<Snowflake> AppliedTags { get; set; }
+        
+        /// <summary>
+        /// Attachments for a discord message
+        /// </summary>
+        public List<MessageFileAttachment> FileAttachments { get; set; }
+        
+        /// <summary>
+        /// Attachments for the message
+        /// </summary>
+        [JsonProperty("attachments")]
+        public List<MessageAttachment> Attachments { get; set; }
+
+        /// <summary>
+        /// Adds an attachment to the message
+        /// </summary>
+        /// <param name="filename">Name of the file</param>
+        /// <param name="data">byte[] of the attachment</param>
+        /// <param name="contentType">Attachment content type</param>
+        /// <param name="description">Description for the attachment</param>
+        public void AddAttachment(string filename, byte[] data, string contentType, string description = null)
+        {
+            InvalidFileNameException.ThrowIfInvalid(filename);
+            InvalidMessageException.ThrowIfInvalidAttachmentDescription(description);
+
+            if (FileAttachments == null)
+            {
+                FileAttachments = new List<MessageFileAttachment>();
+            }
+
+            if (Attachments == null)
+            {
+                Attachments = new List<MessageAttachment>();
+            }
+
+            FileAttachments.Add(new MessageFileAttachment(filename, data, contentType));
+            Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
+        }
         
         /// <summary>
         /// Validates the Thread Forum Create
