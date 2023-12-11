@@ -34,16 +34,22 @@ namespace Oxide.Ext.Discord.Configuration
         public DiscordUsersConfig Users { get; set; }
         
         /// <summary>
-        /// Discord Logging Options
+        /// Discord Search Options
         /// </summary>
         [JsonProperty("Search")]
         public DiscordSearchConfig Search { get; set; }
         
         /// <summary>
-        /// Discord Logging Options
+        /// Discord Validation Options
         /// </summary>
         [JsonProperty("Validation")]
         public DiscordValidationConfig Validation { get; set; }
+        
+        /// <summary>
+        /// Discord Bot Options
+        /// </summary>
+        [JsonProperty("Bot")]
+        public DiscordBotConfig Bot { get; set; }
 
         /// <summary>
         /// Constructor for discord config
@@ -110,6 +116,10 @@ namespace Oxide.Ext.Discord.Configuration
             Validation = new DiscordValidationConfig
             {
                 EnableValidation = Validation?.EnableValidation ?? true
+            };
+            Bot = new DiscordBotConfig
+            {
+                AutomaticallyApplyGatewayIntents = Bot?.AutomaticallyApplyGatewayIntents ?? true
             };
         }
     }

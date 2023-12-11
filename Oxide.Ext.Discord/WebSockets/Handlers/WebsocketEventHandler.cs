@@ -590,6 +590,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
         private void ProcessGatewayIntents(DiscordApplication app)
         {
+            if (!DiscordConfig.Instance.Bot.AutomaticallyApplyGatewayIntents)
+            {
+                return;
+            }
+            
             ApplicationFlags flags = app.Flags ?? ApplicationFlags.None;
             if (_client.Connection.HasIntents(GatewayIntents.GuildMessages) && !app.HasAnyApplicationFlags(ApplicationFlags.GatewayMessageContentLimited | ApplicationFlags.GatewayMessageContent))
             {
