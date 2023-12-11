@@ -34,6 +34,9 @@ public static class DiscordExtHooks
 | const [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated-field) |  |
 | const [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted-field) |  |
 | const [OnDiscordDirectVoiceStateUpdated](#ondiscorddirectvoicestateupdated-field) |  |
+| const [OnDiscordEntitlementCreated](#ondiscordentitlementcreated-field) |  |
+| const [OnDiscordEntitlementDeleted](#ondiscordentitlementdeleted-field) |  |
+| const [OnDiscordEntitlementUpdated](#ondiscordentitlementupdated-field) |  |
 | const [OnDiscordGatewayReady](#ondiscordgatewayready-field) |  |
 | const [OnDiscordGatewayReconnected](#ondiscordgatewayreconnected-field) |  |
 | const [OnDiscordGatewayResumed](#ondiscordgatewayresumed-field) |  |
@@ -449,6 +452,45 @@ public const string OnDiscordGuildChannelDeleted;
 
 ```csharp
 public const string OnDiscordDirectChannelPinsUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordEntitlementCreated field
+
+```csharp
+public const string OnDiscordEntitlementCreated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordEntitlementUpdated field
+
+```csharp
+public const string OnDiscordEntitlementUpdated;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordEntitlementDeleted field
+
+```csharp
+public const string OnDiscordEntitlementDeleted;
 ```
 
 ## See Also

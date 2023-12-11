@@ -484,6 +484,8 @@
 | class [InteractionCallbackData](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionCallbackData.md) | Represents [Interaction Application Command Callback Data Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure) |
 | class [InteractionModalMessage](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionModalMessage.md) | Represents an Interaction Modal Message |
 | class [InteractionModalResponse](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionModalResponse.md) | Represents an Interaction Modal Response |
+| class [InteractionPremiumRequiredMessage](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionPremiumRequiredMessage.md) | Message for Premium Required |
+| class [InteractionPremiumRequiredResponse](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionPremiumRequiredResponse.md) | Response for premium Required |
 | class [InteractionResponse](./Oxide.Ext.Discord/Entities/Interactions/Response/InteractionResponse.md) | Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object) |
 
 ## Oxide.Ext.Discord.Entities.Invites namespace
@@ -531,12 +533,23 @@
 | class [EmbedThumbnail](./Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedThumbnail.md) | Represents [Embed Thumbnail Structure](https://discord.com/developers/docs/resources/channel#embed-object-embed-thumbnail-structure) |
 | class [EmbedVideo](./Oxide.Ext.Discord/Entities/Messages/Embeds/EmbedVideo.md) | Represents [Embed Video Structure](https://discord.com/developers/docs/resources/channel#embed-object-embed-video-structure) |
 
-## Oxide.Ext.Discord.Entities.Monetization namespace
+## Oxide.Ext.Discord.Entities.Monetization.Entitlements namespace
 
 | public type | description |
 | --- | --- |
-| class [DiscordEntitlement](./Oxide.Ext.Discord/Entities/Monetization/DiscordEntitlement.md) | Represents a [Entitlement Structure]() |
-| enum [EntitlementType](./Oxide.Ext.Discord/Entities/Monetization/EntitlementType.md) | Represents a [Entitlement Type]() |
+| class [CreateTestEntitlement](./Oxide.Ext.Discord/Entities/Monetization/Entitlements/CreateTestEntitlement.md) | Represents a [Create Test Entitlement Structure](https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement-json-params) |
+| class [DiscordEntitlement](./Oxide.Ext.Discord/Entities/Monetization/Entitlements/DiscordEntitlement.md) | Represents a [Entitlement Structure](https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-structure) |
+| enum [EntitlementOwnerType](./Oxide.Ext.Discord/Entities/Monetization/Entitlements/EntitlementOwnerType.md) | Represents a [Entitlement Owner Types](https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement-json-params) |
+| enum [EntitlementType](./Oxide.Ext.Discord/Entities/Monetization/Entitlements/EntitlementType.md) | Represents a [Entitlement Types](https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types) |
+| class [GetEntitlements](./Oxide.Ext.Discord/Entities/Monetization/Entitlements/GetEntitlements.md) | Get Entitlements Query String Builder |
+
+## Oxide.Ext.Discord.Entities.Monetization.Skus namespace
+
+| public type | description |
+| --- | --- |
+| class [DiscordSku](./Oxide.Ext.Discord/Entities/Monetization/Skus/DiscordSku.md) | Represents a [SKU Structure](https://discord.com/developers/docs/monetization/skus#sku-object-sku-structure) |
+| enum [DiscordSkuType](./Oxide.Ext.Discord/Entities/Monetization/Skus/DiscordSkuType.md) | Represents a [Discord SKU Types](https://discord.com/developers/docs/monetization/skus#sku-object-sku-types) |
+| [Flags] enum [SkuFlags](./Oxide.Ext.Discord/Entities/Monetization/Skus/SkuFlags.md) | Represents a [Discord SKU Flags](https://discord.com/developers/docs/monetization/skus#sku-object-sku-flags) |
 
 ## Oxide.Ext.Discord.Entities.Permissions namespace
 
@@ -712,6 +725,12 @@
 | class [InvalidEmbedException](./Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidEmbedException.md) | Represents an invalid embed |
 | class [InvalidFileNameException](./Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidFileNameException.md) | Exception throw when an attachment filename contains invalid characters |
 | class [InvalidMessageException](./Oxide.Ext.Discord/Exceptions/Entities/Messages/InvalidMessageException.md) | Represents an invalid message |
+
+## Oxide.Ext.Discord.Exceptions.Entities.Monetization namespace
+
+| public type | description |
+| --- | --- |
+| class [InvalidGetEntitlementException](./Oxide.Ext.Discord/Exceptions/Entities/Monetization/InvalidGetEntitlementException.md) |  |
 
 ## Oxide.Ext.Discord.Exceptions.Entities.Permissions namespace
 

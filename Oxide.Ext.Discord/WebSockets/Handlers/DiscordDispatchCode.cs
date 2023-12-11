@@ -46,6 +46,21 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         [Description("CHANNEL_PINS_UPDATE")] ChannelPinsUpdate,
         
         /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-create">ENTITLEMENT_CREATE</a> gateway event
+        /// </summary>
+        [Description("ENTITLEMENT_CREATE")] EntitlementCreate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-update">ENTITLEMENT_UPDATE</a> gateway event
+        /// </summary>
+        [Description("ENTITLEMENT_UPDATE")] EntitlementUpdate,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-delete">ENTITLEMENT_DELETE</a> gateway event
+        /// </summary>
+        [Description("ENTITLEMENT_DELETE")] EntitlementDelete,
+        
+        /// <summary>
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#guild-create">GUILD_CREATE</a> gateway event
         /// </summary>
         [Description("GUILD_CREATE")] GuildCreated,

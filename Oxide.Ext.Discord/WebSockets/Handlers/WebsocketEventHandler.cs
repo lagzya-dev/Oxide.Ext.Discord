@@ -21,6 +21,8 @@ using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Monetization;
+using Oxide.Ext.Discord.Entities.Monetization.Entitlements;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
 using Oxide.Ext.Discord.Entities.Users;
@@ -332,6 +334,18 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 case DiscordDispatchCode.ChannelPinsUpdate:
                     HandleDispatchChannelPinUpdate(payload.GetData<ChannelPinsUpdatedEvent>(_client));
                     break;
+                
+                case DiscordDispatchCode.EntitlementCreate:
+                    HandleDispatchEntitlementCreate(payload.GetData<DiscordEntitlement>(_client));
+                    break;
+                
+                case DiscordDispatchCode.EntitlementUpdate:
+                    HandleDispatchEntitlementUpdate(payload.GetData<DiscordEntitlement>(_client));
+                    break;
+                
+                case DiscordDispatchCode.EntitlementDelete:
+                    HandleDispatchEntitlementDelete(payload.GetData<DiscordEntitlement>(_client));
+                    break;
 
                 case DiscordDispatchCode.GuildCreated:
                     HandleDispatchGuildCreate(payload.GetData<DiscordGuild>(_client));
@@ -558,7 +572,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                     break;
             }
         }
-
+        
         //https://discord.com/developers/docs/topics/gateway-events#ready
         private void HandleDispatchReady(GatewayReadyEvent ready)
         {
@@ -693,6 +707,27 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 _client.Hooks.CallHook(DiscordExtHooks.OnDiscordDirectChannelPinsUpdated, pins, channel);
             }
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway-events#entitlement-create
+        private void HandleDispatchEntitlementCreate(DiscordEntitlement entitlement)
+        {
+            DiscordGuild guild = _client.GetGuild(entitlement.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordEntitlementCreated, entitlement, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway-events#entitlement-update
+        private void HandleDispatchEntitlementUpdate(DiscordEntitlement entitlement)
+        {
+            DiscordGuild guild = _client.GetGuild(entitlement.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordEntitlementUpdated, entitlement, guild);
+        }
+
+        //https://discord.com/developers/docs/topics/gateway-events#entitlement-delete
+        private void HandleDispatchEntitlementDelete(DiscordEntitlement entitlement)
+        {
+            DiscordGuild guild = _client.GetGuild(entitlement.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordEntitlementDeleted, entitlement, guild);
         }
 
         // NOTE: Some elements of Guild object is only sent with GUILD_CREATE

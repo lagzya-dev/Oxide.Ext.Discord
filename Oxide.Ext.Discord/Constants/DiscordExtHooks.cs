@@ -390,6 +390,30 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordDirectChannelPinsUpdated = nameof(OnDiscordDirectChannelPinsUpdated);
         
         /// <code>
+        /// void OnDiscordEntitlementCreated(DiscordEntitlement entitlement, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordEntitlementCreated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordEntitlementCreated = nameof(OnDiscordEntitlementCreated);
+        
+        /// <code>
+        /// void OnDiscordEntitlementUpdated(DiscordEntitlement entitlement, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordEntitlementUpdated Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordEntitlementUpdated = nameof(OnDiscordEntitlementUpdated);
+        
+        /// <code>
+        /// void OnDiscordEntitlementDeleted(DiscordEntitlement entitlement, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordEntitlementDeleted Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordEntitlementDeleted = nameof(OnDiscordEntitlementDeleted);
+        
+        /// <code>
         /// void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
         /// {
         ///     Puts("OnDiscordGuildChannelPinsUpdated Works!");

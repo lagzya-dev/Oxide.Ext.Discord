@@ -17,6 +17,9 @@ public enum DiscordDispatchCode : byte
 | ChannelUpdated | `ChannelUpdated` | Represents the [CHANNEL_UPDATE](https://discord.com/developers/docs/topics/gateway#channel-update) gateway event |
 | ChannelDeleted | `ChannelDeleted` | Represents the [CHANNEL_DELETE](https://discord.com/developers/docs/topics/gateway#channel-delete) gateway event |
 | ChannelPinsUpdate | `ChannelPinsUpdate` | Represents the [CHANNEL_PINS_UPDATE](https://discord.com/developers/docs/topics/gateway#channel-pins-update) gateway event |
+| EntitlementCreate | `EntitlementCreate` | Represents the [ENTITLEMENT_CREATE](https://discord.com/developers/docs/topics/gateway-events#entitlement-create) gateway event |
+| EntitlementUpdate | `EntitlementUpdate` | Represents the [ENTITLEMENT_UPDATE](https://discord.com/developers/docs/topics/gateway-events#entitlement-update) gateway event |
+| EntitlementDelete | `EntitlementDelete` | Represents the [ENTITLEMENT_DELETE](https://discord.com/developers/docs/topics/gateway-events#entitlement-delete) gateway event |
 | GuildCreated | `GuildCreated` | Represents the [GUILD_CREATE](https://discord.com/developers/docs/topics/gateway#guild-create) gateway event |
 | GuildUpdated | `GuildUpdated` | Represents the [GUILD_UPDATE](https://discord.com/developers/docs/topics/gateway#guild-update) gateway event |
 | GuildDeleted | `GuildDeleted` | Represents the [GUILD_DELETE](https://discord.com/developers/docs/topics/gateway#guild-delete) gateway event |

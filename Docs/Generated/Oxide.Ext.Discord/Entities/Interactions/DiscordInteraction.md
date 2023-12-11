@@ -16,6 +16,7 @@ public class DiscordInteraction
 | [Channel](#channel-property) { get; set; } | Channel that the interaction was sent from |
 | [ChannelId](#channelid-property) { get; set; } | Channel that the interaction was sent from |
 | [Data](#data-property) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
+| [Entitlements](#entitlements-property) { get; set; } | For monetized apps, any entitlements for the invoking user, representing access to premium SKUs |
 | [Focused](#focused-property) { get; } | Returns the Focused option for Auto Complete |
 | [GuildId](#guildid-property) { get; set; } | Guild that the interaction was sent from |
 | [GuildLocale](#guildlocale-property) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
@@ -31,6 +32,7 @@ public class DiscordInteraction
 | readonly [CreatedDate](#createddate-field) | The UTC DateTime this interaction was created |
 | [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
 | [CreateModalResponse](#createmodalresponse-method)(…) | Creates a interaction modal response from a modal template |
+| [CreatePremiumRequiredResponse](#createpremiumrequiredresponse-method)(…) | Creates a response indication that the interaction requires premium to be purchased. |
 | [CreateResponse](#createresponse-method-1-of-7)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
 | [CreateTemplateResponse](#createtemplateresponse-method)(…) | Creates a interaction message response from a message template |
 | [DefferResponse](#defferresponse-method)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
@@ -414,6 +416,27 @@ Creates a response indicating that: for application commands there will be an up
 
 ```csharp
 public IPromise DefferResponse(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise](../../Interfaces/Promises/IPromise.md)
+* class [DiscordClient](../../Clients/DiscordClient.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# CreatePremiumRequiredResponse method
+
+Creates a response indication that the interaction requires premium to be purchased.
+
+```csharp
+public IPromise CreatePremiumRequiredResponse(DiscordClient client)
 ```
 
 | parameter | description |
@@ -857,6 +880,22 @@ public DiscordLocale? GuildLocale { get; set; }
 ## See Also
 
 * struct [DiscordLocale](../../Libraries/Locale/DiscordLocale.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+   
+   
+# Entitlements property
+
+For monetized apps, any entitlements for the invoking user, representing access to premium SKUs
+
+```csharp
+public List<DiscordEntitlement> Entitlements { get; set; }
+```
+
+## See Also
+
+* class [DiscordEntitlement](../Monetization/Entitlements/DiscordEntitlement.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

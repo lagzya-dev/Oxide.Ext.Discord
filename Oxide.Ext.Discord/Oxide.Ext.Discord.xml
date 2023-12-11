@@ -2650,6 +2650,30 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordEntitlementCreated">
+            <code>
+            void OnDiscordEntitlementCreated(DiscordEntitlement entitlement, DiscordGuild guild)
+            {
+                Puts("OnDiscordEntitlementCreated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordEntitlementUpdated">
+            <code>
+            void OnDiscordEntitlementUpdated(DiscordEntitlement entitlement, DiscordGuild guild)
+            {
+                Puts("OnDiscordEntitlementUpdated Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordEntitlementDeleted">
+            <code>
+            void OnDiscordEntitlementDeleted(DiscordEntitlement entitlement, DiscordGuild guild)
+            {
+                Puts("OnDiscordEntitlementDeleted Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordGuildChannelPinsUpdated">
             <code>
             void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
@@ -11601,6 +11625,11 @@
             <a href="https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales">Discord Locale Values</a>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Entitlements">
+            <summary>
+            For monetized apps, any entitlements for the invoking user, representing access to premium SKUs
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.Parsed">
             <summary>
             Returns the interaction parsed args to make it easier to process that interaction.
@@ -11747,6 +11776,12 @@
             for application commands there will be an update in the future
             for message component commands that you have acknowledged the command and there may be an update in the future
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
+            </summary>
+            <param name="client">Client to use</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.DiscordInteraction.CreatePremiumRequiredResponse(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Creates a response indication that the interaction requires premium to be purchased.
             </summary>
             <param name="client">Client to use</param>
         </member>
@@ -12166,6 +12201,11 @@
             <summary>
             Respond to an interaction with an modal for a user to fill-out
             Note: You can't respond to a <see cref="F:Oxide.Ext.Discord.Entities.Interactions.InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Interactions.InteractionResponseType.PremiumRequired">
+            <summary>
+            Respond to an interaction with an upgrade button, only available for apps with monetization enabled
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.InteractionType">
@@ -12745,6 +12785,21 @@
             Constructor with message
             </summary>
             <param name="message">Message to use for the response</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionPremiumRequiredMessage">
+            <summary>
+            Message for Premium Required
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionPremiumRequiredResponse">
+            <summary>
+            Response for premium Required
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionPremiumRequiredResponse.#ctor">
+            <summary>
+            Constructor
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Interactions.Response.InteractionResponse">
             <summary>
@@ -14497,64 +14552,248 @@
             Count of normal reactions
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement">
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Entitlements.CreateTestEntitlement">
             <summary>
-            Represents a <a href="">Entitlement Structure</a>
+            Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement-json-params">Create Test Entitlement Structure</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Id">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.CreateTestEntitlement.SkuId">
+            <summary>
+            ID of the SKU to grant the entitlement to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.CreateTestEntitlement.OwnerId">
+            <summary>
+            ID of the guild or user to grant the entitlement to
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.CreateTestEntitlement.OwnerType">
+            <summary>
+            ID of the guild or user to grant the entitlement to
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-structure">Entitlement Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Id">
             <summary>
             ID of the entitlement
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.SkuId">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.SkuId">
             <summary>
             ID of the SKU
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.UserId">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.UserId">
             <summary>
             ID of the user that is granted access to the entitlement's sku
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.GuildId">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.GuildId">
             <summary>
             ID of the guild that is granted access to the entitlement's sku
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.ApplicationId">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.ApplicationId">
             <summary>
             ID of the parent application
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Type">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Type">
             <summary>
              	Type of entitlement
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.Consumed">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.Consumed">
             <summary>
             Not applicable for App Subscriptions. Subscriptions are not consumed and will be false
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.StartsAt">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.StartsAt">
             <summary>
             Start date at which the entitlement is valid. Not present when using test entitlements.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Monetization.DiscordEntitlement.EndsAt">
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.EndsAt">
             <summary>
             Date at which the entitlement is no longer valid. Not present when using test entitlements.
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Monetization.EntitlementType">
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.GetEntitlements(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements)">
             <summary>
-            Represents a <a href="">Entitlement Type</a>
+            Returns all entitlements for a given app, active and expired.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="applicationId">Application ID to get entitlement for</param>
+            <param name="getEntitlements">Query string options for the request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.CreateTestEntitlement(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Monetization.Entitlements.CreateTestEntitlement)">
+            <summary>
+            Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering.
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Create request</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.DiscordEntitlement.DeleteTestEntitlement(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering.
+            </summary>
+            <param name="client">Client to use</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Entitlements.EntitlementOwnerType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement-json-params">Entitlement Owner Types</a>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.Monetization.EntitlementType.ApplicationSubscription">
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Entitlements.EntitlementOwnerType.GuidSubscription">
+            <summary>
+            Subscription is a Guild Subscription
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Entitlements.EntitlementOwnerType.UserSubscription">
+            <summary>
+            Subscription is a User Subscription
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Entitlements.EntitlementType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types">Entitlement Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Entitlements.EntitlementType.ApplicationSubscription">
             <summary>
             Entitlement was purchased as an app subscription
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements">
+            <summary>
+            Get Entitlements Query String Builder
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.UserId">
+            <summary>
+            User ID to look up entitlements for
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.SkuIds">
+            <summary>
+            Optional list of SKU IDs to check entitlements for
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.Before">
+            <summary>
+            Retrieve entitlements before this time
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.After">
+            <summary>
+            Retrieve entitlements after this time
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.Limit">
+            <summary>
+            Number of entitlements to return, 1-100, default 100
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.GuildId">
+            <summary>
+            Guild ID to look up entitlements for
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.ExcludeEnded">
+            <summary>
+            Whether entitlements should be omitted
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.ToQueryString">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Entitlements.GetEntitlements.Validate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/skus#sku-object-sku-structure">SKU Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.Id">
+            <summary>
+            ID of SKU
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.Type">
+            <summary>
+            Type of SKU
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.ApplicationId">
+            <summary>
+            ID of the parent application
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.Name">
+            <summary>
+            Customer-facing name of your premium offering
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.Slug">
+            <summary>
+            System-generated URL slug based on the SKU's name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.Flags">
+            <summary>
+            SKU flags combined as a bitfield
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSku.GetSkus(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Returns all SKUs for a given application. Because of how our SKU and subscription systems work, you will see two SKUs for your premium offering. 
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="applicationId">Application ID to get SKU's for</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSkuType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/skus#sku-object-sku-types">Discord SKU Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSkuType.Subscription">
+            <summary>
+            Represents a recurring subscription
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.DiscordSkuType.SubscriptionGroup">
+            <summary>
+            System-generated group for each SUBSCRIPTION SKU created
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Monetization.Skus.SkuFlags">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/monetization/skus#sku-object-sku-flags">Discord SKU Flags</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.SkuFlags.None">
+            <summary>
+            No Sku Flags
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.SkuFlags.Available">
+            <summary>
+            SKU is available for purchase
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.SkuFlags.GuildSubscription">
+            <summary>
+            Recurring SKU that can be purchased by a user and applied to a single server. Grants access to every user in that server.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.Monetization.Skus.SkuFlags.UserSubscription">
+            <summary>
+            Recurring SKU purchased by a user for themselves. Grants access to the purchasing user in every server.
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.Permissions.DiscordRole">
@@ -17071,6 +17310,12 @@
             </summary>
             <param name="message">Exception message</param>
             <param name="create">Message Create that caused the error</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Exceptions.Entities.Monetization.InvalidGetEntitlementException.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="message">Exception message</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.Entities.Permissions.InvalidDiscordColorException">
             <summary>
@@ -25532,6 +25777,21 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.ChannelPinsUpdate">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#channel-pins-update">CHANNEL_PINS_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.EntitlementCreate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-create">ENTITLEMENT_CREATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.EntitlementUpdate">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-update">ENTITLEMENT_UPDATE</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.EntitlementDelete">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#entitlement-delete">ENTITLEMENT_DELETE</a> gateway event
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.Handlers.DiscordDispatchCode.GuildCreated">

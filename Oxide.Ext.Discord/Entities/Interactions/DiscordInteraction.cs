@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Interactions.Response;
 using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities.Monetization.Entitlements;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions.Entities;
@@ -127,6 +128,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("guild_locale")]
         public DiscordLocale? GuildLocale { get; set; }
+        
+        /// <summary>
+        /// For monetized apps, any entitlements for the invoking user, representing access to premium SKUs
+        /// </summary>
+        [JsonProperty("entitlements")]
+        public List<DiscordEntitlement> Entitlements { get; set; }
 
         private InteractionDataParsed _parsed;
 
@@ -423,6 +430,15 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             InteractionResponseType type = Type == InteractionType.ApplicationCommand ? InteractionResponseType.DeferredChannelMessageWithSource : InteractionResponseType.DeferredUpdateMessage;
             return CreateResponse(client, type);
+        }
+
+        /// <summary>
+        /// Creates a response indication that the interaction requires premium to be purchased.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise CreatePremiumRequiredResponse(DiscordClient client)
+        {
+            return CreateResponse(client, new InteractionPremiumRequiredResponse());
         }
 
         /// <summary>

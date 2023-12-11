@@ -5,6 +5,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-count-details-object">Reaction Count Details Structure</a>
     /// </summary>
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class ReactionCountDetails
     {
         /// <summary>

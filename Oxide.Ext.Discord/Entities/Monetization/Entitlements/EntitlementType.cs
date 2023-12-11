@@ -1,7 +1,7 @@
-﻿namespace Oxide.Ext.Discord.Entities.Monetization
+﻿namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
 {
     /// <summary>
-    /// Represents a <a href="">Entitlement Type</a>
+    /// Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types">Entitlement Types</a>
     /// </summary>
     public enum EntitlementType
     {
