@@ -1,5 +1,3 @@
-using Oxide.Plugins;
-
 namespace Oxide.Ext.Discord.Cache.Emoji
 {
 	public partial class EmojiCache

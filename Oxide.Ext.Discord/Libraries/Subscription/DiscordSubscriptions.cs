@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Clients;
@@ -11,7 +10,6 @@ using Oxide.Ext.Discord.Exceptions.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.Subscription

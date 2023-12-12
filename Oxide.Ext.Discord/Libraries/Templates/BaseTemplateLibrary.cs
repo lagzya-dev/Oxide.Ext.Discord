@@ -13,7 +13,6 @@ using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Types;
 using Oxide.Ext.Discord.Types.Threading;
 
 namespace Oxide.Ext.Discord.Libraries.Templates

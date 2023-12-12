@@ -24,7 +24,7 @@ public class ChannelCreate
 | [PermissionOverwrites](#permissionoverwrites-property) { get; set; } | Explicit permission overwrites for members and roles [`Overwrite`](./Overwrite.md) |
 | [Position](#position-property) { get; set; } | Sorting position of the channel |
 | [RateLimitPerUser](#ratelimitperuser-property) { get; set; } | Amount of seconds a user has to wait before sending another message (0-21600); bots, as well as users with the permission manage_messages or manage_channel, are unaffected |
-| [Topic](#topic-property) { get; set; } |  |
+| [Topic](#topic-property) { get; set; } | The channel topic (0-4096 characters for GUILD_FORUM &amp; GUILD_MEDIA Channels) (0-1024 characters for all others) |
 | [Type](#type-property) { get; set; } | the type of channel [`ChannelType`](./ChannelType.md) |
 | [UserLimit](#userlimit-property) { get; set; } | The user limit of the voice channel 0 refers to no limit, 1 to 99 refers to a user limit |
 | [Validate](#validate-method)() |  |
@@ -96,6 +96,8 @@ public ChannelType Type { get; set; }
    
    
 # Topic property
+
+The channel topic (0-4096 characters for GUILD_FORUM &amp; GUILD_MEDIA Channels) (0-1024 characters for all others)
 
 ```csharp
 public string Topic { get; set; }

@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Json.Converters;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands

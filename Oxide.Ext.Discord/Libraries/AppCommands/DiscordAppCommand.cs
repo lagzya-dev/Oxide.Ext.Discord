@@ -15,7 +15,6 @@ using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins.Setup;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries.AppCommands
 {

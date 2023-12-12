@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
         
         /// <summary>
         /// The channel topic
-        /// (0-4096 characters for GUILD_FORUM & GUILD_MEDIA Channels)
+        /// (0-4096 characters for GUILD_FORUM &amp; GUILD_MEDIA Channels)
         /// (0-1024 characters for all others)
         /// </summary>
         [JsonProperty("topic")]        

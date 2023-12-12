@@ -4908,7 +4908,13 @@
             the type of channel <see cref="T:Oxide.Ext.Discord.Entities.Channels.ChannelType"/>
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Topic" -->
+        <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Topic">
+            <summary>
+            The channel topic
+            (0-4096 characters for GUILD_FORUM &amp; GUILD_MEDIA Channels)
+            (0-1024 characters for all others)
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.Channels.ChannelCreate.Bitrate">
             <summary>
             The bitrate (in bits) of the voice channel
