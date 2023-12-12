@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Libraries.Pooling;
@@ -31,7 +32,7 @@ namespace Oxide.Ext.Discord.Factory
             
             StringTokenizer tokenizer = StringTokenizer.Create(route, SplitChar, routeLength);
             tokenizer.MoveNext();
-            string previous = tokenizer.Current;
+            ReadOnlySpan<char> previous = tokenizer.Current.Span;
             
             StringBuilder bucket = DiscordPool.Internal.GetStringBuilder();
             bucket.Append(EnumCache<RequestMethod>.Instance.ToString(method));
@@ -42,10 +43,10 @@ namespace Oxide.Ext.Discord.Factory
             {
                 bucket.Append('/');
 
-                string current = GetCurrent(tokenizer.Index, previous, tokenizer.Current);
+                ReadOnlySpan<char> current = GetCurrent(tokenizer.Index, previous, tokenizer.Current.Span);
 
                 bucket.Append(current);
-                if (current == ReactionsRoute)
+                if (current.SequenceEqual(ReactionsRoute))
                 {
                     break;
                 }
@@ -58,27 +59,20 @@ namespace Oxide.Ext.Discord.Factory
             return new BucketId(DiscordPool.Internal.FreeStringBuilderToString(bucket));
         }
         
-        private static string GetCurrent(int index, string previous, string token)
+        private static ReadOnlySpan<char> GetCurrent(int index, ReadOnlySpan<char> previous, ReadOnlySpan<char> token)
         {
             //If previous is not a major ID we don't want to include the ID in the bucket ID so use "id" string instead
-            return char.IsNumber(token[0]) && !IsMajorId(index, previous) ? IdReplacement : token;
+            return char.IsNumber(token[0]) && !IsMajorId(index, previous) ? IdReplacement.AsSpan() : token;
         }
 
-        private static bool IsMajorId(int index, string previous)
+        private static bool IsMajorId(int index, ReadOnlySpan<char> previous)
         {
             //We should only use Major ID if the previous segment name is the first segment and the ID is the second.
-            if (index == 1)
-            {
-                switch (previous)
-                {
-                    case "guilds":
-                    case "channels":
-                    case "webhooks":
-                        return true;
-                }
-            }
-
-            return false;
+            return index == 1 && 
+                   (previous.SequenceEqual("guilds") 
+                    || previous.SequenceEqual("channels") 
+                    || previous.SequenceEqual("webhooks")
+                    );
         }
     }
 }

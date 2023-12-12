@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Types.Pooling;
 
 namespace Oxide.Ext.Discord.Types
 {
-    internal class StringTokenizer : BasePoolable, IEnumerator<string>
+    internal class StringTokenizer : BasePoolable, IEnumerator<ReadOnlyMemory<char>>
     {
         private string _string;
         private char _token;
@@ -13,7 +14,7 @@ namespace Oxide.Ext.Discord.Types
         private int _stringIndex;
         public int Index { get; private set; } = -1;
 
-        public string Current { get; private set; }
+        public ReadOnlyMemory<char> Current { get; private set; }
 
         object IEnumerator.Current => Current;
 
@@ -53,7 +54,7 @@ namespace Oxide.Ext.Discord.Types
                 return MoveNext();
             }
 
-            Current = _string.Substring(_stringIndex, length);
+            Current = _string.AsMemory().Slice(_stringIndex, length);
             _stringIndex = index + 1;
             Index++;
             return true;
