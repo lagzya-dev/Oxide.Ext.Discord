@@ -33,7 +33,12 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System.Net.Http" />
+    <Reference Include="mscorlib">
+      <HintPath>..\References\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\References\System.Net.Http.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="copy &quot;$(outdir)Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;&#xA;&#xA;xmldocmd &quot;$(outdir)Oxide.Ext.Discord.dll&quot; &quot;$(ProjectDir)..\Docs\Generated&quot; --source &quot;../../../Oxide.Ext.Discord&quot; --namespace &quot;Oxide.Ext.Discord&quot; --visibility &quot;protected&quot; --obsolete --clean --namespace-pages --skip-compiler-generated --external &quot;Oxide.Core&quot; --external &quot;Oxide.CSharp&quot; --external &quot;Oxide.References&quot;&#xA;" />
