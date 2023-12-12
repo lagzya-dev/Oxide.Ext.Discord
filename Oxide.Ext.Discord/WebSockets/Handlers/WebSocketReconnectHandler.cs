@@ -39,7 +39,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Starts the reconnect process
         /// </summary>
-        public async Task StartReconnect()
+        public async ValueTask StartReconnect()
         {
             if (!_client.Initialized)
             {

@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Callbacks.Websockets
         
         protected override Task HandleCallback()
         {
-            return _reconnect.StartReconnect();
+            return _reconnect.StartReconnect().AsTask();
         }
 
         protected override string GetExceptionMessage()

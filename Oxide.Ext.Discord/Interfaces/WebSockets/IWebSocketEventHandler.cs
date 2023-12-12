@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// </summary>
         /// <param name="id">ID of the web socket</param>
         /// <returns></returns>
-        Task SocketOpened(Snowflake id);
+        ValueTask SocketOpened(Snowflake id);
 
         /// <summary>
         /// Called when the web socket is closed
@@ -25,7 +25,7 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// <param name="code">Web socket close code</param>
         /// <param name="message">Web socket close message</param>
         /// <returns></returns>
-        Task SocketClosed(Snowflake id, WebSocketCloseStatus code, string message);
+        ValueTask SocketClosed(Snowflake id, WebSocketCloseStatus code, string message);
 
         /// <summary>
         /// Called when an error occurs on the web socket
@@ -33,7 +33,7 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// <param name="id">ID of the websocket</param>
         /// <param name="ex">Exception that was thrown</param>
         /// <returns></returns>
-        Task SocketErrored(Snowflake id, Exception ex);
+        ValueTask SocketErrored(Snowflake id, Exception ex);
 
         /// <summary>
         /// Called when a message is received from the websocket
@@ -41,6 +41,6 @@ namespace Oxide.Ext.Discord.Interfaces.WebSockets
         /// <param name="id">ID of the message</param>
         /// <param name="stream">Stream containing the message</param>
         /// <returns></returns>
-        Task SocketMessage(Snowflake id, DiscordJsonReader stream);
+        ValueTask SocketMessage(Snowflake id, DiscordJsonReader stream);
     }
 }

@@ -16,6 +16,8 @@ namespace Oxide.Ext.Discord.WebSockets
         public CancellationToken Token => _source.Token;
         public WebSocketState WebSocketState => _socket.State;
         public bool IsCancelRequested => _source.IsCancellationRequested;
+        public WebSocketCloseStatus? CloseStatus => _socket.CloseStatus;
+        public string CloseStatusDescription => _socket.CloseStatusDescription;
 
         private readonly ClientWebSocket _socket = new ClientWebSocket();
         private readonly CancellationTokenSource _source = new CancellationTokenSource();
@@ -48,9 +50,9 @@ namespace Oxide.Ext.Discord.WebSockets
             SetSocketState(SocketState.Connected);
         }
 
-        public Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer) => _socket.ReceiveAsync(buffer, Token);
+        public ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(Memory<byte> buffer) => _socket.ReceiveAsync(buffer, Token);
 
-        public Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage) => _socket.SendAsync(buffer, messageType, endOfMessage, Token);
+        public ValueTask SendAsync(Memory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage) => _socket.SendAsync(buffer, messageType, endOfMessage, Token);
 
         public async Task CloseSocket(WebSocketCloseStatus status, string reason)
         {

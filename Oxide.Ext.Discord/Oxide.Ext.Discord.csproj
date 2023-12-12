@@ -25,10 +25,10 @@
     <DocumentationFile>$(outdir)Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Oxide.Core" Version="2.0.4054">
+    <PackageReference Include="Oxide.Core" Version="2.0.4077">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.4083">
+    <PackageReference Include="Oxide.CSharp" Version="2.0.4126">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
@@ -39,8 +39,14 @@
     <Reference Include="System.Net.Http">
       <HintPath>..\References\System.Net.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System">
+      <HintPath>..\References\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core">
+      <HintPath>..\References\System.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(outdir)Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;&#xA;&#xA;xmldocmd &quot;$(outdir)Oxide.Ext.Discord.dll&quot; &quot;$(ProjectDir)..\Docs\Generated&quot; --source &quot;../../../Oxide.Ext.Discord&quot; --namespace &quot;Oxide.Ext.Discord&quot; --visibility &quot;protected&quot; --obsolete --clean --namespace-pages --skip-compiler-generated --external &quot;Oxide.Core&quot; --external &quot;Oxide.CSharp&quot; --external &quot;Oxide.References&quot;&#xA;" />
+    <Exec Command="copy &quot;$(outdir)Oxide.Ext.Discord.xml&quot; &quot;$(ProjectDir)Oxide.Ext.Discord.xml&quot;&#xA;&#xA;REM xmldocmd &quot;$(outdir)Oxide.Ext.Discord.dll&quot; &quot;$(ProjectDir)..\Docs\Generated&quot; --source &quot;../../../Oxide.Ext.Discord&quot; --namespace &quot;Oxide.Ext.Discord&quot; --visibility &quot;protected&quot; --obsolete --clean --namespace-pages --skip-compiler-generated --external &quot;Oxide.Core&quot; --external &quot;Oxide.CSharp&quot; --external &quot;Oxide.References&quot; --external &quot;System&quot; --external &quot;System.Core&quot; --external &quot;mscorlib&quot; --external &quot;System.Net.Http&quot;&#xA;" />
   </Target>
 </Project>

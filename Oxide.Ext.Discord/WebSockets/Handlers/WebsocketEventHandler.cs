@@ -21,7 +21,6 @@ using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
 using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Monetization;
 using Oxide.Ext.Discord.Entities.Monetization.Entitlements;
 using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Entities.Stickers;
@@ -65,12 +64,12 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <summary>
         /// Called when a socket is open
         /// </summary>
-        public Task SocketOpened(Snowflake websocketId)
+        public ValueTask SocketOpened(Snowflake websocketId)
         {
             _logger.Info("Discord socket connected!");
             _webSocket.OnSocketConnected();
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketOpened);
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         /// <summary>
@@ -79,13 +78,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="websocketId">ID of the web socket</param>
         /// <param name="status"><see cref="WebSocketCloseStatus"/> for the web socket</param>
         /// <param name="message">Close message from the web socket</param>
-        public Task SocketClosed(Snowflake websocketId, WebSocketCloseStatus status, string message)
+        public ValueTask SocketClosed(Snowflake websocketId, WebSocketCloseStatus status, string message)
         {
             //If the socket close came from the extension then this will be true
             if (!_webSocket.IsCurrentSocket(websocketId))
             {
                 _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {{0}}, reason: {{1}}", status, message);
-                return Task.CompletedTask;
+                return new ValueTask();
             }
 
             int code = (int)status;
@@ -118,8 +117,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             {
                 _webSocket.ReconnectIfRequested();
             }
-            
-            return Task.CompletedTask;
+
+            return new ValueTask();
         }
 
         /// <summary>
@@ -221,17 +220,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         /// <param name="webSocketId">ID of the web socket</param>
         /// <param name="ex">Exception throw</param>
-        public Task SocketErrored(Snowflake webSocketId, Exception ex)
+        public ValueTask SocketErrored(Snowflake webSocketId, Exception ex)
         {
             if (!_webSocket.IsCurrentSocket(webSocketId))
             {
-                return Task.CompletedTask;
+                return new ValueTask();
             }
             
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketErrored, ex, ex.Message);
             _logger.Exception("An error has occured in the websocket. Attempting to reconnect to discord.", ex);
             _webSocket.Disconnect(true, false);
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         /// <summary>
@@ -239,7 +238,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// </summary>
         /// <param name="webSocketId">ID of the web socket</param>
         /// <param name="reader">Json Reader containing the message</param>
-        public async Task SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
+        public async ValueTask SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
         {
             EventPayload payload = reader.Deserialize<EventPayload>(_client.JsonSerializer);
             _webSocket.OnSequenceUpdate(payload.Sequence);
@@ -1944,7 +1943,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         }
 
         //https://discord.com/developers/docs/topics/gateway-events#heartbeat
-        private Task HandleHeartbeat()
+        private ValueTask HandleHeartbeat()
         {
             _logger.Debug("Manually sent heartbeat (received opcode 1)");
             return _webSocket.SendHeartbeat();
@@ -1963,7 +1962,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         }
 
         //https://discord.com/developers/docs/topics/gateway-events#hello
-        private Task HandleHello(GatewayHelloEvent hello)
+        private ValueTask HandleHello(GatewayHelloEvent hello)
         {
             return _webSocket.OnDiscordHello(hello);
         }

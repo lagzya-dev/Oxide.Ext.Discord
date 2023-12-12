@@ -60,7 +60,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task SendCommandsInternal()
+        private async ValueTask SendCommandsInternal()
         {
             while (_source != null && !_source.IsCancellationRequested)
             {

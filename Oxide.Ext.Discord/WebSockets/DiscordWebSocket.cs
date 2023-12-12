@@ -183,7 +183,7 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         /// <param name="opCode">Command code to send</param>
         /// <param name="data">Data to send</param>
-        private async Task SendImmediatelyAsync(GatewayCommandCode opCode, object data)
+        private async ValueTask SendImmediatelyAsync(GatewayCommandCode opCode, object data)
         {
             CommandPayload payload = CommandPayload.CreatePayload(opCode, data);
             if (!await SendAsync(payload).ConfigureAwait(false))
@@ -193,31 +193,31 @@ namespace Oxide.Ext.Discord.WebSockets
             payload.Dispose();
         }
         
-        internal async Task<bool> SendAsync(CommandPayload payload)
+        internal ValueTask<bool> SendAsync(CommandPayload payload)
         {
             if (Handler == null)
             {
-                return false;
+                return new ValueTask<bool>(false);
             }
 
-            DiscordJsonWriter writer = DiscordJsonWriter.Get(DiscordPool.Internal);
-            writer.Write(_client.JsonSerializer, payload);
-            writer.Stream.Position = 0;
-
-            if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            using (DiscordJsonWriter writer = DiscordJsonWriter.Get(DiscordPool.Internal))
             {
-                string json = writer.ReadAsString();
-                if (payload.OpCode == GatewayCommandCode.Identify)
+                writer.Write(_client.JsonSerializer, payload);
+                writer.Stream.Position = 0;
+
+                if (_client.Logger.IsLogging(DiscordLogLevel.Verbose))
                 {
-                    json = json.Replace(_client.Connection.ApiToken, _client.Connection.HiddenToken);
+                    string json = writer.ReadAsString();
+                    if (payload.OpCode == GatewayCommandCode.Identify)
+                    {
+                        json = json.Replace(_client.Connection.ApiToken, _client.Connection.HiddenToken);
+                    }
+
+                    _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, json);
                 }
 
-                _logger.Verbose($"{nameof(DiscordWebSocket)}.{nameof(SendAsync)} Sending Payload {{0}} Body: {{1}}", payload.OpCode, json);
+                return Handler.SendAsync(writer.Stream);
             }
-            
-            bool sent = await Handler.SendAsync(writer.Stream).ConfigureAwait(false);
-            writer.Dispose();
-            return sent;
         }
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Oxide.Ext.Discord.WebSockets
             }
         }
 
-        internal async Task OnDiscordHello(GatewayHelloEvent hello)
+        internal async ValueTask OnDiscordHello(GatewayHelloEvent hello)
         {
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(OnDiscordHello)}");
 
@@ -281,13 +281,13 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
-        internal Task Identify()
+        internal ValueTask Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discord.com/developers/docs/topics/gateway#identifying
             if (!_client.Initialized)
             {
-                return Task.CompletedTask;
+                return new ValueTask();
             }
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Identify)} Identifying bot with discord.");
@@ -308,11 +308,11 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
-        private Task Resume()
+        private ValueTask Resume()
         {
             if (!_client.Initialized)
             {
-                return Task.CompletedTask;
+                return new ValueTask();
             }
 
             ResumeSessionCommand resume = new ResumeSessionCommand
@@ -336,14 +336,14 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Sends a heartbeat to Discord
         /// </summary>
-        internal Task SendHeartbeat()
+        internal ValueTask SendHeartbeat()
         {
             if (IsConnected())
             {
                 return SendImmediatelyAsync(GatewayCommandCode.Heartbeat, _sequence);
             }
             
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         internal void OnInvalidSession(bool resume)

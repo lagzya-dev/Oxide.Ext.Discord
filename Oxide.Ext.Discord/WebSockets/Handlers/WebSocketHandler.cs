@@ -19,8 +19,8 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         private readonly IWebSocketEventHandler _handler;
         private readonly ILogger _logger;
 
-        private readonly ArraySegment<byte> _receiveBuffer;
-        private readonly byte[] _sendBuffer;
+        private readonly Memory<byte> _receiveBuffer;
+        private readonly Memory<byte> _sendBuffer;
         private readonly AutoResetEvent _sendLock = new AutoResetEvent(true);
         
         private DiscordWebsocketClient _client;
@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         {
             _handler = handler;
             _logger = logger;
-            _receiveBuffer = WebSocket.CreateClientBuffer(ReceiveChunkSize, SendChunkSize);
+            _receiveBuffer = new byte[Math.Max(ReceiveChunkSize, SendChunkSize)];
             _sendBuffer = new byte[SendChunkSize];
         }
 
@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             await RunWebsocket((string)url).ConfigureAwait(false);
         }
         
-        private async Task RunWebsocket(string url)
+        private async ValueTask RunWebsocket(string url)
         {
             DiscordWebsocketClient client = _client;
             Snowflake id = client.WebsocketId;
@@ -112,23 +112,23 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task ReceiveHandlerAsync(DiscordWebsocketClient client)
+        private async ValueTask ReceiveHandlerAsync(DiscordWebsocketClient client)
         {
             DiscordJsonReader reader = new DiscordJsonReader();
             MemoryStream input = reader.Stream;
-            byte[] array = _receiveBuffer.Array ?? throw new ArgumentNullException();
+            Memory<byte> array = _receiveBuffer;
             
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandlerAsync)} Start Receive for {{0}}", client.WebsocketId);
             while (!client.IsCancelRequested && client.WebSocketState == WebSocketState.Open && client.SocketState == SocketState.Connected)
             {
                 _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ReceiveHandlerAsync)} Waiting to receive for {{0}} State: {{1}} Is Cancelled: {{2}}", client.WebsocketId, client.SocketState, client.IsCancelRequested);
-                WebSocketReceiveResult result = await client.ReceiveAsync(_receiveBuffer).ConfigureAwait(false);
+                ValueWebSocketReceiveResult result = await client.ReceiveAsync(array).ConfigureAwait(false);
                 if (client.Token.IsCancellationRequested)
                 {
                     return;
                 }
 
-                await input.WriteAsync(array, 0, result.Count, client.Token).ConfigureAwait(false);
+                await input.WriteAsync(array.Slice(0, result.Count), client.Token).ConfigureAwait(false);
 
                 if (result.EndOfMessage)
                 {
@@ -149,16 +149,16 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async Task ProcessReceivedMessageAsync(DiscordWebsocketClient client, WebSocketReceiveResult result, DiscordJsonReader reader)
+        private async ValueTask ProcessReceivedMessageAsync(DiscordWebsocketClient client, ValueWebSocketReceiveResult result, DiscordJsonReader reader)
         {
             _logger.Verbose($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessageAsync)} Processing Receive Message For: {{0}} State: {{1}} Type: {{2}} Size: {{3}}", client.WebsocketId, client.SocketState, result.MessageType, reader.Stream.Length);
 
             if (client.WebSocketState == WebSocketState.CloseReceived && result.MessageType == WebSocketMessageType.Close)
             {
-                if (client.SocketState != SocketState.Disconnected  && client.SocketState != SocketState.Disconnecting)
+                if (client.SocketState != SocketState.Disconnected && client.SocketState != SocketState.Disconnecting)
                 {
-                    WebSocketCloseStatus closeStatus = result.CloseStatus ?? WebSocketCloseStatus.NormalClosure;
-                    await DisconnectInternal(client, closeStatus, "Websocket closed by Discord", true).ConfigureAwait(false);
+                    WebSocketCloseStatus closeStatus = client.CloseStatus ?? WebSocketCloseStatus.NormalClosure;
+                    await DisconnectInternal(client, closeStatus, $"Websocket closed by Discord. {client.CloseStatusDescription}", true).ConfigureAwait(false);
                 }
 
                 return;
@@ -172,11 +172,11 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// Sends the string message over the web socket
         /// </summary>
         /// <param name="stream">Stream to send</param>
-        public async Task<bool> SendAsync(MemoryStream stream)
+        public ValueTask<bool> SendAsync(MemoryStream stream)
         {
             if (stream.Length == 0)
             {
-                return false;
+                return new ValueTask<bool>(false);
             }
             
             _sendLock.WaitOne();
@@ -185,10 +185,10 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 DiscordWebsocketClient client = _client;
                 if (client == null || client.WebSocketState != WebSocketState.Open)
                 {
-                    return false;
+                    return new ValueTask<bool>(false);
                 }
             
-                return await SendInternalAsync(_client, stream).ConfigureAwait(false);
+                return SendInternalAsync(_client, stream);
             }
             finally
             {
@@ -196,17 +196,17 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
         
-        private async Task<bool> SendInternalAsync(DiscordWebsocketClient client, MemoryStream stream)
+        private async ValueTask<bool> SendInternalAsync(DiscordWebsocketClient client, MemoryStream stream)
         {
             stream.Position = 0;
             int readIndex = 0;
             while (!client.IsCancelRequested)
             {
-                int read = await stream.ReadAsync(_sendBuffer, 0, _sendBuffer.Length, client.Token).ConfigureAwait(false);
+                int read = await stream.ReadAsync(_sendBuffer, client.Token).ConfigureAwait(false);
                 readIndex += read;
                 bool endOfMessage = readIndex == stream.Length;
                 //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(SendInternalAsync)} Sending Message Amount: {{0}} ({{1}}/{{2}}) Message: {{3}} - {{4}} End Of Message: {{5}}", read, readIndex, stream.Length, g, g.Length, endOfMessage);
-                await client.SendAsync(new ArraySegment<byte>(_sendBuffer, 0, read), WebSocketMessageType.Text, endOfMessage).ConfigureAwait(false);
+                await client.SendAsync(_sendBuffer.Slice(0, read), WebSocketMessageType.Text, endOfMessage).ConfigureAwait(false);
                 if (endOfMessage)
                 {
                     return true;
@@ -222,7 +222,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="code">Code to close with</param>
         /// <param name="reason">Reason for the close</param>
         /// <returns></returns>
-        public Task Disconnect(int code, string reason)
+        public ValueTask Disconnect(int code, string reason)
         {
             return Disconnect((WebSocketCloseStatus)code, reason);
         }
@@ -233,7 +233,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="status"><see cref="WebSocketCloseStatus"/>to close with</param>
         /// <param name="reason">Reason for the close</param>
         /// <returns></returns>
-        public Task Disconnect(WebSocketCloseStatus status, string reason)
+        public ValueTask Disconnect(WebSocketCloseStatus status, string reason)
         {
             return DisconnectInternal(_client, status, reason, false);
         }
@@ -246,7 +246,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
         /// <param name="reason">Reason for the close</param>
         /// <param name="closeReceived">If we received a close from the websocket</param>
         /// <returns></returns>
-        private async Task DisconnectInternal(DiscordWebsocketClient client, WebSocketCloseStatus status, string reason, bool closeReceived)
+        private async ValueTask DisconnectInternal(DiscordWebsocketClient client, WebSocketCloseStatus status, string reason, bool closeReceived)
         {
             _logger.Debug($"{nameof(WebSocketHandler)}.{nameof(Disconnect)} Status: {{0}} Reason: {{1}} Close Received: {{2}} Socket State: {{3}} Client State: {{4}} Cancel Requested {{5}}",
                 status, reason, closeReceived, client?.WebSocketState, client?.SocketState, client?.IsCancelRequested);
