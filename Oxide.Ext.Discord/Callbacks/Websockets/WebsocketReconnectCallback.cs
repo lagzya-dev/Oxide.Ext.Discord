@@ -20,9 +20,9 @@ namespace Oxide.Ext.Discord.Callbacks.Websockets
             _reconnect = reconnect;
         }
         
-        protected override Task HandleCallback()
+        protected override ValueTask HandleCallback()
         {
-            return _reconnect.StartReconnect().AsTask();
+            return _reconnect.StartReconnect();
         }
 
         protected override string GetExceptionMessage()

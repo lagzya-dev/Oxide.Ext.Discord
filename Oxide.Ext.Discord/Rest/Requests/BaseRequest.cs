@@ -80,14 +80,14 @@ namespace Oxide.Ext.Discord.Rest.Requests
             Logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);
         }
 
-        internal Task WaitUntilRequestCanStart(CancellationToken token)
+        internal ValueTask WaitUntilRequestCanStart(CancellationToken token)
         {
             if (_errorResetAt > DateTimeOffset.UtcNow)
             {
                 Logger.Debug($"{nameof(BaseRequest)}.{nameof(WaitUntilRequestCanStart)} Request ID: {{0}} Can't Start Request Due to Previous Error Reset Waiting For: {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
                 return _errorResetAt.DelayUntil(token);
             }
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)

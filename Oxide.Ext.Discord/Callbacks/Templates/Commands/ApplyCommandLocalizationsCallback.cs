@@ -29,10 +29,10 @@ namespace Oxide.Ext.Discord.Callbacks.Templates.Commands
             _promise = promise;
         }
 
-        protected override Task HandleCallback()
+        protected override ValueTask HandleCallback()
         {
             _localizations.HandleApplyCommandLocalizationsAsync(_id, _create, _promise);
-            return Task.CompletedTask;
+            return new ValueTask();
         }
         
         protected override string GetExceptionMessage()

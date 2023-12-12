@@ -44,7 +44,7 @@ namespace Oxide.Ext.Discord.WebSockets
             SocketState = state;
         }
 
-        public async Task ConnectAsync(Uri uri)
+        public async ValueTask ConnectAsync(Uri uri)
         {
             await _socket.ConnectAsync(uri, Token).ConfigureAwait(false);
             SetSocketState(SocketState.Connected);
@@ -54,7 +54,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
         public ValueTask SendAsync(Memory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage) => _socket.SendAsync(buffer, messageType, endOfMessage, Token);
 
-        public async Task CloseSocket(WebSocketCloseStatus status, string reason)
+        public async ValueTask CloseSocket(WebSocketCloseStatus status, string reason)
         {
             SetSocketState(SocketState.Disconnecting);
 

@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _promise = promise;
         }
         
-        protected override Task HandleCallback()
+        protected override ValueTask HandleCallback()
         {
             try
             {
@@ -48,7 +48,7 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
                 _promise.Reject(ex);
             }
 
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         protected override string GetExceptionMessage()

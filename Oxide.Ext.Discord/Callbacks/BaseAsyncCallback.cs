@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Callbacks
         /// <summary>
         /// Overridden in the child class to handle the callback
         /// </summary>
-        protected abstract Task HandleCallback();
+        protected abstract ValueTask HandleCallback();
 
         /// <summary>
         /// Returns Exception message if an error occurs 

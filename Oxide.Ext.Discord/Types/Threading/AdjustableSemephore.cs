@@ -40,7 +40,7 @@ namespace Oxide.Ext.Discord.Types.Threading
             }
         }
 
-        public Task WaitOneAsync()
+        public ValueTask WaitOneAsync()
         {
             lock (_syncRoot)
             {
@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Types.Threading
                 Available--;
             }
 
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         public void Release()

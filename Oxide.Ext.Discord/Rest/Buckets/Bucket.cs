@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Rest.Buckets
             }
         }
 
-        internal async Task WaitUntilBucketAvailable(RequestHandler handler, CancellationToken token)
+        internal async ValueTask WaitUntilBucketAvailable(RequestHandler handler, CancellationToken token)
         {
             BaseRequest request = handler.Request;
             DiscordClient client = request.Client;

@@ -31,10 +31,10 @@ namespace Oxide.Ext.Discord.Callbacks.Templates
             _promise = promise;
         }
 
-        protected override Task HandleCallback()
+        protected override ValueTask HandleCallback()
         {
             _library.HandleRegisterTemplate(_id, _template, _version, _minVersion, _promise);
-            return Task.CompletedTask;
+            return new ValueTask();
         }
 
         protected override string GetExceptionMessage()
