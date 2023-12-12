@@ -281,13 +281,13 @@ namespace Oxide.Ext.Discord.WebSockets
         /// <summary>
         /// Used to Identify the bot with discord
         /// </summary>
-        internal async Task Identify()
+        internal Task Identify()
         {
             // Sent immediately after connecting. Opcode 2: Identify
             // Ref: https://discord.com/developers/docs/topics/gateway#identifying
             if (!_client.Initialized)
             {
-                return;
+                return Task.CompletedTask;
             }
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Identify)} Identifying bot with discord.");
@@ -302,17 +302,17 @@ namespace Oxide.Ext.Discord.WebSockets
                 Shard = Gateway.Shard
             };
 
-            await SendImmediatelyAsync(GatewayCommandCode.Identify, identify).ConfigureAwait(false);
+            return SendImmediatelyAsync(GatewayCommandCode.Identify, identify);
         }
         
         /// <summary>
         /// Used to resume the current session with discord
         /// </summary>
-        private async Task Resume()
+        private Task Resume()
         {
             if (!_client.Initialized)
             {
-                return;
+                return Task.CompletedTask;
             }
 
             ResumeSessionCommand resume = new ResumeSessionCommand
@@ -325,7 +325,7 @@ namespace Oxide.Ext.Discord.WebSockets
             _sessionId = null;
             
             _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Resume)} Attempting to resume session with ID: {{0}} Sequence: {{1}}", _sessionId, _sequence);
-            await SendImmediatelyAsync(GatewayCommandCode.Resume, resume).ConfigureAwait(false);
+            return SendImmediatelyAsync(GatewayCommandCode.Resume, resume);
         }
         
         internal void OnHeartbeatAcknowledge()
