@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Entities.Applications;
 using Oxide.Ext.Discord.Entities.AutoMod;
 using Oxide.Ext.Discord.Entities.Channels;
@@ -601,7 +602,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 flags |= ApplicationFlags.GatewayMessageContentLimited;
             }
 
-            if (app.HasAnyApplicationFlags(ApplicationFlags.GatewayGuildMembersLimited | ApplicationFlags.GatewayGuildMembers))
+            if (!app.HasAnyApplicationFlags(ApplicationFlags.GatewayGuildMembersLimited | ApplicationFlags.GatewayGuildMembers))
             {
                 _logger.Info("Applying GatewayGuildMembers App Flag since it is currently disabled");
                 flags |= ApplicationFlags.GatewayGuildMembersLimited;
@@ -609,7 +610,13 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
 
             if (flags != app.Flags)
             {
-                app.Edit(_client.GetFirstClient(), new ApplicationUpdate { Flags = flags });
+                app.Edit(_client.GetFirstClient(), new ApplicationUpdate { Flags = flags }).Then(da =>
+                {
+                    _logger.Info("Successfully Applied Application Flags: {0}", flags);
+                }).Catch<ResponseError>(error =>
+                {
+                    _logger.Error("An error occurred applying application flags: {0}\n{1}", flags, error.ResponseMessage);
+                });
             }
         }
 
