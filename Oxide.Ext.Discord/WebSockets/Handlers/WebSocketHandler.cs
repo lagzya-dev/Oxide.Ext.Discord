@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
             }
         }
 
-        private async ValueTask ProcessReceivedMessageAsync(DiscordWebsocketClient client, ValueWebSocketReceiveResult result, DiscordJsonReader reader)
+        private ValueTask ProcessReceivedMessageAsync(DiscordWebsocketClient client, ValueWebSocketReceiveResult result, DiscordJsonReader reader)
         {
             _logger.Verbose($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessageAsync)} Processing Receive Message For: {{0}} State: {{1}} Type: {{2}} Size: {{3}}", client.WebsocketId, client.SocketState, result.MessageType, reader.Stream.Length);
 
@@ -158,14 +158,14 @@ namespace Oxide.Ext.Discord.WebSockets.Handlers
                 if (client.SocketState != SocketState.Disconnected && client.SocketState != SocketState.Disconnecting)
                 {
                     WebSocketCloseStatus closeStatus = client.CloseStatus ?? WebSocketCloseStatus.NormalClosure;
-                    await DisconnectInternal(client, closeStatus, $"Websocket closed by Discord. {client.CloseStatusDescription}", true).ConfigureAwait(false);
+                    return DisconnectInternal(client, closeStatus, $"Websocket closed by Discord. {client.CloseStatusDescription}", true);
                 }
 
-                return;
+                return new ValueTask();
             }
 
             //_logger.Debug($"{nameof(WebSocketHandler)}.{nameof(ProcessReceivedMessage)} Invoke On Message: {{0}}", message);
-            await _handler.SocketMessage(client.WebsocketId, reader).ConfigureAwait(false);
+            return _handler.SocketMessage(client.WebsocketId, reader);
         }
 
         /// <summary>

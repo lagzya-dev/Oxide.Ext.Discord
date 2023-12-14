@@ -1,5 +1,5 @@
+using System.Buffers;
 using System.IO;
-using Oxide.Ext.Discord.Types.Pooling.Pools;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Extensions
         public static void CopyToPooled(this Stream from, Stream to)
         {
             from.Position = 0;
-            byte[] buffer = DiscordArrayPool<byte>.Shared.Rent(1024);
+            byte[] buffer = ArrayPool<byte>.Shared.Rent(1024);
 
             int bytesRead;
             while ((bytesRead = from.Read(buffer, 0, buffer.Length)) != 0)
@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Extensions
                 to.Write(buffer, 0, bytesRead);
             }
 
-            DiscordArrayPool<byte>.Shared.Return(buffer);
+            ArrayPool<byte>.Shared.Return(buffer);
         }
     }
 }

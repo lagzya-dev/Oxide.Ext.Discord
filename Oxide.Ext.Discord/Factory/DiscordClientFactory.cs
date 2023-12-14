@@ -84,7 +84,7 @@ namespace Oxide.Ext.Discord.Factory
         public DiscordClient GetClient(string pluginName)
         {
             if (pluginName == null) throw new ArgumentNullException(nameof(pluginName));
-            return _clients[new PluginId(pluginName)];
+            return GetClient(new PluginId(pluginName));
         }
         #endregion
         

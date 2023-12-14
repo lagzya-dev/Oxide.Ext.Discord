@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Extensions;
@@ -129,6 +130,8 @@ namespace Oxide.Ext.Discord
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
             Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
             
+            Interface.Oxide.Config.Compiler.PreprocessorDirectives.AddRange(GetPreProcessorDirectives());
+            
             Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginLoaded;
             Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginUnloaded;
         }
@@ -138,12 +141,16 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnShutdown()
         {
-            DiscordClientFactory.Instance.OnShutdown();
-
-            GlobalLogger.Debug("Disconnected all clients - server shutdown.");
-            
             DiscordUserData.Instance.Save(true);
+            DiscordClientFactory.Instance.OnShutdown();
+            GlobalLogger.Debug("Disconnected all clients - server shutdown.");
             DiscordLoggerFactory.Instance.OnServerShutdown();
+        }
+
+        private IEnumerable<string> GetPreProcessorDirectives()
+        {
+            yield return "DiscordExt";
+            yield return "DiscordExt3_0";
         }
     }
 }

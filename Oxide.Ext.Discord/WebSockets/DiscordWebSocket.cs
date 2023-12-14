@@ -107,6 +107,8 @@ namespace Oxide.Ext.Discord.WebSockets
             ShouldResume = false;
 
             Intents = _client.Connection.Intents;
+            
+            _logger.Debug($"{nameof(DiscordWebSocket)}.{nameof(Connect)} Websocket connecting to: {{0}}", url);
             Handler.Connect(url);
         }
 

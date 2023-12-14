@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Types.Pooling.Entities
     {
         public T Value;
         private bool _disposed;
-        internal DiscordPluginPool _pool;
+        internal DiscordPluginPool Pool;
 
         public override string ToString() => StringCache<T>.Instance.ToString(Value);
 
@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Types.Pooling.Entities
 
         public IBoxed Copy()
         {
-            return _pool.GetBoxed(Value);
+            return Pool.GetBoxed(Value);
         }
         
         public void Dispose()

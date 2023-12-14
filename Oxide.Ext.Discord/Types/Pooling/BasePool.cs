@@ -11,7 +11,9 @@ namespace Oxide.Ext.Discord.Types.Pooling
     /// </summary>
     /// <typeparam name="TPooled">Type being pooled</typeparam>
     /// <typeparam name="TPool">Type of the pool</typeparam>
-    public abstract class BasePool<TPooled, TPool> : IPool<TPooled> where TPooled : class where TPool : BasePool<TPooled, TPool>, new()
+    public abstract class BasePool<TPooled, TPool> : IPool<TPooled> 
+        where TPooled : class 
+        where TPool : BasePool<TPooled, TPool>, new()
     {
         /// <summary>
         /// Plugin Pool for this pool

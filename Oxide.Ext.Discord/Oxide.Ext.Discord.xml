@@ -24978,32 +24978,6 @@
             </summary>
             <typeparam name="T">Type that will be in the boxed object</typeparam>
         </member>
-        <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1">
-            <summary>
-            Represents a <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1"/>
-            </summary>
-            <typeparam name="T">Type of the array pool</typeparam>
-        </member>
-        <member name="F:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Shared">
-            <summary>
-            <see cref="T:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1"/> Instance
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Rent(System.Int32)">
-            <summary>
-            Rents an array from the pool
-            </summary>
-            <param name="minimumLength"></param>
-            <returns></returns>
-            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Types.Pooling.Pools.DiscordArrayPool`1.Return(`0[])">
-            <summary>
-            Returns an array to the pool
-            </summary>
-            <param name="array"></param>
-            <exception cref="T:System.ArgumentNullException"></exception>
-        </member>
         <member name="T:Oxide.Ext.Discord.Types.Pooling.Pools.HashPool`2">
             <summary>
             Represents a pool for Hash&lt;TKey, TValue&gt;
