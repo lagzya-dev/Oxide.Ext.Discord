@@ -49,7 +49,7 @@ namespace Oxide.Ext.Discord.Factory
             sb.Append(token, 0, last);
             sb.Append('#', token.Length - last);
 
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
         
         private BotTokenData ParseToken(string token, string pluginName)

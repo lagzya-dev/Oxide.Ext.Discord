@@ -177,7 +177,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 sb.AppendLine(placeholder.Value.IsExtensionPlaceholder ? extensionName : placeholder.Value.PluginName);
             }
             
-            Chat(player, LangKeys.Placeholders.List, DiscordPool.Internal.FreeStringBuilderToString(sb));
+            Chat(player, LangKeys.Placeholders.List, DiscordPool.Internal.ToStringAndFree(sb));
         }
         
         [HookMethod(nameof(ClearEntitiesDiscordPool))]

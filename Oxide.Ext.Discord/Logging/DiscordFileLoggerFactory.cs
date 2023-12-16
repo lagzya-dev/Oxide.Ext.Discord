@@ -22,9 +22,9 @@ namespace Oxide.Ext.Discord.Logging
             _writerThread.Start();
         }
 
-        public DiscordFileLogger CreateLogger(string pluginName, string fileLogFormat)
+        public DiscordFileLogger CreateLogger(string pluginName, string dateTimeFormat)
         {
-            DiscordFileLogger logger = new DiscordFileLogger(pluginName, fileLogFormat, _reset);
+            DiscordFileLogger logger = new DiscordFileLogger(pluginName, dateTimeFormat, _reset);
             _loggers.Add(logger);
             return logger;
         }
@@ -54,12 +54,11 @@ namespace Oxide.Ext.Discord.Logging
         {
             _exit = true;
             _reset.Set();
-            _writerThread.Join(TimeSpan.FromSeconds(30));
+            _writerThread.Join(TimeSpan.FromSeconds(5));
         }
 
-        internal void ShutdownLogger(DiscordFileLogger logger)
+        internal void RemoveLogger(DiscordFileLogger logger)
         {
-            logger.OnShutdown();
             _loggers.Remove(logger);
         }
     }

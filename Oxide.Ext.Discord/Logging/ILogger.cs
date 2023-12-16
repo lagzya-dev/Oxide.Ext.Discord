@@ -38,9 +38,10 @@ namespace Oxide.Ext.Discord.Logging
         /// Log the message with the specified level
         /// </summary>
         /// <param name="level">Log Level for the message</param>
-        /// <param name="message">Message to log</param>
+        /// <param name="log">Message format to log</param>
+        /// <param name="args">Message args</param>
         /// <param name="exception">Exception for the log</param>
-        void Log(DiscordLogLevel level, string message, Exception exception = null);
+        void Log(DiscordLogLevel level, string log, object[] args, Exception exception = null);
 
         /// <summary>
         /// Shuts down the logger

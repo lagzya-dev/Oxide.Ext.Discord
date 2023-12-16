@@ -29,10 +29,10 @@ namespace Oxide.Ext.Discord.Configuration
         [JsonProperty("Hide Discord Error Codes")]
         public HashSet<int> HideDiscordErrorCodes { get; set; }
         
-        [JsonProperty("Console Log Format")]
-        public string ConsoleLogFormat { get; set; }
-        
-        [JsonProperty("File Log Format")]
-        public string FileLogFormat { get; set; }
+        /// <summary>
+        /// DateTime format for file logging
+        /// </summary>
+        [JsonProperty("File DateTime Format")]
+        public string FileDateTimeFormat { get; set; }
     }
 }

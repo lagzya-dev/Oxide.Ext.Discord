@@ -170,7 +170,7 @@ namespace Oxide.Ext.Discord.Cache
                 }
             }
 
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
 
     }

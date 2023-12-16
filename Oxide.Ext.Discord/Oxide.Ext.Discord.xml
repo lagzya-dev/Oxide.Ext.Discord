@@ -2292,6 +2292,11 @@
             Discord Response Error codes that will not be logged
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.FileDateTimeFormat">
+            <summary>
+            DateTime format for file logging
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordUsersConfig">
             <summary>
             Discord User Config
@@ -23869,12 +23874,13 @@
             Represents a Console Logger for Discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DiscordConsoleLogger.AddMessage(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordConsoleLogger.AddMessage(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Object[],System.Exception)">
             <summary>
             Adds a message to the server console
             </summary>
             <param name="level"></param>
-            <param name="message"></param>
+            <param name="log"></param>
+            <param name="args"></param>
             <param name="ex"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.DiscordFileLogger">
@@ -23895,7 +23901,7 @@
             <param name="config">Configuration for the logger</param>
             <param name="handler">Handler for the logger</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Object[],System.Exception)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
@@ -23982,14 +23988,9 @@
             Log Level for file Logging
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.ConsoleLogFormat">
+        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.FileDateTimeFormat">
             <summary>
-            Format for console logging
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Logging.IDiscordLoggingConfig.FileLogFormat">
-            <summary>
-            Format for file logging
+            File Logging DateTime format
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.ILogger">
@@ -24024,12 +24025,13 @@
             <param name="level"></param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Exception)">
+        <member name="M:Oxide.Ext.Discord.Logging.ILogger.Log(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Object[],System.Exception)">
             <summary>
             Log the message with the specified level
             </summary>
             <param name="level">Log Level for the message</param>
-            <param name="message">Message to log</param>
+            <param name="log">Message format to log</param>
+            <param name="args">Message args</param>
             <param name="exception">Exception for the log</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Logging.ILogger.Shutdown">
@@ -24808,7 +24810,7 @@
             </summary>
             <param name="sb">StringBuilder being freed</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.FreeStringBuilderToString(System.Text.StringBuilder)">
+        <member name="M:Oxide.Ext.Discord.Types.Pooling.DiscordPluginPool.ToStringAndFree(System.Text.StringBuilder)">
             <summary>
             Frees a <see cref="T:System.Text.StringBuilder"/> back to the pool returning the built <see cref="T:System.String"/>
             </summary>

@@ -163,7 +163,7 @@ namespace Oxide.Ext.Discord.Types.Pooling
         /// Frees a <see cref="StringBuilder"/> back to the pool returning the built <see cref="string"/>
         /// </summary>
         /// <param name="sb"><see cref="StringBuilder"/> being freed</param>
-        public string FreeStringBuilderToString(StringBuilder sb)
+        public string ToStringAndFree(StringBuilder sb)
         {
             string result = sb?.ToString();
             FreeStringBuilder(sb);

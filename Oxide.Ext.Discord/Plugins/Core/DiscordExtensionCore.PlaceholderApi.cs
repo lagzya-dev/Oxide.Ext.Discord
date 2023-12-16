@@ -32,7 +32,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
             
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder(Placeholder);
             _replacer.Invoke(player, sb, true);
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
 
         public string GetCountryEmoji(IPlayer player)

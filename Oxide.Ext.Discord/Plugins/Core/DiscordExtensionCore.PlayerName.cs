@@ -107,7 +107,7 @@ namespace Oxide.Ext.Discord.Plugins.Core
                 sb.Append(')');
             }
 
-            name = DiscordPool.Internal.FreeStringBuilderToString(sb);
+            name = DiscordPool.Internal.ToStringAndFree(sb);
             cache[player.Id] = name;
             return name;
         }

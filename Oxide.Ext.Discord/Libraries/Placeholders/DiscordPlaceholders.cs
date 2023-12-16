@@ -144,7 +144,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
                     DiscordExtensionCore.Instance.GetReplacer()?.Invoke(data.Get<IPlayer>(), builder, true);
                 }
                 
-                text = DiscordPool.Internal.FreeStringBuilderToString(builder);
+                text = DiscordPool.Internal.ToStringAndFree(builder);
                 state.Dispose();
             }
 

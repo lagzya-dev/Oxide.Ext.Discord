@@ -16,13 +16,8 @@
         DiscordLogLevel FileLogLevel { get; }
         
         /// <summary>
-        /// Format for console logging
+        /// File Logging DateTime format
         /// </summary>
-        string ConsoleLogFormat { get; }
-        
-        /// <summary>
-        /// Format for file logging
-        /// </summary>
-        string FileLogFormat { get; }
+        string FileDateTimeFormat { get; }
     }
 }

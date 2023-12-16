@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
 
@@ -7,46 +8,63 @@ namespace Oxide.Ext.Discord.Logging
     /// <summary>
     /// Represents a Console Logger for Discord
     /// </summary>
-    internal class DiscordConsoleLogger
+    internal class DiscordConsoleLogger : IOutputLogger
     {
-        private readonly object _sync = new object();
-        private readonly string _format;
+        private readonly string _pluginName;
         private readonly object[] _empty = Array.Empty<object>();
 
-        public DiscordConsoleLogger(string format)
+        [ThreadStatic]
+        private static StringBuilder _builder;
+        private static StringBuilder Builder => _builder ?? (_builder = new StringBuilder());
+
+        public DiscordConsoleLogger(string pluginName)
         {
-            _format = format;
+            _pluginName = $"[{pluginName}] ";
         }
-        
+
         /// <summary>
         /// Adds a message to the server console
         /// </summary>
         /// <param name="level"></param>
-        /// <param name="message"></param>
+        /// <param name="log"></param>
+        /// <param name="args"></param>
         /// <param name="ex"></param>
-        internal void AddMessage(DiscordLogLevel level, string message, Exception ex)
+        public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
         {
-            lock (_sync)
+            StringBuilder sb = Builder;
+            sb.Append(_pluginName);
+            sb.Append('[');
+            sb.Append(EnumCache<DiscordLogLevel>.Instance.ToString(level));
+            sb.Append("]: ");
+            if (args.Length != 0)
             {
-                message = string.Format(_format, EnumCache<DiscordLogLevel>.Instance.ToString(level), message);
-                
-                switch (level)
-                {
-                    case DiscordLogLevel.Debug:
-                    case DiscordLogLevel.Warning:
-                        Interface.Oxide.LogWarning(message, _empty);
-                        break;
-                    case DiscordLogLevel.Error:
-                        Interface.Oxide.LogError(message, _empty);
-                        break;
-                    case DiscordLogLevel.Exception:
-                        Interface.Oxide.LogException(message, ex);
-                        break;
-                    default:
-                        Interface.Oxide.LogInfo(message, _empty);
-                        break;
-                }
+                sb.AppendFormat(log, args);
+            }
+            else
+            {
+                sb.Append(log);
+            }
+
+            string message = sb.ToString();
+
+            switch (level)
+            {
+                case DiscordLogLevel.Debug:
+                case DiscordLogLevel.Warning:
+                    Interface.Oxide.LogWarning(message, _empty);
+                    break;
+                case DiscordLogLevel.Error:
+                    Interface.Oxide.LogError(message, _empty);
+                    break;
+                case DiscordLogLevel.Exception:
+                    Interface.Oxide.LogException(message, ex);
+                    break;
+                default:
+                    Interface.Oxide.LogInfo(message, _empty);
+                    break;
             }
         }
+
+        public void OnShutdown() {}
     }
 }

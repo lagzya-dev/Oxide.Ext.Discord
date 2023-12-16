@@ -1,4 +1,5 @@
-﻿using Oxide.Core.Plugins;
+﻿using System;
+using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -21,7 +22,12 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="logLevel">The current LogLevel for the logger</param>
         /// <param name="config">The config for the logger</param>
         /// <returns><see cref="DiscordLogger"/></returns>
-        public DiscordLogger CreateLogger(Plugin plugin, DiscordLogLevel logLevel, IDiscordLoggingConfig config) => GetLoggerInternal(plugin.Name, logLevel, config, false);
+        public DiscordLogger CreateLogger(Plugin plugin, DiscordLogLevel logLevel, IDiscordLoggingConfig config)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            return GetLoggerInternal(plugin.Name, logLevel, config, false);
+        }
+
         internal DiscordLogger CreateExtensionLogger(DiscordLogLevel logLevel) => GetLoggerInternal(nameof(DiscordExtension), logLevel, DiscordConfig.Instance.Logging, true);
 
         private DiscordLogger GetLoggerInternal(string pluginName, DiscordLogLevel logLevel, IDiscordLoggingConfig config, bool isExtension)

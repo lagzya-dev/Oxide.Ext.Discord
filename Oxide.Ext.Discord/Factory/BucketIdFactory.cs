@@ -56,7 +56,7 @@ namespace Oxide.Ext.Discord.Factory
             
             tokenizer.Dispose();
 
-            return new BucketId(DiscordPool.Internal.FreeStringBuilderToString(bucket));
+            return new BucketId(DiscordPool.Internal.ToStringAndFree(bucket));
         }
         
         private static ReadOnlySpan<char> GetCurrent(int index, ReadOnlySpan<char> previous, ReadOnlySpan<char> token)

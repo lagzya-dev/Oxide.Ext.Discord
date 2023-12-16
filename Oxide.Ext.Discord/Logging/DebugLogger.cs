@@ -430,6 +430,6 @@ namespace Oxide.Ext.Discord.Logging
         /// Returns the logged data as a string
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => DiscordPool.Internal.FreeStringBuilderToString(_logger);
+        public override string ToString() => DiscordPool.Internal.ToStringAndFree(_logger);
     }
 }

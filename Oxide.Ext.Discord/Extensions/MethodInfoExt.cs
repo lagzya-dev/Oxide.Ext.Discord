@@ -73,7 +73,7 @@ namespace Oxide.Ext.Discord.Extensions
                 sb.Append(index);
             }
             sb.Append(')');
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         } 
         
         private static string BuildActual(MethodInfo info)
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Extensions
 
             sb.Append(')');
             
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
     }
 }

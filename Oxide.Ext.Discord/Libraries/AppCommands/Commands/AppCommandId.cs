@@ -67,7 +67,7 @@ namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
                 sb.Append(Argument);
             }
 
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
     }
 }

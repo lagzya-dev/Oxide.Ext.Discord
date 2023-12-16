@@ -8,7 +8,7 @@
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/MJSU/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net461;</TargetFrameworks>
-    <LangVersion>7.0</LangVersion>
+    <LangVersion>7</LangVersion>
     <PackageVersion>3.0.0.0</PackageVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <FileVersion>3.0.0.0</FileVersion>

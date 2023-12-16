@@ -25,16 +25,16 @@ namespace Oxide.Ext.Discord.Logging
         }
 
         /// <inheritdoc/>
-        public void Log(DiscordLogLevel level, string message, Exception exception = null)
+        public void Log(DiscordLogLevel level, string log, object[] args, Exception exception = null)
         {
             if (IsConsoleLogging(level))
             {
-                _handler.LogConsole(level, message, exception);
+                _handler.LogConsole(level, log, args,  exception);
             }
 
             if (IsFileLogging(level))
             {
-                _handler.LogFile(level, message, exception);
+                _handler.LogFile(level, log, args, exception);
             }
         }
 

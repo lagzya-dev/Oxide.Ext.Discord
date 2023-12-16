@@ -9,23 +9,24 @@ namespace Oxide.Ext.Discord.Logging
 
         public DiscordLogHandler(string pluginName, IDiscordLoggingConfig config, bool isExtension)
         {
-            _consoleLogger = isExtension || config.ConsoleLogLevel != DiscordLogLevel.Off ? new DiscordConsoleLogger(config.ConsoleLogFormat) : null;
-            _fileLogger = isExtension || config.FileLogLevel != DiscordLogLevel.Off ? DiscordFileLoggerFactory.Instance.CreateLogger(pluginName, config.FileLogFormat) : null;
+            _consoleLogger = isExtension || config.ConsoleLogLevel != DiscordLogLevel.Off ? new DiscordConsoleLogger(pluginName) : null;
+            _fileLogger = isExtension || config.FileLogLevel != DiscordLogLevel.Off ? DiscordFileLoggerFactory.Instance.CreateLogger(pluginName, config.FileDateTimeFormat) : null;
         }
 
-        public void LogConsole(DiscordLogLevel level, string message, Exception exception = null)
+        public void LogConsole(DiscordLogLevel level, string log, object[] args, Exception exception = null)
         {
-            _consoleLogger?.AddMessage(level, message, exception);
+            _consoleLogger?.AddMessage(level, log, args, exception);
         }
 
-        public void LogFile(DiscordLogLevel level, string message, Exception exception = null)
+        public void LogFile(DiscordLogLevel level, string log, object[] args, Exception exception = null)
         {
-            _fileLogger?.AddMessage(level, message, exception);
+            _fileLogger?.AddMessage(level, log, args, exception);
         }
 
         public void Shutdown()
         {
-            _fileLogger.OnShutdown();
+            _consoleLogger?.OnShutdown();
+            _fileLogger?.OnShutdown();
         }
     }
 }

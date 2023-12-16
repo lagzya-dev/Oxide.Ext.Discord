@@ -328,7 +328,7 @@ namespace Oxide.Ext.Discord.Clients
                 }
             }
 
-            return DiscordPool.Internal.FreeStringBuilderToString(sb);
+            return DiscordPool.Internal.ToStringAndFree(sb);
         }
 
         private void UpdateLogLevel(DiscordLogLevel level)

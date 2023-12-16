@@ -109,7 +109,7 @@ namespace Oxide.Ext.Discord.Builders.Ansi
         {
             _sb.AppendLine();
             _sb.Append("```");
-            return DiscordPool.Internal.FreeStringBuilderToString(_sb);
+            return DiscordPool.Internal.ToStringAndFree(_sb);
         }
     }
 }
