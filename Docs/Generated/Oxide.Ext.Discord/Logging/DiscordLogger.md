@@ -28,7 +28,7 @@ public class DiscordLogger : ILogger
 # Log method
 
 ```csharp
-public void Log(DiscordLogLevel level, string message, Exception exception = null)
+public void Log(DiscordLogLevel level, string log, object[] args, Exception exception = null)
 ```
 
 ## See Also

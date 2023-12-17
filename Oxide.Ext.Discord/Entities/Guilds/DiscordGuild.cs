@@ -510,24 +510,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public GuildMember GetMember(string userName)
         {
             if (string.IsNullOrEmpty(userName)) throw new ArgumentNullException(nameof(userName));
-
-            if (userName.Contains("#"))
-            {
-                string[] splitName = userName.Split('#');
-                userName = splitName[0];
-                string discriminator = splitName[1];
-
-                foreach (GuildMember member in Members.Values)
-                {
-                    if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase) && member.User.Discriminator == discriminator)
-                    {
-                        return member;
-                    }
-                }
-                
-                return null;
-            }
-
+            
             foreach (GuildMember member in Members.Values)
             {
                 if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase))

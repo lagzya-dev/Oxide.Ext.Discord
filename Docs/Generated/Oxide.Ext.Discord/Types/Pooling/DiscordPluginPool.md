@@ -17,7 +17,6 @@ public class DiscordPluginPool
 | [FreeMemoryStream](#freememorystream-method)(…) | Frees a MemoryStream back to the pool |
 | [FreePlaceholderData](#freeplaceholderdata-method)(…) | Frees a [`PlaceholderData`](../../Libraries/Placeholders/PlaceholderData.md) back to the pool |
 | [FreeStringBuilder](#freestringbuilder-method)(…) | Frees a StringBuilder back to the pool |
-| [FreeStringBuilderToString](#freestringbuildertostring-method)(…) | Frees a StringBuilder back to the pool returning the built String |
 | [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
 | [GetHash&lt;TKey,TValue&gt;](#gethash&amp;lt;tkey,tvalue&amp;gt;-method)() | Returns a pooled Hash |
 | [GetHashSet&lt;T&gt;](#gethashset&amp;lt;t&amp;gt;-method)() | Returns a pooled HashSet |
@@ -27,6 +26,7 @@ public class DiscordPluginPool
 | [GetStringBuilder](#getstringbuilder-method)() | Returns a pooled StringBuilder |
 | [GetStringBuilder](#getstringbuilder-method)(…) | Returns a pooled StringBuilder |
 | [SetSettings](#setsettings-method)(…) | Sets the settings for the pools |
+| [ToStringAndFree](#tostringandfree-method)(…) | Frees a StringBuilder back to the pool returning the built String |
 
 ## See Also
 
@@ -273,12 +273,12 @@ public void FreeStringBuilder(StringBuilder sb)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
    
    
-# FreeStringBuilderToString method
+# ToStringAndFree method
 
 Frees a StringBuilder back to the pool returning the built String
 
 ```csharp
-public string FreeStringBuilderToString(StringBuilder sb)
+public string ToStringAndFree(StringBuilder sb)
 ```
 
 | parameter | description |

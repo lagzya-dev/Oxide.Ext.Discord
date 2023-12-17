@@ -27,7 +27,7 @@ public interface IWebSocketEventHandler
 Called when the web socket is opened
 
 ```csharp
-public Task SocketOpened(Snowflake id)
+public ValueTask SocketOpened(Snowflake id)
 ```
 
 | parameter | description |
@@ -47,7 +47,7 @@ public Task SocketOpened(Snowflake id)
 Called when the web socket is closed
 
 ```csharp
-public Task SocketClosed(Snowflake id, WebSocketCloseStatus code, string message)
+public ValueTask SocketClosed(Snowflake id, WebSocketCloseStatus code, string message)
 ```
 
 | parameter | description |
@@ -69,7 +69,7 @@ public Task SocketClosed(Snowflake id, WebSocketCloseStatus code, string message
 Called when an error occurs on the web socket
 
 ```csharp
-public Task SocketErrored(Snowflake id, Exception ex)
+public ValueTask SocketErrored(Snowflake id, Exception ex)
 ```
 
 | parameter | description |
@@ -90,7 +90,7 @@ public Task SocketErrored(Snowflake id, Exception ex)
 Called when a message is received from the websocket
 
 ```csharp
-public Task SocketMessage(Snowflake id, DiscordJsonReader stream)
+public ValueTask SocketMessage(Snowflake id, DiscordJsonReader stream)
 ```
 
 | parameter | description |

@@ -10,9 +10,8 @@ public interface IDiscordLoggingConfig
 
 | name | description |
 | --- | --- |
-| [ConsoleLogFormat](#consolelogformat-property) { get; } | Format for console logging |
 | [ConsoleLogLevel](#consoleloglevel-property) { get; } | Log Level for the Console |
-| [FileLogFormat](#filelogformat-property) { get; } | Format for file logging |
+| [FileDateTimeFormat](#filedatetimeformat-property) { get; } | File Logging DateTime format |
 | [FileLogLevel](#fileloglevel-property) { get; } | Log Level for file Logging |
 
 ## See Also
@@ -54,27 +53,12 @@ public DiscordLogLevel FileLogLevel { get; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# ConsoleLogFormat property
+# FileDateTimeFormat property
 
-Format for console logging
-
-```csharp
-public string ConsoleLogFormat { get; }
-```
-
-## See Also
-
-* interface [IDiscordLoggingConfig](./IDiscordLoggingConfig.md)
-* namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# FileLogFormat property
-
-Format for file logging
+File Logging DateTime format
 
 ```csharp
-public string FileLogFormat { get; }
+public string FileDateTimeFormat { get; }
 ```
 
 ## See Also

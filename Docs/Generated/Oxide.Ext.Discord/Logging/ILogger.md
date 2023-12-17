@@ -113,13 +113,14 @@ public bool IsFileLogging(DiscordLogLevel level)
 Log the message with the specified level
 
 ```csharp
-public void Log(DiscordLogLevel level, string message, Exception exception = null)
+public void Log(DiscordLogLevel level, string log, object[] args, Exception exception = null)
 ```
 
 | parameter | description |
 | --- | --- |
 | level | Log Level for the message |
-| message | Message to log |
+| log | Message format to log |
+| args | Message args |
 | exception | Exception for the log |
 
 ## See Also

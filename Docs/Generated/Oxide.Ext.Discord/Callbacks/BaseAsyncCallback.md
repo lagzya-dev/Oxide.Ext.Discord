@@ -28,7 +28,7 @@ public abstract class BaseAsyncCallback : BasePoolable
 Overridden in the child class to handle the callback
 
 ```csharp
-protected abstract Task HandleCallback()
+protected abstract ValueTask HandleCallback()
 ```
 
 ## See Also

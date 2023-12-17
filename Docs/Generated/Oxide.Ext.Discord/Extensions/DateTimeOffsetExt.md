@@ -24,7 +24,7 @@ public static class DateTimeOffsetExt
 Delay until the DateTimeOffset with 25ms padding
 
 ```csharp
-public static Task DelayUntil(this DateTimeOffset time, CancellationToken token)
+public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token)
 ```
 
 | parameter | description |

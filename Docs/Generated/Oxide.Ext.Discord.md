@@ -1083,6 +1083,7 @@
 | enum [DiscordLogLevel](./Oxide.Ext.Discord/Logging/DiscordLogLevel.md) | Represents the log level for a logger |
 | interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Logging/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [ILogger](./Oxide.Ext.Discord/Logging/ILogger.md) | Represents an interface for a logger |
+| interface [IOutputLogger](./Oxide.Ext.Discord/Logging/IOutputLogger.md) |  |
 | static class [LoggerExt](./Oxide.Ext.Discord/Logging/LoggerExt.md) |  |
 
 ## Oxide.Ext.Discord.Plugins namespace
@@ -1144,12 +1145,6 @@
 | interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Types/Pooling/IPool%7BT%7D.md) | Represents a pool of type T |
 | class [PoolSettings](./Oxide.Ext.Discord/Types/Pooling/PoolSettings.md) | Settings for the pools |
 | struct [PoolSize](./Oxide.Ext.Discord/Types/Pooling/PoolSize.md) | Represents size constraints for a pool |
-
-## Oxide.Ext.Discord.Types.Pooling.Pools namespace
-
-| public type | description |
-| --- | --- |
-| class [DiscordArrayPool&lt;T&gt;](./Oxide.Ext.Discord/Types/Pooling/Pools/DiscordArrayPool%7BT%7D.md) | Represents a [`DiscordArrayPool`](./Oxide.Ext.Discord/Types/Pooling/Pools/DiscordArrayPool%7BT%7D.md) |
 
 ## Oxide.Ext.Discord.Types.Promises namespace
 
