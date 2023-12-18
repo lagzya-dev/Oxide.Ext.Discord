@@ -19,7 +19,7 @@ namespace Oxide.Ext.Discord.Extensions
 
             if (char.IsNumber(input[0]))
             {
-                value = input[0] == '0';
+                value = input[0] != '0';
                 return true;
             }
 
