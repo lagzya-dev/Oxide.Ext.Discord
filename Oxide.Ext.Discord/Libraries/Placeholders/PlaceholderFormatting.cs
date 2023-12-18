@@ -1,4 +1,6 @@
 using System;
+using System.Buffers;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,26 +24,22 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="PlaceholderState"/> for the placeholder</param>
         /// <param name="value">Placeholder value to replace</param>
-        private static void Replace(StringBuilder builder, PlaceholderState state, string value)
+        private static void Replace(StringBuilder builder, PlaceholderState state, ReadOnlySpan<char> value)
         {
             builder.Remove(state.Index, state.Length);
-            if (value == null)
-            {
-                value = string.Empty;
-            }
             builder.Insert(state.Index, value);
         }
 
-        private static void Replace(StringBuilder builder, PlaceholderState state, string[] values)
+        private static void Replace(StringBuilder builder, PlaceholderState state, IReadOnlyList<string> values)
         {
             builder.Remove(state.Index, state.Length);
-            if (values == null)
+            if (values == null || values.Count == 0)
             {
                 return;
             }
             
             string separator = !string.IsNullOrEmpty(state.Format) ? state.Format : ", ";
-            for (int index = 0; index < values.Length; index++)
+            for (int index = 0; index < values.Count; index++)
             {
                 if (index != 0)
                 {
@@ -51,16 +49,16 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
         }
 
-        private static void Replace(StringBuilder builder, PlaceholderState state, object[] values)
+        private static void Replace(StringBuilder builder, PlaceholderState state, IReadOnlyList<object> values)
         {
             builder.Remove(state.Index, state.Length);
-            if (values == null)
+            if (values == null || values.Count == 0)
             {
                 return;
             }
             
             string separator = !string.IsNullOrEmpty(state.Format) ? state.Format : ", ";
-            for (int index = 0; index < values.Length; index++)
+            for (int index = 0; index < values.Count; index++)
             {
                 if (index != 0)
                 {
@@ -76,7 +74,7 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="match"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Placeholder value to replace</param>
-        private static void Replace(StringBuilder builder, Match match, string value)
+        private static void Replace(StringBuilder builder, Match match, ReadOnlySpan<char> value)
         {
             builder.Remove(match.Index, match.Length);
             builder.Insert(match.Index, value);
@@ -90,7 +88,30 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="value">Snowflake value to replace</param>
         private static void Replace(StringBuilder builder, PlaceholderState state, bool value)
         {
-            Replace(builder, state, value ? "true" : "false");
+            if (string.IsNullOrEmpty(state.Format))
+            {
+                Replace(builder, state, value ? "true" : "false");
+                return;
+            }
+
+            int split = state.Format.IndexOf(',');
+            if (split == -1)
+            {
+                Replace(builder, state, value ? "true" : "false");
+                return;
+            }
+
+            ReadOnlySpan<char> span = state.Format;
+            if (value)
+            {
+                span = span.Slice(0, split);
+            }
+            else
+            {
+                span = span.Slice(split + 1, span.Length - split - 1);
+            }
+            
+            Replace(builder, state, span);
         }
         
         /// <summary>
@@ -101,7 +122,231 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
         /// <param name="value">Snowflake value to replace</param>
         private static void Replace(StringBuilder builder, PlaceholderState state, Snowflake value)
         {
-            Replace(builder, state, value.ToString());
+            Replace(builder, state, value.Id);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, byte value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(3);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, sbyte value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(3);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, short value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(8);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, ushort value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(8);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, int value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(20);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, uint value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(20);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, long value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(32);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, ulong value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(32);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, float value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, double value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(128);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, decimal value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+
+        private static void Replace(StringBuilder builder, PlaceholderState state, DateTime value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, DateTimeOffset value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
+        }
+        
+        private static void Replace(StringBuilder builder, PlaceholderState state, TimeSpan value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(32);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written, state.Format))
+            {
+                Replace(builder, state, span.Slice(0, written));
+            }
+            else
+            {
+                Replace(builder, state, value as IFormattable);
+            }
+
+            ArrayPool<char>.Shared.Return(array);
         }
 
         /// <summary>
@@ -136,27 +381,30 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             }
 
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            PlaceholderState positionState = PlaceholderState.Create(placeholderState.Data);
             sb.Append(placeholderState.Format);
             MatchCollection matches = GenericPositionRegex.Matches(placeholderState.Format);
             for (int index = matches.Count - 1; index >= 0; index--)
             {
                 Match match = matches[index];
+                positionState.UpdateState(match);
                 switch (match.Groups[1].Value)
                 {
                     case "x":
-                        Replace(sb, match, position.X.ToString(match.Groups[2].Value));
+                        Replace(sb, positionState, position.X);
                         break;
                     case "y":
-                        Replace(sb, match, position.Y.ToString(match.Groups[2].Value));
+                        Replace(sb, positionState, position.Y);
                         break;
                     case "z":
-                        Replace(sb, match, position.Z.ToString(match.Groups[2].Value));
+                        Replace(sb, positionState, position.Z);
                         break;
                 }
             }
             
             Replace(builder, placeholderState, sb.ToString());
             DiscordPool.Internal.FreeStringBuilder(sb);
+            positionState.Dispose();
         }
 
         public static Action<StringBuilder, PlaceholderState, TResult> CreatePlaceholderCallback<TResult>()
@@ -170,9 +418,61 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 return (builder, state, value) => Replace(builder, state, value.Cast<TResult, bool>());
             }
-            if (typeof(IFormattable).IsAssignableFrom(type))
+            if (type == typeof(byte))
             {
-                return (builder, state, value) => Replace(builder, state, value as IFormattable);
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, byte>());
+            }
+            if (type == typeof(sbyte))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, sbyte>());
+            }
+            if (type == typeof(short))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, short>());
+            }
+            if (type == typeof(ushort))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, ushort>());
+            }
+            if (type == typeof(int))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, int>());
+            }
+            if (type == typeof(uint))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, uint>());
+            }
+            if (type == typeof(long))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, long>());
+            }
+            if (type == typeof(ulong))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, ulong>());
+            }
+            if (type == typeof(float))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, float>());
+            }
+            if (type == typeof(double))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, double>());
+            }
+            if (type == typeof(decimal))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, decimal>());
+            }
+            if (type == typeof(DateTime))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, DateTime>());
+            }
+            if (type == typeof(DateTimeOffset))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, DateTimeOffset>());
+            }
+            if (type == typeof(TimeSpan))
+            {
+                return (builder, state, value) => Replace(builder, state, value.Cast<TResult, TimeSpan>());
             }
             if (type == typeof(Snowflake))
             {
@@ -182,13 +482,17 @@ namespace Oxide.Ext.Discord.Libraries.Placeholders
             {
                 return (builder, state, value) => Replace(builder, state, value.Cast<TResult, GenericPosition>());
             }
-            if (type == typeof(string[]))
+            if (typeof(IFormattable).IsAssignableFrom(type))
             {
-                return (builder, state, value) => Replace(builder, state, value as string[]);
+                return (builder, state, value) => Replace(builder, state, value as IFormattable);
             }
-            if (type == typeof(object[]))
+            if (typeof(IReadOnlyList<string>).IsAssignableFrom(type))
             {
-                return (builder, state, value) => Replace(builder, state, value as object[]);
+                return (builder, state, value) => Replace(builder, state, value as IReadOnlyList<string>);
+            }
+            if (typeof(IReadOnlyList<object>).IsAssignableFrom(type))
+            {
+                return (builder, state, value) => Replace(builder, state, value as IReadOnlyList<object>);
             }
             
             return (builder, state, value) => Replace(builder, state, value.ToString());
