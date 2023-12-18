@@ -85,6 +85,11 @@ namespace Oxide.Ext.Discord.Entities
             return false;
         }
 
+        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider = null)
+        {
+            return Id.TryFormat(destination, out charsWritten, format, provider);
+        }
+
         /// <summary>
         /// Returns if the two snowflakes are the same ID.
         /// </summary>
