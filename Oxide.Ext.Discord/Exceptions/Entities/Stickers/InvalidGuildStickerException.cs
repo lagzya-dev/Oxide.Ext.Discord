@@ -1,3 +1,4 @@
+using System;
 using Oxide.Ext.Discord.Entities.Stickers;
 
 namespace Oxide.Ext.Discord.Exceptions.Entities.Stickers
@@ -62,17 +63,12 @@ namespace Oxide.Ext.Discord.Exceptions.Entities.Stickers
         
         internal static void ThrowIfInvalidFileExtension(string fileName)
         {
-            string extension = fileName.Substring(fileName.LastIndexOf('.') + 1);
-            switch (extension.ToLower())
+            if (!fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase)
+                && !fileName.EndsWith(".apng", StringComparison.OrdinalIgnoreCase)
+                && !fileName.EndsWith(".json", StringComparison.OrdinalIgnoreCase)
+                && !fileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
             {
-                case "png":
-                case "apng":
-                case "json":
-                case "gif":
-                    break;
-                
-                default:
-                    throw new InvalidGuildStickerException("Sticker can only be of type png, apng, gif, or lottie json");
+                throw new InvalidGuildStickerException("Sticker can only be of type png, apng, gif, or lottie json");
             }
         }
     }

@@ -49,7 +49,6 @@ namespace Oxide.Ext.Discord.Extensions
         {
             string value = headers.Get(key);
             return !string.IsNullOrEmpty(value) ? new BucketId(value) : default(BucketId);
-
         }
     }
 }

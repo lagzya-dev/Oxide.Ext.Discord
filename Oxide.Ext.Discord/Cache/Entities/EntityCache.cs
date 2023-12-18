@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Cache.Entities
         /// Returns the cached entity with the given ID; default(T) otherwise
         /// </summary>
         /// <param name="id">ID of the entity</param>
-        public T Get(Snowflake id) => _cache.TryGetValue(id, out T value) ? value : default(T);
+        public T Get(Snowflake id) => _cache.GetValueOrDefault(id);
 
         /// <summary>
         /// Returns a cached for the given user ID or creates a new with that ID

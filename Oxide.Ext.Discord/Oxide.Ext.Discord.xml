@@ -22188,7 +22188,7 @@
             Formatting Helpers for Placeholders
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState,System.ReadOnlySpan{System.Char})">
             <summary>
             Replace the <see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> with the the string value
             </summary>
@@ -22196,7 +22196,7 @@
             <param name="state"><see cref="T:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderState"/> for the placeholder</param>
             <param name="value">Placeholder value to replace</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,System.Text.RegularExpressions.Match,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.Placeholders.PlaceholderFormatting.Replace(System.Text.StringBuilder,System.Text.RegularExpressions.Match,System.ReadOnlySpan{System.Char})">
             <summary>
             Replace the <see cref="T:System.Text.RegularExpressions.Match"/> with the the string value
             </summary>
