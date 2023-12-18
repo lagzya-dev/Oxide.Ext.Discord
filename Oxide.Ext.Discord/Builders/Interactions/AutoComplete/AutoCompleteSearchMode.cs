@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// AutoComplete Search Mode for <see cref="InteractionAutoCompleteBuilder"/>

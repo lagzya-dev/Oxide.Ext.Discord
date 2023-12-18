@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Builders.Messages
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Represents a builder for <see cref="MessageCreate"/>

@@ -25,8 +25,27 @@
 
 | public type | description |
 | --- | --- |
+| class [ApplicationCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommandBuilder.md) | Builder to use when building application commands |
+| class [ApplicationCommandGroupBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommandGroupBuilder.md) | Builder for Sub Command Groups |
+| class [ApplicationCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
+| class [ApplicationSubCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationSubCommandBuilder.md) | Application Sub Command Builder |
+| enum [AutoCompleteSearchMode](./Oxide.Ext.Discord/Builders/AutoCompleteSearchMode.md) | AutoComplete Search Mode for [`InteractionAutoCompleteBuilder`](./Oxide.Ext.Discord/Builders/InteractionAutoCompleteBuilder.md) |
+| abstract class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/MessageCreate.md) |
+| abstract class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseInteractionMessage`](./Oxide.Ext.Discord/Entities/BaseInteractionMessage.md) |
+| abstract class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/BaseMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseMessageCreate`](./Oxide.Ext.Discord/Entities/BaseMessageCreate.md) |
+| abstract class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/BaseWebhookMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`WebhookCreateMessage`](./Oxide.Ext.Discord/Entities/WebhookCreateMessage.md) |
 | class [DiscordEmbedBuilder](./Oxide.Ext.Discord/Builders/DiscordEmbedBuilder.md) | Builds a new DiscordEmbed |
+| class [DiscordMessageBuilder](./Oxide.Ext.Discord/Builders/DiscordMessageBuilder.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/MessageCreate.md) |
+| class [InteractionAutoCompleteBuilder](./Oxide.Ext.Discord/Builders/InteractionAutoCompleteBuilder.md) | Builder for Auto Complete Interaction |
+| class [InteractionFollowupBuilder](./Oxide.Ext.Discord/Builders/InteractionFollowupBuilder.md) | Represents a builder for [`CommandFollowupCreate`](./Oxide.Ext.Discord/Entities/CommandFollowupCreate.md) |
+| class [InteractionModalBuilder](./Oxide.Ext.Discord/Builders/InteractionModalBuilder.md) | Builds a Modal Interaction Response Message |
+| class [InteractionResponseBuilder](./Oxide.Ext.Discord/Builders/InteractionResponseBuilder.md) | Represents a builder for [`InteractionCallbackData`](./Oxide.Ext.Discord/Entities/InteractionCallbackData.md) |
+| class [MessageComponentBuilder](./Oxide.Ext.Discord/Builders/MessageComponentBuilder.md) | Builder for Message Components |
+| [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) |
+| class [PlayerNameFormatter](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) | Formatter for player names |
 | class [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
+| class [SelectMenuComponentBuilder](./Oxide.Ext.Discord/Builders/SelectMenuComponentBuilder.md) | Builder for Select Menus |
+| class [WebhookMessageBuilder](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) | Represents a builder for [`WebhookMessageBuilder`](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) |
 
 ## Oxide.Ext.Discord.Builders.Ansi namespace
 
@@ -36,45 +55,6 @@
 | enum [BackgroundColor](./Oxide.Ext.Discord/Builders/Ansi/BackgroundColor.md) | Ansi Background colors |
 | [Flags] enum [FontStyle](./Oxide.Ext.Discord/Builders/Ansi/FontStyle.md) | Font Styles for ANSI text |
 | enum [TextColor](./Oxide.Ext.Discord/Builders/Ansi/TextColor.md) | Text Colors for Ansi Text |
-
-## Oxide.Ext.Discord.Builders.ApplicationCommands namespace
-
-| public type | description |
-| --- | --- |
-| class [ApplicationCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.md) | Builder to use when building application commands |
-| class [ApplicationCommandGroupBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandGroupBuilder.md) | Builder for Sub Command Groups |
-| class [ApplicationCommandOptionBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.md) | Represents a Subcommand Option Builder for SubCommands |
-| class [ApplicationSubCommandBuilder](./Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationSubCommandBuilder.md) | Application Sub Command Builder |
-
-## Oxide.Ext.Discord.Builders.Interactions namespace
-
-| public type | description |
-| --- | --- |
-| enum [AutoCompleteSearchMode](./Oxide.Ext.Discord/Builders/Interactions/AutoCompleteSearchMode.md) | AutoComplete Search Mode for [`InteractionAutoCompleteBuilder`](./Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.md) |
-| abstract class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseInteractionMessage`](./Oxide.Ext.Discord/Entities/BaseInteractionMessage.md) |
-| class [InteractionAutoCompleteBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionAutoCompleteBuilder.md) | Builder for Auto Complete Interaction |
-| class [InteractionFollowupBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionFollowupBuilder.md) | Represents a builder for [`CommandFollowupCreate`](./Oxide.Ext.Discord/Entities/CommandFollowupCreate.md) |
-| class [InteractionModalBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionModalBuilder.md) | Builds a Modal Interaction Response Message |
-| class [InteractionResponseBuilder](./Oxide.Ext.Discord/Builders/Interactions/InteractionResponseBuilder.md) | Represents a builder for [`InteractionCallbackData`](./Oxide.Ext.Discord/Entities/InteractionCallbackData.md) |
-| [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/Interactions/PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/Interactions/PlayerNameFormatter.md) |
-| class [PlayerNameFormatter](./Oxide.Ext.Discord/Builders/Interactions/PlayerNameFormatter.md) | Formatter for player names |
-
-## Oxide.Ext.Discord.Builders.MessageComponents namespace
-
-| public type | description |
-| --- | --- |
-| class [MessageComponentBuilder](./Oxide.Ext.Discord/Builders/MessageComponents/MessageComponentBuilder.md) | Builder for Message Components |
-| class [SelectMenuComponentBuilder](./Oxide.Ext.Discord/Builders/MessageComponents/SelectMenuComponentBuilder.md) | Builder for Select Menus |
-
-## Oxide.Ext.Discord.Builders.Messages namespace
-
-| public type | description |
-| --- | --- |
-| abstract class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/MessageCreate.md) |
-| abstract class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`BaseMessageCreate`](./Oxide.Ext.Discord/Entities/BaseMessageCreate.md) |
-| abstract class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./Oxide.Ext.Discord/Builders/Messages/BaseWebhookMessageBuilder%7BTMessage,TBuilder%7D.md) | Represents a builder for [`WebhookCreateMessage`](./Oxide.Ext.Discord/Entities/WebhookCreateMessage.md) |
-| class [DiscordMessageBuilder](./Oxide.Ext.Discord/Builders/Messages/DiscordMessageBuilder.md) | Represents a builder for [`MessageCreate`](./Oxide.Ext.Discord/Entities/MessageCreate.md) |
-| class [WebhookMessageBuilder](./Oxide.Ext.Discord/Builders/Messages/WebhookMessageBuilder.md) | Represents a builder for [`WebhookMessageBuilder`](./Oxide.Ext.Discord/Builders/Messages/WebhookMessageBuilder.md) |
 
 ## Oxide.Ext.Discord.Cache namespace
 

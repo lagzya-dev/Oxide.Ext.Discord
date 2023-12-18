@@ -305,17 +305,17 @@
             White
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder">
             <summary>
             Builder to use when building application commands
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.CommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.CommandName">
             <summary>
             The Name of the command
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.ApplicationCommandType)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.ApplicationCommandType)">
             <summary>
             Creates a new Application Command Builder
             </summary>
@@ -323,7 +323,7 @@
             <param name="description">Description of the command</param>
             <param name="type">Command type</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.ApplicationCommandType,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.#ctor(System.String,System.String,Oxide.Ext.Discord.Entities.ApplicationCommandType,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Creates a new Application Command Builder
             </summary>
@@ -332,21 +332,21 @@
             <param name="type">Command type</param>
             <param name="defaultLanguage">Language the application command is being created in</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDefaultPermissions(Oxide.Ext.Discord.Entities.PermissionFlags)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddDefaultPermissions(Oxide.Ext.Discord.Entities.PermissionFlags)">
             <summary>
             Adds default command permissions
             </summary>
             <param name="permissions">Default Permissions for the command</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AllowInDirectMessages(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AllowInDirectMessages(System.Boolean)">
             <summary>
             Allows the command to be used in a direct message
             </summary>
             <param name="allow">Allows a command to be used in a direct message</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -354,7 +354,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Command Name Localizations
             </summary>
@@ -362,7 +362,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -370,7 +370,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Command Description Localizations
             </summary>
@@ -378,7 +378,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddSubCommandGroup(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder})">
             <summary>
             Creates a new SubCommandGroup
             SubCommandGroups contain subcommands
@@ -386,58 +386,58 @@
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder"/></param>
             <returns>this</returns>
             <exception cref="T:System.Exception">Thrown if trying to add a subcommand group to</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder})">
             <summary>
             Adds a sub command to the root command
             </summary>
             <param name="name">Name of the sub command</param>
             <param name="description">Description for the sub command</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/>"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder"/>"/></param>
             <returns>this</returns>
             <exception cref="T:System.Exception">Thrown if previous type was not SubCommand or Creation type is not ChatInput</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder})">
             <summary>
             Adds a command option.
             </summary>
             <param name="type">The type of option. Cannot be SubCommand or SubCommandGroup</param>
             <param name="name">Name of the option</param>
             <param name="description">Description for the option</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder"/></param>
             <returns>this</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.Build">
             <summary>
             Returns the created command
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandBuilder.BuildCommandLocalization(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandBuilder.BuildCommandLocalization(System.String)">
             <summary>
             Returns a built <see cref="T:Oxide.Ext.Discord.Libraries.DiscordCommandLocalization"/> using the provided name / descriptions as the default
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder">
             <summary>
             Builder for Sub Command Groups
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.CommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.CommandName">
             <summary>
             The Name of the command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.GroupName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.GroupName">
             <summary>
             The Name of the group
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -445,7 +445,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Sub Command Group Name Localizations
             </summary>
@@ -453,7 +453,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -461,7 +461,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Command Description Localizations
             </summary>
@@ -469,41 +469,41 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandGroupBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandGroupBuilder.AddSubCommand(System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder})">
             <summary>
             Adds a sub command to this sub command group
             </summary>
             <param name="name">Name of the command</param>
             <param name="description">Description of the command</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder"/></param>
             <returns>this</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder">
             <summary>
             Represents a Subcommand Option Builder for SubCommands
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.CommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.CommandName">
             <summary>
             The Name of the command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.GroupName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.GroupName">
             <summary>
             The Name of the group
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.SubCommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.SubCommandName">
             <summary>
             The Name of the Sub Command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.OptionName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.OptionName">
             <summary>
             The Name of the Option
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.CommandOption},Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,Oxide.Ext.Discord.Libraries.ServerLocale,System.String,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.CommandOption},Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,Oxide.Ext.Discord.Libraries.ServerLocale,System.String,System.String,System.String)">
             <summary>
             Constructor
             </summary>
@@ -516,7 +516,7 @@
             <param name="groupName"></param>
             <param name="subCommandName"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -524,7 +524,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Command Option Name Localization
             </summary>
@@ -532,7 +532,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -540,7 +540,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Command Option Description Localization
             </summary>
@@ -548,49 +548,49 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.Required(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.Required(System.Boolean)">
             <summary>
             Set the required state for the option
             </summary>
             <param name="required">If the option is required (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AutoComplete(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AutoComplete(System.Boolean)">
             <summary>
             Enable auto complete for the option
             </summary>
             <param name="autoComplete">If the option support auto complete (Default: true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MinValue(System.Int32)">
             <summary>
             Min Value for Integer Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MinValue(System.Double)">
             <summary>
             Min Value for Number Option
             </summary>
             <param name="minValue">Min Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxValue(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MaxValue(System.Int32)">
             <summary>
             Max Value for Integer Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxValue(System.Double)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MaxValue(System.Double)">
             <summary>
             Max Value for Number Option
             </summary>
             <param name="maxValue">Max Value</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MinLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MinLength(System.Int32)">
             <summary>
             Min Length for String Option
             Max Of 6000
@@ -598,7 +598,7 @@
             <param name="minLength">Min Length for the string</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.MaxLength(System.Int32)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MaxLength(System.Int32)">
             <summary>
             Max Length for String Option
             Max Of 6000
@@ -606,7 +606,7 @@
             <param name="maxLength">Max Length</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.ChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.ChannelType})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.ChannelTypes(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.ChannelType})">
             <summary>
             Set's the channel types for the option
             </summary>
@@ -614,7 +614,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionType"/> is not Channel</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.String,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddChoice(System.String,System.String,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type string
             </summary>
@@ -624,7 +624,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not string</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Int32,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Int32,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type int
             </summary>
@@ -634,7 +634,7 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not int</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Double,Oxide.Plugins.Hash{System.String,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Double,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
             Adds a choice to this option of type double
             </summary>
@@ -644,27 +644,27 @@
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if option type is not double</exception>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder">
             <summary>
             Application Sub Command Builder
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.CommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.CommandName">
             <summary>
             The Name of the command
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.GroupName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.GroupName">
             <summary>
             The Name of the group
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.SubCommandName">
+        <member name="F:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.SubCommandName">
             <summary>
             The Name of the Sub Command
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.CommandOption},System.String,System.String,Oxide.Ext.Discord.Libraries.ServerLocale,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.#ctor(System.Collections.Generic.List{Oxide.Ext.Discord.Entities.CommandOption},System.String,System.String,Oxide.Ext.Discord.Libraries.ServerLocale,System.String,System.String)">
             <summary>
             Constructor
             </summary>
@@ -675,7 +675,7 @@
             <param name="commandName"></param>
             <param name="groupName"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.AddNameLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command name localizations for a given plugin and lang key
             </summary>
@@ -683,7 +683,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.AddNameLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Sub Command Name Localization
             </summary>
@@ -691,7 +691,7 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.AddDescriptionLocalizations(Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds command description localizations for a given plugin and lang key
             </summary>
@@ -699,7 +699,7 @@
             <param name="langKey">Lang Key containing the localized text</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.AddDescriptionLocalization(System.String,Oxide.Ext.Discord.Libraries.ServerLocale)">
             <summary>
             Adds Application Sub Command Description Localizations
             </summary>
@@ -707,14 +707,14 @@
             <param name="serverLocale">Oxide lang the value is in</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder})">
+        <member name="M:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder.AddOption(Oxide.Ext.Discord.Entities.CommandOptionType,System.String,System.String,System.Action{Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder})">
             <summary>
             Adds a new option
             </summary>
             <param name="type">Option data type (Cannot be SubCommand or SubCommandGroup)</param>
             <param name="name">Name of the option</param>
             <param name="description">Description of the option</param>
-            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommands.ApplicationCommandOptionBuilder"/></param>
+            <param name="builder">Callback with the <see cref="T:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder"/></param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if type is <see cref="F:Oxide.Ext.Discord.Entities.CommandOptionType.SubCommand"/> or <see cref="F:Oxide.Ext.Discord.Entities.CommandOptionType.SubCommandGroup"/></exception>
         </member>
@@ -919,135 +919,135 @@
             </summary>
             <returns>List of <see cref="T:Oxide.Ext.Discord.Entities.DiscordEmbed"/></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode">
+        <member name="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode">
             <summary>
-            AutoComplete Search Mode for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/>
+            AutoComplete Search Mode for <see cref="T:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder"/>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.StartsWith">
+        <member name="F:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode.StartsWith">
             <summary>
             Filter using StartsWith
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.Contains">
+        <member name="F:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode.Contains">
             <summary>
             Filter using Contains
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode.EndsWith">
+        <member name="F:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode.EndsWith">
             <summary>
             Filter using EndsWith
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode">
+        <member name="T:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode">
             <summary>
-            Player Name Formatting options for <see cref="T:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter"/>
+            Player Name Formatting options for <see cref="T:Oxide.Ext.Discord.Builders.PlayerNameFormatter"/>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode.Default">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode.Default">
             <summary>
             Defaults search options
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode.Clan">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode.Clan">
             <summary>
             Include Clan Name in search
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode.PlayerId">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode.PlayerId">
             <summary>
             Include Player ID
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode.All">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode.All">
             <summary>
             All display name options
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter">
+        <member name="T:Oxide.Ext.Discord.Builders.PlayerNameFormatter">
             <summary>
             Formatter for player names
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.Default">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.Default">
             <summary>
             Default Player Name Formatter
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.ClanName">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.ClanName">
             <summary>
             Include clan name in the player name
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.PlayerId">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.PlayerId">
             <summary>
             Include Player Id in the player name
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.All">
+        <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.All">
             <summary>
             Include all name options in the player name
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.Create(Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.PlayerNameFormatter.Create(Oxide.Ext.Discord.Builders.PlayerDisplayNameMode)">
             <summary>
-            Create a new Player Name formatter with the given <see cref="T:Oxide.Ext.Discord.Builders.Interactions.PlayerDisplayNameMode"/>
+            Create a new Player Name formatter with the given <see cref="T:Oxide.Ext.Discord.Builders.PlayerDisplayNameMode"/>
             </summary>
             <param name="mode">Mode to use for Player Display Name</param>
-            <returns>A new <see cref="T:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter"/></returns>
+            <returns>A new <see cref="T:Oxide.Ext.Discord.Builders.PlayerNameFormatter"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.Create(System.Func{Oxide.Core.Libraries.Covalence.IPlayer,System.String})">
+        <member name="M:Oxide.Ext.Discord.Builders.PlayerNameFormatter.Create(System.Func{Oxide.Core.Libraries.Covalence.IPlayer,System.String})">
             <summary>
             Create a new Player Name formatter with the given Custom Name Function
             </summary>
             <param name="customNameFunc">Function to use for formatting the name</param>
-            <returns>A new <see cref="T:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter"/></returns>
+            <returns>A new <see cref="T:Oxide.Ext.Discord.Builders.PlayerNameFormatter"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter.Format(Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Builders.PlayerNameFormatter.Format(Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             Formats the player name
             </summary>
             <param name="player">Player to have their name formatted</param>
             <returns>Formatted player name</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2">
+        <member name="T:Oxide.Ext.Discord.Builders.BaseInteractionMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.BaseInteractionMessage"/>
             </summary>
             <typeparam name="TMessage"></typeparam>
             <typeparam name="TBuilder"></typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,`0)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseInteractionMessageBuilder`2.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,`0)">
             <summary>
             Constructor
             </summary>
             <param name="interaction">Interaction this builder is for</param>
             <param name="message">Message to be created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.BaseInteractionMessageBuilder`2.AsEphemeral">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseInteractionMessageBuilder`2.AsEphemeral">
             <summary>
             Marks the response as Ephemeral so only the person who executed the command can see
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder">
             <summary>
             Builder for Auto Complete Interaction
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.Count">
+        <member name="P:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.Count">
             <summary>
             Number of added choices
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionAutoCompleteMessage)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionAutoCompleteMessage)">
             <summary>
             Constructor
             </summary>
             <param name="interaction">Interaction this build is for</param>
             <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.InteractionAutoCompleteMessage"/></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddChoice(System.String,System.Object)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddChoice(System.String,System.Object)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> to the response
             </summary>
@@ -1055,7 +1055,7 @@
             <param name="value">Value of the choice</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddChoice(System.String,System.Object,Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddChoice(System.String,System.Object,Oxide.Core.Plugins.Plugin,System.String)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> to the response
             </summary>
@@ -1065,135 +1065,135 @@
             <param name="langKey">Lang key for the name</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddChoice(Oxide.Ext.Discord.Entities.CommandOptionChoice)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddChoice(Oxide.Ext.Discord.Entities.CommandOptionChoice)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> to the response
             </summary>
             <param name="choice">Choice to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddChoices(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.CommandOptionChoice})">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddChoices(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.CommandOptionChoice})">
             <summary>
             Adds a collection of <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> to the response
             </summary>
             <param name="choices">Choices to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.CanAddChoice">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.CanAddChoice">
             <summary>
             Returns if the Auto Complete can add any more choices
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.Build">
             <summary>
             Returns the built message
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.InteractionAutoCompleteMessage"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroups(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddGroups(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds Oxide Groups to the AutoComplete
             </summary>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissions(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPermissions(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds Oxide Permissions to the AutoComplete
             </summary>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddGroupsWithPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that have this permission
             </summary>
             <param name="permission">Permission to get groups for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithoutPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddGroupsWithoutPermission(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that have this permission
             </summary>
             <param name="permission">Permission to get groups for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPermissionsInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds List of Permissions that are in the given group
             </summary>
             <param name="group">Group to get permissions for</param>
             <param name="filter">Permission filter</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsNotInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPermissionsNotInGroup(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds a List of Permissions that are not in a given group
             </summary>
             <param name="group">Group that doesn't have the permissions</param>
             <param name="filter">Permission filter</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddGroupsWithPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
             <param name="playerId">Player ID to get groups for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddGroupsWithoutPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddGroupsWithoutPlayer(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Groups that playerId has
             </summary>
             <param name="playerId">Player ID to get groups for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsPlayerIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPermissionsPlayerIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Permissions that playerId has
             </summary>
             <param name="playerId">Player ID to get permissions for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddPermissionsPlayerNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPermissionsPlayerNotIn(System.String,System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds The List of Permissions that playerId does not have
             </summary>
             <param name="playerId">Player ID to get permissions for</param>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddOnlinePlayers(System.String,Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddOnlinePlayers(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds Online Players to the list
             </summary>
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddOfflinePlayers(System.String,Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddOfflinePlayers(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds Online Players to the list
             </summary>
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAllOnlineFirstPlayers(System.String,Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddAllOnlineFirstPlayers(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds Online Players to the list first
             If there is still space add Offline Players
@@ -1201,85 +1201,85 @@
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddAllPlayers(System.String,Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddAllPlayers(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds Any Player to the list
             </summary>
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddByPlayerId(System.String,Oxide.Ext.Discord.Builders.Interactions.PlayerNameFormatter)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddByPlayerId(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds a player by player Id to the list
             </summary>
             <param name="playerId">Player ID to add</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddLoadablePlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddLoadablePlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds a list of plugins that can be loaded
             </summary>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder.AddLoadedPlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddLoadedPlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds a list of plugins that are currently loaded
             </summary>
             <param name="filter">String to filter by</param>
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
-            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.Interactions.AutoCompleteSearchMode"/> Filter search mode</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.InteractionFollowupBuilder">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.CommandFollowupCreate"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
             <summary>
             Constructor for creating a new CommandFollowupCreate
             </summary>
             <param name="interaction">Interaction this followup is for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.CommandFollowupCreate)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionFollowupBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.CommandFollowupCreate)">
             <summary>
             Constructor for using an existing CommandFollowupCreate
             </summary>
             <param name="interaction">Interaction this followup is for</param>
             <param name="message">Message to use</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.InteractionModalBuilder">
             <summary>
             Builds a Modal Interaction Response Message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
             <summary>
             Constructor
             </summary>
             <param name="interaction">Interaction this build is for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionModalMessage)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionModalMessage)">
             <summary>
             Constructor
             </summary>
             <param name="interaction">Interaction this build is for</param>
             <param name="message">Starting <see cref="T:Oxide.Ext.Discord.Entities.InteractionAutoCompleteMessage"/></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddModalCustomId(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.AddModalCustomId(System.String)">
             <summary>
             Adds a custom ID for the modal
             </summary>
             <param name="customId">Custom ID for the modal</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddModalTitle(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.AddModalTitle(System.String)">
             <summary>
             Adds a custom ID for the modal
             </summary>
             <param name="title">Title for the Modal</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Adds a select menu to a new action row
             </summary>
@@ -1291,43 +1291,43 @@
             <param name="placeholder">Text to display if no value is selected yet</param>
             <param name="minLength">The min number of options you must select</param>
             <param name="maxLength">The max number of options you can select</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionModalBuilder.Build">
             <summary>
             Returns a built Modal Response Message
             </summary>
             <returns><see cref="T:Oxide.Ext.Discord.Entities.InteractionModalMessage"/></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.InteractionResponseBuilder">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.InteractionCallbackData"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction)">
             <summary>
             Constructor for creating a new InteractionCallbackData
             </summary>
             <param name="interaction">Interaction this followup is for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionCallbackData)">
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionResponseBuilder.#ctor(Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.InteractionCallbackData)">
             <summary>
             Constructor for using an existing InteractionCallbackData
             </summary>
             <param name="interaction">Interaction this followup is for</param>
             <param name="message">Message to use</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder">
             <summary>
             Builder for Message Components
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.#ctor">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.#ctor">
             <summary>
             Creates a new MessageComponentBuilder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.ButtonStyle,System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddActionButton(Oxide.Ext.Discord.Entities.ButtonStyle,System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
             <summary>
             Adds an action button to the current action row
             </summary>
@@ -1337,21 +1337,21 @@
             <param name="disabled">If this button is disabled</param>
             <param name="addToNewRow">Should the button be added to a new row</param>
             <param name="emoji">Emoji to display with the button</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception">
                 Throw if the button style is link or if the button goes outside the max number of action rows
             </exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
             <summary>
             Adds a dummy button that doesn't do anything
             </summary>
             <param name="label">The text of the button</param>
             <param name="disabled">If this button is disabled</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception"> Throw if the button goes outside the max number of action rows</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddLinkButton(System.String,System.String,System.Boolean,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
             <summary>
             Adds a link button to the current action row
             </summary>
@@ -1360,10 +1360,10 @@
             <param name="disabled">if the button should be disabled</param>
             <param name="addToNewRow">Show the button be added to a new row</param>
             <param name="emoji">Emoji to display on the button</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception">Thrown if the button goes outside the max number of action rows</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddSelectMenu(Oxide.Ext.Discord.Entities.MessageComponentType,System.String,System.String,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddSelectMenu(Oxide.Ext.Discord.Entities.MessageComponentType,System.String,System.String,System.Int32,System.Int32,System.Boolean)">
             <summary>
             Adds a select menu to a new action row
             </summary>
@@ -1373,9 +1373,9 @@
             <param name="minValues">The min number of options you must select</param>
             <param name="maxValues">The max number of options you can select</param>
             <param name="disabled">If the select menu should be disabled</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddInputText(System.String,System.String,Oxide.Ext.Discord.Entities.InputTextStyles,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
             <summary>
             Adds a select menu to a new action row
             </summary>
@@ -1387,20 +1387,20 @@
             <param name="placeholder">Text to display if no value is selected yet</param>
             <param name="minLength">The min number of options you must select</param>
             <param name="maxLength">The max number of options you can select</param>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.Build">
             <summary>
             Returns the built action rows
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder">
             <summary>
             Builder for Select Menus
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddOption(System.String,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
+        <member name="M:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder.AddOption(System.String,System.String,System.String,System.Boolean,Oxide.Ext.Discord.Entities.DiscordEmoji)">
             <summary>
             Adds an option to a select menu;
             </summary>
@@ -1411,191 +1411,191 @@
             <param name="emoji">Emoji to display with the option</param>
             <exception cref="T:System.Exception">Throw is more than 25 options are added</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddChannelType(Oxide.Ext.Discord.Entities.ChannelType)">
+        <member name="M:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder.AddChannelType(Oxide.Ext.Discord.Entities.ChannelType)">
             <summary>
             Adds an allow channel type for <see cref="F:Oxide.Ext.Discord.Entities.MessageComponentType.ChannelSelect"/>
             </summary>
             <param name="type">Channel Type to add</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.AddDefaultValue(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder.AddDefaultValue(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Adds an allow channel type for <see cref="F:Oxide.Ext.Discord.Entities.MessageComponentType.ChannelSelect"/>
             </summary>
             <param name="id">ID of the default value to add</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.MessageComponents.SelectMenuComponentBuilder.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.SelectMenuComponentBuilder.Build">
             <summary>
             Returns the root builder
             </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/></returns>
+            <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2">
+        <member name="T:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.MessageCreate"/>
             </summary>
             <typeparam name="TMessage">Type of the message</typeparam>
             <typeparam name="TBuilder">Type of the builder</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.#ctor(`0)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.#ctor(`0)">
             <summary>
             Constructor
             </summary>
             <param name="message">Message being created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddSticker(Oxide.Ext.Discord.Entities.Snowflake)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddSticker(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Adds a sticker to the message
             </summary>
             <param name="stickerId">Sticker ID to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Snowflake})">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
             Adds stickers to the message
             </summary>
             <param name="stickerIds">Sticker ID's to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddSticker(Oxide.Ext.Discord.Entities.DiscordSticker)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddSticker(Oxide.Ext.Discord.Entities.DiscordSticker)">
             <summary>
             Adds a sticker to the message
             </summary>
             <param name="sticker">Sticker to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.DiscordSticker})">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.DiscordSticker})">
             <summary>
             Adds stickers to the message
             </summary>
             <param name="stickerIds">Sticker ID's to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.MessageReference"/> to the message
             </summary>
             <param name="reference">Message Reference to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddReply(Oxide.Ext.Discord.Entities.DiscordMessage,System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddReply(Oxide.Ext.Discord.Entities.DiscordMessage,System.Boolean)">
             <summary>
-            Adds a <see cref="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)"/> to the message
+            Adds a <see cref="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)"/> to the message
             </summary>
             <param name="message">Message to reply to</param>
             <param name="failIfNotExists">Should the API call error if the message does not exist (Default true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddReply(Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake},System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddReply(Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake},System.Boolean)">
             <summary>
-            Adds a <see cref="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)"/> to the message
+            Adds a <see cref="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddMessageReference(Oxide.Ext.Discord.Entities.MessageReference)"/> to the message
             </summary>
             <param name="messageId">ID of the message to reply to</param>
             <param name="guildId">Guild ID of the message if one exists</param>
             <param name="failIfNotExists">Should the API call error if the message does not exist (Default true)</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseChannelMessageBuilder`2.SuppressNotifications(Oxide.Ext.Discord.Entities.DiscordSticker)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.SuppressNotifications(Oxide.Ext.Discord.Entities.DiscordSticker)">
             <summary>
             Adds a sticker to the message
             </summary>
             <param name="sticker">Sticker to be added</param>
             <returns>This</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2">
+        <member name="T:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.BaseMessageCreate"/>
             </summary>
             <typeparam name="TMessage"></typeparam>
             <typeparam name="TBuilder"></typeparam>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.Message">
+        <member name="F:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.Message">
             <summary>
             Message the builder is for
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.Builder">
+        <member name="F:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.Builder">
             <summary>
             This builder
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.#ctor(`0)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.#ctor(`0)">
             <summary>
             Constructor
             </summary>
             <param name="message">Message being created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddContent(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddContent(System.String)">
             <summary>
             Adds message text
             </summary>
             <param name="content">Text to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AsTts(System.Boolean)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AsTts(System.Boolean)">
             <summary>
             Marks the message As Text-To-Speech
             </summary>
             <param name="enabled">Should TTS be enabled (Default true)</param>
             <returns>this</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Entities.DiscordEmbed)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Entities.DiscordEmbed)">
             <summary>
             Adds a <see cref="T:Oxide.Ext.Discord.Entities.DiscordEmbed"/>
             </summary>
             <param name="embed">Embed to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Builders.DiscordEmbedBuilder)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddEmbed(Oxide.Ext.Discord.Builders.DiscordEmbedBuilder)">
             <summary>
             Adds <see cref="T:Oxide.Ext.Discord.Entities.DiscordEmbed"/> created from a <see cref="T:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder"/>
             </summary>
             <param name="builder">Build to add embeds from</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddEmbeds(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.DiscordEmbed})">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddEmbeds(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.DiscordEmbed})">
             <summary>
             Adds a collection of <see cref="T:Oxide.Ext.Discord.Entities.DiscordEmbed"/> to the response
             </summary>
             <param name="embeds">Embeds to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.AllowedMentions)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddAllowedMentions(Oxide.Ext.Discord.Entities.AllowedMentions)">
             <summary>
             Adds <see cref="T:Oxide.Ext.Discord.Entities.AllowedMentions"/> to the response
             </summary>
             <param name="mentions">Mentions to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.SuppressEmbeds">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.SuppressEmbeds">
             <summary>
             Suppresses embeds on this response
             </summary>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddActionRow(Oxide.Ext.Discord.Entities.ActionRowComponent)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddActionRow(Oxide.Ext.Discord.Entities.ActionRowComponent)">
             <summary>
             Adds a single <see cref="T:Oxide.Ext.Discord.Entities.ActionRowComponent"/> 
             </summary>
             <param name="component">Component to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddComponents(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.ActionRowComponent})">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddComponents(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.ActionRowComponent})">
             <summary>
             Adds a collection MessageComponents/>
             </summary>
             <param name="components">Components to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddComponents(Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddComponents(Oxide.Ext.Discord.Builders.MessageComponentBuilder)">
             <summary>
-            Adds MessageComponents from <see cref="T:Oxide.Ext.Discord.Builders.MessageComponents.MessageComponentBuilder"/>
+            Adds MessageComponents from <see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/>
             </summary>
             <param name="builder">Build to add components from</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
             <summary>
             Adds an attachment to the message
             </summary>
@@ -1604,66 +1604,66 @@
             <param name="contentType">Attachment content type</param>
             <param name="description">Description for the attachment</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseMessageBuilder`2.Build">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.Build">
             <summary>
             Returns the built message
             </summary>
             <returns></returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.BaseWebhookMessageBuilder`2">
+        <member name="T:Oxide.Ext.Discord.Builders.BaseWebhookMessageBuilder`2">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.WebhookCreateMessage"/>
             </summary>
             <typeparam name="TMessage">Type of the message</typeparam>
             <typeparam name="TBuilder">Type of the builder</typeparam>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseWebhookMessageBuilder`2.#ctor(`0)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseWebhookMessageBuilder`2.#ctor(`0)">
             <summary>
             Constructor
             </summary>
             <param name="message">Message being created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseWebhookMessageBuilder`2.AddUserName(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseWebhookMessageBuilder`2.AddUserName(System.String)">
             <summary>
             Adds a custom username for the sender
             </summary>
             <param name="userName">Username to be displayed as the sender</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.BaseWebhookMessageBuilder`2.AddAvatarUrl(System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseWebhookMessageBuilder`2.AddAvatarUrl(System.String)">
             <summary>
             Adds a custom avatar url for the sender
             </summary>
             <param name="avatarUrl">Avatar URL to be displayed for the sender</param>
             <returns>This</returns>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.DiscordMessageBuilder">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.MessageCreate"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder.#ctor">
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordMessageBuilder.#ctor">
             <summary>
             Constructor creating a new message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder.#ctor(Oxide.Ext.Discord.Entities.MessageCreate)">
+        <member name="M:Oxide.Ext.Discord.Builders.DiscordMessageBuilder.#ctor(Oxide.Ext.Discord.Entities.MessageCreate)">
             <summary>
             Constructor to use existing message
             </summary>
             <param name="message">Message to use</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder">
+        <member name="T:Oxide.Ext.Discord.Builders.WebhookMessageBuilder">
             <summary>
-            Represents a builder for <see cref="T:Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder"/>
+            Represents a builder for <see cref="T:Oxide.Ext.Discord.Builders.WebhookMessageBuilder"/>
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder.#ctor">
+        <member name="M:Oxide.Ext.Discord.Builders.WebhookMessageBuilder.#ctor">
             <summary>
             Constructor for creating a new WebhookCreateMessage
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder.#ctor(Oxide.Ext.Discord.Entities.WebhookCreateMessage)">
+        <member name="M:Oxide.Ext.Discord.Builders.WebhookMessageBuilder.#ctor(Oxide.Ext.Discord.Entities.WebhookCreateMessage)">
             <summary>
             Constructor for using an existing WebhookCreateMessage
             </summary>
@@ -11786,25 +11786,25 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetResponseBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.InteractionResponseBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetFollowupBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.InteractionFollowupBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetAutoCompleteBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetModalBuilder">
             <summary>
-            Returns a <see cref="T:Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder"/> for this interaction
+            Returns a <see cref="T:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder"/> for this interaction
             </summary>
             <returns></returns>
         </member>
@@ -11846,7 +11846,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.InteractionResponseType,Oxide.Ext.Discord.Builders.Interactions.InteractionResponseBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.InteractionResponseType,Oxide.Ext.Discord.Builders.InteractionResponseBuilder)">
             <summary>
             Create a response to an Interaction from the gateway.
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11863,7 +11863,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionAutoCompleteBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder)">
             <summary>
             Create a Auto Complete response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11879,7 +11879,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message for this response</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionModalBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.InteractionModalBuilder)">
             <summary>
             Create a Modal response to an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response">Create Interaction Response</a>
@@ -11935,7 +11935,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to follow up with</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Interactions.InteractionFollowupBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateFollowUpMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.InteractionFollowupBuilder)">
             <summary>
             Create a followup message for an Interaction
             See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Create Followup Message</a>
@@ -13456,7 +13456,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="message">Message to be created</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.Create(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.Create(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Builders.DiscordMessageBuilder)">
             <summary>
             Post a message to a guild text or DM channel.
             If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user.
@@ -13541,7 +13541,7 @@
             <param name="client">Client to use</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.Reply(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Messages.DiscordMessageBuilder)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.Reply(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.DiscordMessageBuilder)">
             <summary>
             Replies to a previously sent message
             See <a href="https://discord.com/developers/docs/resources/channel#create-message">Create Message</a>
@@ -16886,7 +16886,7 @@
             <param name="message">Message data</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhook(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhook(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.WebhookMessageBuilder,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
@@ -16904,7 +16904,7 @@
             <param name="message">Message data</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookWithMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.Messages.WebhookMessageBuilder,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookWithMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Builders.WebhookMessageBuilder,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
             <summary>
             Executes a webhook
             See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>

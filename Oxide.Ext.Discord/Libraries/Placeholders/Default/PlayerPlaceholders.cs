@@ -3,7 +3,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Builders.Interactions;
+using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 

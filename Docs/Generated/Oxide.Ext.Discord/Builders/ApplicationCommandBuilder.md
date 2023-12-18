@@ -22,13 +22,13 @@ public class ApplicationCommandBuilder
 | [AddSubCommandGroup](#addsubcommandgroup-method)(…) | Creates a new SubCommandGroup SubCommandGroups contain subcommands Your root command can only contain |
 | [AllowInDirectMessages](#allowindirectmessages-method)(…) | Allows the command to be used in a direct message |
 | [Build](#build-method)() | Returns the created command |
-| [BuildCommandLocalization](#buildcommandlocalization-method)(…) | Returns a built [`DiscordCommandLocalization`](../../Libraries/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
+| [BuildCommandLocalization](#buildcommandlocalization-method)(…) | Returns a built [`DiscordCommandLocalization`](../Libraries/DiscordCommandLocalization.md) using the provided name / descriptions as the default |
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ApplicationCommandBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandBuilder.cs)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [ApplicationCommandBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommandBuilder.cs)
    
    
 # AddDefaultPermissions method
@@ -45,10 +45,10 @@ public ApplicationCommandBuilder AddDefaultPermissions(PermissionFlags permissio
 
 ## See Also
 
-* enum [PermissionFlags](../../Entities/PermissionFlags.md)
+* enum [PermissionFlags](../Entities/PermissionFlags.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AllowInDirectMessages method
@@ -66,8 +66,8 @@ public ApplicationCommandBuilder AllowInDirectMessages(bool allow)
 ## See Also
 
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddNameLocalizations method
@@ -87,8 +87,8 @@ public ApplicationCommandBuilder AddNameLocalizations(Plugin plugin, string lang
 ## See Also
 
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddNameLocalization method
@@ -110,10 +110,10 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/ServerLocale.md)
+* struct [ServerLocale](../Libraries/ServerLocale.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddDescriptionLocalizations method
@@ -133,8 +133,8 @@ public ApplicationCommandBuilder AddDescriptionLocalizations(Plugin plugin, stri
 ## See Also
 
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddDescriptionLocalization method
@@ -157,10 +157,10 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/ServerLocale.md)
+* struct [ServerLocale](../Libraries/ServerLocale.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddSubCommandGroup method
@@ -192,8 +192,8 @@ this
 
 * class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddSubCommand method
@@ -225,8 +225,8 @@ this
 
 * class [ApplicationSubCommandBuilder](./ApplicationSubCommandBuilder.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddOption method
@@ -251,11 +251,11 @@ this
 
 ## See Also
 
-* enum [CommandOptionType](../../Entities/CommandOptionType.md)
+* enum [CommandOptionType](../Entities/CommandOptionType.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Build method
@@ -268,15 +268,15 @@ public CommandCreate Build()
 
 ## See Also
 
-* class [CommandCreate](../../Entities/CommandCreate.md)
+* class [CommandCreate](../Entities/CommandCreate.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # BuildCommandLocalization method
 
-Returns a built [`DiscordCommandLocalization`](../../Libraries/DiscordCommandLocalization.md) using the provided name / descriptions as the default
+Returns a built [`DiscordCommandLocalization`](../Libraries/DiscordCommandLocalization.md) using the provided name / descriptions as the default
 
 ```csharp
 public DiscordCommandLocalization BuildCommandLocalization(string lang = "en")
@@ -284,10 +284,10 @@ public DiscordCommandLocalization BuildCommandLocalization(string lang = "en")
 
 ## See Also
 
-* class [DiscordCommandLocalization](../../Libraries/DiscordCommandLocalization.md)
+* class [DiscordCommandLocalization](../Libraries/DiscordCommandLocalization.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ApplicationCommandBuilder constructor (1 of 2)
@@ -306,10 +306,10 @@ public ApplicationCommandBuilder(string name, string description, ApplicationCom
 
 ## See Also
 
-* enum [ApplicationCommandType](../../Entities/ApplicationCommandType.md)
+* enum [ApplicationCommandType](../Entities/ApplicationCommandType.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -331,11 +331,11 @@ public ApplicationCommandBuilder(string name, string description, ApplicationCom
 
 ## See Also
 
-* enum [ApplicationCommandType](../../Entities/ApplicationCommandType.md)
-* struct [ServerLocale](../../Libraries/ServerLocale.md)
+* enum [ApplicationCommandType](../Entities/ApplicationCommandType.md)
+* struct [ServerLocale](../Libraries/ServerLocale.md)
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # CommandName field
@@ -349,7 +349,7 @@ public readonly string CommandName;
 ## See Also
 
 * class [ApplicationCommandBuilder](./ApplicationCommandBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

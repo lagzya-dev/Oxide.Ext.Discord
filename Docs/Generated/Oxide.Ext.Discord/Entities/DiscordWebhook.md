@@ -327,7 +327,7 @@ public IPromise ExecuteWebhook(DiscordClient client, WebhookMessageBuilder build
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [WebhookMessageBuilder](../Builders/Messages/WebhookMessageBuilder.md)
+* class [WebhookMessageBuilder](../Builders/WebhookMessageBuilder.md)
 * class [WebhookExecuteParams](./WebhookExecuteParams.md)
 * class [DiscordWebhook](./DiscordWebhook.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
@@ -382,7 +382,7 @@ public IPromise<DiscordMessage> ExecuteWebhookWithMessage(DiscordClient client,
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [WebhookMessageBuilder](../Builders/Messages/WebhookMessageBuilder.md)
+* class [WebhookMessageBuilder](../Builders/WebhookMessageBuilder.md)
 * class [WebhookExecuteParams](./WebhookExecuteParams.md)
 * class [DiscordWebhook](./DiscordWebhook.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)

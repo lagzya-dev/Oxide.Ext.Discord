@@ -1,6 +1,6 @@
 using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Represents a builder for <see cref="InteractionCallbackData"/>

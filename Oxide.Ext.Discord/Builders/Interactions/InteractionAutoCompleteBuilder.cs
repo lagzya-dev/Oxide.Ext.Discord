@@ -10,7 +10,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder for Auto Complete Interaction

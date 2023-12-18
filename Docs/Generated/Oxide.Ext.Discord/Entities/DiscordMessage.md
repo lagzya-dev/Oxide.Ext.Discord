@@ -121,7 +121,7 @@ public static IPromise<DiscordMessage> Create(DiscordClient client, Snowflake ch
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * struct [Snowflake](./Snowflake.md)
-* class [DiscordMessageBuilder](../Builders/Messages/DiscordMessageBuilder.md)
+* class [DiscordMessageBuilder](../Builders/DiscordMessageBuilder.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -336,7 +336,7 @@ public IPromise<DiscordMessage> Reply(DiscordClient client, DiscordMessageBuilde
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [DiscordMessageBuilder](../Builders/Messages/DiscordMessageBuilder.md)
+* class [DiscordMessageBuilder](../Builders/DiscordMessageBuilder.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

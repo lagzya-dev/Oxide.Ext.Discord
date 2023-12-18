@@ -29,9 +29,9 @@ public class ApplicationCommandOptionBuilder
 
 ## See Also
 
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [ApplicationCommandOptionBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommands/ApplicationCommandOptionBuilder.cs)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [ApplicationCommandOptionBuilder.cs](../../../../Oxide.Ext.Discord/Builders/ApplicationCommandOptionBuilder.cs)
    
    
 # AddNameLocalizations method
@@ -51,8 +51,8 @@ public ApplicationCommandOptionBuilder AddNameLocalizations(Plugin plugin, strin
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddNameLocalization method
@@ -74,10 +74,10 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/ServerLocale.md)
+* struct [ServerLocale](../Libraries/ServerLocale.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddDescriptionLocalizations method
@@ -97,8 +97,8 @@ public ApplicationCommandOptionBuilder AddDescriptionLocalizations(Plugin plugin
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddDescriptionLocalization method
@@ -121,10 +121,10 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/ServerLocale.md)
+* struct [ServerLocale](../Libraries/ServerLocale.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Required method
@@ -146,8 +146,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AutoComplete method
@@ -169,8 +169,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # MinValue method (1 of 2)
@@ -192,8 +192,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -216,8 +216,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # MaxValue method (1 of 2)
@@ -239,8 +239,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -263,8 +263,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # MinLength method
@@ -286,8 +286,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # MaxLength method
@@ -309,8 +309,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ChannelTypes method
@@ -333,14 +333,14 @@ This
 
 | exception | condition |
 | --- | --- |
-| Exception | Thrown if [`CommandOptionType`](../../Entities/CommandOptionType.md) is not Channel |
+| Exception | Thrown if [`CommandOptionType`](../Entities/CommandOptionType.md) is not Channel |
 
 ## See Also
 
-* enum [ChannelType](../../Entities/ChannelType.md)
+* enum [ChannelType](../Entities/ChannelType.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddChoice method (1 of 3)
@@ -371,8 +371,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -404,8 +404,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -437,8 +437,8 @@ This
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # CommandName field
@@ -452,8 +452,8 @@ public readonly string CommandName;
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # GroupName field
@@ -467,8 +467,8 @@ public readonly string GroupName;
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # SubCommandName field
@@ -482,8 +482,8 @@ public readonly string SubCommandName;
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # OptionName field
@@ -497,7 +497,7 @@ public readonly string OptionName;
 ## See Also
 
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

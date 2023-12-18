@@ -4,7 +4,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Builders.ApplicationCommands
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder for Sub Command Groups

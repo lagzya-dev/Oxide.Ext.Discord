@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Player Name Formatting options for <see cref="PlayerNameFormatter"/>

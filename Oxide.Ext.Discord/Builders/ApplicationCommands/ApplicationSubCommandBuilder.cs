@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Builders.ApplicationCommands
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Application Sub Command Builder

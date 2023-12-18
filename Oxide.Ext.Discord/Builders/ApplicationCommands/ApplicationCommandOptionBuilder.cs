@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Builders.ApplicationCommands
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Represents a Subcommand Option Builder for SubCommands

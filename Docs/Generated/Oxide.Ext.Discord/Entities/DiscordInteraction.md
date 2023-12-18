@@ -41,11 +41,11 @@ public class DiscordInteraction
 | [EditFollowUpMessage](#editfollowupmessage-method)(…) | Edits a followup message for an Interaction See [Edit Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-followup-message) |
 | [EditOriginalResponse](#editoriginalresponse-method)(…) | Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response) |
 | [EditTemplateOriginalResponse](#edittemplateoriginalresponse-method)(…) | Edit a interaction response with a message template |
-| [GetAutoCompleteBuilder](#getautocompletebuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetFollowupBuilder](#getfollowupbuilder-method)() | Returns a [`InteractionFollowupBuilder`](../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction |
+| [GetAutoCompleteBuilder](#getautocompletebuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetFollowupBuilder](#getfollowupbuilder-method)() | Returns a [`InteractionFollowupBuilder`](../Builders/InteractionFollowupBuilder.md) for this interaction |
 | [GetLangMessage](#getlangmessage-method-1-of-2)(…) | Returns a localized string for this interaction (2 methods) |
-| [GetModalBuilder](#getmodalbuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction |
-| [GetResponseBuilder](#getresponsebuilder-method)() | Returns a [`InteractionResponseBuilder`](../Builders/Interactions/InteractionResponseBuilder.md) for this interaction |
+| [GetModalBuilder](#getmodalbuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetResponseBuilder](#getresponsebuilder-method)() | Returns a [`InteractionResponseBuilder`](../Builders/InteractionResponseBuilder.md) for this interaction |
 
 ## See Also
 
@@ -106,7 +106,7 @@ Localized string if it is found; Empty string otherwise
    
 # GetResponseBuilder method
 
-Returns a [`InteractionResponseBuilder`](../Builders/Interactions/InteractionResponseBuilder.md) for this interaction
+Returns a [`InteractionResponseBuilder`](../Builders/InteractionResponseBuilder.md) for this interaction
 
 ```csharp
 public InteractionResponseBuilder GetResponseBuilder()
@@ -114,7 +114,7 @@ public InteractionResponseBuilder GetResponseBuilder()
 
 ## See Also
 
-* class [InteractionResponseBuilder](../Builders/Interactions/InteractionResponseBuilder.md)
+* class [InteractionResponseBuilder](../Builders/InteractionResponseBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -122,7 +122,7 @@ public InteractionResponseBuilder GetResponseBuilder()
    
 # GetFollowupBuilder method
 
-Returns a [`InteractionFollowupBuilder`](../Builders/Interactions/InteractionFollowupBuilder.md) for this interaction
+Returns a [`InteractionFollowupBuilder`](../Builders/InteractionFollowupBuilder.md) for this interaction
 
 ```csharp
 public InteractionFollowupBuilder GetFollowupBuilder()
@@ -130,7 +130,7 @@ public InteractionFollowupBuilder GetFollowupBuilder()
 
 ## See Also
 
-* class [InteractionFollowupBuilder](../Builders/Interactions/InteractionFollowupBuilder.md)
+* class [InteractionFollowupBuilder](../Builders/InteractionFollowupBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -138,7 +138,7 @@ public InteractionFollowupBuilder GetFollowupBuilder()
    
 # GetAutoCompleteBuilder method
 
-Returns a [`InteractionAutoCompleteBuilder`](../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction
+Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction
 
 ```csharp
 public InteractionAutoCompleteBuilder GetAutoCompleteBuilder()
@@ -146,7 +146,7 @@ public InteractionAutoCompleteBuilder GetAutoCompleteBuilder()
 
 ## See Also
 
-* class [InteractionAutoCompleteBuilder](../Builders/Interactions/InteractionAutoCompleteBuilder.md)
+* class [InteractionAutoCompleteBuilder](../Builders/InteractionAutoCompleteBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -154,7 +154,7 @@ public InteractionAutoCompleteBuilder GetAutoCompleteBuilder()
    
 # GetModalBuilder method
 
-Returns a [`InteractionAutoCompleteBuilder`](../Builders/Interactions/InteractionAutoCompleteBuilder.md) for this interaction
+Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction
 
 ```csharp
 public InteractionModalBuilder GetModalBuilder()
@@ -162,7 +162,7 @@ public InteractionModalBuilder GetModalBuilder()
 
 ## See Also
 
-* class [InteractionModalBuilder](../Builders/Interactions/InteractionModalBuilder.md)
+* class [InteractionModalBuilder](../Builders/InteractionModalBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -209,7 +209,7 @@ public IPromise CreateResponse(DiscordClient client, InteractionAutoCompleteBuil
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [InteractionAutoCompleteBuilder](../Builders/Interactions/InteractionAutoCompleteBuilder.md)
+* class [InteractionAutoCompleteBuilder](../Builders/InteractionAutoCompleteBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -257,7 +257,7 @@ public IPromise CreateResponse(DiscordClient client, InteractionModalBuilder bui
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [InteractionModalBuilder](../Builders/Interactions/InteractionModalBuilder.md)
+* class [InteractionModalBuilder](../Builders/InteractionModalBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -335,7 +335,7 @@ public IPromise CreateResponse(DiscordClient client, InteractionResponseType typ
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * enum [InteractionResponseType](./InteractionResponseType.md)
-* class [InteractionResponseBuilder](../Builders/Interactions/InteractionResponseBuilder.md)
+* class [InteractionResponseBuilder](../Builders/InteractionResponseBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -576,7 +576,7 @@ public IPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client,
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [InteractionFollowupBuilder](../Builders/Interactions/InteractionFollowupBuilder.md)
+* class [InteractionFollowupBuilder](../Builders/InteractionFollowupBuilder.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

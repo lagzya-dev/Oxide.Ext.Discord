@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Builders.Interactions;
+using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;

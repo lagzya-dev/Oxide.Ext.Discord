@@ -1,6 +1,6 @@
 # BaseMessageBuilder&lt;TMessage,TBuilder&gt; class
 
-Represents a builder for [`BaseMessageCreate`](../../Entities/BaseMessageCreate.md)
+Represents a builder for [`BaseMessageCreate`](../Entities/BaseMessageCreate.md)
 
 ```csharp
 public abstract class BaseMessageBuilder<TMessage, TBuilder>
@@ -17,13 +17,13 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 
 | name | description |
 | --- | --- |
-| virtual [AddActionRow](#addactionrow-method)(…) | Adds a single [`ActionRowComponent`](../../Entities/ActionRowComponent.md) |
-| virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMentions`](../../Entities/AllowedMentions.md) to the response |
+| virtual [AddActionRow](#addactionrow-method)(…) | Adds a single [`ActionRowComponent`](../Entities/ActionRowComponent.md) |
+| virtual [AddAllowedMentions](#addallowedmentions-method)(…) | Adds [`AllowedMentions`](../Entities/AllowedMentions.md) to the response |
 | virtual [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
 | virtual [AddComponents](#addcomponents-method-1-of-2)(…) | Adds a collection MessageComponents/&gt; (2 methods) |
 | virtual [AddContent](#addcontent-method)(…) | Adds message text |
-| virtual [AddEmbed](#addembed-method-1-of-2)(…) | Adds a [`DiscordEmbed`](../../Entities/DiscordEmbed.md) (2 methods) |
-| virtual [AddEmbeds](#addembeds-method)(…) | Adds a collection of [`DiscordEmbed`](../../Entities/DiscordEmbed.md) to the response |
+| virtual [AddEmbed](#addembed-method-1-of-2)(…) | Adds a [`DiscordEmbed`](../Entities/DiscordEmbed.md) (2 methods) |
+| virtual [AddEmbeds](#addembeds-method)(…) | Adds a collection of [`DiscordEmbed`](../Entities/DiscordEmbed.md) to the response |
 | virtual [AsTts](#astts-method)(…) | Marks the message As Text-To-Speech |
 | [Build](#build-method)() | Returns the built message |
 | virtual [SuppressEmbeds](#suppressembeds-method)() | Suppresses embeds on this response |
@@ -38,10 +38,10 @@ public abstract class BaseMessageBuilder<TMessage, TBuilder>
 
 ## See Also
 
-* class [BaseMessageCreate](../../Entities/BaseMessageCreate.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/BaseMessageBuilder.cs)
+* class [BaseMessageCreate](../Entities/BaseMessageCreate.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [BaseMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/BaseMessageBuilder.cs)
    
    
 # AddContent method
@@ -63,8 +63,8 @@ This
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AsTts method
@@ -86,13 +86,13 @@ this
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddEmbed method (1 of 2)
 
-Adds a [`DiscordEmbed`](../../Entities/DiscordEmbed.md)
+Adds a [`DiscordEmbed`](../Entities/DiscordEmbed.md)
 
 ```csharp
 public virtual TBuilder AddEmbed(DiscordEmbed embed)
@@ -108,16 +108,16 @@ This
 
 ## See Also
 
-* class [DiscordEmbed](../../Entities/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
 # AddEmbed method (2 of 2)
 
-Adds [`DiscordEmbed`](../../Entities/DiscordEmbed.md) created from a [`DiscordEmbedBuilder`](../DiscordEmbedBuilder.md)
+Adds [`DiscordEmbed`](../Entities/DiscordEmbed.md) created from a [`DiscordEmbedBuilder`](./DiscordEmbedBuilder.md)
 
 ```csharp
 public virtual TBuilder AddEmbed(DiscordEmbedBuilder builder)
@@ -133,15 +133,15 @@ This
 
 ## See Also
 
-* class [DiscordEmbedBuilder](../DiscordEmbedBuilder.md)
+* class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddEmbeds method
 
-Adds a collection of [`DiscordEmbed`](../../Entities/DiscordEmbed.md) to the response
+Adds a collection of [`DiscordEmbed`](../Entities/DiscordEmbed.md) to the response
 
 ```csharp
 public virtual TBuilder AddEmbeds(ICollection<DiscordEmbed> embeds)
@@ -157,15 +157,15 @@ This
 
 ## See Also
 
-* class [DiscordEmbed](../../Entities/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddAllowedMentions method
 
-Adds [`AllowedMentions`](../../Entities/AllowedMentions.md) to the response
+Adds [`AllowedMentions`](../Entities/AllowedMentions.md) to the response
 
 ```csharp
 public virtual TBuilder AddAllowedMentions(AllowedMentions mentions)
@@ -181,10 +181,10 @@ This
 
 ## See Also
 
-* class [AllowedMentions](../../Entities/AllowedMentions.md)
+* class [AllowedMentions](../Entities/AllowedMentions.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # SuppressEmbeds method
@@ -202,13 +202,13 @@ This
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddActionRow method
 
-Adds a single [`ActionRowComponent`](../../Entities/ActionRowComponent.md)
+Adds a single [`ActionRowComponent`](../Entities/ActionRowComponent.md)
 
 ```csharp
 public virtual TBuilder AddActionRow(ActionRowComponent component)
@@ -224,10 +224,10 @@ This
 
 ## See Also
 
-* class [ActionRowComponent](../../Entities/ActionRowComponent.md)
+* class [ActionRowComponent](../Entities/ActionRowComponent.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddComponents method (1 of 2)
@@ -248,16 +248,16 @@ This
 
 ## See Also
 
-* class [ActionRowComponent](../../Entities/ActionRowComponent.md)
+* class [ActionRowComponent](../Entities/ActionRowComponent.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
 # AddComponents method (2 of 2)
 
-Adds MessageComponents from [`MessageComponentBuilder`](../MessageComponents/MessageComponentBuilder.md)
+Adds MessageComponents from [`MessageComponentBuilder`](./MessageComponentBuilder.md)
 
 ```csharp
 public virtual TBuilder AddComponents(MessageComponentBuilder builder)
@@ -273,10 +273,10 @@ This
 
 ## See Also
 
-* class [MessageComponentBuilder](../MessageComponents/MessageComponentBuilder.md)
+* class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddAttachment method
@@ -298,8 +298,8 @@ public virtual TBuilder AddAttachment(string filename, byte[] data, string conte
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Build method
@@ -313,8 +313,8 @@ public TMessage Build()
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # BaseMessageBuilder&lt;TMessage,TBuilder&gt; constructor
@@ -332,8 +332,8 @@ protected BaseMessageBuilder(TMessage message)
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Message field
@@ -347,8 +347,8 @@ protected readonly TMessage Message;
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Builder field
@@ -362,7 +362,7 @@ protected readonly TBuilder Builder;
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

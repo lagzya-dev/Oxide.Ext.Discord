@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Builders.ApplicationCommands
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder to use when building application commands

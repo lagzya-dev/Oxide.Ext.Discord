@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Builders.MessageComponents;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builds a Modal Interaction Response Message

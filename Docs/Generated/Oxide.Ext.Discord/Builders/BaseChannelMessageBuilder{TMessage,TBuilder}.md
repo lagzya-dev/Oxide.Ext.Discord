@@ -1,6 +1,6 @@
 # BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt; class
 
-Represents a builder for [`MessageCreate`](../../Entities/MessageCreate.md)
+Represents a builder for [`MessageCreate`](../Entities/MessageCreate.md)
 
 ```csharp
 public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> : 
@@ -18,7 +18,7 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 
 | name | description |
 | --- | --- |
-| [AddMessageReference](#addmessagereference-method)(…) | Adds a [`MessageReference`](../../Entities/MessageReference.md) to the message |
+| [AddMessageReference](#addmessagereference-method)(…) | Adds a [`MessageReference`](../Entities/MessageReference.md) to the message |
 | [AddReply](#addreply-method-1-of-2)(…) | Adds a [`AddMessageReference`](#addmessagereference-method) to the message (2 methods) |
 | [AddSticker](#addsticker-method-1-of-2)(…) | Adds a sticker to the message (2 methods) |
 | [AddStickers](#addstickers-method-1-of-2)(…) | Adds stickers to the message (2 methods) |
@@ -33,10 +33,10 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> :
 ## See Also
 
 * class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [MessageCreate](../../Entities/MessageCreate.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
-* [BaseChannelMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/BaseChannelMessageBuilder.cs)
+* class [MessageCreate](../Entities/MessageCreate.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [BaseChannelMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/BaseChannelMessageBuilder.cs)
    
    
 # AddSticker method (1 of 2)
@@ -57,10 +57,10 @@ This
 
 ## See Also
 
-* class [DiscordSticker](../../Entities/DiscordSticker.md)
+* class [DiscordSticker](../Entities/DiscordSticker.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -82,10 +82,10 @@ This
 
 ## See Also
 
-* struct [Snowflake](../../Entities/Snowflake.md)
+* struct [Snowflake](../Entities/Snowflake.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddStickers method (1 of 2)
@@ -106,10 +106,10 @@ This
 
 ## See Also
 
-* class [DiscordSticker](../../Entities/DiscordSticker.md)
+* class [DiscordSticker](../Entities/DiscordSticker.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -131,15 +131,15 @@ This
 
 ## See Also
 
-* struct [Snowflake](../../Entities/Snowflake.md)
+* struct [Snowflake](../Entities/Snowflake.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddMessageReference method
 
-Adds a [`MessageReference`](../../Entities/MessageReference.md) to the message
+Adds a [`MessageReference`](../Entities/MessageReference.md) to the message
 
 ```csharp
 public TBuilder AddMessageReference(MessageReference reference)
@@ -155,10 +155,10 @@ This
 
 ## See Also
 
-* class [MessageReference](../../Entities/MessageReference.md)
+* class [MessageReference](../Entities/MessageReference.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # AddReply method (1 of 2)
@@ -180,10 +180,10 @@ This
 
 ## See Also
 
-* class [DiscordMessage](../../Entities/DiscordMessage.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 ---
 
@@ -208,10 +208,10 @@ This
 
 ## See Also
 
-* struct [Snowflake](../../Entities/Snowflake.md)
+* struct [Snowflake](../Entities/Snowflake.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # SuppressNotifications method
@@ -232,10 +232,10 @@ This
 
 ## See Also
 
-* class [DiscordSticker](../../Entities/DiscordSticker.md)
+* class [DiscordSticker](../Entities/DiscordSticker.md)
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt; constructor
@@ -253,7 +253,7 @@ protected BaseChannelMessageBuilder(TMessage message)
 ## See Also
 
 * class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 
 <!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

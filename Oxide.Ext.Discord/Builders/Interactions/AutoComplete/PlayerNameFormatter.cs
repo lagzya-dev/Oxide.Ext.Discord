@@ -2,7 +2,7 @@
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Builders.Interactions
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Formatter for player names

@@ -1,4 +1,4 @@
-using Oxide.Ext.Discord.Builders.MessageComponents;
+using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Exceptions
