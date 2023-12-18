@@ -37,7 +37,7 @@ public class BotClient : IDebugLoggable
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BotClient.cs](../../../../Oxide.Ext.Discord/Clients/BotClient.cs)
@@ -94,7 +94,7 @@ public void AddClient(DiscordClient client, PluginSetup setup)
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* class [PluginSetup](../Plugins/Setup/PluginSetup.md)
+* class [PluginSetup](../Plugins/PluginSetup.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -146,13 +146,13 @@ public void SendWebSocketCommand(DiscordClient client, GatewayCommandCode opCode
 | parameter | description |
 | --- | --- |
 | client | Client sending the command |
-| opCode | [`GatewayCommandCode`](../Entities/Gateway/Commands/GatewayCommandCode.md) OP Code for the command |
+| opCode | [`GatewayCommandCode`](../Entities/GatewayCommandCode.md) OP Code for the command |
 | data | Command Payload |
 
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* enum [GatewayCommandCode](../Entities/Gateway/Commands/GatewayCommandCode.md)
+* enum [GatewayCommandCode](../Entities/GatewayCommandCode.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -176,7 +176,7 @@ Guild with the specified ID
 
 ## See Also
 
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
 * struct [Snowflake](../Entities/Snowflake.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
@@ -198,7 +198,7 @@ public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
 
 ## See Also
 
-* class [DiscordChannel](../Entities/Channels/DiscordChannel.md)
+* class [DiscordChannel](../Entities/DiscordChannel.md)
 * struct [Snowflake](../Entities/Snowflake.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
@@ -219,7 +219,7 @@ public void AddGuild(DiscordGuild guild)
 
 ## See Also
 
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -239,7 +239,7 @@ public void AddGuildOrUpdate(DiscordGuild guild)
 
 ## See Also
 
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -259,7 +259,7 @@ public void AddDirectChannel(DiscordChannel channel)
 
 ## See Also
 
-* class [DiscordChannel](../Entities/Channels/DiscordChannel.md)
+* class [DiscordChannel](../Entities/DiscordChannel.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -344,7 +344,7 @@ public DiscordApplication Application { get; }
 
 ## See Also
 
-* class [DiscordApplication](../Entities/Applications/DiscordApplication.md)
+* class [DiscordApplication](../Entities/DiscordApplication.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -360,7 +360,7 @@ public DiscordUser BotUser { get; }
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -423,7 +423,7 @@ public readonly Hash<Snowflake, DiscordGuild> Servers;
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -440,7 +440,7 @@ public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByChannelId;
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* class [DiscordChannel](../Entities/Channels/DiscordChannel.md)
+* class [DiscordChannel](../Entities/DiscordChannel.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -457,7 +457,7 @@ public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByUserId;
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* class [DiscordChannel](../Entities/Channels/DiscordChannel.md)
+* class [DiscordChannel](../Entities/DiscordChannel.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

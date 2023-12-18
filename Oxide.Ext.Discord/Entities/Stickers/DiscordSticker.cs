@@ -1,13 +1,10 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Stickers;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Promises;
 
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-object">Discord Sticker Structure</a>

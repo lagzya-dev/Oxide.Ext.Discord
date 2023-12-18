@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Callbacks.Hooks;
+using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins.Setup;
-using Oxide.Ext.Discord.Types.Pooling.Pools;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Types.Hooks
+namespace Oxide.Ext.Discord.Types
 {
     internal class DiscordHook
     {

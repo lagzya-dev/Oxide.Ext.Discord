@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
 using ProtoBuf;
 
-namespace Oxide.Ext.Discord.Data.Users
+namespace Oxide.Ext.Discord.Data
 {
     [ProtoContract]
     internal class BotData

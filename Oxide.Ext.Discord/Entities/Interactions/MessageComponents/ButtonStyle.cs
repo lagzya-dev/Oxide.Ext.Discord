@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/message-components#buttons-button-styles">Button Styles</a> within Discord..

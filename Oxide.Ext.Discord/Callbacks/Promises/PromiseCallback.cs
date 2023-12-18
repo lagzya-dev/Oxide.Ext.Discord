@@ -1,8 +1,8 @@
 ﻿using System;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Callbacks.Promises
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class PromiseCallback : BasePromiseCallback
     {

@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Converts a <see cref="DateTimeOffset"/> to and from a json long

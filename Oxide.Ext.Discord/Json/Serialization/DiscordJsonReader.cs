@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Json.Serialization
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async

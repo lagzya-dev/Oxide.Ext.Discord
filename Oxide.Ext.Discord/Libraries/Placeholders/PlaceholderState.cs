@@ -1,8 +1,7 @@
 using System.Text.RegularExpressions;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents the current state for a matched placeholder

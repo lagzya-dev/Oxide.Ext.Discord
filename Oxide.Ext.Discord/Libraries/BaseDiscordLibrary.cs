@@ -2,7 +2,7 @@
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
-using Oxide.Ext.Discord.Plugins.Setup;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {

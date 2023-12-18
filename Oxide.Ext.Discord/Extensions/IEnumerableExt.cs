@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Extensions

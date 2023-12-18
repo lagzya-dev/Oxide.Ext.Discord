@@ -8,19 +8,14 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Configuration;
-using Oxide.Ext.Discord.Data.Users;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Libraries.AppCommands;
-using Oxide.Ext.Discord.Libraries.Command;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Plugins.Core
+namespace Oxide.Ext.Discord.Plugins
 {
     internal partial class DiscordExtensionCore : BaseDiscordPlugin
     {

@@ -1,8 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Webhooks;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="">Command Followup</a> within discord.

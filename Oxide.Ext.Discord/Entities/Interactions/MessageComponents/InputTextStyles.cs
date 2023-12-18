@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text-styles">Input Text Styles</a> within discord.

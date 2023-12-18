@@ -1,6 +1,6 @@
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Libraries.Linking;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Extensions
 {

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#followed-channel-object-followed-channel-structure">Followed Channel Structure</a> from an API response

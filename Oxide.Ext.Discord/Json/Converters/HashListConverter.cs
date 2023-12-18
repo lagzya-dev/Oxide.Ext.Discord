@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Converts to and from a list in JSON to a hash

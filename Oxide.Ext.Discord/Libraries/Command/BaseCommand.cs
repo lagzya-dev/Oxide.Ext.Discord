@@ -1,13 +1,12 @@
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Hooks;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Command
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)

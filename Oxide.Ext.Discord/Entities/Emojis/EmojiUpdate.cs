@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Emojis
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params">Emoji Update Structure</a>

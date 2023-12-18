@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oxide.Ext.Discord.Rest.Buckets
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents an ID for a bucket

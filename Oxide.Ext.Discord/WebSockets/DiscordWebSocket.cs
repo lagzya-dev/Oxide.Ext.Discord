@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Callbacks.Websockets;
+using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
-using Oxide.Ext.Discord.Entities.Gateway.Events;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Json.Serialization;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.WebSockets.Handlers;
 
 namespace Oxide.Ext.Discord.WebSockets
 {

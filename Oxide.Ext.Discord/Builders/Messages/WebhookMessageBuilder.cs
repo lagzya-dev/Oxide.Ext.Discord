@@ -1,5 +1,4 @@
-using Oxide.Ext.Discord.Builders.Messages.BaseBuilders;
-using Oxide.Ext.Discord.Entities.Webhooks;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Builders.Messages
 {

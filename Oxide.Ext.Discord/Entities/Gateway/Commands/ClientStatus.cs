@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Commands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#client-status-object">Client Status Structure</a>

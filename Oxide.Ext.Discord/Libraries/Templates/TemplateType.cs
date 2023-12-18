@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents available template type

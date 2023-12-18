@@ -45,10 +45,10 @@ public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player,
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -72,10 +72,10 @@ public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player,
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -99,10 +99,10 @@ public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player,
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [MessageCreate](../Entities/Messages/MessageCreate.md)
+* class [MessageCreate](../Entities/MessageCreate.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -126,8 +126,8 @@ public static IPromise<DiscordMessage> SendDiscordMessage(this IPlayer player,
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
@@ -154,11 +154,11 @@ public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPl
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [MessageCreate](../Entities/Messages/MessageCreate.md)
-* class [PlaceholderData](../Libraries/Placeholders/PlaceholderData.md)
+* class [MessageCreate](../Entities/MessageCreate.md)
+* class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -184,11 +184,11 @@ public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer p
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
-* class [DiscordMessage](../Entities/Messages/DiscordMessage.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
-* class [MessageCreate](../Entities/Messages/MessageCreate.md)
-* class [PlaceholderData](../Libraries/Placeholders/PlaceholderData.md)
+* class [MessageCreate](../Entities/MessageCreate.md)
+* class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -259,7 +259,7 @@ Discord User if linked; null otherwise
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -284,8 +284,8 @@ GuildMember if linked and in guild; null otherwise
 
 ## See Also
 
-* class [GuildMember](../Entities/Guilds/GuildMember.md)
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
+* class [GuildMember](../Entities/GuildMember.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -305,7 +305,7 @@ public static PlayerId PlayerId(this IPlayer player)
 
 ## See Also
 
-* struct [PlayerId](../Libraries/Linking/PlayerId.md)
+* struct [PlayerId](../Libraries/PlayerId.md)
 * class [PlayerExt](./PlayerExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

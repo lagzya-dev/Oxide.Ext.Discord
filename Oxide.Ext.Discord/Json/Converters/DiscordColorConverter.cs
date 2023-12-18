@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Handles the JSON Serialization / Deserialization for DiscordColor

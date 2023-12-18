@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Extensions;
 using Oxide.Plugins;
 using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
-namespace Oxide.Ext.Discord.Json.Utilities
+namespace Oxide.Ext.Discord.Json
 {
     internal static class JsonEnumUtils
     {

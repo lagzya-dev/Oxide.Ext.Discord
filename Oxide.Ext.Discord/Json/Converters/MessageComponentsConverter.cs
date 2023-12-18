@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Converter for list of message components

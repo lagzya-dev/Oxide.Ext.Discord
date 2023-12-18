@@ -3,12 +3,12 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Rest.Requests
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents a REST API request that returns {T} data

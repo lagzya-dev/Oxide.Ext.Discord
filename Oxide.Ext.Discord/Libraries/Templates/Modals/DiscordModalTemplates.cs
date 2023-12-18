@@ -1,6 +1,6 @@
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Modals
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Modal Templates Library

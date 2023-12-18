@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object-user-flags">User Flags</a>

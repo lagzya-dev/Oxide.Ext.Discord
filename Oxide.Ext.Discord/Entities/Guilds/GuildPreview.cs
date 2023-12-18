@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Stickers;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-preview-object">Guild Preview Structure</a>

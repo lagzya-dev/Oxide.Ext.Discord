@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;

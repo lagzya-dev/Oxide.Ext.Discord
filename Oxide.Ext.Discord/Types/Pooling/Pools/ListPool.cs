@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a pool for list&lt;T&gt;

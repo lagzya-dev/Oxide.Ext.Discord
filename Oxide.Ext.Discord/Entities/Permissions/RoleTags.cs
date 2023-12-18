@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object-role-tags-structure">Role Tags Structure</a>

@@ -15,7 +15,7 @@ public class BotConnection
 | [ApiToken](#apitoken-property) { get; set; } | API token for the bot |
 | [ApplicationId](#applicationid-property) { get; } | Application ID of the Bot Token |
 | [HiddenToken](#hiddentoken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
-| [Intents](#intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md) |
+| [Intents](#intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/GatewayIntents.md) |
 | [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md) |
 | [HasAnyIntent](#hasanyintent-method)(…) | Returns if the settings has any intent specified |
 | [HasIntents](#hasintents-method)(…) | Returns if the settings has the given intents |
@@ -45,7 +45,7 @@ True if settings has the given intents; False otherwise
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * class [BotConnection](./BotConnection.md)
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -69,7 +69,7 @@ True if settings has at least one of the given intents
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * class [BotConnection](./BotConnection.md)
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -102,7 +102,7 @@ public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.No
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * enum [DiscordLogLevel](../Logging/DiscordLogLevel.md)
 * class [BotConnection](./BotConnection.md)
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
@@ -126,7 +126,7 @@ public string ApiToken { get; set; }
    
 # Intents property
 
-Intents that your bot needs to work See [`GatewayIntents`](../Entities/Gateway/GatewayIntents.md)
+Intents that your bot needs to work See [`GatewayIntents`](../Entities/GatewayIntents.md)
 
 ```csharp
 public GatewayIntents Intents { get; set; }
@@ -134,7 +134,7 @@ public GatewayIntents Intents { get; set; }
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * class [BotConnection](./BotConnection.md)
 * namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

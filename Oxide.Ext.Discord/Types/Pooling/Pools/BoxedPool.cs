@@ -1,6 +1,4 @@
-using Oxide.Ext.Discord.Types.Pooling.Entities;
-
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a pool for <see cref="Boxed{T}"/>;

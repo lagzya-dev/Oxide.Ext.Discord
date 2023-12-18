@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Channels
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-forum-layout-types">Forum Layout Types</a>

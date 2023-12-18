@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// Player Name Formatting options for <see cref="PlayerNameFormatter"/>

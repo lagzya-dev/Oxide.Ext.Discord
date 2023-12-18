@@ -1,9 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Voice
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/voice#voice-state-object">Voice State Structure</a>

@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Gateway
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a command payload

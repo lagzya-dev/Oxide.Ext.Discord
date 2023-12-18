@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message">Command Followup</a> within discord.

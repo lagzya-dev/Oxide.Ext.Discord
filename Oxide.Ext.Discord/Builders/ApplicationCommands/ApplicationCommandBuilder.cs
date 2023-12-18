@@ -1,13 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Exceptions.Builders;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Templates.Commands;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands

@@ -1,6 +1,6 @@
 ﻿using Oxide.Core.Libraries.Covalence;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Placeholder Keys for <see cref="IServer"/>

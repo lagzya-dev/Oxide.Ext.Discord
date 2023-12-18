@@ -4,15 +4,11 @@ using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#webhook-object">Webhook Structure</a>

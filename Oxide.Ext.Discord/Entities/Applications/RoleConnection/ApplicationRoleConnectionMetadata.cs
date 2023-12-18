@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Applications;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Applications.RoleConnection
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-structure">Application Role Connection Metadata Structure</a>

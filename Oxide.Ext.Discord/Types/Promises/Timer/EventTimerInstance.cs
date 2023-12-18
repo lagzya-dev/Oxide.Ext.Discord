@@ -2,9 +2,9 @@
 // Modified by: MJSU
 
 using System;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types.Promises.Timer
+namespace Oxide.Ext.Discord.Types
 {
     internal sealed class EventTimerInstance : BaseTimerInstance
     {

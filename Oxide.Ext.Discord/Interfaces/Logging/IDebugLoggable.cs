@@ -1,6 +1,6 @@
 ﻿using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Interfaces.Logging
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents an object that supports debug logging

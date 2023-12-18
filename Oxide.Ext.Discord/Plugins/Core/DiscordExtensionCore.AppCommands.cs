@@ -2,27 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Attributes.ApplicationCommands;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Builders.ApplicationCommands;
 using Oxide.Ext.Discord.Builders.Interactions;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Permissions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Libraries.AppCommands;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Libraries.Templates.Commands;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins.Core.AppCommands;
-using Oxide.Ext.Discord.Plugins.Core.Templates;
-using Oxide.Ext.Discord.Plugins.Setup;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Plugins.Core
+namespace Oxide.Ext.Discord.Plugins
 {
     internal partial class DiscordExtensionCore
     {

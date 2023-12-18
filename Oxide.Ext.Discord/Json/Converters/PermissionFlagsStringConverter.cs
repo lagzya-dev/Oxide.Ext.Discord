@@ -1,9 +1,9 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Converts Permission Flags to and from a JSON string

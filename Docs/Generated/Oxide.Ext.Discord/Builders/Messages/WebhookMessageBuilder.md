@@ -16,8 +16,8 @@ public class WebhookMessageBuilder :
 
 ## See Also
 
-* class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseBuilders/BaseWebhookMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [WebhookCreateMessage](../../Entities/Webhooks/WebhookCreateMessage.md)
+* class [BaseWebhookMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseWebhookMessageBuilder%7BTMessage,TBuilder%7D.md)
+* class [WebhookCreateMessage](../../Entities/WebhookCreateMessage.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [WebhookMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/WebhookMessageBuilder.cs)
@@ -53,7 +53,7 @@ public WebhookMessageBuilder(WebhookCreateMessage message)
 
 ## See Also
 
-* class [WebhookCreateMessage](../../Entities/Webhooks/WebhookCreateMessage.md)
+* class [WebhookCreateMessage](../../Entities/WebhookCreateMessage.md)
 * class [WebhookMessageBuilder](./WebhookMessageBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

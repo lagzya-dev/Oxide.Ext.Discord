@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command-json-params">Application Command Update</a>

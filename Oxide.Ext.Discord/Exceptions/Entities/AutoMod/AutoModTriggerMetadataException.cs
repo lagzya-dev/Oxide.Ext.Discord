@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.AutoMod;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.AutoMod
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exceptions for <see cref="AutoModTriggerMetadata"/>

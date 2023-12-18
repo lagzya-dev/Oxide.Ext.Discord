@@ -1,6 +1,6 @@
 using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
+namespace Oxide.Ext.Discord.Libraries
 {
     internal class StaticPlaceholder : BasePlaceholder<string>
     {

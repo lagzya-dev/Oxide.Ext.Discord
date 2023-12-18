@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Plugins.Core.AppCommands
+namespace Oxide.Ext.Discord.Plugins
 {
     internal static class AppCommandKeys
     {

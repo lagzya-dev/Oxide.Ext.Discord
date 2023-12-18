@@ -1,9 +1,9 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state-json-params">Modify Current User Voice State</a>

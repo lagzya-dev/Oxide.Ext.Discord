@@ -6,16 +6,15 @@ using Newtonsoft.Json;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Exceptions.Libraries.Templates;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json;
-using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Types.Threading;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Oxide Library for Discord Templates

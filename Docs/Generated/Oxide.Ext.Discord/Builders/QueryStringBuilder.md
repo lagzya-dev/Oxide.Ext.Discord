@@ -26,7 +26,7 @@ public class QueryStringBuilder : BasePoolable
 
 ## See Also
 
-* class [BasePoolable](../Types/Pooling/BasePoolable.md)
+* class [BasePoolable](../Types/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [QueryStringBuilder.cs](../../../../Oxide.Ext.Discord/Builders/QueryStringBuilder.cs)
@@ -46,7 +46,7 @@ public static QueryStringBuilder Create(DiscordPluginPool pool)
 
 ## See Also
 
-* class [DiscordPluginPool](../Types/Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../Types/DiscordPluginPool.md)
 * class [QueryStringBuilder](./QueryStringBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

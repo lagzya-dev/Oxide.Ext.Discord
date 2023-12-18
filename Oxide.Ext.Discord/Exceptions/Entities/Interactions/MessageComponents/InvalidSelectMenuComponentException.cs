@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+﻿using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception for select menu components

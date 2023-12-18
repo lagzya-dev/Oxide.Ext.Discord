@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Entities.Gateway
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents Discord Gatway Connection Url

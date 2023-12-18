@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Oxide.Ext.Discord.Entities.Api
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an <a href="https://discord.com/developers/docs/reference#error-messages">error from the discord API</a> 

@@ -1,12 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Invites
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-object">Invite Structure</a> that when used, adds a user to a guild or group DM channel.

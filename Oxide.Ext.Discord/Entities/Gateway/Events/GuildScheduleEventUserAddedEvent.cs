@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-add-guild-scheduled-event-user-add-event-fields">Guild Scheduled Event User Add Event Fields</a>

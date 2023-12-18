@@ -4,11 +4,9 @@ using System.Reflection;
 using System.Text;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Logging
 {

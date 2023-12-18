@@ -3,9 +3,8 @@ using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Plugins.Core;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
+namespace Oxide.Ext.Discord.Libraries
 {
     internal abstract class BasePlaceholder<TResult> : IPlaceholder
     {

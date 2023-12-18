@@ -1,7 +1,7 @@
 // Originally from: https://github.com/gmamaladze/trienet
 // Modified by: MJSU
 
-namespace Oxide.Ext.Discord.Types.Trie
+namespace Oxide.Ext.Discord.Types
 {
     internal struct AddState<T>
     {

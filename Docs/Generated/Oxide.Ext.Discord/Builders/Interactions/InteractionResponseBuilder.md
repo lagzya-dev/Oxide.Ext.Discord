@@ -1,6 +1,6 @@
 # InteractionResponseBuilder class
 
-Represents a builder for [`InteractionCallbackData`](../../Entities/Interactions/Response/InteractionCallbackData.md)
+Represents a builder for [`InteractionCallbackData`](../../Entities/InteractionCallbackData.md)
 
 ```csharp
 public class InteractionResponseBuilder : 
@@ -16,7 +16,7 @@ public class InteractionResponseBuilder :
 ## See Also
 
 * class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [InteractionCallbackData](../../Entities/Interactions/Response/InteractionCallbackData.md)
+* class [InteractionCallbackData](../../Entities/InteractionCallbackData.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InteractionResponseBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/InteractionResponseBuilder.cs)
@@ -36,7 +36,7 @@ public InteractionResponseBuilder(DiscordInteraction interaction)
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
 * class [InteractionResponseBuilder](./InteractionResponseBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -58,8 +58,8 @@ public InteractionResponseBuilder(DiscordInteraction interaction, InteractionCal
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
-* class [InteractionCallbackData](../../Entities/Interactions/Response/InteractionCallbackData.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
+* class [InteractionCallbackData](../../Entities/InteractionCallbackData.md)
 * class [InteractionResponseBuilder](./InteractionResponseBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

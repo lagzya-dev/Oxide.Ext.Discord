@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#modify-channel-json-params-guild-channel">Guild Channel Update Structure</a>

@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Exceptions.Entities.Messages;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Entities.Messages;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params">Message Update Structure</a> sent in a channel within Discord..

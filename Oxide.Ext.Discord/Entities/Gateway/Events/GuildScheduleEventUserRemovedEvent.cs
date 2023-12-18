@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/topics/gateway#guild-scheduled-event-user-remove">Guild Scheduled Event User Remove Event Fields</a>

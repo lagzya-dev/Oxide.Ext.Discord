@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Builders.Interactions;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Plugins.Core
+namespace Oxide.Ext.Discord.Plugins
 {
     internal partial class DiscordExtensionCore
     {

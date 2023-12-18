@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Helpers;
 
-namespace Oxide.Ext.Discord.Entities.Teams
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/topics/teams#data-models-team-object">Team Object</a>

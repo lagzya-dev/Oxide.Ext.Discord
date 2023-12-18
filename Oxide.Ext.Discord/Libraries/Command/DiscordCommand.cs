@@ -7,16 +7,13 @@ using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins.Setup;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Command
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a library for discord commands

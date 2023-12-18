@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an invalid application command

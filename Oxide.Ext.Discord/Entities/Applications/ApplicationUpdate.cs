@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Images;
 
-namespace Oxide.Ext.Discord.Entities.Applications
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/application#edit-current-application-json-params">Edit Application Structure</a>

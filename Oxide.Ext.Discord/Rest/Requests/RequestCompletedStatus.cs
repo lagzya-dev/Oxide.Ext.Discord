@@ -1,6 +1,6 @@
 using Oxide.Ext.Discord.Clients;
 
-namespace Oxide.Ext.Discord.Rest.Requests
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents the completed status for the request

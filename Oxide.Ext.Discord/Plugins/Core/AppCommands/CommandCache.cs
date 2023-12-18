@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
-namespace Oxide.Ext.Discord.Plugins.Core.AppCommands
+namespace Oxide.Ext.Discord.Plugins
 {
     internal class CommandCache
     {

@@ -1,7 +1,7 @@
-using Oxide.Ext.Discord.Entities.Webhooks;
-using Oxide.Ext.Discord.Exceptions.Entities.Users;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
+namespace Oxide.Ext.Discord.Builders.Messages
 {
     /// <summary>
     /// Represents a builder for <see cref="WebhookCreateMessage"/>

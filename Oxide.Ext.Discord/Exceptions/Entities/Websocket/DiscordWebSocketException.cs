@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Websocket
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception that occured with the websocket

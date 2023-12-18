@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.AutoMod;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution-auto-moderation-action-execution-event-fields">Auto Moderation Action Execution Event</a>

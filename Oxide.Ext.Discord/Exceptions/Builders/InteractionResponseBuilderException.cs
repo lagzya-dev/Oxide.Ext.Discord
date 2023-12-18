@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Builders
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an Interaction Response Builder Exception

@@ -1,8 +1,6 @@
 using System;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Entities.Stickers;
 
 namespace Oxide.Ext.Discord.Helpers
 {

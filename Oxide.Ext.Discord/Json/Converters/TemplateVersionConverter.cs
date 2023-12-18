@@ -1,9 +1,9 @@
 using System;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Libraries.Templates;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     internal class TemplateVersionConverter : JsonConverter
     {

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Exceptions.Entities.Monetization;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Get Entitlements Query String Builder

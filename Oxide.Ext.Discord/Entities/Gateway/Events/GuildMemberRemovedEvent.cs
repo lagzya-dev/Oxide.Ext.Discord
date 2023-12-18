@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-member-remove">Guild Member Remove</a>

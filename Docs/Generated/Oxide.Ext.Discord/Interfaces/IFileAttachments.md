@@ -29,7 +29,7 @@ public List<MessageFileAttachment> FileAttachments { get; }
 
 ## See Also
 
-* class [MessageFileAttachment](../Entities/Messages/MessageFileAttachment.md)
+* class [MessageFileAttachment](../Entities/MessageFileAttachment.md)
 * interface [IFileAttachments](./IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

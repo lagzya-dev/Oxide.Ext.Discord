@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.AutoMod
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types">Auto Mod Event Type</a>

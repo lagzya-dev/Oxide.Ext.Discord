@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     internal class PlaceholderDataPool : BasePool<BasePoolable, PlaceholderDataPool>
     {

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Exceptions.Entities.Messages;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook-jsonform-params">Webhook Create Message</a>

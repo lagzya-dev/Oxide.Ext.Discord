@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Interfaces.Templates;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Callbacks.Templates
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class BulkToEntityCallback<TTemplate, TEntity> : BaseAsyncCallback 
         where TTemplate : class, IBulkTemplate<TEntity> 

@@ -5,14 +5,14 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Locale
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Converts discord locale codes into oxide locale codes

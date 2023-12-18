@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.AutoMod
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object">Auto Mod Rule</a>

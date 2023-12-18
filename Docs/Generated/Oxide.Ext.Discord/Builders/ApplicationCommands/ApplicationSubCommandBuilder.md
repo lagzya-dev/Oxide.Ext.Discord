@@ -66,7 +66,7 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* struct [ServerLocale](../../Libraries/ServerLocale.md)
 * class [ApplicationSubCommandBuilder](./ApplicationSubCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -113,7 +113,7 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* struct [ServerLocale](../../Libraries/ServerLocale.md)
 * class [ApplicationSubCommandBuilder](./ApplicationSubCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -147,7 +147,7 @@ This
 
 ## See Also
 
-* enum [CommandOptionType](../../Entities/Interactions/ApplicationCommands/CommandOptionType.md)
+* enum [CommandOptionType](../../Entities/CommandOptionType.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
 * class [ApplicationSubCommandBuilder](./ApplicationSubCommandBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)

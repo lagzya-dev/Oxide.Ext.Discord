@@ -1,8 +1,6 @@
-using Oxide.Ext.Discord.Builders.Messages.BaseBuilders;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Exceptions.Builders;
+using Oxide.Ext.Discord.Builders.Messages;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {

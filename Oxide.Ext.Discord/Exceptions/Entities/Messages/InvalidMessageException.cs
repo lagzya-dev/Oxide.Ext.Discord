@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an invalid message

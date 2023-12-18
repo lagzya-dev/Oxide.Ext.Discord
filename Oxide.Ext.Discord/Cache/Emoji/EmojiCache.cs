@@ -2,7 +2,7 @@
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Cache.Emoji
+namespace Oxide.Ext.Discord.Cache
 {
     public sealed partial class EmojiCache : Singleton<EmojiCache>
     {

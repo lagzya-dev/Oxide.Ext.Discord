@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Entities.Applications
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object-application-flags">Application Flags</a>

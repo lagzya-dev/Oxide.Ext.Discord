@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Oxide.Ext.Discord.Interfaces.Types
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents a ReadOnly interface for <see cref="ISet{T}"/>

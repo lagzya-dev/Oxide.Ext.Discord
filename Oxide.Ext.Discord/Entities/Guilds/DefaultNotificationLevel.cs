@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-default-message-notification-level">Default Message Notification Level</a>

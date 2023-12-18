@@ -1,7 +1,7 @@
 using Oxide.Ext.Discord.Builders.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Builders
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an error when building Application Commands

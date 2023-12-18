@@ -1,9 +1,8 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Json.Utilities;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Handles deserializing JSON values as strings. If the value doesn't exist return the default value.

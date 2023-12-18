@@ -36,7 +36,7 @@ public static void SendChatMessage(this DiscordUser user, string message)
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [DiscordUserExt](./DiscordUserExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -61,7 +61,7 @@ public static void SendChatMessage(this DiscordUser user, string message, string
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [DiscordUserExt](./DiscordUserExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -86,7 +86,7 @@ True if use is linked and has permission; False otherwise
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [DiscordUserExt](./DiscordUserExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -110,7 +110,7 @@ True if linked; False otherwise
 
 ## See Also
 
-* class [DiscordUser](../Entities/Users/DiscordUser.md)
+* class [DiscordUser](../Entities/DiscordUser.md)
 * class [DiscordUserExt](./DiscordUserExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

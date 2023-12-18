@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Commands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway-events#request-guild-members">Request Guild Members</a>

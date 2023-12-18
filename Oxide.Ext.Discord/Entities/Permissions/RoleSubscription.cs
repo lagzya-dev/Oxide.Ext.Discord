@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#role-subscription-data-object-role-subscription-data-object-structure">Role Subscription Structure</a>

@@ -1,10 +1,9 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#create-guild-scheduled-event">Guild Scheduled Event Create</a> within discord

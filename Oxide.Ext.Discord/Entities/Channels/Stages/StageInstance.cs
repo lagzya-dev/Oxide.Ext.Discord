@@ -1,11 +1,10 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Promises;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Stages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a channel <a href="https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-stage-instance-structure">Stage Instance</a> within Discord.

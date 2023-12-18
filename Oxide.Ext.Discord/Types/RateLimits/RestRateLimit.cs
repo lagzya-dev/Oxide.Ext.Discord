@@ -1,7 +1,7 @@
 using System;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Types.RateLimits
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a rate limit for rest requests

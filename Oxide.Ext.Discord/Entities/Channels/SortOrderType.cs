@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Channels
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#channel-object-sort-order-types">Sort Order Types</a> in Discord

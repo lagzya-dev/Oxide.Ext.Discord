@@ -1,8 +1,8 @@
 using System;
 using System.Globalization;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Permissions;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
 {

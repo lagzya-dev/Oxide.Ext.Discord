@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception for invalid Auto Complete choices

@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     ///  Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message

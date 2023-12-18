@@ -1,8 +1,8 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans-query-string-params">Get Guild Bans Query String Params</a>

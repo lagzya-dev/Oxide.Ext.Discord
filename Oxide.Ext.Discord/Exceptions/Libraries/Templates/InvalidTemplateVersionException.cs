@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Exceptions.Libraries.Templates
+﻿namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Thrown when the minimum template version is higher than the current template version

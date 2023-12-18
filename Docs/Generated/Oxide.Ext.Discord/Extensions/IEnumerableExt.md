@@ -34,7 +34,7 @@ public static List<TSource> ToPooledList<TSource>(this IEnumerable<TSource> sour
 | --- | --- |
 | TSource | Type of the list |
 | source | IEnumerable to convert |
-| pluginPool | The [`DiscordPluginPool`](../Types/Pooling/DiscordPluginPool.md) to pool from |
+| pluginPool | The [`DiscordPluginPool`](../Types/DiscordPluginPool.md) to pool from |
 
 ## Return Value
 
@@ -48,7 +48,7 @@ Pooled List{TSource}
 
 ## See Also
 
-* class [DiscordPluginPool](../Types/Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../Types/DiscordPluginPool.md)
 * class [IEnumerableExt](./IEnumerableExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -106,7 +106,7 @@ public static Hash<TKey, TElement> ToPooledHash<TSource, TKey, TElement>(
 | TKey | Key type for the hash |
 | TElement | Value type for the hash |
 | source | IEnumerable to convert |
-| pluginPool | The [`DiscordPluginPool`](../Types/Pooling/DiscordPluginPool.md) to pool from |
+| pluginPool | The [`DiscordPluginPool`](../Types/DiscordPluginPool.md) to pool from |
 | keySelector | Selector for the key |
 | elementSelector | Selector for the value |
 
@@ -122,7 +122,7 @@ Pooled Hash{TKey, TElement}
 
 ## See Also
 
-* class [DiscordPluginPool](../Types/Pooling/DiscordPluginPool.md)
+* class [DiscordPluginPool](../Types/DiscordPluginPool.md)
 * class [IEnumerableExt](./IEnumerableExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Images
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an image size

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Types.Network
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Stream content that is sent over HTTP

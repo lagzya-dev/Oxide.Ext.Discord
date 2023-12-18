@@ -1,11 +1,11 @@
 using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Callbacks.Libraries
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class SubscriptionCallback : BaseNextTickCallback
     {

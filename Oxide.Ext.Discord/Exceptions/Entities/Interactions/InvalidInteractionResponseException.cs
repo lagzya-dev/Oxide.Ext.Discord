@@ -1,7 +1,7 @@
 using System;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Error thrown when an interaction response is invalid

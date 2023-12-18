@@ -1,8 +1,8 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/user#get-current-user-guilds-query-string-params">Users Guild Request</a>

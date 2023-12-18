@@ -1,15 +1,13 @@
 using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Callbacks.Libraries;
+using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a Base Registered Application Command

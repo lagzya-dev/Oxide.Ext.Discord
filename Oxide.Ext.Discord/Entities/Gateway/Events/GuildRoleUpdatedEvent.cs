@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-role-update">Guild Role Update</a>

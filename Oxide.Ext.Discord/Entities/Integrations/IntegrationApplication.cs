@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
 
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-application-object">Integration Application Structure</a>

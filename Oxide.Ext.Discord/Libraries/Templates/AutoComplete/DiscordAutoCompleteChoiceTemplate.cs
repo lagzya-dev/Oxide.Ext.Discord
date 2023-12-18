@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.AutoComplete
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Template for Discord Auto Completes

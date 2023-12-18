@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Libraries.Placeholders;
+﻿using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries.Placeholders
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception thrown if <see cref="PlaceholderKey"/> is not valid

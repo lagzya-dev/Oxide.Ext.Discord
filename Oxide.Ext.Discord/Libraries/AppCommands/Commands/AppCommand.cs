@@ -1,10 +1,9 @@
 using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Interactions;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
+namespace Oxide.Ext.Discord.Libraries
 {
     internal class AppCommand : BaseAppCommand
     {

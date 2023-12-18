@@ -2,17 +2,15 @@ using System;
 using System.Collections.Concurrent;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Callbacks.Templates;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Callbacks;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Library for Discord Message templates

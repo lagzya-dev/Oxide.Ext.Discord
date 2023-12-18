@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-status">Guild Scheduled Event Status</a>

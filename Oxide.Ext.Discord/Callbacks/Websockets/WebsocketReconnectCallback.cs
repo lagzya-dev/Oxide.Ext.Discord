@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.WebSockets.Handlers;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.WebSockets;
 
-namespace Oxide.Ext.Discord.Callbacks.Websockets
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class WebsocketReconnectCallback : BaseAsyncCallback
     {

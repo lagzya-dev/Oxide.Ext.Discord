@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception thrown when an invalid Snowflake ID is used in an API call

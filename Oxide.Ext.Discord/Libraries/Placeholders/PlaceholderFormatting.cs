@@ -7,9 +7,8 @@ using System.Text.RegularExpressions;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Pooling;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Formatting Helpers for Placeholders

@@ -1,6 +1,6 @@
 # DiscordMessageBuilder class
 
-Represents a builder for [`MessageCreate`](../../Entities/Messages/MessageCreate.md)
+Represents a builder for [`MessageCreate`](../../Entities/MessageCreate.md)
 
 ```csharp
 public class DiscordMessageBuilder : BaseChannelMessageBuilder<MessageCreate, DiscordMessageBuilder>
@@ -15,8 +15,8 @@ public class DiscordMessageBuilder : BaseChannelMessageBuilder<MessageCreate, Di
 
 ## See Also
 
-* class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseBuilders/BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [MessageCreate](../../Entities/Messages/MessageCreate.md)
+* class [BaseChannelMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseChannelMessageBuilder%7BTMessage,TBuilder%7D.md)
+* class [MessageCreate](../../Entities/MessageCreate.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [DiscordMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Messages/DiscordMessageBuilder.cs)
@@ -52,7 +52,7 @@ public DiscordMessageBuilder(MessageCreate message)
 
 ## See Also
 
-* class [MessageCreate](../../Entities/Messages/MessageCreate.md)
+* class [MessageCreate](../../Entities/MessageCreate.md)
 * class [DiscordMessageBuilder](./DiscordMessageBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Messages](./MessagesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

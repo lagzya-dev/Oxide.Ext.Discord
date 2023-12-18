@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Oxide.Ext.Discord.Types.Trie
+namespace Oxide.Ext.Discord.Types
 {
     [DebuggerDisplay("{DebuggerDisplay()}")]
     internal struct WordKey<T> : IEquatable<WordKey<T>>

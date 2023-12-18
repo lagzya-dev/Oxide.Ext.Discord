@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
+﻿namespace Oxide.Ext.Discord.Attributes
 {
     /// <summary>
     /// Base attribute for Application Commands

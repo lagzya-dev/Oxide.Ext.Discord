@@ -1,11 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Emojis
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#emoji-object">Emoji Structure</a>

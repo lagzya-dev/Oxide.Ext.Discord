@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Interfaces.Entities.Messages
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Interfaces for <see cref="DiscordMessageTemplates"/> Messages

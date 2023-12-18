@@ -1,11 +1,10 @@
 using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Locale;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries
 {
     internal struct TemplateId : IEquatable<TemplateId>
     {

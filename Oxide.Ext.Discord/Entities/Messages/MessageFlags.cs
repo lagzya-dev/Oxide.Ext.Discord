@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-flags">Message Flags</a> for a message

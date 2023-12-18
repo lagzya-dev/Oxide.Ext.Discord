@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders.MessageComponents
 {

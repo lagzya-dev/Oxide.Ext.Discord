@@ -1,7 +1,7 @@
 using System;
-using Oxide.Ext.Discord.Entities.Stickers;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Stickers
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception in guild stickers

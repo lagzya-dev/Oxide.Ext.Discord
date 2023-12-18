@@ -2,9 +2,8 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Permissions;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Handles converting <see cref="RoleTags"/>

@@ -1,9 +1,8 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-option-structure">Select Menu Option Structure</a> within discord.

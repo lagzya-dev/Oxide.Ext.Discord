@@ -36,7 +36,7 @@ protected virtual void OnPluginLoaded(PluginSetup data, BotConnection connection
 
 ## See Also
 
-* class [PluginSetup](../Plugins/Setup/PluginSetup.md)
+* class [PluginSetup](../Plugins/PluginSetup.md)
 * class [BotConnection](../Connections/BotConnection.md)
 * class [BaseDiscordLibrary](./BaseDiscordLibrary.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)

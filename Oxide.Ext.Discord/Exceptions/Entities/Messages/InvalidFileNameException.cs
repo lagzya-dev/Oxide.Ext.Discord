@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Messages
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception throw when an attachment filename contains invalid characters

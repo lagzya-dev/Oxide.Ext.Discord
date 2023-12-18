@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Exceptions.Libraries.Templates
+﻿namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Thrown when duplicate templates have been registered for the same type, plugin, and name

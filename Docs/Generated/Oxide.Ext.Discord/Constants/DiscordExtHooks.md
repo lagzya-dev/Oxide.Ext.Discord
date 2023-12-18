@@ -195,7 +195,7 @@ public static readonly Hash<string, GatewayIntents> HookGatewayIntent;
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * class [DiscordExtHooks](./DiscordExtHooks.md)
 * namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

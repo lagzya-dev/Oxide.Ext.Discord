@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji">Message Reaction Remove All</a>

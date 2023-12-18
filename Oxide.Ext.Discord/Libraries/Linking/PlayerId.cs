@@ -2,7 +2,7 @@
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Cache;
 
-namespace Oxide.Ext.Discord.Libraries.Linking
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a <see cref="DiscordLink"/> Player ID

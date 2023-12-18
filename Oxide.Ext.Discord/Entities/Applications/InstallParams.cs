@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-namespace Oxide.Ext.Discord.Entities.Applications
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/application#install-params-object">Install Params Structure</a>

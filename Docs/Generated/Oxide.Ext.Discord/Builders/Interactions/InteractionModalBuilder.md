@@ -88,7 +88,7 @@ public InteractionModalBuilder AddInputText(string customId, string label, Input
 
 ## See Also
 
-* enum [InputTextStyles](../../Entities/Interactions/MessageComponents/InputTextStyles.md)
+* enum [InputTextStyles](../../Entities/InputTextStyles.md)
 * class [InteractionModalBuilder](./InteractionModalBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -104,11 +104,11 @@ public InteractionModalMessage Build()
 
 ## Return Value
 
-[`InteractionModalMessage`](../../Entities/Interactions/Response/InteractionModalMessage.md)
+[`InteractionModalMessage`](../../Entities/InteractionModalMessage.md)
 
 ## See Also
 
-* class [InteractionModalMessage](../../Entities/Interactions/Response/InteractionModalMessage.md)
+* class [InteractionModalMessage](../../Entities/InteractionModalMessage.md)
 * class [InteractionModalBuilder](./InteractionModalBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -128,7 +128,7 @@ public InteractionModalBuilder(DiscordInteraction interaction)
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
 * class [InteractionModalBuilder](./InteractionModalBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -146,12 +146,12 @@ public InteractionModalBuilder(DiscordInteraction interaction, InteractionModalM
 | parameter | description |
 | --- | --- |
 | interaction | Interaction this build is for |
-| message | Starting [`InteractionAutoCompleteMessage`](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md) |
+| message | Starting [`InteractionAutoCompleteMessage`](../../Entities/InteractionAutoCompleteMessage.md) |
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
-* class [InteractionModalMessage](../../Entities/Interactions/Response/InteractionModalMessage.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
+* class [InteractionModalMessage](../../Entities/InteractionModalMessage.md)
 * class [InteractionModalBuilder](./InteractionModalBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

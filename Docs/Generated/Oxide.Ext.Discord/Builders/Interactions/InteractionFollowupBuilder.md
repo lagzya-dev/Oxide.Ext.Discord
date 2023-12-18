@@ -1,6 +1,6 @@
 # InteractionFollowupBuilder class
 
-Represents a builder for [`CommandFollowupCreate`](../../Entities/Interactions/ApplicationCommands/CommandFollowupCreate.md)
+Represents a builder for [`CommandFollowupCreate`](../../Entities/CommandFollowupCreate.md)
 
 ```csharp
 public class InteractionFollowupBuilder : 
@@ -16,7 +16,7 @@ public class InteractionFollowupBuilder :
 ## See Also
 
 * class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [CommandFollowupCreate](../../Entities/Interactions/ApplicationCommands/CommandFollowupCreate.md)
+* class [CommandFollowupCreate](../../Entities/CommandFollowupCreate.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [InteractionFollowupBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/InteractionFollowupBuilder.cs)
@@ -36,7 +36,7 @@ public InteractionFollowupBuilder(DiscordInteraction interaction)
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
 * class [InteractionFollowupBuilder](./InteractionFollowupBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -58,8 +58,8 @@ public InteractionFollowupBuilder(DiscordInteraction interaction, CommandFollowu
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
-* class [CommandFollowupCreate](../../Entities/Interactions/ApplicationCommands/CommandFollowupCreate.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
+* class [CommandFollowupCreate](../../Entities/CommandFollowupCreate.md)
 * class [InteractionFollowupBuilder](./InteractionFollowupBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

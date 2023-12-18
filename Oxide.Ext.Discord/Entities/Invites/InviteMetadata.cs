@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Invites
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure">Invite Metadata Structure</a>

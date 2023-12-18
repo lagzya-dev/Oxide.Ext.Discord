@@ -1,7 +1,7 @@
 ﻿// Originally from: https://github.com/Real-Serious-Games/C-Sharp-Promise
 // Modified by: MJSU
 
-namespace Oxide.Ext.Discord.Interfaces.Promises
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents a promise the is still pending waiting to be resolved

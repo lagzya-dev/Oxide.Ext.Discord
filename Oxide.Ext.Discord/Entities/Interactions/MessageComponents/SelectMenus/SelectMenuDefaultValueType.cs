@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#select-menu-object-select-default-value-structure">Select Menus Default Value Type</a> within discord.

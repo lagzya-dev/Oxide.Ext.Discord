@@ -1,18 +1,10 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Entities.Messages;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
-using Oxide.Ext.Discord.Libraries.Templates;
-using Oxide.Ext.Discord.Libraries.Templates.Embeds;
-using Oxide.Ext.Discord.Libraries.Templates.Messages;
-using Oxide.Ext.Discord.Plugins.Core.Templates;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Plugins.Core
+namespace Oxide.Ext.Discord.Plugins
 {
     internal partial class DiscordExtensionCore
     {

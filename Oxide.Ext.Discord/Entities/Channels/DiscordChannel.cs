@@ -2,30 +2,17 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Channels.Stages;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Invites;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Channels;
-using Oxide.Ext.Discord.Exceptions.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
-using UserData = Oxide.Ext.Discord.Data.Users.UserData;
+using UserData = Oxide.Ext.Discord.Data.UserData;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#channel-object">Channel Structure</a> within Discord.

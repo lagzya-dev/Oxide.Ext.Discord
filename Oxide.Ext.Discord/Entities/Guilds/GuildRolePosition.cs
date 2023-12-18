@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">Guild Role Position</a>

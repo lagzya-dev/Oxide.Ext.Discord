@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
-using Oxide.Ext.Discord.Rest.Buckets;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Extensions
 {

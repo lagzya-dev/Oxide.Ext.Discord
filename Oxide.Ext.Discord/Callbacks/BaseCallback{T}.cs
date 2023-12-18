@@ -1,5 +1,5 @@
 using System;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Callbacks
 {

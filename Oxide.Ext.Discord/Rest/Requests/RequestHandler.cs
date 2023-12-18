@@ -5,16 +5,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Logging;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Types.Pooling;
-using Oxide.Ext.Discord.Types.Threading;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Rest.Requests
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represent a Discord API request

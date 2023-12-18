@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#onboarding-mode">Guild Onboarding Mode Structure</a>

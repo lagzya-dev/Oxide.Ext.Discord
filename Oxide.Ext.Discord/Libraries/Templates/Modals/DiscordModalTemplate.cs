@@ -1,12 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Components;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Modals
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Template used for Modal Message Component

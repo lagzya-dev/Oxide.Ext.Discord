@@ -1,8 +1,8 @@
 using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#commands-and-events-gateway-events">Gateway Event Codes</a>

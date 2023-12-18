@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-types">Sticker Types</a>

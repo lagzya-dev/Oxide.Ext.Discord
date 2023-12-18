@@ -1,9 +1,9 @@
 ﻿// Originally from: https://github.com/Real-Serious-Games/C-Sharp-Promise
 // Modified by: MJSU
 
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types.Promises.Timer
+namespace Oxide.Ext.Discord.Types
 {
     internal sealed class DelayTimerInstance : BaseTimerInstance
     {

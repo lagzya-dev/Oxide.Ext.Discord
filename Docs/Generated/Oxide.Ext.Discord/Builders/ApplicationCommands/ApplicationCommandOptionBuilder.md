@@ -74,7 +74,7 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* struct [ServerLocale](../../Libraries/ServerLocale.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -121,7 +121,7 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* struct [ServerLocale](../../Libraries/ServerLocale.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -333,11 +333,11 @@ This
 
 | exception | condition |
 | --- | --- |
-| Exception | Thrown if [`CommandOptionType`](../../Entities/Interactions/ApplicationCommands/CommandOptionType.md) is not Channel |
+| Exception | Thrown if [`CommandOptionType`](../../Entities/CommandOptionType.md) is not Channel |
 
 ## See Also
 
-* enum [ChannelType](../../Entities/Channels/ChannelType.md)
+* enum [ChannelType](../../Entities/ChannelType.md)
 * class [ApplicationCommandOptionBuilder](./ApplicationCommandOptionBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

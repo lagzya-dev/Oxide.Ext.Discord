@@ -4,7 +4,7 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Handles the heartbeating for the websocket connection

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-pack-object">Sticker Pack Object</a>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 
-namespace Oxide.Ext.Discord.Services.PlayerSearch
+namespace Oxide.Ext.Discord.Services
 {
     internal class CovalenceSearchService : IPlayerSearchService
     {

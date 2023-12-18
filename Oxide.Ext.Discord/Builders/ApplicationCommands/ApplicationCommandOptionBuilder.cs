@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Locale;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders.ApplicationCommands

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Interfaces.Promises
+namespace Oxide.Ext.Discord.Interfaces
 {
    /// <summary>
     /// Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.

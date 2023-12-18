@@ -55,8 +55,8 @@ public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, 
 
 ## See Also
 
-* enum [ButtonStyle](../../Entities/Interactions/MessageComponents/ButtonStyle.md)
-* class [DiscordEmoji](../../Entities/Emojis/DiscordEmoji.md)
+* enum [ButtonStyle](../../Entities/ButtonStyle.md)
+* class [DiscordEmoji](../../Entities/DiscordEmoji.md)
 * class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -121,7 +121,7 @@ public MessageComponentBuilder AddLinkButton(string label, string url, bool disa
 
 ## See Also
 
-* class [DiscordEmoji](../../Entities/Emojis/DiscordEmoji.md)
+* class [DiscordEmoji](../../Entities/DiscordEmoji.md)
 * class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -152,7 +152,7 @@ public SelectMenuComponentBuilder AddSelectMenu(MessageComponentType type, strin
 ## See Also
 
 * class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md)
-* enum [MessageComponentType](../../Entities/Interactions/MessageComponents/MessageComponentType.md)
+* enum [MessageComponentType](../../Entities/MessageComponentType.md)
 * class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -185,7 +185,7 @@ public MessageComponentBuilder AddInputText(string customId, string label, Input
 
 ## See Also
 
-* enum [InputTextStyles](../../Entities/Interactions/MessageComponents/InputTextStyles.md)
+* enum [InputTextStyles](../../Entities/InputTextStyles.md)
 * class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -201,7 +201,7 @@ public List<ActionRowComponent> Build()
 
 ## See Also
 
-* class [ActionRowComponent](../../Entities/Interactions/MessageComponents/ActionRowComponent.md)
+* class [ActionRowComponent](../../Entities/ActionRowComponent.md)
 * class [MessageComponentBuilder](./MessageComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

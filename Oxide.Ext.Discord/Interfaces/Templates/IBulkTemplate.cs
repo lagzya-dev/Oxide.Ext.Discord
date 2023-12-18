@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Interfaces.Templates
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents a Template that supports bulk operations

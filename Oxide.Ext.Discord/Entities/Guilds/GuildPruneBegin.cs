@@ -1,9 +1,9 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#begin-guild-prune">Guild Prune Begin</a>

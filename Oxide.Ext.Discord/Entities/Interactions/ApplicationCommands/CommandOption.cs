@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure">ApplicationCommandOption</a>

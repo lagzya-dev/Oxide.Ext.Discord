@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Cache.Emoji
+namespace Oxide.Ext.Discord.Cache
 {
 	public partial class EmojiCache
 	{

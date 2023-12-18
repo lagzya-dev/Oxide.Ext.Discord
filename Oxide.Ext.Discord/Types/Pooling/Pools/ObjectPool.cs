@@ -1,5 +1,5 @@
 
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     internal class ObjectPool<T> : BasePool<BasePoolable, ObjectPool<T>> where T : BasePoolable, new()
     {

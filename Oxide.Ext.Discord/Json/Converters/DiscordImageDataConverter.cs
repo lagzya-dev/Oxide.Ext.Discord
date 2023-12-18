@@ -1,9 +1,9 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Represents the <see cref="JsonConverter"/> for <see cref="DiscordImageData"/>

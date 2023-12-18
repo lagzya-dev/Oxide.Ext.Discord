@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Activities
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-flags">Activity Flags</a>

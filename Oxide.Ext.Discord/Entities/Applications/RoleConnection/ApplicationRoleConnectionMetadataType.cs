@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Applications.RoleConnection
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="Application Role Connection Metadata Structure">Application Role Connection Metadata Type</a>

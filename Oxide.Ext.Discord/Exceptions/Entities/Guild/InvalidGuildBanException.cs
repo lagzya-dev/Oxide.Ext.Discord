@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Entities.Guilds;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an error in channel ban

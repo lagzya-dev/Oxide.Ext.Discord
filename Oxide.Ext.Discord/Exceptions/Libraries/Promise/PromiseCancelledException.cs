@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Exceptions.Libraries.Promise
+﻿namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception when a promised is cancelled

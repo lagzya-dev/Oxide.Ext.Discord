@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Logging;
 using Timer = System.Timers.Timer;
 
-namespace Oxide.Ext.Discord.Types.RateLimits
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a base rate limit for websocket and rest api requests

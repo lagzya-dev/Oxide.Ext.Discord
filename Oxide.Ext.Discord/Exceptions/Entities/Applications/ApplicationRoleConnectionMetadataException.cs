@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
-using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Applications
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exceptions for <see cref="ApplicationRoleConnectionMetadata"/>

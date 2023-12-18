@@ -2,9 +2,9 @@
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Threads
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#list-thread-members-query-string-params">List Thread Member Query String Params</a>

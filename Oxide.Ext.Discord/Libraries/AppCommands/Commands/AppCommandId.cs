@@ -1,10 +1,9 @@
 using System;
 using System.Text;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.AppCommands.Commands
+namespace Oxide.Ext.Discord.Libraries
 {
     internal struct AppCommandId : IEquatable<AppCommandId>
     {

@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Use to control which webhook execute url to call

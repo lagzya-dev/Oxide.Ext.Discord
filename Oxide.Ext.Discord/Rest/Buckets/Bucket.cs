@@ -6,17 +6,13 @@ using System.Threading.Tasks;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Types.Pooling;
-using Oxide.Ext.Discord.Types.RateLimits;
-using Oxide.Ext.Discord.Types.Threading;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Rest.Buckets
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Contains bucket information for a REST API Bucket

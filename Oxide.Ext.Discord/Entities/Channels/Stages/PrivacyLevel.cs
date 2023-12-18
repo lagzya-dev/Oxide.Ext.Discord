@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Stages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level">Stage Privacy Level</a> within Discord.

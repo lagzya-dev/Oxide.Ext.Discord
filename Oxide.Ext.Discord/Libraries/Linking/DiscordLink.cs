@@ -3,20 +3,16 @@ using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Cache.Entities;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
-using Oxide.Ext.Discord.Types.Hooks;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Linking
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a library for discord linking

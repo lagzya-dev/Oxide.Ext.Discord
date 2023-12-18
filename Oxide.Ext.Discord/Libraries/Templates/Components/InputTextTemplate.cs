@@ -1,9 +1,8 @@
 using System.Collections.Specialized;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Input Text Message Component Template

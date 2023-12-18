@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Oxide.Ext.Discord.Types.Trie
+namespace Oxide.Ext.Discord.Types
 {
     [Serializable]
     [DebuggerDisplay("{ToString()}")]

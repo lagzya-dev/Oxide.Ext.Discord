@@ -1,12 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Gateway.Events;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Types.Pooling;
-using Oxide.Ext.Discord.WebSockets.Handlers;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Types;
+using Oxide.Ext.Discord.WebSockets;
 
-namespace Oxide.Ext.Discord.Entities.Gateway
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#payloads">Gateway Payload Structure</a>

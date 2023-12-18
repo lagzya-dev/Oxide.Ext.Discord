@@ -2,7 +2,7 @@
 using System.Text;
 using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
+namespace Oxide.Ext.Discord.Libraries
 {
     internal interface IPlaceholder
     {

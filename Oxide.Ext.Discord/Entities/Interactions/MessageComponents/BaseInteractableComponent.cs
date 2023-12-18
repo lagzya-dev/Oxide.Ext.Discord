@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represent a MessageComponent that can be interacted with

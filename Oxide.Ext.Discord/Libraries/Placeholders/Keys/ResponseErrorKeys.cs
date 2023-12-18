@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Entities.Api;
+﻿using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Placeholder Keys for <see cref="ResponseError"/>

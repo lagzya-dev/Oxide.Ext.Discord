@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="">Guild Onboarding Update Structure</a>

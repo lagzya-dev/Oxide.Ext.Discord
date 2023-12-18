@@ -28,7 +28,7 @@ public class DiscordWebSocket : IDebugLoggable
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordWebSocket.cs](../../../../Oxide.Ext.Discord/WebSockets/DiscordWebSocket.cs)
@@ -108,7 +108,7 @@ public void Send(DiscordClient client, GatewayCommandCode opCode, object data)
 ## See Also
 
 * class [DiscordClient](../Clients/DiscordClient.md)
-* enum [GatewayCommandCode](../Entities/Gateway/Commands/GatewayCommandCode.md)
+* enum [GatewayCommandCode](../Entities/GatewayCommandCode.md)
 * class [DiscordWebSocket](./DiscordWebSocket.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

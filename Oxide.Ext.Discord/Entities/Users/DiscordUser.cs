@@ -3,30 +3,18 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Cache.Entities;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Data.Users;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Users.Connections;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Channels;
-using Oxide.Ext.Discord.Exceptions.Entities.Users;
+using Oxide.Ext.Discord.Data;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Linking;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>

@@ -1,4 +1,4 @@
-﻿using Oxide.Ext.Discord.Libraries.Placeholders;
+﻿using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Extensions
 {

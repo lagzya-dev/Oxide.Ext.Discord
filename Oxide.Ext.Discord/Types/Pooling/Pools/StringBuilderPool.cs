@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Pool for StringBuilders

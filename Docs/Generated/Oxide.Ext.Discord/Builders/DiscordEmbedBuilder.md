@@ -562,11 +562,11 @@ public DiscordEmbed Build()
 
 ## Return Value
 
-[`DiscordEmbed`](../Entities/Messages/Embeds/DiscordEmbed.md)
+[`DiscordEmbed`](../Entities/DiscordEmbed.md)
 
 ## See Also
 
-* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -582,11 +582,11 @@ public List<DiscordEmbed> BuildList()
 
 ## Return Value
 
-List of [`DiscordEmbed`](../Entities/Messages/Embeds/DiscordEmbed.md)
+List of [`DiscordEmbed`](../Entities/DiscordEmbed.md)
 
 ## See Also
 
-* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -622,7 +622,7 @@ public DiscordEmbedBuilder(DiscordEmbed embed)
 
 ## See Also
 
-* class [DiscordEmbed](../Entities/Messages/Embeds/DiscordEmbed.md)
+* class [DiscordEmbed](../Entities/DiscordEmbed.md)
 * class [DiscordEmbedBuilder](./DiscordEmbedBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

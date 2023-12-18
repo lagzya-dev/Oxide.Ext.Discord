@@ -5,18 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
-using Oxide.Ext.Discord.Callbacks.Promises;
-using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
+using Oxide.Ext.Discord.Callbacks;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 #if PROMISE_DEBUG
 using Oxide.Ext.Discord.Logging;
 #endif
 
 
-namespace Oxide.Ext.Discord.Types.Promises
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Implements a C# promise.

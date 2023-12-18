@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Exceptions.Entities.Monetization
+﻿namespace Oxide.Ext.Discord.Exceptions
 {
     public class InvalidGetEntitlementException : BaseDiscordException
     {

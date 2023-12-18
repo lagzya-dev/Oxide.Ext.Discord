@@ -1,8 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#buttons">Button Component</a> within discord.

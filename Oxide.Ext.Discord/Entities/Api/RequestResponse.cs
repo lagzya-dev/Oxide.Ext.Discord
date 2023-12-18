@@ -1,11 +1,11 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Rest;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Api
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a REST response from discord

@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
-using Oxide.Ext.Discord.Exceptions.Entities.Guild;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#get-guild-prune-count">Guild Prune Get</a>

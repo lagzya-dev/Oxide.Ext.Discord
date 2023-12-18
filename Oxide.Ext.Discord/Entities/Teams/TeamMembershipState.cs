@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Teams
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/teams#data-models-membership-state-enum">Membership State Enum</a>

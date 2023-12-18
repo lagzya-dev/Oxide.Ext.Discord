@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.Attributes.ApplicationCommands;
-using Oxide.Ext.Discord.Attributes.Pooling;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Plugins.Setup
+namespace Oxide.Ext.Discord.Plugins
 {
     /// <summary>
     /// Build Discord Extension Setup Data for a plugin

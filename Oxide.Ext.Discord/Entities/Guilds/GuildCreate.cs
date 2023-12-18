@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Images;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Exceptions.Entities.Guild;
-using Oxide.Ext.Discord.Exceptions.Entities.Images;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#create-guild">Create Guild Structure</a>

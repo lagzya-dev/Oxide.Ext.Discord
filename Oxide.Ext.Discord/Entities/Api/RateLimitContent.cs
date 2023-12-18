@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Api
+namespace Oxide.Ext.Discord.Entities
 {
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     internal class RateLimitContent : BasePoolable

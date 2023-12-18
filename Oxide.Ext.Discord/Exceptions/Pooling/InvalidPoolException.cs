@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Types.Pooling;
+﻿using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Exceptions.Pooling
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// An exception when something is invalid with a pool

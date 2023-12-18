@@ -2,10 +2,10 @@
 // Modified by: MJSU
 
 using System;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Types.Promises
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a handler invoked when the promise is rejected.

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// Converts a snowflake to and from it's JSON string value

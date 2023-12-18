@@ -4,12 +4,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Exceptions.Entities.Images;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Images
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/reference#image-data">Discord Image Data</a>

@@ -3,10 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Types.Promises.Timer
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Timer Implementation using promises

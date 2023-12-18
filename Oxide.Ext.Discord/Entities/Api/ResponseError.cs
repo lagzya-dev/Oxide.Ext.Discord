@@ -7,10 +7,9 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Rest.Requests;
+using Oxide.Ext.Discord.Rest;
 
-namespace Oxide.Ext.Discord.Entities.Api
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Error object that is returned to the caller when a request fails

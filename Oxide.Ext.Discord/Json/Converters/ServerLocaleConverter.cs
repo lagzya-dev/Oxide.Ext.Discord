@@ -1,8 +1,8 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Libraries.Locale;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     internal class ServerLocaleConverter : JsonConverter
     {

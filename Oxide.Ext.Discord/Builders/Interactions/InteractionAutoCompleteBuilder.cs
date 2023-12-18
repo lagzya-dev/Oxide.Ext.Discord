@@ -5,16 +5,10 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Builders.Interactions.AutoComplete;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Exceptions.Builders;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {

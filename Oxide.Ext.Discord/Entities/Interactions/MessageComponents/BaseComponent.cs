@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/message-components#component-object">Message Component</a> within discord

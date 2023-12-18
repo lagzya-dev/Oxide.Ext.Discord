@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Callbacks.Templates;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Interfaces.Templates;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Callbacks;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Embeds
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Discord Template for Embed Field

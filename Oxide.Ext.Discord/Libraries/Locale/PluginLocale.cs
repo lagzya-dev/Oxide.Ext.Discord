@@ -3,7 +3,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Locale
+namespace Oxide.Ext.Discord.Libraries
 {
     internal struct PluginLocale : IEquatable<PluginLocale>
     {

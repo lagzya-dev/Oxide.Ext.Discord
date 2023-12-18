@@ -10,7 +10,7 @@ public static class PlaceholderKeyExt
 
 | name | description |
 | --- | --- |
-| static [WithFormat](#withformat-method)(…) | Applies a format to a given [`PlaceholderKey`](../Libraries/Placeholders/PlaceholderKey.md) |
+| static [WithFormat](#withformat-method)(…) | Applies a format to a given [`PlaceholderKey`](../Libraries/PlaceholderKey.md) |
 
 ## See Also
 
@@ -21,7 +21,7 @@ public static class PlaceholderKeyExt
    
 # WithFormat method
 
-Applies a format to a given [`PlaceholderKey`](../Libraries/Placeholders/PlaceholderKey.md)
+Applies a format to a given [`PlaceholderKey`](../Libraries/PlaceholderKey.md)
 
 ```csharp
 public static string WithFormat(this PlaceholderKey key, string format)
@@ -29,7 +29,7 @@ public static string WithFormat(this PlaceholderKey key, string format)
 
 | parameter | description |
 | --- | --- |
-| key | [`PlaceholderKey`](../Libraries/Placeholders/PlaceholderKey.md) to apply the format to |
+| key | [`PlaceholderKey`](../Libraries/PlaceholderKey.md) to apply the format to |
 | format | Format to be applied |
 
 ## Return Value
@@ -38,7 +38,7 @@ string placeholder containing the placeholder with the given format
 
 ## See Also
 
-* struct [PlaceholderKey](../Libraries/Placeholders/PlaceholderKey.md)
+* struct [PlaceholderKey](../Libraries/PlaceholderKey.md)
 * class [PlaceholderKeyExt](./PlaceholderKeyExt.md)
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

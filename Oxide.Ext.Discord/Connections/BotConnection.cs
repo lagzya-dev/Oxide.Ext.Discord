@@ -1,6 +1,5 @@
 ﻿using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Gateway;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Logging;
 

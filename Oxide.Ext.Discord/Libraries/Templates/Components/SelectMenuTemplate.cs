@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a template for select menus

@@ -34,7 +34,7 @@ public static string Color(this PlaceholderKey key, DiscordColor color)
 
 ## See Also
 
-* struct [PlaceholderKey](../Libraries/Placeholders/PlaceholderKey.md)
+* struct [PlaceholderKey](../Libraries/PlaceholderKey.md)
 * struct [DiscordColor](../Entities/DiscordColor.md)
 * class [ServerFormatting](./ServerFormatting.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)

@@ -68,7 +68,7 @@ Url of the emoji
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -96,7 +96,7 @@ Url of the guild icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -130,7 +130,7 @@ Url of the guild splash
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -164,7 +164,7 @@ Url of the guild discovery splash
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -198,7 +198,7 @@ Url of the guild banner
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -232,7 +232,7 @@ Url of the User banner
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -283,7 +283,7 @@ Url of the users avatar
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -312,7 +312,7 @@ Url of the Guild Member avatar
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -340,7 +340,7 @@ Url of the Guild Member avatar
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -374,7 +374,7 @@ Url of the application icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -408,7 +408,7 @@ Url of the application icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -442,7 +442,7 @@ Url of the application asset icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -509,7 +509,7 @@ Url of the achievement icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -543,7 +543,7 @@ Url of the achievement icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -577,7 +577,7 @@ Url to the sticker pack banner
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -601,7 +601,7 @@ Return url for the sticker
 
 ## See Also
 
-* class [DiscordSticker](../Entities/Stickers/DiscordSticker.md)
+* class [DiscordSticker](../Entities/DiscordSticker.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -634,7 +634,7 @@ Return url for the role icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -667,7 +667,7 @@ Return url for the guild schedule event cover icon
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -701,7 +701,7 @@ Return url for the guild member banner
 ## See Also
 
 * struct [Snowflake](../Entities/Snowflake.md)
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -753,7 +753,7 @@ Image extension for the image format and image data
 
 ## See Also
 
-* enum [DiscordImageFormat](../Entities/Images/DiscordImageFormat.md)
+* enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

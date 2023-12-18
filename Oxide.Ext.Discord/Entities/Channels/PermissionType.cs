@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents the type of a permission

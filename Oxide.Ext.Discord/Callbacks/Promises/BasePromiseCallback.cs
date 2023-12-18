@@ -1,9 +1,8 @@
 ﻿using System;
 using Oxide.Core;
-using Oxide.Ext.Discord.Types.Pooling;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Callbacks.Promises
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal abstract class BasePromiseCallback : BasePoolable
     {

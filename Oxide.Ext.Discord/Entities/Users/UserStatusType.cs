@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents Discord User <a href="https://discord.com/developers/docs/topics/gateway#update-status-status-types">Status Types</a> 

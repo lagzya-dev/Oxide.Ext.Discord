@@ -64,7 +64,7 @@ public void Connect(string apiKey, GatewayIntents intents)
 
 ## See Also
 
-* enum [GatewayIntents](../Entities/Gateway/GatewayIntents.md)
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -114,7 +114,7 @@ public void RequestGuildMembers(GuildMembersRequestCommand request)
 
 ## See Also
 
-* class [GuildMembersRequestCommand](../Entities/Gateway/Commands/GuildMembersRequestCommand.md)
+* class [GuildMembersRequestCommand](../Entities/GuildMembersRequestCommand.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -134,7 +134,7 @@ public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
 
 ## See Also
 
-* class [UpdateVoiceStatusCommand](../Entities/Gateway/Commands/UpdateVoiceStatusCommand.md)
+* class [UpdateVoiceStatusCommand](../Entities/UpdateVoiceStatusCommand.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -154,7 +154,7 @@ public void UpdateStatus(UpdatePresenceCommand presenceUpdate)
 
 ## See Also
 
-* class [UpdatePresenceCommand](../Entities/Gateway/Commands/UpdatePresenceCommand.md)
+* class [UpdatePresenceCommand](../Entities/UpdatePresenceCommand.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -3,20 +3,16 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Attributes.ApplicationCommands;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins.Setup;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.AppCommands
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Application Command Oxide Library handler

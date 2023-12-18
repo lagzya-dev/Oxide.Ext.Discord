@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-metadata">Guild Scheduled Event Entity Metadata</a>

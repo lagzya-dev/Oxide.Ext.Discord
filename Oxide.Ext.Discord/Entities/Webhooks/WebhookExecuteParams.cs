@@ -1,9 +1,9 @@
 using System;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents parameters to execute a webhook

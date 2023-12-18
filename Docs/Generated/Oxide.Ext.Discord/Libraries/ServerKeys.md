@@ -1,0 +1,193 @@
+# ServerKeys class
+
+Placeholder Keys for IServer
+
+```csharp
+public class ServerKeys
+```
+
+## Public Members
+
+| name | description |
+| --- | --- |
+| [ServerKeys](#serverkeys-constructor)(…) | Constructor |
+| readonly [Address](#address-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Address |
+| readonly [MaxPlayers](#maxplayers-field) | [`PlaceholderKey`](./PlaceholderKey.md) for MaxPlayers |
+| readonly [Name](#name-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Name |
+| readonly [Players](#players-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Players |
+| readonly [Port](#port-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Port |
+| readonly [Protocol](#protocol-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Protocol |
+| readonly [Time](#time-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Time |
+| readonly [TotalPlayers](#totalplayers-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Total Players |
+| readonly [Version](#version-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Version |
+
+## See Also
+
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [ServerKeys.cs](../../../../Oxide.Ext.Discord/Libraries/ServerKeys.cs)
+   
+   
+# ServerKeys constructor
+
+Constructor
+
+```csharp
+public ServerKeys(string prefix)
+```
+
+| parameter | description |
+| --- | --- |
+| prefix | Placeholder Key Prefix |
+
+## See Also
+
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Name field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Name
+
+```csharp
+public readonly PlaceholderKey Name;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Players field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Players
+
+```csharp
+public readonly PlaceholderKey Players;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# MaxPlayers field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for MaxPlayers
+
+```csharp
+public readonly PlaceholderKey MaxPlayers;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# TotalPlayers field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Total Players
+
+```csharp
+public readonly PlaceholderKey TotalPlayers;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Version field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Version
+
+```csharp
+public readonly PlaceholderKey Version;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Protocol field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Protocol
+
+```csharp
+public readonly PlaceholderKey Protocol;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Address field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Address
+
+```csharp
+public readonly PlaceholderKey Address;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Port field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Port
+
+```csharp
+public readonly PlaceholderKey Port;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Time field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for Time
+
+```csharp
+public readonly PlaceholderKey Time;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [ServerKeys](./ServerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+<!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

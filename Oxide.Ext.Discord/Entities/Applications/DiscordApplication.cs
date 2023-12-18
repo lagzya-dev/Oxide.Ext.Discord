@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Applications.RoleConnection;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Teams;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Applications;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Applications
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>

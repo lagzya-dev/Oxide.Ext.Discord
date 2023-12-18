@@ -6,7 +6,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Services.PlayerSearch;
+using Oxide.Ext.Discord.Services;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Cache

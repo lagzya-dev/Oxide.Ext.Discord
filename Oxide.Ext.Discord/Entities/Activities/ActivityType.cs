@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Activities
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">Activity Types</a>

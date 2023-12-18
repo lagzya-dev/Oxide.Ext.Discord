@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Images
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception in discord image data

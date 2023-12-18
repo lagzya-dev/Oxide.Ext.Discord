@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Users
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents Discord User <a href="https://discord.com/developers/docs/resources/user#user-object-premium-types">Premium Types</a>

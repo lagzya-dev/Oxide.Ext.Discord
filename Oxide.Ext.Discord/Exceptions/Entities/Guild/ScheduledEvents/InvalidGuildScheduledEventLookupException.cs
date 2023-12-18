@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception in guild schedule event lookup requests

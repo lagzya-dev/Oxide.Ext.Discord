@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     //Currently not used. Needs some work to get it working without so many allocations.
     internal class ZlibDecompressorHandler

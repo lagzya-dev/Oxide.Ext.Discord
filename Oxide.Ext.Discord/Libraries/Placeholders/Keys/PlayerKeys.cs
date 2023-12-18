@@ -1,7 +1,7 @@
 ﻿using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Extensions;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Placeholder Keys for <see cref="IPlayer"/>

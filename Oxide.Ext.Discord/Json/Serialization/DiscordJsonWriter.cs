@@ -2,9 +2,9 @@ using System.IO;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Json.Serialization
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// This is a pooled JSON writer that can write JSON to a stream

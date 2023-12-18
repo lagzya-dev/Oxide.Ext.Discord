@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Teams
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/teams#team-member-roles-team-member-role-types">Team Role Types</a>

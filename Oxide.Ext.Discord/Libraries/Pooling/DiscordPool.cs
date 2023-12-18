@@ -1,15 +1,14 @@
 ﻿using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Attributes.Pooling;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Plugins.Setup;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Pooling
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Discord Pool Library

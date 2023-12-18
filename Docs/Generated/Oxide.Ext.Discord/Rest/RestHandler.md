@@ -32,7 +32,7 @@ public class RestHandler : IDebugLoggable
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [RestHandler.cs](../../../../Oxide.Ext.Discord/Rest/RestHandler.cs)
@@ -54,7 +54,7 @@ public IPromise<TResult> Get<TResult>(DiscordClient client, string url)
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -77,7 +77,7 @@ public IPromise Post(DiscordClient client, string url, object data)
 
 ## See Also
 
-* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -102,7 +102,7 @@ public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object 
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -125,7 +125,7 @@ public IPromise Put(DiscordClient client, string url, object data)
 
 ## See Also
 
-* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -150,7 +150,7 @@ public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object d
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -173,7 +173,7 @@ public IPromise Patch(DiscordClient client, string url, object data)
 
 ## See Also
 
-* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -198,7 +198,7 @@ public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -220,7 +220,7 @@ public IPromise Delete(DiscordClient client, string url)
 
 ## See Also
 
-* interface [IPromise](../Interfaces/Promises/IPromise.md)
+* interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -244,7 +244,7 @@ public IPromise<TResult> Delete<TResult>(DiscordClient client, string url)
 
 ## See Also
 
-* interface [IPromise&lt;TPromised&gt;](../Interfaces/Promises/IPromise%7BTPromised%7D.md)
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
@@ -265,7 +265,7 @@ public void StartRequest(BaseRequest request)
 
 ## See Also
 
-* class [BaseRequest](./Requests/BaseRequest.md)
+* class [BaseRequest](./BaseRequest.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -281,9 +281,9 @@ public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
 
 ## See Also
 
-* class [Bucket](./Buckets/Bucket.md)
-* class [RequestHandler](./Requests/RequestHandler.md)
-* class [BaseRequest](./Requests/BaseRequest.md)
+* class [Bucket](./Bucket.md)
+* class [RequestHandler](./RequestHandler.md)
+* class [BaseRequest](./BaseRequest.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -303,8 +303,8 @@ public Bucket GetBucket(BucketId bucketId)
 
 ## See Also
 
-* class [Bucket](./Buckets/Bucket.md)
-* struct [BucketId](./Buckets/BucketId.md)
+* class [Bucket](./Bucket.md)
+* struct [BucketId](./BucketId.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -386,7 +386,7 @@ public readonly RestRateLimit RateLimit;
 
 ## See Also
 
-* class [RestRateLimit](../Types/RateLimits/RestRateLimit.md)
+* class [RestRateLimit](../Types/RestRateLimit.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -402,8 +402,8 @@ public readonly ConcurrentDictionary<BucketId, Bucket> Buckets;
 
 ## See Also
 
-* struct [BucketId](./Buckets/BucketId.md)
-* class [Bucket](./Buckets/Bucket.md)
+* struct [BucketId](./BucketId.md)
+* class [Bucket](./Bucket.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -419,7 +419,7 @@ public readonly ConcurrentDictionary<BucketId, BucketId> RouteToBucketId;
 
 ## See Also
 
-* struct [BucketId](./Buckets/BucketId.md)
+* struct [BucketId](./BucketId.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

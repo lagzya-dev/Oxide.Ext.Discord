@@ -1,9 +1,8 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Emojis
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Discord Template for Emoji

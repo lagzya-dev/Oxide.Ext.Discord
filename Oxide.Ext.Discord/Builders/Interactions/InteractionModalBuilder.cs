@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Builders.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Exceptions.Builders;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {

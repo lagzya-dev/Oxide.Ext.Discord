@@ -1,9 +1,7 @@
 using System;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Helpers
 {

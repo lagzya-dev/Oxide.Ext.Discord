@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Monetization.Skus
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/monetization/skus#sku-object-sku-types">Discord SKU Types</a>

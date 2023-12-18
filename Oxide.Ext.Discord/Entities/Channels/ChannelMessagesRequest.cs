@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages Request</a>

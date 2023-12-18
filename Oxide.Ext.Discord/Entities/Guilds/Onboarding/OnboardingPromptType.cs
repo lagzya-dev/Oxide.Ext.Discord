@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types">Prompt Types</a>

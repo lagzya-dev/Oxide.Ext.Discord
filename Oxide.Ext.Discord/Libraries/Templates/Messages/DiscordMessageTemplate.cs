@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Interfaces.Entities.Messages;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Components;
-using Oxide.Ext.Discord.Libraries.Templates.Embeds;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Messages
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Discord Message Template for sending localized Discord Messages

@@ -1,7 +1,7 @@
 ﻿using System;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Attributes.Pooling
+namespace Oxide.Ext.Discord.Attributes
 {
     /// <summary>
     /// Attribute for setting <see cref="DiscordPluginPool"/> on a plugin

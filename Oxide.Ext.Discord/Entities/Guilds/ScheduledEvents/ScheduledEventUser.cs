@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-user-object-guild-scheduled-event-user-structure">Guild Scheduled Event User Object</a> within discord

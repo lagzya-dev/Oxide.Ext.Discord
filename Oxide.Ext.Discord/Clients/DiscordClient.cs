@@ -1,15 +1,13 @@
 using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Plugins.Setup;
 
 namespace Oxide.Ext.Discord.Clients
 {

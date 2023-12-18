@@ -2,17 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Callbacks.Templates;
-using Oxide.Ext.Discord.Callbacks.Templates.Commands;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Exceptions.Libraries.Templates;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Locale;
+using Oxide.Ext.Discord.Callbacks;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Commands
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Library for localizing <see cref="DiscordApplicationCommand"/>s

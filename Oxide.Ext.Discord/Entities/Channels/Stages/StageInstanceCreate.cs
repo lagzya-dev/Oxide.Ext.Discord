@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Stages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a> href="https://discord.com/developers/docs/resources/stage-instance#create-stage-instance-json-params">Stage Instance Create Structure</a>

@@ -1,10 +1,8 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Libraries.Placeholders;
-using Oxide.Ext.Discord.Libraries.Templates.Emojis;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Components
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Template for Button Components

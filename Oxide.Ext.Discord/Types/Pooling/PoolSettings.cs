@@ -1,6 +1,4 @@
-﻿using Oxide.Ext.Discord.Types.Pooling.Pools;
-
-namespace Oxide.Ext.Discord.Types.Pooling
+﻿namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Settings for the pools

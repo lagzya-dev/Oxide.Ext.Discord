@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permissions-structure">ApplicationCommandPermissions</a>

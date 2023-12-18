@@ -3,13 +3,11 @@ using System.IO;
 using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Types.Pooling.Entities;
-using Oxide.Ext.Discord.Types.Pooling.Pools;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Types.Pooling
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Built in pooling for discord entities

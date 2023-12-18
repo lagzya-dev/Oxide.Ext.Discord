@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Types.Pooling
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a pool of type T

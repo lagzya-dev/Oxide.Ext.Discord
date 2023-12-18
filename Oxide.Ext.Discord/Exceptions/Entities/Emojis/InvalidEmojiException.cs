@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
-using Oxide.Ext.Discord.Entities.Images;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Emojis
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Error thrown when an emoji string fails validation

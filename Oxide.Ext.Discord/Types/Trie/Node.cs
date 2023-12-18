@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Oxide.Ext.Discord.Types.Trie
+namespace Oxide.Ext.Discord.Types
 {
     internal class Node<T>
     {

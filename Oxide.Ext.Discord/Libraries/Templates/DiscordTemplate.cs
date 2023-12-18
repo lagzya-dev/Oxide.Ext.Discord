@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Libraries.Templates
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Base Template used in Discord Templates

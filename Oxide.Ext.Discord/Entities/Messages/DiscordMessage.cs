@@ -4,32 +4,16 @@ using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Messages;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Stickers;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Emojis;
-using Oxide.Ext.Discord.Exceptions.Entities.Messages;
-using Oxide.Ext.Discord.Exceptions.Entities.Users;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
-using UserData = Oxide.Ext.Discord.Data.Users.UserData;
+using UserData = Oxide.Ext.Discord.Data.UserData;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#message-object">Message Structure</a> sent in a channel within Discord..
@@ -193,7 +177,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
 
         /// <summary>
         /// Data showing the source of a crosspost, channel follow add, pin, or reply message
-        /// <see cref="Messages.MessageReference"/>
+        /// <see cref="Entities.MessageReference"/>
         /// </summary>
         [JsonProperty("message_reference")]
         public MessageReference MessageReference { get; set; }

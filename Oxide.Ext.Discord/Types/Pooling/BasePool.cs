@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Concurrent;
-using Oxide.Ext.Discord.Exceptions.Pooling;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Types.Pooling
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a BasePool in Discord

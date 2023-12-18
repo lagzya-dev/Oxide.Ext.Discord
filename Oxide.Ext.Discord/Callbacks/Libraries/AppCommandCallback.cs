@@ -1,8 +1,7 @@
-﻿using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
-using Oxide.Ext.Discord.Libraries.Pooling;
+﻿using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Callbacks.Libraries
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class AppCommandCallback : BaseNextTickCallback
     {

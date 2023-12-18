@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-flags">Role Flags</a>

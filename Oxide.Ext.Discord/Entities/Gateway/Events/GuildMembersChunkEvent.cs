@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
-using Oxide.Ext.Discord.Entities.Guilds;
 
-namespace Oxide.Ext.Discord.Entities.Gateway.Events
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/gateway#guild-members-chunk">Guild Members Chunk</a>

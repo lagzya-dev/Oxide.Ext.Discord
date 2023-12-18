@@ -1,14 +1,8 @@
 ﻿using System;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Keys
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Default Discord Extension provided Placeholder Keys

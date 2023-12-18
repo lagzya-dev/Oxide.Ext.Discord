@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Libraries.Locale;
+﻿using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception thrown when Discord Locale is not found

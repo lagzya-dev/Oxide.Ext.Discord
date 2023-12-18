@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-object-integration-expire-behaviors">Integration Expire Behaviors</a>

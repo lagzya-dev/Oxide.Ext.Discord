@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-account-object">Integration Account Structure</a>

@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Exceptions.Pooling;
+﻿using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Types.Pooling
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents size constraints for a pool

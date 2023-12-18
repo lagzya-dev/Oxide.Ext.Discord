@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a Placeholder Data Key

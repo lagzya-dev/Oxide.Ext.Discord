@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Types.RateLimits;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Handles command queueing when the websocket is down

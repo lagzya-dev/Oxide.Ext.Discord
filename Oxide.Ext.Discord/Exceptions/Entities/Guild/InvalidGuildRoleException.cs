@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Entities.Permissions;
+﻿using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Guild
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception for invalid guild roles

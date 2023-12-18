@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace Oxide.Ext.Discord.Types.Threading
+namespace Oxide.Ext.Discord.Types
 {
     internal class DiscordConcurrentSet<T> : IDisposable
     {

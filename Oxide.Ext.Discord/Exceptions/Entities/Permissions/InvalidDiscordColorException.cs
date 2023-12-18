@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Permissions
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an invalid discord color

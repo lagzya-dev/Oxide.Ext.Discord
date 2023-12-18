@@ -2,9 +2,9 @@ using System;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Interfaces.WebSockets
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents a Handler for Websocket Events

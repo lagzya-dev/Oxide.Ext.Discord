@@ -64,7 +64,7 @@ This
 
 ## See Also
 
-* struct [ServerLocale](../../Libraries/Locale/ServerLocale.md)
+* struct [ServerLocale](../../Libraries/ServerLocale.md)
 * class [ApplicationCommandGroupBuilder](./ApplicationCommandGroupBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.ApplicationCommands](./ApplicationCommandsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

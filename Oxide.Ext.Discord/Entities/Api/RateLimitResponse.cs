@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Rest;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Api
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a rate limit response from an API request

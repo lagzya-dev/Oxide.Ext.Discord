@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Threads
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message-json-params">Thread Create Structure</a> within Discord.

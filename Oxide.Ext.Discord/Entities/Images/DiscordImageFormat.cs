@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Images
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/reference#image-formatting-image-formats">Image Formats</a>

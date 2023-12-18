@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Text;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Builders
 {

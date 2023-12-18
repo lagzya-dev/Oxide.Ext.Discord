@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.Response
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an Interaction Modal Message

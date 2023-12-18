@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Libraries.Templates;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Callbacks.Templates
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class BulkRegisterTemplateCallback<TTemplate> : BaseAsyncCallback where TTemplate : class
     {

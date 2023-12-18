@@ -1,4 +1,5 @@
 using Oxide.Ext.Discord.Exceptions;
+
 namespace Oxide.Ext.Discord.Interfaces
 {
     internal interface IDiscordValidation

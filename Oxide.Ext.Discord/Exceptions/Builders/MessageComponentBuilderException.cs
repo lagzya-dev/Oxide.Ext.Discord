@@ -1,7 +1,7 @@
 using Oxide.Ext.Discord.Builders.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Builders
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception in Message Component Builder

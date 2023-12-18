@@ -187,7 +187,7 @@ Emoji message string
 
 ## See Also
 
-* class [DiscordEmoji](../Entities/Emojis/DiscordEmoji.md)
+* class [DiscordEmoji](../Entities/DiscordEmoji.md)
 * class [DiscordFormatting](./DiscordFormatting.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -308,7 +308,7 @@ string with navigation to the navigation type
 
 ## See Also
 
-* enum [GuildNavigationType](../Entities/Guilds/GuildNavigationType.md)
+* enum [GuildNavigationType](../Entities/GuildNavigationType.md)
 * class [DiscordFormatting](./DiscordFormatting.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

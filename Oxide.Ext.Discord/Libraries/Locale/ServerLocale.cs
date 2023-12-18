@@ -1,9 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Locale
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a Server Locale

@@ -1,7 +1,7 @@
 using System;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries.Promise
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exceptions for promises

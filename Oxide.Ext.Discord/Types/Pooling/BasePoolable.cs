@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Types.Pooling
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a poolable object

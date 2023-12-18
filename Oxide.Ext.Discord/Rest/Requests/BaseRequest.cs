@@ -5,15 +5,13 @@ using System.Threading.Tasks;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Interfaces.Logging;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Rest.Requests
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Represents a base request class for REST API calls

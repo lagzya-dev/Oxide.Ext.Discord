@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Oxide.Ext.Discord.Types.Threading
+namespace Oxide.Ext.Discord.Types
 {
     internal class AdjustableSemaphore
     {

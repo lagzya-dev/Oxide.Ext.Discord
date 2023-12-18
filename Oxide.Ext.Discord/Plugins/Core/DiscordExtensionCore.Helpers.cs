@@ -1,6 +1,6 @@
 ﻿using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Plugins.Core
+namespace Oxide.Ext.Discord.Plugins
 {
     internal partial class DiscordExtensionCore
     {

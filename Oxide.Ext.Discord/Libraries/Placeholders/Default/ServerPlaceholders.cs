@@ -4,10 +4,9 @@ using System.Net;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
-using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// <see cref="IServer"/> placeholders

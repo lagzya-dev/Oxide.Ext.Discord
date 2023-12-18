@@ -4,23 +4,12 @@ using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders.Interactions;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.Response;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Monetization.Entitlements;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Json.Converters;
-using Oxide.Ext.Discord.Libraries.AppCommands.Commands;
-using Oxide.Ext.Discord.Libraries.Locale;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure">Interaction Structure</a>

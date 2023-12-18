@@ -1,8 +1,8 @@
 ﻿using System;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Builders.Interactions.AutoComplete
+namespace Oxide.Ext.Discord.Builders.Interactions
 {
     /// <summary>
     /// Formatter for player names

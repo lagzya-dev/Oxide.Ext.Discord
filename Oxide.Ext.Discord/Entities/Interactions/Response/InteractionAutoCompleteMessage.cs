@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.Response
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Interaction Auto Complete Response Message

@@ -7,37 +7,14 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Applications;
-using Oxide.Ext.Discord.Entities.AutoMod;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Stages;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
-using Oxide.Ext.Discord.Entities.Gateway.Events;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Monetization.Entitlements;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Stickers;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Entities.Voice;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Interfaces.WebSockets;
-using Oxide.Ext.Discord.Json.Serialization;
-using Oxide.Ext.Discord.Libraries.AppCommands;
-using Oxide.Ext.Discord.Libraries.Command;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Handles websocket events

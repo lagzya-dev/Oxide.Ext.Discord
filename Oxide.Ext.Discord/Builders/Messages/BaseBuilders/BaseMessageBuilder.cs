@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Builders.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Exceptions.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Builders.Messages.BaseBuilders
+namespace Oxide.Ext.Discord.Builders.Messages
 {
     /// <summary>
     /// Represents a builder for <see cref="BaseMessageCreate"/>

@@ -1,5 +1,4 @@
-using Oxide.Ext.Discord.Entities.Interactions;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Builders.Interactions
 {

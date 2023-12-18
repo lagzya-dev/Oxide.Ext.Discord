@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
 {

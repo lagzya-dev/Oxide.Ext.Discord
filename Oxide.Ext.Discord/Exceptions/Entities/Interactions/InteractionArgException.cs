@@ -1,6 +1,6 @@
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an error when an interaction arg does not match the requested type

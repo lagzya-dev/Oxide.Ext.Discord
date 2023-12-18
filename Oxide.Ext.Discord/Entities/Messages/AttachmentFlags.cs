@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channelattachment-flags">Attachment flags for an attachment</a>

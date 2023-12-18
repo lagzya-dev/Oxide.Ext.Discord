@@ -1,7 +1,7 @@
 using System;
 using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Callbacks
+namespace Oxide.Ext.Discord.Libraries
 {
     internal class Placeholder<T, TResult> : BasePlaceholder<TResult>
     {

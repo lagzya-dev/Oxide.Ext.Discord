@@ -1,10 +1,9 @@
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Command
+namespace Oxide.Ext.Discord.Libraries
 {
     internal class DirectMessageCommand : BaseCommand
     {

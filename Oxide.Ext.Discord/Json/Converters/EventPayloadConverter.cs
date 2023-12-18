@@ -1,12 +1,11 @@
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Entities.Gateway.Events;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.WebSockets.Handlers;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.WebSockets;
 
-namespace Oxide.Ext.Discord.Json.Converters
+namespace Oxide.Ext.Discord.Json
 {
     /// <summary>
     /// JSON converter for <see cref="EventPayload"/>

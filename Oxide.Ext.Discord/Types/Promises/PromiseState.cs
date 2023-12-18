@@ -1,7 +1,7 @@
 // Originally from: https://github.com/Real-Serious-Games/C-Sharp-Promise
 // Modified by: MJSU
 
-namespace Oxide.Ext.Discord.Types.Promises
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Specifies the state of a promise.

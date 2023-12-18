@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Oxide.Ext.Discord.Interfaces.Promises
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Interface for a promise that can be rejected.

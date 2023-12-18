@@ -1,7 +1,6 @@
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an error in channel invite

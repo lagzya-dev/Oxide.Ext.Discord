@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Interactions.Response
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an Interaction Modal Response

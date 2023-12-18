@@ -1,9 +1,9 @@
 using System.Collections.Concurrent;
-using Oxide.Ext.Discord.Entities.Gateway.Commands;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Types.RateLimits
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a WebSocket Rate Limit

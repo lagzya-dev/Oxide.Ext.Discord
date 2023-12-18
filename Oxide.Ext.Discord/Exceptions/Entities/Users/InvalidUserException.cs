@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Users
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception when modifying a user with invalid data

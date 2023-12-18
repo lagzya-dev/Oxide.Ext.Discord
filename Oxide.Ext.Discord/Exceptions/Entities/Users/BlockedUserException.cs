@@ -1,7 +1,7 @@
 ﻿using System;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Users
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception when a user has blocked receving messages from a bot

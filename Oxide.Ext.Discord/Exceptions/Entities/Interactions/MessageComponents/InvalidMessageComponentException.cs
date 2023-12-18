@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an invalid message component

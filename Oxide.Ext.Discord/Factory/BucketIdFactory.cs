@@ -2,8 +2,8 @@
 using System.Text;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Rest.Buckets;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Factory

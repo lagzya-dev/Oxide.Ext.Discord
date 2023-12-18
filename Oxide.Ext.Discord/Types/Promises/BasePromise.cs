@@ -5,16 +5,15 @@ using System;
 using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Exceptions.Libraries.Promise;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Interfaces;
 #if PROMISE_DEBUG
 using Oxide.Ext.Discord.Logging;
 #endif
 
-namespace Oxide.Ext.Discord.Types.Promises
+namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents the base class for all promises

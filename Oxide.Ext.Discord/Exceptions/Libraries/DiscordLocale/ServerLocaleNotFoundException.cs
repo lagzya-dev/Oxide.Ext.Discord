@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Libraries.Locale;
+﻿using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Exception thrown when Server Locale is not found
@@ -9,10 +9,10 @@ namespace Oxide.Ext.Discord.Exceptions.Libraries.DiscordLocale
     {
         private ServerLocaleNotFoundException(string message) : base(message) { }
 
-        internal static ServerLocaleNotFoundException NotFound(Discord.Libraries.Locale.DiscordLocale id) => throw new ServerLocaleNotFoundException($"Failed to find discord locale for server locale '{id.Id}'");
+        internal static ServerLocaleNotFoundException NotFound(DiscordLocale id) => throw new ServerLocaleNotFoundException($"Failed to find discord locale for server locale '{id.Id}'");
         internal static ServerLocaleNotFoundException NotFound(ServerLocale id) => throw new ServerLocaleNotFoundException($"Failed to find server local '{id.Id}'");
 
-        internal static void ThrowNotFound(Discord.Libraries.Locale.DiscordLocale id) => throw NotFound(id);
+        internal static void ThrowNotFound(DiscordLocale id) => throw NotFound(id);
         internal static void ThrowNotFound(ServerLocale id) => throw NotFound(id);
     }
 }

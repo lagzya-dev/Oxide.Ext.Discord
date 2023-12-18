@@ -1,7 +1,7 @@
 ﻿using System;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Types.Pooling.Pools
+namespace Oxide.Ext.Discord.Types
 {
     internal sealed class ArrayPool<TPooled> : Singleton<ArrayPool<TPooled>>
     {

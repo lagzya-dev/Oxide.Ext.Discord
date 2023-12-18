@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Guild.ScheduledEvents
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception in guild scheduled events

@@ -1,7 +1,7 @@
 using System;
-using Oxide.Ext.Discord.Entities.Interactions;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Attributes.ApplicationCommands
+namespace Oxide.Ext.Discord.Attributes
 {
     /// <summary>
     /// Discord Message Component Command Attribute for <see cref="InteractionType.MessageComponent"/>

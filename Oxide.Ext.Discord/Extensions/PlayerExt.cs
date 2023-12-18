@@ -1,20 +1,13 @@
 using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Cache.Entities;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Linking;
-using Oxide.Ext.Discord.Libraries.Placeholders;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Extensions
 {

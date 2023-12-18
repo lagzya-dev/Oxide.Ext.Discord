@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Oxide.Ext.Discord.Types.Trie
+namespace Oxide.Ext.Discord.Types
 {
     internal struct EdgeKey<T> : IEquatable<EdgeKey<T>>
     {

@@ -1,16 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents.SelectMenus;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions;
-using Oxide.Ext.Discord.Libraries.Locale;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Parses Interaction Data to make it easier to process for application commands

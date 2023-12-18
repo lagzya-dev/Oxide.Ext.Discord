@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Types.Hooks;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Callbacks.Hooks
+namespace Oxide.Ext.Discord.Callbacks
 {
     internal class PluginHookCallback : BaseNextTickCallback
     {

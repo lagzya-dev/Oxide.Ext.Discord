@@ -15,8 +15,8 @@ public class InteractionAutoCompleteBuilder
 | [AddAllOnlineFirstPlayers](#addallonlinefirstplayers-method)(…) | Adds Online Players to the list first If there is still space add Offline Players |
 | [AddAllPlayers](#addallplayers-method)(…) | Adds Any Player to the list |
 | [AddByPlayerId](#addbyplayerid-method)(…) | Adds a player by player Id to the list |
-| [AddChoice](#addchoice-method-1-of-3)(…) | Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response (3 methods) |
-| [AddChoices](#addchoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response |
+| [AddChoice](#addchoice-method-1-of-3)(…) | Adds a [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response (3 methods) |
+| [AddChoices](#addchoices-method)(…) | Adds a collection of [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response |
 | [AddGroups](#addgroups-method)(…) | Adds Oxide Groups to the AutoComplete |
 | [AddGroupsWithoutPermission](#addgroupswithoutpermission-method)(…) | Adds The List of Groups that have this permission |
 | [AddGroupsWithoutPlayer](#addgroupswithoutplayer-method)(…) | Adds The List of Groups that playerId has |
@@ -43,7 +43,7 @@ public class InteractionAutoCompleteBuilder
    
 # AddChoice method (1 of 3)
 
-Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+Adds a [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response
 
 ```csharp
 public InteractionAutoCompleteBuilder AddChoice(CommandOptionChoice choice)
@@ -59,7 +59,7 @@ This
 
 ## See Also
 
-* class [CommandOptionChoice](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md)
+* class [CommandOptionChoice](../../Entities/CommandOptionChoice.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -68,7 +68,7 @@ This
 
 # AddChoice method (2 of 3)
 
-Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+Adds a [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response
 
 ```csharp
 public InteractionAutoCompleteBuilder AddChoice(string name, object value)
@@ -93,7 +93,7 @@ This
 
 # AddChoice method (3 of 3)
 
-Adds a [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+Adds a [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response
 
 ```csharp
 public InteractionAutoCompleteBuilder AddChoice(string name, object value, Plugin plugin, 
@@ -120,7 +120,7 @@ This
    
 # AddChoices method
 
-Adds a collection of [`CommandOptionChoice`](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md) to the response
+Adds a collection of [`CommandOptionChoice`](../../Entities/CommandOptionChoice.md) to the response
 
 ```csharp
 public InteractionAutoCompleteBuilder AddChoices(ICollection<CommandOptionChoice> choices)
@@ -136,7 +136,7 @@ This
 
 ## See Also
 
-* class [CommandOptionChoice](../../Entities/Interactions/ApplicationCommands/CommandOptionChoice.md)
+* class [CommandOptionChoice](../../Entities/CommandOptionChoice.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -167,11 +167,11 @@ public InteractionAutoCompleteMessage Build()
 
 ## Return Value
 
-[`InteractionAutoCompleteMessage`](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md)
+[`InteractionAutoCompleteMessage`](../../Entities/InteractionAutoCompleteMessage.md)
 
 ## See Also
 
-* class [InteractionAutoCompleteMessage](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md)
+* class [InteractionAutoCompleteMessage](../../Entities/InteractionAutoCompleteMessage.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -191,11 +191,11 @@ public void AddGroups(string filter = null,
 | --- | --- |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -215,11 +215,11 @@ public void AddPermissions(string filter = null,
 | --- | --- |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -240,11 +240,11 @@ public void AddGroupsWithPermission(string permission, string filter = null,
 | permission | Permission to get groups for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -265,11 +265,11 @@ public void AddGroupsWithoutPermission(string permission, string filter = null,
 | permission | Permission to get groups for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -290,11 +290,11 @@ public void AddPermissionsInGroup(string group, string filter = null,
 | group | Group to get permissions for |
 | filter | Permission filter |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -315,11 +315,11 @@ public void AddPermissionsNotInGroup(string group, string filter = null,
 | group | Group that doesn't have the permissions |
 | filter | Permission filter |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -340,11 +340,11 @@ public void AddGroupsWithPlayer(string playerId, string filter = null,
 | playerId | Player ID to get groups for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -365,11 +365,11 @@ public void AddGroupsWithoutPlayer(string playerId, string filter = null,
 | playerId | Player ID to get groups for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -390,11 +390,11 @@ public void AddPermissionsPlayerIn(string playerId, string filter = null,
 | playerId | Player ID to get permissions for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -415,11 +415,11 @@ public void AddPermissionsPlayerNotIn(string playerId, string filter = null,
 | playerId | Player ID to get permissions for |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -440,7 +440,7 @@ public void AddOnlinePlayers(string filter = null, PlayerNameFormatter formatter
 
 ## See Also
 
-* class [PlayerNameFormatter](./AutoComplete/PlayerNameFormatter.md)
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -461,7 +461,7 @@ public void AddOfflinePlayers(string filter = null, PlayerNameFormatter formatte
 
 ## See Also
 
-* class [PlayerNameFormatter](./AutoComplete/PlayerNameFormatter.md)
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -482,7 +482,7 @@ public void AddAllOnlineFirstPlayers(string filter = null, PlayerNameFormatter f
 
 ## See Also
 
-* class [PlayerNameFormatter](./AutoComplete/PlayerNameFormatter.md)
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -503,7 +503,7 @@ public void AddAllPlayers(string filter = null, PlayerNameFormatter formatter = 
 
 ## See Also
 
-* class [PlayerNameFormatter](./AutoComplete/PlayerNameFormatter.md)
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -524,7 +524,7 @@ public void AddByPlayerId(string playerId, PlayerNameFormatter formatter = null)
 
 ## See Also
 
-* class [PlayerNameFormatter](./AutoComplete/PlayerNameFormatter.md)
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -544,11 +544,11 @@ public void AddLoadablePlugins(string filter = null,
 | --- | --- |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -568,11 +568,11 @@ public void AddLoadedPlugins(string filter = null,
 | --- | --- |
 | filter | String to filter by |
 | comparison | StringComparison to use |
-| search | [`AutoCompleteSearchMode`](./AutoComplete/AutoCompleteSearchMode.md) Filter search mode |
+| search | [`AutoCompleteSearchMode`](./AutoCompleteSearchMode.md) Filter search mode |
 
 ## See Also
 
-* enum [AutoCompleteSearchMode](./AutoComplete/AutoCompleteSearchMode.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -590,12 +590,12 @@ public InteractionAutoCompleteBuilder(DiscordInteraction interaction,
 | parameter | description |
 | --- | --- |
 | interaction | Interaction this build is for |
-| message | Starting [`InteractionAutoCompleteMessage`](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md) |
+| message | Starting [`InteractionAutoCompleteMessage`](../../Entities/InteractionAutoCompleteMessage.md) |
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
-* class [InteractionAutoCompleteMessage](../../Entities/Interactions/Response/InteractionAutoCompleteMessage.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
+* class [InteractionAutoCompleteMessage](../../Entities/InteractionAutoCompleteMessage.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

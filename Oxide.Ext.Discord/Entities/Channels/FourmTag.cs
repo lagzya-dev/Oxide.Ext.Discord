@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Exceptions.Entities.Channels;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#forum-tag-object">Forum Tag Structure</a>

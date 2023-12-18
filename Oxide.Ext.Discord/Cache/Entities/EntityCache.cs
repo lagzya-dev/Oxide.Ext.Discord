@@ -3,11 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Cache.Entities
+namespace Oxide.Ext.Discord.Cache
 {
     /// <summary>
     /// Cache for {T} 

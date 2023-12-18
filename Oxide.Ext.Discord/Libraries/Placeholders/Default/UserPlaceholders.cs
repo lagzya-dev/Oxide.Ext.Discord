@@ -1,11 +1,9 @@
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries.Placeholders.Keys;
-using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders.Default
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// <see cref="DiscordUser"/> placeholders

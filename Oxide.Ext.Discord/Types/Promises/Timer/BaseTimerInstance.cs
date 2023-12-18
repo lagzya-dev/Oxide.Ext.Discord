@@ -3,10 +3,9 @@
 
 using System;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Types.Promises.Timer
+namespace Oxide.Ext.Discord.Types
 {
     internal abstract class BaseTimerInstance : BasePoolable
     {

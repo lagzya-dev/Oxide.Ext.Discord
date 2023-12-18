@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
 
-namespace Oxide.Ext.Discord.Entities.Guilds.Onboarding
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-option-structure">Prompt Option Structure</a>

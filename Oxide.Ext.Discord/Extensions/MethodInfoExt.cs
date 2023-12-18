@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.Extensions

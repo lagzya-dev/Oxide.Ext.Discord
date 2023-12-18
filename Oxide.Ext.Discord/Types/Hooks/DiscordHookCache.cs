@@ -4,12 +4,12 @@ using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gateway;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Types.Hooks
+namespace Oxide.Ext.Discord.Types
 {
     internal class DiscordHookCache
     {

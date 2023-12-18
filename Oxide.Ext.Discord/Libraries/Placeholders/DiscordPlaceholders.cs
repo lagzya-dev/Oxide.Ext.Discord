@@ -5,18 +5,15 @@ using System.Text.RegularExpressions;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Exceptions.Libraries.Placeholders;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
-using Oxide.Ext.Discord.Libraries.Placeholders.Callbacks;
-using Oxide.Ext.Discord.Libraries.Placeholders.Default;
-using Oxide.Ext.Discord.Libraries.Pooling;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins.Core;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Placeholders
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Discord Placeholders Library

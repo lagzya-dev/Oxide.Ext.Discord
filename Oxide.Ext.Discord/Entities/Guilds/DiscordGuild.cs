@@ -2,29 +2,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.AutoMod;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Stages;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gateway.Events;
-using Oxide.Ext.Discord.Entities.Guilds.Onboarding;
-using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
-using Oxide.Ext.Discord.Entities.Integrations;
-using Oxide.Ext.Discord.Entities.Invites;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Stickers;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Entities.Voice;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Guild;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Json.Converters;
+using Oxide.Ext.Discord.Json;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object">Guild Structure</a>
@@ -173,7 +157,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// System channel flags
-        /// See <see cref="Guilds.SystemChannelFlags"/>
+        /// See <see cref="Entities.SystemChannelFlags"/>
         /// </summary>
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags SystemChannelFlags { get; set; }

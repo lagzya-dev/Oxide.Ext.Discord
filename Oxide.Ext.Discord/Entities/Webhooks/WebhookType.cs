@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#webhook-object-webhook-types">Webhook Types</a>

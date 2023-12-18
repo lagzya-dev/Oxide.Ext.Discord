@@ -11,14 +11,9 @@ using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Interfaces.Logging;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Rest.Buckets;
-using Oxide.Ext.Discord.Rest.Requests;
-using Oxide.Ext.Discord.Types.Promises;
-using Oxide.Ext.Discord.Types.RateLimits;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Rest
 {

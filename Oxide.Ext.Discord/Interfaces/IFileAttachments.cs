@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces
 {

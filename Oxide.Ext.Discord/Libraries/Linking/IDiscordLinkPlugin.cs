@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Libraries.Linking
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a plugin that supports Discord Link library

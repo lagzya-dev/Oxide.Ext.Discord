@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Libraries.Locale;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Libraries.Templates.Commands
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Command Localizations for Application Commands

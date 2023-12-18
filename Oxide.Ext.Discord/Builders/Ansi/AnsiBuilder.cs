@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Libraries.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Builders.Ansi
 {

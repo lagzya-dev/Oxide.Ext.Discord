@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Exceptions.Entities;
-using Oxide.Ext.Discord.Interfaces.Promises;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Monetization.Entitlements
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-structure">Entitlement Structure</a>

@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Exceptions.Entities.Webhooks
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents a Webhook Create Exception

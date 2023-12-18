@@ -1,4 +1,5 @@
 using System;
+
 namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>

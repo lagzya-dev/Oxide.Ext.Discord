@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-object">Reaction Structure</a>

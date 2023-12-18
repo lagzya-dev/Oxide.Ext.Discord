@@ -1,17 +1,15 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Exceptions.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Interfaces.Promises;
-using Oxide.Ext.Discord.Types.Promises;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure">ApplicationCommand</a>

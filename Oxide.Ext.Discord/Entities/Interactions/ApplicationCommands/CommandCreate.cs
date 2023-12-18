@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Exceptions.Entities.Interactions.ApplicationCommands;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#create-global-application-command-json-params">Application Command Create</a>

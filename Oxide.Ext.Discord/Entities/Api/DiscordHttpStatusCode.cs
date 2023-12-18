@@ -1,4 +1,4 @@
-﻿namespace Oxide.Ext.Discord.Entities.Api
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents possible HTTP Codes sent from discord

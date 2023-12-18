@@ -20,10 +20,10 @@ public class DebugLogger
 | [AppendLine](#appendline-method)() | Appends a line to the logger |
 | [AppendLine](#appendline-method-1-of-2)(…) | Appends a line to the logger with the given character repeated amount time (2 methods) |
 | [AppendList](#appendlist-method-1-of-2)(…) | Appends an IEnumerable where T is string items to add to the logger (2 methods) |
-| [AppendList&lt;T&gt;](#appendlist&amp;lt;t&amp;gt;-method-1-of-2)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger (2 methods) |
+| [AppendList&lt;T&gt;](#appendlist&amp;lt;t&amp;gt;-method-1-of-2)(…) | Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/IDebugLoggable.md) items to add to the logger (2 methods) |
 | [AppendMethod](#appendmethod-method)(…) | Appends a field with the given name and method info |
 | [AppendNullField](#appendnullfield-method)(…) | Appends a field with the given name and Null value |
-| [AppendObject](#appendobject-method)(…) | Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name |
+| [AppendObject](#appendobject-method)(…) | Appends a [`IDebugLoggable`](../Interfaces/IDebugLoggable.md) object to the logger with the given name |
 | [DecrementIndent](#decrementindent-method)() | Decrements the Indent |
 | [EndArray](#endarray-method)() | Ends an array on the logger |
 | [EndObject](#endobject-method)() | Ends an object on the logger |
@@ -491,8 +491,8 @@ public void AppendChannelPath(string name, DiscordGuild guild, DiscordChannel ch
 
 ## See Also
 
-* class [DiscordGuild](../Entities/Guilds/DiscordGuild.md)
-* class [DiscordChannel](../Entities/Channels/DiscordChannel.md)
+* class [DiscordGuild](../Entities/DiscordGuild.md)
+* class [DiscordChannel](../Entities/DiscordChannel.md)
 * class [DebugLogger](./DebugLogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -500,7 +500,7 @@ public void AppendChannelPath(string name, DiscordGuild guild, DiscordChannel ch
    
 # AppendObject method
 
-Appends a [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) object to the logger with the given name
+Appends a [`IDebugLoggable`](../Interfaces/IDebugLoggable.md) object to the logger with the given name
 
 ```csharp
 public void AppendObject(string name, IDebugLoggable obj)
@@ -513,7 +513,7 @@ public void AppendObject(string name, IDebugLoggable obj)
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * class [DebugLogger](./DebugLogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -563,7 +563,7 @@ public void AppendList(string name, List<string> items)
 
 # AppendList&lt;T&gt; method (3 of 4)
 
-Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger
+Appends an IEnumerable where T is [`IDebugLoggable`](../Interfaces/IDebugLoggable.md) items to add to the logger
 
 ```csharp
 public void AppendList<T>(string name, IEnumerable<T> items)
@@ -577,7 +577,7 @@ public void AppendList<T>(string name, IEnumerable<T> items)
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * class [DebugLogger](./DebugLogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -586,7 +586,7 @@ public void AppendList<T>(string name, IEnumerable<T> items)
 
 # AppendList&lt;T&gt; method (4 of 4)
 
-Appends an List where T is [`IDebugLoggable`](../Interfaces/Logging/IDebugLoggable.md) items to add to the logger
+Appends an List where T is [`IDebugLoggable`](../Interfaces/IDebugLoggable.md) items to add to the logger
 
 ```csharp
 public void AppendList<T>(string name, List<T> items)
@@ -600,7 +600,7 @@ public void AppendList<T>(string name, List<T> items)
 
 ## See Also
 
-* interface [IDebugLoggable](../Interfaces/Logging/IDebugLoggable.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * class [DebugLogger](./DebugLogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

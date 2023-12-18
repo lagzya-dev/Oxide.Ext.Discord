@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Rest.Requests
+namespace Oxide.Ext.Discord.Rest
 {
     /// <summary>
     /// Discord API Request Status

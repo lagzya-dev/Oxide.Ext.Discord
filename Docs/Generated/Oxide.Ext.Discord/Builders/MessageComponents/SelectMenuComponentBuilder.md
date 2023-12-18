@@ -47,7 +47,7 @@ public SelectMenuComponentBuilder AddOption(string label, string value, string d
 
 ## See Also
 
-* class [DiscordEmoji](../../Entities/Emojis/DiscordEmoji.md)
+* class [DiscordEmoji](../../Entities/DiscordEmoji.md)
 * class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
@@ -71,7 +71,7 @@ This
 
 ## See Also
 
-* enum [ChannelType](../../Entities/Channels/ChannelType.md)
+* enum [ChannelType](../../Entities/ChannelType.md)
 * class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders.MessageComponents](./MessageComponentsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

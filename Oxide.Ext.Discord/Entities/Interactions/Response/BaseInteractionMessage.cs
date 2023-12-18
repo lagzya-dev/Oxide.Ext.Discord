@@ -1,7 +1,6 @@
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Exceptions.Entities.Messages;
+using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.Response
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a Base Message for an interaction

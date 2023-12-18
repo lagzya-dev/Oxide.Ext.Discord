@@ -1,7 +1,7 @@
 
-using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions.Entities.Channels
+namespace Oxide.Ext.Discord.Exceptions
 {
     /// <summary>
     /// Represents an exception for channel threads

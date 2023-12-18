@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Libraries.Pooling;
-using Oxide.Ext.Discord.Types.Pooling;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Types
 {

@@ -1,6 +1,6 @@
 # BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt; class
 
-Represents a builder for [`BaseInteractionMessage`](../../Entities/Interactions/Response/BaseInteractionMessage.md)
+Represents a builder for [`BaseInteractionMessage`](../../Entities/BaseInteractionMessage.md)
 
 ```csharp
 public abstract class BaseInteractionMessageBuilder<TMessage, TBuilder> : 
@@ -28,8 +28,8 @@ public abstract class BaseInteractionMessageBuilder<TMessage, TBuilder> :
 
 ## See Also
 
-* class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](../Messages/BaseBuilders/BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
-* class [BaseInteractionMessage](../../Entities/Interactions/Response/BaseInteractionMessage.md)
+* class [BaseMessageBuilder&lt;TMessage,TBuilder&gt;](../Messages/BaseMessageBuilder%7BTMessage,TBuilder%7D.md)
+* class [BaseInteractionMessage](../../Entities/BaseInteractionMessage.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)
 * [BaseInteractionMessageBuilder.cs](../../../../Oxide.Ext.Discord/Builders/Interactions/BaseInteractionMessageBuilder.cs)
@@ -65,7 +65,7 @@ protected BaseInteractionMessageBuilder(DiscordInteraction interaction, TMessage
 
 ## See Also
 
-* class [DiscordInteraction](../../Entities/Interactions/DiscordInteraction.md)
+* class [DiscordInteraction](../../Entities/DiscordInteraction.md)
 * class [BaseInteractionMessageBuilder&lt;TMessage,TBuilder&gt;](./BaseInteractionMessageBuilder%7BTMessage,TBuilder%7D.md)
 * namespace [Oxide.Ext.Discord.Builders.Interactions](./InteractionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../../Oxide.Ext.Discord.md)

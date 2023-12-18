@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Threads
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure">Thread Metadata Structure</a> within Discord.

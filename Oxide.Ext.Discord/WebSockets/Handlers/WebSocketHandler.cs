@@ -4,12 +4,12 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Exceptions.Entities.Websocket;
-using Oxide.Ext.Discord.Interfaces.WebSockets;
-using Oxide.Ext.Discord.Json.Serialization;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.WebSockets.Handlers
+namespace Oxide.Ext.Discord.WebSockets
 {
     /// <summary>
     /// Handles the web socket connection and events
