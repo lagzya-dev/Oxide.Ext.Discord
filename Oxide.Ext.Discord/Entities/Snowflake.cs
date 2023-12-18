@@ -260,6 +260,14 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         /// <param name="id">Id to be converted to snowflake</param>
         /// <returns>ID converted to a snowflake</returns>
-        public static explicit operator Snowflake(string id) => new Snowflake(id);
+        public static explicit operator Snowflake(string id)
+        {
+            if (TryParse(id, out Snowflake snowflake))
+            {
+                return snowflake;
+            }
+
+            return default(Snowflake);
+        }
     }
 }
