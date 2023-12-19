@@ -32,6 +32,7 @@ namespace Oxide.Ext.Discord.Logging
         public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
         {
             StringBuilder sb = Builder;
+            sb.Clear();
             sb.Append(_pluginName);
             sb.Append('[');
             sb.Append(EnumCache<DiscordLogLevel>.Instance.ToString(level));

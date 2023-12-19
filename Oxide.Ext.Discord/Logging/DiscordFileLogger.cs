@@ -39,6 +39,7 @@ namespace Oxide.Ext.Discord.Logging
         public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
         {
             StringBuilder sb = Builder;
+            sb.Clear();
             char[] formatting = ArrayPool<char>.Shared.Rent(_dateTimeFormat.Length);
             Span<char> span = formatting.AsSpan();
             DateTime.Now.TryFormat(span, out int written, _dateTimeFormat);
