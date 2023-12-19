@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
 
 #pragma warning disable CS1591

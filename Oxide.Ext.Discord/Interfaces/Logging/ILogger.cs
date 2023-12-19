@@ -1,6 +1,7 @@
 using System;
+using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Logging
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Represents an interface for a logger

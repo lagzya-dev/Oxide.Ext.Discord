@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <summary>
         /// Decrements the Indent
         /// </summary>
-        public void DecrementIndent() => _indent = MathExt.Max(_indent - 1, 0);
+        public void DecrementIndent() => _indent = Math.Max(_indent - 1, 0);
         
         /// <summary>
         /// Appends the current indent into the logger
