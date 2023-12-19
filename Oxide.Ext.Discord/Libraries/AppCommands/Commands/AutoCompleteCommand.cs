@@ -1,7 +1,7 @@
 using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Libraries
 {

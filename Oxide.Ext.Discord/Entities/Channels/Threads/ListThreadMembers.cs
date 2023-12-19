@@ -1,6 +1,6 @@
-﻿using Oxide.Ext.Discord.Builders;
+﻿using System;
+using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 
@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities
 
             if (Limit.HasValue)
             {
-                builder.Add("limit", StringCache<int>.Instance.ToString(Limit.Value.Clamp(1, 100)));
+                builder.Add("limit", StringCache<int>.Instance.ToString(Math.Clamp(Limit.Value, 1, 100)));
             }
             
             return builder.ToStringAndFree();

@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Timers;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Interfaces;
 using Timer = System.Timers.Timer;
 
 namespace Oxide.Ext.Discord.Types

@@ -2,6 +2,7 @@ using System.Timers;
 using Oxide.Core;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets

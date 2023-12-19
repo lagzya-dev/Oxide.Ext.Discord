@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Logging
 {

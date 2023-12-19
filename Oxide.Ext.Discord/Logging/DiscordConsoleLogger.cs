@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Logging
 {

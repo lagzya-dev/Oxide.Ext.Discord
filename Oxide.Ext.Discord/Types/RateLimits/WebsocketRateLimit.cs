@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 

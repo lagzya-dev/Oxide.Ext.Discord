@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Types
 {
@@ -17,7 +17,7 @@ namespace Oxide.Ext.Discord.Types
         /// <summary>
         /// Count of the 
         /// </summary>
-        public int Count => MathExt.Min(_keyToValue.Count, _valueToKey.Count);
+        public int Count => Math.Min(_keyToValue.Count, _valueToKey.Count);
 
         /// <summary>
         /// Returns true of the dictionary contains the given key
