@@ -355,7 +355,7 @@ public RestHandler(BotClient client, ILogger logger)
 ## See Also
 
 * class [BotClient](../Clients/BotClient.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

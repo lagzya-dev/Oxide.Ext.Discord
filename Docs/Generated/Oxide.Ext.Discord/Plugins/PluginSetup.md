@@ -34,7 +34,7 @@ public PluginSetup(Plugin plugin, ILogger logger)
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [PluginSetup](./PluginSetup.md)
 * namespace [Oxide.Ext.Discord.Plugins](./PluginsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

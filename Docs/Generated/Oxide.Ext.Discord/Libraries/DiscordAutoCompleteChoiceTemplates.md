@@ -248,7 +248,7 @@ public DiscordAutoCompleteChoiceTemplates(ILogger logger)
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

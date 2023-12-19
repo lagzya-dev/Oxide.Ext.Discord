@@ -58,7 +58,7 @@ public WebSocketCommandHandler(BotClient client, DiscordWebSocket webSocket, ILo
 
 * class [BotClient](../Clients/BotClient.md)
 * class [DiscordWebSocket](./DiscordWebSocket.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [WebSocketCommandHandler](./WebSocketCommandHandler.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

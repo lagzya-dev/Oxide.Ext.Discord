@@ -258,7 +258,7 @@ namespace Oxide.Ext.Discord.WebSockets
 
                     // Hello (sent immediately after connecting, contains heartbeat and server debug information)
                     case GatewayEventCode.Hello:
-                        await HandleHello(payload.GetData<GatewayHelloEvent>(_client)).ConfigureAwait(false);
+                        await HandleHello(payload).ConfigureAwait(false);
                         break;
 
                     // Heartbeat ACK (sent immediately following a client heartbeat
@@ -1946,8 +1946,9 @@ namespace Oxide.Ext.Discord.WebSockets
         }
 
         //https://discord.com/developers/docs/topics/gateway-events#hello
-        private ValueTask HandleHello(GatewayHelloEvent hello)
+        private ValueTask HandleHello(EventPayload payload)
         {
+            GatewayHelloEvent hello = payload.GetData<GatewayHelloEvent>(_client);
             return _webSocket.OnDiscordHello(hello);
         }
 

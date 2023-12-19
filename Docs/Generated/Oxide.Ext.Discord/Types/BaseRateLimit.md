@@ -110,7 +110,7 @@ protected BaseRateLimit(int maxRequests, long interval, ILogger logger)
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [BaseRateLimit](./BaseRateLimit.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -201,7 +201,7 @@ protected readonly ILogger Logger;
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [BaseRateLimit](./BaseRateLimit.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -91,7 +91,7 @@ public WebsocketRateLimit(ILogger logger)
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [WebsocketRateLimit](./WebsocketRateLimit.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

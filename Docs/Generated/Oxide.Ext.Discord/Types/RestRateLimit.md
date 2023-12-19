@@ -101,7 +101,7 @@ public RestRateLimit(ILogger logger)
 
 ## See Also
 
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [RestRateLimit](./RestRateLimit.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

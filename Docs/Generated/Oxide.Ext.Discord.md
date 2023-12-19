@@ -503,6 +503,8 @@
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
+| interface [ILogger](./Oxide.Ext.Discord/Interfaces/ILogger.md) | Represents an interface for a logger |
+| interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) |  |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
 | interface [IPendingPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
 | interface [IPromise](./Oxide.Ext.Discord/Interfaces/IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
@@ -622,8 +624,6 @@
 | class [DiscordLoggerFactory](./Oxide.Ext.Discord/Logging/DiscordLoggerFactory.md) | Factory for creating DiscordLoggers |
 | enum [DiscordLogLevel](./Oxide.Ext.Discord/Logging/DiscordLogLevel.md) | Represents the log level for a logger |
 | interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Logging/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
-| interface [ILogger](./Oxide.Ext.Discord/Logging/ILogger.md) | Represents an interface for a logger |
-| interface [IOutputLogger](./Oxide.Ext.Discord/Logging/IOutputLogger.md) |  |
 | static class [LoggerExt](./Oxide.Ext.Discord/Logging/LoggerExt.md) |  |
 
 ## Oxide.Ext.Discord.Plugins namespace

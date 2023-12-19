@@ -19,7 +19,7 @@ public class DiscordLogger : ILogger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordLogger.cs](../../../../Oxide.Ext.Discord/Logging/DiscordLogger.cs)

@@ -53,7 +53,7 @@ public DiscordHeartbeatHandler(BotClient client, DiscordWebSocket socket, ILogge
 
 * class [BotClient](../Clients/BotClient.md)
 * class [DiscordWebSocket](./DiscordWebSocket.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [DiscordHeartbeatHandler](./DiscordHeartbeatHandler.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

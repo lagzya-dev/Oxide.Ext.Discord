@@ -254,7 +254,7 @@ public DiscordWebSocket(BotClient client, ILogger logger)
 ## See Also
 
 * class [BotClient](../Clients/BotClient.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [DiscordWebSocket](./DiscordWebSocket.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

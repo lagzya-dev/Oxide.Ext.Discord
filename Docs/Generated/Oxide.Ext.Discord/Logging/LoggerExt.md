@@ -96,7 +96,7 @@ public static void Verbose(this ILogger logger, string message)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -111,7 +111,7 @@ public static void Verbose<T1>(this ILogger logger, string message, T1 arg0)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -126,7 +126,7 @@ public static void Verbose<T1, T2>(this ILogger logger, string message, T1 arg0,
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -142,7 +142,7 @@ public static void Verbose<T1, T2, T3>(this ILogger logger, string message, T1 a
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -158,7 +158,7 @@ public static void Verbose<T1, T2, T3, T4>(this ILogger logger, string message, 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -174,7 +174,7 @@ public static void Verbose<T1, T2, T3, T4, T5>(this ILogger logger, string messa
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -190,7 +190,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6>(this ILogger logger, string m
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -206,7 +206,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, stri
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -222,7 +222,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger, 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -238,7 +238,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger logg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -255,7 +255,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -272,7 +272,7 @@ public static void Verbose<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IL
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -286,7 +286,7 @@ public static void Debug(this ILogger logger, string message)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -301,7 +301,7 @@ public static void Debug<T1>(this ILogger logger, string message, T1 arg0)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -316,7 +316,7 @@ public static void Debug<T1, T2>(this ILogger logger, string message, T1 arg0, T
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -331,7 +331,7 @@ public static void Debug<T1, T2, T3>(this ILogger logger, string message, T1 arg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -347,7 +347,7 @@ public static void Debug<T1, T2, T3, T4>(this ILogger logger, string message, T1
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -363,7 +363,7 @@ public static void Debug<T1, T2, T3, T4, T5>(this ILogger logger, string message
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -379,7 +379,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6>(this ILogger logger, string mes
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -395,7 +395,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, string
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -411,7 +411,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger, st
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -427,7 +427,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger logger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -444,7 +444,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogger l
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -461,7 +461,7 @@ public static void Debug<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ILog
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -475,7 +475,7 @@ public static void Info(this ILogger logger, string message)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -490,7 +490,7 @@ public static void Info<T1>(this ILogger logger, string message, T1 arg0)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -505,7 +505,7 @@ public static void Info<T1, T2>(this ILogger logger, string message, T1 arg0, T2
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -520,7 +520,7 @@ public static void Info<T1, T2, T3>(this ILogger logger, string message, T1 arg0
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -536,7 +536,7 @@ public static void Info<T1, T2, T3, T4>(this ILogger logger, string message, T1 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -552,7 +552,7 @@ public static void Info<T1, T2, T3, T4, T5>(this ILogger logger, string message,
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -568,7 +568,7 @@ public static void Info<T1, T2, T3, T4, T5, T6>(this ILogger logger, string mess
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -584,7 +584,7 @@ public static void Info<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, string 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -600,7 +600,7 @@ public static void Info<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger, str
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -616,7 +616,7 @@ public static void Info<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger logger,
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -633,7 +633,7 @@ public static void Info<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogger lo
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -650,7 +650,7 @@ public static void Info<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ILogg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -664,7 +664,7 @@ public static void Warning(this ILogger logger, string message)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -679,7 +679,7 @@ public static void Warning<T1>(this ILogger logger, string message, T1 arg0)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -694,7 +694,7 @@ public static void Warning<T1, T2>(this ILogger logger, string message, T1 arg0,
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -710,7 +710,7 @@ public static void Warning<T1, T2, T3>(this ILogger logger, string message, T1 a
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -726,7 +726,7 @@ public static void Warning<T1, T2, T3, T4>(this ILogger logger, string message, 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -742,7 +742,7 @@ public static void Warning<T1, T2, T3, T4, T5>(this ILogger logger, string messa
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -758,7 +758,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6>(this ILogger logger, string m
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -774,7 +774,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, stri
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -790,7 +790,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger, 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -806,7 +806,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger logg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -823,7 +823,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -840,7 +840,7 @@ public static void Warning<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this IL
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -854,7 +854,7 @@ public static void Error(this ILogger logger, string message)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -869,7 +869,7 @@ public static void Error<T1>(this ILogger logger, string message, T1 arg0)
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -884,7 +884,7 @@ public static void Error<T1, T2>(this ILogger logger, string message, T1 arg0, T
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -899,7 +899,7 @@ public static void Error<T1, T2, T3>(this ILogger logger, string message, T1 arg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -915,7 +915,7 @@ public static void Error<T1, T2, T3, T4>(this ILogger logger, string message, T1
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -931,7 +931,7 @@ public static void Error<T1, T2, T3, T4, T5>(this ILogger logger, string message
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -947,7 +947,7 @@ public static void Error<T1, T2, T3, T4, T5, T6>(this ILogger logger, string mes
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -963,7 +963,7 @@ public static void Error<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, string
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -979,7 +979,7 @@ public static void Error<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger, st
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -995,7 +995,7 @@ public static void Error<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger logger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1012,7 +1012,7 @@ public static void Error<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogger l
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1029,7 +1029,7 @@ public static void Error<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this ILog
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1043,7 +1043,7 @@ public static void Exception(this ILogger logger, string message, Exception exce
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1059,7 +1059,7 @@ public static void Exception<T1>(this ILogger logger, string message, T1 arg0,
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1075,7 +1075,7 @@ public static void Exception<T1, T2>(this ILogger logger, string message, T1 arg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1091,7 +1091,7 @@ public static void Exception<T1, T2, T3>(this ILogger logger, string message, T1
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1107,7 +1107,7 @@ public static void Exception<T1, T2, T3, T4>(this ILogger logger, string message
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1123,7 +1123,7 @@ public static void Exception<T1, T2, T3, T4, T5>(this ILogger logger, string mes
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1139,7 +1139,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6>(this ILogger logger, string
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1155,7 +1155,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6, T7>(this ILogger logger, st
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1172,7 +1172,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6, T7, T8>(this ILogger logger
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1189,7 +1189,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6, T7, T8, T9>(this ILogger lo
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1206,7 +1206,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(this ILogg
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -1223,7 +1223,7 @@ public static void Exception<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(this 
 
 ## See Also
 
-* interface [ILogger](./ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [LoggerExt](./LoggerExt.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

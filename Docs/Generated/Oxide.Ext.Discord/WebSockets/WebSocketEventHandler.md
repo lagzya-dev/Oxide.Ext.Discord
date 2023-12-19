@@ -123,7 +123,7 @@ public WebSocketEventHandler(BotClient client, DiscordWebSocket socket, ILogger 
 
 * class [BotClient](../Clients/BotClient.md)
 * class [DiscordWebSocket](./DiscordWebSocket.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [WebSocketEventHandler](./WebSocketEventHandler.md)
 * namespace [Oxide.Ext.Discord.WebSockets](./WebSocketsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

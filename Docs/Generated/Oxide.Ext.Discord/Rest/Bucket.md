@@ -49,7 +49,7 @@ public void Init(BucketId bucketId, RestHandler rest, ILogger logger)
 
 * struct [BucketId](./BucketId.md)
 * class [RestHandler](./RestHandler.md)
-* interface [ILogger](../Logging/ILogger.md)
+* interface [ILogger](../Interfaces/ILogger.md)
 * class [Bucket](./Bucket.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
