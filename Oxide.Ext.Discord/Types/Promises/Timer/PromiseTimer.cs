@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Types
     /// <summary>
     /// Timer Implementation using promises
     /// </summary>
-    public sealed class PromiseTimer : Singleton<PromiseTimer>
+    internal sealed class PromiseTimer : Singleton<PromiseTimer>
     {
         /// <summary>
         /// The current running total for time that this PromiseTimer has run for

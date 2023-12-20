@@ -119,7 +119,7 @@ namespace Oxide.Ext.Discord
             EmojiCache.Instance.Build();
             
             Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
-            Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
+            //Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
             
             Interface.Oxide.Config.Compiler.PreprocessorDirectives.AddRange(GetPreProcessorDirectives());
             
