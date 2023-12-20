@@ -38,6 +38,8 @@ namespace Oxide.Ext.Discord.Factory
             bucket.Append(EnumCache<RequestMethod>.Instance.ToString(method));
             bucket.Append(':');
             bucket.Append(previous);
+
+            ReadOnlySpan<char> reactions = ReactionsRoute.AsSpan();
             
             while (tokenizer.MoveNext())
             {
@@ -46,7 +48,7 @@ namespace Oxide.Ext.Discord.Factory
                 ReadOnlySpan<char> current = GetCurrent(tokenizer.Index, previous, tokenizer.Current.Span);
 
                 bucket.Append(current);
-                if (current.SequenceEqual(ReactionsRoute))
+                if (current.Equals(reactions, StringComparison.OrdinalIgnoreCase))
                 {
                     break;
                 }
@@ -69,9 +71,9 @@ namespace Oxide.Ext.Discord.Factory
         {
             //We should only use Major ID if the previous segment name is the first segment and the ID is the second.
             return index == 1 && 
-                   (previous.SequenceEqual("guilds") 
-                    || previous.SequenceEqual("channels") 
-                    || previous.SequenceEqual("webhooks")
+                   (previous.Equals("guilds".AsSpan(), StringComparison.OrdinalIgnoreCase) 
+                    || previous.Equals("channels".AsSpan(), StringComparison.OrdinalIgnoreCase) 
+                    || previous.Equals("webhooks".AsSpan(), StringComparison.OrdinalIgnoreCase)
                     );
         }
     }
