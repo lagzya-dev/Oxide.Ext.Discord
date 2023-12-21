@@ -88,18 +88,14 @@ namespace Oxide.Ext.Discord.WebSockets
             SetSocketState(SocketState.Disconnected);
             if (Token.CanBeCanceled)
             {
-                _logger.Debug("{0} Cancel Token", WebsocketId);
                 _source.Cancel();
             }
-
-            _logger.Debug("{0} Socket Closed: {1}", WebsocketId, _socketClosed);
+            
             if (!_socketClosed)
             {
-                _logger.Debug("{0} Dispose Socket", WebsocketId);
                 _socket.Dispose();
             }
-
-            _logger.Debug("{0} Dispose Source", WebsocketId);
+            
             _source.Dispose();
             _logger.Debug("{0} Dispose Complete", WebsocketId);
         }

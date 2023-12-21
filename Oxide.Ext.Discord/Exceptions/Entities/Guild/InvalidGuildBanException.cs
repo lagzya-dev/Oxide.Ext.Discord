@@ -9,27 +9,6 @@ namespace Oxide.Ext.Discord.Exceptions
     {
         private InvalidGuildBanException(string message) : base(message) { }
         
-        internal static void ThrowIfInvalidDeleteMessageDays(int? days)
-        {
-            const int MinDays = 0;
-            const int MaxDays = 7;
-
-            if (!days.HasValue)
-            {
-                return;
-            }
-            
-            if (days.Value < MinDays)
-            {
-                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageDays)} cannot be less than {MinDays} days");
-            }
-                
-            if (days.Value < MaxDays)
-            {
-                throw new InvalidGuildBanException($"{nameof(GuildBanCreate)}.{nameof(GuildBanCreate.DeleteMessageDays)} cannot be more than {MaxDays} days");
-            }
-        }
-        
         internal static void ThrowIfInvalidDeleteMessageSeconds(int? seconds)
         {
             const int MinSeconds = 0;

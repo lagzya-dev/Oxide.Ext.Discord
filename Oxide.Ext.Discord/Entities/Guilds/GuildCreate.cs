@@ -19,13 +19,6 @@ namespace Oxide.Ext.Discord.Entities
         public string Name { get; set; }
         
         /// <summary>
-        /// Voice region id
-        /// </summary>
-        [Obsolete("Deprecated in Discord API")]
-        [JsonProperty("region")]
-        public string Region { get; set; }
-        
-        /// <summary>
         /// Base64 128x128 image for the guild icon
         /// </summary>
         [JsonProperty("icon")]        

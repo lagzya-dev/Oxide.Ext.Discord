@@ -99,14 +99,7 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [Description("MEMBER_VERIFICATION_GATE_ENABLED")] 
         MemberVerificationGateEnabled,
-
-        /// <summary>
-        /// Guild has enabled monetization
-        /// </summary>
-        [Obsolete("Has been replaced with CreatorMonetizableProvisional")]
-        [Description("MONETIZATION_ENABLED")] 
-        MonetizationEnabled,
-
+        
         /// <summary>
         /// Guild has increased custom sticker slots
         /// </summary>
@@ -136,13 +129,6 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [Description("RAID_ALERTS_DISABLED")] 
         RaidAlertsDisabled,
-        
-        /// <summary>
-        /// Guild has access to create private threads
-        /// </summary>
-        [Obsolete("All guilds now have access to PrivateThreads")]
-        [Description("PRIVATE_THREADS")] 
-        PrivateThreads,
         
         /// <summary>
         /// Guild can be previewed before joining via Membership Screening or the directory

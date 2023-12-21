@@ -40,6 +40,13 @@ namespace Oxide.Ext.Discord.Libraries
         {
             Placeholder = string.IsNullOrEmpty(format) ? $"{prefix.ToLower()}.{key}" : $"{prefix.ToLower()}.{key}:{format}";
         }
+        
+        /// <summary>
+        /// Applies a format to a given <see cref="PlaceholderKey"/>
+        /// </summary>
+        /// <param name="format">Format to be applied</param>
+        /// <returns>string placeholder containing the placeholder with the given format</returns>
+        public string WithFormat(string format) => $"{{{Placeholder}:{format}}}";
 
         /// <summary>
         /// Returns the PlaceholderKey formatted as a usable placeholder in text
