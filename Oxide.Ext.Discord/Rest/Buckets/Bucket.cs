@@ -231,6 +231,11 @@ namespace Oxide.Ext.Discord.Rest
             {
                 _rateLimit.ReachedRateLimit(rateLimit.ResetAt);
             }
+
+            if (request.Options.IgnoreRateLimit)
+            {
+                return;
+            }
             
             if (rateLimit.ResetAt > ResetAt)
             {
