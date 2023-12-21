@@ -9,6 +9,7 @@
 | class [Request&lt;T&gt;](./Request%7BT%7D.md) | Represents a REST API request that returns {T} data |
 | enum [RequestCompletedStatus](./RequestCompletedStatus.md) | Represents the completed status for the request |
 | class [RequestHandler](./RequestHandler.md) | Represent a Discord API request |
+| struct [RequestOptions](./RequestOptions.md) | Options the the REST request |
 | enum [RequestStatus](./RequestStatus.md) | Discord API Request Status |
 | class [RestHandler](./RestHandler.md) | Represents a REST handler for a bot |
 

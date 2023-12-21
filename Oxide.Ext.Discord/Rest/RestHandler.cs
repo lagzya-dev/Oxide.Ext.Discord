@@ -75,8 +75,9 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
+        /// <param name="options">Options for the request</param>
         /// <typeparam name="TResult">Result to be returned from the request</typeparam>
-        public IPromise<TResult> Get<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.GET);
+        public IPromise<TResult> Get<TResult>(DiscordClient client, string url, RequestOptions? options = null) => CreateRequest<TResult>(client, url, RequestMethod.GET, null, options);
 
         /// <summary>
         /// Performs a HTTP Post Request
@@ -84,7 +85,8 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to post</param>
-        public IPromise Post(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.POST, data);
+        /// <param name="options">Options for the request</param>
+        public IPromise Post(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest(client, url, RequestMethod.POST, data, options);
 
         /// <summary>
         /// Performs a HTTP Post Request with TResult response
@@ -92,8 +94,9 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to post</param>
+        /// <param name="options">Options for the request</param>
         /// <typeparam name="TResult">Result to be returned from the request</typeparam>
-        public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.POST, data);
+        public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest<TResult>(client, url, RequestMethod.POST, data, options);
 
         /// <summary>
         /// Performs a HTTP Put Request
@@ -101,7 +104,8 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to put</param>
-        public IPromise Put(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PUT, data);
+        /// <param name="options">Options for the request</param>
+        public IPromise Put(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest(client, url, RequestMethod.PUT, data, options);
 
         /// <summary>
         /// Performs a HTTP Put Request with TResult response
@@ -110,7 +114,8 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to put</param>
         /// <typeparam name="TResult">Result to be returned from the request</typeparam>
-        public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data);
+        /// <param name="options">Options for the request</param>
+        public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest<TResult>(client, url, RequestMethod.PUT, data, options);
 
         /// <summary>
         /// Performs a HTTP Patch Request
@@ -118,7 +123,8 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to patch</param>
-        public IPromise Patch(DiscordClient client, string url, object data) => CreateRequest(client, url, RequestMethod.PATCH, data);
+        /// <param name="options">Options for the request</param>
+        public IPromise Patch(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest(client, url, RequestMethod.PATCH, data, options);
 
         /// <summary>
         /// Performs a HTTP Patch Request with TResult response
@@ -126,23 +132,26 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
         /// <param name="data">Data to patch</param>
+        /// <param name="options">Options for the request</param>
         /// <typeparam name="TResult">Result to be returned from the request</typeparam>
-        public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data);
+        public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data, RequestOptions? options = null) => CreateRequest<TResult>(client, url, RequestMethod.PATCH, data, options);
         
         /// <summary>
         /// Performs a HTTP Delete Request
         /// </summary>
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
-        public IPromise Delete(DiscordClient client, string url) => CreateRequest(client, url, RequestMethod.DELETE);
+        /// <param name="options">Options for the request</param>
+        public IPromise Delete(DiscordClient client, string url, RequestOptions? options = null) => CreateRequest(client, url, RequestMethod.DELETE, null, options);
         
         /// <summary>
         /// Performs a HTTP Delete Request with TResult response
         /// </summary>
         /// <param name="client">Client for the request</param>
         /// <param name="url">Url for the request</param>
+        /// <param name="options">Options for the request</param>
         /// <typeparam name="TResult">Result to be returned from the request</typeparam>
-        public IPromise<TResult> Delete<TResult>(DiscordClient client, string url) => CreateRequest<TResult>(client, url, RequestMethod.DELETE);
+        public IPromise<TResult> Delete<TResult>(DiscordClient client, string url, RequestOptions? options = null) => CreateRequest<TResult>(client, url, RequestMethod.DELETE, null, options);
 
         /// <summary>
         /// Creates a new request and queues it to be ran
@@ -151,11 +160,12 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
-        private IPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data = null)
+        /// <param name="options">Options for the request</param>
+        private IPromise CreateRequest(DiscordClient client, string url, RequestMethod method, object data, RequestOptions? options)
         {
             PerformValidation(data);
             IPendingPromise promise = Promise.Create();
-            Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
+            Request request = Request.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise, options ?? default(RequestOptions));
             StartRequest(request);
             return promise;
         }
@@ -167,12 +177,13 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="url">URL of the request</param>
         /// <param name="method">HTTP method of the request</param>
         /// <param name="data">Data to be sent with the request</param>
+        /// <param name="options">Options for the request</param>
         /// <typeparam name="T">The type that is expected to be returned</typeparam>
-        private IPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data = null)
+        private IPromise<T> CreateRequest<T>(DiscordClient client, string url, RequestMethod method, object data, RequestOptions? options)
         {
             PerformValidation(data);
             IPendingPromise<T> promise = Promise<T>.Create();
-            Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise);
+            Request<T> request = Request<T>.CreateRequest(DiscordPool.Internal, client, Client, method, url, data, promise, options ?? default(RequestOptions));
             StartRequest(request);
             return promise;
         }

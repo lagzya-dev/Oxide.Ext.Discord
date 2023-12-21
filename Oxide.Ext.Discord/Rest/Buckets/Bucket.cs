@@ -126,6 +126,11 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
 
+            if (request.Options.IgnoreRateLimit)
+            {
+                return;
+            }
+
             try
             {
                 _requestSync.WaitOne();
@@ -166,9 +171,12 @@ namespace Oxide.Ext.Discord.Rest
         
         internal void OnRequestStarted(RequestHandler handler)
         {
-            Interlocked.Decrement(ref Remaining);
-            _rateLimit.FiredRequest();
-            _logger.Debug($"{nameof(Bucket)}.{nameof(OnRequestStarted)} ID: {{0}} Has Started Bucket {{1}}/{{2}}", handler.Request.Id, Remaining, Limit);
+            if (!handler.Request.Options.IgnoreRateLimit)
+            {
+                Interlocked.Decrement(ref Remaining);
+                _rateLimit.FiredRequest();
+                _logger.Debug($"{nameof(Bucket)}.{nameof(OnRequestStarted)} ID: {{0}} Has Started Bucket {{1}}/{{2}}", handler.Request.Id, Remaining, Limit);
+            }
         }
 
         internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
@@ -189,7 +197,7 @@ namespace Oxide.Ext.Discord.Rest
             {
                 _completedSync.WaitOne();
                 
-                if (!IsKnownBucket && rateLimit != null && rateLimit.BucketId.IsValid)
+                if (!handler.Request.Options.IgnoreRateLimit && !IsKnownBucket && rateLimit != null && rateLimit.BucketId.IsValid)
                 {
                     _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
                     if (!IsKnownBucket)

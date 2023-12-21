@@ -35,7 +35,8 @@ Creates a REST API request that returns type of T from the response
 
 ```csharp
 public static Request CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, 
-    HttpClient httpClient, RequestMethod method, string route, object data, IPendingPromise promise)
+    HttpClient httpClient, RequestMethod method, string route, object data, 
+    IPendingPromise promise, RequestOptions options)
 ```
 
 | parameter | description |
@@ -47,6 +48,7 @@ public static Request CreateRequest(DiscordPluginPool pluginPool, DiscordClient 
 | route | Route for the request |
 | data | Data being passed into the request. Null if no data is passed |
 | promise | Promise for the request |
+| options | Options for the request |
 
 ## Return Value
 
@@ -57,6 +59,7 @@ A [`Request`](./Request%7BT%7D.md)
 * class [DiscordPluginPool](../Types/DiscordPluginPool.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * interface [IPendingPromise](../Interfaces/IPendingPromise.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [Request](./Request.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

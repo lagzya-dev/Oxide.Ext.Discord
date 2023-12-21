@@ -31,11 +31,12 @@ namespace Oxide.Ext.Discord.Rest
         /// <param name="route">Route for the request</param>
         /// <param name="data">Data being passed into the request. Null if no data is passed</param>
         /// <param name="promise">Promise for the request</param>
+        /// <param name="options">Options for the request</param>
         /// <returns>A <see cref="Request{T}"/></returns>
-        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, IPendingPromise<T> promise)
+        public static Request<T> CreateRequest(DiscordPluginPool pluginPool, DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, IPendingPromise<T> promise, RequestOptions options)
         {
             Request<T> request = pluginPool.Get<Request<T>>();
-            request.Init(client, httpClient, method, route, data);
+            request.Init(client, httpClient, method, route, data, options);
             request._promise = promise;
             return request;
         }

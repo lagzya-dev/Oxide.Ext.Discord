@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -300,7 +301,7 @@ namespace Oxide.Ext.Discord.Entities
             InvalidInteractionResponseException.ThrowIfInvalidResponseType(Type, response.Type);
 
             _hasResponded = true;
-            return client.Bot.Rest.Post(client, $"interactions/{Id}/{Token}/callback", response);
+            return client.Bot.Rest.Post(client, $"interactions/{Id}/{Token}/callback", response, RequestOptions.SkipRateLimit());
         }
 
         /// <summary>
@@ -429,6 +430,18 @@ namespace Oxide.Ext.Discord.Entities
         {
             return CreateResponse(client, new InteractionPremiumRequiredResponse());
         }
+        
+        /// <summary>
+        /// Gets the initial Interaction response
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response">Get Original Interaction Response</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise<DiscordMessage> GetOriginalResponse(DiscordClient client)
+        {
+            InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
+            InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
+            return client.Bot.Rest.Get<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestOptions.SkipRateLimit());
+        }
 
         /// <summary>
         /// Edits the initial Interaction response
@@ -440,7 +453,7 @@ namespace Oxide.Ext.Discord.Entities
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", message);
+            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", message, RequestOptions.SkipRateLimit());
         }
 
         /// <summary>
@@ -468,7 +481,7 @@ namespace Oxide.Ext.Discord.Entities
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/@original");
+            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/@original", RequestOptions.SkipRateLimit());
         }
 
         /// <summary>
@@ -481,7 +494,7 @@ namespace Oxide.Ext.Discord.Entities
         {
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
-            return client.Bot.Rest.Post<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}", message);
+            return client.Bot.Rest.Post<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}", message, RequestOptions.SkipRateLimit());
         }
         
         /// <summary>
@@ -493,6 +506,21 @@ namespace Oxide.Ext.Discord.Entities
         public IPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client, InteractionFollowupBuilder builder)
         {
             return CreateFollowUpMessage(client, builder.Build());
+        }
+        
+        /// <summary>
+        /// Get a followup message for an Interaction
+        /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#get-followup-message">Get Followup Message</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID of the follow up message</param>
+        /// <param name="edit">Updated message</param>
+        public IPromise<DiscordMessage> GetFollowUpMessage(DiscordClient client, Snowflake messageId, CommandFollowupUpdate edit)
+        {
+            InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
+            InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
+            InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
+            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", edit, RequestOptions.SkipRateLimit());
         }
 
         /// <summary>
@@ -507,7 +535,7 @@ namespace Oxide.Ext.Discord.Entities
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", edit);
+            return client.Bot.Rest.Patch<DiscordMessage>(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", edit, RequestOptions.SkipRateLimit());
         }
 
         /// <summary>
@@ -521,7 +549,7 @@ namespace Oxide.Ext.Discord.Entities
             InvalidInteractionResponseException.ThrowIfNotResponded(_hasResponded);
             InvalidInteractionResponseException.ThrowIfMaxResponseTimeElapsed(CreatedDate);
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}");
+            return client.Bot.Rest.Delete(client, $"webhooks/{ApplicationId}/{Token}/messages/{messageId}", RequestOptions.SkipRateLimit());
         }
     }
 }

@@ -16,7 +16,6 @@ public class VoiceRegion
 | [Id](#id-property) { get; set; } | Unique ID for the region |
 | [Name](#name-property) { get; set; } | Name of the region |
 | [Optimal](#optimal-property) { get; set; } | True for a single server that is closest to the current user's client |
-| [Vip](#vip-property) { get; set; } | True if this is a vip-only server |
 | static [ListVoiceRegions](#listvoiceregions-method)(…) | Returns an array of voice region objects that can be used when creating servers. See [List Voice Regions](https://discord.com/developers/docs/resources/voice#list-voice-regions) |
 
 ## See Also
@@ -84,22 +83,6 @@ Name of the region
 
 ```csharp
 public string Name { get; set; }
-```
-
-## See Also
-
-* class [VoiceRegion](./VoiceRegion.md)
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Vip property
-
-True if this is a vip-only server
-
-```csharp
-[Obsolete("This field is no longer sent by discord")]
-public bool Vip { get; set; }
 ```
 
 ## See Also

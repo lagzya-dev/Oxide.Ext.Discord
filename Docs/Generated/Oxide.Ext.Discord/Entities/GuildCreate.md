@@ -18,7 +18,6 @@ public class GuildCreate
 | [ExplicitContentFilter](#explicitcontentfilter-property) { get; set; } | Explicit content filter level |
 | [Icon](#icon-property) { get; set; } | Base64 128x128 image for the guild icon |
 | [Name](#name-property) { get; set; } | Name of the guild (2-100 characters) |
-| [Region](#region-property) { get; set; } | Voice region id |
 | [Roles](#roles-property) { get; set; } | Roles in the guild |
 | [SystemChannelFlags](#systemchannelflags-property) { get; set; } | System channel flags |
 | [SystemChannelId](#systemchannelid-property) { get; set; } | The id of the channel where guild notices such as welcome messages and boost events are posted |
@@ -66,22 +65,6 @@ Name of the guild (2-100 characters)
 
 ```csharp
 public string Name { get; set; }
-```
-
-## See Also
-
-* class [GuildCreate](./GuildCreate.md)
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Region property
-
-Voice region id
-
-```csharp
-[Obsolete("Deprecated in Discord API")]
-public string Region { get; set; }
 ```
 
 ## See Also

@@ -11,7 +11,6 @@ public class GuildBanCreate
 | name | description |
 | --- | --- |
 | [GuildBanCreate](#guildbancreate-constructor)() | The default constructor. |
-| [DeleteMessageDays](#deletemessagedays-property) { get; set; } | Number of days to delete messages for (0-7) |
 | [DeleteMessageSeconds](#deletemessageseconds-property) { get; set; } | Number of seconds to delete messages for, between 0 and 604800 (7 days) |
 | [Validate](#validate-method)() |  |
 
@@ -41,22 +40,6 @@ The default constructor.
 
 ```csharp
 public GuildBanCreate()
-```
-
-## See Also
-
-* class [GuildBanCreate](./GuildBanCreate.md)
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# DeleteMessageDays property
-
-Number of days to delete messages for (0-7)
-
-```csharp
-[Obsolete("This has been deprecated by discord and will be removed in a future version. Please use DeleteMessageSeconds field instead.")]
-public int? DeleteMessageDays { get; set; }
 ```
 
 ## See Also

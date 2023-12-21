@@ -28,7 +28,6 @@ public enum GatewayIntents
 | DirectMessageReactions | `1 << 13` | - MESSAGE_REACTION_ADD - MESSAGE_REACTION_REMOVE - MESSAGE_REACTION_REMOVE_ALL - MESSAGE_REACTION_REMOVE_EMOJI |
 | DirectMessageTyping | `1 << 14` | - TYPING_START |
 | MessageContent | `1 << 15` | - Guild Message.Content |
-| MessageContentIntent | `1 << 15` | Old name for GatewayIntents.MessageContent |
 | GuildScheduledEvents | `1 << 16` | - GUILD_SCHEDULED_EVENT_CREATE - GUILD_SCHEDULED_EVENT_UPDATE - GUILD_SCHEDULED_EVENT_DELETE - GUILD_SCHEDULED_EVENT_USER_ADD - GUILD_SCHEDULED_EVENT_USER_REMOVE |
 | AutoModerationConfiguration | `1 << 20` | - AUTO_MODERATION_RULE_CREATE - AUTO_MODERATION_RULE_UPDATE - AUTO_MODERATION_RULE_DELETE |
 | AutoModerationExecution | `1 << 21` | - AUTO_MODERATION_ACTION_EXECUTION |

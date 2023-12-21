@@ -17,6 +17,7 @@ public struct PlaceholderKey : IEquatable<PlaceholderKey>
 | [Equals](#equals-method)(…) |  |
 | override [GetHashCode](#gethashcode-method)() |  |
 | override [ToString](#tostring-method)() | Returns the PlaceholderKey formatted as a usable placeholder in text |
+| [WithFormat](#withformat-method)(…) | Applies a format to a given [`PlaceholderKey`](./PlaceholderKey.md) |
 | [implicit operator](#placeholderkey-implicit-operator) | Implicitly converts to String by calling the [`ToString`](#tostring-method) method. |
 
 ## See Also
@@ -24,6 +25,29 @@ public struct PlaceholderKey : IEquatable<PlaceholderKey>
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PlaceholderKey.cs](../../../../Oxide.Ext.Discord/Libraries/PlaceholderKey.cs)
+   
+   
+# WithFormat method
+
+Applies a format to a given [`PlaceholderKey`](./PlaceholderKey.md)
+
+```csharp
+public string WithFormat(string format)
+```
+
+| parameter | description |
+| --- | --- |
+| format | Format to be applied |
+
+## Return Value
+
+string placeholder containing the placeholder with the given format
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ToString method

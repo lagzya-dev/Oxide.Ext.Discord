@@ -43,8 +43,10 @@ public class DiscordInteraction
 | [EditTemplateOriginalResponse](#edittemplateoriginalresponse-method)(…) | Edit a interaction response with a message template |
 | [GetAutoCompleteBuilder](#getautocompletebuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction |
 | [GetFollowupBuilder](#getfollowupbuilder-method)() | Returns a [`InteractionFollowupBuilder`](../Builders/InteractionFollowupBuilder.md) for this interaction |
+| [GetFollowUpMessage](#getfollowupmessage-method)(…) | Get a followup message for an Interaction See [Get Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#get-followup-message) |
 | [GetLangMessage](#getlangmessage-method-1-of-2)(…) | Returns a localized string for this interaction (2 methods) |
 | [GetModalBuilder](#getmodalbuilder-method)() | Returns a [`InteractionAutoCompleteBuilder`](../Builders/InteractionAutoCompleteBuilder.md) for this interaction |
+| [GetOriginalResponse](#getoriginalresponse-method)(…) | Gets the initial Interaction response See [Get Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response) |
 | [GetResponseBuilder](#getresponsebuilder-method)() | Returns a [`InteractionResponseBuilder`](../Builders/InteractionResponseBuilder.md) for this interaction |
 
 ## See Also
@@ -452,6 +454,28 @@ public IPromise CreatePremiumRequiredResponse(DiscordClient client)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
+# GetOriginalResponse method
+
+Gets the initial Interaction response See [Get Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response)
+
+```csharp
+public IPromise<DiscordMessage> GetOriginalResponse(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
 # EditOriginalResponse method
 
 Edits the initial Interaction response See [Edit Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#edit-original-interaction-response)
@@ -577,6 +601,33 @@ public IPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client,
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [InteractionFollowupBuilder](../Builders/InteractionFollowupBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetFollowUpMessage method
+
+Get a followup message for an Interaction See [Get Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#get-followup-message)
+
+```csharp
+public IPromise<DiscordMessage> GetFollowUpMessage(DiscordClient client, Snowflake messageId, 
+    CommandFollowupUpdate edit)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| messageId | Message ID of the follow up message |
+| edit | Updated message |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* struct [Snowflake](./Snowflake.md)
+* class [CommandFollowupUpdate](./CommandFollowupUpdate.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

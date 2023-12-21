@@ -27,16 +27,6 @@ public enum UserFlags
 | CertifiedModerator | `1 << 18` | Flag given to users that are Moderator Programs Alumni |
 | BotHttpInteractions | `1 << 19` | User is a Bot uses only HTTP interactions and is shown in the online member list |
 | ActiveDeveloper | `1 << 22` | User is an [Active Developer](https://support-dev.discord.com/hc/articles/10113997751447) |
-| DiscordEmployee | `1 << 0` | Flag given to users who are a Discord employee. |
-| PartneredServerOwner | `1 << 1` | Flag given to users who are owners of a partnered Discord server. |
-| HyperSquadEvents | `1 << 2` | Flag given to users in HypeSquad events. |
-| HouseBravery | `1 << 6` | Flag given to users who are in the HypeSquad House of Bravery. |
-| HouseBrilliance | `1 << 7` | Flag given to users who are in the HypeSquad House of Brilliance. |
-| HouseBalance | `1 << 8` | Flag given to users who are in the HypeSquad House of Balance. |
-| EarlySupporter | `1 << 9` | Flag given to users who subscribed to Nitro before games were added. |
-| TeamUser | `1 << 10` | Flag given to users who are part of a team. |
-| EarlyVerifiedBotDeveloper | `1 << 17` | Flag given to users that developed bots and early verified their accounts. |
-| DiscordCertifiedModerator | `1 << 18` | Flag given to users that are discord certified moderators |
 
 ## See Also
 

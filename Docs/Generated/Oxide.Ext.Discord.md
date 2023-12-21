@@ -464,12 +464,10 @@
 | public type | description |
 | --- | --- |
 | static class [DateTimeOffsetExt](./Oxide.Ext.Discord/Extensions/DateTimeOffsetExt.md) | DateTimeOffset Extensions |
-| static class [DiscordColorExt](./Oxide.Ext.Discord/Extensions/DiscordColorExt.md) | Extensions for Discord Color |
 | static class [DiscordUserExt](./Oxide.Ext.Discord/Extensions/DiscordUserExt.md) | Adds extension methods to Discord User to allow sending server chat commands to the player |
 | static class [HashExt](./Oxide.Ext.Discord/Extensions/HashExt.md) | Hash extensions |
 | static class [IEnumerableExt](./Oxide.Ext.Discord/Extensions/IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./Oxide.Ext.Discord/Extensions/MathExt.md) | Extensions for math operations |
-| static class [PlaceholderKeyExt](./Oxide.Ext.Discord/Extensions/PlaceholderKeyExt.md) | Extensions for placeholder keys |
 | static class [PlayerExt](./Oxide.Ext.Discord/Extensions/PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
 | static class [PluginExt](./Oxide.Ext.Discord/Extensions/PluginExt.md) | Extension methods for plugins |
 | static class [StreamExt](./Oxide.Ext.Discord/Extensions/StreamExt.md) | Stream Extension Methods |
@@ -644,6 +642,7 @@
 | class [Request&lt;T&gt;](./Oxide.Ext.Discord/Rest/Request%7BT%7D.md) | Represents a REST API request that returns {T} data |
 | enum [RequestCompletedStatus](./Oxide.Ext.Discord/Rest/RequestCompletedStatus.md) | Represents the completed status for the request |
 | class [RequestHandler](./Oxide.Ext.Discord/Rest/RequestHandler.md) | Represent a Discord API request |
+| struct [RequestOptions](./Oxide.Ext.Discord/Rest/RequestOptions.md) | Options the the REST request |
 | enum [RequestStatus](./Oxide.Ext.Discord/Rest/RequestStatus.md) | Discord API Request Status |
 | class [RestHandler](./Oxide.Ext.Discord/Rest/RestHandler.md) | Represents a REST handler for a bot |
 
@@ -664,7 +663,6 @@
 | class [Promise](./Oxide.Ext.Discord/Types/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Types/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./Oxide.Ext.Discord/Types/PromiseState.md) | Specifies the state of a promise. |
-| class [PromiseTimer](./Oxide.Ext.Discord/Types/PromiseTimer.md) | Timer Implementation using promises |
 | struct [RejectHandler](./Oxide.Ext.Discord/Types/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
 | class [RestRateLimit](./Oxide.Ext.Discord/Types/RestRateLimit.md) | Represents a rate limit for rest requests |
 | abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Types/Singleton%7BT%7D.md) | Represents a singleton of type {T} |

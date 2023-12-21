@@ -15,7 +15,6 @@
 | class [Promise](./Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./PromiseState.md) | Specifies the state of a promise. |
-| class [PromiseTimer](./PromiseTimer.md) | Timer Implementation using promises |
 | struct [RejectHandler](./RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
 | class [RestRateLimit](./RestRateLimit.md) | Represents a rate limit for rest requests |
 | abstract class [Singleton&lt;T&gt;](./Singleton%7BT%7D.md) | Represents a singleton of type {T} |

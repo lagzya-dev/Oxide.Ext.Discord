@@ -44,6 +44,11 @@ namespace Oxide.Ext.Discord.Rest
         public object Data;
 
         /// <summary>
+        /// Options for the request
+        /// </summary>
+        public RequestOptions Options;
+
+        /// <summary>
         /// Discord Client making the request
         /// </summary>
         internal DiscordClient Client;
@@ -65,7 +70,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Initializes the request
         /// </summary>
-        protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data)
+        protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, string route, object data, RequestOptions options)
         {
             Id = SnowflakeIdFactory.Instance.Generate();
             Client = client;
@@ -73,6 +78,7 @@ namespace Oxide.Ext.Discord.Rest
             Method = method;
             Route = route;
             Data = data;
+            Options = options;
             Source = new CancellationTokenSource();
             Logger = client.Logger;
             Logger.Debug($"{nameof(BaseRequest)}.{nameof(Init)} Request Created Plugin: {{0}} Request ID: {{1}} Method: {{2}} Route: {{3}}", client.PluginName, Id, Method, route);

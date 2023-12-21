@@ -39,6 +39,7 @@ public struct DiscordColor
 | static readonly [Teal](#teal-field) | Teal Role Color |
 | static readonly [Warning](#warning-field) | Discord Warning Color |
 | readonly [Color](#color-field) | uint value of the hex color code |
+| [ToHex](#tohex-method)() | Returns the color as a hex color code |
 | override [ToString](#tostring-method)() | Returns the color as a string |
 
 ## See Also
@@ -54,6 +55,21 @@ Returns the color as a string
 
 ```csharp
 public override string ToString()
+```
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# ToHex method
+
+Returns the color as a hex color code
+
+```csharp
+public string ToHex()
 ```
 
 ## See Also

@@ -43,7 +43,8 @@ public class RestHandler : IDebugLoggable
 Performs a HTTP Get Request with TResult response
 
 ```csharp
-public IPromise<TResult> Get<TResult>(DiscordClient client, string url)
+public IPromise<TResult> Get<TResult>(DiscordClient client, string url, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -51,11 +52,13 @@ public IPromise<TResult> Get<TResult>(DiscordClient client, string url)
 | TResult | Result to be returned from the request |
 | client | Client for the request |
 | url | Url for the request |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -66,7 +69,8 @@ public IPromise<TResult> Get<TResult>(DiscordClient client, string url)
 Performs a HTTP Post Request
 
 ```csharp
-public IPromise Post(DiscordClient client, string url, object data)
+public IPromise Post(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -74,11 +78,13 @@ public IPromise Post(DiscordClient client, string url, object data)
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to post |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -90,7 +96,8 @@ public IPromise Post(DiscordClient client, string url, object data)
 Performs a HTTP Post Request with TResult response
 
 ```csharp
-public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data)
+public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -99,11 +106,13 @@ public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object 
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to post |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -114,7 +123,8 @@ public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object 
 Performs a HTTP Put Request
 
 ```csharp
-public IPromise Put(DiscordClient client, string url, object data)
+public IPromise Put(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -122,11 +132,13 @@ public IPromise Put(DiscordClient client, string url, object data)
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to put |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -138,7 +150,8 @@ public IPromise Put(DiscordClient client, string url, object data)
 Performs a HTTP Put Request with TResult response
 
 ```csharp
-public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data)
+public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -147,11 +160,13 @@ public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object d
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to put |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -162,7 +177,8 @@ public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object d
 Performs a HTTP Patch Request
 
 ```csharp
-public IPromise Patch(DiscordClient client, string url, object data)
+public IPromise Patch(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -170,11 +186,13 @@ public IPromise Patch(DiscordClient client, string url, object data)
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to patch |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -186,7 +204,8 @@ public IPromise Patch(DiscordClient client, string url, object data)
 Performs a HTTP Patch Request with TResult response
 
 ```csharp
-public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data)
+public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -195,11 +214,13 @@ public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object
 | client | Client for the request |
 | url | Url for the request |
 | data | Data to patch |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -210,18 +231,20 @@ public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object
 Performs a HTTP Delete Request
 
 ```csharp
-public IPromise Delete(DiscordClient client, string url)
+public IPromise Delete(DiscordClient client, string url, RequestOptions? options = default)
 ```
 
 | parameter | description |
 | --- | --- |
 | client | Client for the request |
 | url | Url for the request |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -233,7 +256,8 @@ public IPromise Delete(DiscordClient client, string url)
 Performs a HTTP Delete Request with TResult response
 
 ```csharp
-public IPromise<TResult> Delete<TResult>(DiscordClient client, string url)
+public IPromise<TResult> Delete<TResult>(DiscordClient client, string url, 
+    RequestOptions? options = default)
 ```
 
 | parameter | description |
@@ -241,11 +265,13 @@ public IPromise<TResult> Delete<TResult>(DiscordClient client, string url)
 | TResult | Result to be returned from the request |
 | client | Client for the request |
 | url | Url for the request |
+| options | Options for the request |
 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [RestHandler](./RestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

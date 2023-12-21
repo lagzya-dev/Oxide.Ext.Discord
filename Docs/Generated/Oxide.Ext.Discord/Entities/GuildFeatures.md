@@ -25,13 +25,11 @@ public enum GuildFeatures : byte
 | InvitesDisabled | `InvitesDisabled` | Guild has paused invites, preventing new users from joining |
 | InviteSplash | `InviteSplash` | Guild has access to set an invite splash background |
 | MemberVerificationGateEnabled | `MemberVerificationGateEnabled` | Guild has enabled Membership Screening |
-| MonetizationEnabled | `MonetizationEnabled` | Guild has enabled monetization |
 | MoreStickers | `MoreStickers` | Guild has increased custom sticker slots |
 | News | `News` | Guild has access to create news channels |
 | Partnered | `Partnered` | Guild is partnered |
 | PreviewEnabled | `PreviewEnabled` | Guild can be previewed before joining via Membership Screening or the directory |
 | RaidAlertsDisabled | `RaidAlertsDisabled` | Guild has disabled alerts for join raids in the configured safety alerts channel |
-| PrivateThreads | `PrivateThreads` | Guild has access to create private threads |
 | RoleIcons | `RoleIcons` | Guild can be previewed before joining via Membership Screening or the directory |
 | RoleSubscriptionsAvailableForPurchase | `RoleSubscriptionsAvailableForPurchase` | Guild has role subscriptions that can be purchased |
 | RoleSubscriptionsEnabled | `RoleSubscriptionsEnabled` | Guild has enabled role subscriptions |

@@ -13,6 +13,7 @@ public abstract class BaseRequest : BasePoolable, IDebugLoggable
 | [Data](#data-field) | Data to be sent with the request |
 | [Id](#id-field) | ID of the request. Generated from the DateTimeOffset when the request was created |
 | [Method](#method-field) | HTTP request method |
+| [Options](#options-field) | Options for the request |
 | [Route](#route-field) | Route on the API |
 | [Status](#status-field) | Current status of the request |
 | [LogDebug](#logdebug-method)(…) |  |
@@ -44,12 +45,13 @@ Initializes the request
 
 ```csharp
 protected void Init(DiscordClient client, HttpClient httpClient, RequestMethod method, 
-    string route, object data)
+    string route, object data, RequestOptions options)
 ```
 
 ## See Also
 
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [RequestOptions](./RequestOptions.md)
 * class [BaseRequest](./BaseRequest.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -222,6 +224,22 @@ public object Data;
 
 ## See Also
 
+* class [BaseRequest](./BaseRequest.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Options field
+
+Options for the request
+
+```csharp
+public RequestOptions Options;
+```
+
+## See Also
+
+* struct [RequestOptions](./RequestOptions.md)
 * class [BaseRequest](./BaseRequest.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
