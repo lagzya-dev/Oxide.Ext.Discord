@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Plugins

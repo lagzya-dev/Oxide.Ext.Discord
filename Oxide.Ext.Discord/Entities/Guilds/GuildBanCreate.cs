@@ -1,4 +1,3 @@
-using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;

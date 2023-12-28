@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Json;
