@@ -85,7 +85,7 @@ namespace Oxide.Ext.Discord.Entities
             return false;
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider = null)
+        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default (ReadOnlySpan<char>), IFormatProvider provider = null)
         {
             return Id.TryFormat(destination, out charsWritten, format, provider);
         }

@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using System.Text;
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -6,6 +8,13 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     public static class StringBuilderExt
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Replace(this StringBuilder builder, ReadOnlySpan<char> value, int index, int length)
+        {
+            builder.Remove(index, length);
+            builder.Insert(index, value);
+        }
+        
         /// <summary>
         /// Trim empty space to the left and right of the StringBuilder
         /// </summary>
@@ -15,7 +24,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             if (sb == null || sb.Length == 0) return sb;
 
-            //Process Left Size
+            //Process Left Side
             if (char.IsWhiteSpace(sb[0]))
             {
                 int index = 1;

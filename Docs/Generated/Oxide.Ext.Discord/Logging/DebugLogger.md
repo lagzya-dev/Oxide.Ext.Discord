@@ -12,7 +12,7 @@ public class DebugLogger
 | --- | --- |
 | [DebugLogger](#debuglogger-constructor)() | The default constructor. |
 | [AppendChannelPath](#appendchannelpath-method)(…) | Appends a channel path to the logger. This path will include the guild name / Parent Channel Name (Optional) / Channel Name |
-| [AppendField](#appendfield-method-1-of-11)(…) | Appends a field into the logger (11 methods) |
+| [AppendField](#appendfield-method-1-of-12)(…) | Appends a field into the logger (12 methods) |
 | [AppendFieldEnum&lt;T&gt;](#appendfieldenum&amp;lt;t&amp;gt;-method)(…) | Appends a field with the given name and enum value |
 | [AppendFieldOutOf](#appendfieldoutof-method)(…) | Appends a field with the given name and int amount over int total value |
 | [AppendFieldPrefix](#appendfieldprefix-method)(…) | Appends the field name into the logger |
@@ -103,7 +103,7 @@ public void AppendFieldPrefix(string name)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# AppendField method (1 of 11)
+# AppendField method (1 of 12)
 
 Appends a field with the given name and bool value
 
@@ -124,7 +124,7 @@ public void AppendField(string name, bool value)
 
 ---
 
-# AppendField method (2 of 11)
+# AppendField method (2 of 12)
 
 Appends a field with the given name and double value
 
@@ -145,7 +145,7 @@ public void AppendField(string name, double value)
 
 ---
 
-# AppendField method (3 of 11)
+# AppendField method (3 of 12)
 
 Appends a field with the given name and float value
 
@@ -166,7 +166,7 @@ public void AppendField(string name, float value)
 
 ---
 
-# AppendField method (4 of 11)
+# AppendField method (4 of 12)
 
 Appends a field with the given name and int value
 
@@ -187,7 +187,7 @@ public void AppendField(string name, int value)
 
 ---
 
-# AppendField method (5 of 11)
+# AppendField method (5 of 12)
 
 Appends a field with the given name and long value
 
@@ -208,7 +208,28 @@ public void AppendField(string name, long value)
 
 ---
 
-# AppendField method (6 of 11)
+# AppendField method (6 of 12)
+
+Appends a field into the logger
+
+```csharp
+public void AppendField(string name, ReadOnlySpan<char> value)
+```
+
+| parameter | description |
+| --- | --- |
+| name | Name of the field |
+| value | Value of the field |
+
+## See Also
+
+* class [DebugLogger](./DebugLogger.md)
+* namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AppendField method (7 of 12)
 
 Appends a field with the given name and Snowflake value
 
@@ -230,7 +251,7 @@ public void AppendField(string name, Snowflake value)
 
 ---
 
-# AppendField method (7 of 11)
+# AppendField method (8 of 12)
 
 Appends a field with the given name and Snowflake? value
 
@@ -252,7 +273,7 @@ public void AppendField(string name, Snowflake? value)
 
 ---
 
-# AppendField method (8 of 11)
+# AppendField method (9 of 12)
 
 Appends a field into the logger
 
@@ -273,7 +294,7 @@ public void AppendField(string name, string value)
 
 ---
 
-# AppendField method (9 of 11)
+# AppendField method (10 of 12)
 
 Appends a field with the given name and TimeSpan value
 
@@ -294,7 +315,7 @@ public void AppendField(string name, TimeSpan time)
 
 ---
 
-# AppendField method (10 of 11)
+# AppendField method (11 of 12)
 
 Appends a field with the given name and ulong value
 
@@ -315,7 +336,7 @@ public void AppendField(string name, ulong value)
 
 ---
 
-# AppendField method (11 of 11)
+# AppendField method (12 of 12)
 
 Appends a field with the given name and values seperated by a space
 

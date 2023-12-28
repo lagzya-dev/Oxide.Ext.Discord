@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
@@ -23,16 +25,19 @@ namespace Oxide.Ext.Discord.Logging
         /// <summary>
         /// Increments the Indent
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void IncrementIndent() => _indent++;
         
         /// <summary>
         /// Decrements the Indent
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void DecrementIndent() => _indent = Math.Max(_indent - 1, 0);
         
         /// <summary>
         /// Appends the current indent into the logger
         /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AppendIndent() => _logger.Append(IndentCharacter, _indent);
 
         /// <summary>
@@ -45,16 +50,24 @@ namespace Oxide.Ext.Discord.Logging
             _logger.Append(name);
             _logger.Append(": ");
         }
+
+        /// <summary>
+        /// Appends a field into the logger
+        /// </summary>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
+        public void AppendField(string name, string value) => AppendField(name, value.AsSpan());
         
         /// <summary>
         /// Appends a field into the logger
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, string value)
+        public void AppendField(string name, ReadOnlySpan<char> value)
         {
             AppendFieldPrefix(name);
-            _logger.AppendLine(value);
+            _logger.Append(value);
+            _logger.AppendLine();
         }
 
         /// <summary>
@@ -62,36 +75,101 @@ namespace Oxide.Ext.Discord.Logging
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, int value) => AppendField(name, StringCache<int>.Instance.ToString(value));
-        
+        public void AppendField(string name, int value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(20);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and double value
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, double value) => AppendField(name, StringCache<double>.Instance.ToString(value));
-        
+        public void AppendField(string name, double value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and float value
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, float value) => AppendField(name, StringCache<float>.Instance.ToString(value));
-        
+        public void AppendField(string name, float value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and ulong value
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, ulong value) => AppendField(name, StringCache<ulong>.Instance.ToString(value));
-        
+        public void AppendField(string name, ulong value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(32);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and long value
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, long value) => AppendField(name, StringCache<long>.Instance.ToString(value));
-        
+        public void AppendField(string name, long value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(32);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and bool value
         /// </summary>
@@ -108,8 +186,21 @@ namespace Oxide.Ext.Discord.Logging
         /// </summary>
         /// <param name="name">Name of the field</param>
         /// <param name="value">Value of the field</param>
-        public void AppendField(string name, Snowflake value) => AppendField(name, value.ToString());
-        
+        public void AppendField(string name, Snowflake value)
+        {
+            char[] array = ArrayPool<char>.Shared.Rent(64);
+            Span<char> span = array.AsSpan();
+            if (value.TryFormat(span, out int written))
+            {
+                AppendField(name, span.Slice(0, written));
+            }
+            else
+            {
+                AppendField(name, value.ToString());
+            }
+            ArrayPool<char>.Shared.Return(array);
+        }
+
         /// <summary>
         /// Appends a field with the given name and Snowflake? value
         /// </summary>

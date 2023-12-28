@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Extensions
     /// <summary>
     /// Extension methods for plugins
     /// </summary>
-    public static class PluginExt
+    internal static class PluginExt
     {
         private static readonly Hash<PluginId, string> FullNameCache = new Hash<PluginId, string>();
         private static readonly BidirectionalDictionary<PluginId, Plugin> PluginIds = new BidirectionalDictionary<PluginId, Plugin>();

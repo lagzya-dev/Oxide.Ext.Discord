@@ -310,7 +310,7 @@ namespace Oxide.Ext.Discord.Rest
             logger.AppendField("Known Bucket", IsKnownBucket);
             logger.AppendField("Remaining", Remaining);
             logger.AppendField("Limit", Limit);
-            logger.AppendField("Reset In", StringCache<double>.Instance.ToString(ResetAt < DateTimeOffset.UtcNow ? 0 : (ResetAt - DateTimeOffset.UtcNow).TotalSeconds), "Seconds");
+            logger.AppendField("Reset In", (ResetAt < DateTimeOffset.UtcNow ? 0 : (ResetAt - DateTimeOffset.UtcNow).TotalSeconds).ToString(), "Seconds");
             logger.AppendField("Queue Count", _requests.Count);
             logger.AppendFieldOutOf("Semaphore", Semaphore.Available, Semaphore.MaximumCount);
             

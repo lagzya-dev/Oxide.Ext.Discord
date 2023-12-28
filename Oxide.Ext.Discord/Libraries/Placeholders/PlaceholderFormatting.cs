@@ -25,8 +25,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="value">Placeholder value to replace</param>
         private static void Replace(StringBuilder builder, PlaceholderState state, ReadOnlySpan<char> value)
         {
-            builder.Remove(state.Index, state.Length);
-            builder.Insert(state.Index, value);
+            builder.Replace(value, state.Index, state.Length);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, IReadOnlyList<string> values)

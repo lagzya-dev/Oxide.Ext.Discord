@@ -173,16 +173,31 @@ namespace Oxide.Ext.Discord.Clients
             Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
             Initialized = false;
             BotClientFactory.Instance.RemoveBot(this);
+
             try
             {
                 WebSocket?.Shutdown();
-                WebSocket = null;
-                Rest?.Shutdown();
-                Rest = null;
             }
             catch (Exception ex)
             {
-                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot.", ex);
+                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot websocket.", ex);
+            }
+            finally
+            {
+                WebSocket = null;
+            }
+
+            try
+            {
+                Rest?.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot rest client.", ex);
+            }
+            finally
+            {
+                Rest = null;
             }
                 
             _readyData = null;
@@ -311,13 +326,14 @@ namespace Oxide.Ext.Discord.Clients
             for (int index = 0; index < _clients.Count; index++)
             {
                 DiscordClient client = _clients[index];
-                sb.Append('[');
-                sb.Append(client.PluginName);
-                sb.Append(']');
-                if (index + 1 != _clients.Count)
+                if (index != 0)
                 {
                     sb.Append(",");
                 }
+                
+                sb.Append('[');
+                sb.Append(client.PluginName);
+                sb.Append(']');
             }
 
             return DiscordPool.Internal.ToStringAndFree(sb);
