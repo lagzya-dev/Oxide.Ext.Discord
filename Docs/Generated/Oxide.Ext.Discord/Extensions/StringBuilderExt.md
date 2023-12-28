@@ -10,6 +10,7 @@ public static class StringBuilderExt
 
 | name | description |
 | --- | --- |
+| static [Replace](#replace-method)(…) |  |
 | static [Trim](#trim-method)(…) | Trim empty space to the left and right of the StringBuilder |
 
 ## See Also
@@ -17,6 +18,20 @@ public static class StringBuilderExt
 * namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [StringBuilderExt.cs](../../../../Oxide.Ext.Discord/Extensions/StringBuilderExt.cs)
+   
+   
+# Replace method
+
+```csharp
+public static void Replace(this StringBuilder builder, ReadOnlySpan<char> value, int index, 
+    int length)
+```
+
+## See Also
+
+* class [StringBuilderExt](./StringBuilderExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Trim method

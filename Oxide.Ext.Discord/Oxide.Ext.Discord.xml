@@ -141,11 +141,6 @@
             <param name="name">Name of the command</param>
             <param name="isLocalized">If the command name is the localization key for the command</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Attributes.DiscordPoolAttribute">
-            <summary>
-            Attribute for setting <see cref="T:Oxide.Ext.Discord.Types.DiscordPluginPool"/> on a plugin
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Builders.Ansi.AnsiBuilder">
             <summary>
             Builder for ANSI colored text
@@ -18447,6 +18442,28 @@
             <param name="color">Color of the text</param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.ServerFormatting.Bold(System.String)">
+            <summary>
+            Bold the Text
+            </summary>
+            <param name="text"></param>
+            <returns>Bold text formatting</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.ServerFormatting.Italic(System.String)">
+            <summary>
+            Italics the Text
+            </summary>
+            <param name="text"></param>
+            <returns>Italic text formatting</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.ServerFormatting.Size(System.String,System.Int32)">
+            <summary>
+            Font size formatted text
+            </summary>
+            <param name="text"></param>
+            <param name="size">Font size for the text</param>
+            <returns>Font size text formatting</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
             <summary>
             Helper methods relating to time
@@ -18566,41 +18583,6 @@
             </summary>
             <param name="update">Update data to apply</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordPlugin">
-            <summary>
-            Represents a plugin that uses the Discord Extension
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Name">
-            <summary>
-            Name of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Title">
-            <summary>
-            Title of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Description">
-            <summary>
-            Description of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Author">
-            <summary>
-            Author of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Version">
-            <summary>
-            Version of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
-            <summary>
-            Gets / Sets the DiscordClient on a plugin
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">
             <summary>
             Interface for Discord Query Strings
@@ -18694,6 +18676,41 @@
         <member name="M:Oxide.Ext.Discord.Interfaces.ILogger.Shutdown">
             <summary>
             Shuts down the logger
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordPlugin">
+            <summary>
+            Represents a plugin that uses the Discord Extension
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Name">
+            <summary>
+            Name of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Title">
+            <summary>
+            Title of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Description">
+            <summary>
+            Description of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Author">
+            <summary>
+            Author of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Version">
+            <summary>
+            Version of the plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
+            <summary>
+            Gets / Sets the DiscordClient on a plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IPendingPromise">

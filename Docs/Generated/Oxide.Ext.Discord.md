@@ -18,7 +18,6 @@
 | class [DiscordAutoCompleteCommandAttribute](./Oxide.Ext.Discord/Attributes/DiscordAutoCompleteCommandAttribute.md) | Discord Auto Complete Command Attribute for ApplicationCommandAutoComplete Callback Hook Format: |
 | class [DiscordMessageComponentCommandAttribute](./Oxide.Ext.Discord/Attributes/DiscordMessageComponentCommandAttribute.md) | Discord Message Component Command Attribute for MessageComponent Callback Hook Format: |
 | class [DiscordModalSubmitAttribute](./Oxide.Ext.Discord/Attributes/DiscordModalSubmitAttribute.md) | Discord Message Component Command Attribute for ModalSubmit Callback Hook Format: |
-| class [DiscordPoolAttribute](./Oxide.Ext.Discord/Attributes/DiscordPoolAttribute.md) | Attribute for setting [`DiscordPluginPool`](./Oxide.Ext.Discord/Types/DiscordPluginPool.md) on a plugin |
 | class [GuildCommandAttribute](./Oxide.Ext.Discord/Attributes/GuildCommandAttribute.md) | Used to identify guild bot commands |
 
 ## Oxide.Ext.Discord.Builders namespace
@@ -469,7 +468,6 @@
 | static class [IEnumerableExt](./Oxide.Ext.Discord/Extensions/IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./Oxide.Ext.Discord/Extensions/MathExt.md) | Extensions for math operations |
 | static class [PlayerExt](./Oxide.Ext.Discord/Extensions/PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
-| static class [PluginExt](./Oxide.Ext.Discord/Extensions/PluginExt.md) | Extension methods for plugins |
 | static class [StreamExt](./Oxide.Ext.Discord/Extensions/StreamExt.md) | Stream Extension Methods |
 | static class [StringBuilderExt](./Oxide.Ext.Discord/Extensions/StringBuilderExt.md) | StringBuilder extension methods |
 
@@ -499,6 +497,7 @@
 | interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
 | interface [IDiscordMessageTemplate](./Oxide.Ext.Discord/Interfaces/IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
+| interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) |  |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
 | interface [ILogger](./Oxide.Ext.Discord/Interfaces/ILogger.md) | Represents an interface for a logger |

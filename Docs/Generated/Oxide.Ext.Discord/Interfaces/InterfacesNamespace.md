@@ -7,6 +7,7 @@
 | interface [IDiscordCacheable&lt;T&gt;](./IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
 | interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
+| interface [IDiscordPool](./IDiscordPool.md) |  |
 | interface [IDiscordQueryString](./IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./IFileAttachments.md) | Represents and interface for entities that can upload files |
 | interface [ILogger](./ILogger.md) | Represents an interface for a logger |

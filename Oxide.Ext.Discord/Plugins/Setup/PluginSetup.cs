@@ -40,29 +40,7 @@ namespace Oxide.Ext.Discord.Plugins
                 {
                     case MethodInfo hook:
                     {
-                        if (ParseHook(hook, attributes, out string name))
-                        {
-                            if (DiscordExtHooks.IsDiscordHook(name))
-                            {
-                                
-                                if (DiscordExtHooks.IsGlobalHook(name))
-                                {
-                                    GlobalHooks.Add(name);
-                                    logger.Verbose("Adding Global Hook: {0}.{1}", Plugin.Name, name);
-                                }
-                                else
-                                {
-                                    PluginHooks.Add(name);
-                                    logger.Verbose("Adding Plugin Hook: {0}.{1}", Plugin.Name, name);
-                                }
-                            }
-                           
-                            if (IsCallbackMethod(attributes))
-                            {
-                                logger.Verbose("Adding Callback Hook: {0}.{1}", Plugin.Name, name);
-                                _callbacks.Add(new PluginCallback(name, hook, attributes));
-                            }
-                        }
+                        ProcessMethod(hook, attributes, logger);
                         break;
                     }
 
@@ -75,6 +53,34 @@ namespace Oxide.Ext.Discord.Plugins
                     //     }
                     //     break;
                 }
+            }
+        }
+
+        private void ProcessMethod(MethodInfo hook, Attribute[] attributes, ILogger logger)
+        {
+            if (!ParseHook(hook, attributes, out string name))
+            {
+                return;
+            }
+            
+            if (DiscordExtHooks.IsDiscordHook(name))
+            {
+                if (DiscordExtHooks.IsGlobalHook(name))
+                {
+                    GlobalHooks.Add(name);
+                    logger.Verbose("Adding Global Hook: {0}.{1}", Plugin.Name, name);
+                }
+                else
+                {
+                    PluginHooks.Add(name);
+                    logger.Verbose("Adding Plugin Hook: {0}.{1}", Plugin.Name, name);
+                }
+            }
+                           
+            if (IsCallbackMethod(attributes))
+            {
+                logger.Verbose("Adding Callback Hook: {0}.{1}", Plugin.Name, name);
+                _callbacks.Add(new PluginCallback(name, hook, attributes));
             }
         }
 

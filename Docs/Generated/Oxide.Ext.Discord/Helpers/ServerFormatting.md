@@ -10,7 +10,10 @@ public static class ServerFormatting
 
 | name | description |
 | --- | --- |
+| static [Bold](#bold-method)(…) | Bold the Text |
 | static [Color](#color-method-1-of-2)(…) | Color Text with the given color (2 methods) |
+| static [Italic](#italic-method)(…) | Italics the Text |
+| static [Size](#size-method)(…) | Font size formatted text |
 
 ## See Also
 
@@ -47,7 +50,7 @@ public static string Color(this PlaceholderKey key, DiscordColor color)
 Color Text with the given color
 
 ```csharp
-public static string Color(string text, DiscordColor color)
+public static string Color(this string text, DiscordColor color)
 ```
 
 | parameter | description |
@@ -58,6 +61,76 @@ public static string Color(string text, DiscordColor color)
 ## See Also
 
 * struct [DiscordColor](../Entities/DiscordColor.md)
+* class [ServerFormatting](./ServerFormatting.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Bold method
+
+Bold the Text
+
+```csharp
+public static string Bold(this string text)
+```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+
+## Return Value
+
+Bold text formatting
+
+## See Also
+
+* class [ServerFormatting](./ServerFormatting.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Italic method
+
+Italics the Text
+
+```csharp
+public static string Italic(this string text)
+```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+
+## Return Value
+
+Italic text formatting
+
+## See Also
+
+* class [ServerFormatting](./ServerFormatting.md)
+* namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Size method
+
+Font size formatted text
+
+```csharp
+public static string Size(this string text, int size)
+```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+| size | Font size for the text |
+
+## Return Value
+
+Font size text formatting
+
+## See Also
+
 * class [ServerFormatting](./ServerFormatting.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
