@@ -1,6 +1,5 @@
 ﻿using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
@@ -58,11 +57,10 @@ namespace Oxide.Ext.Discord.Libraries
         ///<inheritdoc/>
         protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
         {
-            PluginFieldResult<DiscordPoolAttribute> field = data.GetFieldWthAttribute<DiscordPoolAttribute>();
-            if (field.IsValid)
+            // ReSharper disable once SuspiciousTypeConversion.Global
+            if (data.Plugin is IDiscordPool pool)
             {
-                Plugin plugin = data.Plugin;
-                field.SetValue(plugin, GetOrCreate(data.Plugin));
+                pool.Pool = GetOrCreate(data.Plugin);
             }
         }
 

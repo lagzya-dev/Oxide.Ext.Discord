@@ -20,7 +20,7 @@ namespace Oxide.Ext.Discord.Plugins
         internal readonly List<string> PluginHooks = new List<string>(0);
         internal readonly List<string> GlobalHooks = new List<string>(0);
         private readonly List<PluginCallback> _callbacks = new List<PluginCallback>(0);
-        private readonly List<PluginField> _fields = new List<PluginField>(0);
+        //private readonly List<PluginField> _fields = new List<PluginField>(0);
 
         /// <summary>
         /// Constructor
@@ -66,14 +66,14 @@ namespace Oxide.Ext.Discord.Plugins
                         break;
                     }
 
-                    case FieldInfo _:
-                    case PropertyInfo _:
-                        if (IsFieldAttribute(attributes))
-                        {
-                            logger.Verbose("Adding Plugin Field: {0}.{1}", Plugin.Name, member.Name);
-                            _fields.Add(new PluginField(member, attributes));
-                        }
-                        break;
+                    // case FieldInfo _:
+                    // case PropertyInfo _:
+                    //     if (IsFieldAttribute(attributes))
+                    //     {
+                    //         logger.Verbose("Adding Plugin Field: {0}.{1}", Plugin.Name, member.Name);
+                    //         _fields.Add(new PluginField(member, attributes));
+                    //     }
+                    //     break;
                 }
             }
         }
@@ -120,20 +120,20 @@ namespace Oxide.Ext.Discord.Plugins
             return false;
         }
 
-        private bool IsFieldAttribute(Attribute[] attributes)
-        {
-            for (int index = 0; index < attributes.Length; index++)
-            {
-                Attribute attribute = attributes[index];
-                switch (attribute)
-                {
-                    case DiscordPoolAttribute _:
-                        return true;
-                }
-            }
-
-            return false;
-        }
+        // private bool IsFieldAttribute(Attribute[] attributes)
+        // {
+        //     for (int index = 0; index < attributes.Length; index++)
+        //     {
+        //         Attribute attribute = attributes[index];
+        //         switch (attribute)
+        //         {
+        //             case DiscordPoolAttribute _:
+        //                 return true;
+        //         }
+        //     }
+        //
+        //     return false;
+        // }
 
         internal IEnumerable<PluginHookResult<T>> GetCallbacksWithAttribute<T>() where T : BaseDiscordAttribute
         {
@@ -147,19 +147,19 @@ namespace Oxide.Ext.Discord.Plugins
             }
         }
         
-        internal PluginFieldResult<T> GetFieldWthAttribute<T>() where T : BaseDiscordAttribute
-        {
-            for (int index = 0; index < _fields.Count; index++)
-            {
-                PluginField field = _fields[index];
-                T attribute = field.GetAttribute<T>();
-                if (attribute != null)
-                {
-                    return new PluginFieldResult<T>(field.Member, attribute);
-                }
-            }
-
-            return default(PluginFieldResult<T>);
-        }
+        // internal PluginFieldResult<T> GetFieldWthAttribute<T>() where T : BaseDiscordAttribute
+        // {
+        //     for (int index = 0; index < _fields.Count; index++)
+        //     {
+        //         PluginField field = _fields[index];
+        //         T attribute = field.GetAttribute<T>();
+        //         if (attribute != null)
+        //         {
+        //             return new PluginFieldResult<T>(field.Member, attribute);
+        //         }
+        //     }
+        //
+        //     return default(PluginFieldResult<T>);
+        // }
     }
 }
