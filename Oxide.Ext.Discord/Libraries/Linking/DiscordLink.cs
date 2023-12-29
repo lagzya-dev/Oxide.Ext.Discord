@@ -72,33 +72,38 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Adds a link plugin to be the plugin used with the Discord Link library
         /// </summary>
-        /// <param name="plugin"></param>
-        public void AddLinkPlugin(IDiscordLinkPlugin plugin)
+        /// <param name="link"></param>
+        public void AddLinkPlugin(IDiscordLink link)
         {
-            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (link == null) throw new ArgumentNullException(nameof(link));
 
-            IDictionary<PlayerId, Snowflake> data = plugin.GetPlayerIdToDiscordIds();
+            if (!(link is IDiscordPlugin plugin))
+            {
+                
+            }
+
+            IDictionary<PlayerId, Snowflake> data = link.GetPlayerIdToDiscordIds();
             if (data == null)
             {
-                _logger.Error($"{{0}} returned null when {nameof(plugin.GetPlayerIdToDiscordIds)} was called", plugin.Name);
+                _logger.Error($"{{0}} returned null when {nameof(link.GetPlayerIdToDiscordIds)} was called", link.Name);
                 return;
             }
             
-            _linkPlugins[plugin.Id()] = data;
+            _linkPlugins[link.Id()] = data;
 
             foreach (KeyValuePair<PlayerId,Snowflake> pair in data)
             {
                 AddLink(pair.Key, pair.Value);
             }
             
-            _logger.Debug("{0} has been registered as a DiscordLink plugin", plugin.Name);
+            _logger.Debug("{0} has been registered as a DiscordLink plugin", link.Name);
         }
 
         /// <summary>
         /// Removes a link plugin from the Discord Link library
         /// </summary>
         /// <param name="plugin"></param>
-        public void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
+        public void RemoveLinkPlugin(IDiscordLink plugin)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
 
@@ -133,7 +138,7 @@ namespace Oxide.Ext.Discord.Libraries
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
-            if (plugin is IDiscordLinkPlugin link)
+            if (plugin is IDiscordLink link)
             {
                 RemoveLinkPlugin(link);
             }
@@ -330,7 +335,7 @@ namespace Oxide.Ext.Discord.Libraries
         private bool IsValidLinkPlugin(Plugin plugin)
         {
             // ReSharper disable once SuspiciousTypeConversion.Global
-            if (!(plugin is IDiscordLinkPlugin link))
+            if (!(plugin is IDiscordLink link))
             {
                 _logger.Error($"{plugin.Name} tried to link but is not registered as a link plugin");
                 return false;

@@ -1,9 +1,9 @@
-# IDiscordLinkPlugin interface
+# IDiscordLink interface
 
 Represents a plugin that supports Discord Link library
 
 ```csharp
-public interface IDiscordLinkPlugin : IDiscordPlugin
+public interface IDiscordLink : IPluginBase
 ```
 
 ## Members
@@ -14,10 +14,10 @@ public interface IDiscordLinkPlugin : IDiscordPlugin
 
 ## See Also
 
-* interface [IDiscordPlugin](../Interfaces/IDiscordPlugin.md)
+* interface [IPluginBase](../Interfaces/IPluginBase.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IDiscordLinkPlugin.cs](../../../../Oxide.Ext.Discord/Libraries/IDiscordLinkPlugin.cs)
+* [IDiscordLink.cs](../../../../Oxide.Ext.Discord/Libraries/IDiscordLink.cs)
    
    
 # GetPlayerIdToDiscordIds method
@@ -32,7 +32,7 @@ public IDictionary<PlayerId, Snowflake> GetPlayerIdToDiscordIds()
 
 * struct [PlayerId](./PlayerId.md)
 * struct [Snowflake](../Entities/Snowflake.md)
-* interface [IDiscordLinkPlugin](./IDiscordLinkPlugin.md)
+* interface [IDiscordLink](./IDiscordLink.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 

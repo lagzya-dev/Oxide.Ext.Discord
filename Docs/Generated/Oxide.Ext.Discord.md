@@ -504,6 +504,7 @@
 | interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) |  |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
 | interface [IPendingPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
+| interface [IPluginBase](./Oxide.Ext.Discord/Interfaces/IPluginBase.md) |  |
 | interface [IPromise](./Oxide.Ext.Discord/Interfaces/IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IReadonlySet&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |
@@ -575,7 +576,7 @@
 | class [EmojiTemplate](./Oxide.Ext.Discord/Libraries/EmojiTemplate.md) | Discord Template for Emoji |
 | class [GuildKeys](./Oxide.Ext.Discord/Libraries/GuildKeys.md) | Placeholder Keys for [`DiscordGuild`](./Oxide.Ext.Discord/Entities/DiscordGuild.md) |
 | static class [GuildPlaceholders](./Oxide.Ext.Discord/Libraries/GuildPlaceholders.md) | [`DiscordGuild`](./Oxide.Ext.Discord/Entities/DiscordGuild.md) placeholders |
-| interface [IDiscordLinkPlugin](./Oxide.Ext.Discord/Libraries/IDiscordLinkPlugin.md) | Represents a plugin that supports Discord Link library |
+| interface [IDiscordLink](./Oxide.Ext.Discord/Libraries/IDiscordLink.md) | Represents a plugin that supports Discord Link library |
 | class [InputTextTemplate](./Oxide.Ext.Discord/Libraries/InputTextTemplate.md) | Input Text Message Component Template |
 | class [InteractionKeys](./Oxide.Ext.Discord/Libraries/InteractionKeys.md) | Placeholder Keys for [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) |
 | static class [InteractionPlaceholders](./Oxide.Ext.Discord/Libraries/InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) placeholders |

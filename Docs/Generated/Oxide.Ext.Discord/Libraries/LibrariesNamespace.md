@@ -44,7 +44,7 @@
 | class [EmojiTemplate](./EmojiTemplate.md) | Discord Template for Emoji |
 | class [GuildKeys](./GuildKeys.md) | Placeholder Keys for [`DiscordGuild`](./Oxide.Ext.Discord/Entities/DiscordGuild.md) |
 | static class [GuildPlaceholders](./GuildPlaceholders.md) | [`DiscordGuild`](./Oxide.Ext.Discord/Entities/DiscordGuild.md) placeholders |
-| interface [IDiscordLinkPlugin](./IDiscordLinkPlugin.md) | Represents a plugin that supports Discord Link library |
+| interface [IDiscordLink](./IDiscordLink.md) | Represents a plugin that supports Discord Link library |
 | class [InputTextTemplate](./InputTextTemplate.md) | Input Text Message Component Template |
 | class [InteractionKeys](./InteractionKeys.md) | Placeholder Keys for [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) |
 | static class [InteractionPlaceholders](./InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) placeholders |

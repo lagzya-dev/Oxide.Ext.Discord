@@ -14,6 +14,7 @@
 | interface [IOutputLogger](./IOutputLogger.md) |  |
 | interface [IPendingPromise](./IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
 | interface [IPendingPromise&lt;TPromised&gt;](./IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
+| interface [IPluginBase](./IPluginBase.md) |  |
 | interface [IPromise](./IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IReadonlySet&lt;T&gt;](./IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |

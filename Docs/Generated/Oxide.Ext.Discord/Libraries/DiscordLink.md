@@ -48,16 +48,16 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 Adds a link plugin to be the plugin used with the Discord Link library
 
 ```csharp
-public void AddLinkPlugin(IDiscordLinkPlugin plugin)
+public void AddLinkPlugin(IDiscordLink link)
 ```
 
 | parameter | description |
 | --- | --- |
-| plugin |  |
+| link |  |
 
 ## See Also
 
-* interface [IDiscordLinkPlugin](./IDiscordLinkPlugin.md)
+* interface [IDiscordLink](./IDiscordLink.md)
 * class [DiscordLink](./DiscordLink.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -68,7 +68,7 @@ public void AddLinkPlugin(IDiscordLinkPlugin plugin)
 Removes a link plugin from the Discord Link library
 
 ```csharp
-public void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
+public void RemoveLinkPlugin(IDiscordLink plugin)
 ```
 
 | parameter | description |
@@ -77,7 +77,7 @@ public void RemoveLinkPlugin(IDiscordLinkPlugin plugin)
 
 ## See Also
 
-* interface [IDiscordLinkPlugin](./IDiscordLinkPlugin.md)
+* interface [IDiscordLink](./IDiscordLink.md)
 * class [DiscordLink](./DiscordLink.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

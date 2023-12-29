@@ -28,7 +28,7 @@ namespace Oxide.Ext.Discord.Extensions
         }
 
         // ReSharper disable once SuspiciousTypeConversion.Global
-        internal static PluginId Id(this IDiscordPlugin plugin) => ((Plugin)plugin).Id();
+        internal static PluginId Id(this IPluginBase plugin) => ((Plugin)plugin).Id();
 
         internal static string PluginName(this Plugin plugin) => plugin?.Name ?? throw new ArgumentNullException(nameof(plugin));
         internal static string PluginName(this PluginId pluginId)

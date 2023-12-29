@@ -3,101 +3,21 @@
 Represents a plugin that uses the Discord Extension
 
 ```csharp
-public interface IDiscordPlugin
+public interface IDiscordPlugin : IPluginBase
 ```
 
 ## Members
 
 | name | description |
 | --- | --- |
-| [Author](#author-property) { get; } | Author of the plugin |
 | [Client](#client-property) { get; set; } | Gets / Sets the DiscordClient on a plugin |
-| [Description](#description-property) { get; } | Description of the plugin |
-| [Name](#name-property) { get; } | Name of the plugin |
-| [Title](#title-property) { get; } | Title of the plugin |
-| [Version](#version-property) { get; } | Version of the plugin |
 
 ## See Also
 
+* interface [IPluginBase](./IPluginBase.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [IDiscordPlugin.cs](../../../../Oxide.Ext.Discord/Interfaces/IDiscordPlugin.cs)
-   
-   
-# Name property
-
-Name of the plugin
-
-```csharp
-public string Name { get; }
-```
-
-## See Also
-
-* interface [IDiscordPlugin](./IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Title property
-
-Title of the plugin
-
-```csharp
-public string Title { get; }
-```
-
-## See Also
-
-* interface [IDiscordPlugin](./IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Description property
-
-Description of the plugin
-
-```csharp
-public string Description { get; }
-```
-
-## See Also
-
-* interface [IDiscordPlugin](./IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Author property
-
-Author of the plugin
-
-```csharp
-public string Author { get; }
-```
-
-## See Also
-
-* interface [IDiscordPlugin](./IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Version property
-
-Version of the plugin
-
-```csharp
-public VersionNumber Version { get; }
-```
-
-## See Also
-
-* struct [VersionNumber](../Oxide/Core/VersionNumber.md)
-* interface [IDiscordPlugin](./IDiscordPlugin.md)
-* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Client property

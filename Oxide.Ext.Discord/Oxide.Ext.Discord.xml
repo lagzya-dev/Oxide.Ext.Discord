@@ -18683,34 +18683,34 @@
             Represents a plugin that uses the Discord Extension
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Name">
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
+            <summary>
+            Gets / Sets the DiscordClient on a plugin
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Name">
             <summary>
             Name of the plugin
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Title">
+        <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Title">
             <summary>
             Title of the plugin
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Description">
+        <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Description">
             <summary>
             Description of the plugin
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Author">
+        <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Author">
             <summary>
             Author of the plugin
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Version">
+        <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Version">
             <summary>
             Version of the plugin
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
-            <summary>
-            Gets / Sets the DiscordClient on a plugin
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IPendingPromise">
@@ -20145,13 +20145,13 @@
             </summary>
             <param name="logger">Logger for Discord Link</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.AddLinkPlugin(Oxide.Ext.Discord.Libraries.IDiscordLinkPlugin)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.AddLinkPlugin(Oxide.Ext.Discord.Libraries.IDiscordLink)">
             <summary>
             Adds a link plugin to be the plugin used with the Discord Link library
             </summary>
-            <param name="plugin"></param>
+            <param name="link"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.RemoveLinkPlugin(Oxide.Ext.Discord.Libraries.IDiscordLinkPlugin)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.RemoveLinkPlugin(Oxide.Ext.Discord.Libraries.IDiscordLink)">
             <summary>
             Removes a link plugin from the Discord Link library
             </summary>
@@ -20301,12 +20301,12 @@
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Libraries.IDiscordLinkPlugin">
+        <member name="T:Oxide.Ext.Discord.Libraries.IDiscordLink">
             <summary>
             Represents a plugin that supports Discord Link library
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.IDiscordLinkPlugin.GetPlayerIdToDiscordIds">
+        <member name="M:Oxide.Ext.Discord.Libraries.IDiscordLink.GetPlayerIdToDiscordIds">
             <summary>
             Returns a <see cref="T:System.Collections.Generic.IDictionary`2"/> of Steam ID's to Discord ID's
             </summary>
