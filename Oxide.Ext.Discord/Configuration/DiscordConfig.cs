@@ -22,6 +22,12 @@ namespace Oxide.Ext.Discord.Configuration
         public DiscordCommandsConfig Commands { get; set; }
         
         /// <summary>
+        /// Discord Rest Options
+        /// </summary>
+        [JsonProperty("Rest")]
+        public DiscordRestConfig Rest { get; set; }
+        
+        /// <summary>
         /// Discord Logging Options
         /// </summary>
         [JsonProperty("Logging")]
@@ -96,6 +102,11 @@ namespace Oxide.Ext.Discord.Configuration
             Commands = new DiscordCommandsConfig
             {
                 CommandPrefixes = Commands?.CommandPrefixes ?? new[] {'/', '!'}
+            };
+            Rest = new DiscordRestConfig
+            {
+                ApiErrorRetries = Rest?.ApiErrorRetries ?? 3,
+                ApiRateLimitRetries = Rest?.ApiRateLimitRetries ?? 6
             };
             Logging = new DiscordLoggingConfig
             {

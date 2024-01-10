@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
@@ -156,14 +157,14 @@ namespace Oxide.Ext.Discord.Rest
 
         private bool CanSendRequest(RequestResponse response, byte retries)
         {
-            if (retries >= 6)
+            if (retries >= DiscordConfig.Instance.Rest.ApiRateLimitRetries)
             {
                 return false;
             }
             
             if (response != null && response.Code != DiscordHttpStatusCode.TooManyRequests)
             {
-                return retries < 3;
+                return retries < DiscordConfig.Instance.Rest.ApiErrorRetries;
             }
             
             return true;
