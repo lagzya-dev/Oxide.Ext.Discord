@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// This permission uses Channel ID
         /// </summary>
-        [Description("USER")]
-        Channel = 2
+        [Description("CHANNEL")]
+        Channel = 3
     }
 }
