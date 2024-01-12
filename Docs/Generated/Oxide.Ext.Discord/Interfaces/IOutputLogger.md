@@ -1,5 +1,7 @@
 # IOutputLogger interface
 
+Represents a specific logger output
+
 ```csharp
 public interface IOutputLogger
 ```
@@ -8,8 +10,8 @@ public interface IOutputLogger
 
 | name | description |
 | --- | --- |
-| [AddMessage](#addmessage-method)(…) |  |
-| [OnShutdown](#onshutdown-method)() |  |
+| [AddMessage](#addmessage-method)(…) | Adds a message to the logger |
+| [OnShutdown](#onshutdown-method)() | Shuts down the logger output |
 
 ## See Also
 
@@ -20,9 +22,18 @@ public interface IOutputLogger
    
 # AddMessage method
 
+Adds a message to the logger
+
 ```csharp
 public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
 ```
+
+| parameter | description |
+| --- | --- |
+| level |  |
+| log |  |
+| args |  |
+| ex |  |
 
 ## See Also
 
@@ -33,6 +44,8 @@ public void AddMessage(DiscordLogLevel level, string log, object[] args, Excepti
    
    
 # OnShutdown method
+
+Shuts down the logger output
 
 ```csharp
 public void OnShutdown()

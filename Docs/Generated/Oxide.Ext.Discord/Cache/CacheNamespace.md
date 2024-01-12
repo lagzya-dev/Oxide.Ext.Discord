@@ -3,7 +3,7 @@
 | public type | description |
 | --- | --- |
 | class [DiscordPluginCache](./DiscordPluginCache.md) | Represents a cache for Loaded and Loadable plugins |
-| class [EmojiCache](./EmojiCache.md) |  |
+| class [EmojiCache](./EmojiCache.md) | Cached Emoji Data |
 | class [EntityCache&lt;T&gt;](./EntityCache%7BT%7D.md) | Cache for {T} |
 | class [EnumCache&lt;T&gt;](./EnumCache%7BT%7D.md) | Represents a cache of enum strings |
 | class [ServerPlayerCache](./ServerPlayerCache.md) | Cache for server IPlayer |

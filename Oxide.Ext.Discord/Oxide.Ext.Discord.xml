@@ -1727,6 +1727,41 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Cache.EmojiCache">
+            <summary>
+            Cached Emoji Data
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.EmojiToText(System.String)">
+            <summary>
+            Convert an emoji character to emoji string text
+            </summary>
+            <param name="emoji">Emoji to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.TextToEmoji(System.String)">
+            <summary>
+            Convert emoji string text to an emoji character
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceEmojiWithText(System.String,System.String)">
+            <summary>
+            Replaces emoji character with emoji string characters
+            </summary>
+            <param name="text"></param>
+            <param name="nonMatchReplacement"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceTextWithEmoji(System.String,System.String)">
+            <summary>
+            Replaces emoji string text with emoji characters
+            </summary>
+            <param name="text"></param>
+            <param name="nonMatchReplacement"></param>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Cache.EntityCache`1">
             <summary>
             Cache for {T} 
@@ -2230,6 +2265,11 @@
             Discord Command Options
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Rest">
+            <summary>
+            Discord Rest Options
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordConfig.Logging">
             <summary>
             Discord Logging Options
@@ -2290,6 +2330,21 @@
         <member name="P:Oxide.Ext.Discord.Configuration.DiscordLoggingConfig.FileDateTimeFormat">
             <summary>
             DateTime format for file logging
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Configuration.DiscordRestConfig">
+            <summary>
+            Discord Rest Config
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordRestConfig.ApiErrorRetries">
+            <summary>
+            How many retries for API request errors
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Configuration.DiscordRestConfig.ApiRateLimitRetries">
+            <summary>
+            How many retries for API request rate limit errors
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordUsersConfig">
@@ -11590,7 +11645,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordApplicationCommand.GetPermissions(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+            Fetches command permissions for a specific command for your application in a guild. Returns a <see cref="T:Oxide.Ext.Discord.Entities.GuildCommandPermissions"/> object.
             See <a href="https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions">Get Application Command Permissions</a>
             </summary>
             <param name="client">Client to use</param>
@@ -15435,6 +15490,16 @@
             <param name="snowflake">Snowflake to return</param>
             <returns>True if parse succeeded; false otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.TryFormat(System.Span{System.Char},System.Int32@,System.ReadOnlySpan{System.Char},System.IFormatProvider)">
+            <summary>
+            Try to format the snowflake into the span
+            </summary>
+            <param name="destination">Span to write the snowflake into</param>
+            <param name="charsWritten">Number of characters written</param>
+            <param name="format">Snowflake formatting</param>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.Equals(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
             Returns if the two snowflakes are the same ID.
@@ -17381,6 +17446,11 @@
             <param name="message">Exception message</param>
             <param name="create">Message Create that caused the error</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.InvalidGetEntitlementException">
+            <summary>
+            Exceptions for invalid entitlements
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Exceptions.InvalidGetEntitlementException.#ctor(System.String)">
             <summary>
             Constructor
@@ -17828,6 +17898,15 @@
             <summary>
             StringBuilder extension methods
             </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.StringBuilderExt.Replace(System.Text.StringBuilder,System.ReadOnlySpan{System.Char},System.Int32,System.Int32)">
+            <summary>
+            Replaces the text at the index and length with the span value
+            </summary>
+            <param name="builder"></param>
+            <param name="value"></param>
+            <param name="index"></param>
+            <param name="length"></param>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.StringBuilderExt.Trim(System.Text.StringBuilder)">
             <summary>
@@ -18678,6 +18757,25 @@
             Shuts down the logger
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IOutputLogger">
+            <summary>
+            Represents a specific logger output
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IOutputLogger.AddMessage(Oxide.Ext.Discord.Logging.DiscordLogLevel,System.String,System.Object[],System.Exception)">
+            <summary>
+            Adds a message to the logger
+            </summary>
+            <param name="level"></param>
+            <param name="log"></param>
+            <param name="args"></param>
+            <param name="ex"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IOutputLogger.OnShutdown">
+            <summary>
+            Shuts down the logger output
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordPlugin">
             <summary>
             Represents a plugin that uses the Discord Extension
@@ -18686,6 +18784,21 @@
         <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPlugin.Client">
             <summary>
             Gets / Sets the DiscordClient on a plugin
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordPool">
+            <summary>
+            Interface for plugins to use that need access to a pool
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordPool.Pool">
+            <summary>
+            Pool for plugins to use
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IPluginBase">
+            <summary>
+            Represents an interface for a plugin
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Interfaces.IPluginBase.Name">

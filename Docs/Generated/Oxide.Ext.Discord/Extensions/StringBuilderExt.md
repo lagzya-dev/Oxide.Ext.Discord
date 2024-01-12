@@ -10,7 +10,7 @@ public static class StringBuilderExt
 
 | name | description |
 | --- | --- |
-| static [Replace](#replace-method)(…) |  |
+| static [Replace](#replace-method)(…) | Replaces the text at the index and length with the span value |
 | static [Trim](#trim-method)(…) | Trim empty space to the left and right of the StringBuilder |
 
 ## See Also
@@ -22,10 +22,19 @@ public static class StringBuilderExt
    
 # Replace method
 
+Replaces the text at the index and length with the span value
+
 ```csharp
 public static void Replace(this StringBuilder builder, ReadOnlySpan<char> value, int index, 
     int length)
 ```
+
+| parameter | description |
+| --- | --- |
+| builder |  |
+| value |  |
+| index |  |
+| length |  |
 
 ## See Also
 

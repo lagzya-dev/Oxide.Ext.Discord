@@ -1,5 +1,7 @@
 # InvalidGetEntitlementException class
 
+Exceptions for invalid entitlements
+
 ```csharp
 public class InvalidGetEntitlementException : BaseDiscordException
 ```

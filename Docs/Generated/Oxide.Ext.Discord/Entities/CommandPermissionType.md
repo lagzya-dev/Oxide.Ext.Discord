@@ -12,7 +12,7 @@ public enum CommandPermissionType : byte
 | --- | --- | --- |
 | Role | `Role` | This permissions uses Role ID |
 | User | `User` | This permission uses User ID |
-| Channel | `User` | This permission uses Channel ID |
+| Channel | `Channel` | This permission uses Channel ID |
 
 ## See Also
 

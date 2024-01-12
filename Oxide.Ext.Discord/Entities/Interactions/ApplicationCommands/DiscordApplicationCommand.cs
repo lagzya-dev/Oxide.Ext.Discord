@@ -150,7 +150,7 @@ namespace Oxide.Ext.Discord.Entities
         }
 
         /// <summary>
-        /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+        /// Fetches command permissions for a specific command for your application in a guild. Returns a <see cref="GuildCommandPermissions"/> object.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions">Get Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>

@@ -2,6 +2,9 @@
 
 namespace Oxide.Ext.Discord.Interfaces
 {
+    /// <summary>
+    /// Represents an interface for a plugin
+    /// </summary>
     public interface IPluginBase
     {
         /// <summary>

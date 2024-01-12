@@ -28,7 +28,7 @@ public class DiscordApplicationCommand
 | [Delete](#delete-method)(…) | Deletes a command See [Delete Global Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-global-application-command) See [Delete Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command) |
 | [Edit](#edit-method)(…) | Edit a command. Updates will be available in all guilds after 1 hour. See [Edit Global Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-global-application-command) See [Edit Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#edit-guild-application-command) |
 | [EditPermissions](#editpermissions-method)(…) | Edits command permissions for a specific command for your application in a guild. Warning: This endpoint will overwrite existing permissions for the command in that guild Warning: Deleting or renaming a command will permanently delete all permissions for that command See [Edit Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions) |
-| [GetPermissions](#getpermissions-method)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
+| [GetPermissions](#getpermissions-method)(…) | Fetches command permissions for a specific command for your application in a guild. Returns a [`GuildCommandPermissions`](./GuildCommandPermissions.md) object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions) |
 | [MentionCustom](#mentioncustom-method)(…) | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) using a custom command string |
 
 ## See Also
@@ -107,7 +107,7 @@ public IPromise Delete(DiscordClient client)
    
 # GetPermissions method
 
-Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions)
+Fetches command permissions for a specific command for your application in a guild. Returns a [`GuildCommandPermissions`](./GuildCommandPermissions.md) object. See [Get Application Command Permissions](https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions)
 
 ```csharp
 public IPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)

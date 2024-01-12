@@ -26,7 +26,7 @@
 | class [InvalidEmojiException](./InvalidEmojiException.md) | Error thrown when an emoji string fails validation |
 | class [InvalidFileNameException](./InvalidFileNameException.md) | Exception throw when an attachment filename contains invalid characters |
 | class [InvalidForumTagException](./InvalidForumTagException.md) | Represents an exception for channel threads |
-| class [InvalidGetEntitlementException](./InvalidGetEntitlementException.md) |  |
+| class [InvalidGetEntitlementException](./InvalidGetEntitlementException.md) | Exceptions for invalid entitlements |
 | class [InvalidGuildBanException](./InvalidGuildBanException.md) | Represents an error in channel ban |
 | class [InvalidGuildException](./InvalidGuildException.md) | Represents an exception in guild |
 | class [InvalidGuildListMembersException](./InvalidGuildListMembersException.md) | Represents an exception in guid list request |

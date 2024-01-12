@@ -7,14 +7,14 @@
 | interface [IDiscordCacheable&lt;T&gt;](./IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
 | interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
-| interface [IDiscordPool](./IDiscordPool.md) |  |
+| interface [IDiscordPool](./IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./IFileAttachments.md) | Represents and interface for entities that can upload files |
 | interface [ILogger](./ILogger.md) | Represents an interface for a logger |
-| interface [IOutputLogger](./IOutputLogger.md) |  |
+| interface [IOutputLogger](./IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
 | interface [IPendingPromise&lt;TPromised&gt;](./IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
-| interface [IPluginBase](./IPluginBase.md) |  |
+| interface [IPluginBase](./IPluginBase.md) | Represents an interface for a plugin |
 | interface [IPromise](./IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IReadonlySet&lt;T&gt;](./IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |

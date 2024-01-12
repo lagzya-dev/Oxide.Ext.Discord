@@ -60,7 +60,7 @@
 | public type | description |
 | --- | --- |
 | class [DiscordPluginCache](./Oxide.Ext.Discord/Cache/DiscordPluginCache.md) | Represents a cache for Loaded and Loadable plugins |
-| class [EmojiCache](./Oxide.Ext.Discord/Cache/EmojiCache.md) |  |
+| class [EmojiCache](./Oxide.Ext.Discord/Cache/EmojiCache.md) | Cached Emoji Data |
 | class [EntityCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/EntityCache%7BT%7D.md) | Cache for {T} |
 | class [EnumCache&lt;T&gt;](./Oxide.Ext.Discord/Cache/EnumCache%7BT%7D.md) | Represents a cache of enum strings |
 | class [ServerPlayerCache](./Oxide.Ext.Discord/Cache/ServerPlayerCache.md) | Cache for server IPlayer |
@@ -428,7 +428,7 @@
 | class [InvalidEmojiException](./Oxide.Ext.Discord/Exceptions/InvalidEmojiException.md) | Error thrown when an emoji string fails validation |
 | class [InvalidFileNameException](./Oxide.Ext.Discord/Exceptions/InvalidFileNameException.md) | Exception throw when an attachment filename contains invalid characters |
 | class [InvalidForumTagException](./Oxide.Ext.Discord/Exceptions/InvalidForumTagException.md) | Represents an exception for channel threads |
-| class [InvalidGetEntitlementException](./Oxide.Ext.Discord/Exceptions/InvalidGetEntitlementException.md) |  |
+| class [InvalidGetEntitlementException](./Oxide.Ext.Discord/Exceptions/InvalidGetEntitlementException.md) | Exceptions for invalid entitlements |
 | class [InvalidGuildBanException](./Oxide.Ext.Discord/Exceptions/InvalidGuildBanException.md) | Represents an error in channel ban |
 | class [InvalidGuildException](./Oxide.Ext.Discord/Exceptions/InvalidGuildException.md) | Represents an exception in guild |
 | class [InvalidGuildListMembersException](./Oxide.Ext.Discord/Exceptions/InvalidGuildListMembersException.md) | Represents an exception in guid list request |
@@ -497,14 +497,14 @@
 | interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
 | interface [IDiscordMessageTemplate](./Oxide.Ext.Discord/Interfaces/IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
-| interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) |  |
+| interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
 | interface [ILogger](./Oxide.Ext.Discord/Interfaces/ILogger.md) | Represents an interface for a logger |
-| interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) |  |
+| interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
 | interface [IPendingPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPendingPromise%7BTPromised%7D.md) | Represents a promise waiting to be resolved |
-| interface [IPluginBase](./Oxide.Ext.Discord/Interfaces/IPluginBase.md) |  |
+| interface [IPluginBase](./Oxide.Ext.Discord/Interfaces/IPluginBase.md) | Represents an interface for a plugin |
 | interface [IPromise](./Oxide.Ext.Discord/Interfaces/IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IReadonlySet&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |

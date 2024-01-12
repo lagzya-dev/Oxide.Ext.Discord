@@ -85,6 +85,14 @@ namespace Oxide.Ext.Discord.Entities
             return false;
         }
 
+        /// <summary>
+        /// Try to format the snowflake into the span
+        /// </summary>
+        /// <param name="destination">Span to write the snowflake into</param>
+        /// <param name="charsWritten">Number of characters written</param>
+        /// <param name="format">Snowflake formatting</param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
         public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default (ReadOnlySpan<char>), IFormatProvider provider = null)
         {
             return Id.TryFormat(destination, out charsWritten, format, provider);

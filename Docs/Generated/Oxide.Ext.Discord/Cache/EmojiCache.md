@@ -1,5 +1,7 @@
 # EmojiCache class
 
+Cached Emoji Data
+
 ```csharp
 public sealed class EmojiCache : Singleton<EmojiCache>
 ```
@@ -8,11 +10,10 @@ public sealed class EmojiCache : Singleton<EmojiCache>
 
 | name | description |
 | --- | --- |
-| [Build](#build-method)() |  |
-| [EmojiToText](#emojitotext-method)(…) |  |
-| [ReplaceEmojiWithText](#replaceemojiwithtext-method)(…) |  |
-| [ReplaceTextWithEmoji](#replacetextwithemoji-method)(…) |  |
-| [TextToEmoji](#texttoemoji-method)(…) |  |
+| [EmojiToText](#emojitotext-method)(…) | Convert an emoji character to emoji string text |
+| [ReplaceEmojiWithText](#replaceemojiwithtext-method)(…) | Replaces emoji character with emoji string characters |
+| [ReplaceTextWithEmoji](#replacetextwithemoji-method)(…) | Replaces emoji string text with emoji characters |
+| [TextToEmoji](#texttoemoji-method)(…) | Convert emoji string text to an emoji character |
 
 ## See Also
 
@@ -24,9 +25,15 @@ public sealed class EmojiCache : Singleton<EmojiCache>
    
 # EmojiToText method
 
+Convert an emoji character to emoji string text
+
 ```csharp
 public string EmojiToText(string emoji)
 ```
+
+| parameter | description |
+| --- | --- |
+| emoji | Emoji to convert |
 
 ## See Also
 
@@ -37,9 +44,15 @@ public string EmojiToText(string emoji)
    
 # TextToEmoji method
 
+Convert emoji string text to an emoji character
+
 ```csharp
 public string TextToEmoji(string text)
 ```
+
+| parameter | description |
+| --- | --- |
+| text |  |
 
 ## See Also
 
@@ -50,9 +63,16 @@ public string TextToEmoji(string text)
    
 # ReplaceEmojiWithText method
 
+Replaces emoji character with emoji string characters
+
 ```csharp
 public string ReplaceEmojiWithText(string text, string nonMatchReplacement = "")
 ```
+
+| parameter | description |
+| --- | --- |
+| text |  |
+| nonMatchReplacement |  |
 
 ## See Also
 
@@ -63,22 +83,16 @@ public string ReplaceEmojiWithText(string text, string nonMatchReplacement = "")
    
 # ReplaceTextWithEmoji method
 
+Replaces emoji string text with emoji characters
+
 ```csharp
 public string ReplaceTextWithEmoji(string text, string nonMatchReplacement = "")
 ```
 
-## See Also
-
-* class [EmojiCache](./EmojiCache.md)
-* namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Build method
-
-```csharp
-public void Build()
-```
+| parameter | description |
+| --- | --- |
+| text |  |
+| nonMatchReplacement |  |
 
 ## See Also
 

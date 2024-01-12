@@ -4,6 +4,9 @@ using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
+    /// <summary>
+    /// Cached Emoji Data
+    /// </summary>
     public sealed partial class EmojiCache : Singleton<EmojiCache>
     {
         private readonly Hash<string, string> _emojiToText = new Hash<string, string>();
@@ -13,12 +16,34 @@ namespace Oxide.Ext.Discord.Cache
 
         private EmojiCache() { }
         
+        /// <summary>
+        /// Convert an emoji character to emoji string text
+        /// </summary>
+        /// <param name="emoji">Emoji to convert</param>
+        /// <returns></returns>
         public string EmojiToText(string emoji) => _emojiToText[emoji];
 
+        /// <summary>
+        /// Convert emoji string text to an emoji character
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public string TextToEmoji(string text) => _textToEmoji[text];
 
+        /// <summary>
+        /// Replaces emoji character with emoji string characters
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="nonMatchReplacement"></param>
+        /// <returns></returns>
         public string ReplaceEmojiWithText(string text, string nonMatchReplacement = "") => _emojiRegex.Replace(text, match => _emojiToText[match.Value] ?? nonMatchReplacement);
 
+        /// <summary>
+        /// Replaces emoji string text with emoji characters
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="nonMatchReplacement"></param>
+        /// <returns></returns>
         public string ReplaceTextWithEmoji(string text, string nonMatchReplacement = "") => _textRegex.Replace(text, match => _textToEmoji[match.Value] ?? nonMatchReplacement);
     }
 }

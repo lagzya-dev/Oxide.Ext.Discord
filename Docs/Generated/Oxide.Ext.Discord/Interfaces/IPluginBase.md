@@ -1,5 +1,7 @@
 # IPluginBase interface
 
+Represents an interface for a plugin
+
 ```csharp
 public interface IPluginBase
 ```

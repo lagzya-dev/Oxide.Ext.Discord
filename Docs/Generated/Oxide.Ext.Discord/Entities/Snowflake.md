@@ -20,7 +20,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 | override [GetHashCode](#gethashcode-method)() | Returns the HashCode of the ID |
 | [IsValid](#isvalid-method)() | Returns if the ID value is not 0 |
 | override [ToString](#tostring-method)() | Returns ID as a string |
-| [TryFormat](#tryformat-method)(…) |  |
+| [TryFormat](#tryformat-method)(…) | Try to format the snowflake into the span |
 | static readonly [DiscordEpoch](#discordepoch-field) | DateTimeOffset since discord Epoch |
 | static [TryParse](#tryparse-method)(…) | Try to parse the a string into a snowflake value |
 | [operator ==](#snowflake-equality-operator) | Returns true if left and right are equal |
@@ -95,10 +95,19 @@ True if parse succeeded; false otherwise
    
 # TryFormat method
 
+Try to format the snowflake into the span
+
 ```csharp
 public bool TryFormat(Span<char> destination, out int charsWritten, 
     ReadOnlySpan<char> format = default, IFormatProvider provider = null)
 ```
+
+| parameter | description |
+| --- | --- |
+| destination | Span to write the snowflake into |
+| charsWritten | Number of characters written |
+| format | Snowflake formatting |
+| provider |  |
 
 ## See Also
 

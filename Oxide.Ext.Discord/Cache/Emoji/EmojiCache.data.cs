@@ -2,7 +2,7 @@ namespace Oxide.Ext.Discord.Cache
 {
 	public partial class EmojiCache
 	{
-		public void Build()
+		internal void Build()
 		{
 			_textToEmoji[":100:"] = "💯";
 			_emojiToText["💯"] = ":100:";

@@ -8,6 +8,13 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     public static class StringBuilderExt
     {
+        /// <summary>
+        /// Replaces the text at the index and length with the span value
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="value"></param>
+        /// <param name="index"></param>
+        /// <param name="length"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Replace(this StringBuilder builder, ReadOnlySpan<char> value, int index, int length)
         {

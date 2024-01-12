@@ -1,5 +1,8 @@
 ﻿namespace Oxide.Ext.Discord.Exceptions
 {
+    /// <summary>
+    /// Exceptions for invalid entitlements
+    /// </summary>
     public class InvalidGetEntitlementException : BaseDiscordException
     {
         /// <summary>

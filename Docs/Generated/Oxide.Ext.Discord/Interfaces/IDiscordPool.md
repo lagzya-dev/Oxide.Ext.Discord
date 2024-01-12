@@ -1,5 +1,7 @@
 # IDiscordPool interface
 
+Interface for plugins to use that need access to a pool
+
 ```csharp
 public interface IDiscordPool
 ```
@@ -8,7 +10,7 @@ public interface IDiscordPool
 
 | name | description |
 | --- | --- |
-| [Pool](#pool-property) { get; set; } |  |
+| [Pool](#pool-property) { get; set; } | Pool for plugins to use |
 
 ## See Also
 
@@ -18,6 +20,8 @@ public interface IDiscordPool
    
    
 # Pool property
+
+Pool for plugins to use
 
 ```csharp
 public DiscordPluginPool Pool { get; set; }
