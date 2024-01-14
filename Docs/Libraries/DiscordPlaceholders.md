@@ -1,20 +1,20 @@
 # Discord Placeholders
 
-[Discord Placeholders](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md)
+[Discord Placeholders](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md)
 is a library that can be used for placeholders in strings and [Discord Templates](DiscordTemplates.md).
 There are many built in placeholders that can be used along with the ability for plugins to register custom placeholders.
 Placeholders are highly customizable and is recommend to be used in messages along with [Discord Templates](DiscordTemplates.md).
 
 ## Placeholder Data
-When a placeholder is being processed data is added to [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md) 
-to be used by the placeholders that need certain types for their data. You can get a [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md)
+When a placeholder is being processed data is added to [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md) 
+to be used by the placeholders that need certain types for their data. You can get a [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md)
 instance by with the code below.  
 
 *Note: PlaceholderData is pooled and once processing placeholders is complete it will be returned to the pool. If you want to use the data multiple times call
-[ManualPool()](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md#manualpool-method) method  
+[ManualPool()](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md#manualpool-method) method  
 
-*Note: If you need to use [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md) 
-with different values you can use the [Clone()](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md#clone-method) method*  
+*Note: If you need to use [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md) 
+with different values you can use the [Clone()](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md#clone-method) method*  
 
 ```csharp
 private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
@@ -52,10 +52,10 @@ private void RegisterPlaceholders()
 ```
 
 **See:**
-[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md#registerplaceholder-method-1-of-7)
+[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md#registerplaceholder-method-1-of-7)
 
 ### Data Key Placeholder
-A Data Key Placeholder is a placeholder that should use a registered [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderData.md) 
+A Data Key Placeholder is a placeholder that should use a registered [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md) 
 key as the placeholder value.
 
 ```csharp
@@ -68,7 +68,7 @@ private void RegisterPlaceholders()
 ```
 
 **See:**
-[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md#registerplaceholder-method-3-of-7)
+[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md#registerplaceholder-method-3-of-7)
 
 ### Callback Placeholder
 
@@ -88,7 +88,7 @@ private int GetConfigValue() => _myConfig.ConfigValue;
 ### Callback<T> Placeholder
 
 A Callback<T> placeholder is a placeholder that will call a method with the provided T value.
-If the placeholder needs access to [PlaceholderState](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/PlaceholderState.md)
+If the placeholder needs access to [PlaceholderState](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderState.md)
 That is an option argument that can be added
 
 ```csharp
@@ -114,11 +114,11 @@ private string DisplayItem(PlaceholderState state, ItemDefinition def) => $"{def
 ```
 
 **See:**
-[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md#registerplaceholder-method-5-of-7)
+[RegisterPlaceholder](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md#registerplaceholder-method-5-of-7)
 
 ## Processing Placeholders
 
-To process placeholders you will call the [Process Placeholders](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/DiscordPlaceholders.md#processplaceholders-method) Method
+To process placeholders you will call the [Process Placeholders](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md#processplaceholders-method) Method
 
 ```csharp
 private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
@@ -131,5 +131,4 @@ private string CallPlaceholders(IPlayer player)
 ```
 
 ## Built In Placeholders
-There are a lot of built in placeholders available from the Discord Extension. You can view all the defaults here: [Default Namespace](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/Default/DefaultNamespace.md).
-It is also possible to register placeholders default placeholders using a different datakey. For example you can see that on [Player Placeholders](../Generated/Oxide.Ext.Discord/Libraries/Placeholders/Default/PlayerPlaceholders.md)
+It is also possible to register placeholders default placeholders using a different datakey. For example you can see that on [Player Placeholders](../Generated/Oxide.Ext.Discord/Libraries/PlayerPlaceholders.md)

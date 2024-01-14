@@ -4,9 +4,9 @@
 
 Should you encounter a problem or bug with the extension, please feel free to create an issue here. Try to include as much detail as possible, including steps to reproduce the issue. A code example is highly appreciated.
 
-## Upgrading to version 2.0.0
-Before upgrading to version 2.0.0 make sure all the discord extension plugins you plan to use support the new version. 
-Plugins that were made for version 1.0.0 are **not** compatible with version 2.0.0.
+## Upgrading to version 3.0.0
+Before upgrading to version 3.0.0 make sure all the discord extension plugins you plan to use support the new version. 
+Plugins that were made for version 1.0.0 or 2.0.0 are **not** compatible with version 3.0.0.
 
 ## Installation
 
@@ -18,8 +18,9 @@ To install the extension to your Oxide server, you must follow a few simple step
 
 ## Developer
 
-If you would like to create plugins for the extension please [Click Here](https://github.com/Kirollos/Oxide.Ext.Discord/blob/master/Docs/README.md) to learn more  
-**If the link doesn't work please try the readme on the github page**
+If you would like to create plugins for the extension please [Click Here](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Docs/README.md) to learn more  
+If you would like to view the Discord Extension Documentation [Click Here](https://github.com/dassjosh/Oxide.Ext.Discord/blob/develop/Docs/Generated/Oxide.Ext.Discord.md)  
+**If the links don't work please try the readme on the github page**
 
 ## Getting your API Key
 
@@ -43,14 +44,11 @@ Obtaining an API Key:
    ![](https://i.postimg.cc/WzPFSttB/5-discord-intents.png)
 6) A.Next we're going to setup the permissions that bot has in your Discord Server.  
    B.Click on OAuth2 on the left hand side.  
-   C. Scroll down till your see scopes and permissions.  
+   C.Then click on URL Generator.   
    D. Under Scope select "Bot".  
-   E. __(Optional)__ Select "applications.commands"   
-   F. Under permissions select which permissions that bot should have.  
-   G. Once you have all of this selected click on the copy button.    
+   E. Under permissions select which permissions that bot should have.  
+   F. Once you have all of this selected click on the copy button.    
    ![](https://i.postimg.cc/ZnXStyHc/image.png)
-   __(Optional)__ application.commands selection
-   ![](https://i.postimg.cc/RF20DgPZ/optional-application-commands.png)
 7) Now it's time to add your new bot to your guild!
    Paste the link from the previous step into the url section of your browser.
    Select which Discord Server you want to invite the bot into and continue and then authorize.  
@@ -64,14 +62,60 @@ The config allows you to modify the command prefixes for commands that use the d
 
 ```json
 {
-  "Commands": {
-    "Command Prefixes": [
-      "/",
-      "!"
-    ]
-  }
+   "Commands": {
+      "Command Prefixes": [
+         "/",
+         "!"
+      ]
+   },
+   "Rest": {
+      "API Error Request Retries": 3,
+      "API Rate Limit Request Retries": 6
+   },
+   "Logging": {
+      "Server Console Log Level": "Info",
+      "File Log Level": "Verbose",
+      "Hide Discord Error Codes": [],
+      "File DateTime Format": "HH:mm:ss.ff"
+   },
+   "Users": {
+      "Direct Message Blocked Duration (Hours)": 24.0
+   },
+   "Search": {
+      "Enable Player Name Trie Search (High Performance / High Memory Usage)": true
+   },
+   "Validation": {
+      "Enable Request Validation": true
+   },
+   "Bot": {
+      "Automatically Apply Gateway Intents": true
+   }
 }
 ```
+
+## Application Command Permission Configuration
+[How To Configure Application Command Permissions](https://discord.com/blog/slash-commands-permissions-discord-apps-bots)  
+[Application Command Permissions FAQ](https://support.discord.com/hc/en-us/articles/4644915651095-Command-Permissions)  
+
+## Commands
+Console commands for the Discord Extension:  
+`de.version` - displays the current Discord Extension version  
+`de.websocket.reset` - resets all websockets to fix bugged connections  
+`de.websocket.reconnect` - reconnect all websockets  
+`de.rest.reset` - reset all rest API clients  
+`de.search.highperformance.enable 1/0` - enable or disable high performance player name searches  
+`de.placeholders.list` - list all available placeholders registered in the Discord Extension  
+`de.pool.clearentities` - resets pool entities  
+`de.pool.remove` - removes all pools currently registered  
+`de.log.console ` - set's the console log level (Verbose, Debug, Info, Warning, Error, Exception, Off)  
+`de.log.file` - set's the file log level (Verbose, Debug, Info, Warning, Error, Exception, Off)  
+`de.validation.enable 1/0` - enable / disable api request validation  
+`de.debug` - prints debug information for the Discord Extension  
+`de.help` - displays the command help text  
+
+## Discord Application Commands
+Commands the Discord Extension registers on the bot:  
+`/de commands delete` - deletes an application command from the bot. This should be used when a plugin registers a command but is no longed used.  
 
 ## Contributing
 
