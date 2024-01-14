@@ -11,7 +11,7 @@
     <LangVersion>7</LangVersion>
     <PackageVersion>3.0.0.0</PackageVersion>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
+    <FileVersion>3.0.0</FileVersion>
     <Company>MJSU</Company>
   </PropertyGroup>
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
@@ -21,7 +21,6 @@
     <NoWarn>1701;1702;0618</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <Optimize>true</Optimize>
     <DocumentationFile>$(outdir)Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
