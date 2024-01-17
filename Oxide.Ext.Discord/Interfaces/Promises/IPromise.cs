@@ -7,7 +7,7 @@ using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces
 {
-   /// <summary>
+    /// <summary>
     /// Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.
     /// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
     /// </summary>

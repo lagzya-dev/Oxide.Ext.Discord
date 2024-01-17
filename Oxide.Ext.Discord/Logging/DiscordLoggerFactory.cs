@@ -1,6 +1,7 @@
 ﻿using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Configuration;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 

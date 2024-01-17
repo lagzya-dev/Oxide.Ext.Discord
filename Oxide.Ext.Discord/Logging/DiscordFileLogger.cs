@@ -20,9 +20,7 @@ namespace Oxide.Ext.Discord.Logging
         private readonly string _dateTimeFormat;
         private readonly AutoResetEvent _reset;
         
-        [ThreadStatic]
-        private static StringBuilder _builder;
-        private static StringBuilder Builder => _builder ?? (_builder = new StringBuilder());
+        private static readonly ThreadLocal<StringBuilder> Builder = new ThreadLocal<StringBuilder>(() => new StringBuilder());
 
         internal DiscordFileLogger(string pluginName, string dateTimeFormat, AutoResetEvent reset)
         {
@@ -39,7 +37,7 @@ namespace Oxide.Ext.Discord.Logging
 
         public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
         {
-            StringBuilder sb = Builder;
+            StringBuilder sb = Builder.Value;
             sb.Clear();
             char[] formatting = ArrayPool<char>.Shared.Rent(_dateTimeFormat.Length);
             Span<char> span = formatting.AsSpan();

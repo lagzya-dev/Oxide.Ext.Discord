@@ -3,7 +3,7 @@
 namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
-    /// Represents entities that are cachable by the DiscordExtension
+    /// Represents entities that are cacheable by the DiscordExtension
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface IDiscordCacheable<in T>

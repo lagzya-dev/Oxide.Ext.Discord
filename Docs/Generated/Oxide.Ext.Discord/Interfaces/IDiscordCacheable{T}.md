@@ -1,6 +1,6 @@
 # IDiscordCacheable&lt;T&gt; interface
 
-Represents entities that are cachable by the DiscordExtension
+Represents entities that are cacheable by the DiscordExtension
 
 ```csharp
 public interface IDiscordCacheable<in T>

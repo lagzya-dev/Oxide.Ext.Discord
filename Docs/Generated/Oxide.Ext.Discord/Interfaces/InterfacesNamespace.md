@@ -4,7 +4,8 @@
 | --- | --- |
 | interface [IBulkTemplate&lt;T&gt;](./IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 | interface [IDebugLoggable](./IDebugLoggable.md) | Represents an object that supports debug logging |
-| interface [IDiscordCacheable&lt;T&gt;](./IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
+| interface [IDiscordCacheable&lt;T&gt;](./IDiscordCacheable%7BT%7D.md) | Represents entities that are cacheable by the DiscordExtension |
+| interface [IDiscordLoggingConfig](./IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordPool](./IDiscordPool.md) | Interface for plugins to use that need access to a pool |
@@ -17,7 +18,6 @@
 | interface [IPluginBase](./IPluginBase.md) | Represents an interface for a plugin |
 | interface [IPromise](./IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
-| interface [IReadonlySet&lt;T&gt;](./IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |
 | interface [IRejectable](./IRejectable.md) | Interface for a promise that can be rejected. |
 | interface [ISnowflakeEntity](./ISnowflakeEntity.md) | Interface used to get the entity ID from an entity |
 | interface [IWebSocketEventHandler](./IWebSocketEventHandler.md) | Represents a Handler for Websocket Events |

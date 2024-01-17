@@ -43,7 +43,7 @@ public DiscordLogger CreateLogger(Plugin plugin, DiscordLogLevel logLevel,
 
 * class [DiscordLogger](./DiscordLogger.md)
 * enum [DiscordLogLevel](./DiscordLogLevel.md)
-* interface [IDiscordLoggingConfig](./IDiscordLoggingConfig.md)
+* interface [IDiscordLoggingConfig](../Interfaces/IDiscordLoggingConfig.md)
 * class [DiscordLoggerFactory](./DiscordLoggerFactory.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -494,7 +494,8 @@
 | --- | --- |
 | interface [IBulkTemplate&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 | interface [IDebugLoggable](./Oxide.Ext.Discord/Interfaces/IDebugLoggable.md) | Represents an object that supports debug logging |
-| interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cachable by the DiscordExtension |
+| interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cacheable by the DiscordExtension |
+| interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Interfaces/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [IDiscordMessageTemplate](./Oxide.Ext.Discord/Interfaces/IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) | Interface for plugins to use that need access to a pool |
@@ -507,7 +508,6 @@
 | interface [IPluginBase](./Oxide.Ext.Discord/Interfaces/IPluginBase.md) | Represents an interface for a plugin |
 | interface [IPromise](./Oxide.Ext.Discord/Interfaces/IPromise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | interface [IPromise&lt;TPromised&gt;](./Oxide.Ext.Discord/Interfaces/IPromise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
-| interface [IReadonlySet&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IReadonlySet%7BT%7D.md) | Represents a ReadOnly interface for ISet |
 | interface [IRejectable](./Oxide.Ext.Discord/Interfaces/IRejectable.md) | Interface for a promise that can be rejected. |
 | interface [ISnowflakeEntity](./Oxide.Ext.Discord/Interfaces/ISnowflakeEntity.md) | Interface used to get the entity ID from an entity |
 | interface [IWebSocketEventHandler](./Oxide.Ext.Discord/Interfaces/IWebSocketEventHandler.md) | Represents a Handler for Websocket Events |
@@ -621,7 +621,6 @@
 | class [DiscordLogger](./Oxide.Ext.Discord/Logging/DiscordLogger.md) | Represents a discord extension logger |
 | class [DiscordLoggerFactory](./Oxide.Ext.Discord/Logging/DiscordLoggerFactory.md) | Factory for creating DiscordLoggers |
 | enum [DiscordLogLevel](./Oxide.Ext.Discord/Logging/DiscordLogLevel.md) | Represents the log level for a logger |
-| interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Logging/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | static class [LoggerExt](./Oxide.Ext.Discord/Logging/LoggerExt.md) |  |
 
 ## Oxide.Ext.Discord.Plugins namespace

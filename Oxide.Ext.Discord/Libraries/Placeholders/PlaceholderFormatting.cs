@@ -1,9 +1,9 @@
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
@@ -16,6 +16,7 @@ namespace Oxide.Ext.Discord.Libraries
     internal static class PlaceholderFormatting
     {
         private static readonly Regex GenericPositionRegex = new Regex(@"([xyz])(?::?([\d\.]*))", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private static readonly ThreadLocal<char[]> Buffer = new ThreadLocal<char[]>(() => new char[128]);
 
         /// <summary>
         /// Replace the <see cref="PlaceholderState"/> with the the string value
@@ -70,18 +71,6 @@ namespace Oxide.Ext.Discord.Libraries
         /// Replace the <see cref="Match"/> with the the string value
         /// </summary>
         /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
-        /// <param name="match"><see cref="Match"/> for the placeholder</param>
-        /// <param name="value">Placeholder value to replace</param>
-        private static void Replace(StringBuilder builder, Match match, ReadOnlySpan<char> value)
-        {
-            builder.Remove(match.Index, match.Length);
-            builder.Insert(match.Index, value);
-        }
-
-        /// <summary>
-        /// Replace the <see cref="Match"/> with the the string value
-        /// </summary>
-        /// <param name="builder"><see cref="StringBuilder"/> for the placeholder</param>
         /// <param name="state"><see cref="Match"/> for the placeholder</param>
         /// <param name="value">Snowflake value to replace</param>
         private static void Replace(StringBuilder builder, PlaceholderState state, bool value)
@@ -125,8 +114,7 @@ namespace Oxide.Ext.Discord.Libraries
 
         private static void Replace(StringBuilder builder, PlaceholderState state, byte value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(3);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -135,14 +123,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, sbyte value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(3);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -151,14 +136,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, short value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(8);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -167,14 +149,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, ushort value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(8);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -183,14 +162,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, int value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(20);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -199,14 +175,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, uint value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(20);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -215,14 +188,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, long value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(32);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -231,14 +201,12 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
+            
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, ulong value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(32);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -247,14 +215,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, float value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(64);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -263,14 +228,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, double value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(128);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -279,14 +241,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, decimal value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(64);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -295,14 +254,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, DateTime value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(64);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -311,14 +267,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, DateTimeOffset value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(64);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -327,14 +280,11 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         private static void Replace(StringBuilder builder, PlaceholderState state, TimeSpan value)
         {
-            char[] array = ArrayPool<char>.Shared.Rent(32);
-            Span<char> span = array.AsSpan();
+            Span<char> span = Buffer.Value.AsSpan();
             if (value.TryFormat(span, out int written, state.Format))
             {
                 Replace(builder, state, span.Slice(0, written));
@@ -343,8 +293,6 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 Replace(builder, state, value as IFormattable);
             }
-
-            ArrayPool<char>.Shared.Return(array);
         }
 
         /// <summary>

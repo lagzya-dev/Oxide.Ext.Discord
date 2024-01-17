@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Threading;
 using Oxide.Core;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Interfaces;
@@ -14,9 +15,7 @@ namespace Oxide.Ext.Discord.Logging
         private readonly string _pluginName;
         private readonly object[] _empty = Array.Empty<object>();
 
-        [ThreadStatic]
-        private static StringBuilder _builder;
-        private static StringBuilder Builder => _builder ?? (_builder = new StringBuilder());
+        private static readonly ThreadLocal<StringBuilder> Builder = new ThreadLocal<StringBuilder>(() => new StringBuilder());
 
         public DiscordConsoleLogger(string pluginName)
         {
@@ -32,7 +31,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="ex"></param>
         public void AddMessage(DiscordLogLevel level, string log, object[] args, Exception ex)
         {
-            StringBuilder sb = Builder;
+            StringBuilder sb = Builder.Value;
             sb.Clear();
             sb.Append(_pluginName);
             sb.Append('[');

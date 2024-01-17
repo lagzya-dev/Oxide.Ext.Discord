@@ -249,8 +249,8 @@ namespace Oxide.Ext.Discord.Libraries
         }
 
         /// <summary>
-        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for T will be the T.GetType().Name
-        /// Type T will be passed into the callback function and will expect a TResult to be returned from that function.
+        /// Registers a placeholder that will pull type T from <see cref="PlaceholderData"/>. The datakey for TData will be the typeof(TData).Name
+        /// TData will be passed into the callback function and will expect a TResult to be returned from that function.
         /// </summary>
         /// <param name="plugin">Plugin this placeholder is for</param>
         /// <param name="key">Placeholder key</param>

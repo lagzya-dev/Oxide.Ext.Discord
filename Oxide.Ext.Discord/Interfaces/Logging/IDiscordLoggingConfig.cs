@@ -1,4 +1,6 @@
-﻿namespace Oxide.Ext.Discord.Logging
+﻿using Oxide.Ext.Discord.Logging;
+
+namespace Oxide.Ext.Discord.Interfaces
 {
     /// <summary>
     /// Interface for Discord Logging Configuration

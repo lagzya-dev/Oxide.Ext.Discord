@@ -1,4 +1,5 @@
 ﻿using System;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Logging
 {

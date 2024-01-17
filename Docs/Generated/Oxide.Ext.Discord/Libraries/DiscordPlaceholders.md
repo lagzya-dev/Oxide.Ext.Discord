@@ -17,7 +17,7 @@ public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 | [RegisterPlaceholder](#registerplaceholder-method)(…) | Registers a placeholder static value placeholder. Static placeholder value can not be changed. |
 | [RegisterPlaceholder&lt;TResult&gt;](#registerplaceholder&amp;lt;tresult&amp;gt;-method)(…) | Registers a placeholder that will call the callback function when the placeholder is called. This function will return TResult data for the placeholder |
 | [RegisterPlaceholder&lt;TData&gt;](#registerplaceholder&amp;lt;tdata&amp;gt;-method)(…) | Registers a placeholder that will take a datakey from [`PlaceholderData`](./PlaceholderData.md) and use that as the placeholder value |
-| [RegisterPlaceholder&lt;TData,TResult&gt;](#registerplaceholder&amp;lt;tdata,tresult&amp;gt;-method-1-of-4)(…) | Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function and will expect a TResult to be returned from that function. (4 methods) |
+| [RegisterPlaceholder&lt;TData,TResult&gt;](#registerplaceholder&amp;lt;tdata,tresult&amp;gt;-method-1-of-4)(…) | Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for TData will be the typeof(TData).Name TData will be passed into the callback function and will expect a TResult to be returned from that function. (4 methods) |
 
 ## Protected Members
 
@@ -241,7 +241,7 @@ public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey ke
 
 # RegisterPlaceholder&lt;TData,TResult&gt; method (5 of 7)
 
-Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for T will be the T.GetType().Name Type T will be passed into the callback function and will expect a TResult to be returned from that function.
+Registers a placeholder that will pull type T from [`PlaceholderData`](./PlaceholderData.md). The datakey for TData will be the typeof(TData).Name TData will be passed into the callback function and will expect a TResult to be returned from that function.
 
 ```csharp
 public void RegisterPlaceholder<TData, TResult>(Plugin plugin, PlaceholderKey key, 

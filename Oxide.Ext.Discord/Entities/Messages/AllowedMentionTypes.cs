@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Json;
 namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    ///  Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types">Allowed Mention Types</a> for a message
     /// </summary>
     [JsonConverter(typeof(DiscordEnumConverter))]
     public enum AllowedMentionTypes : byte
