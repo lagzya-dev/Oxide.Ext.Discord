@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Cache;
 
 namespace Oxide.Ext.Discord.Services
 {
     internal class CovalenceSearchService : IPlayerSearchService
     {
-        private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
-
         public IEnumerable<IPlayer> GetOnlinePlayers(string name)
         {
-            foreach (IPlayer player in _covalence.Players.Connected)
+            foreach (IPlayer player in OxideLibrary.Instance.Covalence.Players.Connected)
             {
                 if (IsMatch(player, name))
                 {
@@ -22,7 +21,7 @@ namespace Oxide.Ext.Discord.Services
 
         public IEnumerable<IPlayer> GetAllPlayers(string name)
         {
-            foreach (IPlayer player in _covalence.Players.All)
+            foreach (IPlayer player in OxideLibrary.Instance.Covalence.Players.All)
             {
                 if (IsMatch(player, name))
                 {

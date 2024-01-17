@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Services
@@ -12,13 +13,12 @@ namespace Oxide.Ext.Discord.Services
 
         internal UkkonenTrieService()
         {
-            Covalence covalence = Interface.Oxide.GetLibrary<Covalence>();
-            foreach (IPlayer player in covalence.Players.All)
+            foreach (IPlayer player in OxideLibrary.Instance.Covalence.Players.All)
             {
                 _all.Add(player.Name, player);
             }
             
-            foreach (IPlayer player in covalence.Players.Connected)
+            foreach (IPlayer player in OxideLibrary.Instance.Covalence.Players.Connected)
             {
                 _all.Add(player.Name, player);
             }

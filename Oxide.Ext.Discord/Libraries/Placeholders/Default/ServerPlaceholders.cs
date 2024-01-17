@@ -4,6 +4,7 @@ using System.Net;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
@@ -13,9 +14,6 @@ namespace Oxide.Ext.Discord.Libraries
     /// </summary>
     public static class ServerPlaceholders
     {
-        private static Covalence _covalence;
-        private static Covalence Covalence => _covalence ?? (_covalence = Interface.Oxide.GetLibrary<Covalence>());
-        
         /// <summary>
         /// <see cref="IServer.Name"/> placeholder
         /// </summary>
@@ -34,7 +32,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// <see cref="IServer.MaxPlayers"/> placeholder
         /// </summary>
-        public static int TotalPlayers(IServer server) => Covalence.Players.All.Count();
+        public static int TotalPlayers(IServer server) => OxideLibrary.Instance.Covalence.Players.All.Count();
 
         /// <summary>
         /// <see cref="IServer.Version"/> placeholder

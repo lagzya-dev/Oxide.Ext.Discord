@@ -5,6 +5,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
@@ -28,11 +29,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Returns the Oxide Server language
         /// </summary>
-        public ServerLocale ServerLanguage => ServerLocale.Create(_lang.GetServerLanguage());
+        public ServerLocale ServerLanguage => ServerLocale.Create(OxideLibrary.Instance.Lang.GetServerLanguage());
         
         private readonly Hash<PluginLocale, Hash<string, string>> _pluginLangCache = new Hash<PluginLocale, Hash<string, string>>();
         
-        private readonly Lang _lang = Interface.Oxide.GetLibrary<Lang>();
         private readonly ILogger _logger;
 
         private readonly BidirectionalDictionary<ServerLocale, DiscordLocale> _locales = new BidirectionalDictionary<ServerLocale, DiscordLocale>
@@ -134,7 +134,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// </summary>
         /// <param name="playerId">PlayerId to get the locale for</param>
         /// <returns>Locale for the given playerId</returns>
-        public ServerLocale GetPlayerLanguage(string playerId) => ServerLocale.Parse(_lang.GetLanguage(playerId));
+        public ServerLocale GetPlayerLanguage(string playerId) => ServerLocale.Parse(OxideLibrary.Instance.Lang.GetLanguage(playerId));
 
         /// <summary>
         /// Returns all the discord localizations for a specific lang key in a plugin
@@ -148,7 +148,7 @@ namespace Oxide.Ext.Discord.Libraries
             if (langKey == null) throw new ArgumentNullException(nameof(langKey));
             
             Hash<string, string> localization = new Hash<string, string>();
-            string[] languages = _lang.GetLanguages(plugin);
+            string[] languages = OxideLibrary.Instance.Lang.GetLanguages(plugin);
             for (int index = 0; index < languages.Length; index++)
             {
                 ServerLocale serverLocale = ServerLocale.Parse(languages[index]);
@@ -245,7 +245,7 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 langCache = new Hash<string, string>();
                 _pluginLangCache[id] = langCache;
-                foreach (KeyValuePair<string, string> lang in _lang.GetMessages(language.Id, plugin))
+                foreach (KeyValuePair<string, string> lang in OxideLibrary.Instance.Lang.GetMessages(language.Id, plugin))
                 {
                     langCache[lang.Key] = lang.Value;
                 }

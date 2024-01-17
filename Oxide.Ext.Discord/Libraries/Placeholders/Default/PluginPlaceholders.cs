@@ -3,6 +3,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 
@@ -13,8 +14,6 @@ namespace Oxide.Ext.Discord.Libraries
     /// </summary>
     public static class PluginPlaceholders
     {
-        private static readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
-        
         /// <summary>
         /// <see cref="Plugin.Name"/> placeholder
         /// </summary>
@@ -53,7 +52,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Lang message for a plugin
         /// </summary>
-        public static string LangMessage(PlaceholderState state, Plugin plugin) => Lang.GetMessage(state.Format, plugin, state.Data.Get<IPlayer>()?.Id);
+        public static string LangMessage(PlaceholderState state, Plugin plugin) => OxideLibrary.Instance.Lang.GetMessage(state.Format, plugin, state.Data.Get<IPlayer>()?.Id);
 
         internal static void RegisterPlaceholders()
         {

@@ -4,6 +4,7 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
 
@@ -15,9 +16,6 @@ namespace Oxide.Ext.Discord.Libraries
     public static class PlayerPlaceholders
     {
         internal static readonly PlaceholderDataKey TargetPlayerKey = new PlaceholderDataKey("TargetPlayer");
-        
-        private static Permission _permission;
-        private static Permission Permission => _permission ?? (_permission = Interface.Oxide.GetLibrary<Permission>());
         
         /// <summary>
         /// <see cref="IPlayer.Id"/> placeholder
@@ -76,14 +74,14 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Player Permissions Placeholder
         /// </summary>
-        public static string[] Permissions(IPlayer player) => Permission.GetUserPermissions(player.Id);
+        public static string[] Permissions(IPlayer player) => OxideLibrary.Instance.Permission.GetUserPermissions(player.Id);
         
         /// <summary>
         /// Player Groups Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string[] Groups(IPlayer player) => Permission.GetUserGroups(player.Id);
+        public static string[] Groups(IPlayer player) => OxideLibrary.Instance.Permission.GetUserGroups(player.Id);
 
         /// <summary>
         /// Player Address Placeholder

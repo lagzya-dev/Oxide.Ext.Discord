@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
@@ -24,7 +25,6 @@ namespace Oxide.Ext.Discord.Libraries
         private readonly Regex _placeholderRegex = new Regex(@"{([^\d][^:{}""]+)(?::([^{}""]+))*?}", RegexOptions.Compiled);
         private readonly Hash<PlaceholderKey, IPlaceholder> _placeholders = new Hash<PlaceholderKey, IPlaceholder>();
         private readonly Hash<PlaceholderKey, IPlaceholder> _internalPlaceholders = new Hash<PlaceholderKey, IPlaceholder>();
-        private readonly Covalence _covalence = Interface.Oxide.GetLibrary<Covalence>();
         private readonly ILogger _logger;
         
         internal DiscordPlaceholders(ILogger logger)
@@ -162,7 +162,7 @@ namespace Oxide.Ext.Discord.Libraries
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             
             PlaceholderData data = DiscordPool.Instance.GetOrCreate(plugin).GetPlaceholderData();
-            data.AddServer(_covalence.Server);
+            data.AddServer(OxideLibrary.Instance.Covalence.Server);
             data.AddPlugin(plugin);
             
             DiscordUser bot = DiscordClientFactory.Instance.GetClient(plugin)?.Bot?.BotUser;

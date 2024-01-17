@@ -4,6 +4,7 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
@@ -29,8 +30,6 @@ namespace Oxide.Ext.Discord.Libraries
         private readonly Hash<string, DirectMessageCommand> _directMessageCommands = new Hash<string, DirectMessageCommand>();
         private readonly Hash<string, GuildCommand> _guildCommands = new Hash<string, GuildCommand>();
         private readonly ILogger _logger;
-
-        private readonly Lang _lang = Interface.Oxide.GetLibrary<Lang>();
         
         /// <summary>
         /// Discord Commands Constructor
@@ -87,9 +86,9 @@ namespace Oxide.Ext.Discord.Libraries
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
             
-            foreach (string langType in _lang.GetLanguages(plugin))
+            foreach (string langType in OxideLibrary.Instance.Lang.GetLanguages(plugin))
             {
-                Dictionary<string, string> langKeys = _lang.GetMessages(langType, plugin);
+                Dictionary<string, string> langKeys = OxideLibrary.Instance.Lang.GetMessages(langType, plugin);
                 if (langKeys.TryGetValue(langKey, out string command) && !string.IsNullOrEmpty(command))
                 {
                     AddDirectMessageCommand(command, plugin, callback);
@@ -142,9 +141,9 @@ namespace Oxide.Ext.Discord.Libraries
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
             if (string.IsNullOrEmpty(callback)) throw new ArgumentNullException(nameof(callback));
             
-            foreach (string langType in _lang.GetLanguages(plugin))
+            foreach (string langType in OxideLibrary.Instance.Lang.GetLanguages(plugin))
             {
-                Dictionary<string, string> langKeys = _lang.GetMessages(langType, plugin);
+                Dictionary<string, string> langKeys = OxideLibrary.Instance.Lang.GetMessages(langType, plugin);
                 if (langKeys.TryGetValue(langKey, out string command) && !string.IsNullOrEmpty(command))
                 {
                     AddGuildCommand(command, plugin, allowedChannels, callback);

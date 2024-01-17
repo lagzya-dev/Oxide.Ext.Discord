@@ -3,16 +3,17 @@ using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
 {
     internal class BaseDiscordPlugin : CSPlugin
     {
-        protected readonly Covalence Covalence = Interface.Oxide.GetLibrary<Covalence>();
-        protected readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
-        protected readonly Oxide.Core.Libraries.Plugins Plugins = Interface.Oxide.GetLibrary<Oxide.Core.Libraries.Plugins>();
-        protected readonly Permission Permission = Interface.Oxide.GetLibrary<Permission>();
+        protected readonly Covalence Covalence = OxideLibrary.Instance.Covalence;
+        protected readonly Lang Lang = OxideLibrary.Instance.Lang;
+        protected readonly Oxide.Core.Libraries.Plugins Plugins = OxideLibrary.Instance.Plugins;
+        protected readonly Permission Permission = OxideLibrary.Instance.Permission;
         internal readonly PluginTimers Timer;
 
         protected BaseDiscordPlugin()
