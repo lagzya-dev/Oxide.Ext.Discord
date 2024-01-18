@@ -1,7 +1,9 @@
-﻿using Oxide.Core;
+﻿using System.Linq;
+using Oxide.Core;
 using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
@@ -11,6 +13,7 @@ namespace Oxide.Ext.Discord.Cache
         internal readonly Permission Permission = Interface.Oxide.GetLibrary<Permission>();
         internal readonly Lang Lang = Interface.Oxide.GetLibrary<Lang>();
         internal readonly Oxide.Core.Libraries.Plugins Plugins = Interface.Oxide.GetLibrary<Oxide.Core.Libraries.Plugins>();
+        internal readonly CSharpPluginLoader PluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
         
         private OxideLibrary() { }
     }

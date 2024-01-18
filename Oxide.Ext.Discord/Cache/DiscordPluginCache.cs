@@ -4,7 +4,6 @@ using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Types;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Cache
 {
@@ -13,8 +12,6 @@ namespace Oxide.Ext.Discord.Cache
     /// </summary>
     public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
-        private readonly CSharpPluginLoader _pluginLoader = Interface.Oxide.GetPluginLoaders().OfType<CSharpPluginLoader>().FirstOrDefault();
-
         private readonly List<string> _loadablePlugins = new List<string>();
         private readonly List<string> _loadedPlugins = new List<string>();
         private DateTime _nextUpdate = DateTime.MinValue;
@@ -53,7 +50,7 @@ namespace Oxide.Ext.Discord.Cache
             }
             
             _loadablePlugins.Clear();
-            _loadablePlugins.AddRange(_pluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
+            _loadablePlugins.AddRange(OxideLibrary.Instance.PluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
             _nextUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(5);
             return _loadablePlugins;
         }

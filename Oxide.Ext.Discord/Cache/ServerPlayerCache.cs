@@ -2,7 +2,6 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Plugins;
@@ -37,7 +36,7 @@ namespace Oxide.Ext.Discord.Cache
         /// </summary>
         /// <param name="id">ID of the player</param>
         /// <returns><see cref="IPlayer"/></returns>
-        public IPlayer GetPlayerById(string id) => _cache.TryGetValue(id, out IPlayer player) ? player : null;
+        public IPlayer GetPlayerById(string id) => _cache.GetValueOrDefault(id);
         
         /// <summary>
         /// Returns the <see cref="IPlayer"/> for the given ID

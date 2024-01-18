@@ -65,7 +65,7 @@ namespace Oxide.Ext.Discord.Rest
             Client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add( StringWithQualityHeaderValue.Parse("gzip"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
-            Client.DefaultRequestHeaders.Add("user-agent", $"DiscordBot (https://github.com/Kirollos/Oxide.Ext.Discord, v{DiscordExtension.FullExtensionVersion})");
+            Client.DefaultRequestHeaders.Add("user-agent", $"DiscordBot (https://github.com/dassjosh/Oxide.Ext.Discord, v{DiscordExtension.FullExtensionVersion})");
             _logger = logger;
             RateLimit = new RestRateLimit(logger);
         }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Core;
 using Oxide.Core.Extensions;
-using Oxide.Core.Libraries;
-using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data;

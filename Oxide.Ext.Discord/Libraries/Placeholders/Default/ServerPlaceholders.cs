@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Net;
-using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
