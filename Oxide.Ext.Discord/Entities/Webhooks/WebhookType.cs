@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
         /// </summary>
-        ChannelFollower = 2
+        ChannelFollower = 2,
+        
+        /// <summary>
+        /// Application webhooks are webhooks used with Interactions
+        /// </summary>
+        Application = 3
     }
 }
