@@ -12,6 +12,7 @@ public enum WebhookType : byte
 | --- | --- | --- |
 | Incoming | `Incoming` | Incoming Webhooks can post messages to channels with a generated token |
 | ChannelFollower | `ChannelFollower` | Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels |
+| Application | `Application` | Application webhooks are webhooks used with Interactions |
 
 ## See Also
 

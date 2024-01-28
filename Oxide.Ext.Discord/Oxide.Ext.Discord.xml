@@ -17195,6 +17195,11 @@
             Channel Follower Webhooks are internal webhooks used with Channel Following to post new messages into channels
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.WebhookType.Application">
+            <summary>
+            Application webhooks are webhooks used with Interactions
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.BaseDiscordException">
             <summary>
             Represents a base discord extension

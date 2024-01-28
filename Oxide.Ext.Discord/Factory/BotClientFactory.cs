@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
@@ -40,7 +41,7 @@ namespace Oxide.Ext.Discord.Factory
                 DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);
                 return bot;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 DiscordExtension.GlobalLogger.Exception($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} An error occured adding {{0}} client", client.PluginName, ex);
                 return null;
