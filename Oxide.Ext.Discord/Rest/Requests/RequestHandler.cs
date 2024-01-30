@@ -219,8 +219,9 @@ namespace Oxide.Ext.Discord.Rest
 
             if (Request.Client.Logger.IsLogging(DiscordLogLevel.Debug))
             {
-                Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}", response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.ResponseMessage);
-                Request.Client.Logger.Debug("Body:\n{0}", request.Content != null ? await request.Content.ReadAsStringAsync().ConfigureAwait(false) : "No Content");
+                string content = request.Content != null ? await request.Content.ReadAsStringAsync().ConfigureAwait(false) : "No Content";
+                Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}\nBody:\n{7}", 
+                    response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.ResponseMessage, content);
             }
 
             return response;
