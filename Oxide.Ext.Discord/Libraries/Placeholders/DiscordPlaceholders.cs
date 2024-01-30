@@ -53,10 +53,7 @@ namespace Oxide.Ext.Discord.Libraries
 
         internal IEnumerable<KeyValuePair<PlaceholderKey, IPlaceholder>> GetPlaceholders()
         {
-            foreach (KeyValuePair<PlaceholderKey, IPlaceholder> placeholder in _placeholders)
-            {
-                yield return placeholder;
-            }
+            return _placeholders;
         }
         
         /// <summary>
