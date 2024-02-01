@@ -80,6 +80,12 @@ namespace Oxide.Ext.Discord.Libraries
         public readonly PlaceholderKey Country;
         
         /// <summary>
+        /// <see cref="PlaceholderKey"/> for <see cref="IPlayer"/> Country Code
+        /// Requires Placeholder API plugin in order to use
+        /// </summary>
+        public readonly PlaceholderKey CountryCode;
+        
+        /// <summary>
         /// <see cref="PlaceholderKey"/> for <see cref="IPlayer"/> Country Emoji
         /// Requires Placeholder API plugin in order to use
         /// </summary>
@@ -141,6 +147,7 @@ namespace Oxide.Ext.Discord.Libraries
             Ping = new PlaceholderKey(prefix, "ping");
             Address = new PlaceholderKey(prefix, "address");
             Country = new PlaceholderKey(prefix, "country");
+            CountryCode = new PlaceholderKey(prefix, "country.code");
             CountryEmoji = new PlaceholderKey(prefix, "country.emoji");
             ClanTag = new PlaceholderKey(prefix, "clan.tag");
             SteamProfile = new PlaceholderKey(prefix, "steam.profile");

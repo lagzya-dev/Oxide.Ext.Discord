@@ -17,6 +17,7 @@ public class PlayerKeys
 | readonly [ClanTag](#clantag-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IPlayer Clan Tag Requires Clans plugin in order to use |
 | readonly [Connected](#connected-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IsConnected |
 | readonly [Country](#country-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IPlayer Country Requires Placeholder API plugin in order to use |
+| readonly [CountryCode](#countrycode-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IPlayer Country Code Requires Placeholder API plugin in order to use |
 | readonly [CountryEmoji](#countryemoji-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IPlayer Country Emoji Requires Placeholder API plugin in order to use |
 | readonly [Groups](#groups-field) | [`PlaceholderKey`](./PlaceholderKey.md) for IPlayer groups |
 | readonly [Health](#health-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Health |
@@ -274,6 +275,22 @@ public readonly PlaceholderKey Address;
 
 ```csharp
 public readonly PlaceholderKey Country;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [PlayerKeys](./PlayerKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CountryCode field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for IPlayer Country Code Requires Placeholder API plugin in order to use
+
+```csharp
+public readonly PlaceholderKey CountryCode;
 ```
 
 ## See Also

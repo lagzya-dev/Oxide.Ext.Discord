@@ -3,8 +3,10 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Data.Ip;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {
@@ -14,6 +16,8 @@ namespace Oxide.Ext.Discord.Libraries
     public static class PlayerPlaceholders
     {
         internal static readonly PlaceholderDataKey TargetPlayerKey = new PlaceholderDataKey("TargetPlayer");
+        
+        private static readonly Hash<string, string> FlagCache = new Hash<string, string>();
         
         /// <summary>
         /// <see cref="IPlayer.Id"/> placeholder
@@ -89,18 +93,37 @@ namespace Oxide.Ext.Discord.Libraries
         public static string Address(IPlayer player) => player.Address;
         
         /// <summary>
-        /// Player Country Placeholder
+        /// Player Country Name Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string Country(IPlayer player) => DiscordExtensionCore.Instance.GetCountry(player);
+        public static string CountryName(IPlayer player) => DiscordIpData.Instance.GetCountryName(player.Address);
+        
+        /// <summary>
+        /// Player Country Name Placeholder
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
+        public static string CountryCode(IPlayer player) => DiscordIpData.Instance.GetCountryCode(player.Address);
         
         /// <summary>
         /// Player Flag Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string CountryEmoji(IPlayer player) => DiscordExtensionCore.Instance.GetCountryEmoji(player);
+        public static string CountryEmoji(IPlayer player)
+        {
+            string country = DiscordIpData.Instance.GetCountryCode(player.Address);
+            if (FlagCache.TryGetValue(country, out string flag))
+            {
+                return flag;
+            }
+
+            flag = !string.IsNullOrEmpty(country) ? $":flag_{country}:" : ":signal_strength:";
+
+            FlagCache[country] = flag;
+            return flag;
+        }
 
         /// <summary>
         /// Player Groups Placeholder
@@ -162,8 +185,8 @@ namespace Oxide.Ext.Discord.Libraries
             placeholders.RegisterPlaceholder<IPlayer, float>(plugin, keys.MaxHealth, dataKey, MaxHealth);
             placeholders.RegisterPlaceholder<IPlayer, GenericPosition>(plugin, keys.Position, dataKey, Position);
             placeholders.RegisterPlaceholder<IPlayer, int>(plugin, keys.Ping, dataKey, Ping);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Address, dataKey, Country);
-            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Country, dataKey, Country);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Address, dataKey, CountryName);
+            placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.Country, dataKey, CountryCode);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.CountryEmoji, dataKey, CountryEmoji);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.ClanTag, dataKey, ClanTag);
             placeholders.RegisterPlaceholder<IPlayer, string>(plugin, keys.SteamProfile, dataKey, SteamProfileUrl);

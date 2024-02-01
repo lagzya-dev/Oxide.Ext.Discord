@@ -7,8 +7,10 @@ using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Callbacks.Data;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data;
+using Oxide.Ext.Discord.Data.Ip;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
@@ -86,7 +88,7 @@ namespace Oxide.Ext.Discord.Plugins
         [HookMethod(nameof(OnServerSave))]
         private void OnServerSave()
         {
-            DiscordUserData.Instance.Save(false);
+            DataHandler.Instance.OnServerSave();
         }
         
         // ReSharper disable once UnusedMember.Local
@@ -319,6 +321,10 @@ namespace Oxide.Ext.Discord.Plugins
         private void OnUserConnected(IPlayer player)
         {
             ServerPlayerCache.Instance.OnUserConnected(player);
+            if (!DiscordIpData.Instance.HasData(player.Address))
+            {
+                GetIpDataCallback.Start(player.Address);
+            }
         }
         
         // ReSharper disable once UnusedMember.Local

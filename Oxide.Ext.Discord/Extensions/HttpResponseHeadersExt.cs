@@ -33,6 +33,18 @@ namespace Oxide.Ext.Discord.Extensions
 
             return result;
         }
+
+        internal static bool TryGetInt(this HttpResponseHeaders headers, string key, out int value)
+        {
+            string headerValue = headers.Get(key);
+            if (string.IsNullOrEmpty(headerValue) || !int.TryParse(headerValue, out value))
+            {
+                value = 0;
+                return false;
+            }
+
+            return true;
+        }
         
         internal static double GetDouble(this HttpResponseHeaders headers, string key)
         {

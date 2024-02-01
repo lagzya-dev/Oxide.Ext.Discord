@@ -17,6 +17,6 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="time"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static async ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + Padding, token).ConfigureAwait(false);
+        public static async ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token = default(CancellationToken)) => await Task.Delay(time - DateTimeOffset.UtcNow + Padding, token).ConfigureAwait(false);
     }
 }

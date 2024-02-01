@@ -75,6 +75,12 @@
 | abstract class [BaseCallback&lt;T&gt;](./Oxide.Ext.Discord/Callbacks/BaseCallback%7BT%7D.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
 | abstract class [BaseNextTickCallback](./Oxide.Ext.Discord/Callbacks/BaseNextTickCallback.md) | Represents a callback that calls next tick |
 
+## Oxide.Ext.Discord.Callbacks.Data namespace
+
+| public type | description |
+| --- | --- |
+| class [GetIpDataCallback](./Oxide.Ext.Discord/Callbacks/Data/GetIpDataCallback.md) |  |
+
 ## Oxide.Ext.Discord.Clients namespace
 
 | public type | description |
@@ -457,6 +463,12 @@
 | class [PromiseException](./Oxide.Ext.Discord/Exceptions/PromiseException.md) | Exceptions for promises |
 | class [ServerLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 | class [TokenMismatchException](./Oxide.Ext.Discord/Exceptions/TokenMismatchException.md) | Represents a bot token mismatch |
+
+## Oxide.Ext.Discord.Exceptions.Data namespace
+
+| public type | description |
+| --- | --- |
+| class [DataInfoNotFoundException](./Oxide.Ext.Discord/Exceptions/Data/DataInfoNotFoundException.md) | Exception for Data Info not being fouind |
 
 ## Oxide.Ext.Discord.Extensions namespace
 

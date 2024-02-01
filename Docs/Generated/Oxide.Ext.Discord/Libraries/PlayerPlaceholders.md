@@ -15,8 +15,9 @@ public static class PlayerPlaceholders
 | static [BattleMetricsSteamIdUrl](#battlemetricssteamidurl-method)(…) | Battle metrics Steam ID Url Placeholder |
 | static [ClanTag](#clantag-method)(…) | Player Groups Placeholder |
 | static [Connected](#connected-method)(…) | IsConnected placeholder |
-| static [Country](#country-method)(…) | Player Country Placeholder |
+| static [CountryCode](#countrycode-method)(…) | Player Country Name Placeholder |
 | static [CountryEmoji](#countryemoji-method)(…) | Player Flag Placeholder |
+| static [CountryName](#countryname-method)(…) | Player Country Name Placeholder |
 | static [Groups](#groups-method)(…) | Player Groups Placeholder |
 | static [Health](#health-method)(…) | Health placeholder |
 | static [Id](#id-method)(…) | Id placeholder |
@@ -197,12 +198,31 @@ public static string Address(IPlayer player)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# Country method
+# CountryName method
 
-Player Country Placeholder
+Player Country Name Placeholder
 
 ```csharp
-public static string Country(IPlayer player)
+public static string CountryName(IPlayer player)
+```
+
+| parameter | description |
+| --- | --- |
+| player |  |
+
+## See Also
+
+* class [PlayerPlaceholders](./PlayerPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CountryCode method
+
+Player Country Name Placeholder
+
+```csharp
+public static string CountryCode(IPlayer player)
 ```
 
 | parameter | description |

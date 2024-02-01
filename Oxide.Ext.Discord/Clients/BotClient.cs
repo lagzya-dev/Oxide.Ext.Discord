@@ -355,7 +355,7 @@ namespace Oxide.Ext.Discord.Clients
             if (isFirst)
             {
                 Hooks.CallHook(DiscordExtHooks.OnDiscordGatewayReady, ready);
-                if (DiscordUserData.Instance.Bots.TryGetValue(ready.User.Id, out BotData botData))
+                if (DiscordUserData.Instance.TryGetBotData(ready.User.Id, out BotData botData))
                 {
                     foreach (UserData userData in botData.Users.Values)
                     {

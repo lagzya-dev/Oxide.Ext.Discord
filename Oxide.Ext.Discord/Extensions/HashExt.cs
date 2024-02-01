@@ -17,14 +17,14 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="predicate">Filter of which values to remove</param>
         /// <typeparam name="TKey">Key type of the hash</typeparam>
         /// <typeparam name="TValue">Value type of the hash</typeparam>
-        public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> hash, Func<TKey, bool> predicate)
+        public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> hash, Func<KeyValuePair<TKey, TValue>, bool> predicate)
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
 
             List<TKey> removeKeys = DiscordPool.Internal.GetList<TKey>();
             foreach (KeyValuePair<TKey, TValue> key in hash)
             {
-                if (predicate(key.Key))
+                if (predicate(key))
                 {
                     removeKeys.Add(key.Key);
                 }

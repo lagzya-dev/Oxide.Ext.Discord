@@ -25,7 +25,7 @@ Remove all records from the hash with the given predicate filter
 
 ```csharp
 public static void RemoveAll<TKey, TValue>(this IDictionary<TKey, TValue> hash, 
-    Func<TKey, bool> predicate)
+    Func<KeyValuePair<TKey, TValue>, bool> predicate)
 ```
 
 | parameter | description |

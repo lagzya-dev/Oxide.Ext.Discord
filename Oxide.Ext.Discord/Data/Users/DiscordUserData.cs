@@ -8,8 +8,10 @@ namespace Oxide.Ext.Discord.Data
     internal class DiscordUserData : BaseDataFile<DiscordUserData>
     {
         [ProtoMember(1)]
-        public Dictionary<Snowflake, BotData> Bots { get; set; } = new Dictionary<Snowflake, BotData>();
+        private Dictionary<Snowflake, BotData> Bots { get; set; } = new Dictionary<Snowflake, BotData>();
 
+        public bool TryGetBotData(Snowflake id, out BotData data) => Bots.TryGetValue(id, out data);
+        
         public BotData GetBotData(Snowflake botId)
         {
             if (!Bots.TryGetValue(botId, out BotData data))
@@ -21,8 +23,5 @@ namespace Oxide.Ext.Discord.Data
 
             return data;
         }
-
-        protected override string GetFileName() => "discord.users.data";
-        protected override int GetNumBackups() => 2;
     }
 }

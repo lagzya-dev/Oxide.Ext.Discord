@@ -256,7 +256,7 @@ namespace Oxide.Ext.Discord.Libraries
         protected override void OnPluginUnloaded(Plugin plugin)
         {
             PluginId pluginId = plugin.Id();
-            _pluginLangCache.RemoveAll(p => pluginId == p.PluginId);
+            _pluginLangCache.RemoveAll(p => pluginId == p.Key.PluginId);
         }
     }
 }
