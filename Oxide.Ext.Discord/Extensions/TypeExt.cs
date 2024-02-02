@@ -44,14 +44,17 @@ namespace Oxide.Ext.Discord.Extensions
         public static string GetRealTypeName(this Type t)
         {
             if (!t.IsGenericType)
+            {
                 return t.Name;
+            }
 
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
             sb.Append(t.Name.AsSpan().Slice(0, t.Name.IndexOf('`')));
             sb.Append('<');
-            for (int index = 0; index < t.GetGenericArguments().Length; index++)
+            Type[] args = t.GetGenericArguments();
+            for (int index = 0; index < args.Length; index++)
             {
-                Type arg = t.GetGenericArguments()[index];
+                Type arg = args[index];
                 if (index != 0)
                 {
                     sb.Append(',');
