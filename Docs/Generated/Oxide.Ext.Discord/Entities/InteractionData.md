@@ -22,12 +22,28 @@ public class InteractionData
 | [TargetId](#targetid-property) { get; set; } | Id the of user or message targeted by a user or message command |
 | [Type](#type-property) { get; set; } | The type of the invoked command |
 | [Values](#values-property) { get; set; } | For components, the values for the select menu component |
+| [GetComponent&lt;T&gt;](#getcomponent&amp;lt;t&amp;gt;-method)(…) |  |
 
 ## See Also
 
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [InteractionData.cs](../../../../Oxide.Ext.Discord/Entities/InteractionData.cs)
+   
+   
+# GetComponent&lt;T&gt; method
+
+```csharp
+public T GetComponent<T>(string customId)
+    where T : BaseInteractableComponent
+```
+
+## See Also
+
+* class [BaseInteractableComponent](./BaseInteractableComponent.md)
+* class [InteractionData](./InteractionData.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # InteractionData constructor

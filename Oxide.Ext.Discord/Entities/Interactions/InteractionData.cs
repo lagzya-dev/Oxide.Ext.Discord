@@ -74,5 +74,21 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("components")]
         public List<ActionRowComponent> Components { get; set; }
+        
+        public T GetComponent<T>(string customId) where T : BaseInteractableComponent
+        {
+            foreach (ActionRowComponent row in Components)
+            {
+                foreach (BaseComponent baseComponent in row.Components)
+                {
+                    if (baseComponent is T component && component.CustomId == customId)
+                    {
+                        return component;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }
