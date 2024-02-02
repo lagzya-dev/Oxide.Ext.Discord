@@ -96,7 +96,7 @@ namespace Oxide.Ext.Discord.Clients
         public BotClient(BotConnection connection)
         {
             Connection = new BotConnection(connection);
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(Connection.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
 
             JsonSettings = new JsonSerializerSettings
             {
@@ -228,11 +228,6 @@ namespace Oxide.Ext.Discord.Clients
                 ConnectWebSocket();
                 return;
             }
-            
-            if (client.Connection.LogLevel < Connection.LogLevel)
-            {
-                UpdateLogLevel(client.Connection.LogLevel);
-            }
 
             GatewayIntents intents = Connection.Intents | client.Connection.Intents;
                 
@@ -289,21 +284,7 @@ namespace Oxide.Ext.Discord.Clients
                 Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
                 return;
             }
-
-            DiscordLogLevel level = DiscordLogLevel.Off;
-            for (int index = 0; index < _clients.Count; index++)
-            {
-                DiscordClient remainingClient = _clients[index];
-                if (remainingClient.Connection.LogLevel < level)
-                {
-                    level = remainingClient.Connection.LogLevel;
-                }
-            }
-
-            if (level > Connection.LogLevel)
-            {
-                UpdateLogLevel(level);
-            }
+            
             
             GatewayIntents intents = GatewayIntents.None;
             for (int index = 0; index < _clients.Count; index++)
@@ -339,11 +320,10 @@ namespace Oxide.Ext.Discord.Clients
             return DiscordPool.Internal.ToStringAndFree(sb);
         }
 
-        private void UpdateLogLevel(DiscordLogLevel level)
+        internal void UpdateLogLevel(DiscordLogLevel level)
         {
             Logger.UpdateLogLevel(level);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Connection.LogLevel, level);
-            Connection.LogLevel = level;
+            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Logger.LogLevel, level);
         }
 
         internal void OnClientReady(GatewayReadyEvent ready)
@@ -566,7 +546,7 @@ namespace Oxide.Ext.Discord.Clients
         {
             logger.AppendField("Client", Connection.HiddenToken);
             logger.AppendField("Initialized", Initialized);
-            logger.AppendFieldEnum("Log Level", Connection.LogLevel);
+            logger.AppendFieldEnum("Log Level", Logger.LogLevel);
             logger.AppendFieldEnum("Intents", Connection.Intents);
             logger.AppendField("Plugins", GetClientPluginList());
             

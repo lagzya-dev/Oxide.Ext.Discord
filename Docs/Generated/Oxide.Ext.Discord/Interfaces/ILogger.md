@@ -10,6 +10,7 @@ public interface ILogger
 
 | name | description |
 | --- | --- |
+| [LogLevel](#loglevel-property) { get; } |  |
 | [IsConsoleLogging](#isconsolelogging-method)(…) | Returns if the logger is logging for server console |
 | [IsFileLogging](#isfilelogging-method)(…) | Returns if the logger is logging for file logger |
 | [IsLogging](#islogging-method)(…) | Returns true if the logger is logging for the passed log level |
@@ -141,6 +142,20 @@ public void Shutdown()
 
 ## See Also
 
+* interface [ILogger](./ILogger.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogLevel property
+
+```csharp
+public DiscordLogLevel LogLevel { get; }
+```
+
+## See Also
+
+* enum [DiscordLogLevel](../Logging/DiscordLogLevel.md)
 * interface [ILogger](./ILogger.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

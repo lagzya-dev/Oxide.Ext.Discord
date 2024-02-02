@@ -11,7 +11,7 @@ public class BotConnection
 | name | description |
 | --- | --- |
 | [BotConnection](#botconnection-constructor)() | Constructor |
-| [BotConnection](#botconnection-constructor)(…) | Constructor |
+| [BotConnection](#botconnection-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [ApiToken](#apitoken-property) { get; set; } | API token for the bot |
 | [ApplicationId](#applicationid-property) { get; } | Application ID of the Bot Token |
 | [HiddenToken](#hiddentoken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
@@ -75,7 +75,7 @@ True if settings has at least one of the given intents
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# BotConnection constructor (1 of 2)
+# BotConnection constructor (1 of 3)
 
 Constructor
 
@@ -91,7 +91,24 @@ public BotConnection()
 
 ---
 
-# BotConnection constructor (2 of 2)
+# BotConnection constructor (2 of 3)
+
+Constructor
+
+```csharp
+public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None)
+```
+
+## See Also
+
+* enum [GatewayIntents](../Entities/GatewayIntents.md)
+* class [BotConnection](./BotConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# BotConnection constructor (3 of 3)
 
 Constructor
 
@@ -145,6 +162,7 @@ public GatewayIntents Intents { get; set; }
 Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md)
 
 ```csharp
+[Obsolete("LogLevel is obsolete and will be removed in a future update")]
 public DiscordLogLevel LogLevel { get; set; }
 ```
 

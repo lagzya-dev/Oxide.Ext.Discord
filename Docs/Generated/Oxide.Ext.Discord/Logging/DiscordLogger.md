@@ -10,6 +10,7 @@ public class DiscordLogger : ILogger
 
 | name | description |
 | --- | --- |
+| [LogLevel](#loglevel-property) { get; } |  |
 | [IsConsoleLogging](#isconsolelogging-method)(…) |  |
 | [IsFileLogging](#isfilelogging-method)(…) |  |
 | [IsLogging](#islogging-method)(…) |  |
@@ -103,6 +104,20 @@ public void Shutdown()
 
 ## See Also
 
+* class [DiscordLogger](./DiscordLogger.md)
+* namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogLevel property
+
+```csharp
+public DiscordLogLevel LogLevel { get; }
+```
+
+## See Also
+
+* enum [DiscordLogLevel](./DiscordLogLevel.md)
 * class [DiscordLogger](./DiscordLogger.md)
 * namespace [Oxide.Ext.Discord.Logging](./LoggingNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

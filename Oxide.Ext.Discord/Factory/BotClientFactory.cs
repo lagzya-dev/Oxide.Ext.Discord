@@ -81,5 +81,13 @@ namespace Oxide.Ext.Discord.Factory
                 client.ResetRestApi();
             }
         }
+
+        public void UpdateLogLevel()
+        {
+            foreach (BotClient client in _activeBots.Values)
+            {
+                client.UpdateLogLevel(DiscordLoggerFactory.Instance.GetLogLevel());
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Configuration;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -10,7 +11,7 @@ namespace Oxide.Ext.Discord.Logging
     /// <summary>
     /// Factory for creating DiscordLoggers
     /// </summary>
-    public class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
+    public sealed class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
     {
         private readonly Hash<string, DiscordLogHandler> _handlers = new Hash<string, DiscordLogHandler>();
 
@@ -29,6 +30,12 @@ namespace Oxide.Ext.Discord.Logging
             return GetLoggerInternal(plugin.Name, logLevel, config, false);
         }
 
+        internal DiscordLogLevel GetLogLevel()
+        {
+            return DiscordConfig.Instance.Logging.ConsoleLogLevel <= DiscordConfig.Instance.Logging.FileLogLevel ? DiscordConfig.Instance.Logging.ConsoleLogLevel : DiscordConfig.Instance.Logging.FileLogLevel;
+        }
+
+        internal DiscordLogger CreateExtensionLogger() => CreateExtensionLogger(GetLogLevel());
         internal DiscordLogger CreateExtensionLogger(DiscordLogLevel logLevel) => GetLoggerInternal(nameof(DiscordExtension), logLevel, DiscordConfig.Instance.Logging, true);
 
         private DiscordLogger GetLoggerInternal(string pluginName, DiscordLogLevel logLevel, IDiscordLoggingConfig config, bool isExtension)

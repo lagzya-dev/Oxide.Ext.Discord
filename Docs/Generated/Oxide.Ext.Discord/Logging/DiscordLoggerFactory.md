@@ -3,7 +3,7 @@
 Factory for creating DiscordLoggers
 
 ```csharp
-public class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
+public sealed class DiscordLoggerFactory : Singleton<DiscordLoggerFactory>
 ```
 
 ## Public Members

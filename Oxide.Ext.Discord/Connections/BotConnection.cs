@@ -1,4 +1,5 @@
-﻿using Oxide.Ext.Discord.Clients;
+﻿using System;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Logging;
@@ -25,6 +26,7 @@ namespace Oxide.Ext.Discord.Connections
         /// Discord Extension Logging Level.
         /// See <see cref="DiscordLogLevel"/>
         /// </summary>
+        [Obsolete("LogLevel is obsolete and will be removed in a future update")]
         public DiscordLogLevel LogLevel { get; set; }
 
         /// <summary>
@@ -47,14 +49,22 @@ namespace Oxide.Ext.Discord.Connections
         /// <summary>
         /// Constructor
         /// </summary>
-        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info)
+        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None)
         {
             ApiToken = apiToken;
             Intents = intents;
-            LogLevel = logLevel;
+        }
+        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info) : this(apiToken, intents)
+        {
+            ApiToken = apiToken;
+            Intents = intents;
         }
 
-        internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents, connection.LogLevel)
+        internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents)
         {
             Token = connection.Token;
         }

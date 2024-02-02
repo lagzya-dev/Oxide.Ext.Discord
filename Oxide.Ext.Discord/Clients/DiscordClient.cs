@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Clients
         public void Connect(BotConnection connection)
         {
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
             
             if (string.IsNullOrEmpty(Connection.ApiToken))
             {

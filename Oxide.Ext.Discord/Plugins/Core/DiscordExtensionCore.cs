@@ -206,6 +206,8 @@ namespace Oxide.Ext.Discord.Plugins
                 DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.Log.Set, "Console", log);
+                
+                BotClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {
@@ -229,6 +231,8 @@ namespace Oxide.Ext.Discord.Plugins
                 DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.Log.Set, "File", log);
+                
+                BotClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {
