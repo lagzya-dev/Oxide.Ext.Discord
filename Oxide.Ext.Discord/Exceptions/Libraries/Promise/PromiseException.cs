@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Exceptions
@@ -17,7 +18,7 @@ namespace Oxide.Ext.Discord.Exceptions
 
         internal static void ThrowIfDisposed(BasePromise promise)
         {
-            if (promise.Disposed) throw new ObjectDisposedException($"{promise.GetType().Name}");
+            if (promise.Disposed) throw new ObjectDisposedException($"{promise.GetType().GetRealTypeName()}");
         }
     }
 }

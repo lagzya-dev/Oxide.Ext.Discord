@@ -174,7 +174,7 @@ namespace Oxide.Ext.Discord.Rest
             logger.AppendFieldEnum("Method", Method);
             logger.AppendField("Route", Route);
             logger.AppendFieldEnum("Status", Status);
-            logger.AppendField("Type", GetType().Name);
+            logger.AppendField("Type", GetType().GetRealTypeName());
         }
     }
 }

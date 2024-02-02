@@ -51,7 +51,7 @@ namespace Oxide.Ext.Discord.Extensions
         {
             string expected = BuildExpected(methodInfo, types);
             string actual = BuildActual(methodInfo);
-            DiscordExtension.GlobalLogger.Exception("Failed to create delegate for Plugin: {0} Method: {1} Expected: {2} Actual: {3}", target.GetType().Name, methodInfo.Name, expected, actual, ex);
+            DiscordExtension.GlobalLogger.Exception("Failed to create delegate for Plugin: {0} Method: {1} Expected: {2} Actual: {3}", target.GetType().GetRealTypeName(), methodInfo.Name, expected, actual, ex);
         }
 
         private static string BuildExpected(MethodInfo methodInfo, params Type[] types)

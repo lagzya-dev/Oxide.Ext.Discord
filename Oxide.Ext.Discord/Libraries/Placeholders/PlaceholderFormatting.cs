@@ -322,7 +322,7 @@ namespace Oxide.Ext.Discord.Libraries
         {
             if (string.IsNullOrEmpty(placeholderState.Format))
             {
-                Replace(builder, placeholderState, position.ToString());
+                Replace(builder, placeholderState,  $"{position.X} {position.Y} {position.Z}".AsSpan());
                 return;
             }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks;
@@ -152,7 +153,7 @@ namespace Oxide.Ext.Discord.Libraries
 
             if (template == null)
             {
-                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}/{3}' is not registered", id.GetPluginName(), GetType().Name, id.GetLanguageName(), id.TemplateName);
+                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}/{3}' is not registered", id.GetPluginName(), GetType().GetRealTypeName(), id.GetLanguageName(), id.TemplateName);
                 return new TTemplate();
             }
             
@@ -161,7 +162,7 @@ namespace Oxide.Ext.Discord.Libraries
             return template.Template;
         }
 
-        private TTemplate LoadFromCache(TemplateId id) => _templateCache.TryGetValue(id, out TTemplate template) ? template : null;
+        private TTemplate LoadFromCache(TemplateId id) => _templateCache.GetValueOrDefault(id);
 
         private void SetCache(TemplateId id, TTemplate template)
         {

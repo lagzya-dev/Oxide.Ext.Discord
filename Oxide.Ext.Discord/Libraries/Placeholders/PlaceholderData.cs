@@ -366,7 +366,7 @@ namespace Oxide.Ext.Discord.Libraries
                     return boxed.Value;
                 }
 
-                DiscordExtension.GlobalLogger.Warning($"{nameof(PlaceholderData)}.{nameof(Get)} Failed to Convert Type: {{0}} to Type: {{1}}", obj.GetType().Name, typeof(T));
+                DiscordExtension.GlobalLogger.Warning($"{nameof(PlaceholderData)}.{nameof(Get)} Failed to Convert Type: {{0}} to Type: {{1}}", obj.GetType().GetRealTypeName(), typeof(T));
             }
 
             return default(T);
