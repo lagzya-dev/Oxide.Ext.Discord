@@ -455,6 +455,7 @@
 | class [MessageComponentBuilderException](./Oxide.Ext.Discord/Exceptions/MessageComponentBuilderException.md) | Represents an exception in Message Component Builder |
 | class [PromiseCancelledException](./Oxide.Ext.Discord/Exceptions/PromiseCancelledException.md) | Exception when a promised is cancelled |
 | class [PromiseException](./Oxide.Ext.Discord/Exceptions/PromiseException.md) | Exceptions for promises |
+| class [RequestCancelledException](./Oxide.Ext.Discord/Exceptions/RequestCancelledException.md) |  |
 | class [ServerLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 | class [TokenMismatchException](./Oxide.Ext.Discord/Exceptions/TokenMismatchException.md) | Represents a bot token mismatch |
 

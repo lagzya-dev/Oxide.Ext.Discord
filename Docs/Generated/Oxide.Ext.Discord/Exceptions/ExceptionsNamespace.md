@@ -53,6 +53,7 @@
 | class [MessageComponentBuilderException](./MessageComponentBuilderException.md) | Represents an exception in Message Component Builder |
 | class [PromiseCancelledException](./PromiseCancelledException.md) | Exception when a promised is cancelled |
 | class [PromiseException](./PromiseException.md) | Exceptions for promises |
+| class [RequestCancelledException](./RequestCancelledException.md) |  |
 | class [ServerLocaleNotFoundException](./ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 | class [TokenMismatchException](./TokenMismatchException.md) | Represents a bot token mismatch |
 

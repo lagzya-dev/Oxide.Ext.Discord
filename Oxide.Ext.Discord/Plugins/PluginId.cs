@@ -21,6 +21,8 @@ namespace Oxide.Ext.Discord.Plugins
         /// </summary>
         public bool IsValid => Id != 0;
 
+        internal bool IsExtensionPlugin => IsValid && this == DiscordExtensionCore.Instance.PluginId;
+
         internal PluginId(Plugin plugin)
         {
             Id = plugin?.Name.GetHashCode() ?? throw new ArgumentNullException(nameof(plugin));

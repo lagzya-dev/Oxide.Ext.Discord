@@ -11,9 +11,10 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 | name | description |
 | --- | --- |
 | [RequestHandler](#requesthandler-constructor)() | Constructor |
+| static [CreateRequest](#createrequest-method)(…) | Creates a new [`RequestHandler`](./RequestHandler.md) |
 | [Abort](#abort-method)() | Aborts a currently running request |
 | [LogDebug](#logdebug-method)(…) |  |
-| static [StartRequest](#startrequest-method)(…) | Creates a new [`RequestHandler`](./RequestHandler.md) |
+| [StartRequest](#startrequest-method)() |  |
 
 ## Protected Members
 
@@ -30,23 +31,34 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 * [RequestHandler.cs](../../../../Oxide.Ext.Discord/Rest/RequestHandler.cs)
    
    
-# StartRequest method
+# CreateRequest method
 
 Creates a new [`RequestHandler`](./RequestHandler.md)
 
 ```csharp
-public static void StartRequest(RestHandler rest, BaseRequest request)
+public static RequestHandler CreateRequest(BaseRequest request)
 ```
 
 | parameter | description |
 | --- | --- |
-| rest | Rest handler for the request |
 | request | Request to be handled by this handler |
 
 ## See Also
 
-* class [RestHandler](./RestHandler.md)
 * class [BaseRequest](./BaseRequest.md)
+* class [RequestHandler](./RequestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# StartRequest method
+
+```csharp
+public void StartRequest()
+```
+
+## See Also
+
 * class [RequestHandler](./RequestHandler.md)
 * namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

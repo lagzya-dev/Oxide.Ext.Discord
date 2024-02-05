@@ -11,7 +11,7 @@ public class RequestResponse : BasePoolable
 | name | description |
 | --- | --- |
 | [RequestResponse](#requestresponse-constructor)() | The default constructor. |
-| static [CreateCancelledResponse](#createcancelledresponse-method)(…) | Creates a REST API response for a cancelled request |
+| static [CreateCancelledResponse](#createcancelledresponse-method)() | Creates a REST API response for a cancelled request |
 | static [CreateExceptionResponse](#createexceptionresponse-method)(…) | Creates a Web Exception REST API response |
 | static [CreateSuccessResponse](#createsuccessresponse-method)(…) | Creates a success REST API response |
 
@@ -34,13 +34,11 @@ public class RequestResponse : BasePoolable
 Creates a success REST API response
 
 ```csharp
-public static Task<RequestResponse> CreateSuccessResponse(DiscordClient client, 
-    HttpResponseMessage httpResponse)
+public static ValueTask<RequestResponse> CreateSuccessResponse(HttpResponseMessage httpResponse)
 ```
 
 | parameter | description |
 | --- | --- |
-| client | Client making the request |
 | httpResponse | The Web Response for the request |
 
 ## Return Value
@@ -49,7 +47,6 @@ A success [`RequestResponse`](./RequestResponse.md)
 
 ## See Also
 
-* class [DiscordClient](../Clients/DiscordClient.md)
 * class [RequestResponse](./RequestResponse.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -60,13 +57,12 @@ A success [`RequestResponse`](./RequestResponse.md)
 Creates a Web Exception REST API response
 
 ```csharp
-public static Task<RequestResponse> CreateExceptionResponse(DiscordClient client, 
-    ResponseError error, HttpResponseMessage httpResponse, RequestCompletedStatus status)
+public static ValueTask<RequestResponse> CreateExceptionResponse(ResponseError error, 
+    HttpResponseMessage httpResponse, RequestCompletedStatus status)
 ```
 
 | parameter | description |
 | --- | --- |
-| client | Client making the request |
 | error | Rest Error that occured |
 | httpResponse | Web Response for the request |
 | status | The request status containing the fail reason |
@@ -77,7 +73,6 @@ A web exception [`RequestResponse`](./RequestResponse.md)
 
 ## See Also
 
-* class [DiscordClient](../Clients/DiscordClient.md)
 * class [ResponseError](./ResponseError.md)
 * enum [RequestCompletedStatus](../Rest/RequestCompletedStatus.md)
 * class [RequestResponse](./RequestResponse.md)
@@ -90,12 +85,8 @@ A web exception [`RequestResponse`](./RequestResponse.md)
 Creates a REST API response for a cancelled request
 
 ```csharp
-public static Task<RequestResponse> CreateCancelledResponse(DiscordClient client)
+public static ValueTask<RequestResponse> CreateCancelledResponse()
 ```
-
-| parameter | description |
-| --- | --- |
-| client | Client the request was for |
 
 ## Return Value
 
@@ -103,7 +94,6 @@ A cancelled [`RequestResponse`](./RequestResponse.md)
 
 ## See Also
 
-* class [DiscordClient](../Clients/DiscordClient.md)
 * class [RequestResponse](./RequestResponse.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

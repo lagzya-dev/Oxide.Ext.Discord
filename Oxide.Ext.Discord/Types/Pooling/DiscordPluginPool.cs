@@ -3,7 +3,9 @@ using System.IO;
 using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Plugins;
 
@@ -12,7 +14,7 @@ namespace Oxide.Ext.Discord.Types
     /// <summary>
     /// Built in pooling for discord entities
     /// </summary>
-    public class DiscordPluginPool
+    public class DiscordPluginPool : IDebugLoggable
     {
         private readonly List<IPool> _pools = new List<IPool>();
         private PoolSettings _settings;
@@ -251,6 +253,16 @@ namespace Oxide.Ext.Discord.Types
                 IPool pool = _pools[index];
                 pool.RemoveAllPools();
             }
+        }
+
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.StartArray(PluginId.PluginName());
+            foreach (IPool pool in _pools)
+            {
+                pool.LogDebug(logger);
+            }
+            logger.EndArray();
         }
     }
 }

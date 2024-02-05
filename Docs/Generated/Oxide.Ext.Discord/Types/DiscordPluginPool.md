@@ -3,7 +3,7 @@
 Built in pooling for discord entities
 
 ```csharp
-public class DiscordPluginPool
+public class DiscordPluginPool : IDebugLoggable
 ```
 
 ## Public Members
@@ -25,11 +25,13 @@ public class DiscordPluginPool
 | [GetPlaceholderData](#getplaceholderdata-method)() | Returns a pooled [`PlaceholderData`](../Libraries/PlaceholderData.md) |
 | [GetStringBuilder](#getstringbuilder-method)() | Returns a pooled StringBuilder |
 | [GetStringBuilder](#getstringbuilder-method)(…) | Returns a pooled StringBuilder |
+| [LogDebug](#logdebug-method)(…) |  |
 | [SetSettings](#setsettings-method)(…) | Sets the settings for the pools |
 | [ToStringAndFree](#tostringandfree-method)(…) | Frees a StringBuilder back to the pool returning the built String |
 
 ## See Also
 
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordPluginPool.cs](../../../../Oxide.Ext.Discord/Types/DiscordPluginPool.cs)
@@ -365,6 +367,20 @@ public void FreePlaceholderData(PlaceholderData data)
 ## See Also
 
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
+* class [DiscordPluginPool](./DiscordPluginPool.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../Logging/DebugLogger.md)
 * class [DiscordPluginPool](./DiscordPluginPool.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

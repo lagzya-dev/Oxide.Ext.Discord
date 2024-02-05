@@ -44,10 +44,11 @@ namespace Oxide.Ext.Discord.Rest
         private ILogger _logger;
         private RestHandler _rest;
         
-        private readonly AutoResetEvent _requestSync = new AutoResetEvent(true);
-        private readonly AutoResetEvent _completedSync = new AutoResetEvent(true);
-        internal readonly AdjustableSemaphore Semaphore = new AdjustableSemaphore(1);
-        private readonly ConcurrentDictionary<Snowflake, RequestHandler> _requests = new ConcurrentDictionary<Snowflake, RequestHandler>();
+        private readonly SemaphoreSlim _requestSync = new SemaphoreSlim(1, 1);
+        private readonly object _completedSync = new object();
+        internal readonly AdjustableSemaphore ActiveRequestsSemaphore = new AdjustableSemaphore(1);
+        private readonly DiscordConcurrentQueue<RequestHandler> _requestQueue = new DiscordConcurrentQueue<RequestHandler>();
+        private readonly ConcurrentDictionary<Snowflake, RequestHandler> _activeRequests = new ConcurrentDictionary<Snowflake, RequestHandler>();
         private readonly HashSet<string> _routes = new HashSet<string>();
 
         private bool _isShutdown;
@@ -65,7 +66,7 @@ namespace Oxide.Ext.Discord.Rest
             _rateLimit = rest.RateLimit;
             _logger = logger;
             _logger.Debug($"{nameof(Bucket)}.{nameof(Init)} Bucket Created: {{0}}", Id);
-            Semaphore.Reset();
+            ActiveRequestsSemaphore.Reset();
             Limit = 1;
             Remaining = 1;
             ResetAt = DateTimeOffset.MinValue;
@@ -80,26 +81,44 @@ namespace Oxide.Ext.Discord.Rest
         {
             BaseRequest request = handler.Request;
             request.Bucket?.DequeueRequest(handler);
-            _requests[request.Id] = handler;
             request.Bucket = this;
+            if (handler.Request.Status == RequestStatus.InQueue)
+            {
+                _requestQueue.Add(handler);
+            }
+            else
+            {
+                _activeRequests.TryAdd(handler.Request.Id, handler);
+            }
 
             if (ResetAt < DateTimeOffset.UtcNow)
             {
                 Remaining = Limit;
             }
             
-            _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2}", Id, request.Id, request.Method, request.Route, _requests.Count);
+            CheckPendingRequests();
+            _logger.Debug("Queued Request Bucket ID: {0} Request ID: {1} Requests: {2} Queued: {3}", Id, request.Id, request.Method, request.Route, _activeRequests.Count, _requestQueue.Count);
+        }
+
+        private void CheckPendingRequests()
+        {
+            if (_activeRequests.Count < Limit && _requestQueue.TryTake(out RequestHandler handler))
+            {
+                _activeRequests[handler.Request.Id] = handler;
+                handler.StartRequest();
+            }
         }
 
         private void DequeueRequest(RequestHandler handler)
         {
-            _requests.TryRemove(handler.Request.Id, out RequestHandler _);
+            _activeRequests.TryRemove(handler.Request.Id, out RequestHandler _);
+            _requestQueue.Remove(handler);
         }
         
         internal void Merge(Bucket data)
         {
             List<RequestHandler> handlers = DiscordPool.Internal.GetList<RequestHandler>();
-            handlers.AddRange(data._requests.Values);
+            handlers.AddRange(data._activeRequests.Values);
 
             foreach (RequestHandler handler in handlers)
             {
@@ -108,7 +127,13 @@ namespace Oxide.Ext.Discord.Rest
             
             DiscordPool.Internal.FreeList(handlers);
             
-            data._requests.Clear();
+            data._activeRequests.Clear();
+
+            foreach (RequestHandler handler in data._requestQueue)
+            {
+                QueueRequest(handler);
+            }
+
             foreach (string route in data._routes)
             {
                 _routes.Add(route);
@@ -130,10 +155,10 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
 
+            await _requestSync.WaitAsync(token).ConfigureAwait(false);
+            
             try
             {
-                _requestSync.WaitOne();
-
                 while (true)
                 {
                     if (_rateLimit.HasReachedRateLimit)
@@ -148,12 +173,22 @@ namespace Oxide.Ext.Discord.Rest
                         continue;
                     }
 
-                    if ((Limit == 0 || Remaining <= 0) && ResetAt > DateTimeOffset.UtcNow)
+                    if ((Limit == 0 || Remaining == 0) && ResetAt > DateTimeOffset.UtcNow)
                     {
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
                         if (ResetAt > DateTimeOffset.UtcNow)
                         {
                             await ResetAt.DelayUntil(token).ConfigureAwait(false);
+                        }
+                        continue;
+                    }
+
+                    if (Remaining < 0)
+                    {
+                        _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Remaining < 0: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
+                        if (ResetAt > DateTimeOffset.UtcNow)
+                        {
+                            await ResetAt.DelayUntil(100, token).ConfigureAwait(false);
                         }
                         continue;
                     }
@@ -164,7 +199,7 @@ namespace Oxide.Ext.Discord.Rest
             }
             finally
             {
-                _requestSync.Set();
+                _requestSync.Release();
             }
         }
         
@@ -187,32 +222,28 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
             
-            if (!_requests.TryRemove(handler.Request.Id, out RequestHandler _))
+            if (!_activeRequests.TryRemove(handler.Request.Id, out RequestHandler _))
             {
                 _logger.Warning("Failed to remove request from bucket!!! Bucket ID: {0} Request ID: {1} Method: {2} Route: {3} Status: {4}", Id, handler.Request.Id, handler.Request.Method, handler.Request.Route, handler.Request.Status);
             }
-            
-            try
+
+            lock (_completedSync)
             {
-                _completedSync.WaitOne();
-                
                 if (!handler.Request.Options.IgnoreRateLimit && !IsKnownBucket && rateLimit != null && rateLimit.BucketId.IsValid)
                 {
                     _rest.UpgradeToKnownBucket(this, rateLimit.BucketId);
                     if (!IsKnownBucket)
                     {
-                        Semaphore.AllowAllThrough();
+                        ActiveRequestsSemaphore.AllowAllThrough();
                     }
                 }
                 
-                if (_requests.Count == 0)
+                CheckPendingRequests();
+                
+                if (_activeRequests.Count == 0)
                 {
                     OnBucketCompleted();
                 }
-            }
-            finally
-            {
-                _completedSync.Set();
             }
         }
         
@@ -226,15 +257,17 @@ namespace Oxide.Ext.Discord.Rest
                 return;
             }
             
-            if (rateLimit.IsGlobalRateLimit)
-            {
-                _rateLimit.ReachedRateLimit(rateLimit.ResetAt);
-            }
-
             if (request.Options.IgnoreRateLimit)
             {
                 return;
             }
+            
+            if (rateLimit.IsGlobalRateLimit)
+            {
+                _rateLimit.ReachedRateLimit(rateLimit.ResetAt);
+            }
+            
+            _logger.Debug("Reset At: {0} Rate Limit Reset At: {1}", ResetAt, rateLimit.ResetAt);
             
             if (rateLimit.ResetAt > ResetAt)
             {
@@ -247,9 +280,9 @@ namespace Oxide.Ext.Discord.Rest
                 Interlocked.Exchange(ref Remaining, Math.Min(Remaining, rateLimit.Remaining));
             }
 
-            if (Semaphore.MaximumCount != rateLimit.Limit)
+            if (ActiveRequestsSemaphore.MaximumCount != rateLimit.Limit)
             {
-                Semaphore.MaximumCount = Math.Max(rateLimit.Limit, 1);
+                ActiveRequestsSemaphore.MaximumCount = Math.Max(rateLimit.Limit, 1);
             }
             
             request.Client.Logger.Debug($"{nameof(Bucket)}.{nameof(UpdateRateLimits)} Bucket ID: {{0}} Scope: {{1}} Request ID: {{2}} Limit: {{3}} Remaining: {{4}} Reset: {{5}} Reset In: {{6}}s Rate Limit Bucket ID: {{7}}", Id, rateLimit.Scope, request.Id, Limit, Remaining, ResetAt, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds , rateLimit.BucketId);
@@ -257,18 +290,29 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void AbortClientRequests(DiscordClient client)
         {
-            foreach (RequestHandler handler in _requests.Values)
+            List<RequestHandler> handlers = DiscordPool.Internal.GetList<RequestHandler>();
+            foreach (RequestHandler handler in _requestQueue)
             {
-                if (handler.Request.Client != client)
+                if (handler.Request.Client.PluginId == client.PluginId)
                 {
-                    continue;
-                }
-                    
-                if (handler.Request.Status == RequestStatus.InProgress)
-                {
-                    handler.Abort();
+                    handlers.Add(handler);
                 }
             }
+            
+            _requestQueue.RemoveAll(r => handlers.Contains(r));
+            foreach (RequestHandler handler in handlers)
+            {
+                handler.Abort();
+                handler.Dispose();
+            }
+            
+            DiscordPool.Internal.FreeList(handlers);
+
+            _activeRequests.RemoveAll(h => h.Request.Client.PluginId == client.PluginId, h =>
+            {
+                h.Abort();
+                h.Dispose();
+            });
         }
 
         private void OnBucketCompleted()
@@ -280,6 +324,27 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
 
+        internal void ShutDown()
+        {
+            _logger.Debug("Shutting down bucket ID: {0}", Id);
+            foreach (RequestHandler handler in _requestQueue)
+            {
+                handler.Abort();
+                handler.Dispose();
+            }
+                
+            _requestQueue.Clear();
+            
+            foreach (RequestHandler handler in _activeRequests.Values)
+            {
+                handler.Abort();
+                handler.Dispose();
+            }
+            
+            _activeRequests.Clear();
+            _isShutdown = true;
+        }
+
         ///<inheritdoc/>
         protected override void LeavePool()
         {
@@ -289,17 +354,7 @@ namespace Oxide.Ext.Discord.Rest
         ///<inheritdoc/>
         protected override void EnterPool()
         {
-            _logger.Debug("Shutting down bucket ID: {0}", Id);
-            foreach (RequestHandler request in _requests.Values)
-            {
-                request.Abort();
-            }
-            
-            _requests.Clear();
-            Semaphore.AllowAllThrough();
-            _isShutdown = true;
-            _requestSync.Set();
-            _completedSync.Set();
+            ActiveRequestsSemaphore.AllowAllThrough();
         }
 
         ///<inheritdoc/>
@@ -309,12 +364,14 @@ namespace Oxide.Ext.Discord.Rest
             logger.AppendField("Known Bucket", IsKnownBucket);
             logger.AppendField("Remaining", Remaining);
             logger.AppendField("Limit", Limit);
-            logger.AppendField("Reset In", (ResetAt < DateTimeOffset.UtcNow ? 0 : (ResetAt - DateTimeOffset.UtcNow).TotalSeconds).ToString(), "Seconds");
-            logger.AppendField("Queue Count", _requests.Count);
-            logger.AppendFieldOutOf("Semaphore", Semaphore.Available, Semaphore.MaximumCount);
-            
+            logger.AppendField("Reset At", ResetAt.ToString());
+            logger.AppendField("Reset In", ((ResetAt - DateTimeOffset.UtcNow).TotalSeconds).ToString(), "Seconds");
+            logger.AppendField("Active Count", _activeRequests.Count);
+            logger.AppendField("Queue Count", _requestQueue.Count);
+            logger.AppendFieldOutOf("Semaphore", ActiveRequestsSemaphore.Available, ActiveRequestsSemaphore.MaximumCount);
             logger.AppendList("Routes", _routes);
-            logger.AppendList("Requests", _requests.Values);
+            logger.AppendList("Active Requests", _activeRequests.Values);
+            logger.AppendList("Queued Requests", _requestQueue);
         }
     }
 }

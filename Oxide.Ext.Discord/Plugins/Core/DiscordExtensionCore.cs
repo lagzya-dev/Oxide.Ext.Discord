@@ -21,6 +21,7 @@ namespace Oxide.Ext.Discord.Plugins
     internal partial class DiscordExtensionCore : BaseDiscordPlugin
     {
         #region Fields
+        public readonly PluginId PluginId;
         public static DiscordExtensionCore Instance;
         private ILogger _logger;
 
@@ -34,7 +35,7 @@ namespace Oxide.Ext.Discord.Plugins
         {
             Name = "DiscordExtension";
             Title = "Discord Extension";
-
+            PluginId = new PluginId(this);
             _pluginReferences = new Hash<string, Action<Plugin>>
             {
                 ["PlaceholderAPI"] = HandlePlaceholderApi,
@@ -273,6 +274,7 @@ namespace Oxide.Ext.Discord.Plugins
             DiscordAppCommand.Instance.LogDebug(logger);
             DiscordCommand.Instance.LogDebug(logger);
             DiscordSubscriptions.Instance.LogDebug(logger);
+            DiscordPool.Instance.LogDebug(logger);
             logger.EndObject();
             
             string message = logger.ToString();

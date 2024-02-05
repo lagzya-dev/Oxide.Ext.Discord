@@ -1,7 +1,6 @@
 using System;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries;
@@ -58,11 +57,10 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Initialize the RateLimitResponse
         /// </summary>
-        /// <param name="client">Client for the rate limit</param>
         /// <param name="headers">Headers for the rate limit</param>
         /// <param name="code">Http code for the request</param>
         /// <param name="content">Request response content</param>
-        public void Init(DiscordClient client, HttpResponseHeaders headers, DiscordHttpStatusCode code, string content)
+        public void Init(HttpResponseHeaders headers, DiscordHttpStatusCode code, string content)
         {
             IsGlobalRateLimit = headers.GetBool(RateLimitHeaders.IsGlobal);
             Scope = headers.Get(RateLimitHeaders.Scope);
@@ -90,6 +88,8 @@ namespace Oxide.Ext.Discord.Entities
                 Code = rateContent.Code;
                 DiscordPool.Internal.Free(rateContent);
             }
+
+            //DiscordExtension.GlobalLogger.Debug("Headers:\n{0}", headers.ToString());
         }
 
         private double GetBucketReset(HttpResponseHeaders headers)

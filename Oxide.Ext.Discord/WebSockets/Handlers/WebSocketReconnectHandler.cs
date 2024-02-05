@@ -1,10 +1,8 @@
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Ext.Discord.WebSockets
@@ -89,8 +87,6 @@ namespace Oxide.Ext.Discord.WebSockets
             finally
             {
                 IsPendingReconnect = false;
-                _source?.Dispose();
-                _source = null;
             }
         }
 
@@ -110,36 +106,9 @@ namespace Oxide.Ext.Discord.WebSockets
         /// </summary>
         public void CancelReconnect()
         {
-            StringBuilder debug = DiscordPool.Internal.GetStringBuilder();
-            try
+            if (_source != null && !_source.IsCancellationRequested)
             {
-                debug.Append("A");
-                if (_source == null)
-                {
-                    debug.Append("B");
-                    return;
-                }
-
-                debug.Append("C");
-                if (!_source.IsCancellationRequested)
-                {
-                    debug.Append("D");
-                    _source.Cancel();
-                }
-
-                debug.Append("E");
-                //This can be null here. No idea why.
-                _source?.Dispose();
-                debug.Append("F");
-            }
-            catch (Exception ex)
-            {
-                _logger.Exception($"{nameof(WebSocketReconnectHandler)}.{nameof(CancelReconnect)} An error occured. Websocket: {{0}} Source: {{1}} Debug: \n{{2}}", WebSocket == null, _source == null, debug.ToString(), ex);
-                throw;
-            }
-            finally
-            {
-                DiscordPool.Internal.FreeStringBuilder(debug);
+                _source.Cancel();
             }
         }
 

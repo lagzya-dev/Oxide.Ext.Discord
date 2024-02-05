@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 
@@ -24,6 +25,9 @@ namespace Oxide.Ext.Discord.Types
         private int _index;
         private readonly object _lock = new object();
         private PoolSize _size;
+        private bool _isFirstLeakError = true;
+        private DateTime _nextLeakError;
+        private bool _isInitialized;
         
         private static readonly ConcurrentDictionary<PluginId, TPool> Pools = new ConcurrentDictionary<PluginId, TPool>();
 
@@ -31,11 +35,17 @@ namespace Oxide.Ext.Discord.Types
         {
             lock (_lock)
             {
+                if (_isInitialized)
+                {
+                    return;
+                }
                 _size = GetPoolSize(pluginPool.Settings);
                 InvalidPoolException.ThrowIfInvalidPoolSize(_size);
                 PluginPool = pluginPool;
                 pluginPool.AddPool(this);
                 _pool = new TPooled[_size.StartingSize];
+                _isInitialized = true;
+                DiscordExtension.GlobalLogger.Debug("Creating Pool. Plugin ID: {0} Type: {1}", pluginPool.PluginName, typeof(TPool).GetRealTypeName());
             }
         }
 
@@ -53,16 +63,15 @@ namespace Oxide.Ext.Discord.Types
         /// <returns></returns>
         public static TPool ForPlugin(DiscordPluginPool pluginPool)
         {
-            if (!Pools.TryGetValue(pluginPool.PluginId, out TPool pool))
+            TPool pool = Pools.GetOrAdd(pluginPool.PluginId, CreatePool);
+            if (!pool._isInitialized)
             {
-                pool = new TPool();
-                Pools[pluginPool.PluginId] = pool;
                 pool.InitPool(pluginPool);
             }
-
             return pool;
         }
 
+        private static TPool CreatePool(PluginId id) => new TPool();
         /// <summary>
         /// Returns an element from the pool if it exists else it creates a new one
         /// </summary>
@@ -78,14 +87,14 @@ namespace Oxide.Ext.Discord.Types
                     DiscordExtension.GlobalLogger.Debug("{0} Resizing Pool {1} Current Size: {2} Next Size: {3}", PluginPool.PluginName, GetType(), _pool.Length, nextSize);
                     Array.Resize(ref _pool, nextSize);
                 }
-
+                
                 if (_index < _pool.Length)
                 {
                     item = _pool[_index];
                     _pool[_index] = null;
                     _index++;
                 }
-                else
+                else if(ShouldLogLeak())
                 {
                     DiscordExtension.GlobalLogger.Warning("{0} Pool {1} is leaking entities!!! {2}/{3}", PluginPool.PluginName, GetType(), _index, _pool.Length);
                 }
@@ -98,6 +107,28 @@ namespace Oxide.Ext.Discord.Types
                 
             OnGetItem(item);
             return item;
+        }
+
+        private bool ShouldLogLeak()
+        {
+            if (!PluginPool.PluginId.IsExtensionPlugin)
+            {
+                return true;
+            }
+
+            if (_isFirstLeakError)
+            {
+                _isFirstLeakError = false;
+                return false;
+            }
+
+            if (_nextLeakError < DateTime.UtcNow)
+            {
+                return false;
+            }
+            
+            _nextLeakError = DateTime.UtcNow + TimeSpan.FromSeconds(30);
+            return true;
         }
 
         /// <summary>
@@ -183,6 +214,13 @@ namespace Oxide.Ext.Discord.Types
         protected virtual bool OnFreeItem(ref TPooled item)
         {
             return true;
+        }
+        
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.StartObject($"{GetType().GetRealTypeName()}");
+            logger.AppendFieldOutOf("Pool", _pool.Length - _index, _pool.Length);
+            logger.EndObject();
         }
     }
 }

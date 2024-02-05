@@ -3,7 +3,7 @@
 Represents a pool
 
 ```csharp
-public interface IPool
+public interface IPool : IDebugLoggable
 ```
 
 ## Members
@@ -16,6 +16,7 @@ public interface IPool
 
 ## See Also
 
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [IPool.cs](../../../../Oxide.Ext.Discord/Types/IPool.cs)

@@ -112,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities
             _logLevel = log;
         }
 
-        internal async Task<ResponseError> WithRequest(HttpRequestMessage request)
+        internal async ValueTask<ResponseError> WithRequest(HttpRequestMessage request)
         {
             if (request.Content != null)
             {

@@ -96,7 +96,6 @@ namespace Oxide.Ext.Discord.WebSockets
                 _socket.Dispose();
             }
             
-            _source.Dispose();
             _logger.Debug("{0} Dispose Complete", WebsocketId);
         }
     }

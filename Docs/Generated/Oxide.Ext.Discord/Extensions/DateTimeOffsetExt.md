@@ -10,7 +10,7 @@ public static class DateTimeOffsetExt
 
 | name | description |
 | --- | --- |
-| static [DelayUntil](#delayuntil-method)(…) | Delay until the DateTimeOffset with 25ms padding |
+| static [DelayUntil](#delayuntil-method-1-of-2)(…) | Delay until the DateTimeOffset with 25ms - 50ms padding (2 methods) |
 
 ## See Also
 
@@ -19,9 +19,9 @@ public static class DateTimeOffsetExt
 * [DateTimeOffsetExt.cs](../../../../Oxide.Ext.Discord/Extensions/DateTimeOffsetExt.cs)
    
    
-# DelayUntil method
+# DelayUntil method (1 of 2)
 
-Delay until the DateTimeOffset with 25ms padding
+Delay until the DateTimeOffset with 25ms - 50ms padding
 
 ```csharp
 public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token)
@@ -31,6 +31,21 @@ public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken t
 | --- | --- |
 | time |  |
 | token |  |
+
+## See Also
+
+* class [DateTimeOffsetExt](./DateTimeOffsetExt.md)
+* namespace [Oxide.Ext.Discord.Extensions](./ExtensionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# DelayUntil method (2 of 2)
+
+```csharp
+public static ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, 
+    CancellationToken token)
+```
 
 ## See Also
 

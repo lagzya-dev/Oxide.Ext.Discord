@@ -11,6 +11,11 @@ namespace Oxide.Ext.Discord.Rest
         InQueue,
         
         /// <summary>
+        /// Request has been started
+        /// </summary>
+        Started,
+        
+        /// <summary>
         /// Requesting is waiting for bucket to be ready
         /// </summary>
         PendingBucket,
@@ -28,6 +33,11 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Request completed and was not cancelled
         /// </summary>
-        Completed
+        Completed,
+        
+        /// <summary>
+        /// Request was cancelled
+        /// </summary>
+        Cancelled
     }
 }

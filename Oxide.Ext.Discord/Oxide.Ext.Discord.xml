@@ -3897,11 +3897,10 @@
             Rate Limit Code
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.RateLimitResponse.Init(Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.Headers.HttpResponseHeaders,Oxide.Ext.Discord.Entities.DiscordHttpStatusCode,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.RateLimitResponse.Init(System.Net.Http.Headers.HttpResponseHeaders,Oxide.Ext.Discord.Entities.DiscordHttpStatusCode,System.String)">
             <summary>
             Initialize the RateLimitResponse
             </summary>
-            <param name="client">Client for the rate limit</param>
             <param name="headers">Headers for the rate limit</param>
             <param name="code">Http code for the request</param>
             <param name="content">Request response content</param>
@@ -3949,38 +3948,34 @@
             Represents a REST response from discord
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.Init(Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.RequestCompletedStatus,Oxide.Ext.Discord.Entities.ResponseError)">
+        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.Init(System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.RequestCompletedStatus,Oxide.Ext.Discord.Entities.ResponseError)">
             <summary>
             Create new REST response with the given data
             </summary>
-            <param name="client">BotClient for the response</param>
             <param name="response">The Web Response for the request</param>
             <param name="status">The status of the request indicating if it was successful</param>
             <param name="error">If the request had an error the error created from the request</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateSuccessResponse(Oxide.Ext.Discord.Clients.DiscordClient,System.Net.Http.HttpResponseMessage)">
+        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateSuccessResponse(System.Net.Http.HttpResponseMessage)">
             <summary>
             Creates a success REST API response
             </summary>
-            <param name="client">Client making the request</param>
             <param name="httpResponse">The Web Response for the request</param>
             <returns>A success <see cref="T:Oxide.Ext.Discord.Entities.RequestResponse"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateExceptionResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.ResponseError,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.RequestCompletedStatus)">
+        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateExceptionResponse(Oxide.Ext.Discord.Entities.ResponseError,System.Net.Http.HttpResponseMessage,Oxide.Ext.Discord.Rest.RequestCompletedStatus)">
             <summary>
             Creates a Web Exception REST API response
             </summary>
-            <param name="client">Client making the request</param>
             <param name="error">Rest Error that occured</param>
             <param name="httpResponse">Web Response for the request</param>
             <param name="status">The request status containing the fail reason</param>
             <returns>A web exception <see cref="T:Oxide.Ext.Discord.Entities.RequestResponse"/></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateCancelledResponse(Oxide.Ext.Discord.Clients.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.CreateCancelledResponse">
             <summary>
             Creates a REST API response for a cancelled request
             </summary>
-            <param name="client">Client the request was for</param>
             <returns>A cancelled <see cref="T:Oxide.Ext.Discord.Entities.RequestResponse"/></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.RequestResponse.EnterPool">
@@ -17627,7 +17622,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.DateTimeOffsetExt.DelayUntil(System.DateTimeOffset,System.Threading.CancellationToken)">
             <summary>
-            Delay until the DateTimeOffset with 25ms padding
+            Delay until the DateTimeOffset with 25ms - 50ms padding
             </summary>
             <param name="time"></param>
             <param name="token"></param>
@@ -24371,11 +24366,10 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.StartRequest(Oxide.Ext.Discord.Rest.RestHandler,Oxide.Ext.Discord.Rest.BaseRequest)">
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.CreateRequest(Oxide.Ext.Discord.Rest.BaseRequest)">
             <summary>
             Creates a new <see cref="T:Oxide.Ext.Discord.Rest.RequestHandler"/>
             </summary>
-            <param name="rest">Rest handler for the request</param>
             <param name="request">Request to be handled by this handler</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.FireRequest">
@@ -24426,6 +24420,11 @@
             Request is in the queue waiting to be processed
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.Started">
+            <summary>
+            Request has been started
+            </summary>
+        </member>
         <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.PendingBucket">
             <summary>
             Requesting is waiting for bucket to be ready
@@ -24444,6 +24443,11 @@
         <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.Completed">
             <summary>
             Request completed and was not cancelled
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.Cancelled">
+            <summary>
+            Request was cancelled
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Request`1">

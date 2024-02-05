@@ -285,7 +285,6 @@ namespace Oxide.Ext.Discord.Clients
                 return;
             }
             
-            
             GatewayIntents intents = GatewayIntents.None;
             for (int index = 0; index < _clients.Count; index++)
             {

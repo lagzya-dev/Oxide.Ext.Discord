@@ -9,14 +9,14 @@ namespace Oxide.Ext.Discord.Extensions
     /// </summary>
     public static class DateTimeOffsetExt
     {
-        private static readonly TimeSpan Padding = TimeSpan.FromMilliseconds(25);
-        
         /// <summary>
-        /// Delay until the DateTimeOffset with 25ms padding
+        /// Delay until the DateTimeOffset with 25ms - 50ms padding
         /// </summary>
         /// <param name="time"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static async ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + Padding, token).ConfigureAwait(false);
+        public static async ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + TimeSpan.FromMilliseconds(Core.Random.Range(25, 40)), token).ConfigureAwait(false);
+        
+        public static async ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + TimeSpan.FromMilliseconds(additionalMs), token).ConfigureAwait(false);
     }
 }
