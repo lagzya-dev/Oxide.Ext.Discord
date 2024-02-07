@@ -234,6 +234,7 @@ namespace Oxide.Ext.Discord.Plugins
                 Chat(player, LangKeys.Log.Set, "File", log);
                 
                 BotClientFactory.Instance.UpdateLogLevel();
+                DiscordClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {

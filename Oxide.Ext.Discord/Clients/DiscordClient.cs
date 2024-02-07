@@ -69,7 +69,7 @@ namespace Oxide.Ext.Discord.Clients
         public void Connect(BotConnection connection)
         {
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
+            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
             if (string.IsNullOrEmpty(Connection.ApiToken))
             {
@@ -125,6 +125,11 @@ namespace Oxide.Ext.Discord.Clients
         /// <param name="presenceUpdate"></param>
         public void UpdateStatus(UpdatePresenceCommand presenceUpdate) => Bot?.SendWebSocketCommand(this, GatewayCommandCode.PresenceUpdate, presenceUpdate);
         #endregion
+        
+        internal void UpdateLogLevel()
+        {
+            Logger.UpdateLogLevel(DiscordLoggerFactory.Instance.GetLogLevel(Connection.LogLevel));
+        }
         
         internal void CloseClient()
         {

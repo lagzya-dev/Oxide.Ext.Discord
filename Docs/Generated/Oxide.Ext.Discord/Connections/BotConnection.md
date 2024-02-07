@@ -162,7 +162,6 @@ public GatewayIntents Intents { get; set; }
 Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md)
 
 ```csharp
-[Obsolete("LogLevel is obsolete and will be removed in a future update")]
 public DiscordLogLevel LogLevel { get; set; }
 ```
 

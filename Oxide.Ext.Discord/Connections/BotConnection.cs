@@ -26,7 +26,6 @@ namespace Oxide.Ext.Discord.Connections
         /// Discord Extension Logging Level.
         /// See <see cref="DiscordLogLevel"/>
         /// </summary>
-        [Obsolete("LogLevel is obsolete and will be removed in a future update")]
         public DiscordLogLevel LogLevel { get; set; }
 
         /// <summary>

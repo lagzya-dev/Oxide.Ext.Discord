@@ -182,20 +182,6 @@ public void RemoveAllPools()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# LogDebug method
-
-```csharp
-public void LogDebug(DebugLogger logger)
-```
-
-## See Also
-
-* class [DebugLogger](../Logging/DebugLogger.md)
-* class [BasePool&lt;TPooled,TPool&gt;](./BasePool%7BTPooled,TPool%7D.md)
-* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # OnGetItem method
 
 Called when an item is retrieved from the pool
@@ -233,6 +219,20 @@ True if can be freed; false otherwise
 
 ## See Also
 
+* class [BasePool&lt;TPooled,TPool&gt;](./BasePool%7BTPooled,TPool%7D.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../Logging/DebugLogger.md)
 * class [BasePool&lt;TPooled,TPool&gt;](./BasePool%7BTPooled,TPool%7D.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

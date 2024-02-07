@@ -33,9 +33,15 @@ namespace Oxide.Ext.Discord.Logging
         {
             return DiscordConfig.Instance.Logging.ConsoleLogLevel <= DiscordConfig.Instance.Logging.FileLogLevel ? DiscordConfig.Instance.Logging.ConsoleLogLevel : DiscordConfig.Instance.Logging.FileLogLevel;
         }
+        
+        internal DiscordLogLevel GetLogLevel(DiscordLogLevel level)
+        {
+            DiscordLogLevel globalLevel = GetLogLevel();
+            return level < globalLevel ? level : globalLevel;
+        }
 
         internal DiscordLogger CreateExtensionLogger() => CreateExtensionLogger(GetLogLevel());
-        internal DiscordLogger CreateExtensionLogger(DiscordLogLevel logLevel) => GetLoggerInternal(nameof(DiscordExtension), logLevel, DiscordConfig.Instance.Logging, true);
+        internal DiscordLogger CreateExtensionLogger(DiscordLogLevel logLevel) => GetLoggerInternal(nameof(DiscordExtension), GetLogLevel(logLevel), DiscordConfig.Instance.Logging, true);
 
         private DiscordLogger GetLoggerInternal(string pluginName, DiscordLogLevel logLevel, IDiscordLoggingConfig config, bool isExtension)
         {
