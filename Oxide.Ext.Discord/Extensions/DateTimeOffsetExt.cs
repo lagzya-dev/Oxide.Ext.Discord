@@ -15,8 +15,12 @@ namespace Oxide.Ext.Discord.Extensions
         /// <param name="time"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public static async ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + TimeSpan.FromMilliseconds(Core.Random.Range(25, 40)), token).ConfigureAwait(false);
+        public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token) => time.DelayUntil(Core.Random.Range(25, 40), token);
         
-        public static async ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, CancellationToken token) => await Task.Delay(time - DateTimeOffset.UtcNow + TimeSpan.FromMilliseconds(additionalMs), token).ConfigureAwait(false);
+        public static async ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, CancellationToken token)
+        {
+            TimeSpan duration = time >= DateTimeOffset.UtcNow ? time - DateTimeOffset.UtcNow : TimeSpan.Zero;
+            await Task.Delay(duration + TimeSpan.FromMilliseconds(additionalMs), token).ConfigureAwait(false);
+        }
     }
 }

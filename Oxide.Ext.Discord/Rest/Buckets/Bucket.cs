@@ -31,7 +31,7 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// How many requests are remaining before hitting the rate limit for the bucket
         /// </summary>
-        internal int Remaining;
+        internal volatile int Remaining;
 
         /// <summary>
         /// How long until the rate limit resets
@@ -102,7 +102,7 @@ namespace Oxide.Ext.Discord.Rest
 
         private void CheckPendingRequests()
         {
-            if (_activeRequests.Count < Limit && _requestQueue.TryTake(out RequestHandler handler))
+            while(_activeRequests.Count < Limit && _requestQueue.TryTake(out RequestHandler handler))
             {
                 _activeRequests[handler.Request.Id] = handler;
                 handler.StartRequest();
@@ -165,37 +165,29 @@ namespace Oxide.Ext.Discord.Rest
                     {
                         DateTimeOffset resetAt = _rateLimit.NextReset();
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Global Rate Limit Method: {{3}} Url: {{4}} Waiting For: {{5}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, (resetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                        if (resetAt > DateTimeOffset.UtcNow)
-                        {
-                            await resetAt.DelayUntil(token).ConfigureAwait(false);
-                        }
-
+                        await resetAt.DelayUntil(token).ConfigureAwait(false);
                         continue;
                     }
 
                     if ((Limit == 0 || Remaining == 0) && ResetAt > DateTimeOffset.UtcNow)
                     {
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Bucket Rate Limit Method: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                        if (ResetAt > DateTimeOffset.UtcNow)
-                        {
-                            await ResetAt.DelayUntil(token).ConfigureAwait(false);
-                        }
+                        await ResetAt.DelayUntil(token).ConfigureAwait(false);
                         continue;
                     }
 
                     if (Remaining < 0)
                     {
                         _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can't Start Request Due to Remaining < 0: {{3}} Url: {{4}} Limit: {{5}} Remaining: {{6}} Waiting For: {{7}} Seconds", client.PluginName, Id, request.Id, request.Method, request.Route, Limit, Remaining, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
-                        if (ResetAt > DateTimeOffset.UtcNow)
-                        {
-                            await ResetAt.DelayUntil(100, token).ConfigureAwait(false);
-                        }
+                        await ResetAt.DelayUntil(100, token).ConfigureAwait(false);
                         continue;
                     }
 
                     _logger.Debug($"{nameof(Bucket)}.{nameof(WaitUntilBucketAvailable)} Plugin: {{0}} Bucket ID: {{1}} Request ID: {{2}} Can Start Request: Bucket: {{3}}/{{4}} Reset In: {{5}}", client.PluginName, Id, request.Id, Remaining, Limit, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds);
                     break;
                 }
+                
+                OnRequestStarted(handler);
             }
             finally
             {
@@ -203,7 +195,7 @@ namespace Oxide.Ext.Discord.Rest
             }
         }
         
-        internal void OnRequestStarted(RequestHandler handler)
+        private void OnRequestStarted(RequestHandler handler)
         {
             if (!handler.Request.Options.IgnoreRateLimit)
             {
@@ -267,13 +259,20 @@ namespace Oxide.Ext.Discord.Rest
                 _rateLimit.ReachedRateLimit(rateLimit.ResetAt);
             }
             
-            _logger.Debug("Reset At: {0} Rate Limit Reset At: {1}", ResetAt, rateLimit.ResetAt);
-            
+            if (request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                request.Client.Logger.Verbose($"{nameof(Bucket)}.{nameof(UpdateRateLimits)} Pre Bucket ID: {{0}} Scope: {{1}} Request ID: {{2}} Limit: {{3}} Remaining: {{4}} Reset: {{5}} Reset In: {{6}}s Rate Limit Bucket ID: {{7}}", Id, rateLimit.Scope, request.Id, Limit, Remaining, ResetAt, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds, rateLimit.BucketId);
+            }
+
             if (rateLimit.ResetAt > ResetAt)
             {
-                Limit = rateLimit.Limit;
-                Interlocked.Exchange(ref Remaining, rateLimit.Remaining);
                 ResetAt = rateLimit.ResetAt;
+                //Ensure the ResetAt really is Greater
+                if (rateLimit.ResetAt > ResetAt + TimeSpan.FromMilliseconds(100))
+                {
+                    Limit = rateLimit.Limit;
+                    Interlocked.Exchange(ref Remaining, rateLimit.Remaining);
+                }
             }
             else
             {
@@ -285,7 +284,10 @@ namespace Oxide.Ext.Discord.Rest
                 ActiveRequestsSemaphore.MaximumCount = Math.Max(rateLimit.Limit, 1);
             }
             
-            request.Client.Logger.Debug($"{nameof(Bucket)}.{nameof(UpdateRateLimits)} Bucket ID: {{0}} Scope: {{1}} Request ID: {{2}} Limit: {{3}} Remaining: {{4}} Reset: {{5}} Reset In: {{6}}s Rate Limit Bucket ID: {{7}}", Id, rateLimit.Scope, request.Id, Limit, Remaining, ResetAt, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds , rateLimit.BucketId);
+            if(request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                request.Client.Logger.Verbose($"{nameof(Bucket)}.{nameof(UpdateRateLimits)} Post Bucket ID: {{0}} Scope: {{1}} Request ID: {{2}} Limit: {{3}} Remaining: {{4}} Reset: {{5}} Reset In: {{6}}s Rate Limit Bucket ID: {{7}}", Id, rateLimit.Scope, request.Id, Limit, Remaining, ResetAt, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds, rateLimit.BucketId);
+            }
         }
 
         internal void AbortClientRequests(DiscordClient client)

@@ -66,7 +66,7 @@ namespace Oxide.Ext.Discord.Entities
             Scope = headers.Get(RateLimitHeaders.Scope);
             if (IsGlobalRateLimit)
             {
-                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
+                ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(headers.GetDouble(RateLimitHeaders.RetryAfter));
                 return;
             }
 
@@ -78,7 +78,7 @@ namespace Oxide.Ext.Discord.Entities
             
             Limit = headers.GetInt(RateLimitHeaders.BucketLimit);
             Remaining =  headers.GetInt(RateLimitHeaders.BucketRemaining);
-            ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(GetBucketReset(headers));
+            ResetAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(headers.GetDouble(RateLimitHeaders.BucketResetAfter));
 
             if (code == DiscordHttpStatusCode.TooManyRequests && !string.IsNullOrEmpty(content) && content[0] == '{')
             {
@@ -90,11 +90,6 @@ namespace Oxide.Ext.Discord.Entities
             }
 
             //DiscordExtension.GlobalLogger.Debug("Headers:\n{0}", headers.ToString());
-        }
-
-        private double GetBucketReset(HttpResponseHeaders headers)
-        {
-            return Math.Max(headers.GetDouble(RateLimitHeaders.BucketResetAfter), headers.GetDouble(RateLimitHeaders.RetryAfter));
         }
 
         ///<inheritdoc/>

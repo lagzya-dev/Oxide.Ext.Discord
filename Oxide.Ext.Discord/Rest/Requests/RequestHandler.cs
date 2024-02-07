@@ -128,10 +128,9 @@ namespace Oxide.Ext.Discord.Rest
             {
                 response?.Dispose();
                 Request.Status = RequestStatus.PendingStart;
-                await Request.Bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
                 await Request.WaitUntilRequestCanStart(_token).ConfigureAwait(false);
+                await Request.Bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
                 Request.Status = RequestStatus.InProgress;
-                Request.Bucket.OnRequestStarted(this);
                 
                 if (Request.IsCancelled)
                 {
