@@ -266,13 +266,13 @@ namespace Oxide.Ext.Discord.Rest
 
             if (rateLimit.ResetAt > ResetAt)
             {
-                ResetAt = rateLimit.ResetAt;
                 //Ensure the ResetAt really is Greater
-                if (rateLimit.ResetAt > ResetAt + TimeSpan.FromMilliseconds(100))
+                if (rateLimit.ResetAt > ResetAt + TimeSpan.FromMilliseconds(100) || Limit != rateLimit.Limit)
                 {
                     Limit = rateLimit.Limit;
                     Interlocked.Exchange(ref Remaining, rateLimit.Remaining);
                 }
+                ResetAt = rateLimit.ResetAt;
             }
             else
             {
