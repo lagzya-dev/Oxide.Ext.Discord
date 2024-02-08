@@ -38,6 +38,11 @@ namespace Oxide.Ext.Discord.Plugins
         public string GetCountryEmoji(IPlayer player)
         {
             string country = GetCountry(player);
+            if (string.IsNullOrEmpty(country))
+            {
+                return ":signal_strength:";
+            }
+            
             if (_flagCache.TryGetValue(country, out string flag))
             {
                 return flag;
