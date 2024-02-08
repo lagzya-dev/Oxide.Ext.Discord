@@ -95,7 +95,6 @@ namespace Oxide.Ext.Discord.Libraries
 
         public void LogDebug(DebugLogger logger)
         {
-            logger.StartObject(nameof(DiscordPool));
             logger.AppendObject("Internal", Internal);
             foreach (DiscordPluginPool pool in _pluginPools.Values)
             {
@@ -104,7 +103,6 @@ namespace Oxide.Ext.Discord.Libraries
                     logger.AppendObject(pool.PluginName, pool);
                 }
             }
-            logger.EndObject();
         }
     }
 }

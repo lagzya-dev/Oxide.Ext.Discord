@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -266,8 +267,15 @@ namespace Oxide.Ext.Discord.Plugins
         private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
             DebugLogger logger = new DebugLogger();
+            
+            ThreadPool.GetAvailableThreads(out int worker, out int port);
+            ThreadPool.GetMaxThreads(out int maxWorker, out int maxPort);
+            
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
-
+            logger.StartObject("Threads");
+            logger.AppendField("Worker", worker.ToString(), maxWorker.ToString());
+            logger.AppendField("Port", port.ToString(), maxPort.ToString());
+            logger.EndObject();
             logger.StartObject("Libraries");
             logger.AppendObject("Discord Application Command", DiscordAppCommand.Instance);
             logger.AppendObject("Discord Command", DiscordCommand.Instance);
@@ -275,7 +283,7 @@ namespace Oxide.Ext.Discord.Plugins
             DiscordAppCommand.Instance.LogDebug(logger);
             DiscordCommand.Instance.LogDebug(logger);
             DiscordSubscriptions.Instance.LogDebug(logger);
-            DiscordPool.Instance.LogDebug(logger);
+            logger.AppendObject("Discord Pool", DiscordPool.Instance);
             logger.EndObject();
             
             string message = logger.ToString();
