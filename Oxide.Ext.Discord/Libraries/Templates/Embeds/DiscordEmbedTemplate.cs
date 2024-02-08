@@ -126,7 +126,7 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 embed.Image = new EmbedImage
                 {
-                    Url = placeholders.ProcessPlaceholders(Url, data)
+                    Url = placeholders.ProcessPlaceholders(ImageUrl, data)
                 };
             }
 
