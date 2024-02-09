@@ -76,6 +76,7 @@ namespace Oxide.Ext.Discord.Libraries
 
             AddDiscordLocale(DiscordLocale.Create("en-GB"), ServerLocale.Create("en"));
             AddDiscordLocale(DiscordLocale.Create("zh-TW"), ServerLocale.Create("zh"));
+            AddDiscordLocale(DiscordLocale.Create("es-419"), ServerLocale.Create("es"));
         }
 
         /// <summary>
