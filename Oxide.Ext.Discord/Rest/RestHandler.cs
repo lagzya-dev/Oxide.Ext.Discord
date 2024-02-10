@@ -266,9 +266,9 @@ namespace Oxide.Ext.Discord.Rest
         /// <returns></returns>
         public Bucket GetBucket(BucketId bucketId)
         {
-            if (RouteToBucketId.ContainsKey(bucketId))
+            if (RouteToBucketId.TryGetValue(bucketId, out BucketId value))
             {
-                bucketId = RouteToBucketId[bucketId];
+                bucketId = value;
             }
 
             if (!Buckets.TryGetValue(bucketId, out Bucket bucket))

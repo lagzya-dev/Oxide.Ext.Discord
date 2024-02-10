@@ -59,7 +59,7 @@ namespace Oxide.Ext.Discord.Builders
             AddDescriptionLocalization(description, defaultLanguage);
             CommandName = commandName;
             GroupName = groupName;
-            SubCommandName = name;
+            SubCommandName = subCommandName;
             OptionName = name;
         }
 

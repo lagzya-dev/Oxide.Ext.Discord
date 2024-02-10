@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions;
@@ -248,6 +249,7 @@ namespace Oxide.Ext.Discord.Entities
         /// Returns the color as a hex color code
         /// </summary>
         /// <returns></returns>
+        [Pure]
         public string ToHex() => $"#{Color.ToString("X6")}";
     }
 }

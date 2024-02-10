@@ -10,7 +10,7 @@ public static class DateTimeOffsetExt
 
 | name | description |
 | --- | --- |
-| static [DelayUntil](#delayuntil-method-1-of-2)(…) | Delay until the DateTimeOffset with 25ms - 50ms padding (2 methods) |
+| static [DelayUntil](#delayuntil-method-1-of-2)(…) | Delay until the DateTimeOffset with 25ms - 40 padding (2 methods) |
 
 ## See Also
 
@@ -21,7 +21,7 @@ public static class DateTimeOffsetExt
    
 # DelayUntil method (1 of 2)
 
-Delay until the DateTimeOffset with 25ms - 50ms padding
+Delay until the DateTimeOffset with 25ms - 40 padding
 
 ```csharp
 public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken token)
@@ -42,10 +42,18 @@ public static ValueTask DelayUntil(this DateTimeOffset time, CancellationToken t
 
 # DelayUntil method (2 of 2)
 
+Delay until the DateTimeOffset with additionalMs padding
+
 ```csharp
 public static ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, 
     CancellationToken token)
 ```
+
+| parameter | description |
+| --- | --- |
+| time | Time to wait until |
+| additionalMs | Additional millisecond padding |
+| token | Cancellation Token |
 
 ## See Also
 

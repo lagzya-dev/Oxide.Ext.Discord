@@ -10,7 +10,7 @@ public interface ILogger
 
 | name | description |
 | --- | --- |
-| [LogLevel](#loglevel-property) { get; } |  |
+| [LogLevel](#loglevel-property) { get; } | Current Log level of the logger |
 | [IsConsoleLogging](#isconsolelogging-method)(…) | Returns if the logger is logging for server console |
 | [IsFileLogging](#isfilelogging-method)(…) | Returns if the logger is logging for file logger |
 | [IsLogging](#islogging-method)(…) | Returns true if the logger is logging for the passed log level |
@@ -148,6 +148,8 @@ public void Shutdown()
    
    
 # LogLevel property
+
+Current Log level of the logger
 
 ```csharp
 public DiscordLogLevel LogLevel { get; }

@@ -51,6 +51,9 @@ namespace Oxide.Ext.Discord.Rest
             _logger = logger;
         }
 
+        /// <summary>
+        /// Starts the Request
+        /// </summary>
         public void StartRequest()
         {
             if (Request.Status == RequestStatus.InQueue)
@@ -293,7 +296,9 @@ namespace Oxide.Ext.Discord.Rest
 
         private StringContent GetJsonContent(object data)
         {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings));
+            string json = JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings);
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Data: {{0}}", json);
+            StringContent content = new StringContent(json);
             content.Headers.ContentType = MediaTypeHeaderCache.Instance.Get("application/json");
             return content;
         }

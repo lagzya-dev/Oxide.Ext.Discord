@@ -214,9 +214,10 @@ namespace Oxide.Ext.Discord.Libraries
         {
             if (interaction != null)
             {
+                AddMessage(interaction.Message);
                 AddGuildMember(interaction.Member);
                 AddUser(interaction.User);
-                AddMessage(interaction.Message);
+                AddChannel(interaction.Channel);
                 Add(new PlaceholderDataKey(nameof(DiscordInteraction)), interaction);
             }
 

@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Entities
         /// Reaction Count Details
         /// </summary>
         [JsonProperty("count_details")]
-        public ReactionCountDetails count_details { get; set; }
+        public ReactionCountDetails CountDetails { get; set; }
 
         /// <summary>
         /// Whether the current user reacted using this emoji
@@ -27,10 +27,10 @@ namespace Oxide.Ext.Discord.Entities
         public bool Me { get; set; }
         
         /// <summary>
-        ///  	Whether the current user super-reacted using this emoji
+        /// Whether the current user super-reacted using this emoji
         /// </summary>
         [JsonProperty("me_burst")]
-        public bool me_burst { get; set; }
+        public bool MeBurst { get; set; }
 
         /// <summary>
         /// Emoji information

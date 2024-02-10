@@ -8,6 +8,7 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     public class DiscordLogger : ILogger
     {
+        ///<inheritdoc/>
         public DiscordLogLevel LogLevel { get; private set; }
         private readonly IDiscordLoggingConfig _config;
         private readonly DiscordLogHandler _handler;

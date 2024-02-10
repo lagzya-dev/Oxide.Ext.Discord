@@ -1,5 +1,4 @@
-﻿using System;
-using Oxide.Ext.Discord.Clients;
+﻿using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Logging;
@@ -61,6 +60,7 @@ namespace Oxide.Ext.Discord.Connections
         {
             ApiToken = apiToken;
             Intents = intents;
+            LogLevel = logLevel;
         }
 
         internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents)

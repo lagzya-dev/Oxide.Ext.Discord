@@ -93,6 +93,7 @@ namespace Oxide.Ext.Discord.Libraries
             }
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.AppendObject("Internal", Internal);

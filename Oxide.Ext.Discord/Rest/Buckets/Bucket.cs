@@ -264,15 +264,16 @@ namespace Oxide.Ext.Discord.Rest
                 request.Client.Logger.Verbose($"{nameof(Bucket)}.{nameof(UpdateRateLimits)} Pre Bucket ID: {{0}} Scope: {{1}} Request ID: {{2}} Limit: {{3}} Remaining: {{4}} Reset: {{5}} Reset In: {{6}}s Rate Limit Bucket ID: {{7}}", Id, rateLimit.Scope, request.Id, Limit, Remaining, ResetAt, (ResetAt - DateTimeOffset.UtcNow).TotalSeconds, rateLimit.BucketId);
             }
 
-            if (rateLimit.ResetAt > ResetAt)
+            DateTimeOffset currentResetAt = ResetAt;
+            if (rateLimit.ResetAt > currentResetAt)
             {
+                ResetAt = rateLimit.ResetAt;
                 //Ensure the ResetAt really is Greater
-                if (rateLimit.ResetAt > ResetAt + TimeSpan.FromMilliseconds(100) || Limit != rateLimit.Limit)
+                if (rateLimit.ResetAt > currentResetAt + TimeSpan.FromMilliseconds(250) || Limit != rateLimit.Limit)
                 {
                     Limit = rateLimit.Limit;
                     Interlocked.Exchange(ref Remaining, rateLimit.Remaining);
                 }
-                ResetAt = rateLimit.ResetAt;
             }
             else
             {

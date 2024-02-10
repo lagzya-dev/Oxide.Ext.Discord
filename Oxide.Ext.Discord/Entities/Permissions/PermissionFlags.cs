@@ -368,6 +368,6 @@ namespace Oxide.Ext.Discord.Entities
         /// Allows members to interact with the Clyde AI bot
         /// </summary>
         [Description("USE_CLYDE_AI")]
-        UseClydeAI = 1ul << 47,
+        UseClydeAi = 1ul << 47,
     }
 }

@@ -273,8 +273,8 @@ namespace Oxide.Ext.Discord.Plugins
             
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
             logger.StartObject("Threads");
-            logger.AppendField("Worker", worker.ToString(), maxWorker.ToString());
-            logger.AppendField("Port", port.ToString(), maxPort.ToString());
+            logger.AppendFieldOutOf("Worker", worker, maxWorker);
+            logger.AppendFieldOutOf("Port", port, maxPort);
             logger.EndObject();
             logger.StartObject("Libraries");
             logger.AppendObject("Discord Application Command", DiscordAppCommand.Instance);

@@ -77,11 +77,6 @@ namespace Oxide.Ext.Discord.Libraries
         {
             if (link == null) throw new ArgumentNullException(nameof(link));
 
-            if (!(link is IDiscordPlugin plugin))
-            {
-                
-            }
-
             IDictionary<PlayerId, Snowflake> data = link.GetPlayerIdToDiscordIds();
             if (data == null)
             {

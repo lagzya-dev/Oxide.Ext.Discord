@@ -216,6 +216,7 @@ namespace Oxide.Ext.Discord.Types
             return true;
         }
         
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.StartObject($"{GetType().GetRealTypeName()}");

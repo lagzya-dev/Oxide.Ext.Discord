@@ -22,7 +22,7 @@ public class InteractionData
 | [TargetId](#targetid-property) { get; set; } | Id the of user or message targeted by a user or message command |
 | [Type](#type-property) { get; set; } | The type of the invoked command |
 | [Values](#values-property) { get; set; } | For components, the values for the select menu component |
-| [GetComponent&lt;T&gt;](#getcomponent&amp;lt;t&amp;gt;-method)(…) |  |
+| [GetComponent&lt;T&gt;](#getcomponent&amp;lt;t&amp;gt;-method)(…) | Returns a Component of type {T} with a custom ID that equals customId |
 
 ## See Also
 
@@ -33,10 +33,17 @@ public class InteractionData
    
 # GetComponent&lt;T&gt; method
 
+Returns a Component of type {T} with a custom ID that equals customId
+
 ```csharp
 public T GetComponent<T>(string customId)
     where T : BaseInteractableComponent
 ```
+
+| parameter | description |
+| --- | --- |
+| T | Type to return |
+| customId | Custom ID to match on |
 
 ## See Also
 

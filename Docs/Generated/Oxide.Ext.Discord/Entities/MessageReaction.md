@@ -13,10 +13,10 @@ public class MessageReaction
 | [MessageReaction](#messagereaction-constructor)() | The default constructor. |
 | [BurstColors](#burstcolors-property) { get; set; } | HEX colors used for super reaction TODO: Find out the array type |
 | [Count](#count-property) { get; set; } | Total number of times this emoji has been used to react (including super reacts) |
-| [count_details](#count_details-property) { get; set; } | Reaction Count Details |
+| [CountDetails](#countdetails-property) { get; set; } | Reaction Count Details |
 | [Emoji](#emoji-property) { get; set; } | Emoji information [`DiscordEmoji`](./DiscordEmoji.md) |
 | [Me](#me-property) { get; set; } | Whether the current user reacted using this emoji |
-| [me_burst](#me_burst-property) { get; set; } | Whether the current user super-reacted using this emoji |
+| [MeBurst](#meburst-property) { get; set; } | Whether the current user super-reacted using this emoji |
 
 ## See Also
 
@@ -55,12 +55,12 @@ public int Count { get; set; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# count_details property
+# CountDetails property
 
 Reaction Count Details
 
 ```csharp
-public ReactionCountDetails count_details { get; set; }
+public ReactionCountDetails CountDetails { get; set; }
 ```
 
 ## See Also
@@ -86,12 +86,12 @@ public bool Me { get; set; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# me_burst property
+# MeBurst property
 
 Whether the current user super-reacted using this emoji
 
 ```csharp
-public bool me_burst { get; set; }
+public bool MeBurst { get; set; }
 ```
 
 ## See Also

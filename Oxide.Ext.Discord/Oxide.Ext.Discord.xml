@@ -12067,6 +12067,14 @@
             The values submitted by the user (Modal Submit)
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.InteractionData.GetComponent``1(System.String)">
+            <summary>
+            Returns a Component of type {T} with a custom ID that equals customId 
+            </summary>
+            <param name="customId">Custom ID to match on</param>
+            <typeparam name="T">Type to return</typeparam>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.InteractionDataOption">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure">Application Command Interaction Data Option</a>
@@ -14419,7 +14427,7 @@
             Total number of times this emoji has been used to react (including super reacts)
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.MessageReaction.count_details">
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReaction.CountDetails">
             <summary>
             Reaction Count Details
             </summary>
@@ -14429,9 +14437,9 @@
             Whether the current user reacted using this emoji
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.MessageReaction.me_burst">
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReaction.MeBurst">
             <summary>
-             	Whether the current user super-reacted using this emoji
+            Whether the current user super-reacted using this emoji
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageReaction.Emoji">
@@ -15356,7 +15364,7 @@
             Allows sending voice messages
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.UseClydeAI">
+        <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.UseClydeAi">
             <summary>
             Allows members to interact with the Clyde AI bot
             </summary>
@@ -17586,6 +17594,11 @@
             An exception when something is invalid with a pool
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.RequestCancelledException">
+            <summary>
+            Exception returns from promise when a request is cancelled
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.TokenMismatchException">
             <summary>
             Represents a bot token mismatch
@@ -17622,10 +17635,19 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.DateTimeOffsetExt.DelayUntil(System.DateTimeOffset,System.Threading.CancellationToken)">
             <summary>
-            Delay until the DateTimeOffset with 25ms - 50ms padding
+            Delay until the DateTimeOffset with 25ms - 40 padding
             </summary>
             <param name="time"></param>
             <param name="token"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Extensions.DateTimeOffsetExt.DelayUntil(System.DateTimeOffset,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Delay until the DateTimeOffset with additionalMs padding
+            </summary>
+            <param name="time">Time to wait until</param>
+            <param name="additionalMs">Additional millisecond padding</param>
+            <param name="token">Cancellation Token</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.DiscordUserExt">
@@ -18739,6 +18761,11 @@
         <member name="T:Oxide.Ext.Discord.Interfaces.ILogger">
             <summary>
             Represents an interface for a logger
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Interfaces.ILogger.LogLevel">
+            <summary>
+            Current Log level of the logger
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.ILogger.UpdateLogLevel(Oxide.Ext.Discord.Logging.DiscordLogLevel)">
@@ -22438,6 +22465,9 @@
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordPool.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordSubscription">
             <summary>
             Represents a channel subscription for a plugin
@@ -23988,6 +24018,9 @@
             Represents a discord extension logger
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Logging.DiscordLogger.LogLevel">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Logging.DiscordLogger.#ctor(Oxide.Ext.Discord.Logging.DiscordLogLevel,Oxide.Ext.Discord.Interfaces.IDiscordLoggingConfig,Oxide.Ext.Discord.Logging.DiscordLogHandler)">
             <summary>
             Creates a new logger with the given log level
@@ -24371,6 +24404,11 @@
             Creates a new <see cref="T:Oxide.Ext.Discord.Rest.RequestHandler"/>
             </summary>
             <param name="request">Request to be handled by this handler</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.StartRequest">
+            <summary>
+            Starts the Request
+            </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RequestHandler.FireRequest">
             <summary>
@@ -24764,6 +24802,9 @@
             <param name="item">Item to be freed</param>
             <returns>True if can be freed; false otherwise</returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Types.BasePool`2.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
+        </member>
         <member name="T:Oxide.Ext.Discord.Types.BasePoolable">
             <summary>
             Represents a poolable object
@@ -24931,6 +24972,9 @@
             </summary>
             <param name="boxed">Boxed to be freed</param>
             <typeparam name="T">Type of the Boxed</typeparam>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.DiscordPluginPool.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Types.IPool">
             <summary>

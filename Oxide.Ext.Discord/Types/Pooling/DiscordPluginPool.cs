@@ -192,7 +192,7 @@ namespace Oxide.Ext.Discord.Types
         /// Returns a pooled <see cref="PlaceholderData"/>
         /// </summary>
         /// <returns>Pooled <see cref="PlaceholderData"/></returns>
-        public PlaceholderData GetPlaceholderData()
+        internal PlaceholderData GetPlaceholderData()
         {
             return (PlaceholderData)PlaceholderDataPool.ForPlugin(this).Get();
         }
@@ -201,7 +201,7 @@ namespace Oxide.Ext.Discord.Types
         /// Frees a <see cref="PlaceholderData"/> back to the pool
         /// </summary>
         /// <param name="data"><see cref="PlaceholderData"/> being freed</param>
-        public void FreePlaceholderData(PlaceholderData data)
+        internal void FreePlaceholderData(PlaceholderData data)
         {
             PlaceholderDataPool.ForPlugin(this).Free(data);
         }
@@ -255,6 +255,7 @@ namespace Oxide.Ext.Discord.Types
             }
         }
 
+        ///<inheritdoc/>
         public void LogDebug(DebugLogger logger)
         {
             logger.StartArray(PluginId.PluginName());

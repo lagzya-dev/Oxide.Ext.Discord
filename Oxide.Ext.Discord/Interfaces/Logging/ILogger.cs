@@ -8,6 +8,9 @@ namespace Oxide.Ext.Discord.Interfaces
     /// </summary>
     public interface ILogger
     {
+        /// <summary>
+        /// Current Log level of the logger
+        /// </summary>
         DiscordLogLevel LogLevel { get; }
         
         /// <summary>

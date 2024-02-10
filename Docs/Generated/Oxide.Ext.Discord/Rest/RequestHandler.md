@@ -14,7 +14,7 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 | static [CreateRequest](#createrequest-method)(…) | Creates a new [`RequestHandler`](./RequestHandler.md) |
 | [Abort](#abort-method)() | Aborts a currently running request |
 | [LogDebug](#logdebug-method)(…) |  |
-| [StartRequest](#startrequest-method)() |  |
+| [StartRequest](#startrequest-method)() | Starts the Request |
 
 ## Protected Members
 
@@ -52,6 +52,8 @@ public static RequestHandler CreateRequest(BaseRequest request)
    
    
 # StartRequest method
+
+Starts the Request
 
 ```csharp
 public void StartRequest()
