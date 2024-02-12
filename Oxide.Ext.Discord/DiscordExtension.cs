@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Test version information if using test version
         /// </summary>
-        internal const string TestVersion = ".Beta.1";
+        internal const string TestVersion = ".Beta.2";
         
         internal const string Authors = "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
 
