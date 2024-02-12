@@ -125,14 +125,20 @@ namespace Oxide.Ext.Discord.Rest
                 QueueRequest(handler);
             }
             
-            DiscordPool.Internal.FreeList(handlers);
-            
             data._activeRequests.Clear();
 
+            handlers.Clear();
             foreach (RequestHandler handler in data._requestQueue)
+            {
+                handlers.Add(handler);
+            }
+
+            foreach (RequestHandler handler in handlers)
             {
                 QueueRequest(handler);
             }
+            
+            DiscordPool.Internal.FreeList(handlers);
 
             foreach (string route in data._routes)
             {
