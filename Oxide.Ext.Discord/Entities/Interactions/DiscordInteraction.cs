@@ -509,6 +509,22 @@ namespace Oxide.Ext.Discord.Entities
         }
         
         /// <summary>
+        /// Creates a interaction follow up message response from a message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="templateName">Name of the template</param>
+        /// <param name="message">Message to send (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
+        public IPromise<DiscordMessage> CreateFollowUpTemplateResponse(DiscordClient client, string templateName, CommandFollowupCreate message = null, PlaceholderData placeholders = null)
+        {
+            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            
+            CommandFollowupCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
+            return CreateFollowUpMessage(client, template);
+        }
+        
+        /// <summary>
         /// Get a followup message for an Interaction
         /// See <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#get-followup-message">Get Followup Message</a>
         /// </summary>
