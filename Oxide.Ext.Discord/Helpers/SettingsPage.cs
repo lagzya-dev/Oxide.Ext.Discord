@@ -1,0 +1,35 @@
+﻿namespace Oxide.Ext.Discord.Helpers
+{
+    public enum SettingsPage
+    {
+        Account,
+        ProfileCustomization,
+        PrivacyAndSafety,
+        AuthorizedApps,
+        Connections,
+        Premium,
+        PremiumGuildSubscriptions,
+        Subscriptions,
+        Inventory,
+        Billing,
+        Appearance,
+        Accessibility,
+        Voice,
+        Text,
+        Notifications,
+        Keybinds,
+        Locale,
+        Windows,
+        Linux,
+        StreamerMode,
+        Advanced,
+        ActivityStatus,
+        Overlay,
+        HypesquadOnline,
+        Changelogs,
+        Experiments,
+        DeveloperOptions,
+        HotspotOptions,
+        DismissibleContentOptions
+    }
+}
