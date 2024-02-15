@@ -244,9 +244,13 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 langCache = new Hash<string, string>();
                 _pluginLangCache[id] = langCache;
-                foreach (KeyValuePair<string, string> lang in OxideLibrary.Instance.Lang.GetMessages(language.Id, plugin))
+                Dictionary<string, string> messages = OxideLibrary.Instance.Lang.GetMessages(language.Id, plugin);
+                if (messages != null)
                 {
-                    langCache[lang.Key] = lang.Value;
+                    foreach (KeyValuePair<string, string> lang in messages)
+                    {
+                        langCache[lang.Key] = lang.Value;
+                    }
                 }
             }
 
