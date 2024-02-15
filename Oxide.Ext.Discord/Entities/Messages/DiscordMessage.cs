@@ -351,7 +351,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
             return Create(client, channelId, template);
@@ -367,7 +367,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, string templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
+        public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, Snowflake channelId, Plugin plugin, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
             return Create(client, channelId, template);
@@ -466,7 +466,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, message);
             return Reply(client, template);
@@ -480,7 +480,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, string templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, message);
             return Reply(client, template);
@@ -695,7 +695,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="templateName">Template Name</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="update">Update to be applied to the message</param>
-        public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, string templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
+        public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, TemplateKey templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
             MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, update);
             return Edit(client, template);
@@ -709,7 +709,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="language">Oxide language to use</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <param name="update">Update to be applied tothe message</param>
-        public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, string templateName, string language = DiscordLocales.DefaultServerLanguage, PlaceholderData placeholders = null, MessageUpdate update = null)
+        public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, PlaceholderData placeholders = null, MessageUpdate update = null)
         {
             MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, update);
             return Edit(client, template);

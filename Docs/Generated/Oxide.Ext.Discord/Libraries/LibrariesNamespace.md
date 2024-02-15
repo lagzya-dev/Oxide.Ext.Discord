@@ -72,6 +72,7 @@
 | static class [ServerPlaceholders](./ServerPlaceholders.md) | IServer placeholders |
 | class [SnowflakeKeys](./SnowflakeKeys.md) | Placeholder Keys for [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) |
 | static class [SnowflakePlaceholders](./SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
+| struct [TemplateKey](./TemplateKey.md) | Represents a Template Key. This is the key for template lookup |
 | enum [TemplateType](./TemplateType.md) | Represents available template type |
 | struct [TemplateVersion](./TemplateVersion.md) | Version of a specific template |
 | class [TimespanKeys](./TimespanKeys.md) | Placeholder Keys for TimeSpan |

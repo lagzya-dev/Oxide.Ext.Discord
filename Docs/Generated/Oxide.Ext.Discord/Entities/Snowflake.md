@@ -4,7 +4,7 @@ Represents an ID in discord.
 
 ```csharp
 public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable<Snowflake>, 
-    IEquatable<ulong>
+    IEquatable<ulong>, IKey
 ```
 
 ## Public Members
@@ -34,6 +34,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 
 ## See Also
 
+* interface [IKey](../Interfaces/IKey.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [Snowflake.cs](../../../../Oxide.Ext.Discord/Entities/Snowflake.cs)

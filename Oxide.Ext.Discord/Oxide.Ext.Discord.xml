@@ -5570,7 +5570,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordChannel.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordChannel.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Creates a message in a text channel using a global message template
             </summary>
@@ -5579,7 +5579,7 @@
             <param name="message">message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordChannel.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordChannel.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Creates a message in a text channel using a localized message template
             </summary>
@@ -11856,7 +11856,7 @@
             <param name="type">Type of the interaction response</param>
             <param name="response">Interaction Callback Message Data</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateTemplateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.InteractionResponseType,System.String,Oxide.Ext.Discord.Entities.InteractionCallbackData,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateTemplateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.InteractionResponseType,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.InteractionCallbackData,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Creates a interaction message response from a message template
             </summary>
@@ -11867,7 +11867,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateModalResponse(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.InteractionModalMessage,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateModalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.InteractionModalMessage,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Creates a interaction modal response from a modal template 
             </summary>
@@ -11948,7 +11948,7 @@
             <param name="client">Client to use</param>
             /// <param name="message">Updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.EditTemplateOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageUpdate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.EditTemplateOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageUpdate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Edit a interaction response with a message template
             </summary>
@@ -11980,6 +11980,16 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="builder">Builder for the follow up</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreateFollowUpTemplateResponse(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.CommandFollowupCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+            <summary>
+            Creates a interaction follow up message response from a message template
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="templateName">Name of the template</param>
+            <param name="message">Message to send (optional)</param>
+            <param name="placeholders">Placeholders to apply (optional)</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetFollowUpMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.CommandFollowupUpdate)">
             <summary>
@@ -13555,7 +13565,7 @@
             <param name="channelId">Channel ID to send the message to</param>
             <param name="embeds">Embeds to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.CreateGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Send a message in the channel with the given ID using a global message template
             </summary>
@@ -13566,7 +13576,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.CreateTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Send a message in the channel with the given ID using a localized message template
             </summary>
@@ -13628,7 +13638,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.ReplyWithGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.ReplyWithGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -13637,7 +13647,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.ReplyWithTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.ReplyWithTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -13784,7 +13794,7 @@
             <param name="client">Client to use</param>
             <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.MessageUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.EditGlobalTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.MessageUpdate)">
             <summary>
             Edit a message using a global message template
             </summary>
@@ -13793,7 +13803,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="update">Update to be applied to the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.MessageUpdate)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.EditTemplateMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.MessageUpdate)">
             <summary>
             Edit a message using a localized message template
             </summary>
@@ -16327,7 +16337,7 @@
             <param name="client">Client to use</param>
             <param name="embeds">Embeds to be send in the message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordUser.SendTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordUser.SendTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Send a message in a DM to the user using a localized message template
             </summary>
@@ -16337,7 +16347,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordUser.SendGlobalTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordUser.SendGlobalTemplateDirectMessage(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Reply to a message using a global message template
             </summary>
@@ -16923,7 +16933,7 @@
             <param name="builder">Builder for the message</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
             <summary>
             Send a message to a webhook using a global message template
             </summary>
@@ -16933,7 +16943,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="executeParams">Webhook execution parameters</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookTemplate(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.String,Oxide.Ext.Discord.Entities.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.ExecuteWebhookTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.WebhookCreateMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookExecuteParams)">
             <summary>
             Send a message to a webhook using a localized message template
             </summary>
@@ -16963,7 +16973,7 @@
             <param name="messageParams">Message Params</param>
             <param name="message">The updated message</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.EditWebhookMessageGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.WebhookEditMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookMessageParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.EditWebhookMessageGlobalTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.WebhookEditMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookMessageParams)">
             <summary>
             Edit a message from a webhook using a global message template
             </summary>
@@ -16975,7 +16985,7 @@
             <param name="placeholders">Placeholders to apply (optional)</param>
             <param name="messageParams">Message Params</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.EditWebhookMessageTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,System.String,System.String,Oxide.Ext.Discord.Entities.WebhookEditMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookMessageParams)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.EditWebhookMessageTemplate(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,System.String,Oxide.Ext.Discord.Entities.WebhookEditMessage,Oxide.Ext.Discord.Libraries.PlaceholderData,Oxide.Ext.Discord.Entities.WebhookMessageParams)">
             <summary>
             Edit a message from a webhook using a localized message template
             </summary>
@@ -17832,7 +17842,7 @@
             <param name="client">Client to use for sending the message</param>
             <param name="message">Message to send</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordGlobalTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordGlobalTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Send a message in a DM to the linked user using a global message template
             </summary>
@@ -17842,7 +17852,7 @@
             <param name="message">Message to use (optional)</param>
             <param name="placeholders">Placeholders to apply (optional)</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Extensions.PlayerExt.SendDiscordTemplateMessage(Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.MessageCreate,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Send a message in a DM to the linked user using a localized message template
             </summary>
@@ -18064,6 +18074,128 @@
             Returns the generated snowflake ID
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.DiscordAppRoutes">
+            <summary>
+            Discord App Routes for navigating the client within the discord app using links
+            Sourced from: https://gist.github.com/ghostrider-05/8f1a0bfc27c7c4509b4ea4e8ce718af0
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.User(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            User App Route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.MessageRequests">
+            <summary>
+            Message Requests App Route
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General">
+            <summary>
+            General App Routes
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.Apps">
+            <summary>
+            Apps App Route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.GuildDiscovery">
+            <summary>
+            Guild Discovery App Route
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.CreateGuild">
+            <summary>
+            Create Guild App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.Gift(System.String)">
+            <summary>
+            Gift App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.ServerInvite(System.String)">
+            <summary>
+            Server Invite App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.General.Settings(Oxide.Ext.Discord.Helpers.SettingsPage)">
+            <summary>
+            App Settings Page Routes
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs">
+            <summary>
+            DM App routes
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Channel(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            DM Channel App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Message(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            DM Message App Route
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds">
+            <summary>
+            Guild App Routes
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Favorites">
+            <summary>
+            Favorite Channels App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.FavoritesChannel(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Favorites Channel App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Guild(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Guild App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Channel(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Guild Channel App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.BrowseChannel(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Browse Guild Channels App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.ServerGuide(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Server Guide App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Event(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Event App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Message(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Message App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.MembershipScreening(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Membership Screening App Route
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.RoleSubscriptions(Oxide.Ext.Discord.Interfaces.IKey)">
+            <summary>
+            Role Subscriptions App Route
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.DiscordCdn">
             <summary>
@@ -18570,6 +18702,176 @@
             <param name="size">Font size for the text</param>
             <returns>Font size text formatting</returns>
         </member>
+        <member name="T:Oxide.Ext.Discord.Helpers.SettingsPage">
+            <summary>
+            App Settings Pages
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Account">
+            <summary>
+            Account Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.ProfileCustomization">
+            <summary>
+            Profile Customization Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.PrivacyAndSafety">
+            <summary>
+            Privacy and Safety Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.FamilyCenter">
+            <summary>
+            Family Center Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.AuthorizedApps">
+            <summary>
+            Authorized Apps Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Connections">
+            <summary>
+            Connections Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Sessions">
+            <summary>
+            Sessions Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.FriendRequests">
+            <summary>
+            Friend Requests Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Premium">
+            <summary>
+            Premium Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.PremiumGuildSubscriptions">
+            <summary>
+            Premium Guild Subscriptions Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Subscriptions">
+            <summary>
+            Subscriptions Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Inventory">
+            <summary>
+            Inventory Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Billing">
+            <summary>
+            Billing Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Appearance">
+            <summary>
+            Appearance Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Accessibility">
+            <summary>
+            Accessibility Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Voice">
+            <summary>
+            Voice Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Text">
+            <summary>
+            Text Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Notifications">
+            <summary>
+            Notifications Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Keybinds">
+            <summary>
+            Keybinds Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Locale">
+            <summary>
+            Locale Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Windows">
+            <summary>
+            Windows Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Linux">
+            <summary>
+            Linux Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.StreamerMode">
+            <summary>
+            Streamer Mode Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Advanced">
+            <summary>
+            Advanced Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.ActivityStatus">
+            <summary>
+            Activity Status Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.RegisteredGames">
+            <summary>
+            Registered Games Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Overlay">
+            <summary>
+            Overlay
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.HypesquadOnline">
+            <summary>
+            Hype Squad Online Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Changelogs">
+            <summary>
+            Changelogs page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.Experiments">
+            <summary>
+            Experiments Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.DeveloperOptions">
+            <summary>
+            Developer Options Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.HotspotOptions">
+            <summary>
+            Hotspot Options Page
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Helpers.SettingsPage.DismissibleContentOptions">
+            <summary>
+            Dismissible Content Options Page
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
             <summary>
             Helper methods relating to time
@@ -18715,6 +19017,17 @@
             <summary>
             File attachments for an entity
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IKey">
+            <summary>
+            Represents a Key in Discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IKey.ToString">
+            <summary>
+            Converts the key to a string
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.ISnowflakeEntity">
             <summary>
@@ -19494,6 +19807,20 @@
             <summary>
             Message Component Convert does not write JSON
             </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Json.TemplateKeyConverter">
+            <summary>
+            Json Template Key Converter
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.TemplateKeyConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.TemplateKeyConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Json.TemplateKeyConverter.CanConvert(System.Type)">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Json.UnixDateTimeConverter">
             <summary>
@@ -22399,6 +22726,9 @@
         <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.GetHashCode">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.CompareTo(Oxide.Ext.Discord.Libraries.PlaceholderKey)">
+            <inheritdoc />
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.op_Implicit(Oxide.Ext.Discord.Libraries.PlaceholderKey)~System.String">
             <summary>
             Implicitly converts to <see cref="T:System.String"/> by calling the <see cref="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.ToString"/> method.
@@ -22598,7 +22928,7 @@
             </summary>
             <param name="logger"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.RegisterGlobalTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.RegisterGlobalTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
             <summary>
             Registers a global template for Auto Complete Choices
             </summary>
@@ -22610,7 +22940,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Throw if plugin or templateName is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.RegisterLocalizedTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.RegisterLocalizedTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplate,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
             <summary>
             Registers a global template for Auto Complete Choices
             </summary>
@@ -22623,7 +22953,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Throw if plugin, templateName, or language is null/empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.GetGlobalTemplate(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.GetGlobalTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey)">
             <summary>
             Returns a global Auto Complete Template for the given plugin and template name
             </summary>
@@ -22631,7 +22961,7 @@
             <param name="templateName">Name of the template</param>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyGlobal(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyGlobal(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Applies a Global Template to a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> with optional placeholders
             </summary>
@@ -22642,7 +22972,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData,System.String)">
             <summary>
             Applies a Localized Template to a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> with optional placeholders
             </summary>
@@ -22654,7 +22984,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAutoCompleteChoiceTemplates.ApplyLocalized(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.DiscordInteraction,Oxide.Ext.Discord.Entities.CommandOptionChoice,Oxide.Ext.Discord.Libraries.PlaceholderData)">
             <summary>
             Applies a Localized Template to a <see cref="T:Oxide.Ext.Discord.Entities.CommandOptionChoice"/> with optional placeholders
             </summary>
@@ -22674,7 +23004,7 @@
             Library for Discord Message templates
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.RegisterGlobalTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,`0,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.RegisterGlobalTemplateAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,`0,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
             <summary>
             Registers a global message template
             Global Message templates cannot be localized
@@ -22686,7 +23016,7 @@
             <param name="minVersion">Min supported version for this template</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.RegisterLocalizedTemplateAsync(Oxide.Core.Plugins.Plugin,System.String,`0,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.RegisterLocalizedTemplateAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,`0,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
             <summary>
             Registers a message template with the given name and language
             </summary>
@@ -22702,7 +23032,7 @@
             <param name="language">Language for the template</param>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetGlobalTemplate(Oxide.Core.Plugins.Plugin,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetGlobalTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey)">
             <summary>
             Returns a global message template for the plugin with the given name
             </summary>
@@ -22711,7 +23041,7 @@
             <returns><see cref="T:Oxide.Ext.Discord.Libraries.DiscordMessageTemplate"/></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetPlayerTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Core.Libraries.Covalence.IPlayer)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetPlayerTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Core.Libraries.Covalence.IPlayer)">
             <summary>
             Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
             </summary>
@@ -22721,7 +23051,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetPlayerTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetPlayerTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,System.String)">
             <summary>
             Returns a message template for a given <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> player
             </summary>
@@ -22731,7 +23061,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetLocalizedTemplate(Oxide.Core.Plugins.Plugin,System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetLocalizedTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,System.String)">
             <summary>
             Returns a message template for a given language
             </summary>
@@ -22741,7 +23071,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetLocalizedTemplate(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Entities.DiscordInteraction)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseMessageTemplateLibrary`1.GetLocalizedTemplate(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Entities.DiscordInteraction)">
             <summary>
             Returns a message template for a given language
             </summary>
@@ -22984,12 +23314,12 @@
             Library for localizing <see cref="T:Oxide.Ext.Discord.Entities.DiscordApplicationCommand"/>s
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.RegisterCommandLocalizationAsync(Oxide.Core.Plugins.Plugin,System.String,Oxide.Ext.Discord.Libraries.DiscordCommandLocalization,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.RegisterCommandLocalizationAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.DiscordCommandLocalization,Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion,System.String)">
             <summary>
             Registers Application Command Localization for a given language
             </summary>
             <param name="plugin">Plugin the for the command localization</param>
-            <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+            <param name="templateName">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
             <param name="localization">Localization to register</param>
             <param name="version">Version of the template</param>
             <param name="minVersion">Min supported registered version</param>
@@ -22997,24 +23327,24 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.BulkRegisterCommandLocalizationsAsync(Oxide.Core.Plugins.Plugin,System.String,System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.BulkTemplateRegistration{Oxide.Ext.Discord.Libraries.DiscordCommandLocalization}},Oxide.Ext.Discord.Libraries.TemplateVersion)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.BulkRegisterCommandLocalizationsAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Libraries.TemplateKey,System.Collections.Generic.List{Oxide.Ext.Discord.Libraries.BulkTemplateRegistration{Oxide.Ext.Discord.Libraries.DiscordCommandLocalization}},Oxide.Ext.Discord.Libraries.TemplateVersion)">
             <summary>
             Registers multiple command localizations
             </summary>
             <param name="plugin">Plugin the for the command localization</param>
-            <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+            <param name="templateName">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
             <param name="commands">List of <see cref="T:Oxide.Ext.Discord.Libraries.DiscordCommandLocalization"/> to bulk register</param>
             <param name="minVersion">Min supported registered version</param>
             <returns></returns>
             <exception cref="T:System.ArgumentNullException"></exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.CommandCreate,System.String)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(Oxide.Core.Plugins.Plugin,Oxide.Ext.Discord.Entities.CommandCreate,Oxide.Ext.Discord.Libraries.TemplateKey)">
             <summary>
             Applies Command Localizations Async
             </summary>
             <param name="plugin">Plugin the localizations are for</param>
             <param name="create">The command to apply the localizations to</param>
-            <param name="fileNameSuffix">fileName suffix used when registering</param>
+            <param name="templateName">fileName suffix used when registering</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.BaseComponentTemplate">
@@ -23637,6 +23967,58 @@
             Constructor
             </summary>
             <param name="logger"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.TemplateKey">
+            <summary>
+            Represents a Template Key. This is the key for template lookup
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.TemplateKey.Name">
+            <summary>
+            Placeholder Key
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.TemplateKey.IsValid">
+            <summary>
+            If <see cref="F:Oxide.Ext.Discord.Libraries.TemplateKey.Name"/> Is a Valid Key
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Placeholder Value</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(Oxide.Ext.Discord.Libraries.TemplateKey)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.op_Equality(Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.TemplateKey)">
+            <summary>
+            Template Key == operator
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.op_Inequality(Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.TemplateKey)">
+            <summary>
+            Template Key != operator
+            </summary>
+            <param name="left"></param>
+            <param name="right"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.ToString">
+            <summary>
+            Returns the template name
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.TemplateType">
             <summary>

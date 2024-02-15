@@ -483,9 +483,11 @@
 
 | public type | description |
 | --- | --- |
+| static class [DiscordAppRoutes](./Oxide.Ext.Discord/Helpers/DiscordAppRoutes.md) | Discord App Routes for navigating the client within the discord app using links Sourced from: https://gist.github.com/ghostrider-05/8f1a0bfc27c7c4509b4ea4e8ce718af0 |
 | static class [DiscordCdn](./Oxide.Ext.Discord/Helpers/DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./Oxide.Ext.Discord/Helpers/DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
 | static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) | Server Text Formatting |
+| enum [SettingsPage](./Oxide.Ext.Discord/Helpers/SettingsPage.md) | App Settings Pages |
 | static class [TimeHelpers](./Oxide.Ext.Discord/Helpers/TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./Oxide.Ext.Discord/Helpers/TimestampStyles.md) | Available flags for timestamp formatting |
 
@@ -502,6 +504,7 @@
 | interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
+| interface [IKey](./Oxide.Ext.Discord/Interfaces/IKey.md) | Represents a Key in Discord |
 | interface [ILogger](./Oxide.Ext.Discord/Interfaces/ILogger.md) | Represents an interface for a logger |
 | interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
@@ -529,6 +532,7 @@
 | class [RoleTagsConverter](./Oxide.Ext.Discord/Json/RoleTagsConverter.md) | Handles converting [`RoleTags`](./Oxide.Ext.Discord/Entities/RoleTags.md) This type contains special deserialization types |
 | class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from it's JSON string value |
 | class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for list of message components |
+| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | Json Template Key Converter |
 | class [UnixDateTimeConverter](./Oxide.Ext.Discord/Json/UnixDateTimeConverter.md) | Converts a DateTimeOffset to and from a json long |
 
 ## Oxide.Ext.Discord.Libraries namespace
@@ -605,6 +609,7 @@
 | static class [ServerPlaceholders](./Oxide.Ext.Discord/Libraries/ServerPlaceholders.md) | IServer placeholders |
 | class [SnowflakeKeys](./Oxide.Ext.Discord/Libraries/SnowflakeKeys.md) | Placeholder Keys for [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) |
 | static class [SnowflakePlaceholders](./Oxide.Ext.Discord/Libraries/SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
+| struct [TemplateKey](./Oxide.Ext.Discord/Libraries/TemplateKey.md) | Represents a Template Key. This is the key for template lookup |
 | enum [TemplateType](./Oxide.Ext.Discord/Libraries/TemplateType.md) | Represents available template type |
 | struct [TemplateVersion](./Oxide.Ext.Discord/Libraries/TemplateVersion.md) | Version of a specific template |
 | class [TimespanKeys](./Oxide.Ext.Discord/Libraries/TimespanKeys.md) | Placeholder Keys for TimeSpan |

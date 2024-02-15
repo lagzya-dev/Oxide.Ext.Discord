@@ -36,7 +36,7 @@ public abstract class BaseMessageTemplateLibrary<TTemplate> : BaseTemplateLibrar
 Registers a global message template Global Message templates cannot be localized
 
 ```csharp
-public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string templateName, 
+public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, TemplateKey templateName, 
     TTemplate template, TemplateVersion version, TemplateVersion minVersion)
 ```
 
@@ -57,6 +57,7 @@ public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string tem
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* struct [TemplateKey](./TemplateKey.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -68,7 +69,7 @@ public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string tem
 Registers a message template with the given name and language
 
 ```csharp
-public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, 
+public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, TemplateKey templateName, 
     TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = "en")
 ```
 
@@ -90,6 +91,7 @@ public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string 
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* struct [TemplateKey](./TemplateKey.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -101,7 +103,7 @@ public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string 
 Returns a global message template for the plugin with the given name
 
 ```csharp
-public TTemplate GetGlobalTemplate(Plugin plugin, string templateName)
+public TTemplate GetGlobalTemplate(Plugin plugin, TemplateKey templateName)
 ```
 
 | parameter | description |
@@ -121,6 +123,7 @@ public TTemplate GetGlobalTemplate(Plugin plugin, string templateName)
 
 ## See Also
 
+* struct [TemplateKey](./TemplateKey.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -131,7 +134,7 @@ public TTemplate GetGlobalTemplate(Plugin plugin, string templateName)
 Returns a message template for a given IPlayer player
 
 ```csharp
-public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer player)
+public TTemplate GetPlayerTemplate(Plugin plugin, TemplateKey templateName, IPlayer player)
 ```
 
 | parameter | description |
@@ -148,6 +151,7 @@ public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer p
 
 ## See Also
 
+* struct [TemplateKey](./TemplateKey.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -159,7 +163,7 @@ public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer p
 Returns a message template for a given IPlayer player
 
 ```csharp
-public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string playerId)
+public TTemplate GetPlayerTemplate(Plugin plugin, TemplateKey templateName, string playerId)
 ```
 
 | parameter | description |
@@ -176,6 +180,7 @@ public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string pl
 
 ## See Also
 
+* struct [TemplateKey](./TemplateKey.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -186,7 +191,7 @@ public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string pl
 Returns a message template for a given language
 
 ```csharp
-public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, 
+public TTemplate GetLocalizedTemplate(Plugin plugin, TemplateKey templateName, 
     DiscordInteraction interaction)
 ```
 
@@ -204,6 +209,7 @@ public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName,
 
 ## See Also
 
+* struct [TemplateKey](./TemplateKey.md)
 * class [DiscordInteraction](../Entities/DiscordInteraction.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -216,7 +222,8 @@ public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName,
 Returns a message template for a given language
 
 ```csharp
-public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = "en")
+public TTemplate GetLocalizedTemplate(Plugin plugin, TemplateKey templateName, 
+    string language = "en")
 ```
 
 | parameter | description |
@@ -233,6 +240,7 @@ public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string
 
 ## See Also
 
+* struct [TemplateKey](./TemplateKey.md)
 * class [BaseMessageTemplateLibrary&lt;TTemplate&gt;](./BaseMessageTemplateLibrary%7BTTemplate%7D.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

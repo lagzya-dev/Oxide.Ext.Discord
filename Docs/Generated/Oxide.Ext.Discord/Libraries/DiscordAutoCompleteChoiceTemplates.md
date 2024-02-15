@@ -39,7 +39,7 @@ Registers a global template for Auto Complete Choices
 
 ```csharp
 public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin plugin, 
-    string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
+    TemplateKey templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
     TemplateVersion minVersion)
 ```
 
@@ -61,6 +61,7 @@ public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
+* struct [TemplateKey](./TemplateKey.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -73,7 +74,7 @@ Registers a global template for Auto Complete Choices
 
 ```csharp
 public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plugin plugin, 
-    string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
+    TemplateKey templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, 
     TemplateVersion minVersion, string language = "en")
 ```
 
@@ -96,6 +97,7 @@ public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plu
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
+* struct [TemplateKey](./TemplateKey.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -107,7 +109,7 @@ public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plu
 Returns a global Auto Complete Template for the given plugin and template name
 
 ```csharp
-public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, string templateName)
+public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, TemplateKey templateName)
 ```
 
 | parameter | description |
@@ -118,6 +120,7 @@ public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, string
 ## See Also
 
 * class [DiscordAutoCompleteChoiceTemplate](./DiscordAutoCompleteChoiceTemplate.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -128,7 +131,7 @@ public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, string
 Applies a Global Template to a [`CommandOptionChoice`](../Entities/CommandOptionChoice.md) with optional placeholders
 
 ```csharp
-public CommandOptionChoice ApplyGlobal(Plugin plugin, string templateName, 
+public CommandOptionChoice ApplyGlobal(Plugin plugin, TemplateKey templateName, 
     CommandOptionChoice choice = null, PlaceholderData placeholders = null)
 ```
 
@@ -148,6 +151,7 @@ public CommandOptionChoice ApplyGlobal(Plugin plugin, string templateName,
 ## See Also
 
 * class [CommandOptionChoice](../Entities/CommandOptionChoice.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -159,7 +163,7 @@ public CommandOptionChoice ApplyGlobal(Plugin plugin, string templateName,
 Applies a Localized Template to a [`CommandOptionChoice`](../Entities/CommandOptionChoice.md) with optional placeholders
 
 ```csharp
-public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, 
+public CommandOptionChoice ApplyLocalized(Plugin plugin, TemplateKey templateName, 
     CommandOptionChoice choice = null, PlaceholderData placeholders = null, string language = "en")
 ```
 
@@ -180,6 +184,7 @@ public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName,
 ## See Also
 
 * class [CommandOptionChoice](../Entities/CommandOptionChoice.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -192,7 +197,7 @@ public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName,
 Applies a Localized Template to a [`CommandOptionChoice`](../Entities/CommandOptionChoice.md) with optional placeholders
 
 ```csharp
-public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, 
+public CommandOptionChoice ApplyLocalized(Plugin plugin, TemplateKey templateName, 
     DiscordInteraction interaction, CommandOptionChoice choice = null, 
     PlaceholderData placeholders = null)
 ```
@@ -214,6 +219,7 @@ public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName,
 ## See Also
 
 * class [CommandOptionChoice](../Entities/CommandOptionChoice.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [DiscordInteraction](../Entities/DiscordInteraction.md)
 * class [PlaceholderData](./PlaceholderData.md)
 * class [DiscordAutoCompleteChoiceTemplates](./DiscordAutoCompleteChoiceTemplates.md)

@@ -1,11 +1,12 @@
 ﻿using System;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a Placeholder Key. This is the key for placeholder usage and lookup
     /// </summary>
-    public struct PlaceholderKey : IEquatable<PlaceholderKey>, IComparable<PlaceholderKey>
+    public struct PlaceholderKey : IEquatable<PlaceholderKey>, IComparable<PlaceholderKey>, IKey
     {
         /// <summary>
         /// Placeholder Key

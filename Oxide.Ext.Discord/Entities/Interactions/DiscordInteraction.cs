@@ -326,9 +326,9 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="message">Message to send (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
-        public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponseType type, string templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
+        public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponseType type, TemplateKey templateName, InteractionCallbackData message = null, PlaceholderData placeholders = null)
         {
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             
             InteractionCallbackData template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
             return CreateResponse(client, type, template);
@@ -342,9 +342,9 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise CreateModalResponse(DiscordClient client, string templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
+        public IPromise CreateModalResponse(DiscordClient client, TemplateKey templateName, InteractionModalMessage message = null, PlaceholderData placeholders = null)
         {
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             
             InteractionModalMessage template = DiscordExtension.DiscordModalTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToModal(placeholders, message);
             return CreateResponse(client, template);
@@ -464,9 +464,9 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, string templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, TemplateKey templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
         {
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             
             MessageUpdate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
             return EditOriginalResponse(client, template);
@@ -516,9 +516,9 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="message">Message to send (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null</exception>
-        public IPromise<DiscordMessage> CreateFollowUpTemplateResponse(DiscordClient client, string templateName, CommandFollowupCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> CreateFollowUpTemplateResponse(DiscordClient client, TemplateKey templateName, CommandFollowupCreate message = null, PlaceholderData placeholders = null)
         {
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             
             CommandFollowupCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, this).ToMessage(placeholders, message);
             return CreateFollowUpMessage(client, template);

@@ -435,7 +435,7 @@ Creates a message in a text channel using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, 
-    string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+    TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
 ```
 
 | parameter | description |
@@ -450,6 +450,7 @@ public IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordChannel](./DiscordChannel.md)
@@ -462,8 +463,9 @@ public IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client
 Creates a message in a text channel using a localized message template
 
 ```csharp
-public IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, string templateName, 
-    string language = "en", MessageCreate message = null, PlaceholderData placeholders = null)
+public IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, 
+    TemplateKey templateName, string language = "en", MessageCreate message = null, 
+    PlaceholderData placeholders = null)
 ```
 
 | parameter | description |
@@ -479,6 +481,7 @@ public IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, stri
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordChannel](./DiscordChannel.md)

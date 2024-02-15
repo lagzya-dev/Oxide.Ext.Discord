@@ -189,7 +189,7 @@ Send a message in a DM to the user using a localized message template
 
 ```csharp
 public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, 
-    string templateName, string language = "en", MessageCreate message = null, 
+    TemplateKey templateName, string language = "en", MessageCreate message = null, 
     PlaceholderData placeholders = null)
 ```
 
@@ -206,6 +206,7 @@ public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client,
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordUser](./DiscordUser.md)
@@ -219,7 +220,7 @@ Reply to a message using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, 
-    string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+    TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
 ```
 
 | parameter | description |
@@ -234,6 +235,7 @@ public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient cl
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordUser](./DiscordUser.md)

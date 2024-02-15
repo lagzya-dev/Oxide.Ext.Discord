@@ -213,7 +213,7 @@ Send a message in the channel with the given ID using a global message template
 
 ```csharp
 public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient client, 
-    Snowflake channelId, Plugin plugin, string templateName, MessageCreate message = null, 
+    Snowflake channelId, Plugin plugin, TemplateKey templateName, MessageCreate message = null, 
     PlaceholderData placeholders = null)
 ```
 
@@ -231,6 +231,7 @@ public static IPromise<DiscordMessage> CreateGlobalTemplateMessage(DiscordClient
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * struct [Snowflake](./Snowflake.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordMessage](./DiscordMessage.md)
@@ -244,7 +245,7 @@ Send a message in the channel with the given ID using a localized message templa
 
 ```csharp
 public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient client, 
-    Snowflake channelId, Plugin plugin, string templateName, string language = "en", 
+    Snowflake channelId, Plugin plugin, TemplateKey templateName, string language = "en", 
     MessageCreate message = null, PlaceholderData placeholders = null)
 ```
 
@@ -263,6 +264,7 @@ public static IPromise<DiscordMessage> CreateTemplateMessage(DiscordClient clien
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * struct [Snowflake](./Snowflake.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordMessage](./DiscordMessage.md)
@@ -418,8 +420,8 @@ public IPromise<DiscordMessage> Reply(DiscordClient client, string message)
 Reply to a message using a global message template
 
 ```csharp
-public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, string templateName, 
-    MessageCreate message = null, PlaceholderData placeholders = null)
+public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, 
+    TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
 ```
 
 | parameter | description |
@@ -433,6 +435,7 @@ public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, st
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordMessage](./DiscordMessage.md)
@@ -445,7 +448,7 @@ public IPromise<DiscordMessage> ReplyWithGlobalTemplate(DiscordClient client, st
 Reply to a message using a global message template
 
 ```csharp
-public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, string templateName, 
+public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, TemplateKey templateName, 
     string language = "en", MessageCreate message = null, PlaceholderData placeholders = null)
 ```
 
@@ -461,6 +464,7 @@ public IPromise<DiscordMessage> ReplyWithTemplate(DiscordClient client, string t
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](./MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordMessage](./DiscordMessage.md)
@@ -800,7 +804,7 @@ Edit a message using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client, 
-    string templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
+    TemplateKey templateName, PlaceholderData placeholders = null, MessageUpdate update = null)
 ```
 
 | parameter | description |
@@ -814,6 +818,7 @@ public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client,
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [MessageUpdate](./MessageUpdate.md)
 * class [DiscordMessage](./DiscordMessage.md)
@@ -826,7 +831,7 @@ public IPromise<DiscordMessage> EditGlobalTemplateMessage(DiscordClient client,
 Edit a message using a localized message template
 
 ```csharp
-public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, string templateName, 
+public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, TemplateKey templateName, 
     string language = "en", PlaceholderData placeholders = null, MessageUpdate update = null)
 ```
 
@@ -842,6 +847,7 @@ public IPromise<DiscordMessage> EditTemplateMessage(DiscordClient client, string
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [MessageUpdate](./MessageUpdate.md)
 * class [DiscordMessage](./DiscordMessage.md)

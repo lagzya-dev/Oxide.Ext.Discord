@@ -223,9 +223,9 @@ namespace Oxide.Ext.Discord.Libraries
             return path;
         }
 
-        internal virtual string GetTemplatePath(TemplateId id)
+        private string GetTemplatePath(TemplateId id)
         {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
+            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName.Name, TemplateType);
 
             if (id.IsGlobal)
             {

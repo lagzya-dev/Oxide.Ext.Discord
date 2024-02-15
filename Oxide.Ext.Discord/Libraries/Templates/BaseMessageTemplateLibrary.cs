@@ -33,10 +33,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="version">Version of the template</param>
         /// <param name="minVersion">Min supported version for this template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        public IPromise<TTemplate> RegisterGlobalTemplateAsync(Plugin plugin, TemplateKey templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
 
             IPendingPromise<TTemplate> promise = Promise<TTemplate>.Create();
@@ -60,10 +60,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// </param>
         /// <param name="language">Language for the template</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, string templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
+        public IPromise<TTemplate> RegisterLocalizedTemplateAsync(Plugin plugin, TemplateKey templateName, TTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             if (template == null) throw new ArgumentNullException(nameof(template));
             
             IPendingPromise<TTemplate> promise = Promise<TTemplate>.Create();
@@ -80,7 +80,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="templateName">Name of the template</param>
         /// <returns><see cref="DiscordMessageTemplate"/></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public TTemplate GetGlobalTemplate(Plugin plugin, string templateName) => HandleGetLocalizedTemplate(TemplateId.CreateGlobal(plugin, templateName), null);
+        public TTemplate GetGlobalTemplate(Plugin plugin, TemplateKey templateName) => HandleGetLocalizedTemplate(TemplateId.CreateGlobal(plugin, templateName), null);
         
         /// <summary>
         /// Returns a message template for a given <see cref="IPlayer"/> player
@@ -90,7 +90,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="player">IPlayer for the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, IPlayer player) => GetPlayerTemplate(plugin, templateName, player?.Id);
+        public TTemplate GetPlayerTemplate(Plugin plugin, TemplateKey templateName, IPlayer player) => GetPlayerTemplate(plugin, templateName, player?.Id);
         
         /// <summary>
         /// Returns a message template for a given <see cref="IPlayer"/> player
@@ -100,7 +100,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="playerId">Player ID for the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public TTemplate GetPlayerTemplate(Plugin plugin, string templateName, string playerId) => HandleGetLocalizedTemplate(TemplateId.CreatePlayer(plugin, templateName, playerId), null);
+        public TTemplate GetPlayerTemplate(Plugin plugin, TemplateKey templateName, string playerId) => HandleGetLocalizedTemplate(TemplateId.CreatePlayer(plugin, templateName, playerId), null);
 
         /// <summary>
         /// Returns a message template for a given language
@@ -110,7 +110,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="language">Oxide language of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, string language = DiscordLocales.DefaultServerLanguage) => HandleGetLocalizedTemplate(TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language)), null);
+        public TTemplate GetLocalizedTemplate(Plugin plugin, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage) => HandleGetLocalizedTemplate(TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language)), null);
 
         /// <summary>
         /// Returns a message template for a given language
@@ -120,7 +120,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="interaction">Interaction to get the template for</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if Plugin is null or name / language is null or empty</exception>
-        public TTemplate GetLocalizedTemplate(Plugin plugin, string templateName, DiscordInteraction interaction) => HandleGetLocalizedTemplate(TemplateId.CreateInteraction(plugin, templateName, interaction), interaction);
+        public TTemplate GetLocalizedTemplate(Plugin plugin, TemplateKey templateName, DiscordInteraction interaction) => HandleGetLocalizedTemplate(TemplateId.CreateInteraction(plugin, templateName, interaction), interaction);
 
         private TTemplate HandleGetLocalizedTemplate(TemplateId id, DiscordInteraction interaction)
         {

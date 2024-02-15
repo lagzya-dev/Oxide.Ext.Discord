@@ -11,6 +11,7 @@
 | interface [IDiscordPool](./IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./IFileAttachments.md) | Represents and interface for entities that can upload files |
+| interface [IKey](./IKey.md) | Represents a Key in Discord |
 | interface [ILogger](./ILogger.md) | Represents an interface for a logger |
 | interface [IOutputLogger](./IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |

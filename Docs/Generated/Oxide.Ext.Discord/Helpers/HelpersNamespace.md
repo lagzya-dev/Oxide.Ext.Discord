@@ -2,9 +2,11 @@
 
 | public type | description |
 | --- | --- |
+| static class [DiscordAppRoutes](./DiscordAppRoutes.md) | Discord App Routes for navigating the client within the discord app using links Sourced from: https://gist.github.com/ghostrider-05/8f1a0bfc27c7c4509b4ea4e8ce718af0 |
 | static class [DiscordCdn](./DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
 | static class [ServerFormatting](./ServerFormatting.md) | Server Text Formatting |
+| enum [SettingsPage](./SettingsPage.md) | App Settings Pages |
 | static class [TimeHelpers](./TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./TimestampStyles.md) | Available flags for timestamp formatting |
 
