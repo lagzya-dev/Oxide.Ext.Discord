@@ -46,6 +46,9 @@ namespace Oxide.Ext.Discord
         internal static DiscordEmbedTemplates DiscordEmbedTemplates;
         internal static DiscordEmbedFieldTemplates DiscordEmbedFieldTemplates;
         internal static DiscordModalTemplates DiscordModalTemplates;
+        internal static DiscordButtonTemplates DiscordButtonTemplates;
+        internal static DiscordInputTextTemplates DiscordInputTextTemplates;
+        internal static DiscordSelectMenuTemplates DiscordSelectMenuTemplates;
         internal static DiscordCommandLocalizations DiscordCommandLocalizations;
         
         internal static bool IsShuttingDown;
@@ -108,12 +111,18 @@ namespace Oxide.Ext.Discord
             DiscordEmbedFieldTemplates = new DiscordEmbedFieldTemplates(GlobalLogger);
             DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
             DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
+            DiscordButtonTemplates = new DiscordButtonTemplates(GlobalLogger);
+            DiscordInputTextTemplates = new DiscordInputTextTemplates(GlobalLogger);
+            DiscordSelectMenuTemplates = new DiscordSelectMenuTemplates(GlobalLogger);
 
             Manager.RegisterLibrary(nameof(DiscordMessageTemplates), DiscordMessageTemplates);
             Manager.RegisterLibrary(nameof(DiscordEmbedTemplates), DiscordEmbedTemplates);
             Manager.RegisterLibrary(nameof(DiscordEmbedFieldTemplates), DiscordEmbedFieldTemplates);
             Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
             Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
+            Manager.RegisterLibrary(nameof(DiscordButtonTemplates), DiscordButtonTemplates);
+            Manager.RegisterLibrary(nameof(DiscordInputTextTemplates), DiscordInputTextTemplates);
+            Manager.RegisterLibrary(nameof(DiscordSelectMenuTemplates), DiscordSelectMenuTemplates);
 
             EmojiCache.Instance.Build();
             

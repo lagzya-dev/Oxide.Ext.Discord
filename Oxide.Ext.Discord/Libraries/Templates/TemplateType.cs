@@ -33,6 +33,21 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Auto Complete Choice Template Type
         /// </summary>
-        AutoCompleteChoice
+        AutoCompleteChoice,
+        
+        /// <summary>
+        /// Button Component Template Type
+        /// </summary>
+        ButtonComponent,
+        
+        /// <summary>
+        /// Input Text Component Template Type
+        /// </summary>
+        InputTextComponent,
+        
+        /// <summary>
+        /// Select Menu Template Type
+        /// </summary>
+        SelectMenuComponent,
     }
 }

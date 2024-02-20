@@ -3,14 +3,14 @@ using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
-    /// Embed Templates Library
+    /// Button Templates Library
     /// </summary>
-    public class DiscordEmbedTemplates : BaseMessageTemplateLibrary<DiscordEmbedTemplate>
+    public class DiscordButtonTemplates : BaseMessageTemplateLibrary<ButtonTemplate>
     {
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="logger"></param>
-        internal DiscordEmbedTemplates(ILogger logger) : base(TemplateType.Embed, logger) { }
+        internal DiscordButtonTemplates(ILogger logger) : base(TemplateType.ButtonComponent, logger) { }
     }
 }
