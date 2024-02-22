@@ -14,7 +14,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// User App Route
         /// </summary>
-        public static string User(IKey userId) => $"{BaseUrl}/users/{userId.ToString()}";
+        public static string User(IDiscordKey userId) => $"{BaseUrl}/users/{userId.ToString()}";
 
         /// <summary>
         /// Message Requests App Route
@@ -175,12 +175,12 @@ namespace Oxide.Ext.Discord.Helpers
             /// <summary>
             /// DM Channel App Route
             /// </summary>
-            public static string Channel(IKey channelId) => $"{BaseUrl}/channels/@me/{channelId.ToString()}";
+            public static string Channel(IDiscordKey channelId) => $"{BaseUrl}/channels/@me/{channelId.ToString()}";
             
             /// <summary>
             /// DM Message App Route
             /// </summary>
-            public static string Message(IKey channelId, IKey messageId) => $"{BaseUrl}/channels/@me/{channelId.ToString()}/{messageId.ToString()}";
+            public static string Message(IDiscordKey channelId, IDiscordKey messageId) => $"{BaseUrl}/channels/@me/{channelId.ToString()}/{messageId.ToString()}";
         }
 
         /// <summary>
@@ -196,47 +196,47 @@ namespace Oxide.Ext.Discord.Helpers
             /// <summary>
             /// Favorites Channel App Route
             /// </summary>
-            public static string FavoritesChannel(IKey channelId) => $"{BaseUrl}/channels/@favorites/{channelId.ToString()}";
+            public static string FavoritesChannel(IDiscordKey channelId) => $"{BaseUrl}/channels/@favorites/{channelId.ToString()}";
             
             /// <summary>
             /// Guild App Route
             /// </summary>
-            public static string Guild(IKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}";
+            public static string Guild(IDiscordKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}";
             
             /// <summary>
             /// Guild Channel App Route
             /// </summary>
-            public static string Channel(IKey guildId, IKey channelId) => $"{BaseUrl}/channels/{guildId.ToString()}/{channelId.ToString()}";
+            public static string Channel(IDiscordKey guildId, IDiscordKey channelId) => $"{BaseUrl}/channels/{guildId.ToString()}/{channelId.ToString()}";
             
             /// <summary>
             /// Browse Guild Channels App Route
             /// </summary>
-            public static string BrowseChannel(IKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}/channel-browser";
+            public static string BrowseChannel(IDiscordKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}/channel-browser";
             
             /// <summary>
             /// Server Guide App Route
             /// </summary>
-            public static string ServerGuide(IKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}/@home";
+            public static string ServerGuide(IDiscordKey guildId) => $"{BaseUrl}/channels/{guildId.ToString()}/@home";
             
             /// <summary>
             /// Event App Route
             /// </summary>
-            public static string Event(IKey guildId, IKey eventId) => $"{BaseUrl}/events/{guildId.ToString()}/{eventId}";
+            public static string Event(IDiscordKey guildId, IDiscordKey eventId) => $"{BaseUrl}/events/{guildId.ToString()}/{eventId}";
             
             /// <summary>
             /// Message App Route
             /// </summary>
-            public static string Message(IKey guildId, IKey channelId, IKey messageId) => $"{BaseUrl}/channels/{guildId.ToString()}/{channelId.ToString()}/{messageId.ToString()}";
+            public static string Message(IDiscordKey guildId, IDiscordKey channelId, IDiscordKey messageId) => $"{BaseUrl}/channels/{guildId.ToString()}/{channelId.ToString()}/{messageId.ToString()}";
             
             /// <summary>
             /// Membership Screening App Route
             /// </summary>
-            public static string MembershipScreening(IKey guildId) => $"{BaseUrl}/member-verification/{guildId.ToString()}";
+            public static string MembershipScreening(IDiscordKey guildId) => $"{BaseUrl}/member-verification/{guildId.ToString()}";
             
             /// <summary>
             /// Role Subscriptions App Route
             /// </summary>
-            public static string RoleSubscriptions(IKey guildId) => $"{BaseUrl}/guild-role-subscriptions/{guildId.ToString()}";
+            public static string RoleSubscriptions(IDiscordKey guildId) => $"{BaseUrl}/guild-role-subscriptions/{guildId.ToString()}";
         }
     }
 }

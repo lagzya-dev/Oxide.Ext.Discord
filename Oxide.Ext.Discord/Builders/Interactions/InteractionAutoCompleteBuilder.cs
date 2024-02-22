@@ -270,6 +270,35 @@ namespace Oxide.Ext.Discord.Builders
         {
             AddPlayerList(ServerPlayerCache.Instance.GetAllPlayers(filter), formatter ?? PlayerNameFormatter.Default, null);
         }
+        
+        /// <summary>
+        /// Add a custom list of players that are filtered by player name or player ID
+        /// </summary>
+        /// <param name="filter">Filter to filter by</param>
+        /// <param name="list">Custom list of players</param>
+        /// <param name="formatter">Formatter for the player name</param>
+        /// <param name="addedList">List of already added players</param>
+        /// <param name="search">Mode to match on player name</param>
+        public void AddPlayerList(string filter, IEnumerable<IPlayer> list, PlayerNameFormatter formatter, HashSet<string> addedList = null, AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains)
+        {
+            if (!CanAddChoice())
+            {
+                return;
+            }
+            
+            foreach (IPlayer player in list)
+            {
+                if (!IsMatch(player.Name, filter, StringComparison.OrdinalIgnoreCase, search) && player.Id != filter)
+                {
+                    continue;
+                }
+
+                if (!AddPlayer(player, formatter, addedList))
+                {
+                    return;
+                }
+            }
+        }
 
         /// <summary>
         /// Adds a player by player Id to the list
@@ -328,7 +357,7 @@ namespace Oxide.Ext.Discord.Builders
             }
         }
 
-        private void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, HashSet<string> addedList)
+        public void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, HashSet<string> addedList)
         {
             if (!CanAddChoice())
             {

@@ -1,5 +1,7 @@
 using System;
+using System.Text;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
@@ -15,6 +17,45 @@ namespace Oxide.Ext.Discord.Libraries
         /// <see cref="TimeSpan.Days"/> placeholder
         /// </summary>
         public static int Days(TimeSpan time) => time.Days;
+
+        /// <summary>
+        /// Formats Timespan into a text string placeholder
+        /// Text is localized if used with DiscordInteraction or IPlayer
+        /// Ex: 1 days 2 hours 3 minutes 4 seconds
+        /// Ex: 2 hour 0 minutes 53 seconds
+        /// </summary>
+        public static string Formatted(PlaceholderState state, TimeSpan time)
+        {
+            DiscordInteraction interaction = state.Data.Get<DiscordInteraction>();
+            if (time < TimeSpan.Zero)
+            {
+                return interaction.GetLangMessage(DiscordExtensionCore.Instance, LangKeys.TimeSpan.Infinity);
+            }
+
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            
+            AppendTime(interaction, sb, time.TotalDays, time.Days, LangKeys.TimeSpan.Day, LangKeys.TimeSpan.Days);
+            AppendTime(interaction, sb, time.TotalHours, time.Hours, LangKeys.TimeSpan.Hour, LangKeys.TimeSpan.Hours);
+            AppendTime(interaction, sb, time.TotalMinutes, time.Minutes, LangKeys.TimeSpan.Minute, LangKeys.TimeSpan.Minutes);
+            AppendTime(interaction, sb, time.TotalSeconds, time.Seconds, LangKeys.TimeSpan.Second, LangKeys.TimeSpan.Seconds);
+
+            return DiscordPool.Internal.ToStringAndFree(sb);
+        }
+
+        private static void AppendTime(DiscordInteraction interaction, StringBuilder sb, double total, int value, string singular, string plural)
+        {
+            if (total >= 1)
+            {
+                if (sb.Length != 0)
+                {
+                    sb.Append(' ');
+                }
+                
+                sb.Append(value.ToString());
+                sb.Append(' ');
+                sb.Append(interaction.GetLangMessage(DiscordExtensionCore.Instance, value == 1 ? singular : plural));
+            }
+        }
         
         /// <summary>
         /// <see cref="TimeSpan.Hours"/> placeholder
@@ -76,6 +117,7 @@ namespace Oxide.Ext.Discord.Libraries
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             placeholders.RegisterPlaceholder<TimeSpan>(plugin, keys.Time, dataKey);
+            placeholders.RegisterPlaceholder<TimeSpan, string>(plugin, keys.Formatted, dataKey, Formatted);
             placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Days, dataKey, Days);
             placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Hours, dataKey, Hours);
             placeholders.RegisterPlaceholder<TimeSpan, int>(plugin, keys.Minutes, dataKey, Minutes);

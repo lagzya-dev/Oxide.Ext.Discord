@@ -13,6 +13,11 @@ namespace Oxide.Ext.Discord.Libraries
         public readonly PlaceholderKey Time;
         
         /// <summary>
+        /// <see cref="PlaceholderKey"/> for <see cref="TimeSpan"/>
+        /// </summary>
+        public readonly PlaceholderKey Formatted;
+        
+        /// <summary>
         /// <see cref="PlaceholderKey"/> for <see cref="TimeSpan.Days"/>
         /// </summary>
         public readonly PlaceholderKey Days;
@@ -69,6 +74,7 @@ namespace Oxide.Ext.Discord.Libraries
         public TimespanKeys(string prefix)
         {
             Time = new PlaceholderKey(prefix, "time");
+            Formatted = new PlaceholderKey(prefix, "formatted");
             Days = new PlaceholderKey(prefix, "days");
             Hours = new PlaceholderKey(prefix, "hours");
             Minutes = new PlaceholderKey(prefix, "minutes");

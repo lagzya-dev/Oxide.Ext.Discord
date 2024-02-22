@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities
     /// Represents an ID in discord.
     /// </summary>
     [JsonConverter(typeof(SnowflakeConverter))]
-    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>, IKey
+    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>, IDiscordKey
     {
         /// <summary>
         /// DateTimeOffset since discord Epoch

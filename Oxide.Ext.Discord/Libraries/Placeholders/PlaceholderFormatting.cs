@@ -373,6 +373,7 @@ namespace Oxide.Ext.Discord.Libraries
             if (type == typeof(DateTimeOffset)) return (builder, state, value) => Replace(builder, state, value.Cast<TResult, DateTimeOffset>());
             if (type == typeof(TimeSpan)) return (builder, state, value) => Replace(builder, state, value.Cast<TResult, TimeSpan>());
             if (type == typeof(Snowflake)) return (builder, state, value) => Replace(builder, state, value.Cast<TResult, Snowflake>());
+            if (type == typeof(TemplateKey)) return (builder, state, value) => Replace(builder, state, value.Cast<TResult, TemplateKey>().Name);
             if (type == typeof(GenericPosition)) return (builder, state, value) => Replace(builder, state, value.Cast<TResult, GenericPosition>());
             if (typeof(IFormattable).IsAssignableFrom(type)) return (builder, state, value) => Replace(builder, state, value as IFormattable);
             if (typeof(IReadOnlyList<string>).IsAssignableFrom(type)) return (builder, state, value) => Replace(builder, state, value as IReadOnlyList<string>);

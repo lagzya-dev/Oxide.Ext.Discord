@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Libraries
@@ -8,7 +9,7 @@ namespace Oxide.Ext.Discord.Libraries
     /// Represents a Template Key. This is the key for template lookup
     /// </summary>
     [JsonConverter(typeof(TemplateKeyConverter))]
-    public struct TemplateKey: IEquatable<TemplateKey>
+    public struct TemplateKey: IEquatable<TemplateKey>, IDiscordKey
     {
         /// <summary>
         /// Placeholder Key
