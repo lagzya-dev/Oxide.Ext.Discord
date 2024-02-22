@@ -1,9 +1,11 @@
+using Oxide.Ext.Discord.Interfaces;
+
 namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
     /// Represents a pool
     /// </summary>
-    public interface IPool
+    public interface IPool : IDebugLoggable
     {
         /// <summary>
         /// Called on a pool when a plugin is unloaded

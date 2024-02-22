@@ -126,6 +126,11 @@ namespace Oxide.Ext.Discord.Clients
         public void UpdateStatus(UpdatePresenceCommand presenceUpdate) => Bot?.SendWebSocketCommand(this, GatewayCommandCode.PresenceUpdate, presenceUpdate);
         #endregion
         
+        internal void UpdateLogLevel()
+        {
+            Logger.UpdateLogLevel(DiscordLoggerFactory.Instance.GetLogLevel(Connection.LogLevel));
+        }
+        
         internal void CloseClient()
         {
             try

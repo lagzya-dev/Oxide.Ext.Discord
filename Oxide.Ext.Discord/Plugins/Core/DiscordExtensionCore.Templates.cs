@@ -37,7 +37,7 @@ namespace Oxide.Ext.Discord.Plugins
             };
         }
 
-        public void SendTemplateMessage(DiscordClient client, string key, DiscordInteraction interaction, PlaceholderData placeholders = null)
+        public void SendTemplateMessage(DiscordClient client, TemplateKey key, DiscordInteraction interaction, PlaceholderData placeholders = null)
         {
             InteractionCallbackData message = new InteractionCallbackData
             {

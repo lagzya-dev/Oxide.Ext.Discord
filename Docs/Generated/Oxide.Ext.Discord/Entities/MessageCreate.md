@@ -11,6 +11,7 @@ public class MessageCreate : BaseMessageCreate
 | name | description |
 | --- | --- |
 | [MessageCreate](#messagecreate-constructor)() | The default constructor. |
+| [EnforceNonce](#enforcenonce-property) { get; set; } | If true and nonce is present, it will be checked for uniqueness in the past few minutes. If another message was created by the same author with the same nonce, that message will be returned and no new message will be created. |
 | [MessageReference](#messagereference-property) { get; set; } | Include to make your message a reply |
 | [Nonce](#nonce-property) { get; set; } | Can be used to verify a message was sent (up to 25 characters). Value will appear in the Message Create event. |
 
@@ -43,6 +44,21 @@ Can be used to verify a message was sent (up to 25 characters). Value will appea
 
 ```csharp
 public string Nonce { get; set; }
+```
+
+## See Also
+
+* class [MessageCreate](./MessageCreate.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# EnforceNonce property
+
+If true and nonce is present, it will be checked for uniqueness in the past few minutes. If another message was created by the same author with the same nonce, that message will be returned and no new message will be created.
+
+```csharp
+public bool EnforceNonce { get; set; }
 ```
 
 ## See Also

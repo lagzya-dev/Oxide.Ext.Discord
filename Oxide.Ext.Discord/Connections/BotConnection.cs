@@ -47,14 +47,23 @@ namespace Oxide.Ext.Discord.Connections
         /// <summary>
         /// Constructor
         /// </summary>
-        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info)
+        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None)
+        {
+            ApiToken = apiToken;
+            Intents = intents;
+        }
+        
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public BotConnection(string apiToken, GatewayIntents intents = GatewayIntents.None, DiscordLogLevel logLevel = DiscordLogLevel.Info) : this(apiToken, intents)
         {
             ApiToken = apiToken;
             Intents = intents;
             LogLevel = logLevel;
         }
 
-        internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents, connection.LogLevel)
+        internal BotConnection(BotConnection connection) : this(connection.ApiToken, connection.Intents)
         {
             Token = connection.Token;
         }

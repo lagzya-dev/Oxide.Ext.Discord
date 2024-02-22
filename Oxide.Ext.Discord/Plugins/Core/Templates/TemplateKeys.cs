@@ -1,3 +1,5 @@
+using Oxide.Ext.Discord.Libraries;
+
 namespace Oxide.Ext.Discord.Plugins
 {
     internal static class TemplateKeys
@@ -10,15 +12,15 @@ namespace Oxide.Ext.Discord.Plugins
             {
                 private const string Base = Commands.Base + nameof(Delete) + ".";
 
-                public const string Success = Base + nameof(Success);
+                public static readonly TemplateKey Success = new TemplateKey( Base + nameof(Success));
 
                 public static class Errors
                 {
                     private const string Base = Delete.Base + nameof(Errors) + ".";
 
-                    public const string InvalidSelection = Base + nameof(InvalidSelection);
-                    public const string CommandIdNotFound = Base + nameof(CommandIdNotFound);
-                    public const string DeleteCommandError = Base + nameof(DeleteCommandError);
+                    public static readonly TemplateKey InvalidSelection = new TemplateKey(Base + nameof(InvalidSelection));
+                    public static readonly TemplateKey CommandIdNotFound = new TemplateKey(Base + nameof(CommandIdNotFound));
+                    public static readonly TemplateKey DeleteCommandError = new TemplateKey(Base + nameof(DeleteCommandError));
                 }
             }
         }

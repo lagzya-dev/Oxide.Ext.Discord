@@ -461,6 +461,7 @@
 | class [MessageComponentBuilderException](./Oxide.Ext.Discord/Exceptions/MessageComponentBuilderException.md) | Represents an exception in Message Component Builder |
 | class [PromiseCancelledException](./Oxide.Ext.Discord/Exceptions/PromiseCancelledException.md) | Exception when a promised is cancelled |
 | class [PromiseException](./Oxide.Ext.Discord/Exceptions/PromiseException.md) | Exceptions for promises |
+| class [RequestCancelledException](./Oxide.Ext.Discord/Exceptions/RequestCancelledException.md) | Exception returns from promise when a request is cancelled |
 | class [ServerLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/ServerLocaleNotFoundException.md) | Exception thrown when Server Locale is not found |
 | class [TokenMismatchException](./Oxide.Ext.Discord/Exceptions/TokenMismatchException.md) | Represents a bot token mismatch |
 
@@ -494,10 +495,11 @@
 
 | public type | description |
 | --- | --- |
+| static class [DiscordAppRoutes](./Oxide.Ext.Discord/Helpers/DiscordAppRoutes.md) | Discord App Routes for navigating the client within the discord app using links Sourced from: https://gist.github.com/ghostrider-05/8f1a0bfc27c7c4509b4ea4e8ce718af0 |
 | static class [DiscordCdn](./Oxide.Ext.Discord/Helpers/DiscordCdn.md) | Represents Discord [CDN Endpoints](https://discord.com/developers/docs/reference#image-formatting-cdn-endpoints) |
 | static class [DiscordFormatting](./Oxide.Ext.Discord/Helpers/DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
 | static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) | Server Text Formatting |
-| static class [TimeHelpers](./Oxide.Ext.Discord/Helpers/TimeHelpers.md) | Helper methods relating to time |
+| enum [SettingsPage](./Oxide.Ext.Discord/Helpers/SettingsPage.md) | App Settings Pages |
 | enum [TimestampStyles](./Oxide.Ext.Discord/Helpers/TimestampStyles.md) | Available flags for timestamp formatting |
 
 ## Oxide.Ext.Discord.Interfaces namespace
@@ -507,6 +509,7 @@
 | interface [IBulkTemplate&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 | interface [IDebugLoggable](./Oxide.Ext.Discord/Interfaces/IDebugLoggable.md) | Represents an object that supports debug logging |
 | interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cacheable by the DiscordExtension |
+| interface [IDiscordKey](./Oxide.Ext.Discord/Interfaces/IDiscordKey.md) | Represents a Key in Discord |
 | interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Interfaces/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [IDiscordMessageTemplate](./Oxide.Ext.Discord/Interfaces/IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
@@ -540,6 +543,7 @@
 | class [RoleTagsConverter](./Oxide.Ext.Discord/Json/RoleTagsConverter.md) | Handles converting [`RoleTags`](./Oxide.Ext.Discord/Entities/RoleTags.md) This type contains special deserialization types |
 | class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from it's JSON string value |
 | class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for list of message components |
+| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | Json Template Key Converter |
 | class [UnixDateTimeConverter](./Oxide.Ext.Discord/Json/UnixDateTimeConverter.md) | Converts a DateTimeOffset to and from a json long |
 
 ## Oxide.Ext.Discord.Libraries namespace
@@ -566,13 +570,15 @@
 | class [DiscordAppCommand](./Oxide.Ext.Discord/Libraries/DiscordAppCommand.md) | Application Command Oxide Library handler Routes Application Commands to their respective hook method handlers instead of having to manually handle it. |
 | class [DiscordAutoCompleteChoiceTemplate](./Oxide.Ext.Discord/Libraries/DiscordAutoCompleteChoiceTemplate.md) | Template for Discord Auto Completes |
 | class [DiscordAutoCompleteChoiceTemplates](./Oxide.Ext.Discord/Libraries/DiscordAutoCompleteChoiceTemplates.md) | Auto Complete Choice Templates Library |
+| class [DiscordButtonTemplates](./Oxide.Ext.Discord/Libraries/DiscordButtonTemplates.md) | Button Templates Library |
 | class [DiscordCommand](./Oxide.Ext.Discord/Libraries/DiscordCommand.md) | Represents a library for discord commands |
 | class [DiscordCommandLocalization](./Oxide.Ext.Discord/Libraries/DiscordCommandLocalization.md) | Command Localizations for Application Commands |
 | class [DiscordCommandLocalizations](./Oxide.Ext.Discord/Libraries/DiscordCommandLocalizations.md) | Library for localizing [`DiscordApplicationCommand`](./Oxide.Ext.Discord/Entities/DiscordApplicationCommand.md)s |
 | class [DiscordEmbedFieldTemplate](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplate.md) | Discord Template for Embed Field |
-| class [DiscordEmbedFieldTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplates.md) | Modal Templates Library |
+| class [DiscordEmbedFieldTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplates.md) | Embed Field Templates Library |
 | class [DiscordEmbedTemplate](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplate.md) | Discord Template for embed |
-| class [DiscordEmbedTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplates.md) | Modal Templates Library |
+| class [DiscordEmbedTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplates.md) | Embed Templates Library |
+| class [DiscordInputTextTemplates](./Oxide.Ext.Discord/Libraries/DiscordInputTextTemplates.md) | InputText Templates Library |
 | class [DiscordLink](./Oxide.Ext.Discord/Libraries/DiscordLink.md) | Represents a library for discord linking |
 | struct [DiscordLocale](./Oxide.Ext.Discord/Libraries/DiscordLocale.md) | Represents a Locale in Discord |
 | class [DiscordLocales](./Oxide.Ext.Discord/Libraries/DiscordLocales.md) | Converts discord locale codes into oxide locale codes |
@@ -582,6 +588,7 @@
 | class [DiscordModalTemplates](./Oxide.Ext.Discord/Libraries/DiscordModalTemplates.md) | Modal Templates Library |
 | class [DiscordPlaceholders](./Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md) | Discord Placeholders Library |
 | class [DiscordPool](./Oxide.Ext.Discord/Libraries/DiscordPool.md) | Discord Pool Library |
+| class [DiscordSelectMenuTemplates](./Oxide.Ext.Discord/Libraries/DiscordSelectMenuTemplates.md) | InputText Templates Library |
 | class [DiscordSubscription](./Oxide.Ext.Discord/Libraries/DiscordSubscription.md) | Represents a channel subscription for a plugin |
 | class [DiscordSubscriptions](./Oxide.Ext.Discord/Libraries/DiscordSubscriptions.md) | Represents Discord Subscriptions Oxide Library Allows for plugins to subscribe to discord channels |
 | class [EmbedFooterTemplate](./Oxide.Ext.Discord/Libraries/EmbedFooterTemplate.md) | Discord Template for Embed Footer |
@@ -616,6 +623,7 @@
 | static class [ServerPlaceholders](./Oxide.Ext.Discord/Libraries/ServerPlaceholders.md) | IServer placeholders |
 | class [SnowflakeKeys](./Oxide.Ext.Discord/Libraries/SnowflakeKeys.md) | Placeholder Keys for [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) |
 | static class [SnowflakePlaceholders](./Oxide.Ext.Discord/Libraries/SnowflakePlaceholders.md) | [`Snowflake`](./Oxide.Ext.Discord/Entities/Snowflake.md) placeholders |
+| struct [TemplateKey](./Oxide.Ext.Discord/Libraries/TemplateKey.md) | Represents a Template Key. This is the key for template lookup |
 | enum [TemplateType](./Oxide.Ext.Discord/Libraries/TemplateType.md) | Represents available template type |
 | struct [TemplateVersion](./Oxide.Ext.Discord/Libraries/TemplateVersion.md) | Version of a specific template |
 | class [TimespanKeys](./Oxide.Ext.Discord/Libraries/TimespanKeys.md) | Placeholder Keys for TimeSpan |

@@ -96,6 +96,11 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void OnRequestCompleted(RequestHandler handler, RequestResponse response)
         {
+            if (Status == RequestStatus.Cancelled)
+            {
+                return;
+            }
+            
             Status = RequestStatus.Completed;
 
             BaseRequest request = handler.Request;
@@ -135,12 +140,12 @@ namespace Oxide.Ext.Discord.Rest
             Logger.Debug($"{nameof(BaseRequest)}.{nameof(OnRequestErrored)} Request ID: {{0}} Waiting For {{1}} Seconds", Id, (_errorResetAt - DateTimeOffset.UtcNow).TotalSeconds);
         }
 
-        internal void Abort()
+        internal virtual void Abort()
         {
             if (!Source.IsCancellationRequested)
             {
                 Source.Cancel();
-                Source.Dispose();
+                Status = RequestStatus.Cancelled;
             }
         }
         
@@ -154,7 +159,6 @@ namespace Oxide.Ext.Discord.Rest
             HttpClient = null;
             Data = null;
             Client = null;
-            Source?.Dispose();
             Source = null;
             Bucket = null;
             _errorResetAt = DateTimeOffset.MinValue;
@@ -174,7 +178,7 @@ namespace Oxide.Ext.Discord.Rest
             logger.AppendFieldEnum("Method", Method);
             logger.AppendField("Route", Route);
             logger.AppendFieldEnum("Status", Status);
-            logger.AppendField("Type", GetType().Name);
+            logger.AppendField("Type", GetType().GetRealTypeName());
         }
     }
 }

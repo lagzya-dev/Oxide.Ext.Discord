@@ -302,12 +302,11 @@ public void StartRequest(BaseRequest request)
 Queues the request for the bucket
 
 ```csharp
-public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
+public void QueueBucket(RequestHandler handler, BaseRequest request)
 ```
 
 ## See Also
 
-* class [Bucket](./Bucket.md)
 * class [RequestHandler](./RequestHandler.md)
 * class [BaseRequest](./BaseRequest.md)
 * class [RestHandler](./RestHandler.md)

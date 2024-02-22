@@ -12,6 +12,7 @@ public class TimespanKeys
 | --- | --- |
 | [TimespanKeys](#timespankeys-constructor)(…) | Constructor |
 | readonly [Days](#days-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Days |
+| readonly [Formatted](#formatted-field) | [`PlaceholderKey`](./PlaceholderKey.md) for TimeSpan |
 | readonly [Hours](#hours-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Hours |
 | readonly [Milliseconds](#milliseconds-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Milliseconds |
 | readonly [Minutes](#minutes-field) | [`PlaceholderKey`](./PlaceholderKey.md) for Minutes |
@@ -55,6 +56,22 @@ public TimespanKeys(string prefix)
 
 ```csharp
 public readonly PlaceholderKey Time;
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* class [TimespanKeys](./TimespanKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Formatted field
+
+[`PlaceholderKey`](./PlaceholderKey.md) for TimeSpan
+
+```csharp
+public readonly PlaceholderKey Formatted;
 ```
 
 ## See Also

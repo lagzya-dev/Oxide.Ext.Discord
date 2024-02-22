@@ -3,6 +3,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -12,7 +13,7 @@ namespace Oxide.Ext.Discord.Libraries
     /// <summary>
     /// Discord Pool Library
     /// </summary>
-    public class DiscordPool : BaseDiscordLibrary<DiscordPool>
+    public class DiscordPool : BaseDiscordLibrary<DiscordPool>, IDebugLoggable
     {
         private readonly Hash<PluginId, DiscordPluginPool> _pluginPools = new Hash<PluginId, DiscordPluginPool>();
         internal static DiscordPluginPool Internal;
@@ -89,6 +90,19 @@ namespace Oxide.Ext.Discord.Libraries
             foreach (DiscordPluginPool pool in _pluginPools.Values)
             {
                 pool.Wipe();
+            }
+        }
+
+        ///<inheritdoc/>
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendObject("Internal", Internal);
+            foreach (DiscordPluginPool pool in _pluginPools.Values)
+            {
+                if (pool != Internal)
+                {
+                    logger.AppendObject(pool.PluginName, pool);
+                }
             }
         }
     }

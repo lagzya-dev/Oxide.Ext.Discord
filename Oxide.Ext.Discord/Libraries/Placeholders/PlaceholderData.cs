@@ -214,9 +214,10 @@ namespace Oxide.Ext.Discord.Libraries
         {
             if (interaction != null)
             {
+                AddMessage(interaction.Message);
                 AddGuildMember(interaction.Member);
                 AddUser(interaction.User);
-                AddMessage(interaction.Message);
+                AddChannel(interaction.Channel);
                 Add(new PlaceholderDataKey(nameof(DiscordInteraction)), interaction);
             }
 
@@ -366,7 +367,7 @@ namespace Oxide.Ext.Discord.Libraries
                     return boxed.Value;
                 }
 
-                DiscordExtension.GlobalLogger.Warning($"{nameof(PlaceholderData)}.{nameof(Get)} Failed to Convert Type: {{0}} to Type: {{1}}", obj.GetType().Name, typeof(T));
+                DiscordExtension.GlobalLogger.Warning($"{nameof(PlaceholderData)}.{nameof(Get)} Failed to Convert Type: {{0}} to Type: {{1}}", obj.GetType().GetRealTypeName(), typeof(T));
             }
 
             return default(T);

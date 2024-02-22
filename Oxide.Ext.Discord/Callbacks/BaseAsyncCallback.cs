@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
 
@@ -51,7 +52,7 @@ namespace Oxide.Ext.Discord.Callbacks
             }
             catch (Exception ex)
             {
-                DiscordExtension.GlobalLogger.Exception("{0}.CallbackInternal had exception. Callback Data: {1}", GetType().Name, GetExceptionMessage(), ex);
+                DiscordExtension.GlobalLogger.Exception("{0}.CallbackInternal had exception. Callback Data: {1}", GetType().GetRealTypeName(), GetExceptionMessage(), ex);
             }
             finally
             {

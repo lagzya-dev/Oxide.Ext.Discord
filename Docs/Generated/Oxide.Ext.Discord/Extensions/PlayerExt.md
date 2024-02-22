@@ -140,7 +140,7 @@ Send a message in a DM to the linked user using a global message template
 
 ```csharp
 public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPlayer player, 
-    DiscordClient client, string templateName, MessageCreate message = null, 
+    DiscordClient client, TemplateKey templateName, MessageCreate message = null, 
     PlaceholderData placeholders = null)
 ```
 
@@ -157,6 +157,7 @@ public static IPromise<DiscordMessage> SendDiscordGlobalTemplateMessage(this IPl
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](../Entities/MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [PlayerExt](./PlayerExt.md)
@@ -170,7 +171,7 @@ Send a message in a DM to the linked user using a localized message template
 
 ```csharp
 public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer player, 
-    DiscordClient client, string templateName, MessageCreate message = null, 
+    DiscordClient client, TemplateKey templateName, MessageCreate message = null, 
     PlaceholderData placeholders = null)
 ```
 
@@ -187,6 +188,7 @@ public static IPromise<DiscordMessage> SendDiscordTemplateMessage(this IPlayer p
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](../Entities/DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageCreate](../Entities/MessageCreate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [PlayerExt](./PlayerExt.md)

@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Types
         /// Returns the next reset for the rate limit
         /// </summary>
         /// <returns></returns>
-        public virtual DateTimeOffset NextReset() => (TimeHelpers.MillisecondsSinceEpoch() + ResetInterval).ToDateTimeOffsetFromMilliseconds();
+        public virtual DateTimeOffset NextReset() => LastReset + TimeSpan.FromMilliseconds(ResetInterval);
 
         /// <summary>
         /// Called when an API request is fired

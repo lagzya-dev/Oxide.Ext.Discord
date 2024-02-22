@@ -40,20 +40,17 @@ public class RateLimitResponse : BasePoolable
 Initialize the RateLimitResponse
 
 ```csharp
-public void Init(DiscordClient client, HttpResponseHeaders headers, DiscordHttpStatusCode code, 
-    string content)
+public void Init(HttpResponseHeaders headers, DiscordHttpStatusCode code, string content)
 ```
 
 | parameter | description |
 | --- | --- |
-| client | Client for the rate limit |
 | headers | Headers for the rate limit |
 | code | Http code for the request |
 | content | Request response content |
 
 ## See Also
 
-* class [DiscordClient](../Clients/DiscordClient.md)
 * enum [DiscordHttpStatusCode](./DiscordHttpStatusCode.md)
 * class [RateLimitResponse](./RateLimitResponse.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)

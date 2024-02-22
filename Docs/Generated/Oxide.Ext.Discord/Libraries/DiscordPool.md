@@ -3,7 +3,7 @@
 Discord Pool Library
 
 ```csharp
-public class DiscordPool : BaseDiscordLibrary<DiscordPool>
+public class DiscordPool : BaseDiscordLibrary<DiscordPool>, IDebugLoggable
 ```
 
 ## Public Members
@@ -11,6 +11,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 | name | description |
 | --- | --- |
 | [GetOrCreate](#getorcreate-method)(…) | Returns an existing [`DiscordPluginPool`](../Types/DiscordPluginPool.md) for the given plugin or returns a new one |
+| [LogDebug](#logdebug-method)(…) |  |
 
 ## Protected Members
 
@@ -22,6 +23,7 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>
 ## See Also
 
 * class [BaseDiscordLibrary&lt;TLibrary&gt;](./BaseDiscordLibrary%7BTLibrary%7D.md)
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordPool.cs](../../../../Oxide.Ext.Discord/Libraries/DiscordPool.cs)
@@ -76,6 +78,20 @@ protected override void OnPluginUnloaded(Plugin plugin)
 
 ## See Also
 
+* class [DiscordPool](./DiscordPool.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../Logging/DebugLogger.md)
 * class [DiscordPool](./DiscordPool.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

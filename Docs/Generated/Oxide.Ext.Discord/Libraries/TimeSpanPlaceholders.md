@@ -11,6 +11,7 @@ public static class TimeSpanPlaceholders
 | name | description |
 | --- | --- |
 | static [Days](#days-method)(…) | Days placeholder |
+| static [Formatted](#formatted-method)(…) | Days placeholder |
 | static [Hours](#hours-method)(…) | Hours placeholder |
 | static [Milliseconds](#milliseconds-method)(…) | Milliseconds placeholder |
 | static [Minutes](#minutes-method)(…) | Minutes placeholder |
@@ -39,6 +40,22 @@ public static int Days(TimeSpan time)
 
 ## See Also
 
+* class [TimeSpanPlaceholders](./TimeSpanPlaceholders.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Formatted method
+
+Days placeholder
+
+```csharp
+public static string Formatted(PlaceholderState state, TimeSpan time)
+```
+
+## See Also
+
+* class [PlaceholderState](./PlaceholderState.md)
 * class [TimeSpanPlaceholders](./TimeSpanPlaceholders.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

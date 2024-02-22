@@ -20,8 +20,6 @@ namespace Oxide.Ext.Discord.Rest
     {
         internal BaseRequest Request;
         
-        private Bucket _bucket;
-        private RestHandler _rest;
         private RequestResponse _response;
         private CancellationToken _token;
         private ILogger _logger;
@@ -32,54 +30,69 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public RequestHandler()
         {
-            _runner = StartRequest;
+            _runner = RunRequest;
         }
 
         /// <summary>
         /// Creates a new <see cref="RequestHandler"/>
         /// </summary>
-        /// <param name="rest">Rest handler for the request</param>
         /// <param name="request">Request to be handled by this handler</param>
-        public static void StartRequest(RestHandler rest, BaseRequest request)
+        public static RequestHandler CreateRequest(BaseRequest request)
         {
             RequestHandler handler = request.PluginPool.Get<RequestHandler>();
-            handler.Init(rest, request, request.Client.Logger);
+            handler.Init(request, request.Client.Logger);
+            return handler;
         }
         
-        private void Init(RestHandler rest, BaseRequest request, ILogger logger)
+        private void Init(BaseRequest request, ILogger logger)
         {
-            _rest = rest;
             Request = request;
             _token = Request.Source.Token;
             _logger = logger;
-            Task.Run(_runner, _token);
         }
 
-        private async ValueTask StartRequest()
+        /// <summary>
+        /// Starts the Request
+        /// </summary>
+        public void StartRequest()
+        {
+            if (Request.Status == RequestStatus.InQueue)
+            {
+                Request.Status = RequestStatus.Started;
+                Task.Run(_runner, _token);
+            }
+        }
+        
+        private async ValueTask RunRequest()
         {
             AdjustableSemaphore semaphore = null;
             try
             {
-                _bucket = _rest.QueueBucket(this, Request);
-            
-                BucketId bucketId = _bucket.Id;
-                semaphore = _bucket.Semaphore;
+                Bucket bucket = Request.Bucket;
+                BucketId bucketId = bucket.Id;
+                semaphore = bucket.ActiveRequestsSemaphore;
                 Request.Status = RequestStatus.PendingBucket;
             
-                _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
+                _logger.Debug("Waiting for bucket availability Bucket ID: {0} Request ID: {1}", bucket.Id, Request.Id);
                 
                 await semaphore.WaitOneAsync().ConfigureAwait(false);
-                if (bucketId != _bucket.Id)
+                bucket = Request.Bucket;
+                if (bucketId != bucket.Id)
                 {
-                    _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", Request.Id, bucketId, _bucket.Id);
+                    _logger.Debug("Bucket ID Changed. Waiting for bucket availability again for ID: {0} Old Bucket ID: {1} New Bucket ID: {2}", Request.Id, bucketId, bucket.Id);
                     semaphore.Release();
-                    semaphore = _bucket.Semaphore;
+                    semaphore = bucket.ActiveRequestsSemaphore;
                     await semaphore.WaitOneAsync().ConfigureAwait(false);
                 }
 
-                _logger.Debug("Request callback started for Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
-                await FireRequest().ConfigureAwait(false);
-                _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", _bucket.Id, Request.Id);
+                _logger.Debug("Request started for Bucket ID: {0} Request ID: {1}", bucket.Id, Request.Id);
+                _response = await FireRequest().ConfigureAwait(false);
+                if (_response != null)
+                {
+                    Request.OnRequestCompleted(this, _response);
+                }
+                
+                _logger.Debug("Request callback completed successfully for Bucket ID: {0} Request ID: {1}", bucket.Id, Request.Id);
             }
             catch (Exception ex)
             {
@@ -96,19 +109,15 @@ namespace Oxide.Ext.Discord.Rest
         /// <summary>
         /// Fires the request off
         /// </summary>
-        private async ValueTask FireRequest()
+        private ValueTask<RequestResponse> FireRequest()
         {
             try
             {
-                _response = await FireRequestInternal().ConfigureAwait(false);
+                return FireRequestInternal();
             }
             catch (Exception ex)
             {
-                _response = await RequestResponse.CreateExceptionResponse(Request.Client, GetResponseError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
-            }
-            finally
-            {
-                Request.OnRequestCompleted(this, _response);
+                return RequestResponse.CreateExceptionResponse(GetResponseError(RequestErrorType.Generic, DiscordLogLevel.Exception).WithException(ex), null, RequestCompletedStatus.ErrorFatal);
             }
         }
         
@@ -120,21 +129,27 @@ namespace Oxide.Ext.Discord.Rest
             byte retries = 0;
             while(CanSendRequest(response, retries)) 
             {
+                response?.Dispose();
                 Request.Status = RequestStatus.PendingStart;
-                await _bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
                 await Request.WaitUntilRequestCanStart(_token).ConfigureAwait(false);
+                await Request.Bucket.WaitUntilBucketAvailable(this, _token).ConfigureAwait(false);
                 Request.Status = RequestStatus.InProgress;
-                _bucket.OnRequestStarted(this);
                 
                 if (Request.IsCancelled)
                 {
                     _logger.Verbose($"{nameof(RequestHandler)}.{nameof(FireRequestInternal)} Cancel REST Request. Request ID: {{0}} Method: {{1}} Url: {{2}}", Request.Id, Request.Method, Request.Route);
-                    return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
+                    return await RequestResponse.CreateCancelledResponse().ConfigureAwait(false);
                 }
 
-                response = await SendRequest().ConfigureAwait(false);
+                response = await SendRequest(_token).ConfigureAwait(false);
                 
-                _bucket.UpdateRateLimits(this, response);
+                //Request was cancelled
+                if (response == null)
+                {
+                    return null;
+                }
+                
+                Request.Bucket.UpdateRateLimits(this, response);
                 
                 switch (response.Status)
                 {
@@ -170,17 +185,22 @@ namespace Oxide.Ext.Discord.Rest
             return true;
         }
 
-        private async ValueTask<RequestResponse> SendRequest()
+        private async ValueTask<RequestResponse> SendRequest(CancellationToken token)
         {
             try
             {
                 using (HttpRequestMessage request = CreateRequest())
                 {
-                    using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, _token).ConfigureAwait(false))
+                    using (HttpResponseMessage webResponse = await Request.HttpClient.SendAsync(request, token).ConfigureAwait(false))
                     {
+                        if (token.IsCancellationRequested)
+                        {
+                            return null;
+                        }
+                        
                         if (webResponse.IsSuccessStatusCode)
                         {
-                            return await RequestResponse.CreateSuccessResponse(Request.Client, webResponse).ConfigureAwait(false);
+                            return await RequestResponse.CreateSuccessResponse(webResponse).ConfigureAwait(false);
                         }
 
                         return await HandleWebException(request, webResponse).ConfigureAwait(false);
@@ -189,15 +209,15 @@ namespace Oxide.Ext.Discord.Rest
             }
             catch (OperationCanceledException)
             {
-                return await RequestResponse.CreateCancelledResponse(Request.Client).ConfigureAwait(false);
+                return await RequestResponse.CreateCancelledResponse().ConfigureAwait(false);
             }
             catch (JsonSerializationException ex)
             {
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetResponseError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
+                return await RequestResponse.CreateExceptionResponse(GetResponseError(RequestErrorType.Serialization, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                return await RequestResponse.CreateExceptionResponse(Request.Client, GetResponseError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
+                return await RequestResponse.CreateExceptionResponse(GetResponseError(RequestErrorType.Generic, DiscordLogLevel.Error).WithException(ex), null, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
         }
 
@@ -205,23 +225,30 @@ namespace Oxide.Ext.Discord.Rest
         {
             RequestResponse response;
             
+            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
+            {
+                string content = request.Content != null ? await request.Content.ReadAsStringAsync().ConfigureAwait(false) : "No Content";
+                Request.Client.Logger.Verbose("Web Exception Occured. Request ID: {0} Plugin: {1} Method: {2} Route: {3} HTTP Code: {4}\nBody:\n{5}", 
+                    Request.Id, Request.Client.PluginName, Request.Method, Request.Route, webResponse.StatusCode, content);
+            }
+            
             DiscordHttpStatusCode statusCode = (DiscordHttpStatusCode)webResponse.StatusCode;
             if (statusCode == DiscordHttpStatusCode.TooManyRequests)
             {
-                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetResponseError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorRetry).ConfigureAwait(false);
+                response = await RequestResponse.CreateExceptionResponse(await GetResponseError(RequestErrorType.RateLimit, DiscordLogLevel.Warning).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorRetry).ConfigureAwait(false);
             }
             else
             {
-                response = await RequestResponse.CreateExceptionResponse(Request.Client, await GetResponseError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
+                response = await RequestResponse.CreateExceptionResponse(await GetResponseError(RequestErrorType.GenericWeb, DiscordLogLevel.Error).WithRequest(request).ConfigureAwait(false), webResponse, RequestCompletedStatus.ErrorFatal).ConfigureAwait(false);
             }
             
             Request.OnRequestErrored();
 
-            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Debug))
+            if (Request.Client.Logger.IsLogging(DiscordLogLevel.Verbose))
             {
                 string content = request.Content != null ? await request.Content.ReadAsStringAsync().ConfigureAwait(false) : "No Content";
-                Request.Client.Logger.Debug("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5} Message: {6}\nBody:\n{7}", 
-                    response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, response.Error?.ResponseMessage, content);
+                Request.Client.Logger.Verbose("Web Exception Occured. Type: {0} Request ID: {1} Plugin: {2} Method: {3} Route: {4} HTTP Code: {5}\nBody:\n{6}", 
+                    response.Error?.ErrorType, Request.Id, Request.Client.PluginName, Request.Method, Request.Route, response.Code, content);
             }
 
             return response;
@@ -237,37 +264,41 @@ namespace Oxide.Ext.Discord.Rest
         private void CreateContent(HttpRequestMessage request)
         {
             object data = Request.Data;
-            if (data == null)
+            switch (data)
             {
-                return;
-            }
-            
-            if (data is IFileAttachments attachments && attachments.FileAttachments != null && attachments.FileAttachments.Count != 0)
-            {
-                MultipartFormDataContent content = new MultipartFormDataContent();
-
-                HttpContent json = GetJsonContent(data);
-                content.Add(json, "payload_json");
-
-                for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                case null:
+                    return;
+                case IFileAttachments attachments when attachments.FileAttachments != null && attachments.FileAttachments.Count != 0:
                 {
-                    MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
-                    ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
-                    content.Add(file, FileAttachmentCache.Instance.GetName(index), fileAttachment.FileName);
-                    file.Headers.ContentType = MediaTypeHeaderCache.Instance.Get(fileAttachment.ContentType);
+                    MultipartFormDataContent content = new MultipartFormDataContent();
+
+                    HttpContent json = GetJsonContent(data);
+                    content.Add(json, "payload_json");
+
+                    for (int index = 0; index < attachments.FileAttachments.Count; index++)
+                    {
+                        MessageFileAttachment fileAttachment = attachments.FileAttachments[index];
+                        ByteArrayContent file = new ByteArrayContent(fileAttachment.Data);
+                        content.Add(file, FileAttachmentCache.Instance.GetName(index), fileAttachment.FileName);
+                        file.Headers.ContentType = MediaTypeHeaderCache.Instance.Get(fileAttachment.ContentType);
+                    }
+
+                    request.Content = content;
+                    break;
                 }
 
-                request.Content = content;
+                default:
+                    request.Content = GetJsonContent(data);
+                    break;
             }
-            else
-            {
-                request.Content = GetJsonContent(data);
-            }
+
         }
 
         private StringContent GetJsonContent(object data)
         {
-            StringContent content = new StringContent(JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings));
+            string json = JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings);
+            _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Data: {{0}}", json);
+            StringContent content = new StringContent(json);
             content.Headers.ContentType = MediaTypeHeaderCache.Instance.Get("application/json");
             return content;
         }
@@ -277,7 +308,7 @@ namespace Oxide.Ext.Discord.Rest
         /// </summary>
         public void Abort()
         {
-            Request.Client.Logger.Debug($"{nameof(RequestHandler)}.{nameof(Abort)} Abort Request Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", _bucket.Id, Request.Id, Request.Client.PluginName, Request.Method, Request.Route);
+            Request.Client.Logger.Debug($"{nameof(RequestHandler)}.{nameof(Abort)} Abort Request Bucket ID: {{0}} Request ID: {{1}} Plugin: {{2}} Method: {{3}} Route: {{4}}", Request.Bucket.Id, Request.Id, Request.Client.PluginName, Request.Method, Request.Route);
             Request.Abort();
         }
 
@@ -287,9 +318,7 @@ namespace Oxide.Ext.Discord.Rest
         protected override void EnterPool()
         {
             Request.Dispose();
-            _response.Dispose();
-            _bucket = null;
-            _rest = null;
+            _response?.Dispose();
             Request = null;
             _response = null;
             _logger = null;

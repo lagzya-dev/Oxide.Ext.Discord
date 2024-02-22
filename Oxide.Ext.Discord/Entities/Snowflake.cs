@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
@@ -9,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities
     /// Represents an ID in discord.
     /// </summary>
     [JsonConverter(typeof(SnowflakeConverter))]
-    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>
+    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>, IDiscordKey
     {
         /// <summary>
         /// DateTimeOffset since discord Epoch

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
@@ -175,17 +176,28 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
                 
                 case DiscordWebsocketCloseCode.InvalidIntents: 
-                    _logger.Error("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect. Plugins: {0} Reason: {1}", _client.GetClientPluginList(), reason);
+                    _logger.Error("Invalid intent(s) specified for the gateway. Please check that you're using valid intents in the connect. Plugins: {0}", _client.GetClientPluginList(), reason);
                     shouldReconnect = false;
                     break;
                 
                 case DiscordWebsocketCloseCode.DisallowedIntent:
-                    _logger.Error("The plugin is asking for an intent you have not granted your bot. Please complete step 5 @ https://umod.org/extensions/discord#getting-your-api-key Plugins: {0} Reason: {1}", _client.GetClientPluginList(), reason);
+                    DiscordClient client = _client.GetFirstClient();
+                    _logger.Warning("A plugin is asking for an intent you have not granted your bot. Attempting to update intents. Plugins: {0}", _client.GetClientPluginList());
+                    DiscordApplication.Get(client).Then(app =>
+                    {
+                        ProcessGatewayIntents(app)?
+                            .Then(updatedApp =>
+                            {
+                                _client.Application.Flags = updatedApp.Flags;
+                                _webSocket.Connect();
+                            })
+                            .Catch(err => _logger.Exception("An error occurred trying to update disallowed intents. Plugins: {0} Reason: {1}", _client.GetClientPluginList(), reason, err));
+                    }).Catch(err => _logger.Exception("An error occurred trying to correct disallowed intents. Plugins: {0} Reason: {1}", _client.GetClientPluginList(), reason, err));
                     shouldReconnect = false;
                     break;
                 
                 case DiscordWebsocketCloseCode.UnknownCloseCode:
-                    _logger.Error("Discord has closed the gateway with a code we do not recognize. Code: {0}. Reason: {1} Please Contact Discord Extension Authors.", code, reason);
+                    _logger.Error("Discord has closed the gateway with a code we do not recognize. Please Contact Discord Extension Authors. Code: {0}. Reason: {1}.", code, reason);
                     break;
             }
 
@@ -562,14 +574,13 @@ namespace Oxide.Ext.Discord.WebSockets
             _client.OnClientReady(ready);
 
             _logger.Info("Your bot was found in {0} Guilds!", ready.Guilds.Count);
-           ProcessGatewayIntents(ready.Application);
         }
 
-        private void ProcessGatewayIntents(DiscordApplication app)
+        private IPromise<DiscordApplication> ProcessGatewayIntents(DiscordApplication app)
         {
             if (!DiscordConfig.Instance.Bot.AutomaticallyApplyGatewayIntents)
             {
-                return;
+                return null;
             }
             
             ApplicationFlags flags = app.Flags ?? ApplicationFlags.None;
@@ -587,14 +598,18 @@ namespace Oxide.Ext.Discord.WebSockets
 
             if (flags != app.Flags)
             {
-                app.Edit(_client.GetFirstClient(), new ApplicationUpdate { Flags = flags }).Then(da =>
+                IPromise<DiscordApplication> promise = app.Edit(_client.GetFirstClient(), new ApplicationUpdate { Flags = flags });
+                promise.Then(da =>
                 {
-                    _logger.Info("Successfully Applied Application Flags: {0}", flags);
+                    _logger.Info("Successfully Applied Application Flags: {0}", EnumCache<ApplicationFlags>.Instance.ToString(flags));
                 }).Catch<ResponseError>(error =>
                 {
-                    _logger.Error("An error occurred applying application flags: {0}\n{1}", flags, error.ResponseMessage);
+                    _logger.Error("An error occurred applying application flags: {0}\n{1}", EnumCache<ApplicationFlags>.Instance.ToString(flags), error.ResponseMessage);
                 });
+                return promise;
             }
+
+            return null;
         }
 
         //https://discord.com/developers/docs/topics/gateway-events#resumed`

@@ -3,7 +3,7 @@ using Oxide.Ext.Discord.Interfaces;
 namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
-    /// Modal Templates Library
+    /// Embed Templates Library
     /// </summary>
     public class DiscordEmbedTemplates : BaseMessageTemplateLibrary<DiscordEmbedTemplate>
     {

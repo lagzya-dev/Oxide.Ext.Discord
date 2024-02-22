@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
@@ -60,6 +61,15 @@ namespace Oxide.Ext.Discord.Rest
         {
             _promise.Reject(response.Error);
             _promise.Finally(response.Error.LogError);
+        }
+        
+        internal override void Abort()
+        {
+            if (Status != RequestStatus.Cancelled)
+            {
+                _promise.Reject(new RequestCancelledException());
+                base.Abort();
+            }
         }
 
         ///<inheritdoc/>

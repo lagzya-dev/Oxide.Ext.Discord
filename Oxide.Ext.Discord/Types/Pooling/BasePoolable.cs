@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Extensions;
 
 namespace Oxide.Ext.Discord.Types
 {
@@ -69,7 +70,7 @@ namespace Oxide.Ext.Discord.Types
             
             if (Disposed)
             {
-                throw new ObjectDisposedException(GetType().Name);
+                throw new ObjectDisposedException(GetType().GetRealTypeName());
             }
                 
             _pool.Free(this);

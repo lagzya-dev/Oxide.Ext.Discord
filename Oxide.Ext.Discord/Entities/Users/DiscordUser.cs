@@ -251,7 +251,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="language">Oxide language to use</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, string templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, message);
             return SendDirectMessage(client, template);
@@ -264,7 +264,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="templateName">Template Name</param>
         /// <param name="message">Message to use (optional)</param>
         /// <param name="placeholders">Placeholders to apply (optional)</param>
-        public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, string templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
         {
             MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, message);
             return SendDirectMessage(client, template);

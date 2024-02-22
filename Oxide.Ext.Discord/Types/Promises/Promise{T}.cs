@@ -512,7 +512,6 @@ namespace Oxide.Ext.Discord.Types
             return promise.Then(onComplete);
         }
         
-        
         ///<inheritdoc/>
         protected override void ClearHandlers()
         {

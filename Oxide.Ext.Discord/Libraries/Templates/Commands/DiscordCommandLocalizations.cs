@@ -4,7 +4,6 @@ using System.IO;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -22,21 +21,22 @@ namespace Oxide.Ext.Discord.Libraries
         /// Registers Application Command Localization for a given language
         /// </summary>
         /// <param name="plugin">Plugin the for the command localization</param>
-        /// <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+        /// <param name="templateName">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
         /// <param name="localization">Localization to register</param>
         /// <param name="version">Version of the template</param>
         /// <param name="minVersion">Min supported registered version</param>
         /// <param name="language">Language to register</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plugin plugin, string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
+        public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plugin plugin, TemplateKey templateName, DiscordCommandLocalization localization, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(plugin));
             if (localization == null) throw new ArgumentNullException(nameof(localization));
 
             IPendingPromise<DiscordCommandLocalization> promise = Promise<DiscordCommandLocalization>.Create();
             
-            TemplateId id = TemplateId.CreateLocalized(plugin, fileNameSuffix, ServerLocale.Parse(language));
+            TemplateId id = TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language));
             RegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, localization, version, minVersion, promise);
             return promise;
         }
@@ -45,19 +45,20 @@ namespace Oxide.Ext.Discord.Libraries
         /// Registers multiple command localizations
         /// </summary>
         /// <param name="plugin">Plugin the for the command localization</param>
-        /// <param name="fileNameSuffix">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
+        /// <param name="templateName">Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional)</param>
         /// <param name="commands">List of <see cref="DiscordCommandLocalization"/> to bulk register</param>
         /// <param name="minVersion">Min supported registered version</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
+        public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, TemplateKey templateName, List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(plugin));
             if (commands == null) throw new ArgumentNullException(nameof(commands));
 
             IPendingPromise promise = Promise.Create();
             
-            TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
+            TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             BulkRegisterTemplateCallback<DiscordCommandLocalization>.Start(this, id, commands, minVersion, promise);
             return promise;
         }
@@ -67,14 +68,15 @@ namespace Oxide.Ext.Discord.Libraries
         /// </summary>
         /// <param name="plugin">Plugin the localizations are for</param>
         /// <param name="create">The command to apply the localizations to</param>
-        /// <param name="fileNameSuffix">fileName suffix used when registering</param>
+        /// <param name="templateName">fileName suffix used when registering</param>
         /// <returns></returns>
-        public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, string fileNameSuffix)
+        public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, TemplateKey templateName)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(plugin));
 
             IPendingPromise promise = Promise.Create();
-            TemplateId id = TemplateId.CreateGlobal(plugin, fileNameSuffix);
+            TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             ApplyCommandLocalizationsCallback.Start(id, create, promise);
             return promise;
         }
@@ -156,13 +158,6 @@ namespace Oxide.Ext.Discord.Libraries
                 DiscordTemplate<DiscordCommandLocalization> localization = LoadTemplate(id.WithLanguage(locale));
                 localization?.Template.ApplyCommandLocalization(create, discordLocale);
             }
-        }
-
-        internal override string GetTemplatePath(TemplateId id)
-        {
-            DiscordTemplateException.ThrowIfInvalidTemplateName(id.TemplateName, TemplateType);
-            string fileName = !string.IsNullOrEmpty(id.TemplateName) ? $"{id.PluginId}.{id.TemplateName}.json" : $"{id.PluginId}.json";
-            return Path.Combine(GetTemplateFolder(id.PluginId), id.Language.Id, fileName);
         }
     }
 }

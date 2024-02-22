@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
@@ -23,6 +24,7 @@ namespace Oxide.Ext.Discord.Plugins
     internal partial class DiscordExtensionCore : BaseDiscordPlugin
     {
         #region Fields
+        public readonly PluginId PluginId;
         public static DiscordExtensionCore Instance;
         private ILogger _logger;
 
@@ -36,7 +38,7 @@ namespace Oxide.Ext.Discord.Plugins
         {
             Name = "DiscordExtension";
             Title = "Discord Extension";
-
+            PluginId = new PluginId(this);
             _pluginReferences = new Hash<string, Action<Plugin>>
             {
                 ["PlaceholderAPI"] = HandlePlaceholderApi,
@@ -208,6 +210,8 @@ namespace Oxide.Ext.Discord.Plugins
                 DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.Log.Set, "Console", log);
+                
+                BotClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {
@@ -231,6 +235,9 @@ namespace Oxide.Ext.Discord.Plugins
                 DiscordConfig.Instance.Save();
 
                 Chat(player, LangKeys.Log.Set, "File", log);
+                
+                BotClientFactory.Instance.UpdateLogLevel();
+                DiscordClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {
@@ -262,8 +269,15 @@ namespace Oxide.Ext.Discord.Plugins
         private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
             DebugLogger logger = new DebugLogger();
+            
+            ThreadPool.GetAvailableThreads(out int worker, out int port);
+            ThreadPool.GetMaxThreads(out int maxWorker, out int maxPort);
+            
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
-
+            logger.StartObject("Threads");
+            logger.AppendFieldOutOf("Worker", worker, maxWorker);
+            logger.AppendFieldOutOf("Port", port, maxPort);
+            logger.EndObject();
             logger.StartObject("Libraries");
             logger.AppendObject("Discord Application Command", DiscordAppCommand.Instance);
             logger.AppendObject("Discord Command", DiscordCommand.Instance);
@@ -271,6 +285,7 @@ namespace Oxide.Ext.Discord.Plugins
             DiscordAppCommand.Instance.LogDebug(logger);
             DiscordCommand.Instance.LogDebug(logger);
             DiscordSubscriptions.Instance.LogDebug(logger);
+            logger.AppendObject("Discord Pool", DiscordPool.Instance);
             logger.EndObject();
             
             string message = logger.ToString();

@@ -16,6 +16,12 @@ namespace Oxide.Ext.Discord.Entities
         public string Nonce { get; set; }
         
         /// <summary>
+        /// If true and nonce is present, it will be checked for uniqueness in the past few minutes. If another message was created by the same author with the same nonce, that message will be returned and no new message will be created.
+        /// </summary>
+        [JsonProperty("enforce_nonce")]
+        public bool EnforceNonce { get; set; }
+        
+        /// <summary>
         /// Include to make your message a reply
         /// </summary>
         [JsonProperty("message_reference")]

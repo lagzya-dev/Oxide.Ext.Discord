@@ -3,7 +3,7 @@
 Represents a Placeholder Key. This is the key for placeholder usage and lookup
 
 ```csharp
-public struct PlaceholderKey : IEquatable<PlaceholderKey>
+public struct PlaceholderKey : IComparable<PlaceholderKey>, IDiscordKey, IEquatable<PlaceholderKey>
 ```
 
 ## Public Members
@@ -13,6 +13,7 @@ public struct PlaceholderKey : IEquatable<PlaceholderKey>
 | [PlaceholderKey](#placeholderkey-constructor-1-of-2)(…) | Constructor (2 constructors) |
 | [IsValid](#isvalid-property) { get; } | If [`Placeholder`](#placeholder-field) Is a Valid Key |
 | readonly [Placeholder](#placeholder-field) | Placeholder Key |
+| [CompareTo](#compareto-method)(…) |  |
 | override [Equals](#equals-method)(…) |  |
 | [Equals](#equals-method)(…) |  |
 | override [GetHashCode](#gethashcode-method)() |  |
@@ -22,6 +23,7 @@ public struct PlaceholderKey : IEquatable<PlaceholderKey>
 
 ## See Also
 
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PlaceholderKey.cs](../../../../Oxide.Ext.Discord/Libraries/PlaceholderKey.cs)
@@ -96,6 +98,19 @@ public bool Equals(PlaceholderKey other)
 
 ```csharp
 public override int GetHashCode()
+```
+
+## See Also
+
+* struct [PlaceholderKey](./PlaceholderKey.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CompareTo method
+
+```csharp
+public int CompareTo(PlaceholderKey other)
 ```
 
 ## See Also

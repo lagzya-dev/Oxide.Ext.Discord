@@ -3,7 +3,7 @@
 Built in pooling for discord entities
 
 ```csharp
-public class DiscordPluginPool
+public class DiscordPluginPool : IDebugLoggable
 ```
 
 ## Public Members
@@ -15,21 +15,21 @@ public class DiscordPluginPool
 | [FreeHashSet&lt;T&gt;](#freehashset&amp;lt;t&amp;gt;-method)(…) | Free's a pooled HashSet |
 | [FreeList&lt;T&gt;](#freelist&amp;lt;t&amp;gt;-method)(…) | Free's a pooled List |
 | [FreeMemoryStream](#freememorystream-method)(…) | Frees a MemoryStream back to the pool |
-| [FreePlaceholderData](#freeplaceholderdata-method)(…) | Frees a [`PlaceholderData`](../Libraries/PlaceholderData.md) back to the pool |
 | [FreeStringBuilder](#freestringbuilder-method)(…) | Frees a StringBuilder back to the pool |
 | [Get&lt;T&gt;](#get&amp;lt;t&amp;gt;-method)() | Returns a pooled object of {T} type Must inherit from [`BasePoolable`](./BasePoolable.md) and have an empty default constructor |
 | [GetHash&lt;TKey,TValue&gt;](#gethash&amp;lt;tkey,tvalue&amp;gt;-method)() | Returns a pooled Hash |
 | [GetHashSet&lt;T&gt;](#gethashset&amp;lt;t&amp;gt;-method)() | Returns a pooled HashSet |
 | [GetList&lt;T&gt;](#getlist&amp;lt;t&amp;gt;-method)() | Returns a pooled List |
 | [GetMemoryStream](#getmemorystream-method)() | Returns a pooled MemoryStream |
-| [GetPlaceholderData](#getplaceholderdata-method)() | Returns a pooled [`PlaceholderData`](../Libraries/PlaceholderData.md) |
 | [GetStringBuilder](#getstringbuilder-method)() | Returns a pooled StringBuilder |
 | [GetStringBuilder](#getstringbuilder-method)(…) | Returns a pooled StringBuilder |
+| [LogDebug](#logdebug-method)(…) |  |
 | [SetSettings](#setsettings-method)(…) | Sets the settings for the pools |
 | [ToStringAndFree](#tostringandfree-method)(…) | Frees a StringBuilder back to the pool returning the built String |
 
 ## See Also
 
+* interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [DiscordPluginPool.cs](../../../../Oxide.Ext.Discord/Types/DiscordPluginPool.cs)
@@ -330,41 +330,15 @@ public void FreeMemoryStream(MemoryStream stream)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# GetPlaceholderData method
-
-Returns a pooled [`PlaceholderData`](../Libraries/PlaceholderData.md)
+# LogDebug method
 
 ```csharp
-public PlaceholderData GetPlaceholderData()
+public void LogDebug(DebugLogger logger)
 ```
-
-## Return Value
-
-Pooled [`PlaceholderData`](../Libraries/PlaceholderData.md)
 
 ## See Also
 
-* class [PlaceholderData](../Libraries/PlaceholderData.md)
-* class [DiscordPluginPool](./DiscordPluginPool.md)
-* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# FreePlaceholderData method
-
-Frees a [`PlaceholderData`](../Libraries/PlaceholderData.md) back to the pool
-
-```csharp
-public void FreePlaceholderData(PlaceholderData data)
-```
-
-| parameter | description |
-| --- | --- |
-| data | [`PlaceholderData`](../Libraries/PlaceholderData.md) being freed |
-
-## See Also
-
-* class [PlaceholderData](../Libraries/PlaceholderData.md)
+* class [DebugLogger](../Logging/DebugLogger.md)
 * class [DiscordPluginPool](./DiscordPluginPool.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -29,14 +29,14 @@ Registers Application Command Localization for a given language
 
 ```csharp
 public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plugin plugin, 
-    string fileNameSuffix, DiscordCommandLocalization localization, TemplateVersion version, 
+    TemplateKey templateName, DiscordCommandLocalization localization, TemplateVersion version, 
     TemplateVersion minVersion, string language = "en")
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the for the command localization |
-| fileNameSuffix | Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional) |
+| templateName | Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional) |
 | localization | Localization to register |
 | version | Version of the template |
 | minVersion | Min supported registered version |
@@ -52,6 +52,7 @@ public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plu
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordCommandLocalization](./DiscordCommandLocalization.md)
+* struct [TemplateKey](./TemplateKey.md)
 * struct [TemplateVersion](./TemplateVersion.md)
 * class [DiscordCommandLocalizations](./DiscordCommandLocalizations.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
@@ -63,14 +64,14 @@ public IPromise<DiscordCommandLocalization> RegisterCommandLocalizationAsync(Plu
 Registers multiple command localizations
 
 ```csharp
-public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, string fileNameSuffix, 
+public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, TemplateKey templateName, 
     List<BulkTemplateRegistration<DiscordCommandLocalization>> commands, TemplateVersion minVersion)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the for the command localization |
-| fileNameSuffix | Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional) |
+| templateName | Suffix to be applied to the localization. IE DiscordExtension.{suffix}.json (optional) |
 | commands | List of [`DiscordCommandLocalization`](./DiscordCommandLocalization.md) to bulk register |
 | minVersion | Min supported registered version |
 
@@ -83,6 +84,7 @@ public IPromise BulkRegisterCommandLocalizationsAsync(Plugin plugin, string file
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [BulkTemplateRegistration&lt;T&gt;](./BulkTemplateRegistration%7BT%7D.md)
 * class [DiscordCommandLocalization](./DiscordCommandLocalization.md)
 * struct [TemplateVersion](./TemplateVersion.md)
@@ -97,19 +99,20 @@ Applies Command Localizations Async
 
 ```csharp
 public IPromise ApplyCommandLocalizationsAsync(Plugin plugin, CommandCreate create, 
-    string fileNameSuffix)
+    TemplateKey templateName)
 ```
 
 | parameter | description |
 | --- | --- |
 | plugin | Plugin the localizations are for |
 | create | The command to apply the localizations to |
-| fileNameSuffix | fileName suffix used when registering |
+| templateName | fileName suffix used when registering |
 
 ## See Also
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [CommandCreate](../Entities/CommandCreate.md)
+* struct [TemplateKey](./TemplateKey.md)
 * class [DiscordCommandLocalizations](./DiscordCommandLocalizations.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

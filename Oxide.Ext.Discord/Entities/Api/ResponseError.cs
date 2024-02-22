@@ -6,6 +6,7 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
 
@@ -111,7 +112,7 @@ namespace Oxide.Ext.Discord.Entities
             _logLevel = log;
         }
 
-        internal async Task<ResponseError> WithRequest(HttpRequestMessage request)
+        internal async ValueTask<ResponseError> WithRequest(HttpRequestMessage request)
         {
             if (request.Content != null)
             {
@@ -215,11 +216,11 @@ namespace Oxide.Ext.Discord.Entities
                     break;
 
                 case RequestErrorType.Serialization:
-                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (JSON Serialization). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().GetRealTypeName() ?? "None", Exception);
                     break;
 
                 case RequestErrorType.Generic:
-                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().Name ?? "None", Exception);
+                    _client.Logger.Exception("Rest Request Exception (Generic Error). Plugin: {0} ID: {1} Method: {2} URL: {3} Data Type: {4}", _client.PluginName, RequestId, RequestMethod, Url, RequestData?.GetType().GetRealTypeName() ?? "None", Exception);
                     break;
             }
         }

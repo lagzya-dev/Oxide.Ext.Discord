@@ -71,7 +71,25 @@ namespace Oxide.Ext.Discord.Plugins
                 public const string Invalid = Base + nameof(Invalid);
             }
         }
-        
+
+        internal static class TimeSpan
+        {
+            private const string Base = nameof(TimeSpan) + ".";
+
+            public const string Infinity = Base + nameof(Infinity);
+            
+            public const string Days = Base + nameof(Days);
+            public const string Day = Base + nameof(Day);
+            
+            public const string Hours = Base + nameof(Hours);
+            public const string Hour = Base + nameof(Hour);
+            
+            public const string Minutes = Base + nameof(Minutes);
+            public const string Minute = Base + nameof(Minute);
+            
+            public const string Seconds = Base + nameof(Seconds);
+            public const string Second = Base + nameof(Second);
+        }
     }
     
     internal static class Localization
@@ -99,6 +117,15 @@ namespace Oxide.Ext.Discord.Plugins
                 [LangKeys.Search.HighPerformance.Invalid] = "'{0}' is not a valid boolean value. Valid values are false, true, 0, or 1",
                 [LangKeys.Enabled] = "Enabled",
                 [LangKeys.Disabled] = "Disabled",
+                [LangKeys.TimeSpan.Infinity] = "\u221E",
+                [LangKeys.TimeSpan.Day] = "Day",
+                [LangKeys.TimeSpan.Days] = "Days",
+                [LangKeys.TimeSpan.Hour] = "Hour",
+                [LangKeys.TimeSpan.Hours] = "Hours",
+                [LangKeys.TimeSpan.Minute] = "Minute",
+                [LangKeys.TimeSpan.Minutes] = "Minutes",
+                [LangKeys.TimeSpan.Second] = "Second",
+                [LangKeys.TimeSpan.Seconds] = "Seconds",
                 [LangKeys.Help] = "Discord Extension v{0} Commands:\n" +
                                   " * de.version - displays the current Discord Extension version\n" +
                                   " * de.reset.reset - resets all rest handlers\n" +
@@ -109,6 +136,18 @@ namespace Oxide.Ext.Discord.Plugins
                                   " * de.validation.enabled - sets if request validation is enabled\n" +
                                   " * de.search.trie.enable - sets if player name search should use high performance trie mode\n" +
                                   " * de.debug - prints debug information about the state of the Discord Extension"
+            },
+            ["ru"] = new Dictionary<string, string>
+            {
+                [LangKeys.TimeSpan.Infinity] = "\u221E",
+                [LangKeys.TimeSpan.Day] = "день ",
+                [LangKeys.TimeSpan.Days] = "дней ",
+                [LangKeys.TimeSpan.Hour] = "час ",
+                [LangKeys.TimeSpan.Hours] = "часов ",
+                [LangKeys.TimeSpan.Minute] = "минуту ",
+                [LangKeys.TimeSpan.Minutes] = "минут ",
+                [LangKeys.TimeSpan.Second] = "секунду",
+                [LangKeys.TimeSpan.Seconds] = "секунд",
             }
         };
     }

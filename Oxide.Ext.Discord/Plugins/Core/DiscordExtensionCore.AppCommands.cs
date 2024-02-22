@@ -32,9 +32,10 @@ namespace Oxide.Ext.Discord.Plugins
 
             CommandCreate create = builder.Build();
             DiscordCommandLocalization localization = builder.BuildCommandLocalization();
-            DiscordExtension.DiscordCommandLocalizations.RegisterCommandLocalizationAsync(this, null, localization, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0)).Then(_ =>
+            TemplateKey template = new TemplateKey(nameof(DiscordExtension));
+            DiscordExtension.DiscordCommandLocalizations.RegisterCommandLocalizationAsync(this, template, localization, new TemplateVersion(1, 0, 0), new TemplateVersion(1, 0, 0)).Then(_ =>
             {
-                DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, null).Then(() =>
+                DiscordExtension.DiscordCommandLocalizations.ApplyCommandLocalizationsAsync(this, create, template).Then(() =>
                 {
                     _create = create;
                     foreach (BotClient client in BotClientFactory.Instance.Clients.ToList())

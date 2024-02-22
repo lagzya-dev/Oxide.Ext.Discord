@@ -8,7 +8,8 @@ namespace Oxide.Ext.Discord.Logging
     /// </summary>
     public class DiscordLogger : ILogger
     {
-        private DiscordLogLevel _logLevel;
+        ///<inheritdoc/>
+        public DiscordLogLevel LogLevel { get; private set; }
         private readonly IDiscordLoggingConfig _config;
         private readonly DiscordLogHandler _handler;
 
@@ -20,7 +21,7 @@ namespace Oxide.Ext.Discord.Logging
         /// <param name="handler">Handler for the logger</param>
         internal DiscordLogger(DiscordLogLevel logLevel, IDiscordLoggingConfig config, DiscordLogHandler handler)
         {
-            _logLevel = logLevel;
+            LogLevel = logLevel;
             _config = config;
             _handler = handler;
         }
@@ -42,25 +43,25 @@ namespace Oxide.Ext.Discord.Logging
         /// <inheritdoc/>
         public void UpdateLogLevel(DiscordLogLevel level)
         {
-            _logLevel = level;
+            LogLevel = level;
         }
 
         /// <inheritdoc/>
         public bool IsLogging(DiscordLogLevel level)
         {
-            return level >= _logLevel && (level >= _config.ConsoleLogLevel || level >= _config.FileLogLevel);
+            return level >= LogLevel && (level >= _config.ConsoleLogLevel || level >= _config.FileLogLevel);
         }
         
         /// <inheritdoc/>
         public bool IsConsoleLogging(DiscordLogLevel level)
         {
-            return level >= _logLevel && level >= _config.ConsoleLogLevel;
+            return level >= LogLevel && level >= _config.ConsoleLogLevel;
         }
         
         /// <inheritdoc/>
         public bool IsFileLogging(DiscordLogLevel level)
         {
-            return level >= _logLevel && level >= _config.FileLogLevel;
+            return level >= LogLevel && level >= _config.FileLogLevel;
         }
         
         /// <inheritdoc/>

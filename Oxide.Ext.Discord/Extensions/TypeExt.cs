@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Reflection;
+using System.Text;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -38,5 +40,29 @@ namespace Oxide.Ext.Discord.Extensions
 
         internal static T GetAttribute<T>(this Type type, bool inherit) where T : Attribute => type.GetCustomAttribute(typeof(T), inherit) as T;
         internal static bool HasAttribute<T>(this Type type, bool inherit) where T : Attribute => GetAttribute<T>(type, inherit) != null;
+        
+        public static string GetRealTypeName(this Type t)
+        {
+            if (!t.IsGenericType)
+            {
+                return t.Name;
+            }
+
+            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+            sb.Append(t.Name.AsSpan().Slice(0, t.Name.IndexOf('`')));
+            sb.Append('<');
+            Type[] args = t.GetGenericArguments();
+            for (int index = 0; index < args.Length; index++)
+            {
+                Type arg = args[index];
+                if (index != 0)
+                {
+                    sb.Append(',');
+                }
+                sb.Append(GetRealTypeName(arg));
+            }
+            sb.Append('>');
+            return DiscordPool.Internal.ToStringAndFree(sb);
+        }
     }
 }

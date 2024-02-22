@@ -10,6 +10,7 @@ public class SelectMenuTemplate : BaseComponentTemplate
 
 | name | description |
 | --- | --- |
+| [SelectMenuTemplate](#selectmenutemplate-constructor)() | Constructor |
 | [SelectMenuTemplate](#selectmenutemplate-constructor)(…) | Constructor |
 | [ChannelTypes](#channeltypes-property) { get; set; } | ChannelSelect[`ChannelType`](../Entities/ChannelType.md) to show Max 25 options |
 | [CustomId](#customid-property) { get; set; } | Command for the Select Menu |
@@ -43,7 +44,23 @@ public override BaseComponent ToComponent(PlaceholderData data)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# SelectMenuTemplate constructor
+# SelectMenuTemplate constructor (1 of 2)
+
+Constructor
+
+```csharp
+public SelectMenuTemplate()
+```
+
+## See Also
+
+* class [SelectMenuTemplate](./SelectMenuTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# SelectMenuTemplate constructor (2 of 2)
 
 Constructor
 

@@ -1,6 +1,6 @@
 # DiscordEmbedTemplates class
 
-Modal Templates Library
+Embed Templates Library
 
 ```csharp
 public class DiscordEmbedTemplates : BaseMessageTemplateLibrary<DiscordEmbedTemplate>

@@ -395,8 +395,8 @@ Send a message to a webhook using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient client, 
-    string templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, 
-    WebhookExecuteParams executeParams = null)
+    TemplateKey templateName, WebhookCreateMessage message = null, 
+    PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
 ```
 
 | parameter | description |
@@ -412,6 +412,7 @@ public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient clien
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [WebhookCreateMessage](./WebhookCreateMessage.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [WebhookExecuteParams](./WebhookExecuteParams.md)
@@ -425,8 +426,8 @@ public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient clien
 Send a message to a webhook using a localized message template
 
 ```csharp
-public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, string templateName, 
-    string language = "en", WebhookCreateMessage message = null, 
+public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, 
+    TemplateKey templateName, string language = "en", WebhookCreateMessage message = null, 
     PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
 ```
 
@@ -444,6 +445,7 @@ public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, str
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [WebhookCreateMessage](./WebhookCreateMessage.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [WebhookExecuteParams](./WebhookExecuteParams.md)
@@ -514,8 +516,9 @@ Edit a message from a webhook using a global message template
 
 ```csharp
 public IPromise<DiscordMessage> EditWebhookMessageGlobalTemplate(DiscordClient client, 
-    Snowflake messageId, Plugin plugin, string templateName, WebhookEditMessage message = null, 
-    PlaceholderData placeholders = null, WebhookMessageParams messageParams = null)
+    Snowflake messageId, Plugin plugin, TemplateKey templateName, 
+    WebhookEditMessage message = null, PlaceholderData placeholders = null, 
+    WebhookMessageParams messageParams = null)
 ```
 
 | parameter | description |
@@ -534,6 +537,7 @@ public IPromise<DiscordMessage> EditWebhookMessageGlobalTemplate(DiscordClient c
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * struct [Snowflake](./Snowflake.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [WebhookEditMessage](./WebhookEditMessage.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [WebhookMessageParams](./WebhookMessageParams.md)
@@ -548,7 +552,7 @@ Edit a message from a webhook using a localized message template
 
 ```csharp
 public IPromise<DiscordMessage> EditWebhookMessageTemplate(DiscordClient client, 
-    Snowflake messageId, Plugin plugin, string templateName, string language = "en", 
+    Snowflake messageId, Plugin plugin, TemplateKey templateName, string language = "en", 
     WebhookEditMessage message = null, PlaceholderData placeholders = null, 
     WebhookMessageParams messageParams = null)
 ```
@@ -570,6 +574,7 @@ public IPromise<DiscordMessage> EditWebhookMessageTemplate(DiscordClient client,
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * struct [Snowflake](./Snowflake.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [WebhookEditMessage](./WebhookEditMessage.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [WebhookMessageParams](./WebhookMessageParams.md)

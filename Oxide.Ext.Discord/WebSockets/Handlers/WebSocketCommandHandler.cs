@@ -200,7 +200,6 @@ namespace Oxide.Ext.Discord.WebSockets
             _online?.Dispose();
             _commands?.Dispose();
             _source?.Cancel();
-            _source?.Dispose();
         }
 
         internal IReadOnlyCollection<WebSocketCommand> GetPendingCommands()

@@ -76,6 +76,7 @@ namespace Oxide.Ext.Discord.Libraries
 
             AddDiscordLocale(DiscordLocale.Create("en-GB"), ServerLocale.Create("en"));
             AddDiscordLocale(DiscordLocale.Create("zh-TW"), ServerLocale.Create("zh"));
+            AddDiscordLocale(DiscordLocale.Create("es-419"), ServerLocale.Create("es"));
         }
 
         /// <summary>
@@ -243,9 +244,13 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 langCache = new Hash<string, string>();
                 _pluginLangCache[id] = langCache;
-                foreach (KeyValuePair<string, string> lang in OxideLibrary.Instance.Lang.GetMessages(language.Id, plugin))
+                Dictionary<string, string> messages = OxideLibrary.Instance.Lang.GetMessages(language.Id, plugin);
+                if (messages != null)
                 {
-                    langCache[lang.Key] = lang.Value;
+                    foreach (KeyValuePair<string, string> lang in messages)
+                    {
+                        langCache[lang.Key] = lang.Value;
+                    }
                 }
             }
 

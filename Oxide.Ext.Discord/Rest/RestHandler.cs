@@ -9,6 +9,7 @@ using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Constants;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
@@ -218,19 +219,19 @@ namespace Oxide.Ext.Discord.Rest
         public void StartRequest(BaseRequest request)
         {
             _logger.Debug($"{nameof(RestHandler)}.{nameof(StartRequest)} Method: {{0}} Route: {{1}}", request.Method, request.Route);
-            RequestHandler.StartRequest(this, request);
+            RequestHandler handler = RequestHandler.CreateRequest(request);
+            QueueBucket(handler, request);
         }
         
         /// <summary>
         /// Queues the request for the bucket
         /// </summary>
-        public Bucket QueueBucket(RequestHandler handler, BaseRequest request)
+        public void QueueBucket(RequestHandler handler, BaseRequest request)
         {
             BucketId bucketId = BucketIdFactory.GenerateId(request.Method, request.Route);
             _logger.Debug("RestHandler Queuing Bucket for {0} bucket {1}",  request.Route, bucketId);
             Bucket bucket = GetBucket(bucketId);
             bucket.QueueRequest(handler);
-            return bucket;
         }
 
         internal void UpgradeToKnownBucket(Bucket bucket, BucketId newBucketId)
@@ -254,6 +255,7 @@ namespace Oxide.Ext.Discord.Rest
         internal void RemoveBucket(Bucket bucket)
         {
             Buckets.TryRemove(bucket.Id, out Bucket _);
+            bucket.ShutDown();
             bucket.Dispose();
         }
 
@@ -264,9 +266,9 @@ namespace Oxide.Ext.Discord.Rest
         /// <returns></returns>
         public Bucket GetBucket(BucketId bucketId)
         {
-            if (RouteToBucketId.ContainsKey(bucketId))
+            if (RouteToBucketId.TryGetValue(bucketId, out BucketId value))
             {
-                bucketId = RouteToBucketId[bucketId];
+                bucketId = value;
             }
 
             if (!Buckets.TryGetValue(bucketId, out Bucket bucket))
@@ -281,9 +283,10 @@ namespace Oxide.Ext.Discord.Rest
 
         internal void OnClientClosed(DiscordClient client)
         {
-            foreach (KeyValuePair<BucketId, Bucket> bucket in Buckets)
+            _logger.Debug($"{nameof(RestHandler)}.{nameof(OnClientClosed)} Client: {{0}}", client.Plugin.FullName());
+            foreach (Bucket bucket in Buckets.Values)
             {
-                bucket.Value.AbortClientRequests(client);
+                bucket.AbortClientRequests(client);
             }
         }
 
@@ -294,6 +297,7 @@ namespace Oxide.Ext.Discord.Rest
         {
             foreach (KeyValuePair<BucketId, Bucket> bucket in Buckets)
             {
+                bucket.Value.ShutDown();
                 bucket.Value.Dispose();
             }
             

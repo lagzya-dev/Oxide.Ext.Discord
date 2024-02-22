@@ -20,6 +20,7 @@ public abstract class BasePool<TPooled, TPool> : IPool<TPooled>
 | [ClearPoolEntities](#clearpoolentities-method)() | Clears the pool of all pooled objects and resets state to when the pool was first created |
 | [Free](#free-method)(…) | Frees an item back to the pool |
 | [Get](#get-method)() | Returns an element from the pool if it exists else it creates a new one |
+| [LogDebug](#logdebug-method)(…) |  |
 | [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 | [RemoveAllPools](#removeallpools-method)() | Wipes all the pools for this type |
 | static [ForPlugin](#forplugin-method)(…) | Returns a pool for the given plugin pool |
@@ -218,6 +219,20 @@ True if can be freed; false otherwise
 
 ## See Also
 
+* class [BasePool&lt;TPooled,TPool&gt;](./BasePool%7BTPooled,TPool%7D.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# LogDebug method
+
+```csharp
+public void LogDebug(DebugLogger logger)
+```
+
+## See Also
+
+* class [DebugLogger](../Logging/DebugLogger.md)
 * class [BasePool&lt;TPooled,TPool&gt;](./BasePool%7BTPooled,TPool%7D.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

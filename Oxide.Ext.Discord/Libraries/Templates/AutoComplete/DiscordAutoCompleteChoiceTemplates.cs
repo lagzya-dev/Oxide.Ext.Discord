@@ -38,10 +38,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="minVersion">Minimum supported version of the template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Throw if plugin or templateName is null</exception>
-        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
+        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterGlobalTemplate(Plugin plugin, TemplateKey templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
 
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             return RegisterTemplate(id, template, version, minVersion);
@@ -58,10 +58,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="language">Server Language for the localized template</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Throw if plugin, templateName, or language is null/empty</exception>
-        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plugin plugin, string templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
+        public IPromise<DiscordAutoCompleteChoiceTemplate> RegisterLocalizedTemplate(Plugin plugin, TemplateKey templateName, DiscordAutoCompleteChoiceTemplate template, TemplateVersion version, TemplateVersion minVersion, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             if (string.IsNullOrEmpty(language)) throw new ArgumentNullException(nameof(language));
 
             TemplateId id = TemplateId.CreateLocalized(plugin, templateName, ServerLocale.Parse(language));
@@ -82,7 +82,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="plugin">Plugin for the template</param>
         /// <param name="templateName">Name of the template</param>
         /// <returns></returns>
-        public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, string templateName)
+        public DiscordAutoCompleteChoiceTemplate GetGlobalTemplate(Plugin plugin, TemplateKey templateName)
         {
             TemplateId id = TemplateId.CreateGlobal(plugin, templateName);
             if (_globalCache.TryGetValue(id, out DiscordAutoCompleteChoiceTemplate cached))
@@ -94,7 +94,7 @@ namespace Oxide.Ext.Discord.Libraries
             
             if (template == null)
             {
-                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}' is not registered", id.GetPluginName(), GetType().Name, id.TemplateName);
+                Logger.Error("Plugin {0} is using the {1} Template API but message template name '{2}' is not registered", id.GetPluginName(), GetType().GetRealTypeName(), id.TemplateName);
                 return new DiscordAutoCompleteChoiceTemplate();
             }
             
@@ -112,10 +112,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="placeholders">Placeholders to apply</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
-        public CommandOptionChoice ApplyGlobal(Plugin plugin, string templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
+        public CommandOptionChoice ApplyGlobal(Plugin plugin, TemplateKey templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
             
             if (choice == null)
             {
@@ -142,10 +142,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="language">Server Language to apply</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
-        public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null, string language = DiscordLocales.DefaultServerLanguage)
+        public CommandOptionChoice ApplyLocalized(Plugin plugin, TemplateKey templateName, CommandOptionChoice choice = null, PlaceholderData placeholders = null, string language = DiscordLocales.DefaultServerLanguage)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
 
             if (choice == null)
             {
@@ -168,10 +168,10 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="placeholders">Placeholders to apply</param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">Thrown if plugin or templateName is null/empty</exception>
-        public CommandOptionChoice ApplyLocalized(Plugin plugin, string templateName, DiscordInteraction interaction, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
+        public CommandOptionChoice ApplyLocalized(Plugin plugin, TemplateKey templateName, DiscordInteraction interaction, CommandOptionChoice choice = null, PlaceholderData placeholders = null)
         {
             if (plugin == null) throw new ArgumentNullException(nameof(plugin));
-            if (string.IsNullOrEmpty(templateName)) throw new ArgumentNullException(nameof(templateName));
+            if (!templateName.IsValid) throw new ArgumentNullException(nameof(templateName));
 
             if (choice == null)
             {

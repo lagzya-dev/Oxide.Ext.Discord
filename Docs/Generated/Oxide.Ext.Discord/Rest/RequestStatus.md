@@ -11,10 +11,12 @@ public enum RequestStatus : byte
 | name | value | description |
 | --- | --- | --- |
 | InQueue | `InQueue` | Request is in the queue waiting to be processed |
+| Started | `Started` | Request has been started |
 | PendingBucket | `PendingBucket` | Requesting is waiting for bucket to be ready |
 | PendingStart | `PendingStart` | Request is waiting to start |
 | InProgress | `InProgress` | Request is in progress |
 | Completed | `Completed` | Request completed and was not cancelled |
+| Cancelled | `Cancelled` | Request was cancelled |
 
 ## See Also
 

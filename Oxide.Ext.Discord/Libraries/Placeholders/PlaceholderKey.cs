@@ -1,11 +1,12 @@
 ﻿using System;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a Placeholder Key. This is the key for placeholder usage and lookup
     /// </summary>
-    public struct PlaceholderKey : IEquatable<PlaceholderKey>
+    public struct PlaceholderKey : IEquatable<PlaceholderKey>, IComparable<PlaceholderKey>, IDiscordKey
     {
         /// <summary>
         /// Placeholder Key
@@ -62,6 +63,9 @@ namespace Oxide.Ext.Discord.Libraries
 
         ///<inheritdoc/>
         public override int GetHashCode() => Placeholder != null ? Placeholder.GetHashCode() : 0;
+
+        /// <inheritdoc />
+        public int CompareTo(PlaceholderKey other) => string.Compare(Placeholder, other.Placeholder, StringComparison.OrdinalIgnoreCase);
 
         /// <summary>
         /// Implicitly converts to <see cref="string"/> by calling the <see cref="ToString"/> method.

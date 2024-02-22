@@ -31,6 +31,7 @@ public class DiscordInteraction
 | [Version](#version-property) { get; set; } | Read-only property, always 1 |
 | readonly [CreatedDate](#createddate-field) | The UTC DateTime this interaction was created |
 | [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
+| [CreateFollowUpTemplateResponse](#createfollowuptemplateresponse-method)(…) | Creates a interaction follow up message response from a message template |
 | [CreateModalResponse](#createmodalresponse-method)(…) | Creates a interaction modal response from a modal template |
 | [CreatePremiumRequiredResponse](#createpremiumrequiredresponse-method)(…) | Creates a response indication that the interaction requires premium to be purchased. |
 | [CreateResponse](#createresponse-method-1-of-7)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
@@ -349,7 +350,7 @@ Creates a interaction message response from a message template
 
 ```csharp
 public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponseType type, 
-    string templateName, InteractionCallbackData message = null, 
+    TemplateKey templateName, InteractionCallbackData message = null, 
     PlaceholderData placeholders = null)
 ```
 
@@ -372,6 +373,7 @@ public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponse
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * enum [InteractionResponseType](./InteractionResponseType.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [InteractionCallbackData](./InteractionCallbackData.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
@@ -384,7 +386,7 @@ public IPromise CreateTemplateResponse(DiscordClient client, InteractionResponse
 Creates a interaction modal response from a modal template
 
 ```csharp
-public IPromise CreateModalResponse(DiscordClient client, string templateName, 
+public IPromise CreateModalResponse(DiscordClient client, TemplateKey templateName, 
     InteractionModalMessage message = null, PlaceholderData placeholders = null)
 ```
 
@@ -405,6 +407,7 @@ public IPromise CreateModalResponse(DiscordClient client, string templateName,
 
 * interface [IPromise](../Interfaces/IPromise.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [InteractionModalMessage](./InteractionModalMessage.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
@@ -506,7 +509,7 @@ Edit a interaction response with a message template
 
 ```csharp
 public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient client, 
-    string templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
+    TemplateKey templateName, MessageUpdate message = null, PlaceholderData placeholders = null)
 ```
 
 | parameter | description |
@@ -527,6 +530,7 @@ public IPromise<DiscordMessage> EditTemplateOriginalResponse(DiscordClient clien
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
 * class [MessageUpdate](./MessageUpdate.md)
 * class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
@@ -601,6 +605,42 @@ public IPromise<DiscordMessage> CreateFollowUpMessage(DiscordClient client,
 * class [DiscordMessage](./DiscordMessage.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [InteractionFollowupBuilder](../Builders/InteractionFollowupBuilder.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CreateFollowUpTemplateResponse method
+
+Creates a interaction follow up message response from a message template
+
+```csharp
+public IPromise<DiscordMessage> CreateFollowUpTemplateResponse(DiscordClient client, 
+    TemplateKey templateName, CommandFollowupCreate message = null, 
+    PlaceholderData placeholders = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| templateName | Name of the template |
+| message | Message to send (optional) |
+| placeholders | Placeholders to apply (optional) |
+
+## Exceptions
+
+| exception | condition |
+| --- | --- |
+| ArgumentNullException | Thrown if plugin or templateName is null |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* struct [TemplateKey](../Libraries/TemplateKey.md)
+* class [CommandFollowupCreate](./CommandFollowupCreate.md)
+* class [PlaceholderData](../Libraries/PlaceholderData.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

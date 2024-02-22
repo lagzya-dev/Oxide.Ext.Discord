@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
@@ -51,7 +52,7 @@ namespace Oxide.Ext.Discord.Callbacks
 
         protected override string GetExceptionMessage()
         {
-            return $"Template: {_template.GetType().Name} Placeholders: {_placeholders?.Count} Promise: {_promise?.Id}";
+            return $"Template: {_template.GetType().GetRealTypeName()} Placeholders: {_placeholders?.Count} Promise: {_promise?.Id}";
         }
 
         protected override void EnterPool()

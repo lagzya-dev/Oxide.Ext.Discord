@@ -129,5 +129,13 @@ namespace Oxide.Ext.Discord.Factory
             }
         }
         #endregion
+
+        internal void UpdateLogLevel()
+        {
+            foreach (DiscordClient client in _clients.Values)
+            {
+                client.UpdateLogLevel();
+            }
+        }
     }
 }

@@ -58,6 +58,13 @@ namespace Oxide.Ext.Discord.Libraries
         [JsonProperty("Select Menu Enabled")]
         public bool Enabled { get; set; } = true;
 
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        [JsonConstructor]
+        public SelectMenuTemplate() { }
+        
         /// <summary>
         /// Constructor
         /// </summary>

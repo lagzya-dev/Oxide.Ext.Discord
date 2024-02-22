@@ -3,8 +3,8 @@
 Represents an ID in discord.
 
 ```csharp
-public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable<Snowflake>, 
-    IEquatable<ulong>
+public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IDiscordKey, 
+    IEquatable<Snowflake>, IEquatable<ulong>
 ```
 
 ## Public Members
@@ -34,6 +34,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IEquatable
 
 ## See Also
 
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [Snowflake.cs](../../../../Oxide.Ext.Discord/Entities/Snowflake.cs)
