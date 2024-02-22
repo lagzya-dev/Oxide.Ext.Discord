@@ -5,13 +5,13 @@
 | interface [IBulkTemplate&lt;T&gt;](./IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 | interface [IDebugLoggable](./IDebugLoggable.md) | Represents an object that supports debug logging |
 | interface [IDiscordCacheable&lt;T&gt;](./IDiscordCacheable%7BT%7D.md) | Represents entities that are cacheable by the DiscordExtension |
+| interface [IDiscordKey](./IDiscordKey.md) | Represents a Key in Discord |
 | interface [IDiscordLoggingConfig](./IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [IDiscordMessageTemplate](./IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordPool](./IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./IFileAttachments.md) | Represents and interface for entities that can upload files |
-| interface [IKey](./IKey.md) | Represents a Key in Discord |
 | interface [ILogger](./ILogger.md) | Represents an interface for a logger |
 | interface [IOutputLogger](./IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |

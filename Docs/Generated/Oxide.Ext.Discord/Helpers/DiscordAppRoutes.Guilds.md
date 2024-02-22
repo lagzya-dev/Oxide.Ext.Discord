@@ -33,12 +33,12 @@ public static class Guilds
 Favorites Channel App Route
 
 ```csharp
-public static string FavoritesChannel(IKey channelId)
+public static string FavoritesChannel(IDiscordKey channelId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -49,12 +49,12 @@ public static string FavoritesChannel(IKey channelId)
 Guild App Route
 
 ```csharp
-public static string Guild(IKey guildId)
+public static string Guild(IDiscordKey guildId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -65,12 +65,12 @@ public static string Guild(IKey guildId)
 Guild Channel App Route
 
 ```csharp
-public static string Channel(IKey guildId, IKey channelId)
+public static string Channel(IDiscordKey guildId, IDiscordKey channelId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -81,12 +81,12 @@ public static string Channel(IKey guildId, IKey channelId)
 Browse Guild Channels App Route
 
 ```csharp
-public static string BrowseChannel(IKey guildId)
+public static string BrowseChannel(IDiscordKey guildId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -97,12 +97,12 @@ public static string BrowseChannel(IKey guildId)
 Server Guide App Route
 
 ```csharp
-public static string ServerGuide(IKey guildId)
+public static string ServerGuide(IDiscordKey guildId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -113,12 +113,12 @@ public static string ServerGuide(IKey guildId)
 Event App Route
 
 ```csharp
-public static string Event(IKey guildId, IKey eventId)
+public static string Event(IDiscordKey guildId, IDiscordKey eventId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -129,12 +129,12 @@ public static string Event(IKey guildId, IKey eventId)
 Message App Route
 
 ```csharp
-public static string Message(IKey guildId, IKey channelId, IKey messageId)
+public static string Message(IDiscordKey guildId, IDiscordKey channelId, IDiscordKey messageId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -145,12 +145,12 @@ public static string Message(IKey guildId, IKey channelId, IKey messageId)
 Membership Screening App Route
 
 ```csharp
-public static string MembershipScreening(IKey guildId)
+public static string MembershipScreening(IDiscordKey guildId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -161,12 +161,12 @@ public static string MembershipScreening(IKey guildId)
 Role Subscriptions App Route
 
 ```csharp
-public static string RoleSubscriptions(IKey guildId)
+public static string RoleSubscriptions(IDiscordKey guildId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [Guilds](./DiscordAppRoutes.Guilds.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

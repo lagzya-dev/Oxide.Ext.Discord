@@ -28,12 +28,12 @@ public static class DiscordAppRoutes
 User App Route
 
 ```csharp
-public static string User(IKey userId)
+public static string User(IDiscordKey userId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [DiscordAppRoutes](./DiscordAppRoutes.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

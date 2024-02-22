@@ -3,7 +3,7 @@
 Represents a Placeholder Key. This is the key for placeholder usage and lookup
 
 ```csharp
-public struct PlaceholderKey : IComparable<PlaceholderKey>, IEquatable<PlaceholderKey>, IKey
+public struct PlaceholderKey : IComparable<PlaceholderKey>, IDiscordKey, IEquatable<PlaceholderKey>
 ```
 
 ## Public Members
@@ -23,7 +23,7 @@ public struct PlaceholderKey : IComparable<PlaceholderKey>, IEquatable<Placehold
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [PlaceholderKey.cs](../../../../Oxide.Ext.Discord/Libraries/PlaceholderKey.cs)

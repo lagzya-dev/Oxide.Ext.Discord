@@ -25,12 +25,12 @@ public static class DMs
 DM Channel App Route
 
 ```csharp
-public static string Channel(IKey channelId)
+public static string Channel(IDiscordKey channelId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [DMs](./DiscordAppRoutes.DMs.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -41,12 +41,12 @@ public static string Channel(IKey channelId)
 DM Message App Route
 
 ```csharp
-public static string Message(IKey channelId, IKey messageId)
+public static string Message(IDiscordKey channelId, IDiscordKey messageId)
 ```
 
 ## See Also
 
-* interface [IKey](../Interfaces/IKey.md)
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * class [DMs](./DiscordAppRoutes.DMs.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

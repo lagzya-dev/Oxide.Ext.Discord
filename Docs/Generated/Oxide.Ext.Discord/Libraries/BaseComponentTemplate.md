@@ -18,6 +18,7 @@ public abstract class BaseComponentTemplate
 
 | name | description |
 | --- | --- |
+| [BaseComponentTemplate](#basecomponenttemplate-constructor)() | Constructor |
 | [BaseComponentTemplate](#basecomponenttemplate-constructor)(…) | Represents a base Message Component Template |
 
 ## See Also
@@ -52,7 +53,23 @@ Component
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# BaseComponentTemplate constructor
+# BaseComponentTemplate constructor (1 of 2)
+
+Constructor
+
+```csharp
+protected BaseComponentTemplate()
+```
+
+## See Also
+
+* class [BaseComponentTemplate](./BaseComponentTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# BaseComponentTemplate constructor (2 of 2)
 
 Represents a base Message Component Template
 

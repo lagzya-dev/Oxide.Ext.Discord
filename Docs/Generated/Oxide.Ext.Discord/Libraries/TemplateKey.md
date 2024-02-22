@@ -3,7 +3,7 @@
 Represents a Template Key. This is the key for template lookup
 
 ```csharp
-public struct TemplateKey : IEquatable<TemplateKey>
+public struct TemplateKey : IDiscordKey, IEquatable<TemplateKey>
 ```
 
 ## Public Members
@@ -22,6 +22,7 @@ public struct TemplateKey : IEquatable<TemplateKey>
 
 ## See Also
 
+* interface [IDiscordKey](../Interfaces/IDiscordKey.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [TemplateKey.cs](../../../../Oxide.Ext.Discord/Libraries/TemplateKey.cs)

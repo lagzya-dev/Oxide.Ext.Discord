@@ -1,9 +1,9 @@
-# IKey interface
+# IDiscordKey interface
 
 Represents a Key in Discord
 
 ```csharp
-public interface IKey
+public interface IDiscordKey
 ```
 
 ## Members
@@ -16,7 +16,7 @@ public interface IKey
 
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-* [IKey.cs](../../../../Oxide.Ext.Discord/Interfaces/IKey.cs)
+* [IDiscordKey.cs](../../../../Oxide.Ext.Discord/Interfaces/IDiscordKey.cs)
    
    
 # ToString method
@@ -29,7 +29,7 @@ public string ToString()
 
 ## See Also
 
-* interface [IKey](./IKey.md)
+* interface [IDiscordKey](./IDiscordKey.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 

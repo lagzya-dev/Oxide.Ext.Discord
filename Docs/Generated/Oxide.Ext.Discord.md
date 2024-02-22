@@ -488,7 +488,6 @@
 | static class [DiscordFormatting](./Oxide.Ext.Discord/Helpers/DiscordFormatting.md) | Represents [Message text formatting options](https://discord.com/developers/docs/reference#message-formatting-formats) |
 | static class [ServerFormatting](./Oxide.Ext.Discord/Helpers/ServerFormatting.md) | Server Text Formatting |
 | enum [SettingsPage](./Oxide.Ext.Discord/Helpers/SettingsPage.md) | App Settings Pages |
-| static class [TimeHelpers](./Oxide.Ext.Discord/Helpers/TimeHelpers.md) | Helper methods relating to time |
 | enum [TimestampStyles](./Oxide.Ext.Discord/Helpers/TimestampStyles.md) | Available flags for timestamp formatting |
 
 ## Oxide.Ext.Discord.Interfaces namespace
@@ -498,13 +497,13 @@
 | interface [IBulkTemplate&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IBulkTemplate%7BT%7D.md) | Represents a Template that supports bulk operations |
 | interface [IDebugLoggable](./Oxide.Ext.Discord/Interfaces/IDebugLoggable.md) | Represents an object that supports debug logging |
 | interface [IDiscordCacheable&lt;T&gt;](./Oxide.Ext.Discord/Interfaces/IDiscordCacheable%7BT%7D.md) | Represents entities that are cacheable by the DiscordExtension |
+| interface [IDiscordKey](./Oxide.Ext.Discord/Interfaces/IDiscordKey.md) | Represents a Key in Discord |
 | interface [IDiscordLoggingConfig](./Oxide.Ext.Discord/Interfaces/IDiscordLoggingConfig.md) | Interface for Discord Logging Configuration |
 | interface [IDiscordMessageTemplate](./Oxide.Ext.Discord/Interfaces/IDiscordMessageTemplate.md) | Interfaces for [`DiscordMessageTemplates`](./Oxide.Ext.Discord/Libraries/DiscordMessageTemplates.md) Messages |
 | interface [IDiscordPlugin](./Oxide.Ext.Discord/Interfaces/IDiscordPlugin.md) | Represents a plugin that uses the Discord Extension |
 | interface [IDiscordPool](./Oxide.Ext.Discord/Interfaces/IDiscordPool.md) | Interface for plugins to use that need access to a pool |
 | interface [IDiscordQueryString](./Oxide.Ext.Discord/Interfaces/IDiscordQueryString.md) | Interface for Discord Query Strings |
 | interface [IFileAttachments](./Oxide.Ext.Discord/Interfaces/IFileAttachments.md) | Represents and interface for entities that can upload files |
-| interface [IKey](./Oxide.Ext.Discord/Interfaces/IKey.md) | Represents a Key in Discord |
 | interface [ILogger](./Oxide.Ext.Discord/Interfaces/ILogger.md) | Represents an interface for a logger |
 | interface [IOutputLogger](./Oxide.Ext.Discord/Interfaces/IOutputLogger.md) | Represents a specific logger output |
 | interface [IPendingPromise](./Oxide.Ext.Discord/Interfaces/IPendingPromise.md) | Represents a promise the is still pending waiting to be resolved |
@@ -559,13 +558,15 @@
 | class [DiscordAppCommand](./Oxide.Ext.Discord/Libraries/DiscordAppCommand.md) | Application Command Oxide Library handler Routes Application Commands to their respective hook method handlers instead of having to manually handle it. |
 | class [DiscordAutoCompleteChoiceTemplate](./Oxide.Ext.Discord/Libraries/DiscordAutoCompleteChoiceTemplate.md) | Template for Discord Auto Completes |
 | class [DiscordAutoCompleteChoiceTemplates](./Oxide.Ext.Discord/Libraries/DiscordAutoCompleteChoiceTemplates.md) | Auto Complete Choice Templates Library |
+| class [DiscordButtonTemplates](./Oxide.Ext.Discord/Libraries/DiscordButtonTemplates.md) | Button Templates Library |
 | class [DiscordCommand](./Oxide.Ext.Discord/Libraries/DiscordCommand.md) | Represents a library for discord commands |
 | class [DiscordCommandLocalization](./Oxide.Ext.Discord/Libraries/DiscordCommandLocalization.md) | Command Localizations for Application Commands |
 | class [DiscordCommandLocalizations](./Oxide.Ext.Discord/Libraries/DiscordCommandLocalizations.md) | Library for localizing [`DiscordApplicationCommand`](./Oxide.Ext.Discord/Entities/DiscordApplicationCommand.md)s |
 | class [DiscordEmbedFieldTemplate](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplate.md) | Discord Template for Embed Field |
-| class [DiscordEmbedFieldTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplates.md) | Modal Templates Library |
+| class [DiscordEmbedFieldTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedFieldTemplates.md) | Embed Field Templates Library |
 | class [DiscordEmbedTemplate](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplate.md) | Discord Template for embed |
-| class [DiscordEmbedTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplates.md) | Modal Templates Library |
+| class [DiscordEmbedTemplates](./Oxide.Ext.Discord/Libraries/DiscordEmbedTemplates.md) | Embed Templates Library |
+| class [DiscordInputTextTemplates](./Oxide.Ext.Discord/Libraries/DiscordInputTextTemplates.md) | InputText Templates Library |
 | class [DiscordLink](./Oxide.Ext.Discord/Libraries/DiscordLink.md) | Represents a library for discord linking |
 | struct [DiscordLocale](./Oxide.Ext.Discord/Libraries/DiscordLocale.md) | Represents a Locale in Discord |
 | class [DiscordLocales](./Oxide.Ext.Discord/Libraries/DiscordLocales.md) | Converts discord locale codes into oxide locale codes |
@@ -575,6 +576,7 @@
 | class [DiscordModalTemplates](./Oxide.Ext.Discord/Libraries/DiscordModalTemplates.md) | Modal Templates Library |
 | class [DiscordPlaceholders](./Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md) | Discord Placeholders Library |
 | class [DiscordPool](./Oxide.Ext.Discord/Libraries/DiscordPool.md) | Discord Pool Library |
+| class [DiscordSelectMenuTemplates](./Oxide.Ext.Discord/Libraries/DiscordSelectMenuTemplates.md) | InputText Templates Library |
 | class [DiscordSubscription](./Oxide.Ext.Discord/Libraries/DiscordSubscription.md) | Represents a channel subscription for a plugin |
 | class [DiscordSubscriptions](./Oxide.Ext.Discord/Libraries/DiscordSubscriptions.md) | Represents Discord Subscriptions Oxide Library Allows for plugins to subscribe to discord channels |
 | class [EmbedFooterTemplate](./Oxide.Ext.Discord/Libraries/EmbedFooterTemplate.md) | Discord Template for Embed Footer |

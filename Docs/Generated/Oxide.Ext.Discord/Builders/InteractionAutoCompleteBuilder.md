@@ -31,6 +31,7 @@ public class InteractionAutoCompleteBuilder
 | [AddPermissionsNotInGroup](#addpermissionsnotingroup-method)(…) | Adds a List of Permissions that are not in a given group |
 | [AddPermissionsPlayerIn](#addpermissionsplayerin-method)(…) | Adds The List of Permissions that playerId has |
 | [AddPermissionsPlayerNotIn](#addpermissionsplayernotin-method)(…) | Adds The List of Permissions that playerId does not have |
+| [AddPlayerList](#addplayerlist-method-1-of-2)(…) | Add a custom list of players that are filtered by player name or player ID (2 methods) |
 | [Build](#build-method)() | Returns the built message |
 | [CanAddChoice](#canaddchoice-method)() | Returns if the Auto Complete can add any more choices |
 
@@ -504,6 +505,49 @@ public void AddAllPlayers(string filter = null, PlayerNameFormatter formatter = 
 ## See Also
 
 * class [PlayerNameFormatter](./PlayerNameFormatter.md)
+* class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AddPlayerList method (1 of 2)
+
+```csharp
+public void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, 
+    HashSet<string> addedList)
+```
+
+## See Also
+
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
+* class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
+* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AddPlayerList method (2 of 2)
+
+Add a custom list of players that are filtered by player name or player ID
+
+```csharp
+public void AddPlayerList(string filter, IEnumerable<IPlayer> list, PlayerNameFormatter formatter, 
+    HashSet<string> addedList = null, 
+    AutoCompleteSearchMode search = AutoCompleteSearchMode.Contains)
+```
+
+| parameter | description |
+| --- | --- |
+| filter | Filter to filter by |
+| list | Custom list of players |
+| formatter | Formatter for the player name |
+| addedList | List of already added players |
+| search | Mode to match on player name |
+
+## See Also
+
+* class [PlayerNameFormatter](./PlayerNameFormatter.md)
+* enum [AutoCompleteSearchMode](./AutoCompleteSearchMode.md)
 * class [InteractionAutoCompleteBuilder](./InteractionAutoCompleteBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

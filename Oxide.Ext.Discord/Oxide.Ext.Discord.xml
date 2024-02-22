@@ -1203,6 +1203,16 @@
             <param name="filter">String to filter by</param>
             <param name="formatter">Formatter for the player name</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPlayerList(System.String,System.Collections.Generic.IEnumerable{Oxide.Core.Libraries.Covalence.IPlayer},Oxide.Ext.Discord.Builders.PlayerNameFormatter,System.Collections.Generic.HashSet{System.String},Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
+            <summary>
+            Add a custom list of players that are filtered by player name or player ID
+            </summary>
+            <param name="filter">Filter to filter by</param>
+            <param name="list">Custom list of players</param>
+            <param name="formatter">Formatter for the player name</param>
+            <param name="addedList">List of already added players</param>
+            <param name="search">Mode to match on player name</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddByPlayerId(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
             Adds a player by player Id to the list
@@ -14299,6 +14309,11 @@
             Value will appear in the Message Create event.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageCreate.EnforceNonce">
+            <summary>
+            If true and nonce is present, it will be checked for uniqueness in the past few minutes. If another message was created by the same author with the same nonce, that message will be returned and no new message will be created.
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageCreate.MessageReference">
             <summary>
             Include to make your message a reply
@@ -18081,7 +18096,7 @@
             Sourced from: https://gist.github.com/ghostrider-05/8f1a0bfc27c7c4509b4ea4e8ce718af0
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.User(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.User(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             User App Route
             </summary>
@@ -18132,12 +18147,12 @@
             DM App routes
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Channel(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Channel(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             DM Channel App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Message(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.DMs.Message(Oxide.Ext.Discord.Interfaces.IDiscordKey,Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             DM Message App Route
             </summary>
@@ -18152,47 +18167,47 @@
             Favorite Channels App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.FavoritesChannel(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.FavoritesChannel(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Favorites Channel App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Guild(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Guild(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Guild App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Channel(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Channel(Oxide.Ext.Discord.Interfaces.IDiscordKey,Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Guild Channel App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.BrowseChannel(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.BrowseChannel(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Browse Guild Channels App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.ServerGuide(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.ServerGuide(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Server Guide App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Event(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Event(Oxide.Ext.Discord.Interfaces.IDiscordKey,Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Event App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Message(Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey,Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.Message(Oxide.Ext.Discord.Interfaces.IDiscordKey,Oxide.Ext.Discord.Interfaces.IDiscordKey,Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Message App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.MembershipScreening(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.MembershipScreening(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Membership Screening App Route
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.RoleSubscriptions(Oxide.Ext.Discord.Interfaces.IKey)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordAppRoutes.Guilds.RoleSubscriptions(Oxide.Ext.Discord.Interfaces.IDiscordKey)">
             <summary>
             Role Subscriptions App Route
             </summary>
@@ -18872,35 +18887,6 @@
             Dismissible Content Options Page
             </summary>
         </member>
-        <member name="T:Oxide.Ext.Discord.Helpers.TimeHelpers">
-            <summary>
-            Helper methods relating to time
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.SecondsSinceEpoch">
-            <summary>
-            Gets how many seconds since the linux epoch
-            </summary>
-            <returns>Seconds since linux epoch</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.MillisecondsSinceEpoch">
-            <summary>
-            Gets how many seconds since the linux epoch
-            </summary>
-            <returns>Seconds since linux epoch</returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToDateTimeOffsetFromMilliseconds(System.Int64)">
-            <summary>
-            Converts the milliseconds since linux epoch to a <see cref="T:System.DateTimeOffset"/>
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.TimeHelpers.ToDateTimeOffsetFromSeconds(System.Double)">
-            <summary>
-            Converts the seconds since linux epoch to a DateTime
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:Oxide.Ext.Discord.Helpers.TimestampStyles">
             <summary>
             Available flags for timestamp formatting
@@ -18991,6 +18977,17 @@
             </summary>
             <param name="update">Update data to apply</param>
         </member>
+        <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordKey">
+            <summary>
+            Represents a Key in Discord
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IDiscordKey.ToString">
+            <summary>
+            Converts the key to a string
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IDiscordQueryString">
             <summary>
             Interface for Discord Query Strings
@@ -19017,17 +19014,6 @@
             <summary>
             File attachments for an entity
             </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Interfaces.IKey">
-            <summary>
-            Represents a Key in Discord
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Interfaces.IKey.ToString">
-            <summary>
-            Converts the key to a string
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.ISnowflakeEntity">
             <summary>
@@ -21249,6 +21235,11 @@
             <see cref="P:System.TimeSpan.Days"/> placeholder
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TimeSpanPlaceholders.Formatted(Oxide.Ext.Discord.Libraries.PlaceholderState,System.TimeSpan)">
+            <summary>
+            <see cref="P:System.TimeSpan.Days"/> placeholder
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.TimeSpanPlaceholders.Hours(System.TimeSpan)">
             <summary>
             <see cref="P:System.TimeSpan.Hours"/> placeholder
@@ -22173,6 +22164,11 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Libraries.TimespanKeys.Time">
+            <summary>
+            <see cref="T:Oxide.Ext.Discord.Libraries.PlaceholderKey"/> for <see cref="T:System.TimeSpan"/>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.TimespanKeys.Formatted">
             <summary>
             <see cref="T:Oxide.Ext.Discord.Libraries.PlaceholderKey"/> for <see cref="T:System.TimeSpan"/>
             </summary>
@@ -23362,6 +23358,11 @@
             Type of the component
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseComponentTemplate.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.BaseComponentTemplate.#ctor(Oxide.Ext.Discord.Entities.MessageComponentType)">
             <summary>
             Represents a base Message Component Template
@@ -23441,6 +23442,39 @@
             Converts the template to a <see cref="T:Oxide.Ext.Discord.Entities.ButtonComponent"/>
             </summary>
             <returns></returns>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.DiscordButtonTemplates">
+            <summary>
+            Button Templates Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordButtonTemplates.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.DiscordInputTextTemplates">
+            <summary>
+            InputText Templates Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordInputTextTemplates.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Libraries.DiscordSelectMenuTemplates">
+            <summary>
+            InputText Templates Library
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordSelectMenuTemplates.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.InputTextTemplate">
             <summary>
@@ -23612,6 +23646,11 @@
             If the Button is enabled
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.SelectMenuTemplate.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.SelectMenuTemplate.#ctor(Oxide.Ext.Discord.Entities.MessageComponentType)">
             <summary>
             Constructor
@@ -23683,7 +23722,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordEmbedFieldTemplates">
             <summary>
-            Modal Templates Library
+            Embed Field Templates Library
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordEmbedFieldTemplates.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
@@ -23778,7 +23817,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordEmbedTemplates">
             <summary>
-            Modal Templates Library
+            Embed Templates Library
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordEmbedTemplates.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
@@ -24053,6 +24092,21 @@
         <member name="F:Oxide.Ext.Discord.Libraries.TemplateType.AutoCompleteChoice">
             <summary>
             Auto Complete Choice Template Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.TemplateType.ButtonComponent">
+            <summary>
+            Button Component Template Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.TemplateType.InputTextComponent">
+            <summary>
+            Input Text Component Template Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Libraries.TemplateType.SelectMenuComponent">
+            <summary>
+            Select Menu Template Type
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.TemplateVersion">

@@ -16,6 +16,9 @@ public enum TemplateType : byte
 | Modal | `Modal` | Modal Template Type |
 | Command | `Command` | Command Template Type |
 | AutoCompleteChoice | `AutoCompleteChoice` | Auto Complete Choice Template Type |
+| ButtonComponent | `ButtonComponent` | Button Component Template Type |
+| InputTextComponent | `InputTextComponent` | Input Text Component Template Type |
+| SelectMenuComponent | `SelectMenuComponent` | Select Menu Template Type |
 
 ## See Also
 
