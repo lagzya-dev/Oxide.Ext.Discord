@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Data
 {
@@ -8,12 +7,13 @@ namespace Oxide.Ext.Discord.Data
         public readonly string FilePath;
         public readonly int NumBackups;
         
-        private readonly Hash<int, string> _backupPaths = new Hash<int, string>();
+        private readonly string[] _backupPaths;
 
         public DataFileInfo(string fileName, int numBackups)
         {
             FilePath = Path.Combine(DataHandler.RootPath, fileName);
             NumBackups = numBackups;
+            _backupPaths = new string[numBackups];
         }
 
         public string GetPathForIndex(int index)

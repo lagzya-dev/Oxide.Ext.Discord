@@ -11,7 +11,7 @@ public static class TimeSpanPlaceholders
 | name | description |
 | --- | --- |
 | static [Days](#days-method)(…) | Days placeholder |
-| static [Formatted](#formatted-method)(…) | Days placeholder |
+| static [Formatted](#formatted-method)(…) | Formats Timespan into a text string placeholder Text is localized if used with DiscordInteraction or IPlayer Ex: 1 days 2 hours 3 minutes 4 seconds Ex: 2 hour 0 minutes 53 seconds |
 | static [Hours](#hours-method)(…) | Hours placeholder |
 | static [Milliseconds](#milliseconds-method)(…) | Milliseconds placeholder |
 | static [Minutes](#minutes-method)(…) | Minutes placeholder |
@@ -47,7 +47,7 @@ public static int Days(TimeSpan time)
    
 # Formatted method
 
-Days placeholder
+Formats Timespan into a text string placeholder Text is localized if used with DiscordInteraction or IPlayer Ex: 1 days 2 hours 3 minutes 4 seconds Ex: 2 hour 0 minutes 53 seconds
 
 ```csharp
 public static string Formatted(PlaceholderState state, TimeSpan time)

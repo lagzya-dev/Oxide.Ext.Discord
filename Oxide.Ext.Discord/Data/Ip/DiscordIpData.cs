@@ -6,7 +6,7 @@ using ProtoBuf;
 namespace Oxide.Ext.Discord.Data.Ip
 {
     [ProtoContract]
-    internal class DiscordIpData : BaseDataFile<DiscordIpData>
+    internal sealed class DiscordIpData : BaseDataFile<DiscordIpData>
     {
         [ProtoMember(1)] 
         private readonly Hash<string, IpData> Ips = new Hash<string, IpData>();
@@ -22,8 +22,9 @@ namespace Oxide.Ext.Discord.Data.Ip
         public string GetCountryName(string ip) => Ips.TryGetValue(ip, out IpData data) ? data.CountryName : "Unknown";
         public string GetCountryCode(string ip) => Ips.TryGetValue(ip, out IpData data) ? data.CountryCode : string.Empty;
         
-        internal override void OnDataLoaded()
+        internal override void OnDataLoaded(DataFileInfo info)
         {
+            base.OnDataLoaded(info);
             int count = Ips.Count;
             Ips.RemoveAll(ip => ip.IsExpired);
             if (count != Ips.Count)

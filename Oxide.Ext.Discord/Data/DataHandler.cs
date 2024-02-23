@@ -2,10 +2,9 @@
 using System.IO;
 using Oxide.Core;
 using Oxide.Ext.Discord.Data.Ip;
-using Oxide.Ext.Discord.Exceptions.Data;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
-using Oxide.Plugins;
 using ProtoBuf;
 
 namespace Oxide.Ext.Discord.Data
@@ -13,18 +12,18 @@ namespace Oxide.Ext.Discord.Data
     internal sealed class DataHandler : Singleton<DataHandler>
     {
         internal static readonly string RootPath = Path.Combine(Interface.Oxide.DataDirectory, "DiscordExtension");
-        private readonly Hash<Type, DataFileInfo> _fileInfo = new Hash<Type, DataFileInfo>
-        {
-            [typeof(DiscordUserData)] = new DataFileInfo("discord.users.data", 2),
-            [typeof(DiscordIpData)] = new DataFileInfo("discord.ip.data", 1)
-        };
 
         private DataHandler() { }
 
-        public void Initialize()
+        public void LoadAll()
         {
-            Load<DiscordUserData>();
-            Load<DiscordIpData>();
+            if (!Directory.Exists(RootPath))
+            {
+                Directory.CreateDirectory(RootPath);
+            }
+            
+            Load<DiscordUserData>(new DataFileInfo("discord.users.data", 2));
+            Load<DiscordIpData>(new DataFileInfo("discord.ip.data", 1));
         }
 
         public void OnServerSave() => SaveAll(false);
@@ -37,26 +36,22 @@ namespace Oxide.Ext.Discord.Data
             Save(DiscordIpData.Instance, force);
         }
         
-        public void Load<TData>() where TData : BaseDataFile<TData>, new()
+        public void Load<TData>(DataFileInfo info) where TData : BaseDataFile<TData>, new()
         {
-            Type type = typeof(TData);
-            DataFileInfo info = _fileInfo[type];
-            DataInfoNotFoundException.ThrowIfDataInfoNotFound(type, info);
-            
             int index = 0;
             while (true)
             {
                 try
                 {
-                    string path = info.GetPathForIndex(index);
-                    if (!Directory.Exists(RootPath))
-                    {
-                        Directory.CreateDirectory(RootPath);
-                    }
-                    
-                    if (!File.Exists(path))
+                    if (index >= info.NumBackups)
                     {
                         break;
+                    }
+                    
+                    string path = info.GetPathForIndex(index);
+                    if (!File.Exists(path))
+                    {
+                        continue;
                     }
                     
                     using (FileStream file = File.OpenRead(path))
@@ -65,14 +60,14 @@ namespace Oxide.Ext.Discord.Data
                         if (data != null)
                         {
                             BaseDataFile<TData>.Instance = data;
-                            data.OnDataLoaded();
+                            data.OnDataLoaded(info);
                             return;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {0} Data File of type {1}", info.FilePath, type.FullName, ex);
+                    DiscordExtension.GlobalLogger.Exception("An error occured loading the {0} Data File of type {1}", info.FilePath, typeof(TData).FullName, ex);
                 }
                 finally
                 {
@@ -80,7 +75,9 @@ namespace Oxide.Ext.Discord.Data
                 }
             }
 
-            BaseDataFile<TData>.Instance = new TData();
+            TData newData = new TData();
+            newData.OnDataLoaded(info);
+            BaseDataFile<TData>.Instance = newData;
         }
         
         public void Save<TData>(TData data, bool force) where TData : BaseDataFile<TData>, new()
@@ -90,9 +87,7 @@ namespace Oxide.Ext.Discord.Data
                 return;
             }
             
-            Type type = typeof(TData);
-            DataFileInfo info = _fileInfo[type];
-            DataInfoNotFoundException.ThrowIfDataInfoNotFound(type, info);
+            DataFileInfo info = data.FileInfo;
 
             try
             {
@@ -122,14 +117,14 @@ namespace Oxide.Ext.Discord.Data
 
                 using (FileStream file = File.Open(path, saveMode))
                 {
-                    Serializer.Serialize(file, this);
+                    Serializer.Serialize(file, BaseDataFile<TData>.Instance);
                 }
                     
                 data.OnDataSaved();
             }
             catch (Exception ex)
             {
-                DiscordExtension.GlobalLogger.Exception("An error occured saving the Data File", ex);
+                DiscordExtension.GlobalLogger.Exception("An error occured saving the data file. {0}", typeof(TData).GetRealTypeName(), ex);
             }
         }
     }

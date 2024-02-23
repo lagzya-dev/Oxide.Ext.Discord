@@ -53,6 +53,7 @@ namespace Oxide.Ext.Discord.Plugins
             Instance = this;
             _logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(DiscordLogLevel.Info);
             DiscordPool.Instance.CreateInternal(this);
+            DataHandler.Instance.LoadAll();
             AddCovalenceCommand(new[] { "de.version" }, nameof(VersionCommand), "de.version");
             AddCovalenceCommand(new[] { "de.websocket.reset" }, nameof(ResetWebSocketCommand), "de.websocket.reset");
             AddCovalenceCommand(new[] { "de.websocket.reconnect" }, nameof(ReconnectWebSocketCommand), "de.websocket.reconnect");
@@ -332,14 +333,21 @@ namespace Oxide.Ext.Discord.Plugins
         }
 
         // ReSharper disable once UnusedMember.Local
+        [HookMethod(nameof(OnUserApproved))]
+        private void OnUserApproved(string name, string id, string ipAddress)
+        {
+            if (!DiscordIpData.Instance.HasData(ipAddress))
+            {
+                _logger.Verbose($"{nameof(DiscordExtensionCore)}.{nameof(OnUserConnected)} No data found for IP: {{0}}. Requesting Data.", ipAddress);
+                GetIpDataCallback.Start(ipAddress);
+            }
+        }
+        
+        // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnUserConnected))]
         private void OnUserConnected(IPlayer player)
         {
             ServerPlayerCache.Instance.OnUserConnected(player);
-            if (!DiscordIpData.Instance.HasData(player.Address))
-            {
-                GetIpDataCallback.Start(player.Address);
-            }
         }
         
         // ReSharper disable once UnusedMember.Local

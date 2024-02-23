@@ -15,5 +15,7 @@ namespace Oxide.Ext.Discord.Services.IpApi
 
         [JsonProperty("countryCode")]
         public string CountryCode { get; set; }
+
+        public bool IsSuccess => Status == "success";
     }
 }

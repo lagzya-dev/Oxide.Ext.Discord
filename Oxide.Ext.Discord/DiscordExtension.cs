@@ -103,8 +103,6 @@ namespace Oxide.Ext.Discord
             Manager.RegisterLibrary(nameof(DiscordSubscriptions), new DiscordSubscriptions(GlobalLogger));
             Manager.RegisterLibrary(nameof(DiscordLocales), new DiscordLocales(GlobalLogger));
             Manager.RegisterLibrary(nameof(DiscordPlaceholders), new DiscordPlaceholders(GlobalLogger));
-
-            DataHandler.Instance.Initialize();
             
             DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
             DiscordEmbedTemplates = new DiscordEmbedTemplates(GlobalLogger);
@@ -140,9 +138,9 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnShutdown()
         {
-            DataHandler.Instance.Shutdown();
             DiscordClientFactory.Instance.OnShutdown();
             GlobalLogger.Debug("Disconnected all clients - server shutdown.");
+            DataHandler.Instance.Shutdown();
             DiscordLoggerFactory.Instance.OnServerShutdown();
         }
 

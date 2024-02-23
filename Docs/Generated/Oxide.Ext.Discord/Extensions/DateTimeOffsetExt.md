@@ -46,7 +46,7 @@ Delay until the DateTimeOffset with additionalMs padding
 
 ```csharp
 public static ValueTask DelayUntil(this DateTimeOffset time, int additionalMs, 
-    CancellationToken token)
+    CancellationToken token = default)
 ```
 
 | parameter | description |

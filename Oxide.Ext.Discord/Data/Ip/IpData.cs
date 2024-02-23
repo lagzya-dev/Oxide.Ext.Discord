@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Data.Ip
         public IpData(IpResult result)
         {
             CountryName = result.Country;
-            CountryCode = result.CountryCode;
+            CountryCode = result.CountryCode.ToLower();
             CreatedDate = DateTime.UtcNow;
         }
     }

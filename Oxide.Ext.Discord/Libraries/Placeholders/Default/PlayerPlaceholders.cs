@@ -114,13 +114,17 @@ namespace Oxide.Ext.Discord.Libraries
         public static string CountryEmoji(IPlayer player)
         {
             string country = DiscordIpData.Instance.GetCountryCode(player.Address);
+            if (string.IsNullOrEmpty(country))
+            {
+                return ":signal_strength:";
+            }
+            
             if (FlagCache.TryGetValue(country, out string flag))
             {
                 return flag;
             }
 
-            flag = !string.IsNullOrEmpty(country) ? $":flag_{country}:" : ":signal_strength:";
-
+            flag = $":flag_{country}:";
             FlagCache[country] = flag;
             return flag;
         }
