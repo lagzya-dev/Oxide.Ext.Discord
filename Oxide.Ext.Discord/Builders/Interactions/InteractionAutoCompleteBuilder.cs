@@ -357,6 +357,12 @@ namespace Oxide.Ext.Discord.Builders
             }
         }
 
+        /// <summary>
+        /// Adds a list of players from a custom list
+        /// </summary>
+        /// <param name="list">Custom list of players</param>
+        /// <param name="formatter">Formatter for the player name</param>
+        /// <param name="addedList">List of already added players</param>
         public void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, HashSet<string> addedList)
         {
             if (!CanAddChoice())

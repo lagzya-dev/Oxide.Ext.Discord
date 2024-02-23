@@ -1236,6 +1236,14 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddPlayerList(System.Collections.Generic.IEnumerable{Oxide.Core.Libraries.Covalence.IPlayer},Oxide.Ext.Discord.Builders.PlayerNameFormatter,System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Adds a list of players from a custom list
+            </summary>
+            <param name="list">Custom list of players</param>
+            <param name="formatter">Formatter for the player name</param>
+            <param name="addedList">List of already added players</param>
+        </member>
         <member name="T:Oxide.Ext.Discord.Builders.InteractionFollowupBuilder">
             <summary>
             Represents a builder for <see cref="T:Oxide.Ext.Discord.Entities.CommandFollowupCreate"/>

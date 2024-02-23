@@ -75,12 +75,6 @@
 | abstract class [BaseCallback&lt;T&gt;](./Oxide.Ext.Discord/Callbacks/BaseCallback%7BT%7D.md) | Represents a base callback to be used when needing a lambda callback so no delegate or class is generated This class is pooled to prevent allocations |
 | abstract class [BaseNextTickCallback](./Oxide.Ext.Discord/Callbacks/BaseNextTickCallback.md) | Represents a callback that calls next tick |
 
-## Oxide.Ext.Discord.Callbacks.Data namespace
-
-| public type | description |
-| --- | --- |
-| class [GetIpDataCallback](./Oxide.Ext.Discord/Callbacks/Data/GetIpDataCallback.md) |  |
-
 ## Oxide.Ext.Discord.Clients namespace
 
 | public type | description |

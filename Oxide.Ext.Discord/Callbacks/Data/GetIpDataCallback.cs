@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Services.IpApi;
 
 namespace Oxide.Ext.Discord.Callbacks.Data
 {
-    public class GetIpDataCallback : BaseAsyncCallback
+    internal class GetIpDataCallback : BaseAsyncCallback
     {
         private string _ip;
 

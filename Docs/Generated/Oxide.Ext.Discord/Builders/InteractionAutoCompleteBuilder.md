@@ -512,10 +512,18 @@ public void AddAllPlayers(string filter = null, PlayerNameFormatter formatter = 
    
 # AddPlayerList method (1 of 2)
 
+Adds a list of players from a custom list
+
 ```csharp
 public void AddPlayerList(IEnumerable<IPlayer> list, PlayerNameFormatter formatter, 
     HashSet<string> addedList)
 ```
+
+| parameter | description |
+| --- | --- |
+| list | Custom list of players |
+| formatter | Formatter for the player name |
+| addedList | List of already added players |
 
 ## See Also
 
