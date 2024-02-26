@@ -1,13 +1,13 @@
 using System;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Json
 {
     internal class TemplateVersionConverter : JsonConverter
     {
-        private static readonly Regex VersionRegex = new Regex(@"^([\d]+).([\d]+).([\d]+)$", RegexOptions.Compiled);
+        private const string Token = ".";
         
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
@@ -17,25 +17,19 @@ namespace Oxide.Ext.Discord.Json
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             string value = reader.Value.ToString();
-            Match match = VersionRegex.Match(value);
-            if (!match.Success)
-            {
-                throw new JsonSerializationException($"{value} is not a valid template version for {reader.Path}.");
-            }
+            ReadOnlySpan<char> span = value;
 
-            if (!ushort.TryParse(match.Groups[1].Value, out ushort major))
+            if (!span.TryParseNextString(Token, out span, out ReadOnlySpan<char> majorSpan) || !ushort.TryParse(majorSpan, out ushort major))
             {
-                throw new JsonSerializationException($"{match.Groups[1].Value} is not a valid major template version number for {reader.Path}.");
+                throw new JsonSerializationException($"{value} is not a valid major template version for. Major: {majorSpan.ToString()} Path: {reader.Path}.");
             }
-            
-            if (!ushort.TryParse(match.Groups[2].Value, out ushort minor))
+            if (!span.TryParseNextString(Token, out span, out ReadOnlySpan<char> minorSpan) || !ushort.TryParse(minorSpan, out ushort minor))
             {
-                throw new JsonSerializationException($"{match.Groups[2].Value} is not a valid minor template version number for {reader.Path}.");
+                throw new JsonSerializationException($"{value} is not a valid minor template version for. Minor: {minorSpan.ToString()} Path: {reader.Path}.");
             }
-            
-            if (!ushort.TryParse(match.Groups[3].Value, out ushort revision))
+            if (!span.TryParseNextString(Token, out span, out ReadOnlySpan<char> revisionSpan) || !ushort.TryParse(revisionSpan, out ushort revision))
             {
-                throw new JsonSerializationException($"{match.Groups[3].Value} is not a valid revision template version number for {reader.Path}.");
+                throw new JsonSerializationException($"{value} is not a valid revision template version for. Revision: {revisionSpan.ToString()} Path: {reader.Path}.");
             }
             
             return new TemplateVersion(major, minor, revision);

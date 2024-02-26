@@ -60,5 +60,12 @@ namespace Oxide.Ext.Discord.Libraries
         /// </summary>
         /// <returns></returns>
         public override string ToString() => Name;
+        
+        /// <summary>
+        /// Implicitly converts to <see cref="string"/> by calling the <see cref="ToString"/> method.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static implicit operator string(TemplateKey key) => key.ToString();
     }
 }
