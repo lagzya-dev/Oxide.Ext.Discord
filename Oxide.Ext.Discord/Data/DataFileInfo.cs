@@ -13,7 +13,7 @@ namespace Oxide.Ext.Discord.Data
         {
             FilePath = Path.Combine(DataHandler.RootPath, fileName);
             NumBackups = numBackups;
-            _backupPaths = new string[numBackups];
+            _backupPaths = new string[numBackups + 1];
         }
 
         public string GetPathForIndex(int index)
