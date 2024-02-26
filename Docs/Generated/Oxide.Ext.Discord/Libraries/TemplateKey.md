@@ -18,6 +18,7 @@ public struct TemplateKey : IDiscordKey, IEquatable<TemplateKey>
 | override [GetHashCode](#gethashcode-method)() |  |
 | override [ToString](#tostring-method)() | Returns the template name |
 | [operator ==](#templatekey-equality-operator) | Template Key == operator |
+| [implicit operator](#templatekey-implicit-operator) | Implicitly converts to String by calling the [`ToString`](#tostring-method) method. |
 | [operator !=](#templatekey-inequality-operator) | Template Key != operator |
 
 ## See Also
@@ -115,6 +116,25 @@ Returns the template name
 ```csharp
 public override string ToString()
 ```
+
+## See Also
+
+* struct [TemplateKey](./TemplateKey.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# TemplateKey Implicit operator
+
+Implicitly converts to String by calling the [`ToString`](#tostring-method) method.
+
+```csharp
+public static implicit operator string(TemplateKey key)
+```
+
+| parameter | description |
+| --- | --- |
+| key |  |
 
 ## See Also
 

@@ -8,6 +8,7 @@
 | static class [IEnumerableExt](./IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./MathExt.md) | Extensions for math operations |
 | static class [PlayerExt](./PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
+| static class [SpanExt](./SpanExt.md) | Span Extension Methods |
 | static class [StreamExt](./StreamExt.md) | Stream Extension Methods |
 | static class [StringBuilderExt](./StringBuilderExt.md) | StringBuilder extension methods |
 

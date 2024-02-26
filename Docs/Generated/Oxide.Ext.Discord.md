@@ -475,6 +475,7 @@
 | static class [IEnumerableExt](./Oxide.Ext.Discord/Extensions/IEnumerableExt.md) | Represents Extension to IEnumerable |
 | static class [MathExt](./Oxide.Ext.Discord/Extensions/MathExt.md) | Extensions for math operations |
 | static class [PlayerExt](./Oxide.Ext.Discord/Extensions/PlayerExt.md) | IPlayer Extensions for sending Discord Message to an IPlayer |
+| static class [SpanExt](./Oxide.Ext.Discord/Extensions/SpanExt.md) | Span Extension Methods |
 | static class [StreamExt](./Oxide.Ext.Discord/Extensions/StreamExt.md) | Stream Extension Methods |
 | static class [StringBuilderExt](./Oxide.Ext.Discord/Extensions/StringBuilderExt.md) | StringBuilder extension methods |
 
