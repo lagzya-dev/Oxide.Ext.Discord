@@ -1111,10 +1111,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 for (int index = 0; index < chunk.Members.Count; index++)
                 {
                     GuildMember member = chunk.Members[index];
-                    if (!guild.Members.ContainsKey(member.User.Id))
-                    {
-                        guild.Members[member.User.Id] = member;
-                    }
+                    guild.Members.TryAdd(member.User.Id, member);
                 }
                     
                 //Once we've loaded all guild members call hook

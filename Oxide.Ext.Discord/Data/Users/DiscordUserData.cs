@@ -8,16 +8,16 @@ namespace Oxide.Ext.Discord.Data
     internal sealed class DiscordUserData : BaseDataFile<DiscordUserData>
     {
         [ProtoMember(1)]
-        private Dictionary<Snowflake, BotData> Bots { get; set; } = new Dictionary<Snowflake, BotData>();
+        private Dictionary<Snowflake, BotData> _bots = new Dictionary<Snowflake, BotData>();
 
-        public bool TryGetBotData(Snowflake id, out BotData data) => Bots.TryGetValue(id, out data);
+        public bool TryGetBotData(Snowflake id, out BotData data) => _bots.TryGetValue(id, out data);
         
         public BotData GetBotData(Snowflake botId)
         {
-            if (!Bots.TryGetValue(botId, out BotData data))
+            if (!_bots.TryGetValue(botId, out BotData data))
             {
                 data = new BotData();
-                Bots[botId] = data;
+                _bots[botId] = data;
                 OnDataChanged();
             }
 

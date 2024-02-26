@@ -18,12 +18,12 @@ namespace Oxide.Ext.Discord.Constants
             /// <summary>
             /// API Version for Rest requests
             /// </summary>
-            public const string ApiVersion = "/v10";
+            public const string ApiVersion = "v10";
         
             /// <summary>
             /// Discord API Url
             /// </summary>
-            public const string ApiUrl = DiscordBaseUrl + ApiVersion + "/";
+            public const string ApiUrl = DiscordBaseUrl + "/" + ApiVersion + "/";
         }
 
         /// <summary>

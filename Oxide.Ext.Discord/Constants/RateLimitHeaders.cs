@@ -38,7 +38,7 @@ namespace Oxide.Ext.Discord.Constants
         /// <summary>
         /// Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets
         /// </summary>
-        public const string BucketReset = "X-RateLimit-Reset";     
+        public const string BucketReset = "X-RateLimit-Reset";
         
         /// <summary>
         /// Scope of the rate limit

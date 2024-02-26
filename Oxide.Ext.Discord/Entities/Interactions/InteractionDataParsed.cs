@@ -83,6 +83,13 @@ namespace Oxide.Ext.Discord.Entities
         {
             Interaction = interaction;
             Data = interaction.Data;
+            
+            UserOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.Locale);
+            if (interaction.GuildLocale.HasValue && interaction.GuildLocale.Value.IsValid)
+            {
+                GuildOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.GuildLocale.Value);
+            }
+            
             //Check if MessageComponent and parse data accordingly
             if (Data.ComponentType.HasValue)
             {
@@ -96,16 +103,11 @@ namespace Oxide.Ext.Discord.Entities
             
             Type = Data.Type;
             Command = Data.Name;
+            
             //If ApplicationCommand is Message or User it can't have arguments
             if (Type == ApplicationCommandType.Message || Type == ApplicationCommandType.User)
             {
                 return;
-            }
-
-            UserOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.Locale);
-            if (interaction.GuildLocale.HasValue && interaction.GuildLocale.Value.IsValid)
-            {
-                GuildOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.GuildLocale.Value);
             }
 
             //Parse the arguments for the application command

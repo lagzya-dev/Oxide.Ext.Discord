@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Services.IpApi
                 {
                     string json = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
                     IpResult ipResult = JsonConvert.DeserializeObject<IpResult>(json);
-                    _logger.Verbose($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} Request Success for IP: {{0}}. IP Success: {{1}} Body:\n{{2}} ", url, ipResult?.IsSuccess ?? false, json);
+                    _logger.Verbose($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} Request Success for IP: {{0}}. IP Success: {{1}} Message: {{2}} Body:\n{{3}} ", url, ipResult?.IsSuccess ?? false, ipResult?.Message, json);
                     return ipResult?.IsSuccess ?? false ? ipResult : null;
                 }
 
