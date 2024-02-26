@@ -93,11 +93,6 @@ namespace Oxide.Ext.Discord.Data
             {
                 int numBackups = info.NumBackups;
                 string path = info.GetPathForIndex(numBackups);
-                if (!Directory.Exists(RootPath))
-                {
-                    Directory.CreateDirectory(RootPath);
-                }
-                
                 if (File.Exists(path))
                 {
                     File.Delete(path);
