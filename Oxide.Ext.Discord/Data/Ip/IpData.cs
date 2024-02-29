@@ -1,4 +1,5 @@
 ﻿using System;
+using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Services.IpApi;
 using ProtoBuf;
 
@@ -16,7 +17,7 @@ namespace Oxide.Ext.Discord.Data.Ip
         [ProtoMember(3)]
         public DateTime CreatedDate { get; set; }
 
-        public bool IsExpired => DateTime.UtcNow > CreatedDate + TimeSpan.FromDays(30);
+        public bool IsExpired => DateTime.UtcNow > CreatedDate + TimeSpan.FromDays(DiscordConfig.Instance.Ip.StoreIpDuration);
         
         public IpData() { }
 

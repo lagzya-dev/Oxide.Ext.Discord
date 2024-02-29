@@ -56,6 +56,12 @@ namespace Oxide.Ext.Discord.Configuration
         /// </summary>
         [JsonProperty("Bot")]
         public DiscordBotConfig Bot { get; set; }
+        
+        /// <summary>
+        /// Discord Bot Options
+        /// </summary>
+        [JsonProperty("Ip")]
+        public DiscordIpConfig Ip { get; set; }
 
         /// <summary>
         /// Constructor for discord config
@@ -130,6 +136,10 @@ namespace Oxide.Ext.Discord.Configuration
             Bot = new DiscordBotConfig
             {
                 AutomaticallyApplyGatewayIntents = Bot?.AutomaticallyApplyGatewayIntents ?? true
+            };
+            Ip = new DiscordIpConfig
+            {
+                StoreIpDuration = Ip?.StoreIpDuration ?? 30f
             };
         }
     }
