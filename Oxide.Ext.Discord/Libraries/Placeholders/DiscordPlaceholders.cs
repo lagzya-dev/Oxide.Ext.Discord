@@ -37,6 +37,7 @@ namespace Oxide.Ext.Discord.Libraries
             DateTimePlaceholders.RegisterPlaceholders();
             GuildPlaceholders.RegisterPlaceholders();
             InteractionPlaceholders.RegisterPlaceholders();
+            IpPlaceholders.RegisterPlaceholders();
             ServerPlaceholders.RegisterPlaceholders();
             MemberPlaceholders.RegisterPlaceholders();
             MessagePlaceholders.RegisterPlaceholders();

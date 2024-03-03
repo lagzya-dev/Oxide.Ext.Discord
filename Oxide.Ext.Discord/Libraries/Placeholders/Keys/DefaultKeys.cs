@@ -40,6 +40,11 @@ namespace Oxide.Ext.Discord.Libraries
         public static readonly InteractionKeys Interaction = new InteractionKeys("interaction");
         
         /// <summary>
+        /// IP address placeholders
+        /// </summary>
+        public static readonly IpKeys Ip = new IpKeys("ip");
+        
+        /// <summary>
         /// <see cref="GuildMember"/> Placeholder Keys
         /// </summary>
         public static readonly MemberKeys Member = new MemberKeys("member");

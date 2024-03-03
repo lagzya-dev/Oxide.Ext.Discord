@@ -594,6 +594,8 @@
 | class [InputTextTemplate](./Oxide.Ext.Discord/Libraries/InputTextTemplate.md) | Input Text Message Component Template |
 | class [InteractionKeys](./Oxide.Ext.Discord/Libraries/InteractionKeys.md) | Placeholder Keys for [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) |
 | static class [InteractionPlaceholders](./Oxide.Ext.Discord/Libraries/InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) placeholders |
+| class [IpKeys](./Oxide.Ext.Discord/Libraries/IpKeys.md) | Placeholder Keys for [`IpPlaceholders`](./Oxide.Ext.Discord/Libraries/IpPlaceholders.md) |
+| static class [IpPlaceholders](./Oxide.Ext.Discord/Libraries/IpPlaceholders.md) | IP Address Placeholders |
 | class [MemberKeys](./Oxide.Ext.Discord/Libraries/MemberKeys.md) | Placeholder Keys for [`GuildMember`](./Oxide.Ext.Discord/Entities/GuildMember.md) |
 | static class [MemberPlaceholders](./Oxide.Ext.Discord/Libraries/MemberPlaceholders.md) | [`GuildMember`](./Oxide.Ext.Discord/Entities/GuildMember.md) placeholders |
 | class [MessageKeys](./Oxide.Ext.Discord/Libraries/MessageKeys.md) | Placeholder Keys for [`DiscordMessage`](./Oxide.Ext.Discord/Entities/DiscordMessage.md) |

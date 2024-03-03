@@ -16,10 +16,11 @@ public class PlaceholderData : BasePoolable
 | [AddGuild](#addguild-method-1-of-2)(…) | Add a [`DiscordGuild`](../Entities/DiscordGuild.md) by [`DiscordClient`](../Clients/DiscordClient.md) and GuildId (2 methods) |
 | [AddGuildMember](#addguildmember-method-1-of-2)(…) | Add a [`GuildMember`](../Entities/GuildMember.md) by [`DiscordClient`](../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
 | [AddInteraction](#addinteraction-method)(…) | Adds a [`DiscordInteraction`](../Entities/DiscordInteraction.md) |
+| [AddIp](#addip-method)(…) | Adds a IP |
 | [AddMessage](#addmessage-method)(…) | Add a [`DiscordMessage`](../Entities/DiscordMessage.md) |
 | [AddPlayer](#addplayer-method)(…) | Adds a IPlayer |
 | [AddPlugin](#addplugin-method)(…) | Adds a Plugin |
-| [AddRequestError](#addrequesterror-method)(…) | Add a [`ResponseError`](../Entities/ResponseError.md) |
+| [AddRequestError](#addrequesterror-method)(…) | Adds a [`ResponseError`](../Entities/ResponseError.md) |
 | [AddRole](#addrole-method-1-of-2)(…) | Adds a [`DiscordRole`](../Entities/DiscordRole.md) by [`DiscordClient`](../Clients/DiscordClient.md), GuildId, and RoleId (2 methods) |
 | [AddSnowflake](#addsnowflake-method)(…) | Adds a [`Snowflake`](../Entities/Snowflake.md) |
 | [AddTarget](#addtarget-method)(…) | Adds a target IPlayer |
@@ -677,7 +678,7 @@ This
    
 # AddRequestError method
 
-Add a [`ResponseError`](../Entities/ResponseError.md)
+Adds a [`ResponseError`](../Entities/ResponseError.md)
 
 ```csharp
 public PlaceholderData AddRequestError(ResponseError error)
@@ -694,6 +695,25 @@ This
 ## See Also
 
 * class [ResponseError](../Entities/ResponseError.md)
+* class [PlaceholderData](./PlaceholderData.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AddIp method
+
+Adds a IP
+
+```csharp
+public PlaceholderData AddIp(string ip)
+```
+
+| parameter | description |
+| --- | --- |
+| ip |  |
+
+## See Also
+
 * class [PlaceholderData](./PlaceholderData.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -17,6 +17,7 @@ public static class DefaultKeys
 | static readonly [DateTimeNow](#datetimenow-field) | [`DateTime`](#datetime-field) Placeholder Keys |
 | static readonly [Guild](#guild-field) | [`DiscordGuild`](../Entities/DiscordGuild.md) Placeholder Keys |
 | static readonly [Interaction](#interaction-field) | [`DiscordInteraction`](../Entities/DiscordInteraction.md) Placeholder Keys |
+| static readonly [Ip](#ip-field) | IP address placeholders |
 | static readonly [Member](#member-field) | [`GuildMember`](../Entities/GuildMember.md) Placeholder Keys |
 | static readonly [Message](#message-field) | [`DiscordMessage`](../Entities/DiscordMessage.md) Placeholder Keys |
 | static readonly [Player](#player-field) | IPlayer Placeholder Keys |
@@ -130,6 +131,22 @@ public static readonly InteractionKeys Interaction;
 ## See Also
 
 * class [InteractionKeys](./InteractionKeys.md)
+* class [DefaultKeys](./DefaultKeys.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Ip field
+
+IP address placeholders
+
+```csharp
+public static readonly IpKeys Ip;
+```
+
+## See Also
+
+* class [IpKeys](./IpKeys.md)
 * class [DefaultKeys](./DefaultKeys.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -3,10 +3,8 @@ using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Data.Ip;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {
@@ -16,8 +14,6 @@ namespace Oxide.Ext.Discord.Libraries
     public static class PlayerPlaceholders
     {
         internal static readonly PlaceholderDataKey TargetPlayerKey = new PlaceholderDataKey("TargetPlayer");
-        
-        private static readonly Hash<string, string> FlagCache = new Hash<string, string>();
         
         /// <summary>
         /// <see cref="IPlayer.Id"/> placeholder
@@ -91,43 +87,27 @@ namespace Oxide.Ext.Discord.Libraries
         /// <param name="player"></param>
         /// <returns></returns>
         public static string Address(IPlayer player) => player.Address;
-        
+
         /// <summary>
         /// Player Country Name Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string CountryName(IPlayer player) => DiscordIpData.Instance.GetCountryName(player.Address);
-        
+        public static string CountryName(IPlayer player) => IpPlaceholders.CountryName(player.Address);
+
         /// <summary>
         /// Player Country Name Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string CountryCode(IPlayer player) => DiscordIpData.Instance.GetCountryCode(player.Address);
-        
+        public static string CountryCode(IPlayer player) => IpPlaceholders.CountryCode(player.Address);
+
         /// <summary>
         /// Player Flag Placeholder
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        public static string CountryEmoji(IPlayer player)
-        {
-            string country = DiscordIpData.Instance.GetCountryCode(player.Address);
-            if (string.IsNullOrEmpty(country))
-            {
-                return ":signal_strength:";
-            }
-            
-            if (FlagCache.TryGetValue(country, out string flag))
-            {
-                return flag;
-            }
-
-            flag = $":flag_{country}:";
-            FlagCache[country] = flag;
-            return flag;
-        }
+        public static string CountryEmoji(IPlayer player) => IpPlaceholders.CountryEmoji(player.Address);
 
         /// <summary>
         /// Player Groups Placeholder

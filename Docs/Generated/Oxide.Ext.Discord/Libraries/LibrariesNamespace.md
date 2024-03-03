@@ -51,6 +51,8 @@
 | class [InputTextTemplate](./InputTextTemplate.md) | Input Text Message Component Template |
 | class [InteractionKeys](./InteractionKeys.md) | Placeholder Keys for [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) |
 | static class [InteractionPlaceholders](./InteractionPlaceholders.md) | [`DiscordInteraction`](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) placeholders |
+| class [IpKeys](./IpKeys.md) | Placeholder Keys for [`IpPlaceholders`](./Oxide.Ext.Discord/Libraries/IpPlaceholders.md) |
+| static class [IpPlaceholders](./IpPlaceholders.md) | IP Address Placeholders |
 | class [MemberKeys](./MemberKeys.md) | Placeholder Keys for [`GuildMember`](./Oxide.Ext.Discord/Entities/GuildMember.md) |
 | static class [MemberPlaceholders](./MemberPlaceholders.md) | [`GuildMember`](./Oxide.Ext.Discord/Entities/GuildMember.md) placeholders |
 | class [MessageKeys](./MessageKeys.md) | Placeholder Keys for [`DiscordMessage`](./Oxide.Ext.Discord/Entities/DiscordMessage.md) |

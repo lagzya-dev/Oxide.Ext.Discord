@@ -280,12 +280,19 @@ namespace Oxide.Ext.Discord.Libraries
         public PlaceholderData AddSnowflake(Snowflake id) => Add(new PlaceholderDataKey(nameof(Snowflake)), id);
         
         /// <summary>
-        /// Add a <see cref="ResponseError"/>
+        /// Adds a <see cref="ResponseError"/>
         /// </summary>
         /// <param name="error">RequestError to add</param>
         /// <returns>This</returns>
         public PlaceholderData AddRequestError(ResponseError error) => Add(new PlaceholderDataKey(nameof(ResponseError)), error);
-
+        
+        /// <summary>
+        /// Adds a IP
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public PlaceholderData AddIp(string ip) => Add(new PlaceholderDataKey("ip"), ip);
+        
         /// <summary>
         /// Adds the data with the given name
         /// </summary>
