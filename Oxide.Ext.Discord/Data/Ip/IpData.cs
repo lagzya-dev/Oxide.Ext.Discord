@@ -17,8 +17,19 @@ namespace Oxide.Ext.Discord.Data.Ip
         [ProtoMember(3)]
         public DateTime CreatedDate { get; set; }
 
-        public bool IsExpired => DateTime.UtcNow > CreatedDate + TimeSpan.FromDays(DiscordConfig.Instance.Ip.StoreIpDuration);
-        
+        public bool IsExpired
+        {
+            get
+            {
+                float duration = DiscordConfig.Instance.Ip.StoreIpDuration;
+                if (duration < 0)
+                {
+                    return false;
+                }
+                return DateTime.UtcNow > CreatedDate + TimeSpan.FromDays(duration);
+            }
+        }
+
         public IpData() { }
 
         public IpData(IpResult result)
