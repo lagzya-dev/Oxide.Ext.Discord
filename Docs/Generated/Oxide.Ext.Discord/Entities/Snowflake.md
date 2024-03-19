@@ -11,7 +11,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IDiscordKe
 
 | name | description |
 | --- | --- |
-| [Snowflake](#snowflake-constructor-1-of-3)(…) | Create a new snowflake from a ulong (3 constructors) |
+| [Snowflake](#snowflake-constructor-1-of-4)(…) | Create a new snowflake from a ulong (4 constructors) |
 | readonly [Id](#id-field) | Snowflake Value |
 | [CompareTo](#compareto-method-1-of-2)(…) | Returns the ID field of num compared to this snowflakes ID field (2 methods) |
 | override [Equals](#equals-method)(…) | Returns if the obj is snowflake or ulong with matching ID. |
@@ -511,7 +511,27 @@ ID converted to a snowflake
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# Snowflake constructor (1 of 3)
+# Snowflake constructor (1 of 4)
+
+Create a new snowflake from a ReadOnlySpan
+
+```csharp
+public Snowflake(ReadOnlySpan<char> span)
+```
+
+| parameter | description |
+| --- | --- |
+| span |  |
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Snowflake constructor (2 of 4)
 
 Create a new snowflake from a string
 
@@ -531,7 +551,7 @@ public Snowflake(string id)
 
 ---
 
-# Snowflake constructor (2 of 3)
+# Snowflake constructor (3 of 4)
 
 Create a new snowflake from a ulong
 
@@ -551,7 +571,7 @@ public Snowflake(ulong id)
 
 ---
 
-# Snowflake constructor (3 of 3)
+# Snowflake constructor (4 of 4)
 
 Create a snowflake from a DateTimeOffset and increment
 

@@ -27,7 +27,7 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 case InteractionType.ApplicationCommand:
                 case InteractionType.ApplicationCommandAutoComplete:
-                    return _commands.TryGetValue(id, out BaseAppCommand command) ? command : null;
+                    return _commands.GetValueOrDefault(id);
                 case InteractionType.MessageComponent:
                 case InteractionType.ModalSubmit:
                     return GetComponentCommand(id);

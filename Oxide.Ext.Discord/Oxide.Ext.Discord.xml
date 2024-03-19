@@ -15524,6 +15524,12 @@
             </summary>
             <param name="id"></param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.#ctor(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Create a new snowflake from a <see cref="T:System.ReadOnlySpan`1"/>
+            </summary>
+            <param name="span"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.#ctor(System.DateTimeOffset,System.UInt64)">
             <summary>
             Create a snowflake from a DateTimeOffset and increment

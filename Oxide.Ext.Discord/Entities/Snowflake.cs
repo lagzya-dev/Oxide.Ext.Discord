@@ -35,10 +35,13 @@ namespace Oxide.Ext.Discord.Entities
         /// Create a new snowflake from a string
         /// </summary>
         /// <param name="id"></param>
-        public Snowflake(string id)
-        {
-            Id = ulong.Parse(id);
-        }
+        public Snowflake(string id): this(ulong.Parse(id)) {}
+
+        /// <summary>
+        /// Create a new snowflake from a <see cref="ReadOnlySpan{T}"/>
+        /// </summary>
+        /// <param name="span"></param>
+        public Snowflake(ReadOnlySpan<char> span) : this(ulong.Parse(span)) {}
 
         /// <summary>
         /// Create a snowflake from a DateTimeOffset and increment
