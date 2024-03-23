@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -32,6 +33,12 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("install_params")]
         public InstallParams InstallParams { get; set; } 
+        
+        /// <summary>
+        /// Default scopes and permissions for each supported installation context.
+        /// </summary>
+        [JsonProperty("integration_types_config")]
+        public Hash<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration> IntegrationTypesConfig { get; set; }
         
         /// <summary>
         /// App's public flags

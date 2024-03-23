@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions;
@@ -53,20 +54,33 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
         /// </summary>
+        [Obsolete("Deprecated (use Contexts instead)")]
         [JsonProperty("dm_permission")]
         public bool? DmPermission { get; set; }
-
-        /// <summary>
-        /// Indicates whether the command is age-restricted
-        /// </summary>
-        [JsonProperty("nsfw")]
-        public bool? Nsfw { get; set; }
         
+        /// <summary>
+        /// Installation context(s) where the command is available
+        /// </summary>
+        [JsonProperty("integration_types")]
+        public List<ApplicationIntegrationType> IntegrationTypes { get; set; }
+        
+        /// <summary>
+        /// Interaction context(s) where the command can be used
+        /// </summary>
+        [JsonProperty("contexts")]
+        public List<InteractionContextTypes> Contexts { get; set; }
+
         /// <summary>
         /// The <see cref="ApplicationCommandType"/> of the command
         /// </summary>
         [JsonProperty("type")]
         public ApplicationCommandType Type { get; set; }
+        
+        /// <summary>
+        /// Indicates whether the command is age-restricted
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool? Nsfw { get; set; }
 
         /// <summary>
         /// Constructor

@@ -196,8 +196,15 @@ namespace Oxide.Ext.Discord.Entities
         public DiscordMessage ReferencedMessage { get; internal set; }
         
         /// <summary>
+        /// sent if the message is sent as a result of an interaction
+        /// </summary>
+        [JsonProperty("interaction_metadata")]
+        public MessageInteraction InteractionMetadata { get; set; }
+        
+        /// <summary>
         /// Sent if the message is a response to an Interaction
         /// </summary>
+        [Obsolete("Deprecated in favor of InteractionMetadata")]
         [JsonProperty("interaction")]
         public MessageInteraction Interaction { get; set; }
         

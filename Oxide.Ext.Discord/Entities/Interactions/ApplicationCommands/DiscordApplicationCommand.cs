@@ -97,6 +97,20 @@ namespace Oxide.Ext.Discord.Entities
         public bool? Nsfw { get; set; }
         
         /// <summary>
+        /// Installation context(s) where the command is available, only for globally-scoped commands.
+        /// Defaults to GUILD_INSTALL (0)
+        /// </summary>
+        [JsonProperty("integration_types")]
+        public List<ApplicationIntegrationType> IntegrationTypes { get; set; }
+        
+        /// <summary>
+        /// Interaction context(s) where the command can be used, only for globally-scoped commands.
+        /// By default, all interaction context types included for new commands..
+        /// </summary>
+        [JsonProperty("contexts")]
+        public List<InteractionContextTypes> Contexts { get; set; }
+        
+        /// <summary>
         /// Auto incrementing version identifier updated during substantial record changes
         /// </summary>
         [JsonProperty("version")]

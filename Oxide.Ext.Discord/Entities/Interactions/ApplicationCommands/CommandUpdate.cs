@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Json;
@@ -52,6 +53,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
         /// </summary>
+        [Obsolete("Deprecated (use Contexts instead)")]
         [JsonProperty("dm_permission")]
         public bool? DmPermission { get; set; }
         
@@ -60,6 +62,18 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("default_permission")]
         public bool? DefaultPermissions { get; set; }
+        
+        /// <summary>
+        /// Installation context(s) where the command is available
+        /// </summary>
+        [JsonProperty("integration_types")]
+        public List<ApplicationIntegrationType> IntegrationTypes { get; set; }
+        
+        /// <summary>
+        /// Interaction context(s) where the command can be used
+        /// </summary>
+        [JsonProperty("contexts")]
+        public List<InteractionContextTypes> Contexts { get; set; }
         
         /// <summary>
         /// Indicates whether the command is age-restricted

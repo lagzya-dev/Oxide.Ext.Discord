@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -166,6 +167,12 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("install_params")]
         public InstallParams InstallParams { get; set; } 
+        
+        /// <summary>
+        /// Default scopes and permissions for each supported installation context
+        /// </summary>
+        [JsonProperty("integration_types_config")]
+        public Hash<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration> IntegrationTypesConfig { get; set; }
         
         /// <summary>
         /// The application's default custom authorization link, if enabled

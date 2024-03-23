@@ -9,6 +9,7 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Rest;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -99,7 +100,7 @@ namespace Oxide.Ext.Discord.Entities
         public DiscordMessage Message { get; set; }
 
         /// <summary>
-        /// Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+        /// Bitwise set of permissions the app has in the source location of the interaction
         /// </summary>
         [JsonConverter(typeof(PermissionFlagsStringConverter))]
         [JsonProperty("app_permissions")]
@@ -124,6 +125,18 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("entitlements")]
         public List<DiscordEntitlement> Entitlements { get; set; }
+        
+        /// <summary>
+        /// Mapping of installation contexts that the interaction was authorized for to related user or guild IDs
+        /// </summary>
+        [JsonProperty("authorizing_integration_owners")]
+        public Hash<ApplicationIntegrationType, Snowflake> AuthorizingIntegrationOwners { get; set; }
+        
+        /// <summary>
+        /// Context where the interaction was triggered from
+        /// </summary>
+        [JsonProperty("contexts")]
+        public List<InteractionContextTypes> Contexts { get; set; }
 
         private InteractionDataParsed _parsed;
 
