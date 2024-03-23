@@ -30,6 +30,12 @@ namespace Oxide.Ext.Discord.Libraries
         /// </summary>
         [JsonProperty("Keep Field On Same Row")]
         public bool Inline { get; set; } = true;
+        
+        /// <summary>
+        /// Hides the field if the value is null, empty, or \u200b
+        /// </summary>
+        [JsonProperty("Hide Field If Value Empty")]
+        public bool HideIfEmpty { get; set; } = false;
 
         /// <summary>
         /// Constructor
@@ -58,16 +64,27 @@ namespace Oxide.Ext.Discord.Libraries
         /// <returns></returns>
         public EmbedField ToEntity(PlaceholderData data = null, EmbedField field = null)
         {
+            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            string value = placeholders.ProcessPlaceholders(Value, data);
+            if (HideIfEmpty && (string.IsNullOrEmpty(value) || value == EmbedField.Blank))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(value))
+            {
+                value = EmbedField.Blank;
+            }
+            
             if (field == null)
             {
                 field = new EmbedField();
             }
             
             data?.IncrementDepth();
-
-            DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            
             field.Name = placeholders.ProcessPlaceholders(Name, data);
-            field.Value = placeholders.ProcessPlaceholders(Value, data);
+            field.Value = value;
             field.Inline = Inline;
 
             data?.DecrementDepth();

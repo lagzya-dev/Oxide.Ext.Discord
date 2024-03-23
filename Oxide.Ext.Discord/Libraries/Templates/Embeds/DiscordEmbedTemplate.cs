@@ -152,7 +152,11 @@ namespace Oxide.Ext.Discord.Libraries
                 embed.Fields = new List<EmbedField>();
                 for (int index = 0; index < Fields.Count; index++)
                 {
-                    embed.Fields.Add(Fields[index].ToEntity(data));
+                    EmbedField field = Fields[index].ToEntity(data);
+                    if (field != null)
+                    {
+                        embed.Fields.Add(field);
+                    }
                 }
             }
 
