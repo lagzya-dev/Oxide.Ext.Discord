@@ -66,14 +66,14 @@ namespace Oxide.Ext.Discord.Libraries
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
             string value = placeholders.ProcessPlaceholders(Value, data);
-            if (HideIfEmpty && (string.IsNullOrEmpty(value) || value == EmbedField.Blank))
+            if (string.IsNullOrEmpty(value) || value == EmbedField.Blank)
             {
-                return null;
-            }
+                if (HideIfEmpty)
+                {
+                    return null;
+                }
 
-            if (string.IsNullOrEmpty(value))
-            {
-                value = EmbedField.Blank;
+                Value = EmbedField.Blank;
             }
             
             if (field == null)
