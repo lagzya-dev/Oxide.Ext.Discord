@@ -755,7 +755,7 @@ namespace Oxide.Ext.Discord.Entities
         
         /// <summary>
         /// Creates a new public thread this message
-        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-from-message"></a>
+        /// See <a href="https://discord.com/developers/docs/resources/channel#start-thread-from-message">Start Thread</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Data to use when creating the thread</param>
@@ -763,6 +763,29 @@ namespace Oxide.Ext.Discord.Entities
         {
             if (create == null) throw new ArgumentNullException(nameof(create));
             return client.Bot.Rest.Post<DiscordChannel>(client,$"channels/{ChannelId}/messages/{Id}/threads", create);
+        }
+
+        /// <summary>
+        /// Get a list of users that voted for this specific answer.
+        /// See <a href="https://discord.com/developers/docs/resources/poll#get-answer-voters">Get Answer Voters</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="answer">Answer to get voters for</param>
+        /// <param name="filter"></param>
+        public IPromise<GetPollAnswerResponse> GetPollVoters(DiscordClient client, PollAnswers answer, GetPollAnswerVoters filter = null)
+        {
+            return client.Bot.Rest.Get<GetPollAnswerResponse>(client, $"channels/{ChannelId}/polls/{Id}/answers/{answer.AnswerId}{filter?.ToQueryString()}");
+        }
+        
+        /// <summary>
+        /// Immediately ends the poll.
+        /// You cannot end polls from other users.
+        /// See <a href="https://discord.com/developers/docs/resources/poll#end-poll">End Poll</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise<DiscordMessage> EndPoll(DiscordClient client)
+        {
+            return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{ChannelId}/polls/{Id}/expire", new object());
         }
     }
 }

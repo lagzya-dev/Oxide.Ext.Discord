@@ -363,11 +363,11 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [Description("SEND_VOICE_MESSAGES")]
         SendVoiceMessages = 1ul << 46,
-            
+        
         /// <summary>
-        /// Allows members to interact with the Clyde AI bot
+        /// Allows sending polls
         /// </summary>
-        [Description("USE_CLYDE_AI")]
-        UseClydeAi = 1ul << 47,
+        [Description("SEND_POLLS")]
+        UseClydeAi = 1ul << 49,
     }
 }

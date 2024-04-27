@@ -108,6 +108,8 @@ public static class DiscordExtHooks
 | const [OnDiscordPlayerLinked](#ondiscordplayerlinked-field) |  |
 | const [OnDiscordPlayerUnlink](#ondiscordplayerunlink-field) |  |
 | const [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked-field) |  |
+| const [OnDiscordPollVoteAdded](#ondiscordpollvoteadded-field) |  |
+| const [OnDiscordPollVoteRemoved](#ondiscordpollvoteremoved-field) |  |
 | const [OnDiscordSetupHeartbeat](#ondiscordsetupheartbeat-field) |  |
 | const [OnDiscordStageInstanceCreated](#ondiscordstageinstancecreated-field) |  |
 | const [OnDiscordStageInstanceDeleted](#ondiscordstageinstancedeleted-field) |  |
@@ -1557,6 +1559,32 @@ public const string OnDiscordAutoModRuleDeleted;
 
 ```csharp
 public const string OnDiscordAutoModActionExecuted;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPollVoteAdded field
+
+```csharp
+public const string OnDiscordPollVoteAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPollVoteRemoved field
+
+```csharp
+public const string OnDiscordPollVoteRemoved;
 ```
 
 ## See Also
