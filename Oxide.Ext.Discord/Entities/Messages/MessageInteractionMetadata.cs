@@ -22,10 +22,10 @@ namespace Oxide.Ext.Discord.Entities
         public InteractionType Type { get; set; }
         
         /// <summary>
-        /// ID of the user who triggered the interaction
+        /// IUser who triggered the interaction
         /// </summary>
-        [JsonProperty("user_id")]
-        public Snowflake UserId { get; set; }
+        [JsonProperty("user")]
+        public DiscordUser User { get; set; }
         
         /// <summary>
         /// IDs for installation context(s) related to an interaction.
