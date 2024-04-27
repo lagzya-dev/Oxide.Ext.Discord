@@ -37,7 +37,11 @@ namespace Oxide.Ext.Discord.Callbacks
                 List<TEntity> results = new List<TEntity>(_placeholders.Count);
                 for (int index = 0; index < _placeholders.Count; index++)
                 {
-                    results.Add(_template.ToEntity(_placeholders[index]));
+                    TEntity field = _template.ToEntity(_placeholders[index]);
+                    if (field != null)
+                    {
+                        results.Add(field);
+                    }
                 }
                 _promise.Resolve(results);
             }

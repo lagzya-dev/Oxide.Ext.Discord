@@ -55,6 +55,12 @@ namespace Oxide.Ext.Discord.Entities
         public MessageFlags? Flags { get; set; }
         
         /// <summary>
+        /// Poll Create Request
+        /// </summary>
+        [JsonProperty("poll")]
+        public PollCreate Poll { get; set; }
+        
+        /// <summary>
         /// Attachments for a discord message
         /// </summary>
         public List<MessageFileAttachment> FileAttachments { get; set; }

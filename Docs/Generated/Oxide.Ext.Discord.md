@@ -182,6 +182,7 @@
 | class [DiscordInteraction](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) | Represents [Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure) |
 | class [DiscordInvite](./Oxide.Ext.Discord/Entities/DiscordInvite.md) | Represents an [Invite Structure](https://discord.com/developers/docs/resources/invite#invite-object) that when used, adds a user to a guild or group DM channel. |
 | class [DiscordMessage](./Oxide.Ext.Discord/Entities/DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
+| class [DiscordPoll](./Oxide.Ext.Discord/Entities/DiscordPoll.md) | Represents a [Discord Poll](https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure) |
 | class [DiscordRole](./Oxide.Ext.Discord/Entities/DiscordRole.md) | Represents [Role Structure](https://discord.com/developers/docs/topics/permissions#role-object) |
 | class [DiscordSku](./Oxide.Ext.Discord/Entities/DiscordSku.md) | Represents a [SKU Structure](https://discord.com/developers/docs/monetization/skus#sku-object-sku-structure) |
 | enum [DiscordSkuType](./Oxide.Ext.Discord/Entities/DiscordSkuType.md) | Represents a [Discord SKU Types](https://discord.com/developers/docs/monetization/skus#sku-object-sku-types) |
@@ -213,6 +214,8 @@
 | class [GatewayReadyEvent](./Oxide.Ext.Discord/Entities/GatewayReadyEvent.md) | Represents [Ready](https://discord.com/developers/docs/topics/gateway#ready) The ready event is dispatched when a client has completed the initial handshake with the gateway (for new sessions) |
 | class [GatewayResumedEvent](./Oxide.Ext.Discord/Entities/GatewayResumedEvent.md) | Represents [Resumed](https://discord.com/developers/docs/topics/gateway#resumed) The resumed event is dispatched when a client has sent a resume payload to the gateway (for resuming existing sessions). |
 | class [GetEntitlements](./Oxide.Ext.Discord/Entities/GetEntitlements.md) | Get Entitlements Query String Builder |
+| class [GetPollAnswerResponse](./Oxide.Ext.Discord/Entities/GetPollAnswerResponse.md) | Represents a [Get Poll Answers Response](https://discord.com/developers/docs/resources/poll#get-answer-voters-response-body) |
+| class [GetPollAnswerVoters](./Oxide.Ext.Discord/Entities/GetPollAnswerVoters.md) | Represents a [Get Answer Voters Query String Params](https://discord.com/developers/docs/resources/poll#get-answer-voters-query-string-params) |
 | class [GetThreadMember](./Oxide.Ext.Discord/Entities/GetThreadMember.md) | Represents [Get Thread Member Query String Params](https://discord.com/developers/docs/resources/channel#get-thread-member-query-string-params) |
 | class [GroupDmChannelUpdate](./Oxide.Ext.Discord/Entities/GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
 | class [GuildBan](./Oxide.Ext.Discord/Entities/GuildBan.md) | Represents [Guild Ban Structure](https://discord.com/developers/docs/resources/guild#ban-object-ban-structure) |
@@ -311,6 +314,8 @@
 | class [MessageFileAttachment](./Oxide.Ext.Discord/Entities/MessageFileAttachment.md) | Represents a file attachment for a discord message |
 | [Flags] enum [MessageFlags](./Oxide.Ext.Discord/Entities/MessageFlags.md) | Represents [Message Flags](https://discord.com/developers/docs/resources/channel#message-object-message-flags) for a message |
 | class [MessageInteraction](./Oxide.Ext.Discord/Entities/MessageInteraction.md) | Represents a [Message Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object) within Discord. |
+| class [MessagePollVoteAddedEvent](./Oxide.Ext.Discord/Entities/MessagePollVoteAddedEvent.md) | Represents [Message Poll Vote Added Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add) |
+| class [MessagePollVoteRemovedEvent](./Oxide.Ext.Discord/Entities/MessagePollVoteRemovedEvent.md) | Represents [Message Poll Vote Removed Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove) |
 | class [MessageReaction](./Oxide.Ext.Discord/Entities/MessageReaction.md) | Represents a [Reaction Structure](https://discord.com/developers/docs/resources/channel#reaction-object) |
 | class [MessageReactionAddedEvent](./Oxide.Ext.Discord/Entities/MessageReactionAddedEvent.md) | Represents [Message Reaction Add](https://discord.com/developers/docs/topics/gateway#message-reaction-add) |
 | class [MessageReactionRemovedAllEmojiEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedAllEmojiEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji) |
@@ -325,6 +330,12 @@
 | class [Overwrite](./Oxide.Ext.Discord/Entities/Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
 | [Flags] enum [PermissionFlags](./Oxide.Ext.Discord/Entities/PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
 | enum [PermissionType](./Oxide.Ext.Discord/Entities/PermissionType.md) | Represents the type of a permission |
+| class [PollAnswerCount](./Oxide.Ext.Discord/Entities/PollAnswerCount.md) | Represents a [Discord Poll Answer Count](https://discord.com/developers/docs/resources/poll#poll-results-object-poll-answer-count-object-structure) |
+| class [PollAnswers](./Oxide.Ext.Discord/Entities/PollAnswers.md) | Represents a [Discord Poll Answers](https://discord.com/developers/docs/resources/poll#poll-answer-object) |
+| class [PollCreate](./Oxide.Ext.Discord/Entities/PollCreate.md) | Represents a [Discord Poll Create](https://discord.com/developers/docs/resources/poll#poll-create-request-object-poll-create-request-object-structure) |
+| enum [PollLayoutType](./Oxide.Ext.Discord/Entities/PollLayoutType.md) | Represents a [Discord Poll Layout Type](https://discord.com/developers/docs/resources/poll#layout-type) |
+| class [PollMedia](./Oxide.Ext.Discord/Entities/PollMedia.md) | Represents a [Discord Poll Media](https://discord.com/developers/docs/resources/poll#poll-media-object) |
+| class [PollResults](./Oxide.Ext.Discord/Entities/PollResults.md) | Represents a [Discord Poll Results](https://discord.com/developers/docs/resources/poll#poll-results-object) |
 | class [PresenceUpdatedEvent](./Oxide.Ext.Discord/Entities/PresenceUpdatedEvent.md) | Represents [Presence Update](https://discord.com/developers/docs/topics/gateway#presence-update) |
 | enum [PrivacyLevel](./Oxide.Ext.Discord/Entities/PrivacyLevel.md) | Represents a [Stage Privacy Level](https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level) within Discord. |
 | class [RateLimitResponse](./Oxide.Ext.Discord/Entities/RateLimitResponse.md) | Represents a rate limit response from an API request |

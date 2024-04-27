@@ -64,6 +64,7 @@ namespace Oxide.Ext.Discord.Plugins
             
             internal static class HighPerformance
             {
+                // ReSharper disable once MemberHidesStaticFromOuterClass
                 private const string Base = Search.Base + nameof(HighPerformance) + ".";
                 
                 public const string Show = Base + nameof(Show);

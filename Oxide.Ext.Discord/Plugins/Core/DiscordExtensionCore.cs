@@ -138,6 +138,7 @@ namespace Oxide.Ext.Discord.Plugins
         }
         
         [HookMethod(nameof(SearchHighPerformanceEnabled))]
+        // ReSharper disable once UnusedParameter.Local
         private void SearchHighPerformanceEnabled(IPlayer player, string cmd, string[] args)
         {
             DiscordSearchConfig config = DiscordConfig.Instance.Search;
@@ -196,6 +197,7 @@ namespace Oxide.Ext.Discord.Plugins
         }
         
         [HookMethod(nameof(ConsoleLogCommand))]
+        // ReSharper disable once UnusedParameter.Local
         private void ConsoleLogCommand(IPlayer player, string cmd, string[] args)
         {
             if (args.Length == 0)
@@ -221,6 +223,7 @@ namespace Oxide.Ext.Discord.Plugins
         }
         
         [HookMethod(nameof(FileLogCommand))]
+        // ReSharper disable once UnusedParameter.Local
         private void FileLogCommand(IPlayer player, string cmd, string[] args)
         {
             if (args.Length == 0)
@@ -247,6 +250,7 @@ namespace Oxide.Ext.Discord.Plugins
         }
 
         [HookMethod(nameof(ValidationEnableCommand))]
+        // ReSharper disable once UnusedParameter.Local
         private void ValidationEnableCommand(IPlayer player, string cmd, string[] args)
         {
             if (args.Length == 0)
@@ -267,6 +271,7 @@ namespace Oxide.Ext.Discord.Plugins
         }
 
         [HookMethod(nameof(DiscordDebugCommand))]
+        // ReSharper disable once UnusedParameter.Local
         private void DiscordDebugCommand(IPlayer player, string cmd, string[] args)
         {
             DebugLogger logger = new DebugLogger();
@@ -334,6 +339,7 @@ namespace Oxide.Ext.Discord.Plugins
 
         // ReSharper disable once UnusedMember.Local
         [HookMethod(nameof(OnUserApproved))]
+        // ReSharper disable twice UnusedParameter.Local
         private void OnUserApproved(string name, string id, string ipAddress)
         {
             if (!DiscordIpData.Instance.HasData(ipAddress))

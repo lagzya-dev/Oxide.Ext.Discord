@@ -1072,6 +1072,22 @@ namespace Oxide.Ext.Discord.Constants
         public const string OnDiscordAutoModActionExecuted = nameof(OnDiscordAutoModActionExecuted);
         
         /// <code>
+        /// void OnDiscordPollVoteAdded(MessagePollVoteAddedEvent vote, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordPollVoteAdded Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordPollVoteAdded = nameof(OnDiscordPollVoteAdded);
+        
+        /// <code>
+        /// void OnDiscordAutoModActionExecuted(MessagePollVoteRemovedEvent vote, DiscordGuild guild)
+        /// {
+        ///     Puts("OnDiscordPollVoteRemoved Works!");
+        /// }
+        /// </code>
+        public const string OnDiscordPollVoteRemoved = nameof(OnDiscordPollVoteRemoved);
+        
+        /// <code>
         /// void OnDiscordUnhandledCommand(EventPayload payload)
         /// {
         ///     Puts("OnDiscordUnhandledCommand Works!");

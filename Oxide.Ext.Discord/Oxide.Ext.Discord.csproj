@@ -24,7 +24,7 @@
     <DocumentationFile>$(outdir)Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Oxide.Core" Version="2.0.4077">
+    <PackageReference Include="Oxide.Core" Version="2.0.4091-develop">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
     <PackageReference Include="Oxide.CSharp" Version="2.0.4126">

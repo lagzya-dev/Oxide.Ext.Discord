@@ -334,5 +334,15 @@ namespace Oxide.Ext.Discord.WebSockets
         /// Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
         /// </summary>
         [Description("AUTO_MODERATION_ACTION_EXECUTION")] AutoModerationActionExecution,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add">MESSAGE_POLL_VOTE_ADD</a> gateway event
+        /// </summary>
+        [Description("MESSAGE_POLL_VOTE_ADD")] MessagePollVoteAdded,
+        
+        /// <summary>
+        /// Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove">MESSAGE_POLL_VOTE_REMOVE</a> gateway event
+        /// </summary>
+        [Description("MESSAGE_POLL_VOTE_REMOVE")] MessagePollVoteRemoved,
     }
 }

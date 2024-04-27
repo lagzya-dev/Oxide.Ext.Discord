@@ -12,6 +12,7 @@ public class DiscordEmbedFieldTemplate : IBulkTemplate<EmbedField>
 | --- | --- |
 | [DiscordEmbedFieldTemplate](#discordembedfieldtemplate-constructor)() | Constructor |
 | [DiscordEmbedFieldTemplate](#discordembedfieldtemplate-constructor)(…) | Constructor |
+| [HideIfEmpty](#hideifempty-property) { get; set; } | Hides the field if the value is null, empty, or \u200b |
 | [Inline](#inline-property) { get; set; } | Should the field be on the same row |
 | [Name](#name-property) { get; set; } | Title of the field |
 | [Value](#value-property) { get; set; } | Value of the field |
@@ -138,6 +139,21 @@ Should the field be on the same row
 
 ```csharp
 public bool Inline { get; set; }
+```
+
+## See Also
+
+* class [DiscordEmbedFieldTemplate](./DiscordEmbedFieldTemplate.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# HideIfEmpty property
+
+Hides the field if the value is null, empty, or \u200b
+
+```csharp
+public bool HideIfEmpty { get; set; }
 ```
 
 ## See Also

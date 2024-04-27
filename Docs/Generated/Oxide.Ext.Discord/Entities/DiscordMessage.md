@@ -54,12 +54,14 @@ public class DiscordMessage : IFileAttachments
 | [Edit](#edit-method)(…) | Edit a previously sent message. The fields content, embed, allowed_mentions and flags can be edited by the original message author. Other users can only edit flags and only if they have the MANAGE_MESSAGES permission in the corresponding channel. When specifying flags, ensure to include all previously set flags/bits in addition to ones that you are modifying. Only flags documented in the table below may be modified by users (unsupported flag changes are currently ignored without error). See [Edit Message](https://discord.com/developers/docs/resources/channel#edit-message) |
 | [EditGlobalTemplateMessage](#editglobaltemplatemessage-method)(…) | Edit a message using a global message template |
 | [EditTemplateMessage](#edittemplatemessage-method)(…) | Edit a message using a localized message template |
+| [EndPoll](#endpoll-method)(…) | Immediately ends the poll. You cannot end polls from other users. See [End Poll](https://discord.com/developers/docs/resources/poll#end-poll) |
+| [GetPollVoters](#getpollvoters-method)(…) | Get a list of users that voted for this specific answer. See [Get Answer Voters](https://discord.com/developers/docs/resources/poll#get-answer-voters) |
 | [GetReactions](#getreactions-method-1-of-2)(…) | Get a list of users that reacted with this emoji Valid emoji formats are the unicode emoji character '😀' or for custom emoji format must be &lt;emojiName:emojiId&gt; See [Get Reactions](https://discord.com/developers/docs/resources/channel#get-reactions) (2 methods) |
 | [Pin](#pin-method)(…) | Pin a message in a channel. Requires the MANAGE_MESSAGES permission. See [Add Pinned Channel Message](https://discord.com/developers/docs/resources/channel#add-pinned-channel-message) |
 | [Reply](#reply-method-1-of-5)(…) | Replies to a previously sent message See [Create Message](https://discord.com/developers/docs/resources/channel#create-message) (5 methods) |
 | [ReplyWithGlobalTemplate](#replywithglobaltemplate-method)(…) | Reply to a message using a global message template |
 | [ReplyWithTemplate](#replywithtemplate-method)(…) | Reply to a message using a global message template |
-| [StartThread](#startthread-method)(…) | Creates a new public thread this message See [https://discord.com/developers/docs/resources/channel#start-thread-from-message](https://discord.com/developers/docs/resources/channel#start-thread-from-message) |
+| [StartThread](#startthread-method)(…) | Creates a new public thread this message See [Start Thread](https://discord.com/developers/docs/resources/channel#start-thread-from-message) |
 | [Unpin](#unpin-method)(…) | Delete a pinned message in a channel. Requires the MANAGE_MESSAGES permission. See [Unpin Pinned Channel Message](https://discord.com/developers/docs/resources/channel#delete-pinned-channel-message) |
 | static [Create](#create-method-1-of-5)(…) | Post a message to a guild text or DM channel. If operating on a guild channel, this endpoint requires the SEND_MESSAGES permission to be present on the current user. If the tts field is set to true, the SEND_TTS_MESSAGES permission is required for the message to be spoken. See [Create Message](https://discord.com/developers/docs/resources/channel#create-message) (5 methods) |
 | static [CreateGlobalTemplateMessage](#createglobaltemplatemessage-method)(…) | Send a message in the channel with the given ID using a global message template |
@@ -920,7 +922,7 @@ public IPromise Unpin(DiscordClient client)
    
 # StartThread method
 
-Creates a new public thread this message See [https://discord.com/developers/docs/resources/channel#start-thread-from-message](https://discord.com/developers/docs/resources/channel#start-thread-from-message)
+Creates a new public thread this message See [Start Thread](https://discord.com/developers/docs/resources/channel#start-thread-from-message)
 
 ```csharp
 public IPromise<DiscordChannel> StartThread(DiscordClient client, ThreadCreateFromMessage create)
@@ -937,6 +939,54 @@ public IPromise<DiscordChannel> StartThread(DiscordClient client, ThreadCreateFr
 * class [DiscordChannel](./DiscordChannel.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [ThreadCreateFromMessage](./ThreadCreateFromMessage.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetPollVoters method
+
+Get a list of users that voted for this specific answer. See [Get Answer Voters](https://discord.com/developers/docs/resources/poll#get-answer-voters)
+
+```csharp
+public IPromise<GetPollAnswerResponse> GetPollVoters(DiscordClient client, PollAnswers answer, 
+    GetPollAnswerVoters filter = null)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| answer | Answer to get voters for |
+| filter |  |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [GetPollAnswerResponse](./GetPollAnswerResponse.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [PollAnswers](./PollAnswers.md)
+* class [GetPollAnswerVoters](./GetPollAnswerVoters.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# EndPoll method
+
+Immediately ends the poll. You cannot end polls from other users. See [End Poll](https://discord.com/developers/docs/resources/poll#end-poll)
+
+```csharp
+public IPromise<DiscordMessage> EndPoll(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

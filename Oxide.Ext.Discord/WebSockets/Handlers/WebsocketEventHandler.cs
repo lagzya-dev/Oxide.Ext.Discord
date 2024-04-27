@@ -552,6 +552,14 @@ namespace Oxide.Ext.Discord.WebSockets
                     HandleDispatchAutoModActionExecuted(payload.GetData<AutoModActionExecutionEvent>(_client));
                     break;
                 
+                case DiscordDispatchCode.MessagePollVoteAdded:
+                    HandleDispatchMessagePollVoteAdded(payload.GetData<MessagePollVoteAddedEvent>(_client));
+                    break;
+                
+                case DiscordDispatchCode.MessagePollVoteRemoved:
+                    HandleDispatchMessagePollVoteRemoved(payload.GetData<MessagePollVoteRemovedEvent>(_client));
+                    break;
+                
                 // Bots should ignore this
                 case DiscordDispatchCode.PresenceReplace:
                     break;
@@ -561,7 +569,7 @@ namespace Oxide.Ext.Discord.WebSockets
                     break;
             }
         }
-        
+
         //https://discord.com/developers/docs/topics/gateway-events#ready
         private void HandleDispatchReady(GatewayReadyEvent ready)
         {
@@ -1930,6 +1938,20 @@ namespace Oxide.Ext.Discord.WebSockets
         {
             DiscordGuild guild = _client.GetGuild(action.GuildId);
             _client.Hooks.CallHook(DiscordExtHooks.OnDiscordAutoModActionExecuted, action, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add
+        private void HandleDispatchMessagePollVoteAdded(MessagePollVoteAddedEvent data)
+        {
+            DiscordGuild guild = _client.GetGuild(data.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordPollVoteAdded, data, guild);
+        }
+        
+        //https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove
+        private void HandleDispatchMessagePollVoteRemoved(MessagePollVoteRemovedEvent data)
+        {
+            DiscordGuild guild = _client.GetGuild(data.GuildId);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordPollVoteRemoved, data, guild);
         }
 
         private void HandleDispatchUnhandledEvent(EventPayload payload)

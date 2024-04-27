@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -105,7 +106,7 @@ namespace Oxide.Ext.Discord.Logging
             }
             else
             {
-                AppendField(name, value.ToString());
+                AppendField(name, value.ToString(CultureInfo.InvariantCulture));
             }
             ArrayPool<char>.Shared.Return(array);
         }
@@ -125,7 +126,7 @@ namespace Oxide.Ext.Discord.Logging
             }
             else
             {
-                AppendField(name, value.ToString());
+                AppendField(name, value.ToString(CultureInfo.InvariantCulture));
             }
             ArrayPool<char>.Shared.Return(array);
         }

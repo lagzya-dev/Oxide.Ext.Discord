@@ -3440,6 +3440,22 @@
             }
             </code>
         </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPollVoteAdded">
+            <code>
+            void OnDiscordPollVoteAdded(MessagePollVoteAddedEvent vote, DiscordGuild guild)
+            {
+                Puts("OnDiscordPollVoteAdded Works!");
+            }
+            </code>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPollVoteRemoved">
+            <code>
+            void OnDiscordAutoModActionExecuted(MessagePollVoteRemovedEvent vote, DiscordGuild guild)
+            {
+                Puts("OnDiscordPollVoteRemoved Works!");
+            }
+            </code>
+        </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUnhandledCommand">
             <code>
             void OnDiscordUnhandledCommand(EventPayload payload)
@@ -7764,6 +7780,66 @@
         <member name="P:Oxide.Ext.Discord.Entities.MessageDeletedEvent.GuildId">
             <summary>
             The id of the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add">Message Poll Vote Added Event</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent.ChannelId">
+            <summary>
+            The id of the channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent.MessageId">
+            <summary>
+            ID of the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteAddedEvent.AnswerId">
+            <summary>
+            ID of the answer
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove">Message Poll Vote Removed Event</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent.UserId">
+            <summary>
+            ID of the user
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent.ChannelId">
+            <summary>
+            The id of the channel
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent.MessageId">
+            <summary>
+            ID of the message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent.GuildId">
+            <summary>
+            ID of the guild
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessagePollVoteRemovedEvent.AnswerId">
+            <summary>
+            ID of the answer
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageReactionAddedEvent">
@@ -13330,6 +13406,11 @@
             Attachments for the message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.BaseMessageCreate.Poll">
+            <summary>
+            Poll Create Request
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.BaseMessageCreate.FileAttachments">
             <summary>
             Attachments for a discord message
@@ -13878,10 +13959,27 @@
         <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.StartThread(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.ThreadCreateFromMessage)">
             <summary>
             Creates a new public thread this message
-            See <a href="https://discord.com/developers/docs/resources/channel#start-thread-from-message"></a>
+            See <a href="https://discord.com/developers/docs/resources/channel#start-thread-from-message">Start Thread</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="create">Data to use when creating the thread</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.GetPollVoters(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.PollAnswers,Oxide.Ext.Discord.Entities.GetPollAnswerVoters)">
+            <summary>
+            Get a list of users that voted for this specific answer.
+            See <a href="https://discord.com/developers/docs/resources/poll#get-answer-voters">Get Answer Voters</a>
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="answer">Answer to get voters for</param>
+            <param name="filter"></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordMessage.EndPoll(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Immediately ends the poll.
+            You cannot end polls from other users.
+            See <a href="https://discord.com/developers/docs/resources/poll#end-poll">End Poll</a>
+            </summary>
+            <param name="client">Client to use</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.DiscordEmbed">
             <summary>
@@ -14762,6 +14860,174 @@
         <member name="M:Oxide.Ext.Discord.Entities.MessageUpdate.Validate">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.DiscordPoll">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure">Discord Poll</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.Question">
+            <summary>
+            The question of the poll. Only text is supported.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.Answers">
+            <summary>
+            Each of the answers available in the poll.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.Expiry">
+            <summary>
+            The time when the poll ends.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.AllowMultiselect">
+            <summary>
+            Whether a user can select multiple answers
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.LayoutType">
+            <summary>
+            The layout type of the poll
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordPoll.Results">
+            <summary>
+            The results of the poll
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.GetPollAnswerResponse">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#get-answer-voters-response-body">Get Poll Answers Response</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.GetPollAnswerResponse.Users">
+            <summary>
+            Users who voted for this answer
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.GetPollAnswerVoters">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#get-answer-voters-query-string-params">Get Answer Voters Query String Params</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.GetPollAnswerVoters.After">
+            <summary>
+            Get users after this user ID
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.GetPollAnswerVoters.Limit">
+            <summary>
+            Max number of users to return (1-100)
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.GetPollAnswerVoters.ToQueryString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollAnswerCount">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-results-object-poll-answer-count-object-structure">Discord Poll Answer Count</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollAnswerCount.Id">
+            <summary>
+            The answer_id
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollAnswerCount.Count">
+            <summary>
+            The number of votes for this answer
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollAnswerCount.MeVoted">
+            <summary>
+            Whether the current user voted for this answer
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollAnswers">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-answer-object">Discord Poll Answers</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollAnswers.AnswerId">
+            <summary>
+            The ID of the answer
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollAnswers.PollMedia">
+            <summary>
+            The data of the answer
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollCreate">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-create-request-object-poll-create-request-object-structure">Discord Poll Create</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollCreate.Question">
+            <summary>
+            The question of the poll. Only text is supported.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollCreate.Answers">
+            <summary>
+            Each of the answers available in the poll.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollCreate.Duration">
+            <summary>
+            Number of hours the poll should be open for, up to 7 days
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollCreate.AllowMultiselect">
+            <summary>
+            Whether a user can select multiple answers
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollCreate.LayoutType">
+            <summary>
+            The layout type of the poll
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollLayoutType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#layout-type">Discord Poll Layout Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.PollLayoutType.Default">
+            <summary>
+            The default layout type.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollMedia">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-media-object">Discord Poll Media</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollMedia.Text">
+            <summary>
+            The text of the field
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollMedia.Emoji">
+            <summary>
+            The emoji of the field
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.PollResults">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/poll#poll-results-object">Discord Poll Results</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollResults.IsFinalized">
+            <summary>
+            Whether the votes have been precisely counted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.PollResults.AnswerCounts">
+            <summary>
+            The counts for each answer
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.ReactionCountDetails">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#reaction-count-details-object">Reaction Count Details Structure</a>
@@ -15419,7 +15685,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.UseClydeAi">
             <summary>
-            Allows members to interact with the Clyde AI bot
+            Allows sending polls
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.RoleFlags">
@@ -23837,6 +24103,11 @@
             Should the field be on the same row
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Libraries.DiscordEmbedFieldTemplate.HideIfEmpty">
+            <summary>
+            Hides the field if the value is null, empty, or \u200b
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordEmbedFieldTemplate.#ctor">
             <summary>
             Constructor
@@ -26877,6 +27148,16 @@
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.AutoModerationActionExecution">
             <summary>
             Represents the <a href="https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution">AUTO_MODERATION_ACTION_EXECUTION</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessagePollVoteAdded">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add">MESSAGE_POLL_VOTE_ADD</a> gateway event
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.WebSockets.DiscordDispatchCode.MessagePollVoteRemoved">
+            <summary>
+            Represents the <a href="https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove">MESSAGE_POLL_VOTE_REMOVE</a> gateway event
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordHeartbeatHandler">

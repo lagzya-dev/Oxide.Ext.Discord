@@ -75,6 +75,8 @@ public enum DiscordDispatchCode : byte
 | AutoModerationRuleUpdate | `AutoModerationRuleUpdate` | Represents the [AUTO_MODERATION_RULE_UPDATE](https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-update) gateway event |
 | AutoModerationRuleDelete | `AutoModerationRuleDelete` | Represents the [AUTO_MODERATION_RULE_DELETE](https://discord.com/developers/docs/topics/gateway#auto-moderation-rule-delete) gateway event |
 | AutoModerationActionExecution | `AutoModerationActionExecution` | Represents the [AUTO_MODERATION_ACTION_EXECUTION](https://discord.com/developers/docs/topics/gateway#auto-moderation-action-execution) gateway event |
+| MessagePollVoteAdded | `MessagePollVoteAdded` | Represents the [MESSAGE_POLL_VOTE_ADD](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add) gateway event |
+| MessagePollVoteRemoved | `MessagePollVoteRemoved` | Represents the [MESSAGE_POLL_VOTE_REMOVE](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove) gateway event |
 
 ## See Also
 

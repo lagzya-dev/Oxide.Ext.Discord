@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Clients;
@@ -387,7 +388,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <returns></returns>
         public string GetKeys()
         {
-            return string.Join(", ", _data.Keys);
+            return string.Join(", ", _data.Keys.Select(k => k.Key));
         }
 
         /// <summary>
