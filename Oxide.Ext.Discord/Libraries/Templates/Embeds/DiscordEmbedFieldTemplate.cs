@@ -68,6 +68,11 @@ namespace Oxide.Ext.Discord.Libraries
             
             data?.IncrementDepth();
             
+            if (field == null)
+            {
+                field = new EmbedField();
+            }
+            
             string value = placeholders.ProcessPlaceholders(Value, data);
             if (string.IsNullOrEmpty(value) || value == EmbedField.Blank)
             {
@@ -77,11 +82,6 @@ namespace Oxide.Ext.Discord.Libraries
                 }
 
                 Value = EmbedField.Blank;
-            }
-            
-            if (field == null)
-            {
-                field = new EmbedField();
             }
             
             field.Name = placeholders.ProcessPlaceholders(Name, data);
