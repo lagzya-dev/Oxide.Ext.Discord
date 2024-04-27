@@ -785,7 +785,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="client">Client to use</param>
         public IPromise<DiscordMessage> EndPoll(DiscordClient client)
         {
-            return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{ChannelId}/polls/{Id}/expire", new object());
+            return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{ChannelId}/polls/{Id}/expire", null);
         }
     }
 }

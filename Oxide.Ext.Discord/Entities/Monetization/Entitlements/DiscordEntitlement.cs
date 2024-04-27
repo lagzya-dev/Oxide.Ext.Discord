@@ -66,9 +66,16 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// For consumable items, whether the entitlement has been consumed                      |
+        /// </summary>
+        [JsonProperty("consumed")]
+        public bool? Consumed { get; set; }
 
         /// <summary>
         /// Returns all entitlements for a given app, active and expired.
+        /// See <a href="https://discord.com/developers/docs/monetization/entitlements#list-entitlements">List Entitlements</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="applicationId">Application ID to get entitlement for</param>
@@ -78,9 +85,20 @@ namespace Oxide.Ext.Discord.Entities
             InvalidSnowflakeException.ThrowIfInvalid(applicationId, true, nameof(applicationId));
             return client.Bot.Rest.Get<List<DiscordEntitlement>>(client, $"applications/{applicationId}/application-object/entitlements{getEntitlements?.ToQueryString()}");
         }
+        
+        /// <summary>
+        /// For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed.
+        /// See <a href="https://discord.com/developers/docs/monetization/entitlements#consume-an-entitlement">Consume an Entitlement</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise ConsumeEntitlement(DiscordClient client)
+        {
+            return client.Bot.Rest.Post(client, $"applications/{ApplicationId}/entitlements/{Id}/consume", null);
+        }
 
         /// <summary>
         /// Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering.
+        /// See <a href="https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement">Create Test Entitlement</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Create request</param>
@@ -91,6 +109,7 @@ namespace Oxide.Ext.Discord.Entities
 
         /// <summary>
         /// Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering.
+        /// See <a href="https://discord.com/developers/docs/monetization/entitlements#delete-test-entitlement">Delete Test Entitlement</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         public IPromise DeleteTestEntitlement(DiscordClient client)

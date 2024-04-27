@@ -15113,17 +15113,31 @@
             ID of the guild that is granted access to the entitlement's sku
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordEntitlement.Consumed">
+            <summary>
+            For consumable items, whether the entitlement has been consumed                      |
+            </summary>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordEntitlement.GetEntitlements(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.GetEntitlements)">
             <summary>
             Returns all entitlements for a given app, active and expired.
+            See <a href="https://discord.com/developers/docs/monetization/entitlements#list-entitlements">List Entitlements</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="applicationId">Application ID to get entitlement for</param>
             <param name="getEntitlements">Query string options for the request</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordEntitlement.ConsumeEntitlement(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            For One-Time Purchase consumable SKUs, marks a given entitlement for the user as consumed.
+            See <a href="https://discord.com/developers/docs/monetization/entitlements#consume-an-entitlement">Consume an Entitlement</a>
+            </summary>
+            <param name="client">Client to use</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordEntitlement.CreateTestEntitlement(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.CreateTestEntitlement)">
             <summary>
             Creates a test entitlement to a given SKU for a given guild or user. Discord will act as though that user or guild has entitlement to your premium offering.
+            See <a href="https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement">Create Test Entitlement</a>
             </summary>
             <param name="client">Client to use</param>
             <param name="create">Create request</param>
@@ -15131,6 +15145,7 @@
         <member name="M:Oxide.Ext.Discord.Entities.DiscordEntitlement.DeleteTestEntitlement(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Deletes a currently-active test entitlement. Discord will act as though that user or guild no longer has entitlement to your premium offering.
+            See <a href="https://discord.com/developers/docs/monetization/entitlements#delete-test-entitlement">Delete Test Entitlement</a>
             </summary>
             <param name="client">Client to use</param>
         </member>
@@ -15152,6 +15167,41 @@
         <member name="T:Oxide.Ext.Discord.Entities.EntitlementType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#entitlement-object-entitlement-types">Entitlement Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.Purchase">
+            <summary>
+            Entitlement was purchased by user  
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.PremiumSubscription">
+            <summary>
+            Entitlement for Discord Nitro subscription
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.DeveloperGift">
+            <summary>
+            Entitlement was gifted by developer
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.TestModePurchase">
+            <summary>
+            Entitlement was purchased by a dev in application test mode
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.FreePurchase">
+            <summary>
+            Entitlement was granted when the SKU was free
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.UserGift">
+            <summary>
+            Entitlement was claimed by user for free as a Nitro Subscriber
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.PremiumPurchase">
+            <summary>
+            Entitlement was purchased as an app subscription
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.EntitlementType.ApplicationSubscription">
@@ -15250,6 +15300,16 @@
         <member name="T:Oxide.Ext.Discord.Entities.DiscordSkuType">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/monetization/skus#sku-object-sku-types">Discord SKU Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordSkuType.Durable">
+            <summary>
+            Durable one-time purchase
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.DiscordSkuType.Consumable">
+            <summary>
+            Consumable one-time purchase
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.DiscordSkuType.Subscription">

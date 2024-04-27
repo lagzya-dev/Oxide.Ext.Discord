@@ -10,6 +10,8 @@ public enum DiscordSkuType
 
 | name | value | description |
 | --- | --- | --- |
+| Durable | `Durable` | Durable one-time purchase |
+| Consumable | `Consumable` | Consumable one-time purchase |
 | Subscription | `Subscription` | Represents a recurring subscription |
 | SubscriptionGroup | `SubscriptionGroup` | System-generated group for each SUBSCRIPTION SKU created |
 
