@@ -65,6 +65,9 @@ namespace Oxide.Ext.Discord.Libraries
         public EmbedField ToEntity(PlaceholderData data = null, EmbedField field = null)
         {
             DiscordPlaceholders placeholders = DiscordPlaceholders.Instance;
+            
+            data?.IncrementDepth();
+            
             string value = placeholders.ProcessPlaceholders(Value, data);
             if (string.IsNullOrEmpty(value) || value == EmbedField.Blank)
             {
@@ -80,8 +83,6 @@ namespace Oxide.Ext.Discord.Libraries
             {
                 field = new EmbedField();
             }
-            
-            data?.IncrementDepth();
             
             field.Name = placeholders.ProcessPlaceholders(Name, data);
             field.Value = value;
