@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Oxide.Ext.Discord.Clients;
@@ -374,7 +375,7 @@ namespace Oxide.Ext.Discord.Rest
             logger.AppendField("Remaining", Remaining);
             logger.AppendField("Limit", Limit);
             logger.AppendField("Reset At", ResetAt.ToString());
-            logger.AppendField("Reset In", ((ResetAt - DateTimeOffset.UtcNow).TotalSeconds).ToString(), "Seconds");
+            logger.AppendField("Reset In", ((ResetAt - DateTimeOffset.UtcNow).TotalSeconds).ToString(CultureInfo.InvariantCulture), "Seconds");
             logger.AppendField("Active Count", _activeRequests.Count);
             logger.AppendField("Queue Count", _requestQueue.Count);
             logger.AppendFieldOutOf("Semaphore", ActiveRequestsSemaphore.Available, ActiveRequestsSemaphore.MaximumCount);

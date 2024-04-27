@@ -10,12 +10,14 @@ namespace Oxide.Ext.Discord.Plugins
             
             public static class Delete
             {
+                // ReSharper disable once MemberHidesStaticFromOuterClass
                 private const string Base = Commands.Base + nameof(Delete) + ".";
 
                 public static readonly TemplateKey Success = new TemplateKey( Base + nameof(Success));
 
                 public static class Errors
                 {
+                    // ReSharper disable once MemberHidesStaticFromOuterClass
                     private const string Base = Delete.Base + nameof(Errors) + ".";
 
                     public static readonly TemplateKey InvalidSelection = new TemplateKey(Base + nameof(InvalidSelection));
