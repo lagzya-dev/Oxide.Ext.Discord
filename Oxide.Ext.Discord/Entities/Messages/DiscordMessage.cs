@@ -183,6 +183,14 @@ namespace Oxide.Ext.Discord.Entities
         public MessageReference MessageReference { get; set; }
         
         /// <summary>
+        /// The message associated with the message_reference.
+        /// This is a minimal subset of fields in a message (e.g. author is excluded.)
+        /// <see cref="Entities.MessageReference"/>
+        /// </summary>
+        [JsonProperty("message_snapshots")]
+        public List<MessageSnapshot> MessageSnapshots { get; set; }
+        
+        /// <summary>
         /// Message flags combined as a bitfield
         /// <see cref="MessageFlags"/>
         /// </summary>
