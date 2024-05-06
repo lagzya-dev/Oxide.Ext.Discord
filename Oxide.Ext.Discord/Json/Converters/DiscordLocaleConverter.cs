@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Json
                     return Nullable.GetUnderlyingType(objectType) != null ? (object)null : default(DiscordLocale);
 
                 default:
-                    throw new JsonException($"Token type {reader.TokenType} does not match DiscordLocale valid types of string. Path: {reader.Path}");
+                    throw new JsonException($"Token type {reader.TokenType} does not match DiscordLocale valid types of string or null. Path: {reader.Path}");
             }
         }
 
