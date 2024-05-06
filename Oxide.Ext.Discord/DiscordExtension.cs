@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord
     public class DiscordExtension : Extension
     {
         /// <summary>
-        /// Test version information if using test version
+        /// Test version information if using a test version
         /// </summary>
         internal const string TestVersion = "";
         
