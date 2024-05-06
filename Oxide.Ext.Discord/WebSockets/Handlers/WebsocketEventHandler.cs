@@ -89,7 +89,7 @@ namespace Oxide.Ext.Discord.WebSockets
                 _logger.Debug($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Discord WebSocket closed. Code: {{0}}, reason: {{1}}", code, message);
             }
 
-            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketClosed, message, code, true);
+            _client.Hooks.CallHook(DiscordExtHooks.OnDiscordWebsocketClosed, message, code);
             _webSocket.OnSocketDisconnected();
 
             if (_client.Initialized)

@@ -1,7 +1,7 @@
 # Hooks
 
 Hooks within the discord extension are only called on plugins that are registered to receive them and also will only be called on plugins for the bot the event occured. 
-By default all plugins with a connected DiscordClient will be registered to receive hooks for the bot they're connect to.
+By default, all plugins with a connected DiscordClient will be registered to receive hooks for the bot they're connect to.
 
 ## Table of Contents
 
@@ -120,8 +120,7 @@ By default all plugins with a connected DiscordClient will be registered to rece
 These hooks will be called when an action occurs on the DiscordClient assigned to a plugin
 
 ### OnDiscordClientCreated
-- Called when the DiscordClient is created on the bot and is ready to use. 
-This is called after the Loaded() hook on the plugin.
+- 
 
 ```c#
 void OnDiscordClientCreated()
@@ -710,7 +709,7 @@ void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, Discord
 
 ### OnDiscordGuildScheduledEventUpdated
 
-- Called when a discord guild scheduled event is update
+- Called when a discord guild scheduled event is updated
 
 ```c#
 void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
@@ -754,8 +753,7 @@ void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent 
 
 ### OnDiscordDirectMessageCreated
 
-- Called when a message is created in a direct message channel
-  - `channel` may be null if we haven't seen it yet
+
 
 ```c#
 void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
@@ -961,7 +959,7 @@ void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel chan
 
 ### OnDiscordGuildTypingStarted
 
-- Called typing starts in a guild channel
+- Called when typing starts in a guild channel
 
 ```c#
 void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)

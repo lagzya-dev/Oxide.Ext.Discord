@@ -11,112 +11,112 @@ public static class DiscordExtHooks
 | name | description |
 | --- | --- |
 | static readonly [HookGatewayIntent](#hookgatewayintent-field) | A mapping of Hooks required Gateway Intent |
-| const [OnDiscordApplicationCommandPermissionsUpdated](#ondiscordapplicationcommandpermissionsupdated-field) |  |
-| const [OnDiscordAutoModActionExecuted](#ondiscordautomodactionexecuted-field) |  |
-| const [OnDiscordAutoModRuleCreated](#ondiscordautomodrulecreated-field) |  |
-| const [OnDiscordAutoModRuleDeleted](#ondiscordautomodruledeleted-field) |  |
-| const [OnDiscordAutoModRuleUpdated](#ondiscordautomodruleupdated-field) |  |
-| const [OnDiscordBotFullyLoaded](#ondiscordbotfullyloaded-field) |  |
-| const [OnDiscordClientCreated](#ondiscordclientcreated-field) |  |
-| const [OnDiscordDirectChannelCreated](#ondiscorddirectchannelcreated-field) |  |
-| const [OnDiscordDirectChannelDeleted](#ondiscorddirectchanneldeleted-field) |  |
-| const [OnDiscordDirectChannelPinsUpdated](#ondiscorddirectchannelpinsupdated-field) |  |
-| const [OnDiscordDirectChannelUpdated](#ondiscorddirectchannelupdated-field) |  |
-| const [OnDiscordDirectInviteCreated](#ondiscorddirectinvitecreated-field) |  |
-| const [OnDiscordDirectInviteDeleted](#ondiscorddirectinvitedeleted-field) |  |
-| const [OnDiscordDirectMessageCreated](#ondiscorddirectmessagecreated-field) |  |
-| const [OnDiscordDirectMessageDeleted](#ondiscorddirectmessagedeleted-field) |  |
-| const [OnDiscordDirectMessageReactionAdded](#ondiscorddirectmessagereactionadded-field) |  |
-| const [OnDiscordDirectMessageReactionEmojiRemoved](#ondiscorddirectmessagereactionemojiremoved-field) |  |
-| const [OnDiscordDirectMessageReactionRemoved](#ondiscorddirectmessagereactionremoved-field) |  |
-| const [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall-field) |  |
-| const [OnDiscordDirectMessagesBulkDeleted](#ondiscorddirectmessagesbulkdeleted-field) |  |
-| const [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated-field) |  |
-| const [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted-field) |  |
-| const [OnDiscordDirectVoiceStateUpdated](#ondiscorddirectvoicestateupdated-field) |  |
-| const [OnDiscordEntitlementCreated](#ondiscordentitlementcreated-field) |  |
-| const [OnDiscordEntitlementDeleted](#ondiscordentitlementdeleted-field) |  |
-| const [OnDiscordEntitlementUpdated](#ondiscordentitlementupdated-field) |  |
-| const [OnDiscordGatewayReady](#ondiscordgatewayready-field) |  |
-| const [OnDiscordGatewayReconnected](#ondiscordgatewayreconnected-field) |  |
-| const [OnDiscordGatewayResumed](#ondiscordgatewayresumed-field) |  |
-| const [OnDiscordGuildChannelCreated](#ondiscordguildchannelcreated-field) |  |
-| const [OnDiscordGuildChannelDeleted](#ondiscordguildchanneldeleted-field) |  |
-| const [OnDiscordGuildChannelPinsUpdated](#ondiscordguildchannelpinsupdated-field) |  |
-| const [OnDiscordGuildChannelUpdated](#ondiscordguildchannelupdated-field) |  |
-| const [OnDiscordGuildCreated](#ondiscordguildcreated-field) |  |
-| const [OnDiscordGuildDeleted](#ondiscordguilddeleted-field) |  |
-| const [OnDiscordGuildEmojisUpdated](#ondiscordguildemojisupdated-field) |  |
-| const [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated-field) |  |
-| const [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted-field) |  |
-| const [OnDiscordGuildIntegrationsUpdated](#ondiscordguildintegrationsupdated-field) |  |
-| const [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated-field) |  |
-| const [OnDiscordGuildInviteCreated](#ondiscordguildinvitecreated-field) |  |
-| const [OnDiscordGuildInviteDeleted](#ondiscordguildinvitedeleted-field) |  |
-| const [OnDiscordGuildMemberAdded](#ondiscordguildmemberadded-field) |  |
-| const [OnDiscordGuildMemberAvatarUpdated](#ondiscordguildmemberavatarupdated-field) |  |
-| const [OnDiscordGuildMemberBanned](#ondiscordguildmemberbanned-field) |  |
-| const [OnDiscordGuildMemberBoosted](#ondiscordguildmemberboosted-field) |  |
-| const [OnDiscordGuildMemberBoostEnded](#ondiscordguildmemberboostended-field) |  |
-| const [OnDiscordGuildMemberBoostExtended](#ondiscordguildmemberboostextended-field) |  |
-| const [OnDiscordGuildMemberDeafened](#ondiscordguildmemberdeafened-field) |  |
-| const [OnDiscordGuildMemberMuted](#ondiscordguildmembermuted-field) |  |
-| const [OnDiscordGuildMemberNicknameUpdated](#ondiscordguildmembernicknameupdated-field) |  |
-| const [OnDiscordGuildMemberPresenceUpdated](#ondiscordguildmemberpresenceupdated-field) |  |
-| const [OnDiscordGuildMemberRemoved](#ondiscordguildmemberremoved-field) |  |
-| const [OnDiscordGuildMemberRoleAdded](#ondiscordguildmemberroleadded-field) |  |
-| const [OnDiscordGuildMemberRoleRemoved](#ondiscordguildmemberroleremoved-field) |  |
-| const [OnDiscordGuildMembersChunk](#ondiscordguildmemberschunk-field) |  |
-| const [OnDiscordGuildMembersLoaded](#ondiscordguildmembersloaded-field) |  |
-| const [OnDiscordGuildMemberTimeout](#ondiscordguildmembertimeout-field) |  |
-| const [OnDiscordGuildMemberTimeoutEnded](#ondiscordguildmembertimeoutended-field) |  |
-| const [OnDiscordGuildMemberUnbanned](#ondiscordguildmemberunbanned-field) |  |
-| const [OnDiscordGuildMemberUndeafened](#ondiscordguildmemberundeafened-field) |  |
-| const [OnDiscordGuildMemberUnmuted](#ondiscordguildmemberunmuted-field) |  |
-| const [OnDiscordGuildMemberUpdated](#ondiscordguildmemberupdated-field) |  |
-| const [OnDiscordGuildMessageCreated](#ondiscordguildmessagecreated-field) |  |
-| const [OnDiscordGuildMessageDeleted](#ondiscordguildmessagedeleted-field) |  |
-| const [OnDiscordGuildMessageReactionAdded](#ondiscordguildmessagereactionadded-field) |  |
-| const [OnDiscordGuildMessageReactionEmojiRemoved](#ondiscordguildmessagereactionemojiremoved-field) |  |
-| const [OnDiscordGuildMessageReactionRemoved](#ondiscordguildmessagereactionremoved-field) |  |
-| const [OnDiscordGuildMessageReactionRemovedAll](#ondiscordguildmessagereactionremovedall-field) |  |
-| const [OnDiscordGuildMessagesBulkDeleted](#ondiscordguildmessagesbulkdeleted-field) |  |
-| const [OnDiscordGuildMessageUpdated](#ondiscordguildmessageupdated-field) |  |
-| const [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated-field) |  |
-| const [OnDiscordGuildRoleDeleted](#ondiscordguildroledeleted-field) |  |
-| const [OnDiscordGuildRoleUpdated](#ondiscordguildroleupdated-field) |  |
-| const [OnDiscordGuildScheduledEventCreated](#ondiscordguildscheduledeventcreated-field) |  |
-| const [OnDiscordGuildScheduledEventDeleted](#ondiscordguildscheduledeventdeleted-field) |  |
-| const [OnDiscordGuildScheduledEventUpdated](#ondiscordguildscheduledeventupdated-field) |  |
-| const [OnDiscordGuildScheduledEventUserAdded](#ondiscordguildscheduledeventuseradded-field) |  |
-| const [OnDiscordGuildScheduledEventUserRemoved](#ondiscordguildscheduledeventuserremoved-field) |  |
-| const [OnDiscordGuildStickersUpdated](#ondiscordguildstickersupdated-field) |  |
-| const [OnDiscordGuildThreadCreated](#ondiscordguildthreadcreated-field) |  |
-| const [OnDiscordGuildThreadDeleted](#ondiscordguildthreaddeleted-field) |  |
-| const [OnDiscordGuildThreadListSynced](#ondiscordguildthreadlistsynced-field) |  |
-| const [OnDiscordGuildThreadMembersUpdated](#ondiscordguildthreadmembersupdated-field) |  |
-| const [OnDiscordGuildThreadMemberUpdated](#ondiscordguildthreadmemberupdated-field) |  |
-| const [OnDiscordGuildThreadUpdated](#ondiscordguildthreadupdated-field) |  |
-| const [OnDiscordGuildTypingStarted](#ondiscordguildtypingstarted-field) |  |
-| const [OnDiscordGuildUnavailable](#ondiscordguildunavailable-field) |  |
-| const [OnDiscordGuildUpdated](#ondiscordguildupdated-field) |  |
-| const [OnDiscordGuildVoiceServerUpdated](#ondiscordguildvoiceserverupdated-field) |  |
-| const [OnDiscordGuildVoiceStateUpdated](#ondiscordguildvoicestateupdated-field) |  |
-| const [OnDiscordGuildWebhookUpdated](#ondiscordguildwebhookupdated-field) |  |
-| const [OnDiscordHeartbeatSent](#ondiscordheartbeatsent-field) |  |
-| const [OnDiscordInteractionCreated](#ondiscordinteractioncreated-field) |  |
-| const [OnDiscordPlayerLinked](#ondiscordplayerlinked-field) |  |
-| const [OnDiscordPlayerUnlink](#ondiscordplayerunlink-field) |  |
-| const [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked-field) |  |
-| const [OnDiscordSetupHeartbeat](#ondiscordsetupheartbeat-field) |  |
-| const [OnDiscordStageInstanceCreated](#ondiscordstageinstancecreated-field) |  |
-| const [OnDiscordStageInstanceDeleted](#ondiscordstageinstancedeleted-field) |  |
-| const [OnDiscordStageInstanceUpdated](#ondiscordstageinstanceupdated-field) |  |
-| const [OnDiscordUnhandledCommand](#ondiscordunhandledcommand-field) |  |
-| const [OnDiscordUserUpdated](#ondiscorduserupdated-field) |  |
-| const [OnDiscordWebsocketClosed](#ondiscordwebsocketclosed-field) |  |
-| const [OnDiscordWebsocketErrored](#ondiscordwebsocketerrored-field) |  |
-| const [OnDiscordWebsocketOpened](#ondiscordwebsocketopened-field) |  |
+| const [OnDiscordApplicationCommandPermissionsUpdated](#ondiscordapplicationcommandpermissionsupdated-field) | Called when the bots application command permission have been updated |
+| const [OnDiscordAutoModActionExecuted](#ondiscordautomodactionexecuted-field) | Called when an AutoMod rule is executed on a guild |
+| const [OnDiscordAutoModRuleCreated](#ondiscordautomodrulecreated-field) | Called when an AutoMod rule is created in a guild |
+| const [OnDiscordAutoModRuleDeleted](#ondiscordautomodruledeleted-field) | Called when an AutoMod rule is deleted from a guild |
+| const [OnDiscordAutoModRuleUpdated](#ondiscordautomodruleupdated-field) | Called when an AutoMod rule is updated on a guild |
+| const [OnDiscordBotFullyLoaded](#ondiscordbotfullyloaded-field) | Called when the bot has fully loaded all discord guilds If GatewayIntent.GuildMembers is specified then this hook is delayed until all guild members have been loaded |
+| const [OnDiscordClientCreated](#ondiscordclientcreated-field) | Called when the DiscordClient is created on the bot and is ready to use. This is called after the Loaded() hook on the plugin. |
+| const [OnDiscordDirectChannelCreated](#ondiscorddirectchannelcreated-field) | Called when a direct message (DM) channel has been created. |
+| const [OnDiscordDirectChannelDeleted](#ondiscorddirectchanneldeleted-field) | Called when a direct message (DM) channel has been deleted. Not sure if this is possible for DM channels |
+| const [OnDiscordDirectChannelPinsUpdated](#ondiscorddirectchannelpinsupdated-field) | Called when a direct message (DM) channel has it's pinned messages updated. Channel may be null if we haven't seen it before. |
+| const [OnDiscordDirectChannelUpdated](#ondiscorddirectchannelupdated-field) | Called when a direct message (DM) channel has been updated. |
+| const [OnDiscordDirectInviteCreated](#ondiscorddirectinvitecreated-field) | Called when an invite to a direct message channel is created `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectInviteDeleted](#ondiscorddirectinvitedeleted-field) | Called when an invite to a direct message channel is deleted `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageCreated](#ondiscorddirectmessagecreated-field) | Called when a message is created in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageDeleted](#ondiscorddirectmessagedeleted-field) | Called when a message is deleted in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageReactionAdded](#ondiscorddirectmessagereactionadded-field) | Called when a reaction is added to a message in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageReactionEmojiRemoved](#ondiscorddirectmessagereactionemojiremoved-field) | Called when all of a specific reactions is removed from a message in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageReactionRemoved](#ondiscorddirectmessagereactionremoved-field) | Called when a reaction is removed from a message in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageReactionRemovedAll](#ondiscorddirectmessagereactionremovedall-field) | Called when all reactions are removed from a message in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessagesBulkDeleted](#ondiscorddirectmessagesbulkdeleted-field) | Called when a message is deleted in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectMessageUpdated](#ondiscorddirectmessageupdated-field) | Called when a message is updated in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectTypingStarted](#ondiscorddirecttypingstarted-field) | Called typing starts in a direct message channel `channel` may be null if we haven't seen it yet |
+| const [OnDiscordDirectVoiceStateUpdated](#ondiscorddirectvoicestateupdated-field) | Called when the voice state in a direct message channel is updated `channel` may be null if we haven't seen it yet |
+| const [OnDiscordEntitlementCreated](#ondiscordentitlementcreated-field) | Called when an entitlement has been created |
+| const [OnDiscordEntitlementDeleted](#ondiscordentitlementdeleted-field) | Called when an entitlement has been deleted |
+| const [OnDiscordEntitlementUpdated](#ondiscordentitlementupdated-field) | Called when an entitlement has been update |
+| const [OnDiscordGatewayReady](#ondiscordgatewayready-field) | - Called when the Discord Bot has successfully connected to the gateway and identified successfully. **Note:** Only partial guild information is available at this point. If you need full guild listen for [OnDiscordGuildCreated](#OnDiscordGuildCreated) hook If you need full guild member list listen for [OnDiscordGuildMembersLoaded](#OnDiscordGuildMembersLoaded) |
+| const [OnDiscordGatewayReconnected](#ondiscordgatewayreconnected-field) | Called when the websocket has reconnected |
+| const [OnDiscordGatewayResumed](#ondiscordgatewayresumed-field) | Called when the websocket has reconnected to the websocket and resumed the previous session |
+| const [OnDiscordGuildChannelCreated](#ondiscordguildchannelcreated-field) | Called when a channel has been created in a guild. |
+| const [OnDiscordGuildChannelDeleted](#ondiscordguildchanneldeleted-field) | Called when a channel has been deleted in a guild. |
+| const [OnDiscordGuildChannelPinsUpdated](#ondiscordguildchannelpinsupdated-field) | Called when a guild channel has it's pinned messages updated |
+| const [OnDiscordGuildChannelUpdated](#ondiscordguildchannelupdated-field) | Called when a channel has been updated in a guild. |
+| const [OnDiscordGuildCreated](#ondiscordguildcreated-field) | Called when a discord server is fully loaded while connecting or the bot has joined a new discord server |
+| const [OnDiscordGuildDeleted](#ondiscordguilddeleted-field) | Called when a bot is removed from a discord server or that discord server was deleted |
+| const [OnDiscordGuildEmojisUpdated](#ondiscordguildemojisupdated-field) | Called when the custom emojis for a guild are created/updated/deleted |
+| const [OnDiscordGuildIntegrationCreated](#ondiscordguildintegrationcreated-field) | Called when a new integration is created a guild |
+| const [OnDiscordGuildIntegrationDeleted](#ondiscordguildintegrationdeleted-field) | Called when an integration is deleted on a guild |
+| const [OnDiscordGuildIntegrationsUpdated](#ondiscordguildintegrationsupdated-field) | Called when a guild integration is updated |
+| const [OnDiscordGuildIntegrationUpdated](#ondiscordguildintegrationupdated-field) | Called when an integration is updated on a guild |
+| const [OnDiscordGuildInviteCreated](#ondiscordguildinvitecreated-field) | Called when an invite to a guild channel is created |
+| const [OnDiscordGuildInviteDeleted](#ondiscordguildinvitedeleted-field) | Called when an invite to a guild channel is deleted |
+| const [OnDiscordGuildMemberAdded](#ondiscordguildmemberadded-field) | Called when a guild member has been added to the guild |
+| const [OnDiscordGuildMemberAvatarUpdated](#ondiscordguildmemberavatarupdated-field) | Called when a guild member avatar has been updated |
+| const [OnDiscordGuildMemberBanned](#ondiscordguildmemberbanned-field) | Called when a guild member is banned |
+| const [OnDiscordGuildMemberBoosted](#ondiscordguildmemberboosted-field) | Called when a guild member boosts the server |
+| const [OnDiscordGuildMemberBoostEnded](#ondiscordguildmemberboostended-field) | Called when a guild member boost ends |
+| const [OnDiscordGuildMemberBoostExtended](#ondiscordguildmemberboostextended-field) | Called when a guild member extends their boost |
+| const [OnDiscordGuildMemberDeafened](#ondiscordguildmemberdeafened-field) | Called when a guild member is deafened |
+| const [OnDiscordGuildMemberMuted](#ondiscordguildmembermuted-field) | Called when a guild member is muted |
+| const [OnDiscordGuildMemberNicknameUpdated](#ondiscordguildmembernicknameupdated-field) | Called when a guild member nickname has been updated |
+| const [OnDiscordGuildMemberPresenceUpdated](#ondiscordguildmemberpresenceupdated-field) | Called when a guild members presence is updated |
+| const [OnDiscordGuildMemberRemoved](#ondiscordguildmemberremoved-field) | Called when a guild member has been removed from the guild |
+| const [OnDiscordGuildMemberRoleAdded](#ondiscordguildmemberroleadded-field) | Called when a role is added to a guild member |
+| const [OnDiscordGuildMemberRoleRemoved](#ondiscordguildmemberroleremoved-field) | Called when a role is removed from a guild member |
+| const [OnDiscordGuildMembersChunk](#ondiscordguildmemberschunk-field) | Called in a response to a request for guild member chunks |
+| const [OnDiscordGuildMembersLoaded](#ondiscordguildmembersloaded-field) | Called when a guild has finished loading all guild members This Discord Extension requests all guild members in the [OnDiscordGuildCreated](#ondiscordguildcreated) Hook |
+| const [OnDiscordGuildMemberTimeout](#ondiscordguildmembertimeout-field) | Called when a guild member is placed in [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ) |
+| const [OnDiscordGuildMemberTimeoutEnded](#ondiscordguildmembertimeoutended-field) | Called when a guild members [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ) ends |
+| const [OnDiscordGuildMemberUnbanned](#ondiscordguildmemberunbanned-field) | Called when a guild member is unbanned |
+| const [OnDiscordGuildMemberUndeafened](#ondiscordguildmemberundeafened-field) | Called when a guild member is undeafened |
+| const [OnDiscordGuildMemberUnmuted](#ondiscordguildmemberunmuted-field) | Called when a guild member is unmuted |
+| const [OnDiscordGuildMemberUpdated](#ondiscordguildmemberupdated-field) | Called when a guild member has been updated This also include when the DiscordUser is updated as well |
+| const [OnDiscordGuildMessageCreated](#ondiscordguildmessagecreated-field) | Called when a message is created in a guild channel |
+| const [OnDiscordGuildMessageDeleted](#ondiscordguildmessagedeleted-field) | Called when a message is deleted in a guild channel |
+| const [OnDiscordGuildMessageReactionAdded](#ondiscordguildmessagereactionadded-field) | Called when a reaction is added to a message in a guild channel |
+| const [OnDiscordGuildMessageReactionEmojiRemoved](#ondiscordguildmessagereactionemojiremoved-field) | Called when all of a specific reaction is removed from a message in a guild channel |
+| const [OnDiscordGuildMessageReactionRemoved](#ondiscordguildmessagereactionremoved-field) | Called when a reaction is removed from a message in a guild channel |
+| const [OnDiscordGuildMessageReactionRemovedAll](#ondiscordguildmessagereactionremovedall-field) | Called when all reactions are removed from a message in a guild channel |
+| const [OnDiscordGuildMessagesBulkDeleted](#ondiscordguildmessagesbulkdeleted-field) | Called when a message is deleted in a guild channel |
+| const [OnDiscordGuildMessageUpdated](#ondiscordguildmessageupdated-field) | Called when a message is updated in a guild channel |
+| const [OnDiscordGuildRoleCreated](#ondiscordguildrolecreated-field) | Called when a discord guild role is created |
+| const [OnDiscordGuildRoleDeleted](#ondiscordguildroledeleted-field) | Called when a discord guild role is deleted |
+| const [OnDiscordGuildRoleUpdated](#ondiscordguildroleupdated-field) | Called when a discord guild role is updated |
+| const [OnDiscordGuildScheduledEventCreated](#ondiscordguildscheduledeventcreated-field) | Called when a discord guild scheduled event is created |
+| const [OnDiscordGuildScheduledEventDeleted](#ondiscordguildscheduledeventdeleted-field) | Called when a discord guild scheduled event is deleted |
+| const [OnDiscordGuildScheduledEventUpdated](#ondiscordguildscheduledeventupdated-field) | Called when a discord guild scheduled event is updated |
+| const [OnDiscordGuildScheduledEventUserAdded](#ondiscordguildscheduledeventuseradded-field) | Called when a discord user is added to a guild scheduled event |
+| const [OnDiscordGuildScheduledEventUserRemoved](#ondiscordguildscheduledeventuserremoved-field) | Called when a discord user is removed from a guild scheduled event |
+| const [OnDiscordGuildStickersUpdated](#ondiscordguildstickersupdated-field) | Called when the guild stickers are updated |
+| const [OnDiscordGuildThreadCreated](#ondiscordguildthreadcreated-field) | Called when a guild thread is created |
+| const [OnDiscordGuildThreadDeleted](#ondiscordguildthreaddeleted-field) | Called when a guild thread is deleted |
+| const [OnDiscordGuildThreadListSynced](#ondiscordguildthreadlistsynced-field) | Called when a guild thread list is synced |
+| const [OnDiscordGuildThreadMembersUpdated](#ondiscordguildthreadmembersupdated-field) | Called when thread members are updated |
+| const [OnDiscordGuildThreadMemberUpdated](#ondiscordguildthreadmemberupdated-field) | Called when a thread member is updated |
+| const [OnDiscordGuildThreadUpdated](#ondiscordguildthreadupdated-field) | Called when a guild thread is updated |
+| const [OnDiscordGuildTypingStarted](#ondiscordguildtypingstarted-field) | Called when typing starts in a guild channel |
+| const [OnDiscordGuildUnavailable](#ondiscordguildunavailable-field) | Called when a guild become unavailable due to a network outage |
+| const [OnDiscordGuildUpdated](#ondiscordguildupdated-field) | Called when any updates are made to a guild Note: previous will be null if guild previously not loaded |
+| const [OnDiscordGuildVoiceServerUpdated](#ondiscordguildvoiceserverupdated-field) | Called when the voice server in a guild channel is updated |
+| const [OnDiscordGuildVoiceStateUpdated](#ondiscordguildvoicestateupdated-field) | Called when the voice state in a guild channel is updated |
+| const [OnDiscordGuildWebhookUpdated](#ondiscordguildwebhookupdated-field) | Called when a webhook ins a guild is updated |
+| const [OnDiscordHeartbeatSent](#ondiscordheartbeatsent-field) | Called when a heartbeat is sent over the websocket to discord to keep the connection open |
+| const [OnDiscordInteractionCreated](#ondiscordinteractioncreated-field) | Called when a discord interaction occurs by a user |
+| const [OnDiscordPlayerLinked](#ondiscordplayerlinked-field) | These hooks are called when a player is linked or unlinked using discord link. It will be called for every plugins registered to receive hooks. **Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you. **Note:** Discord Link hooks are considered global hooks and will be called on all plugins regardless of bot |
+| const [OnDiscordPlayerUnlink](#ondiscordplayerunlink-field) | Called when a player is being unlinked from DiscordLink Library This is called before the unlink occurs |
+| const [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked-field) | Called when a player has unlinked their discord and player together using the DiscordLink library |
+| const [OnDiscordSetupHeartbeat](#ondiscordsetupheartbeat-field) | Called when we receive the heartbeat interval from the websocket |
+| const [OnDiscordStageInstanceCreated](#ondiscordstageinstancecreated-field) | Called when a stage instance is created |
+| const [OnDiscordStageInstanceDeleted](#ondiscordstageinstancedeleted-field) | Called when a stage instance is deleted |
+| const [OnDiscordStageInstanceUpdated](#ondiscordstageinstanceupdated-field) | Called when a stage instance is updated |
+| const [OnDiscordUnhandledCommand](#ondiscordunhandledcommand-field) | Called when we receive an event we do not handle yet. If you need this event, you can listen to it using this hook until we support it Please create an issue on uMod if this error ever occurs |
+| const [OnDiscordUserUpdated](#ondiscorduserupdated-field) | Called when a discord user is updated |
+| const [OnDiscordWebsocketClosed](#ondiscordwebsocketclosed-field) | Called when the web socket is closed for any reason. |
+| const [OnDiscordWebsocketErrored](#ondiscordwebsocketerrored-field) | Called when the web socket has an error. |
+| const [OnDiscordWebsocketOpened](#ondiscordwebsocketopened-field) | Called when the discord socket connects. |
 | static [IsDiscordHook](#isdiscordhook-method)(…) | Returns true if the hook is a Discord Extension Hook |
 | static [IsGlobalHook](#isglobalhook-method)(…) | Returns true if the hook is a Discord Extension Global Hook |
 | static [IsPluginHook](#ispluginhook-method)(…) | Returns true if the hook is a Discord Extension Plugin Hook |
@@ -203,6 +203,15 @@ public static readonly Hash<string, GatewayIntents> HookGatewayIntent;
    
 # OnDiscordClientCreated field
 
+Called when the DiscordClient is created on the bot and is ready to use. This is called after the Loaded() hook on the plugin.
+
+```csharp
+void OnDiscordClientCreated()
+{
+    Puts("OnDiscordClientCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordClientCreated;
 ```
@@ -215,6 +224,15 @@ public const string OnDiscordClientCreated;
    
    
 # OnDiscordBotFullyLoaded field
+
+Called when the bot has fully loaded all discord guilds If GatewayIntent.GuildMembers is specified then this hook is delayed until all guild members have been loaded
+
+```csharp
+void OnDiscordBotFullyLoaded()
+{
+    Puts("OnDiscordBotFullyLoaded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordBotFullyLoaded;
@@ -229,6 +247,15 @@ public const string OnDiscordBotFullyLoaded;
    
 # OnDiscordWebsocketOpened field
 
+Called when the discord socket connects.
+
+```csharp
+void OnDiscordWebsocketOpened()
+{
+    Puts("OnDiscordWebsocketOpened Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordWebsocketOpened;
 ```
@@ -241,6 +268,15 @@ public const string OnDiscordWebsocketOpened;
    
    
 # OnDiscordWebsocketClosed field
+
+Called when the web socket is closed for any reason.
+
+```csharp
+void OnDiscordWebsocketClosed(string reason, ushort code)
+{
+    Puts("OnDiscordWebsocketClosed Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordWebsocketClosed;
@@ -255,6 +291,15 @@ public const string OnDiscordWebsocketClosed;
    
 # OnDiscordWebsocketErrored field
 
+Called when the web socket has an error.
+
+```csharp
+void OnDiscordWebsocketErrored(Exception ex, string message)
+{
+    Puts("OnDiscordWebsocketErrored Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordWebsocketErrored;
 ```
@@ -267,6 +312,15 @@ public const string OnDiscordWebsocketErrored;
    
    
 # OnDiscordSetupHeartbeat field
+
+Called when we receive the heartbeat interval from the websocket
+
+```csharp
+void OnDiscordSetupHeartbeat(float heartbeat)
+{
+    Puts("OnDiscordHeartbeatSent Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordSetupHeartbeat;
@@ -281,6 +335,15 @@ public const string OnDiscordSetupHeartbeat;
    
 # OnDiscordHeartbeatSent field
 
+Called when a heartbeat is sent over the websocket to discord to keep the connection open
+
+```csharp
+void OnDiscordHeartbeatSent()
+{
+    Puts("OnDiscordHeartbeatSent Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordHeartbeatSent;
 ```
@@ -293,6 +356,15 @@ public const string OnDiscordHeartbeatSent;
    
    
 # OnDiscordPlayerLinked field
+
+These hooks are called when a player is linked or unlinked using discord link. It will be called for every plugins registered to receive hooks. **Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you. **Note:** Discord Link hooks are considered global hooks and will be called on all plugins regardless of bot
+
+```csharp
+void OnDiscordPlayerLinked(IPlayer player, DiscordUser discord)
+{
+    Puts("OnDiscordPlayerLinked Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordPlayerLinked;
@@ -307,6 +379,15 @@ public const string OnDiscordPlayerLinked;
    
 # OnDiscordPlayerUnlink field
 
+Called when a player is being unlinked from DiscordLink Library This is called before the unlink occurs
+
+```csharp
+void OnDiscordPlayerUnlink(IPlayer player, DiscordUser discord)
+{
+    Puts("OnDiscordPlayerUnlink Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordPlayerUnlink;
 ```
@@ -319,6 +400,15 @@ public const string OnDiscordPlayerUnlink;
    
    
 # OnDiscordPlayerUnlinked field
+
+Called when a player has unlinked their discord and player together using the DiscordLink library
+
+```csharp
+void OnDiscordPlayerUnlinked(IPlayer player, DiscordUser discord)
+{
+    Puts("OnDiscordPlayerUnlinked Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordPlayerUnlinked;
@@ -333,6 +423,15 @@ public const string OnDiscordPlayerUnlinked;
    
 # OnDiscordGatewayReady field
 
+- Called when the Discord Bot has successfully connected to the gateway and identified successfully. **Note:** Only partial guild information is available at this point. If you need full guild listen for [OnDiscordGuildCreated](#OnDiscordGuildCreated) hook If you need full guild member list listen for [OnDiscordGuildMembersLoaded](#OnDiscordGuildMembersLoaded)
+
+```csharp
+void OnDiscordGatewayReady(GatewayReadyEvent ready)
+{
+    Puts("OnDiscordGatewayReady Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGatewayReady;
 ```
@@ -345,6 +444,15 @@ public const string OnDiscordGatewayReady;
    
    
 # OnDiscordGatewayResumed field
+
+Called when the websocket has reconnected to the websocket and resumed the previous session
+
+```csharp
+void OnDiscordGatewayResumed(GatewayResumedEvent resume)
+{
+    Puts("OnDiscordGatewayResumed Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGatewayResumed;
@@ -359,6 +467,15 @@ public const string OnDiscordGatewayResumed;
    
 # OnDiscordGatewayReconnected field
 
+Called when the websocket has reconnected
+
+```csharp
+void OnDiscordGatewayReconnected()
+{
+    Puts("OnDiscordGatewayReconnected Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGatewayReconnected;
 ```
@@ -371,6 +488,15 @@ public const string OnDiscordGatewayReconnected;
    
    
 # OnDiscordDirectChannelCreated field
+
+Called when a direct message (DM) channel has been created.
+
+```csharp
+void OnDiscordDirectChannelCreated(DiscordChannel channel)
+{
+    Puts("OnDiscordDirectChannelCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectChannelCreated;
@@ -385,6 +511,15 @@ public const string OnDiscordDirectChannelCreated;
    
 # OnDiscordGuildChannelCreated field
 
+Called when a channel has been created in a guild.
+
+```csharp
+void OnDiscordGuildChannelCreated(DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildChannelCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildChannelCreated;
 ```
@@ -397,6 +532,16 @@ public const string OnDiscordGuildChannelCreated;
    
    
 # OnDiscordDirectChannelUpdated field
+
+Called when a direct message (DM) channel has been updated.
+
+```csharp
+Note: previous will be null if previous channel not found
+void OnDiscordDirectChannelUpdated(DiscordChannel channel, DiscordChannel previous)
+{
+    Puts("OnDiscordDirectChannelUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectChannelUpdated;
@@ -411,6 +556,15 @@ public const string OnDiscordDirectChannelUpdated;
    
 # OnDiscordGuildChannelUpdated field
 
+Called when a channel has been updated in a guild.
+
+```csharp
+void OnDiscordGuildChannelUpdated(DiscordChannel channel, DiscordChannel previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildChannelUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildChannelUpdated;
 ```
@@ -423,6 +577,16 @@ public const string OnDiscordGuildChannelUpdated;
    
    
 # OnDiscordDirectChannelDeleted field
+
+Called when a direct message (DM) channel has been deleted. Not sure if this is possible for DM channels
+
+```csharp
+Note: Not sure if this will ever happen but we handle it if it does
+void OnDiscordDirectChannelDeleted(DiscordChannel channel)
+{
+    Puts("OnDiscordDirectChannelDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectChannelDeleted;
@@ -437,6 +601,15 @@ public const string OnDiscordDirectChannelDeleted;
    
 # OnDiscordGuildChannelDeleted field
 
+Called when a channel has been deleted in a guild.
+
+```csharp
+void OnDiscordGuildChannelDeleted(DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildChannelDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildChannelDeleted;
 ```
@@ -449,6 +622,15 @@ public const string OnDiscordGuildChannelDeleted;
    
    
 # OnDiscordDirectChannelPinsUpdated field
+
+Called when a direct message (DM) channel has it's pinned messages updated. Channel may be null if we haven't seen it before.
+
+```csharp
+void OnDiscordDirectChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectChannelPinsUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectChannelPinsUpdated;
@@ -463,6 +645,15 @@ public const string OnDiscordDirectChannelPinsUpdated;
    
 # OnDiscordEntitlementCreated field
 
+Called when an entitlement has been created
+
+```csharp
+void OnDiscordEntitlementCreated(DiscordEntitlement entitlement, DiscordGuild guild)
+{
+    Puts("OnDiscordEntitlementCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordEntitlementCreated;
 ```
@@ -475,6 +666,15 @@ public const string OnDiscordEntitlementCreated;
    
    
 # OnDiscordEntitlementUpdated field
+
+Called when an entitlement has been update
+
+```csharp
+void OnDiscordEntitlementUpdated(DiscordEntitlement entitlement, DiscordGuild guild)
+{
+    Puts("OnDiscordEntitlementUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordEntitlementUpdated;
@@ -489,6 +689,15 @@ public const string OnDiscordEntitlementUpdated;
    
 # OnDiscordEntitlementDeleted field
 
+Called when an entitlement has been deleted
+
+```csharp
+void OnDiscordEntitlementDeleted(DiscordEntitlement entitlement, DiscordGuild guild)
+{
+    Puts("OnDiscordEntitlementDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordEntitlementDeleted;
 ```
@@ -501,6 +710,15 @@ public const string OnDiscordEntitlementDeleted;
    
    
 # OnDiscordGuildChannelPinsUpdated field
+
+Called when a guild channel has it's pinned messages updated
+
+```csharp
+void OnDiscordGuildChannelPinsUpdated(ChannelPinsUpdatedEvent update, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildChannelPinsUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildChannelPinsUpdated;
@@ -515,6 +733,15 @@ public const string OnDiscordGuildChannelPinsUpdated;
    
 # OnDiscordGuildCreated field
 
+Called when a discord server is fully loaded while connecting or the bot has joined a new discord server
+
+```csharp
+void OnDiscordGuildCreated(GuildDiscordGuild guild)
+{
+    Puts("OnDiscordGuildCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildCreated;
 ```
@@ -527,6 +754,15 @@ public const string OnDiscordGuildCreated;
    
    
 # OnDiscordGuildUpdated field
+
+Called when any updates are made to a guild Note: previous will be null if guild previously not loaded
+
+```csharp
+void OnDiscordGuildUpdated(DiscordGuild guild, DiscordGuild previous)
+{
+    Puts("OnDiscordGuildUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildUpdated;
@@ -541,6 +777,15 @@ public const string OnDiscordGuildUpdated;
    
 # OnDiscordGuildUnavailable field
 
+Called when a guild become unavailable due to a network outage
+
+```csharp
+void OnDiscordGuildUnavailable(DiscordGuild guild)
+{
+    Puts("OnDiscordGuildUnavailable Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildUnavailable;
 ```
@@ -553,6 +798,15 @@ public const string OnDiscordGuildUnavailable;
    
    
 # OnDiscordGuildDeleted field
+
+Called when a bot is removed from a discord server or that discord server was deleted
+
+```csharp
+void OnDiscordGuildDeleted(DiscordGuild guild)
+{
+    Puts("OnDiscordGuildDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildDeleted;
@@ -567,6 +821,15 @@ public const string OnDiscordGuildDeleted;
    
 # OnDiscordGuildMemberBanned field
 
+Called when a guild member is banned
+
+```csharp
+void OnDiscordGuildMemberBanned(GuildMemberBannedEvent ban, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberBanned Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberBanned;
 ```
@@ -579,6 +842,15 @@ public const string OnDiscordGuildMemberBanned;
    
    
 # OnDiscordGuildMemberUnbanned field
+
+Called when a guild member is unbanned
+
+```csharp
+void OnDiscordGuildMemberUnbanned(GuildMemberBannedEvent ban, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildBanRemoved Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberUnbanned;
@@ -593,6 +865,15 @@ public const string OnDiscordGuildMemberUnbanned;
    
 # OnDiscordGuildEmojisUpdated field
 
+Called when the custom emojis for a guild are created/updated/deleted
+
+```csharp
+void OnDiscordGuildEmojisUpdated(GuildEmojisUpdatedEvent emojis, Hash<Snowflake, DiscordEmoji> previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildEmojisUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildEmojisUpdated;
 ```
@@ -605,6 +886,15 @@ public const string OnDiscordGuildEmojisUpdated;
    
    
 # OnDiscordGuildStickersUpdated field
+
+Called when the guild stickers are updated
+
+```csharp
+void OnDiscordGuildStickersUpdated(GuildStickersUpdatedEvent stickers, Hash<Snowflake, DiscordSticker> previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildStickersUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildStickersUpdated;
@@ -619,6 +909,15 @@ public const string OnDiscordGuildStickersUpdated;
    
 # OnDiscordGuildIntegrationsUpdated field
 
+Called when a guild integration is updated
+
+```csharp
+void OnDiscordGuildIntegrationsUpdated(GuildIntegrationsUpdatedEvent integration, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationsUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildIntegrationsUpdated;
 ```
@@ -631,6 +930,15 @@ public const string OnDiscordGuildIntegrationsUpdated;
    
    
 # OnDiscordGuildMemberAdded field
+
+Called when a guild member has been added to the guild
+
+```csharp
+void OnDiscordGuildMemberAdded(GuildMemberAddedEvent member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberAdded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberAdded;
@@ -645,6 +953,15 @@ public const string OnDiscordGuildMemberAdded;
    
 # OnDiscordGuildMemberRemoved field
 
+Called when a guild member has been removed from the guild
+
+```csharp
+void OnDiscordGuildMemberRemoved(GuildMemberRemovedEvent member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberRemoved Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberRemoved;
 ```
@@ -657,6 +974,15 @@ public const string OnDiscordGuildMemberRemoved;
    
    
 # OnDiscordGuildMemberUpdated field
+
+Called when a guild member has been updated This also include when the DiscordUser is updated as well
+
+```csharp
+void OnDiscordGuildMemberUpdated(GuildMemberUpdatedEvent member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberUpdated;
@@ -671,6 +997,15 @@ public const string OnDiscordGuildMemberUpdated;
    
 # OnDiscordGuildMemberNicknameUpdated field
 
+Called when a guild member nickname has been updated
+
+```csharp
+void OnDiscordGuildMemberNicknameUpdated(GuildMember member, string oldNickname, string newNickname, DateTime? lastNicknameUpdate, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberNicknameUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberNicknameUpdated;
 ```
@@ -683,6 +1018,15 @@ public const string OnDiscordGuildMemberNicknameUpdated;
    
    
 # OnDiscordGuildMemberAvatarUpdated field
+
+Called when a guild member avatar has been updated
+
+```csharp
+void OnDiscordGuildMemberAvatarUpdated(GuildMember member, string oldAvatar, string newAvatar, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberAvatarUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberAvatarUpdated;
@@ -697,6 +1041,15 @@ public const string OnDiscordGuildMemberAvatarUpdated;
    
 # OnDiscordGuildMemberDeafened field
 
+Called when a guild member is deafened
+
+```csharp
+void OnDiscordGuildMemberDeafened(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberDeafened Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberDeafened;
 ```
@@ -709,6 +1062,15 @@ public const string OnDiscordGuildMemberDeafened;
    
    
 # OnDiscordGuildMemberUndeafened field
+
+Called when a guild member is undeafened
+
+```csharp
+void OnDiscordGuildMemberUndeafened(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberUndeafened Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberUndeafened;
@@ -723,6 +1085,15 @@ public const string OnDiscordGuildMemberUndeafened;
    
 # OnDiscordGuildMemberMuted field
 
+Called when a guild member is muted
+
+```csharp
+void OnDiscordGuildMemberMuted(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberMuted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberMuted;
 ```
@@ -735,6 +1106,15 @@ public const string OnDiscordGuildMemberMuted;
    
    
 # OnDiscordGuildMemberUnmuted field
+
+Called when a guild member is unmuted
+
+```csharp
+void OnDiscordGuildMemberUnmuted(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberUnmuted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberUnmuted;
@@ -749,6 +1129,15 @@ public const string OnDiscordGuildMemberUnmuted;
    
 # OnDiscordGuildMemberTimeout field
 
+Called when a guild member is placed in [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ)
+
+```csharp
+void OnDiscordGuildMemberTimeout(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberTimeout Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberTimeout;
 ```
@@ -761,6 +1150,15 @@ public const string OnDiscordGuildMemberTimeout;
    
    
 # OnDiscordGuildMemberTimeoutEnded field
+
+Called when a guild members [Timeout](https://support.discord.com/hc/en-us/articles/4413305239191-Time-Out-FAQ) ends
+
+```csharp
+void OnDiscordGuildMemberTimeoutEnded(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberTimeoutEnded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberTimeoutEnded;
@@ -775,6 +1173,15 @@ public const string OnDiscordGuildMemberTimeoutEnded;
    
 # OnDiscordGuildMemberBoosted field
 
+Called when a guild member boosts the server
+
+```csharp
+void OnDiscordGuildMemberBoosted(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberBoosted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberBoosted;
 ```
@@ -787,6 +1194,15 @@ public const string OnDiscordGuildMemberBoosted;
    
    
 # OnDiscordGuildMemberBoostExtended field
+
+Called when a guild member extends their boost
+
+```csharp
+void OnDiscordGuildMemberBoostExtended(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberBoostExtended Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberBoostExtended;
@@ -801,6 +1217,15 @@ public const string OnDiscordGuildMemberBoostExtended;
    
 # OnDiscordGuildMemberBoostEnded field
 
+Called when a guild member boost ends
+
+```csharp
+void OnDiscordGuildMemberBoostEnded(GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberBoostEnded Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberBoostEnded;
 ```
@@ -813,6 +1238,15 @@ public const string OnDiscordGuildMemberBoostEnded;
    
    
 # OnDiscordGuildMemberRoleAdded field
+
+Called when a role is added to a guild member
+
+```csharp
+void OnDiscordGuildMemberRoleAdded(GuildMember member, Snowflake roleId, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberRoleAdded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberRoleAdded;
@@ -827,6 +1261,15 @@ public const string OnDiscordGuildMemberRoleAdded;
    
 # OnDiscordGuildMemberRoleRemoved field
 
+Called when a role is removed from a guild member
+
+```csharp
+void OnDiscordGuildMemberRoleRemoved(GuildMember member, Snowflake roleId, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberRoleRemoved Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMemberRoleRemoved;
 ```
@@ -839,6 +1282,15 @@ public const string OnDiscordGuildMemberRoleRemoved;
    
    
 # OnDiscordGuildMembersLoaded field
+
+Called when a guild has finished loading all guild members This Discord Extension requests all guild members in the [OnDiscordGuildCreated](#ondiscordguildcreated) Hook
+
+```csharp
+void OnDiscordGuildMembersLoaded(DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMembersLoaded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMembersLoaded;
@@ -853,6 +1305,15 @@ public const string OnDiscordGuildMembersLoaded;
    
 # OnDiscordGuildMembersChunk field
 
+Called in a response to a request for guild member chunks
+
+```csharp
+void OnDiscordGuildMembersChunk(GuildMembersChunkEvent chunk, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMembersChunk Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMembersChunk;
 ```
@@ -865,6 +1326,15 @@ public const string OnDiscordGuildMembersChunk;
    
    
 # OnDiscordGuildRoleCreated field
+
+Called when a discord guild role is created
+
+```csharp
+void OnDiscordGuildRoleCreated(DiscordRole role, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildRoleCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildRoleCreated;
@@ -879,6 +1349,15 @@ public const string OnDiscordGuildRoleCreated;
    
 # OnDiscordGuildRoleUpdated field
 
+Called when a discord guild role is updated
+
+```csharp
+void OnDiscordGuildRoleUpdated(DiscordRole role, DiscordRole previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildRoleUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildRoleUpdated;
 ```
@@ -891,6 +1370,15 @@ public const string OnDiscordGuildRoleUpdated;
    
    
 # OnDiscordGuildRoleDeleted field
+
+Called when a discord guild role is deleted
+
+```csharp
+void OnDiscordGuildRoleDeleted(DiscordRole role, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildRoleDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildRoleDeleted;
@@ -905,6 +1393,15 @@ public const string OnDiscordGuildRoleDeleted;
    
 # OnDiscordGuildScheduledEventCreated field
 
+Called when a discord guild scheduled event is created
+
+```csharp
+void OnDiscordGuildScheduledEventCreated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildScheduledEventCreated;
 ```
@@ -917,6 +1414,15 @@ public const string OnDiscordGuildScheduledEventCreated;
    
    
 # OnDiscordGuildScheduledEventUpdated field
+
+Called when a discord guild scheduled event is updated
+
+```csharp
+void OnDiscordGuildScheduledEventUpdated(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildScheduledEventUpdated;
@@ -931,6 +1437,15 @@ public const string OnDiscordGuildScheduledEventUpdated;
    
 # OnDiscordGuildScheduledEventDeleted field
 
+Called when a discord guild scheduled event is deleted
+
+```csharp
+void OnDiscordGuildScheduledEventDeleted(GuildScheduledEvent guildEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildScheduledEventDeleted;
 ```
@@ -943,6 +1458,15 @@ public const string OnDiscordGuildScheduledEventDeleted;
    
    
 # OnDiscordGuildScheduledEventUserAdded field
+
+Called when a discord user is added to a guild scheduled event
+
+```csharp
+void OnDiscordGuildScheduledEventUserAdded(GuildScheduleEventUserAddedEvent added, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserAdded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildScheduledEventUserAdded;
@@ -957,6 +1481,15 @@ public const string OnDiscordGuildScheduledEventUserAdded;
    
 # OnDiscordGuildScheduledEventUserRemoved field
 
+Called when a discord user is removed from a guild scheduled event
+
+```csharp
+void OnDiscordGuildScheduledEventUserRemoved(GuildScheduleEventUserRemovedEvent removed, GuildScheduledEvent, scheduledEvent, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildScheduledEventUserRemoved Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildScheduledEventUserRemoved;
 ```
@@ -969,6 +1502,15 @@ public const string OnDiscordGuildScheduledEventUserRemoved;
    
    
 # OnDiscordDirectMessageCreated field
+
+Called when a message is created in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageCreated(DiscordMessage message, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageCreated;
@@ -983,6 +1525,15 @@ public const string OnDiscordDirectMessageCreated;
    
 # OnDiscordGuildMessageCreated field
 
+Called when a message is created in a guild channel
+
+```csharp
+void OnDiscordGuildMessageCreated(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageCreated;
 ```
@@ -995,6 +1546,15 @@ public const string OnDiscordGuildMessageCreated;
    
    
 # OnDiscordDirectMessageUpdated field
+
+Called when a message is updated in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageUpdated;
@@ -1009,6 +1569,15 @@ public const string OnDiscordDirectMessageUpdated;
    
 # OnDiscordGuildMessageUpdated field
 
+Called when a message is updated in a guild channel
+
+```csharp
+void OnDiscordDirectMessageUpdated(DiscordMessage message, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageUpdated;
 ```
@@ -1021,6 +1590,15 @@ public const string OnDiscordGuildMessageUpdated;
    
    
 # OnDiscordDirectMessageDeleted field
+
+Called when a message is deleted in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageDeleted(DiscordMessage message, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageDeleted;
@@ -1035,6 +1613,15 @@ public const string OnDiscordDirectMessageDeleted;
    
 # OnDiscordGuildMessageDeleted field
 
+Called when a message is deleted in a guild channel
+
+```csharp
+void OnDiscordGuildMessageDeleted(DiscordMessage message, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageDeleted;
 ```
@@ -1047,6 +1634,15 @@ public const string OnDiscordGuildMessageDeleted;
    
    
 # OnDiscordDirectMessagesBulkDeleted field
+
+Called when a message is deleted in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessagesBulkDeleted(List<Snowflake> messageIds, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessagesBulkDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessagesBulkDeleted;
@@ -1061,6 +1657,15 @@ public const string OnDiscordDirectMessagesBulkDeleted;
    
 # OnDiscordGuildMessagesBulkDeleted field
 
+Called when a message is deleted in a guild channel
+
+```csharp
+void OnDiscordGuildMessagesBulkDeleted(List<Snowflake> messageIds, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessagesBulkDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessagesBulkDeleted;
 ```
@@ -1073,6 +1678,15 @@ public const string OnDiscordGuildMessagesBulkDeleted;
    
    
 # OnDiscordDirectMessageReactionAdded field
+
+Called when a reaction is added to a message in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageReactionAdded Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageReactionAdded;
@@ -1087,6 +1701,15 @@ public const string OnDiscordDirectMessageReactionAdded;
    
 # OnDiscordGuildMessageReactionAdded field
 
+Called when a reaction is added to a message in a guild channel
+
+```csharp
+void OnDiscordGuildMessageReactionAdded(MessageReactionAddedEvent reaction, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageReactionAdded Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageReactionAdded;
 ```
@@ -1099,6 +1722,15 @@ public const string OnDiscordGuildMessageReactionAdded;
    
    
 # OnDiscordDirectMessageReactionRemoved field
+
+Called when a reaction is removed from a message in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageReactionRemoved Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageReactionRemoved;
@@ -1113,6 +1745,15 @@ public const string OnDiscordDirectMessageReactionRemoved;
    
 # OnDiscordGuildMessageReactionRemoved field
 
+Called when a reaction is removed from a message in a guild channel
+
+```csharp
+void OnDiscordGuildMessageReactionRemoved(MessageReactionRemovedEvent reaction, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageReactionRemoved Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageReactionRemoved;
 ```
@@ -1125,6 +1766,15 @@ public const string OnDiscordGuildMessageReactionRemoved;
    
    
 # OnDiscordDirectMessageReactionRemovedAll field
+
+Called when all reactions are removed from a message in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageReactionRemovedAll Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageReactionRemovedAll;
@@ -1139,6 +1789,15 @@ public const string OnDiscordDirectMessageReactionRemovedAll;
    
 # OnDiscordGuildMessageReactionRemovedAll field
 
+Called when all reactions are removed from a message in a guild channel
+
+```csharp
+void OnDiscordGuildMessageReactionRemovedAll(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageReactionRemovedAll Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageReactionRemovedAll;
 ```
@@ -1151,6 +1810,15 @@ public const string OnDiscordGuildMessageReactionRemovedAll;
    
    
 # OnDiscordDirectMessageReactionEmojiRemoved field
+
+Called when all of a specific reactions is removed from a message in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectMessageReactionEmojiRemoved Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectMessageReactionEmojiRemoved;
@@ -1165,6 +1833,15 @@ public const string OnDiscordDirectMessageReactionEmojiRemoved;
    
 # OnDiscordGuildMessageReactionEmojiRemoved field
 
+Called when all of a specific reaction is removed from a message in a guild channel
+
+```csharp
+void OnDiscordGuildMessageReactionEmojiRemoved(MessageReactionRemovedAllEmojiEvent reaction, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMessageReactionEmojiRemoved Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildMessageReactionEmojiRemoved;
 ```
@@ -1177,6 +1854,15 @@ public const string OnDiscordGuildMessageReactionEmojiRemoved;
    
    
 # OnDiscordGuildMemberPresenceUpdated field
+
+Called when a guild members presence is updated
+
+```csharp
+void OnDiscordGuildMemberPresenceUpdated(PresenceUpdatedEvent update, GuildMember member, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildMemberPresenceUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildMemberPresenceUpdated;
@@ -1191,6 +1877,15 @@ public const string OnDiscordGuildMemberPresenceUpdated;
    
 # OnDiscordDirectTypingStarted field
 
+Called typing starts in a direct message channel `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectTypingStarted(TypingStartedEvent typing, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectTypingStarted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordDirectTypingStarted;
 ```
@@ -1203,6 +1898,15 @@ public const string OnDiscordDirectTypingStarted;
    
    
 # OnDiscordGuildTypingStarted field
+
+Called when typing starts in a guild channel
+
+```csharp
+void OnDiscordGuildTypingStarted(TypingStartedEvent typing, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildTypingStarted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildTypingStarted;
@@ -1217,6 +1921,15 @@ public const string OnDiscordGuildTypingStarted;
    
 # OnDiscordUserUpdated field
 
+Called when a discord user is updated
+
+```csharp
+void OnDiscordUserUpdated(DiscordUser user)
+{
+    Puts("OnDiscordUserUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordUserUpdated;
 ```
@@ -1229,6 +1942,15 @@ public const string OnDiscordUserUpdated;
    
    
 # OnDiscordDirectVoiceStateUpdated field
+
+Called when the voice state in a direct message channel is updated `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectVoiceStateUpdated(VoiceState voice, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectVoiceStateUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectVoiceStateUpdated;
@@ -1243,6 +1965,15 @@ public const string OnDiscordDirectVoiceStateUpdated;
    
 # OnDiscordGuildVoiceStateUpdated field
 
+Called when the voice state in a guild channel is updated
+
+```csharp
+void OnDiscordGuildVoiceStateUpdated(VoiceState voice, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildVoiceStateUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildVoiceStateUpdated;
 ```
@@ -1255,6 +1986,15 @@ public const string OnDiscordGuildVoiceStateUpdated;
    
    
 # OnDiscordGuildVoiceServerUpdated field
+
+Called when the voice server in a guild channel is updated
+
+```csharp
+void OnDiscordGuildVoiceServerUpdated(VoiceServerUpdatedEvent voice, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildVoiceServerUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildVoiceServerUpdated;
@@ -1269,6 +2009,15 @@ public const string OnDiscordGuildVoiceServerUpdated;
    
 # OnDiscordGuildWebhookUpdated field
 
+Called when a webhook ins a guild is updated
+
+```csharp
+void OnDiscordGuildWebhookUpdated(WebhooksUpdatedEvent webhook, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildWebhookUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildWebhookUpdated;
 ```
@@ -1281,6 +2030,15 @@ public const string OnDiscordGuildWebhookUpdated;
    
    
 # OnDiscordDirectInviteCreated field
+
+Called when an invite to a direct message channel is created `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectInviteCreated(InviteCreatedEvent invite, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectInviteCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectInviteCreated;
@@ -1295,6 +2053,15 @@ public const string OnDiscordDirectInviteCreated;
    
 # OnDiscordGuildInviteCreated field
 
+Called when an invite to a guild channel is created
+
+```csharp
+void OnDiscordGuildInviteCreated(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildInviteCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildInviteCreated;
 ```
@@ -1307,6 +2074,15 @@ public const string OnDiscordGuildInviteCreated;
    
    
 # OnDiscordDirectInviteDeleted field
+
+Called when an invite to a direct message channel is deleted `channel` may be null if we haven't seen it yet
+
+```csharp
+void OnDiscordDirectInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel)
+{
+    Puts("OnDiscordDirectInviteDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordDirectInviteDeleted;
@@ -1321,6 +2097,15 @@ public const string OnDiscordDirectInviteDeleted;
    
 # OnDiscordGuildInviteDeleted field
 
+Called when an invite to a guild channel is deleted
+
+```csharp
+void OnDiscordGuildInviteDeleted(InviteCreatedEvent invite, DiscordChannel channel, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildInviteDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildInviteDeleted;
 ```
@@ -1333,6 +2118,15 @@ public const string OnDiscordGuildInviteDeleted;
    
    
 # OnDiscordApplicationCommandPermissionsUpdated field
+
+Called when the bots application command permission have been updated
+
+```csharp
+void OnDiscordApplicationCommandPermissionsUpdated(CommandPermissions permissions)
+{
+    Puts("OnDiscordInteractionCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordApplicationCommandPermissionsUpdated;
@@ -1347,6 +2141,15 @@ public const string OnDiscordApplicationCommandPermissionsUpdated;
    
 # OnDiscordInteractionCreated field
 
+Called when a discord interaction occurs by a user
+
+```csharp
+void OnDiscordInteractionCreated(DiscordInteraction interaction)
+{
+    Puts("OnDiscordInteractionCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordInteractionCreated;
 ```
@@ -1359,6 +2162,15 @@ public const string OnDiscordInteractionCreated;
    
    
 # OnDiscordGuildIntegrationCreated field
+
+Called when a new integration is created a guild
+
+```csharp
+void OnDiscordGuildIntegrationCreated(IntegrationCreatedEvent integration, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildIntegrationCreated;
@@ -1373,6 +2185,15 @@ public const string OnDiscordGuildIntegrationCreated;
    
 # OnDiscordGuildIntegrationUpdated field
 
+Called when an integration is updated on a guild
+
+```csharp
+void OnDiscordGuildIntegrationUpdated(IntegrationUpdatedEvent interaction, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildIntegrationUpdated;
 ```
@@ -1385,6 +2206,15 @@ public const string OnDiscordGuildIntegrationUpdated;
    
    
 # OnDiscordGuildIntegrationDeleted field
+
+Called when an integration is deleted on a guild
+
+```csharp
+void OnDiscordGuildIntegrationDeleted(IntegrationDeletedEvent interaction, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildIntegrationDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildIntegrationDeleted;
@@ -1399,6 +2229,15 @@ public const string OnDiscordGuildIntegrationDeleted;
    
 # OnDiscordGuildThreadCreated field
 
+Called when a guild thread is created
+
+```csharp
+void OnDiscordGuildThreadCreated(DiscordChannel thread, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildThreadCreated;
 ```
@@ -1411,6 +2250,15 @@ public const string OnDiscordGuildThreadCreated;
    
    
 # OnDiscordGuildThreadUpdated field
+
+Called when a guild thread is updated
+
+```csharp
+void OnDiscordGuildThreadUpdated(DiscordChannel thread, DiscordChannel previous, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildThreadUpdated;
@@ -1425,6 +2273,15 @@ public const string OnDiscordGuildThreadUpdated;
    
 # OnDiscordGuildThreadDeleted field
 
+Called when a guild thread is deleted
+
+```csharp
+void OnDiscordGuildThreadDeleted(DiscordChannel thread, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildThreadDeleted;
 ```
@@ -1437,6 +2294,15 @@ public const string OnDiscordGuildThreadDeleted;
    
    
 # OnDiscordGuildThreadListSynced field
+
+Called when a guild thread list is synced
+
+```csharp
+void OnDiscordGuildThreadListSynced(ThreadListSyncEvent sync, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadListSynced Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildThreadListSynced;
@@ -1451,6 +2317,15 @@ public const string OnDiscordGuildThreadListSynced;
    
 # OnDiscordGuildThreadMemberUpdated field
 
+Called when a thread member is updated
+
+```csharp
+void OnDiscordGuildThreadMemberUpdated(ThreadMember member, DiscordChannel thread, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadMemberUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordGuildThreadMemberUpdated;
 ```
@@ -1463,6 +2338,15 @@ public const string OnDiscordGuildThreadMemberUpdated;
    
    
 # OnDiscordGuildThreadMembersUpdated field
+
+Called when thread members are updated
+
+```csharp
+void OnDiscordGuildThreadMembersUpdated(ThreadMembersUpdatedEvent members, DiscordGuild guild)
+{
+    Puts("OnDiscordGuildThreadMembersUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordGuildThreadMembersUpdated;
@@ -1477,6 +2361,15 @@ public const string OnDiscordGuildThreadMembersUpdated;
    
 # OnDiscordStageInstanceCreated field
 
+Called when a stage instance is created
+
+```csharp
+void OnDiscordStageInstanceCreated(StageInstance stage, DiscordGuild guild)
+{
+    Puts("OnDiscordStageInstanceCreated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordStageInstanceCreated;
 ```
@@ -1489,6 +2382,15 @@ public const string OnDiscordStageInstanceCreated;
    
    
 # OnDiscordStageInstanceUpdated field
+
+Called when a stage instance is updated
+
+```csharp
+void OnDiscordStageInstanceUpdated(StageInstance stage, StageInstance previous, DiscordGuild guild)
+{
+    Puts("OnDiscordStageInstanceUpdated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordStageInstanceUpdated;
@@ -1503,6 +2405,15 @@ public const string OnDiscordStageInstanceUpdated;
    
 # OnDiscordStageInstanceDeleted field
 
+Called when a stage instance is deleted
+
+```csharp
+void OnDiscordStageInstanceDeleted(StageInstance stage, DiscordGuild guild)
+{
+    Puts("OnDiscordStageInstanceDeleted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordStageInstanceDeleted;
 ```
@@ -1515,6 +2426,15 @@ public const string OnDiscordStageInstanceDeleted;
    
    
 # OnDiscordAutoModRuleCreated field
+
+Called when an AutoMod rule is created in a guild
+
+```csharp
+void OnDiscordAutoModRuleCreated(AutoModRule rule, DiscordGuild guild)
+{
+    Puts("OnDiscordAutoModRuleCreated Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordAutoModRuleCreated;
@@ -1529,6 +2449,15 @@ public const string OnDiscordAutoModRuleCreated;
    
 # OnDiscordAutoModRuleUpdated field
 
+Called when an AutoMod rule is updated on a guild
+
+```csharp
+void OnDiscordAutoModRuleUpdated(AutoModRule rule, DiscordGuild guild)
+{
+    Puts("OnDiscordAutoModRuleUpdated Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordAutoModRuleUpdated;
 ```
@@ -1541,6 +2470,15 @@ public const string OnDiscordAutoModRuleUpdated;
    
    
 # OnDiscordAutoModRuleDeleted field
+
+Called when an AutoMod rule is deleted from a guild
+
+```csharp
+void OnDiscordAutoModRuleDeleted(AutoModRule rule, DiscordGuild guild)
+{
+    Puts("OnDiscordAutoModRuleDeleted Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordAutoModRuleDeleted;
@@ -1555,6 +2493,15 @@ public const string OnDiscordAutoModRuleDeleted;
    
 # OnDiscordAutoModActionExecuted field
 
+Called when an AutoMod rule is executed on a guild
+
+```csharp
+void OnDiscordAutoModActionExecuted(AutoModActionExecutionEvent rule, DiscordGuild guild)
+{
+    Puts("OnDiscordAutoModActionExecuted Works!");
+}
+```
+
 ```csharp
 public const string OnDiscordAutoModActionExecuted;
 ```
@@ -1567,6 +2514,15 @@ public const string OnDiscordAutoModActionExecuted;
    
    
 # OnDiscordUnhandledCommand field
+
+Called when we receive an event we do not handle yet. If you need this event, you can listen to it using this hook until we support it Please create an issue on uMod if this error ever occurs
+
+```csharp
+void OnDiscordUnhandledCommand(EventPayload payload)
+{
+    Puts("OnDiscordUnhandledCommand Works!");
+}
+```
 
 ```csharp
 public const string OnDiscordUnhandledCommand;

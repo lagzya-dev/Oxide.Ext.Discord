@@ -5,20 +5,26 @@ is a library that can be used for placeholders in strings and [Discord Templates
 There are many built in placeholders that can be used along with the ability for plugins to register custom placeholders.
 Placeholders are highly customizable and is recommend to be used in messages along with [Discord Templates](DiscordTemplates.md).
 
+## Getting Started
+To get started with Discord placeholders you will need to import the library
+
+```csharp
+private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
+```
+
 ## Placeholder Data
 When a placeholder is being processed data is added to [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md) 
 to be used by the placeholders that need certain types for their data. You can get a [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md)
 instance by with the code below.  
 
-*Note: PlaceholderData is pooled and once processing placeholders is complete it will be returned to the pool. If you want to use the data multiple times call
+*Note: PlaceholderData is pooled and once processing placeholders is complete it will be returned to the pool. 
+If you want to use the data multiple times call
 [ManualPool()](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md#manualpool-method) method  
 
 *Note: If you need to use [PlaceholderData](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md) 
 with different values you can use the [Clone()](../Generated/Oxide.Ext.Discord/Libraries/PlaceholderData.md#clone-method) method*  
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private PlaceholderData GetData()
 {
     _placeholders.CreateData(this);
@@ -43,8 +49,6 @@ For example if the plugin is DiscordCore the prefix would be `discordcore.`
 A static placeholder is a placeholder who's value will never change.
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private void RegisterPlaceholders()
 {
     _placeholders.RegisterPlaceholder(this, "myplugin.name", "staticvalue");
@@ -59,8 +63,6 @@ A Data Key Placeholder is a placeholder that should use a registered [Placeholde
 key as the placeholder value.
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private void RegisterPlaceholders()
 {
     _placeholders.RegisterPlaceholder<string>(this, "myplugin.name", "datakey");
@@ -75,8 +77,6 @@ private void RegisterPlaceholders()
 A Callback placeholder is a placeholder that will will callback an empty method and that remove will return a <TResult> for the placeholder.
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private void RegisterPlaceholders()
 {
     _placeholders.RegisterPlaceholder<int>(this, "myplugin.name", GetConfigValue);
@@ -92,8 +92,6 @@ If the placeholder needs access to [PlaceholderState](../Generated/Oxide.Ext.Dis
 That is an option argument that can be added
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private void RegisterPlaceholders()
 {
     _placeholders.RegisterPlaceholder<ItemDefinition, int>(this, "myplugin.itemid", ItemId);
@@ -103,8 +101,6 @@ private string ItemId(ItemDefinition def) => def.itemid;
 ```
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private void RegisterPlaceholders()
 {
     _placeholders.RegisterPlaceholder<ItemDefinition, int>(this, "myplugin.itemid", ItemId);
@@ -121,8 +117,6 @@ private string DisplayItem(PlaceholderState state, ItemDefinition def) => $"{def
 To process placeholders you will call the [Process Placeholders](../Generated/Oxide.Ext.Discord/Libraries/DiscordPlaceholders.md#processplaceholders-method) Method
 
 ```csharp
-private readonly DiscordPlaceholders _placeholders = GetLibrary<DiscordPlaceholders>();
-
 private string CallPlaceholders(IPlayer player)
 {
     PlaceholderData data = _placeholders.CreateData(this).AddPlayer(player);
