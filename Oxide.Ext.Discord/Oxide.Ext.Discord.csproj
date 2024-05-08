@@ -2,15 +2,15 @@
 <Project>
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
   <PropertyGroup>
-    <Version>3.0.0.0</Version>
+    <Version>3.0.0</Version>
     <AssemblyName>Oxide.Ext.Discord</AssemblyName>
     <Authors>MJSU</Authors>
     <Description>An Oxide extension for Discord.</Description>
     <RepositoryUrl>https://github.com/MJSU/Oxide.Ext.Discord</RepositoryUrl>
     <TargetFrameworks>net48;</TargetFrameworks>
     <LangVersion>7</LangVersion>
-    <PackageVersion>3.0.0.0</PackageVersion>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <PackageVersion>3.0.0</PackageVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
     <FileVersion>3.0.0</FileVersion>
     <Company>MJSU</Company>
   </PropertyGroup>
@@ -24,10 +24,10 @@
     <DocumentationFile>$(outdir)Oxide.Ext.Discord.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Oxide.Core" Version="2.0.4091-develop">
+    <PackageReference Include="Oxide.Core" Version="2.0.4106">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
-    <PackageReference Include="Oxide.CSharp" Version="2.0.4126">
+    <PackageReference Include="Oxide.CSharp" Version="2.0.4132">
       <ExcludeAssets>contentfiles;analyzers;build</ExcludeAssets>
     </PackageReference>
   </ItemGroup>
