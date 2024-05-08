@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Helpers
     /// <summary>
     /// Available flags for timestamp formatting
     /// </summary>
-    public enum TimestampStyles
+    public enum TimestampStyles : byte
     {
         /// <summary>
         /// Displays the short time for the timestamp

@@ -1,14 +1,18 @@
 using System;
-using System.Text;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Webhooks
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents parameters to execute a webhook
     /// </summary>
-    public class WebhookExecuteParams
+    public class WebhookExecuteParams : IDiscordQueryString
     {
+        internal static readonly WebhookExecuteParams Default = new WebhookExecuteParams();
+        internal static readonly WebhookExecuteParams DefaultWait = new WebhookExecuteParams{Wait = true};
+        
         /// <summary>
         /// Which type of webhook are we trying to send (Discord, Slack, Github)
         /// Defaults to Discord
@@ -27,13 +31,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         public Snowflake? ThreadId { get; set; }
 
-        /// <summary>
-        /// Returns the query string to be used in the webhook URL
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (Wait)
             {
                 builder.Add("wait", "true");
@@ -44,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
                 builder.Add("thread_id", ThreadId.Value.ToString());
             }
             
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
         
         /// <summary>

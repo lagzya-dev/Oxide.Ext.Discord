@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
-namespace Oxide.Ext.Discord.Entities.Webhooks
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/webhook#webhook-object">Webhook Structure</a>
@@ -90,20 +92,11 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID for the webhook</param>
-        /// <param name="name">Name of the webhook (1-80 characters)</param>
-        /// <param name="avatar">Image for the default webhook avatar</param>
-        /// <param name="callback">Callback with the completed webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateWebhook(DiscordClient client, Snowflake channelId, string name, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        /// <param name="create">Webhook create request</param>
+        public static IPromise<DiscordWebhook> CreateWebhook(DiscordClient client, Snowflake channelId, WebhookCreate create)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            Dictionary<string, string> data = new Dictionary<string, string>
-            {
-                ["name"] = name,
-                ["avatar"] = avatar
-            };
-
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.POST, data, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
+            return client.Bot.Rest.Post<DiscordWebhook>(client,$"channels/{channelId}/webhooks", create);
         }
 
         /// <summary>
@@ -112,12 +105,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to get webhooks for</param>
-        /// <param name="callback">Callback with a list of channel webhooks</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetChannelWebhooks(DiscordClient client, Snowflake channelId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
+        public static IPromise<List<DiscordWebhook>> GetChannelWebhooks(DiscordClient client, Snowflake channelId)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/webhooks", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"channels/{channelId}/webhooks");
         }
 
         /// <summary>
@@ -126,12 +117,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to get webhooks for</param>
-        /// <param name="callback">Callback with the list of guild webhooks</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetGuildWebhooks(DiscordClient client, Snowflake guildId, Action<List<DiscordWebhook>> callback = null, Action<RestError> error = null)
+        public static IPromise<List<DiscordWebhook>> GetGuildWebhooks(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/guilds/{guildId}/webhooks", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"guilds/{guildId}/webhooks");
         }
 
         /// <summary>
@@ -140,12 +129,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="webhookId">Webhook ID to get</param>
-        /// <param name="callback">Callback with the webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhook(DiscordClient client, Snowflake webhookId, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordWebhook> GetWebhook(DiscordClient client, Snowflake webhookId)
         {
-            if (!webhookId.IsValid()) throw new InvalidSnowflakeException(nameof(webhookId));
-            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}");
         }
 
         /// <summary>
@@ -157,12 +144,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="webhookId">Webhook ID to get</param>
         /// <param name="webhookToken">Webhook Token</param>
-        /// <param name="callback">Callback with the webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordWebhook> GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken)
         {
-            if (!webhookId.IsValid()) throw new InvalidSnowflakeException(nameof(webhookId));
-            client.Bot.Rest.DoRequest($"/webhooks/{webhookId}/{webhookToken}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}");
         }
 
         /// <summary>
@@ -173,15 +158,13 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="webhookUrl">Returns the webhook for the specified URL</param>
-        /// <param name="callback">Callback with the webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetWebhookWithUrl(DiscordClient client, string webhookUrl, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordWebhook> GetWebhookWithUrl(DiscordClient client, string webhookUrl)
         {
-            string[] webhookInfo = webhookUrl.Split('/');
+            string[] webhookInfo = webhookUrl.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
             string id = webhookInfo[webhookInfo.Length - 2];
             string token = webhookInfo[webhookInfo.Length - 1];
             
-            client.Bot.Rest.DoRequest($"/webhooks/{id}/{token}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{id}/{token}");
         }
 
         /// <summary>
@@ -190,23 +173,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook">Modify Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="name">New webhook name</param>
-        /// <param name="avatar">New avatar image</param>
-        /// <param name="channelId">Channel to move the webhook to</param>
-        /// <param name="callback">Callback with the updated webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyWebhook(DiscordClient client, string name = null, string avatar = null, Snowflake? channelId = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        /// <param name="edit">Edit request for the webhook</param>
+        public IPromise<DiscordWebhook> EditWebhook(DiscordClient client, WebhookEdit edit)
         {
-            if (channelId.HasValue && !channelId.Value.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["name"] = name ,
-                ["avatar"] = avatar,
-                ["channel_id"] = channelId
-            };
-
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.PATCH, data, callback, error);
+            return client.Bot.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}", edit);
         }
 
         /// <summary>
@@ -215,19 +185,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token">Modify Webhook with Token</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="name">New webhook name</param>
-        /// <param name="avatar">New avatar image</param>
-        /// <param name="callback">Callback with the updated webhook</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyWebhookWithToken(DiscordClient client, string name = null, string avatar = null, Action<DiscordWebhook> callback = null, Action<RestError> error = null)
+        /// <param name="edit">Edit request for the webhook</param>
+        public IPromise<DiscordWebhook> ModifyWebhookWithToken(DiscordClient client, WebhookEdit edit)
         {
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["name"] = name,
-                ["avatar"] = avatar
-            };
-
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.PATCH, data, callback, error);
+            return client.Bot.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}/{Token}", edit);
         }
 
         /// <summary>
@@ -236,11 +197,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook">Delete Webhook</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteWebhook(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteWebhook(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}");
         }
 
         /// <summary>
@@ -249,11 +208,9 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// See <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token">Delete Webhook with Token</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteWebhookWithToken(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteWebhookWithToken(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}/{Token}");
         }
 
         /// <summary>
@@ -263,19 +220,26 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action callback = null, Action<RestError> error = null)
+        public IPromise ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null)
         {
             if (executeParams == null)
             {
-                executeParams = new WebhookExecuteParams();
+                executeParams = WebhookExecuteParams.Default;
             }
-            
-            message.Validate();
-            message.ValidateWebhookMessage();
-            
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
+
+            return client.Bot.Rest.Post(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
+        }
+        
+        /// <summary>
+        /// Executes a webhook
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="builder">Builder for the message</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        public IPromise ExecuteWebhook(DiscordClient client, WebhookMessageBuilder builder, WebhookExecuteParams executeParams = null)
+        {
+            return ExecuteWebhook(client, builder.Build(), executeParams);
         }
 
         /// <summary>
@@ -285,20 +249,55 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="message">Message data</param>
         /// <param name="executeParams">Webhook execution parameters</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ExecuteWebhook(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> ExecuteWebhookWithMessage(DiscordClient client, WebhookCreateMessage message, WebhookExecuteParams executeParams = null)
         {
             if (executeParams == null)
             {
-                executeParams = new WebhookExecuteParams();
+                executeParams = WebhookExecuteParams.DefaultWait;
             }
 
-            executeParams.Wait = true;
-            message.Validate();
-            message.ValidateWebhookMessage();
-            
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", RequestMethod.POST, message, callback, error);
+            return client.Bot.Rest.Post<DiscordMessage>(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
+        }
+        
+        /// <summary>
+        /// Executes a webhook
+        /// See <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">Execute Webhook</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="builder">Builder for the message</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        public IPromise<DiscordMessage> ExecuteWebhookWithMessage(DiscordClient client, WebhookMessageBuilder builder, WebhookExecuteParams executeParams = null)
+        {
+            return ExecuteWebhookWithMessage(client, builder.Build(), executeParams);
+        }
+
+        /// <summary>
+        /// Send a message to a webhook using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        public IPromise<DiscordMessage> ExecuteWebhookGlobalTemplate(DiscordClient client, TemplateKey templateName, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
+        {
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, message);
+            return ExecuteWebhookWithMessage(client, template, executeParams);
+        }
+
+        /// <summary>
+        /// Send a message to a webhook using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="executeParams">Webhook execution parameters</param>
+        public IPromise<DiscordMessage> ExecuteWebhookTemplate(DiscordClient client, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, WebhookCreateMessage message = null, PlaceholderData placeholders = null, WebhookExecuteParams executeParams = null)
+        {
+            WebhookCreateMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, message);
+            return ExecuteWebhookWithMessage(client, template, executeParams);
         }
 
         /// <summary>
@@ -308,17 +307,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to get</param>
         /// <param name="messageParams">Message Params</param>
-        /// <param name="callback">Callback with the message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null)
         {
-            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
-            if (messageParams == null)
-            {
-                messageParams = new WebhookMessageParams();
-            }
-            
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
+            return client.Bot.Rest.Get<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}");
         }
         
         /// <summary>
@@ -329,16 +321,42 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// <param name="messageId">Message ID to edit</param>
         /// <param name="messageParams">Message Params</param>
         /// <param name="message">The updated message</param>
-        /// <param name="callback">Callback with the edited message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditWebhookMessage(DiscordClient client, Snowflake messageId, DiscordMessage message, WebhookMessageParams messageParams = null, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> EditWebhookMessage(DiscordClient client, Snowflake messageId, WebhookEditMessage message, WebhookMessageParams messageParams = null)
         {
-            if (messageParams == null)
-            {
-                messageParams = new WebhookMessageParams();
-            }
-            
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}{messageParams.ToQueryString()}", RequestMethod.PATCH, message, callback, error);
+            return client.Bot.Rest.Patch<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", message);
+        }
+
+        /// <summary>
+        /// Edit a message from a webhook using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID of the message to edit</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="messageParams">Message Params</param>
+        public IPromise<DiscordMessage> EditWebhookMessageGlobalTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, TemplateKey templateName, WebhookEditMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null)
+        {
+            WebhookEditMessage template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(plugin, templateName).ToMessage(placeholders, message);
+            return EditWebhookMessage(client, messageId, template, messageParams);
+        }
+
+        /// <summary>
+        /// Edit a message from a webhook using a localized message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="messageId">Message ID of the message to edit</param>
+        /// <param name="plugin">Plugin for the template</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        /// <param name="messageParams">Message Params</param>
+        public IPromise<DiscordMessage> EditWebhookMessageTemplate(DiscordClient client, Snowflake messageId, Plugin plugin, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, WebhookEditMessage message = null, PlaceholderData placeholders = null, WebhookMessageParams messageParams = null)
+        {
+            WebhookEditMessage template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(plugin, templateName, language).ToMessage(placeholders, message);
+            return EditWebhookMessage(client, messageId, template, messageParams);
         }
         
         /// <summary>
@@ -346,12 +364,10 @@ namespace Oxide.Ext.Discord.Entities.Webhooks
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="messageId">Message ID to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteWebhookMessage(DiscordClient client, Snowflake messageId, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteWebhookMessage(DiscordClient client, Snowflake messageId)
         {
-            if (!messageId.IsValid()) throw new InvalidSnowflakeException(nameof(messageId));
-            client.Bot.Rest.DoRequest($"/webhooks/{Id}/{Token}/messages/{messageId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}/{Token}/messages/{messageId}");
         }
     }
 }

@@ -1,15 +1,17 @@
 using System;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Reflection;
 using Oxide.Core;
-using Oxide.Core.Configuration;
 using Oxide.Core.Extensions;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Configuration;
-using Oxide.Ext.Discord.Libraries.Command;
-using Oxide.Ext.Discord.Libraries.Linking;
-using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Data;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Factory;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord
 {
@@ -19,32 +21,37 @@ namespace Oxide.Ext.Discord
     public class DiscordExtension : Extension
     {
         /// <summary>
-        /// Test version information if using test version
+        /// Test version information if using a test version
         /// </summary>
-        public const string TestVersion = "";
-
-        /// <summary>
-        /// Discord Extension JSON Serialization settings
-        /// </summary>
-        internal static readonly JsonSerializerSettings ExtensionSerializeSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore
-        };
+        internal const string TestVersion = "";
         
+        internal const string Authors = "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
+
         /// <summary>
         /// Version number of the extension
         /// </summary>
-        private static readonly VersionNumber ExtensionVersion = new VersionNumber(2, 1, 9);
+        internal static VersionNumber ExtensionVersion;
+        
+        /// <summary>
+        /// Gets full extension version including test version
+        /// </summary>
+        internal static string FullExtensionVersion { get; private set; }
         
         /// <summary>
         /// Global logger for areas that aren't part of a client connection
         /// </summary>
-        public static ILogger GlobalLogger;
-
-        internal static DiscordLink DiscordLink;
-        internal static DiscordCommand DiscordCommand;
-        internal static DiscordSubscriptions DiscordSubscriptions;
-        internal static DiscordConfig DiscordConfig;
+        internal static ILogger GlobalLogger;
+        
+        internal static DiscordMessageTemplates DiscordMessageTemplates;
+        internal static DiscordEmbedTemplates DiscordEmbedTemplates;
+        internal static DiscordEmbedFieldTemplates DiscordEmbedFieldTemplates;
+        internal static DiscordModalTemplates DiscordModalTemplates;
+        internal static DiscordButtonTemplates DiscordButtonTemplates;
+        internal static DiscordInputTextTemplates DiscordInputTextTemplates;
+        internal static DiscordSelectMenuTemplates DiscordSelectMenuTemplates;
+        internal static DiscordCommandLocalizations DiscordCommandLocalizations;
+        
+        internal static bool IsShuttingDown;
 
         /// <summary>
         /// Constructor for the extension
@@ -52,7 +59,9 @@ namespace Oxide.Ext.Discord
         /// <param name="manager">Oxide extension manager</param>
         public DiscordExtension(ExtensionManager manager) : base(manager)
         {
-            
+            AssemblyName assembly = Assembly.GetExecutingAssembly().GetName();
+            ExtensionVersion = new VersionNumber(assembly.Version.Major, assembly.Version.Minor, assembly.Version.Build);
+            FullExtensionVersion = $"{ExtensionVersion}{TestVersion}";
         }
 
         /// <summary>
@@ -63,7 +72,7 @@ namespace Oxide.Ext.Discord
         /// <summary>
         /// Authors for the extension
         /// </summary>
-        public override string Author => "PsychoTea & DylanSMR & Tricky & Kirollos & MJSU";
+        public override string Author => Authors;
 
         /// <summary>
         /// Version number used by oxide
@@ -71,42 +80,57 @@ namespace Oxide.Ext.Discord
         public override VersionNumber Version => ExtensionVersion;
 
         /// <summary>
-        /// Gets full extension version including test information
-        /// </summary>
-        public static string GetExtensionVersion => ExtensionVersion.ToString() + TestVersion; 
-
-        /// <summary>
         /// Called when mod is loaded
         /// </summary>
         public override void OnModLoad()
         {
-            GlobalLogger = string.IsNullOrEmpty(TestVersion) ? new Logger(DiscordLogLevel.Warning) : new Logger(DiscordLogLevel.Debug);
+            DiscordConfig.LoadConfig();
             
-            GlobalLogger.Info($"Using Discord Extension Version: {GetExtensionVersion}");
+            GlobalLogger = DiscordLoggerFactory.Instance.CreateExtensionLogger(string.IsNullOrEmpty(TestVersion) ? DiscordLogLevel.Warning : DiscordLogLevel.Verbose);
+            GlobalLogger.Info("Using Discord Extension Version: {0}", FullExtensionVersion);
+            
+            ThreadEx.Initialize();
+
             AppDomain.CurrentDomain.UnhandledException += (sender, exception) =>
             {
-                GlobalLogger.Exception("An exception was thrown!", exception.ExceptionObject as Exception);
+                GlobalLogger.Exception("An unhandled exception was thrown!", exception?.ExceptionObject as Exception);
             };
+            
+            Manager.RegisterLibrary(nameof(DiscordPool), new DiscordPool(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordAppCommand),  new DiscordAppCommand(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordLink), new DiscordLink(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordCommand), new DiscordCommand(DiscordConfig.Instance.Commands.CommandPrefixes, GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordSubscriptions), new DiscordSubscriptions(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordLocales), new DiscordLocales(GlobalLogger));
+            Manager.RegisterLibrary(nameof(DiscordPlaceholders), new DiscordPlaceholders(GlobalLogger));
+            
+            DiscordMessageTemplates = new DiscordMessageTemplates(GlobalLogger);
+            DiscordEmbedTemplates = new DiscordEmbedTemplates(GlobalLogger);
+            DiscordEmbedFieldTemplates = new DiscordEmbedFieldTemplates(GlobalLogger);
+            DiscordModalTemplates = new DiscordModalTemplates(GlobalLogger);
+            DiscordCommandLocalizations = new DiscordCommandLocalizations(GlobalLogger);
+            DiscordButtonTemplates = new DiscordButtonTemplates(GlobalLogger);
+            DiscordInputTextTemplates = new DiscordInputTextTemplates(GlobalLogger);
+            DiscordSelectMenuTemplates = new DiscordSelectMenuTemplates(GlobalLogger);
 
-            string configPath = Path.Combine(Interface.Oxide.InstanceDirectory, "discord.config.json");
-            if (!File.Exists(configPath))
-            {
-                DiscordConfig = new DiscordConfig(configPath);
-                DiscordConfig.Save();
-            }
+            Manager.RegisterLibrary(nameof(DiscordMessageTemplates), DiscordMessageTemplates);
+            Manager.RegisterLibrary(nameof(DiscordEmbedTemplates), DiscordEmbedTemplates);
+            Manager.RegisterLibrary(nameof(DiscordEmbedFieldTemplates), DiscordEmbedFieldTemplates);
+            Manager.RegisterLibrary(nameof(DiscordModalTemplates), DiscordModalTemplates);
+            Manager.RegisterLibrary(nameof(DiscordCommandLocalizations), DiscordCommandLocalizations);
+            Manager.RegisterLibrary(nameof(DiscordButtonTemplates), DiscordButtonTemplates);
+            Manager.RegisterLibrary(nameof(DiscordInputTextTemplates), DiscordInputTextTemplates);
+            Manager.RegisterLibrary(nameof(DiscordSelectMenuTemplates), DiscordSelectMenuTemplates);
 
-            DiscordConfig = ConfigFile.Load<DiscordConfig>(configPath);
-            DiscordConfig.Save();
-
-            DiscordLink = new DiscordLink(GlobalLogger);
-            DiscordCommand = new DiscordCommand(DiscordConfig.Commands.CommandPrefixes);
-            DiscordSubscriptions = new DiscordSubscriptions(GlobalLogger);
-
-            Manager.RegisterLibrary(nameof(DiscordLink), DiscordLink);
-            Manager.RegisterLibrary(nameof(DiscordCommand), DiscordCommand);
-            Manager.RegisterLibrary(nameof(DiscordSubscriptions), DiscordSubscriptions);
-            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClient.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved +=  DiscordClient.OnPluginRemoved;
+            EmojiCache.Instance.Build();
+            
+            Manager.RegisterPluginLoader(new DiscordExtPluginLoader());
+            //Interface.Oxide.OnFrame(PromiseTimer.Instance.Update);
+            
+            Interface.Oxide.Config.Compiler.PreprocessorDirectives.AddRange(GetPreProcessorDirectives());
+            
+            Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginLoaded;
+            Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginUnloaded;
         }
 
         /// <summary>
@@ -114,15 +138,16 @@ namespace Oxide.Ext.Discord
         /// </summary>
         public override void OnShutdown()
         {
-            foreach (DiscordClient client in DiscordClient.Clients.Values.ToList())
-            {
-                DiscordClient.CloseClient(client);
-            }
-            
-            Interface.Oxide.RootPluginManager.OnPluginAdded -= DiscordClient.OnPluginAdded;
-            Interface.Oxide.RootPluginManager.OnPluginRemoved -=  DiscordClient.OnPluginRemoved;
+            DiscordClientFactory.Instance.OnShutdown();
+            GlobalLogger.Debug("Disconnected all clients - server shutdown.");
+            DataHandler.Instance.Shutdown();
+            DiscordLoggerFactory.Instance.OnServerShutdown();
+        }
 
-            GlobalLogger.Info("Disconnected all clients - server shutdown.");
+        private IEnumerable<string> GetPreProcessorDirectives()
+        {
+            yield return "DiscordExt";
+            yield return "DiscordExt3_0";
         }
     }
 }

@@ -1,10 +1,13 @@
 using Oxide.Ext.Discord.Builders;
-namespace Oxide.Ext.Discord.Entities.Invites
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
     /// </summary>
-    public class InviteLookup
+    public class InviteLookup : IDiscordQueryString
     {
         /// <summary>
         /// Whether the invite should contain approximate member counts
@@ -21,9 +24,10 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// </summary>
         public bool? GuildScheduledEventId { get; set; }
 
-        internal string ToQueryString()
+        /// <inheritdoc/>
+        public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (WithCounts.HasValue)
             {
                 builder.Add("with_counts", WithCounts.Value.ToString());
@@ -39,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
                 builder.Add("guild_scheduled_event_id", GuildScheduledEventId.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

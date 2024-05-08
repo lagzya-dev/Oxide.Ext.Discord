@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
+﻿using System;
+using Newtonsoft.Json;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Emojis
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/emoji#emoji-object">Emoji Structure</a>
@@ -56,7 +55,12 @@ namespace Oxide.Ext.Discord.Entities.Emojis
         /// <summary>
         /// Url to the emoji image
         /// </summary>
-        public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? ImageFormat.Gif : ImageFormat.Png) : null;
+        public string Url => EmojiId.HasValue ? DiscordCdn.GetCustomEmojiUrl(EmojiId.Value, Animated.HasValue && Animated.Value ? DiscordImageFormat.Gif : DiscordImageFormat.Png) : null;
+
+        /// <summary>
+        /// Show the emoji in a message
+        /// </summary>
+        public string Mention => DiscordFormatting.EmojiMessageString(this);
 
         /// <summary>
         /// Returns an emoji object for the given emoji character
@@ -68,6 +72,21 @@ namespace Oxide.Ext.Discord.Entities.Emojis
             return new DiscordEmoji
             {
                 Name = emoji
+            };
+        }
+
+        /// <summary>
+        /// Returns an Emoji object from a custom emoji ID and Animated flag
+        /// </summary>
+        /// <param name="id">ID of the emoji</param>
+        /// <param name="animated">If the emoji is animated</param>
+        /// <returns></returns>
+        public static DiscordEmoji FromCustom(Snowflake id, bool animated = false)
+        {
+            return new DiscordEmoji
+            {
+                EmojiId = id,
+                Animated = animated
             };
         }
         
@@ -82,31 +101,18 @@ namespace Oxide.Ext.Discord.Entities.Emojis
                 return Name;
             }
 
-            return DiscordFormatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false);
+            return Uri.EscapeDataString(DiscordFormatting.CustomEmojiDataString(EmojiId.Value, Name, Animated ?? false));
         }
 
         internal void Update(DiscordEmoji emoji)
         {
-            if (emoji.Name != null)
-                Name = emoji.Name;
-
-            if (emoji.Roles != null)
-                Roles = emoji.Roles;
-            
-            if (emoji.User != null)
-                User = emoji.User;
-
-            if (emoji.RequireColons != null)
-                RequireColons = emoji.RequireColons;
-
-            if (emoji.Managed != null)
-                Managed = emoji.Managed;
-
-            if (emoji.Animated != null)
-                Animated = emoji.Animated;
-
-            if (emoji.Available != null)
-                Available = emoji.Available;
+            if (emoji.Name != null) Name = emoji.Name;
+            if (emoji.Roles != null) Roles = emoji.Roles;
+            if (emoji.User != null) User = emoji.User;
+            if (emoji.RequireColons != null) RequireColons = emoji.RequireColons;
+            if (emoji.Managed != null) Managed = emoji.Managed;
+            if (emoji.Animated != null) Animated = emoji.Animated;
+            if (emoji.Available != null) Available = emoji.Available;
         }
     }
 }

@@ -1,5 +1,9 @@
 using Oxide.Ext.Discord.Builders;
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
@@ -9,7 +13,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
     /// If both before and after are provided, only before is respected.
     /// Fetching users in-between before and after is not supported.
     /// </summary>
-    public class ScheduledEventUsersLookup
+    public class ScheduledEventUsersLookup : IDiscordQueryString, IDiscordValidation
     {
         /// <summary>
         /// Number of users to return (up to maximum 100)
@@ -34,9 +38,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
         /// </summary>
         public Snowflake? After { get; set; }
         
-        internal string ToQueryString()
+        /// <inheritdoc/>
+        public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            Validate();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (Limit.HasValue)
             {
                 builder.Add("limit", Limit.Value.ToString());
@@ -57,7 +63,13 @@ namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
                 builder.Add("after", After.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
+        }
+
+        /// <inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildScheduledEventLookupException.ThrowIfInvalidLimit(Limit);
         }
     }
 }

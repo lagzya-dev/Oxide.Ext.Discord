@@ -1,9 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-object">Integration Structure</a>
@@ -34,7 +33,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// Is this integration enabled
         /// </summary>
         [JsonProperty("enabled")]
-        public bool Enabled { get; set; }
+        public bool? Enabled { get; set; }
 
         /// <summary>
         /// Is this integration syncing
@@ -58,7 +57,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// Integration account information
         /// </summary>
         [JsonProperty("account")]
-        public Account Account { get; set; }
+        public IntegrationAccount Account { get; set; }
 
         /// <summary>
         /// When this integration was last synced

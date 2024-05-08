@@ -1,25 +1,29 @@
 using Oxide.Ext.Discord.Builders;
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params">Scheduled Event Lookup Structure</a> within Discord.
     /// </summary>
-    public class ScheduledEventLookup
+    public class ScheduledEventLookup : IDiscordQueryString
     {
         /// <summary>
         /// Include number of users subscribed to each event
         /// </summary>
         public bool? WithUserCount { get; set; }
         
-        internal string ToQueryString()
+        /// <inheritdoc/>
+        public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             if (WithUserCount.HasValue)
             {
                 builder.Add("with_user_count", WithUserCount.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

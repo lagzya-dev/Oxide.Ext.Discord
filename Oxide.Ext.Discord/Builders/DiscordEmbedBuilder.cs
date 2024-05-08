@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Permissions;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Builders
@@ -12,7 +11,21 @@ namespace Oxide.Ext.Discord.Builders
     /// </summary>
     public class DiscordEmbedBuilder
     {
-        private readonly DiscordEmbed _embed = new DiscordEmbed();
+        private readonly DiscordEmbed _embed;
+
+        /// <summary>
+        /// Constructor for the builder creating a new embed
+        /// </summary>
+        public DiscordEmbedBuilder() : this(new DiscordEmbed()) { }
+
+        /// <summary>
+        /// Constructor for the builder using an existing embed
+        /// </summary>
+        /// <param name="embed"></param>
+        public DiscordEmbedBuilder(DiscordEmbed embed)
+        {
+            _embed = embed;
+        }
         
         /// <summary>
         /// Adds a title to the embed message
@@ -21,11 +34,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddTitle(string title)
         {
-            if (title != null && title.Length > 256)
-            {
-                throw new InvalidEmbedException("Title cannot be more than 256 characters");
-            }
-            
+            InvalidEmbedException.ThrowIfInvalidTitle(title);
             _embed.Title = title;
             return this;
         }
@@ -37,12 +46,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddDescription(string description)
         {
-            if (description == null) throw new ArgumentNullException(nameof(description));
-            if (description.Length > 4096)
-            {
-                throw new InvalidEmbedException("Description cannot be more than 4096 characters");
-            }
-            
+            InvalidEmbedException.ThrowIfInvalidDescription(description);
             _embed.Description = description;
             return this;
         }
@@ -62,19 +66,14 @@ namespace Oxide.Ext.Discord.Builders
         /// Adds an author to the embed message. The author will appear above the title
         /// </summary>
         /// <param name="name">Name of the author</param>
-        /// <param name="iconUrl">Icon Url to use for the author</param>
         /// <param name="url">Url to go to when the authors name is clicked on</param>
+        /// <param name="iconUrl">Icon Url to use for the author</param>
         /// <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
         /// <returns>This</returns>
-        public DiscordEmbedBuilder AddAuthor(string name, string iconUrl = null, string url = null, string proxyIconUrl = null)
+        public DiscordEmbedBuilder AddAuthor(string name, string url = null, string iconUrl = null, string proxyIconUrl = null)
         {
-            if (name == null) throw new ArgumentNullException(nameof(name));
-            if (name.Length > 256)
-            {
-                throw new InvalidEmbedException("Author name cannot be more than 256 characters");
-            }
-            
-            _embed.Author = new EmbedAuthor(name, iconUrl, url, proxyIconUrl);
+            InvalidEmbedException.ThrowIfInvalidAuthorName(name);
+            _embed.Author = new EmbedAuthor(name, url, iconUrl, proxyIconUrl);
             return this;
         }
 
@@ -87,12 +86,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddFooter(string text, string iconUrl = null, string proxyIconUrl = null)
         {
-            if (text == null) throw new ArgumentNullException(nameof(text));
-            if (text.Length > 2048)
-            {
-                throw new InvalidEmbedException("Footer text cannot be more than 2048 characters");
-            }
-            
+            InvalidEmbedException.ThrowIfInvalidFooterText(text);
             _embed.Footer = new EmbedFooter(text, iconUrl, proxyIconUrl);
             return this;
         }
@@ -101,7 +95,7 @@ namespace Oxide.Ext.Discord.Builders
         /// Adds a Discord Color to the embed
         /// </summary>
         /// <param name="color"></param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddColor(DiscordColor color)
         {
             _embed.Color = color;
@@ -112,7 +106,7 @@ namespace Oxide.Ext.Discord.Builders
         /// Adds an int based color to the embed. Color appears as a bar on the left side of the message
         /// </summary>
         /// <param name="color"></param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddColor(uint color)
         {
             _embed.Color = new DiscordColor(color);
@@ -216,60 +210,28 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns>This</returns>
         public DiscordEmbedBuilder AddBlankField(bool inline)
         {
-            if ( _embed.Fields == null)
-            {
-                _embed.Fields = new List<EmbedField>();
-            }
-
-            if ( _embed.Fields.Count >= 25)
-            {
-                throw new InvalidEmbedException("Embeds cannot have more than 25 fields");
-            }
-            
-            _embed.Fields.Add(new EmbedField("\u200b", "\u200b", inline));
-            return this;
+            return AddField(null, null, inline);
         }
 
         /// <summary>
         /// Adds a new field with the name as the title and value as the value.
         /// If inline will add a new column. If row will add in a new row.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="inline"></param>
-        /// <returns></returns>
+        /// <param name="name">Name of the field</param>
+        /// <param name="value">Value of the field</param>
+        /// <param name="inline">If the field should be inlined</param>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddField(string name, string value, bool inline)
         {
-            if ( _embed.Fields == null)
+            if (_embed.Fields == null)
             {
                 _embed.Fields = new List<EmbedField>();
             }
 
-            if (_embed.Fields.Count >= 25)
-            {
-                throw new InvalidEmbedException("Embeds cannot have more than 25 fields");
-            }
+            InvalidEmbedException.ThrowIfInvalidFieldCount(_embed.Fields.Count);
+            InvalidEmbedException.ThrowIfInvalidFieldName(name);
+            InvalidEmbedException.ThrowIfInvalidFieldValue(value);
 
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new InvalidEmbedException("Embed Fields cannot have a null or empty name");
-            }
-            
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new InvalidEmbedException("Embed Fields cannot have a null or empty value");
-            }
-
-            if (name.Length > 256)
-            {
-                throw new InvalidEmbedException("Field name cannot be more than 256 characters");
-            }
-            
-            if (value.Length > 1024)
-            {
-                throw new InvalidEmbedException("Field value cannot be more than 1024 characters");
-            }
-            
             _embed.Fields.Add(new EmbedField(name, value, inline));
             return this;
         }
@@ -282,10 +244,10 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="width">width of the image</param>
         /// <param name="height">height of the image</param>
         /// <param name="proxyUrl">Backup url for the image</param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddImage(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
-            if (url == null) throw new ArgumentNullException(nameof(url));
+            InvalidEmbedException.ThrowIfInvalidUrl(url);
             _embed.Image = new EmbedImage(url, width, height, proxyUrl);
             return this;
         }
@@ -298,10 +260,10 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="width">width of the image</param>
         /// <param name="height">height of the image</param>
         /// <param name="proxyUrl">Backup url for the image</param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddThumbnail(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
-            if (url == null) throw new ArgumentNullException(nameof(url));
+            InvalidEmbedException.ThrowIfInvalidUrl(url);
             _embed.Thumbnail = new EmbedThumbnail(url, width, height, proxyUrl);
             return this;
         }
@@ -313,10 +275,10 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="width">Width of the video</param>
         /// <param name="height">Height of the video</param>
         /// <param name="proxyUrl">Proxy Url for the video</param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddVideo(string url, int? width = null, int? height = null, string proxyUrl = null)
         {
-            if (url == null) throw new ArgumentNullException(nameof(url));
+            InvalidEmbedException.ThrowIfInvalidUrl(url);
             _embed.Video = new EmbedVideo(url, width, height, proxyUrl);
             return this;
         }
@@ -326,7 +288,7 @@ namespace Oxide.Ext.Discord.Builders
         /// </summary>
         /// <param name="name">Name for the provider</param>
         /// <param name="url">Url for the provider</param>
-        /// <returns></returns>
+        /// <returns>This</returns>
         public DiscordEmbedBuilder AddProvider(string name, string url)
         {
             _embed.Provider = new EmbedProvider(name, url);

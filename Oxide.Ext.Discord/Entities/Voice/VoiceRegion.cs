@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Voice
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/voice#voice-region-object">Voice Region Structure</a>
@@ -22,13 +22,6 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
-
-        /// <summary>
-        /// True if this is a vip-only server
-        /// </summary>
-        [Obsolete("This field is no longer sent by discord")]
-        [JsonProperty("vip")]
-        public bool Vip { get; set; }
 
         /// <summary>
         /// True for a single server that is closest to the current user's client
@@ -53,11 +46,9 @@ namespace Oxide.Ext.Discord.Entities.Voice
         /// See <a href="https://discord.com/developers/docs/resources/voice#list-voice-regions">List Voice Regions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of voice regions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void ListVoiceRegions(DiscordClient client, Action<List<VoiceRegion>> callback = null, Action<RestError> error = null)
+        public static IPromise<List<VoiceRegion>> ListVoiceRegions(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/voice/regions", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<VoiceRegion>>(client,"voice/regions");
         }
     }
 }

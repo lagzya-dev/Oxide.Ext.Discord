@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Users;
 
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#integration-application-object">Integration Application Structure</a>
@@ -32,13 +31,7 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
-        
-        /// <summary>
-        /// The summary of the app
-        /// </summary>
-        [JsonProperty("summary")]
-        public string Summary { get; set; }
-        
+
         /// <summary>
         /// The bot associated with this application
         /// </summary>

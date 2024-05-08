@@ -1,5 +1,6 @@
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Extensions
 {
@@ -57,7 +58,7 @@ namespace Oxide.Ext.Discord.Extensions
         /// <returns>True if linked; False otherwise</returns>
         public static bool IsLinked(this DiscordUser user)
         {
-            return DiscordExtension.DiscordLink.IsLinked(user.Id);
+            return DiscordLink.Instance.IsLinked(user.Id);
         }
     }
 }

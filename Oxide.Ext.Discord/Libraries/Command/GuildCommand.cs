@@ -1,19 +1,18 @@
-using System;
 using System.Collections.Generic;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Libraries.Command
+namespace Oxide.Ext.Discord.Libraries
 {
     internal class GuildCommand : BaseCommand
     {
         private readonly List<Snowflake> _allowedChannels;
 
-        public GuildCommand(string name, Plugin plugin, List<Snowflake> allowedChannels, Action<DiscordMessage, string, string[]> callback) : base(name, plugin, callback)
+        public GuildCommand(Plugin plugin, string name, string hook, List<Snowflake> allowedChannels) : base(plugin, name, hook)
         {
-            _allowedChannels = allowedChannels ?? new List<Snowflake>();
+            _allowedChannels = allowedChannels;
         }
 
         public override bool CanHandle(DiscordMessage message, DiscordChannel channel)
@@ -22,13 +21,30 @@ namespace Oxide.Ext.Discord.Libraries.Command
             {
                 return false;
             }
-
-            if (_allowedChannels.Count != 0 && !_allowedChannels.Contains(channel.Id) && (!channel.ParentId.HasValue || !_allowedChannels.Contains(channel.ParentId.Value)))
+            
+            if (channel == null)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            if (_allowedChannels == null || _allowedChannels.Count == 0 || _allowedChannels.Contains(channel.Id))
+            {
+                return true;
+            }
+
+            if (channel.ParentId.HasValue && _allowedChannels.Contains(channel.ParentId.Value))
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
+        public override void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Name", Name);
+            logger.AppendField("Plugin", Plugin.FullName());
+            logger.AppendField("Type", "Guild Command");
         }
     }
 }

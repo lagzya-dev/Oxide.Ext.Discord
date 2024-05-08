@@ -1,14 +1,15 @@
-using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">Get Channel Messages Request</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ChannelMessagesRequest
+    public class ChannelMessagesRequest : IDiscordQueryString
     {
         /// <summary>
         /// Get messages around this message ID
@@ -33,13 +34,10 @@ namespace Oxide.Ext.Discord.Entities.Channels
         /// </summary>
         public int? Limit { get; set; }
 
-        /// <summary>
-        /// Returns the request as a query string
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
 
             //Per Documentation "The before, after, and around keys are mutually exclusive, only one may be passed at a time."
             if (Around.HasValue)
@@ -60,7 +58,7 @@ namespace Oxide.Ext.Discord.Entities.Channels
                 builder.Add("limit", Limit.Value.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

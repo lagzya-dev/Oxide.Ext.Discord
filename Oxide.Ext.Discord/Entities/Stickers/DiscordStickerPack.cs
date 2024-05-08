@@ -1,9 +1,9 @@
-using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-pack-object">Sticker Pack Object</a>
@@ -58,11 +58,9 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#list-nitro-sticker-packs">List Nitro Sticker Packs</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of Nitro sticker packs</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetNitroStickerPacks(DiscordClient client, Action<List<DiscordStickerPack>> callback, Action<RestError> error = null)
+        public static IPromise<List<DiscordStickerPack>> GetStickerPacks(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/sticker-packs", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordStickerPack>>(client,"sticker-packs");
         }
     }
 }

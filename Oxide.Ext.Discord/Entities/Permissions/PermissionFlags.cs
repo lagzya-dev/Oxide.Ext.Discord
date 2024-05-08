@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags">Permission Flags</a> for user or role
@@ -9,6 +9,16 @@ namespace Oxide.Ext.Discord.Entities.Permissions
     [Flags]
     public enum PermissionFlags : ulong
     {
+        /// <summary>
+        /// Represents No Permissions
+        /// </summary>
+        None = 0,
+        
+        /// <summary>
+        /// Represents all possible Permissions Flags
+        /// </summary>
+        All = ulong.MaxValue,
+        
         /// <summary>
         /// Allows creation of instant invites
         /// Channel Type (Text, Voice, Stage)
@@ -75,7 +85,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         Stream = 1 << 9,
         
         /// <summary>
-        /// Allows guild members to view a channel, which includes reading messages in text channels
+        /// Allows guild members to view a channel, which includes reading messages in text channels and joining voice channels
         /// Channel Type (Text, Voice, Stage)
         /// </summary>
         [Description("VIEW_CHANNEL")]
@@ -126,7 +136,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// <summary>
         /// Allows for using the @everyone tag to notify all users in a channel,
         /// and the @here tag to notify all online users in a channel
-        /// Channel Type (Text)
+        /// Channel Type (Text, Stage)
         /// </summary>
         [Description("MENTION_EVERYONE")]
         MentionEveryone = 1 << 17,
@@ -213,9 +223,16 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         ManageWebhooks = 1 << 29,
         
         /// <summary>
+        /// Allows for editing and deleting emojis, stickers, and soundboard sounds created by all users
+        /// </summary>
+        [Description("MANAGE_GUILD_EXPRESSIONS")]
+        ManageGuildExpressions = 1 << 30,
+        
+        /// <summary>
         /// Allows management and editing of emojis
         /// </summary>
         [Description("MANAGE_EMOJIS_AND_STICKERS")]
+        [Obsolete("Replace with ManageGuildExpressions")]
         ManageEmojisAndStickers = 1 << 30,
         
         /// <summary>
@@ -233,7 +250,7 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         RequestToSpeak = 1ul << 32,
         
         /// <summary>
-        /// Allows for creating, editing, and deleting scheduled events
+        /// Allows for editing and deleting scheduled events created by all users
         /// Channel Type (Voice, Stage)
         /// </summary>
         [Description("MANAGE_EVENTS")]
@@ -294,13 +311,63 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         /// Allows for launching activities (applications with the `EMBEDDED` flag) in a voice channel
         /// Channel Type (Voice)
         /// </summary>
+        [Obsolete("Replaced with UseEmbeddedActivities")]
         [Description("START_EMBEDDED_ACTIVITIES")]
         StartEmbeddedActivities = 1ul << 39,
+        
+        /// <summary>
+        /// Allows for using Activities (applications with the `EMBEDDED` flag) in a voice channel
+        /// Channel Type (Voice)
+        /// </summary>
+        [Description("USE_EMBEDDED_ACTIVITIES")]
+        UseEmbeddedActivities = 1ul << 39,
         
         /// <summary>
         /// Allows for timing out users to prevent them from sending or reacting to messages in chat and threads, and from speaking in voice and stage channels
         /// </summary>
         [Description("MODERATE_MEMBERS")]
         ModerateMembers = 1ul << 40,
+        
+        /// <summary>
+        /// Allows for viewing role subscription insights
+        /// </summary>
+        [Description("VIEW_CREATOR_MONETIZATION_ANALYTICS")]
+        ViewCreatorMonetizationAnalytics = 1ul << 41,
+        
+        /// <summary>
+        /// Allows for using soundboard in a voice channel
+        /// </summary>
+        [Description("USE_SOUNDBOARD")]
+        UseSoundboard = 1ul << 42,
+        
+        /// <summary>
+        /// Allows for creating emojis, stickers, and soundboard sounds, and editing and deleting those created by the current user
+        /// </summary>
+        [Description("CREATE_GUILD_EXPRESSIONS")]
+        CreateGuildExpressions = 1ul << 43,
+        
+        /// <summary>
+        /// Allows for creating scheduled events, and editing and deleting those created by the current user
+        /// </summary>
+        [Description("CREATE_EVENTS")]
+        CreateEvents = 1ul << 44,
+        
+        /// <summary>
+        /// Allows the usage of custom soundboard sounds from other servers
+        /// </summary>
+        [Description("USE_EXTERNAL_SOUNDS")]
+        UseExternalSounds = 1ul << 45,
+        
+        /// <summary>
+        /// Allows sending voice messages
+        /// </summary>
+        [Description("SEND_VOICE_MESSAGES")]
+        SendVoiceMessages = 1ul << 46,
+            
+        /// <summary>
+        /// Allows members to interact with the Clyde AI bot
+        /// </summary>
+        [Description("USE_CLYDE_AI")]
+        UseClydeAi = 1ul << 47,
     }
 }

@@ -1,4 +1,4 @@
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a file attachment for a discord message
@@ -19,14 +19,6 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Web Content Type for the file attachment
         /// </summary>
         public string ContentType { get; set; }
-
-        /// <summary>
-        /// Default Constructor
-        /// </summary>
-        public MessageFileAttachment()
-        {
-
-        }
 
         /// <summary>
         /// Constructor

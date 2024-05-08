@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member-json-params">Guild Member Update Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildMemberUpdate
+    public class GuildMemberUpdate : IDiscordValidation
     {
         /// <summary>
         /// The nickname to give the user
@@ -52,5 +54,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("communication_disabled_until")]
         public DateTime? CommunicationDisabledUntil { get; set; }
+
+        /// <inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildMemberException.ThrowIfInvalidNickname(Nick);
+        }
     }
 }

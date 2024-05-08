@@ -1,12 +1,11 @@
 using System.ComponentModel;
-using System.Runtime.Serialization;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents Discord User <a href="https://discord.com/developers/docs/topics/gateway#update-status-status-types">Status Types</a> 
     /// </summary>
-    public enum UserStatusType
+    public enum UserStatusType : byte
     {
         /// <summary>
         /// User is online
@@ -16,7 +15,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <summary>
         /// User has Do Not Disturb
         /// </summary>
-        [Description("dnd")] DND,
+        [Description("dnd")] Dnd,
         
         /// <summary>
         /// User is idle

@@ -1,47 +1,48 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Teams;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Entities.Applications
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/application#application-object">Application Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordApplication
+    public class DiscordApplication : IDebugLoggable
     {
         /// <summary>
-        /// The id of the app
+        /// ID of the app
         /// </summary>
         [JsonProperty("id")]
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// The name of the app
+        /// Name of the app
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
         
         /// <summary>
-        /// The icon hash of the app
+        /// Icon hash of the app
         /// </summary>
         [JsonProperty("icon")]
         public string Icon { get; set; }
         
         /// <summary>
-        /// The description of the app
+        /// Description of the app
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
         
         /// <summary>
-        /// An array of rpc origin urls, if rpc is enabled
+        /// List of RPC origin URLs, if RPC is enabled
         /// </summary>
         [JsonProperty("rpc_origins")]
         public List<string> RpcOrigins { get; set; }
@@ -59,13 +60,19 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public bool BotRequireCodeGrant { get; set; }
         
         /// <summary>
-        /// The url of the app's terms of service
+        /// Partial user object for the bot user associated with the app
+        /// </summary>
+        [JsonProperty("bot")]
+        public DiscordUser Bot { get; set; }
+        
+        /// <summary>
+        /// URL of the app's terms of service
         /// </summary>
         [JsonProperty("terms_of_service_url")]
         public string TermsOfServiceUrl { get; set; }
         
         /// <summary>
-        /// The url of the app's privacy policy
+        /// URL of the app's privacy policy
         /// </summary>
         [JsonProperty("privacy_policy_url")]
         public string PrivacyPolicyUrl { get; set; }
@@ -75,15 +82,9 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("owner")]
         public DiscordUser Owner { get; set; }
-        
+
         /// <summary>
-        /// If this application is a game sold on Discord, this field will be the summary field for the store page of its primary sku
-        /// </summary>
-        [JsonProperty("summary")]
-        public string Summary { get; set; }
-        
-        /// <summary>
-        /// The hex encoded key for verification in interactions and the GameSDK's GetTicket
+        /// Hex encoded key for verification in interactions and the GameSDK's GetTicket
         /// </summary>
         [JsonProperty("verify_key")]
         public string Verify { get; set; }
@@ -93,12 +94,18 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         [JsonProperty("team")]
         public DiscordTeam Team { get; set; }
-        
+
         /// <summary>
-        /// If this application is a game sold on Discord, this field will be the guild to which it has been linked
+        /// Guild associated with the app. For example, a developer support server.
         /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
+        
+        /// <summary>
+        /// Partial Guild for the application
+        /// </summary>
+        [JsonProperty("guild")]
+        public DiscordGuild Guild { get; set; }
         
         /// <summary>
         /// If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if exists
@@ -119,10 +126,52 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public string CoverImage { get; set; } 
         
         /// <summary>
-        /// The application's public flags
+        /// App's public flags
         /// </summary>
         [JsonProperty("flags")]
         public ApplicationFlags? Flags { get; set; }
+        
+        /// <summary>
+        /// An approximate count of the app's guild membership.
+        /// </summary>
+        [JsonProperty("approximate_guild_count")]
+        public int? ApproximateGuildCount { get; set; } 
+                
+        /// <summary>
+        /// Array of redirect URIs for the app
+        /// </summary>
+        [JsonProperty("redirect_uris")]
+        public List<string> RedirectUris { get; set; } 
+        
+        /// <summary>
+        /// Interactions endpoint URL for the app
+        /// </summary>
+        [JsonProperty("interactions_endpoint_url")]
+        public string InteractionsEndpointUrl { get; set; } 
+        
+        /// <summary>
+        /// Role connection verification URL for the app
+        /// </summary>
+        [JsonProperty("role_connections_verification_url")]
+        public string RoleConnectionsVerificationUrl { get; set; } 
+        
+        /// <summary>
+        /// Up to 5 tags describing the content and functionality of the application
+        /// </summary>
+        [JsonProperty("tags")]
+        public List<string> Tags { get; set; } 
+        
+        /// <summary>
+        /// Settings for the application's default in-app authorization link, if enabled
+        /// </summary>
+        [JsonProperty("install_params")]
+        public InstallParams InstallParams { get; set; } 
+        
+        /// <summary>
+        /// The application's default custom authorization link, if enabled
+        /// </summary>
+        [JsonProperty("custom_install_url")]
+        public string CustomInstallUrl { get; set; } 
 
         /// <summary>
         /// Returns the URL for the applications Icon
@@ -130,8 +179,13 @@ namespace Oxide.Ext.Discord.Entities.Applications
         public string GetApplicationIconUrl => DiscordCdn.GetApplicationIconUrl(Id, Icon);
         
         /// <summary>
+        /// Returns the URL for the application cover
+        /// </summary>
+        public string GetApplicationCoverUrl => DiscordCdn.GetApplicationIconUrl(Id, CoverImage);
+        
+        /// <summary>
         /// Returns if the given application has the passed in application flag
-        /// If Flags is null false is returned
+        /// If <see cref="Flags"/> is null false is returned
         /// </summary>
         /// <param name="flag">Flag to compare against</param>
         /// <returns>True of application has flag; False Otherwise</returns>
@@ -139,18 +193,47 @@ namespace Oxide.Ext.Discord.Entities.Applications
         {
             return Flags.HasValue && (Flags.Value & flag) == flag;
         }
+        
+        /// <summary>
+        /// Returns if the given application has any of the passed in application flags
+        /// If <see cref="Flags"/> is null false is returned
+        /// </summary>
+        /// <param name="flag">Flag to compare against</param>
+        /// <returns>True of application has flag; False Otherwise</returns>
+        public bool HasAnyApplicationFlags(ApplicationFlags flag)
+        {
+            return Flags.HasValue && (Flags.Value & flag) != 0;
+        }
 
+        /// <summary>
+        /// Returns the current users application
+        /// See <a href="">Get Current Application</a>
+        /// </summary>
+        public static IPromise<DiscordApplication> Get(DiscordClient client)
+        {
+            return client.Bot.Rest.Get<DiscordApplication>(client,"applications/@me");
+        }
+
+        /// <summary>
+        /// Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update to apply</param>
+        public IPromise<DiscordApplication> Edit(DiscordClient client, ApplicationUpdate update)
+        {
+            return client.Bot.Rest.Patch<DiscordApplication>(client, "applications/@me", update);
+        }
+        
         /// <summary>
         /// Fetch all of the global commands for your application.
         /// Returns a list of ApplicationCommand.
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands">Get Global Application Commands</a>
-        /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with list of application commands</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalCommands(DiscordClient client, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        /// <param name="withLocalizations">Include Command Localizations</param>
+        /// </summary>
+        public IPromise<List<DiscordApplicationCommand>> GetGlobalCommands(DiscordClient client, bool withLocalizations = false)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands?with_localizations={withLocalizations}");
         }
 
         /// <summary>
@@ -159,12 +242,10 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="commandId">ID of command to get</param>
-        /// <param name="callback">Callback with list of application commands</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGlobalCommand(DiscordClient client, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordApplicationCommand> GetGlobalCommand(DiscordClient client, Snowflake commandId)
         {
-            if (!commandId.IsValid()) throw new InvalidSnowflakeException(nameof(commandId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands/{commandId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
+            return client.Bot.Rest.Get<DiscordApplicationCommand>(client,$"applications/{Id}/commands/{commandId}");
         }
         
         /// <summary>
@@ -175,11 +256,10 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Command to create</param>
-        /// <param name="callback">Callback with the created command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGlobalCommand(DiscordClient client, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordApplicationCommand> CreateGlobalCommand(DiscordClient client, CommandCreate create)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.POST, create, callback, error);
+            if (create == null) throw new ArgumentNullException(nameof(create));
+            return client.Bot.Rest.Post<DiscordApplicationCommand>(client,$"applications/{Id}/commands", create);
         }
 
         /// <summary>
@@ -188,11 +268,10 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="commands">List of commands to overwrite</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void BulkOverwriteGlobalCommands(DiscordClient client, List<DiscordApplicationCommand> commands, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordApplicationCommand>> BulkOverwriteGlobalCommands(DiscordClient client, List<CommandBulkOverwrite> commands)
         {
-            client.Bot.Rest.DoRequest($"/applications/{Id}/commands", RequestMethod.PUT, commands, callback, error);
+            if (commands == null) throw new ArgumentNullException(nameof(commands));
+            return client.Bot.Rest.Put<List<DiscordApplicationCommand>>(client,$"applications/{Id}/commands", commands);
         }
 
         /// <summary>
@@ -201,12 +280,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">ID of the guild to get commands for</param>
-        /// <param name="callback">Callback with a list of guild application commands</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommands(DiscordClient client, Snowflake guildId, Action<List<DiscordApplicationCommand>> callback = null, Action<RestError> error = null)
+        /// <param name="withLocalizations">Include Command Localizations</param>
+        public IPromise<List<DiscordApplicationCommand>> GetGuildCommands(DiscordClient client, Snowflake guildId, bool withLocalizations = false)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Get<List<DiscordApplicationCommand>>(client,$"applications/{Id}/guilds/{guildId}/commands?with_localizations={withLocalizations}");
         }
 
         /// <summary>
@@ -216,13 +294,11 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="client">Client to use</param>
         /// <param name="guildId">ID of the guild to get commands for</param>
         /// <param name="commandId">ID of the command to get</param>
-        /// <param name="callback">Callback with a list of guild application commands</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordApplicationCommand> GetGuildCommand(DiscordClient client, Snowflake guildId, Snowflake commandId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            if (!commandId.IsValid()) throw new InvalidSnowflakeException(nameof(commandId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/{commandId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
+            return client.Bot.Rest.Get<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands/{commandId}");
         }
 
         /// <summary>
@@ -233,40 +309,69 @@ namespace Oxide.Ext.Discord.Entities.Applications
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to create the command in</param>
         /// <param name="create">Command to create</param>
-        /// <param name="callback">Callback with the created command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordApplicationCommand> CreateGuildCommand(DiscordClient client, Snowflake guildId, CommandCreate create)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands", RequestMethod.POST, create, callback, error);
+            if (create == null) throw new ArgumentNullException(nameof(create));
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Post<DiscordApplicationCommand>(client,$"applications/{Id}/guilds/{guildId}/commands", create);
         }
 
         /// <summary>
         /// Fetches command permissions for all commands for your application in a guild. Returns an array of GuildApplicationCommandPermissions objects.
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command-permissions">Get Guild Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to get the permissions from</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildCommandPermissions(DiscordClient client, Snowflake guildId, Action<List<GuildCommandPermissions>> callback = null, Action<RestError> error = null)
+        public IPromise<List<GuildCommandPermissions>> GetGuildCommandPermissions(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Get<List<GuildCommandPermissions>>(client,$"applications/{Id}/guilds/{guildId}/commands/permissions");
         }
 
         /// <summary>
-        /// Batch edits permissions for all commands in a guild.
-        /// Warning: This endpoint will overwrite all existing permissions for all commands in a guild
+        /// Returns all commands registered to this application
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="guildId">Guild ID to update the permissions for</param>
-        /// <param name="permissions">List of permissions for the commands</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void BatchEditCommandPermissions(DiscordClient client, Snowflake guildId, List<GuildCommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        /// <param name="withLocalizations">Should the response include localizations</param>
+        public IPromise<List<DiscordApplicationCommand>> GetAllCommands(DiscordClient client, bool withLocalizations = false)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{Id}/guilds/{guildId}/commands/permissions", RequestMethod.PUT, permissions, callback, error);
+            List<IPromise<List<DiscordApplicationCommand>>> requests = new List<IPromise<List<DiscordApplicationCommand>>>();
+            requests.Add(GetGlobalCommands(client, withLocalizations));
+            requests.AddRange(client.Bot.Servers.Keys.Select(id => GetGuildCommands(client, id, withLocalizations)));
+
+            return Promise<List<DiscordApplicationCommand>>.All(requests)
+                                                           .Then(commands => commands
+                                                                             .SelectMany(c => c).ToList());
+        }
+        
+        /// <summary>
+        /// Returns a list of application role connection metadata objects for the given application.
+        /// See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#get-application-role-connection-metadata-records">Get Application Role Connection Metadata Records</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise<List<ApplicationRoleConnectionMetadata>> GetRoleConnectionMetadata(DiscordClient client)
+        {
+            return client.Bot.Rest.Get<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata");
+        }
+
+        /// <summary>
+        /// Updates and returns a list of application role connection metadata objects for the given application.
+        /// See <a href="https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records">Update Application Role Connection Metadata Records</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="records">The records to update on the application</param>
+        public IPromise<List<ApplicationRoleConnectionMetadata>> EditRoleConnectionMetadata(DiscordClient client, List<ApplicationRoleConnectionMetadata> records)
+        {
+            DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
+            return client.Bot.Rest.Put<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", records);
+        }
+
+        ///<inheritdoc/>
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("ID", Id);
+            logger.AppendField("Name", Name);
+            logger.AppendFieldEnum("Flags", Flags ?? ApplicationFlags.None);
         }
     }
 }

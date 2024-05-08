@@ -1,11 +1,11 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-permissions-object-application-command-permission-type">ApplicationCommandPermissionType</a>
     /// </summary>
-    public enum CommandPermissionType
+    public enum CommandPermissionType : byte
     {
         /// <summary>
         /// This permissions uses Role ID
@@ -17,6 +17,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// This permission uses User ID
         /// </summary>
         [Description("USER")]
-        User = 2
+        User = 2,
+        
+        /// <summary>
+        /// This permission uses Channel ID
+        /// </summary>
+        [Description("CHANNEL")]
+        Channel = 3
     }
 }

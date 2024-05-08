@@ -1,28 +1,48 @@
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#component-types">Message Component Type</a> within Discord..
     /// </summary>
-    public enum MessageComponentType
+    public enum MessageComponentType : byte
     {
         /// <summary>
-        /// A container for other components
+        /// Container for other components
         /// </summary>
         ActionRow = 1,
         
         /// <summary>
-        /// A clickable button
+        /// Clickable button
         /// </summary>
         Button = 2,
         
         /// <summary>
-        /// A select menu for picking from choices
+        /// Select menu for picking from defined text options
         /// </summary>
-        SelectMenu = 3,
+        StringSelect = 3,
         
         /// <summary>
-        /// A text box for inserting written responses
+        /// Text box for inserting written responses
         /// </summary>
-        InputText = 4
+        InputText = 4,
+        
+        /// <summary>
+        /// Select menu for users
+        /// </summary>
+        UserSelect = 5,
+        
+        /// <summary>
+        /// Select menu for roles
+        /// </summary>
+        RoleSelect = 6,
+        
+        /// <summary>
+        /// Select menu for mentionables (users and roles)
+        /// </summary>
+        MentionableSelect = 7,
+        
+        /// <summary>
+        /// Select menu for channels
+        /// </summary>
+        ChannelSelect = 8,
     }
 }

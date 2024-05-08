@@ -1,42 +1,32 @@
-using System;
-using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Factory;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 
-namespace Oxide.Ext.Discord.Libraries.Command
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Sourced from Command.cs of OxideMod (https://github.com/OxideMod/Oxide.Rust/blob/develop/src/Libraries/Command.cs#L76)
     /// </summary>
-    internal class BaseCommand
+    internal abstract class BaseCommand : IDebugLoggable
     {
         internal readonly string Name;
+        private readonly string _hook;
         internal Plugin Plugin;
-        private readonly Action<DiscordMessage, string, string[]> _callback;
 
-        protected BaseCommand(string name, Plugin plugin, Action<DiscordMessage, string, string[]> callback)
+        protected BaseCommand(Plugin plugin, string name, string hook)
         {
             Name = name;
+            _hook = hook;
             Plugin = plugin;
-            _callback = callback;
         }
         
         public void HandleCommand(DiscordMessage message, string name, string[] args)
         {
-            Interface.Oxide.NextTick(() =>
-            {
-                try
-                {
-                    Plugin.TrackStart();
-                    _callback.Invoke(message, name, args);
-                    Plugin.TrackEnd();
-                }
-                catch(Exception ex)
-                {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured in discord command {name} for plugin {Plugin?.Name}", ex);   
-                }
-            });
+            DiscordHook.CallPluginHook(Plugin, _hook, message, name, args);
         }
 
         /// <summary>
@@ -47,10 +37,11 @@ namespace Oxide.Ext.Discord.Libraries.Command
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[Plugin.Name]?.Bot == client;
+            return client != null && DiscordClientFactory.Instance.GetClient(Plugin)?.Bot == client;
         }
 
-        public virtual bool CanHandle(DiscordMessage message, DiscordChannel channel) => true;
+        public abstract bool CanHandle(DiscordMessage message, DiscordChannel channel);
+        public abstract void LogDebug(DebugLogger logger);
 
         internal void OnRemoved()
         {

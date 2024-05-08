@@ -18,6 +18,6 @@ If you would like to see a feature released before the monthly release please op
 
 ## Libraries
 
-[Discord Link](DiscordLink.md)  
-[Discord Command](DiscordCommand.md)  
-[Discord Subscription](DiscordSubscriptions.md)
+[Discord Link](Libraries/DiscordLink.md)  
+[Discord Command](Libraries/DiscordCommand.md)  
+[Discord Subscription](Libraries/DiscordSubscriptions.md)

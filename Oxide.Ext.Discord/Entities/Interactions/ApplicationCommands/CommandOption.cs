@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
+using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-structure">ApplicationCommandOption</a>
@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
     public class CommandOption
     {
         /// <summary>
-        /// They type of command option
+        /// Type of option
         /// See <see cref="CommandOptionType"/>
         /// </summary>
         [JsonProperty("type")]
@@ -24,32 +24,39 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public string Name { get; set; }
         
         /// <summary>
+        /// Localization dictionary for the name field. Values follow the same restrictions as name
+        /// </summary>
+        [JsonProperty("name_localizations")]
+        public Hash<string, string> NameLocalizations { get; set; }
+        
+        /// <summary>
         /// Description the command option (1-100 characters)
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+        
+        /// <summary>
+        /// Localization dictionary for the description field. Values follow the same restrictions as description
+        /// </summary>
+        [JsonProperty("description_localizations")]
+        public Hash<string, string> DescriptionLocalizations { get; set; }
 
         /// <summary>
         /// If the parameter is required or optional
+        /// Defaults to false
         /// </summary>
         [JsonProperty("required")]
         public bool? Required { get; set; }
-        
+
         /// <summary>
-        /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
-        /// </summary>
-        [JsonProperty("autocomplete")]
-        public bool? Autocomplete { get; set; }
-        
-        /// <summary>
-        /// Choices for string and int types for the user to pick from
-        /// See <see cref="CommandOption"/>
+        /// Choices for STRING, INTEGER, and NUMBER types for the user to pick from, max 25
+        /// See <see cref="CommandOptionChoice"/>
         /// </summary>
         [JsonProperty("choices")]
         public List<CommandOptionChoice> Choices { get; set; }
         
         /// <summary>
-        /// If the option is a subcommand or subcommand group type, this nested options will be the parameters
+        /// If the option is a subcommand or subcommand group type, these nested options will be the parameters
         /// See <see cref="CommandOption"/>
         /// </summary>
         [JsonProperty("options")]
@@ -73,5 +80,42 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("max_value")]
         public double? MaxValue { get; set; }
+        
+        /// <summary>
+        /// For option type STRING, the minimum allowed length (minimum of 0)
+        /// </summary>
+        [JsonProperty("min_length")]
+        public int? MinLength { get; set; }
+        
+        /// <summary>
+        /// For option type STRING, the maximum allowed length (minimum of 1)
+        /// </summary>
+        [JsonProperty("max_length")]
+        public int? MaxLength { get; set; }
+        
+        /// <summary>
+        /// If autocomplete interactions are enabled for this `STRING`, `INTEGER`, or `NUMBER` type option
+        /// </summary>
+        [JsonProperty("autocomplete")]
+        public bool? Autocomplete { get; set; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        [JsonConstructor]
+        public CommandOption() { }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public CommandOption(string name, string description, CommandOptionType type, List<CommandOption> options = null)
+        {
+            Name = name;
+            Description = description;
+            Type = type;
+            Options = options;
+            NameLocalizations = new Hash<string, string>();
+            DescriptionLocalizations = new Hash<string, string>();
+        }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Threads
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a guild or DM <a href="https://discord.com/developers/docs/resources/channel#thread-metadata-object-thread-metadata-structure">Thread Metadata Structure</a> within Discord.
@@ -32,14 +32,14 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// When a thread is locked, only users with MANAGE_THREADS can unarchive it
         /// </summary>
         [JsonProperty("locked")]
-        public bool? Locked { get; set; } 
+        public bool Locked { get; set; }
         
         /// <summary>
         /// Whether non-moderators can add other non-moderators to a thread
         /// Only available on private threads
         /// </summary>
         [JsonProperty("invitable")]
-        public bool? Invitable { get; set; } 
+        public bool? Invitable { get; set; }
         
         /// <summary>
         /// Timestamp when the thread was created; only populated for threads created after 2022-01-09

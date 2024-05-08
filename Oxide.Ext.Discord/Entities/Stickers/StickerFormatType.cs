@@ -1,11 +1,11 @@
 using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/sticker#sticker-format-types">Sticker Format Types</a>
     /// </summary>
-    public enum StickerFormatType
+    public enum StickerFormatType : byte
     {
         /// <summary>
         /// Sticker format type PNG
@@ -23,6 +23,12 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// Sticker format type LOTTIE
         /// </summary>
         [Description("LOTTIE")]
-        Lottie = 3
+        Lottie = 3,
+        
+        /// <summary>
+        /// Sticker format type GIF
+        /// </summary>
+        [Description("GIF")]
+        Gif = 4
     }
 }

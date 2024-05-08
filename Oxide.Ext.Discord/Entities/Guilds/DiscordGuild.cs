@@ -1,27 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Stages;
-using Oxide.Ext.Discord.Entities.Channels.Threads;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents;
-using Oxide.Ext.Discord.Entities.Integrations;
-using Oxide.Ext.Discord.Entities.Invites;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Stickers;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Entities.Voice;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Helpers.Cdn;
-using Oxide.Ext.Discord.Helpers.Converters;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object">Guild Structure</a>
@@ -133,7 +120,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<DiscordRole>))]
         [JsonProperty("roles")]
         public Hash<Snowflake, DiscordRole> Roles { get; set; }
-  
+
         /// <summary>
         /// Custom guild emojis
         /// </summary>
@@ -151,10 +138,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
   
         /// <summary>
         /// Required MFA level for the guild
-        /// See <see cref="GuildMFALevel"/>
+        /// See <see cref="GuildMfaLevel"/>
         /// </summary>
         [JsonProperty("mfa_level")]
-        public GuildMFALevel? MfaLevel { get; set; }
+        public GuildMfaLevel? MfaLevel { get; set; }
   
         /// <summary>
         /// Application id of the guild creator if it is bot-created
@@ -170,7 +157,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         
         /// <summary>
         /// System channel flags
-        /// See <see cref="SystemChannelFlags"/>
+        /// See <see cref="Entities.SystemChannelFlags"/>
         /// </summary>
         [JsonProperty("system_channel_flags")]
         public SystemChannelFlags SystemChannelFlags { get; set; }
@@ -211,7 +198,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<VoiceState>))]
         [JsonProperty("voice_states")]
         public Hash<Snowflake, VoiceState> VoiceStates { get; set; }
-  
+
         /// <summary>
         /// Users in the guild
         /// </summary>
@@ -225,7 +212,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<DiscordChannel>))]
         [JsonProperty("channels")]
         public Hash<Snowflake, DiscordChannel> Channels { get; set; }
-        
+
         /// <summary>
         /// All active threads in the guild that current user has permission to view
         /// </summary>
@@ -259,7 +246,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public string VanityUrlCode { get; set; }
   
         /// <summary>
-        /// The description of a Community guild
+        /// The description of a guild
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
@@ -297,6 +284,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public Snowflake? PublicUpdatesChannelId { get; set; }
         
         /// <summary>
+        /// The maximum amount of users in a stage video channel
+        /// </summary>
+        [JsonProperty("max_stage_video_channel_users")]
+        public int? MaxStageVideoChannelUsers { get; set; }
+        
+        /// <summary>
         /// The maximum amount of users in a video channel
         /// </summary>
         [JsonProperty("max_video_channel_users")]
@@ -327,7 +320,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("nsfw_level")]
         public GuildNsfwLevel NsfwLevel { get; set; }
-        
+
         /// <summary>
         /// Stage instances in the guild
         /// <see cref="StageInstance"/>
@@ -335,7 +328,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonConverter(typeof(HashListConverter<StageInstance>))]
         [JsonProperty("stage_instances")]
         public Hash<Snowflake, StageInstance> StageInstances { get; set; }
-        
+
         /// <summary>
         /// Custom guild stickers
         /// <see cref="DiscordSticker"/>
@@ -357,6 +350,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("premium_progress_bar_enabled")]
         public bool PremiumProgressBarEnabled { get; set; }
+        
+        /// <summary>
+        /// The ID of the channel where admins and moderators of Community guilds receive safety alerts from Discord
+        /// </summary>
+        [JsonProperty("safety_alerts_channel_id")]
+        public Snowflake? SafetyAlertsChannelId { get; set; }
         #endregion
 
         #region Extension Fields
@@ -364,6 +363,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Returns true if all guild members have been loaded
         /// </summary>
         public bool HasLoadedAllMembers { get; internal set; }
+
+        /// <summary>
+        /// Members who have left the guild
+        /// This list will contain members who have left the guild since the initial bot connection
+        /// </summary>
+        public Hash<Snowflake, GuildMember> LeftMembers { get; } = new Hash<Snowflake, GuildMember>();
         #endregion
 
         #region Helper Properties
@@ -406,10 +411,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Channel with the given name; Null otherwise</returns>
         public DiscordChannel GetChannel(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             foreach (DiscordChannel channel in Channels.Values)
             {
@@ -420,6 +422,16 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Returns the <see cref="DiscordGuild"/> channel or thread by ID
+        /// </summary>
+        /// <param name="id">ID of the thread of channel</param>
+        /// <returns><see cref="DiscordChannel"/></returns>
+        public DiscordChannel GetChannel(Snowflake id)
+        {
+            return Channels[id] ?? Threads[id];
         }
 
         /// <summary>
@@ -444,11 +456,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>Role with the given name; Null otherwise</returns>
         public DiscordRole GetRole(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+
             foreach (DiscordRole role in Roles.Values)
             {
                 if (role.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
@@ -484,28 +493,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <returns>GuildMember with the given username; Null otherwise</returns>
         public GuildMember GetMember(string userName)
         {
-            if (userName == null)
-            {
-                throw new ArgumentNullException(nameof(userName));
-            }
+            if (string.IsNullOrEmpty(userName)) throw new ArgumentNullException(nameof(userName));
             
-            if (userName.Contains("#"))
-            {
-                string[] splitName = userName.Split('#');
-                userName = splitName[0];
-                string discriminator = splitName[1];
-
-                foreach (GuildMember member in Members.Values)
-                {
-                    if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase) && member.User.Discriminator == discriminator)
-                    {
-                        return member;
-                    }
-                }
-                
-                return null;
-            }
-
             foreach (GuildMember member in Members.Values)
             {
                 if (member.User.Username.Equals(userName, StringComparison.OrdinalIgnoreCase))
@@ -518,6 +507,18 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         }
 
         /// <summary>
+        /// Returns the  <see cref="GuildMember"/> for the given <see cref="Snowflake"/> User ID including members who are no longer in the guild
+        /// Left members only include <see cref="GuildMember"/>s who have left the guild since the bot was connected
+        /// </summary>
+        /// <param name="userId">User ID of the guild member to get</param>
+        /// <param name="includeLeft">If we should include guild members who have left the guild</param>
+        /// <returns><see cref="GuildMember"/> For the UserId </returns>
+        public GuildMember GetMember(Snowflake userId, bool includeLeft = false)
+        {
+            return Members[userId] ?? (includeLeft ? LeftMembers[userId] : null);
+        }
+        
+        /// <summary>
         /// Finds guild emoji by name
         /// </summary>
         /// <param name="name">Name of the emoji</param>
@@ -525,10 +526,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <exception cref="ArgumentNullException"></exception>
         public DiscordEmoji GetEmoji(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
 
             foreach (DiscordEmoji emoji in Emojis.Values)
             {
@@ -540,6 +538,38 @@ namespace Oxide.Ext.Discord.Entities.Guilds
 
             return null;
         }
+        
+        /// <summary>
+        /// Returns the user permissions for the given user ID
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public PermissionFlags GetUserPermissions(Snowflake userId)
+        {
+            GuildMember member = Members[userId];
+            if (member == null)
+            {
+                return PermissionFlags.None;
+            }
+            
+            PermissionFlags permissions = EveryoneRole.Permissions;
+
+            for (int index = 0; index < member.Roles.Count; index++)
+            {
+                DiscordRole role = Roles[member.Roles[index]];
+                if (role != null)
+                {
+                    permissions |= role.Permissions;
+                }
+            }
+
+            if ((permissions & PermissionFlags.Administrator) == PermissionFlags.Administrator)
+            {
+                return PermissionFlags.All;
+            }
+
+            return permissions;
+        }
         #endregion
 
         #region API Methods
@@ -549,11 +579,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="create">Guild Create Object</param>
-        /// <param name="callback">Callback with the created guild</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateGuild(DiscordClient client, GuildCreate create, Action<DiscordGuild> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordGuild> Create(DiscordClient client, GuildCreate create)
         {
-            client.Bot.Rest.DoRequest($"/guilds", RequestMethod.POST, create, callback, error);
+            if (create == null) throw new ArgumentNullException(nameof(create));
+            return client.Bot.Rest.Post<DiscordGuild>(client,"guilds", create);
         }
 
         /// <summary>
@@ -562,12 +591,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to lookup</param>
-        /// <param name="callback">callback with the guild for the given ID</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetGuild(DiscordClient client, Snowflake guildId, Action<DiscordGuild> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordGuild> Get(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/guilds/{guildId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Get<DiscordGuild>(client,$"guilds/{guildId}");
         }
         
         /// <summary>
@@ -576,12 +603,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to get preview for</param>
-        /// <param name="callback">Callback with the guild preview for the ID</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetGuildPreview(DiscordClient client, Snowflake guildId, Action<GuildPreview> callback = null, Action<RestError> error = null)
+        public static IPromise<GuildPreview> GetGuildPreview(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/guilds/{guildId}/preview", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Get<GuildPreview>(client,$"guilds/{guildId}/preview");
         }
 
         /// <summary>
@@ -590,11 +615,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild">Modify Guild</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the updated guild</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuild(DiscordClient client, Action<DiscordGuild> callback = null, Action<RestError> error = null)
+        /// <param name="update">Update to be applied to the guild</param>
+        public IPromise<DiscordGuild> Edit(DiscordClient client, GuildUpdate update)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}", RequestMethod.PATCH, this, callback, error);
+            return client.Bot.Rest.Patch<DiscordGuild>(client,$"guilds/{Id}", update);
         }
 
         /// <summary>
@@ -603,11 +627,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#delete-guild">Delete Guild</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuild(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public IPromise Delete(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}");
         }
 
         /// <summary>
@@ -616,11 +638,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-channels">Get Guild Channels</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the list of channels</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildChannels(DiscordClient client, Action<List<DiscordChannel>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordChannel>> GetChannels(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordChannel>>(client,$"guilds/{Id}/channels");
         }
 
         /// <summary>
@@ -630,11 +650,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channel">Channel to create</param>
-        /// <param name="callback">Callback with created channel</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildChannel(DiscordClient client, ChannelCreate channel, Action<DiscordChannel> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordChannel> CreateChannel(DiscordClient client, ChannelCreate channel)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.POST, channel, callback, error);
+            return client.Bot.Rest.Post<DiscordChannel>(client,$"guilds/{Id}/channels", channel);
         }
 
         /// <summary>
@@ -645,11 +663,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="positions">List new channel positions for each channel</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildChannelPositions(DiscordClient client, List<GuildChannelPosition> positions, Action callback = null, Action<RestError> error = null)
+        public IPromise<List<GuildChannelPosition>> EditChannelPositions(DiscordClient client, List<GuildChannelPosition> positions)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/channels", RequestMethod.PATCH, positions, callback, error);
+            return client.Bot.Rest.Patch<List<GuildChannelPosition>>(client,$"guilds/{Id}/channels", positions);
         }
 
         /// <summary>
@@ -657,11 +673,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">List Active Threads</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of threads and thread members for a guild</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListActiveThreads(DiscordClient client, Action<ThreadList> callback = null, Action<RestError> error = null)
+        public IPromise<ThreadList> ListActiveThreads(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/threads/active", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<ThreadList>(client,$"guilds/{Id}/threads/active");
         }
         
         /// <summary>
@@ -670,12 +684,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">UserID to get guild member for</param>
-        /// <param name="callback">Callback with guild member matching user Id</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildMember(DiscordClient client, Snowflake userId, Action<GuildMember> callback = null, Action<RestError> error = null)
+        public IPromise<GuildMember> GetMember(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Get<GuildMember>(client,$"guilds/{Id}/members/{userId}");
         }
 
         /// <summary>
@@ -683,13 +695,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// In the future, this endpoint will be restricted in line with our Privileged Intents
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="limit">Max number of members to return (1-1000)</param>
-        /// <param name="afterSnowflake">The highest user id in the previous page</param>
-        /// <param name="callback">Callback with list of guild members</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListGuildMembers(DiscordClient client, int limit = 1000, string afterSnowflake = "0", Action<List<GuildMember>> callback = null, Action<RestError> error = null)
+        /// <param name="list">Query string request for the list</param>
+        public IPromise<List<GuildMember>> Listembers(DiscordClient client, GuildListMembers list = null)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members?limit={limit}&after={afterSnowflake}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<GuildMember>>(client,$"guilds/{Id}/members{list?.ToQueryString()}");
         }
 
         /// <summary>
@@ -697,41 +706,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="search">Username or nickname to match</param>
-        /// <param name="limit">Max number of members to return (1-1000)</param>
-        /// <param name="callback">Callback with matching guild members</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SearchGuildMembers(DiscordClient client, string search, int limit = 1, Action<List<GuildMember>> callback = null, Action<RestError> error = null)
+        public IPromise<List<GuildMember>> SearchMembers(DiscordClient client, GuildSearchMembers search)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/search?query={search}&limit={limit}", RequestMethod.GET, null, callback, error);
-        }
-
-        /// <summary>
-        /// Adds a user to the guild, provided you have a valid oauth2 access token for the user with the guilds.join scope. 
-        /// See <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">Add Guild Member</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="member">Member to copy from</param>
-        /// <param name="accessToken">Member access token</param>
-        /// <param name="roles">List of roles to grant</param>
-        /// <param name="callback">Callback with the added guild member</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddGuildMember(DiscordClient client, GuildMember member, string accessToken, List<DiscordRole> roles, Action<GuildMember> callback = null, Action<RestError> error = null)
-        {
-            GuildMemberAdd add = new GuildMemberAdd
-            {
-                Deaf = member.Deaf,
-                Mute = member.Mute,
-                Nick = member.Nickname,
-                AccessToken = accessToken,
-                Roles = new List<Snowflake>()
-            };
-
-            foreach (DiscordRole role in roles)
-            {
-                add.Roles.Add(role.Id);
-            }
-            
-            AddGuildMember(client, member.User.Id, add, callback, error);
+            if (search == null) throw new ArgumentNullException(nameof(search));
+            return client.Bot.Rest.Get<List<GuildMember>>(client,$"guilds/{Id}/members/search{search.ToQueryString()}");
         }
 
         /// <summary>
@@ -741,12 +719,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the user to add</param>
         /// <param name="member">Member to copy from</param>
-        /// <param name="callback">Callback with the added guild member</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddGuildMember(DiscordClient client, Snowflake userId, GuildMemberAdd member, Action<GuildMember> callback = null, Action<RestError> error = null)
+        public IPromise<GuildMember> AddMember(DiscordClient client, Snowflake userId, GuildMemberAdd member)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PUT, member, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Put<GuildMember>(client,$"guilds/{Id}/members/{userId}", member);
         }
 
         /// <summary>
@@ -756,12 +732,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the user to update</param>
         /// <param name="update">Changes to make to the user</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildMember(DiscordClient client, Snowflake userId, GuildMemberUpdate update, Action<GuildMember> callback = null, Action<RestError> error = null)
+        public IPromise<GuildMember> EditMember(DiscordClient client, Snowflake userId, GuildMemberUpdate update)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.PATCH, update, callback, error);
+            if (update == null) throw new ArgumentNullException(nameof(update));
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Patch<GuildMember>(client,$"guilds/{Id}/members/{userId}", update);
         }
         
         /// <summary>
@@ -771,17 +746,14 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the user to update</param>
         /// <param name="nick">Nickname for the user</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyUsersNick(DiscordClient client, Snowflake userId, string nick, Action<GuildMember> callback = null, Action<RestError> error = null)
+        public IPromise<GuildMember> EditMemberNick(DiscordClient client, Snowflake userId, string nick)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
             GuildMemberUpdate update = new GuildMemberUpdate
             {
                 Nick = nick
             };
             
-            ModifyGuildMember(client, userId, update, callback, error);
+            return EditMember(client, userId, update);
         }
         
         /// <summary>
@@ -789,36 +761,17 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-member">Modify Current Member</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="nick">New members nickname</param>
-        /// <param name="callback">Callback with the updated guild member</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyCurrentMember(DiscordClient client, string nick, Action<GuildMember> callback, Action<RestError> error)
+        /// <param name="nick">New members nickname (1-32 characters)</param>
+        public IPromise<GuildMember> EditCurrentMember(DiscordClient client, string nick)
         {
+            InvalidGuildMemberException.ThrowIfInvalidNickname(nick);
+
             Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["nick"] = nick
             };
             
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/@me", RequestMethod.PATCH, data, callback, error);
-        }
-
-        /// <summary>
-        /// Modifies the nickname of the current user in a guild
-        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-nick">Modify Current User Nick</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="nick">New user nickname</param>
-        /// <param name="callback">Callback with updated nickname</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        [Obsolete("Please use ModifyCurrentMember Instead. This will be removed in April 2022 Update")]
-        public void ModifyCurrentUsersNick(DiscordClient client, string nick, Action<string> callback = null, Action<RestError> error = null)
-        {
-            Dictionary<string, object> data = new Dictionary<string, object>()
-            {
-                ["nick"] = nick
-            };
-
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/@me/nick", RequestMethod.PATCH, data, callback, error);
+            return client.Bot.Rest.Patch<GuildMember>(client,$"guilds/{Id}/members/@me", data);
         }
 
         /// <summary>
@@ -829,9 +782,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="user">User to add role to</param>
         /// <param name="role">Role to add</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddGuildMemberRole(DiscordClient client, DiscordUser user, DiscordRole role, Action callback = null, Action<RestError> error = null) => AddGuildMemberRole(client, user.Id, role.Id, callback, error);
+        public IPromise AddMemberRole(DiscordClient client, DiscordUser user, DiscordRole role) => AddMemberRole(client, user.Id, role.Id);
 
         /// <summary>
         /// Adds a role to a guild member.
@@ -841,13 +792,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to add role to</param>
         /// <param name="roleId">Role ID to add</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void AddGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null, Action<RestError> error = null)
+        public IPromise AddMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            if (!roleId.IsValid()) throw new InvalidSnowflakeException(nameof(roleId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.PUT, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            InvalidSnowflakeException.ThrowIfInvalid(roleId, nameof(roleId));
+            return client.Bot.Rest.Put(client,$"guilds/{Id}/members/{userId}/roles/{roleId}", null);
         }
 
         /// <summary>
@@ -858,9 +807,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="user">User to remove role form</param>
         /// <param name="role">Role to remove</param>
-        /// <param name="callback">callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveGuildMemberRole(DiscordClient client, DiscordUser user, DiscordRole role, Action callback = null, Action<RestError> error = null) => RemoveGuildMemberRole(client, user.Id, role.Id, callback, error);
+        public IPromise RemoveMemberRole(DiscordClient client, DiscordUser user, DiscordRole role) => RemoveMemberRole(client, user.Id, role.Id);
 
         /// <summary>
         /// Removes a role from a guild member.
@@ -870,13 +817,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to remove role form</param>
         /// <param name="roleId">Role ID to remove</param>
-        /// <param name="callback">callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveGuildMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId, Action callback = null, Action<RestError> error = null)
+        public IPromise RemoveMemberRole(DiscordClient client, Snowflake userId, Snowflake roleId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            if (!roleId.IsValid()) throw new InvalidSnowflakeException(nameof(roleId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}/roles/{roleId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            InvalidSnowflakeException.ThrowIfInvalid(roleId, nameof(roleId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/members/{userId}/roles/{roleId}");
         }
 
         /// <summary>
@@ -886,9 +831,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="member">Guild Member to remove</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveGuildMember(DiscordClient client, GuildMember member, Action callback = null, Action<RestError> error = null) => RemoveGuildMember(client, member.User.Id, callback, error);
+        public IPromise RemoveMember(DiscordClient client, GuildMember member) => RemoveMember(client, member.User.Id);
 
         /// <summary>
         /// Remove a member from a guild.
@@ -897,12 +840,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the user to remove</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveGuildMember(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        public IPromise RemoveMember(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/members/{userId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/members/{userId}");
         }
 
         /// <summary>
@@ -910,11 +851,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">Get Guild Bans</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the list of guild bans</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildBans(DiscordClient client, Action<List<GuildBan>> callback = null, Action<RestError> error = null)
+        /// <param name="request">Request params for retrieving guild bans</param>
+        public IPromise<List<GuildBan>> GetBans(DiscordClient client, GuildBansRequest request = null)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/bans", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<GuildBan>>(client,$"guilds/{Id}/bans{request?.ToQueryString()}");
         }
 
         /// <summary>
@@ -924,12 +864,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to get guild ban for</param>
-        /// <param name="callback">Callback with the guild ban for the user</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildBan(DiscordClient client, Snowflake userId, Action<GuildBan> callback = null, Action<RestError> error = null)
+        public IPromise<GuildBan> GetBan(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Get<GuildBan>(client,$"guilds/{Id}/bans/{userId}");
         }
 
         /// <summary>
@@ -940,9 +878,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="member">Guild Member to ban</param>
         /// <param name="ban">User ban information</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildBan(DiscordClient client, GuildMember member, GuildBanCreate ban, Action callback = null, Action<RestError> error = null) => CreateGuildBan(client, member.User.Id, ban, callback, error);
+        public IPromise CreateBan(DiscordClient client, GuildMember member, GuildBanCreate ban) => CreateBan(client, member.User.Id, ban);
 
         /// <summary>
         /// Create a guild ban, and optionally delete previous messages sent by the banned user.
@@ -952,12 +888,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to ban</param>
         /// <param name="ban">User ban information</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildBan(DiscordClient client, Snowflake userId, GuildBanCreate ban, Action callback = null, Action<RestError> error = null)
+        public IPromise CreateBan(DiscordClient client, Snowflake userId, GuildBanCreate ban)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.PUT, ban, callback, error);
+            if (ban == null) throw new ArgumentNullException(nameof(ban));
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Put(client,$"guilds/{Id}/bans/{userId}", ban);
         }
 
         /// <summary>
@@ -967,12 +902,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID of the user to unban</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void RemoveGuildBan(DiscordClient client, Snowflake userId, Action callback = null, Action<RestError> error = null)
+        public IPromise RemoveBan(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/bans/{userId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/bans/{userId}");
         }
 
         /// <summary>
@@ -980,11 +913,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-roles">Get Guild Roles</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of role objects</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildRoles(DiscordClient client, Action<List<DiscordRole>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordRole>> GetRoles(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/roles", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordRole>>(client,$"guilds/{Id}/roles");
         }
 
         /// <summary>
@@ -995,11 +926,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="role">New role to create</param>
-        /// <param name="callback">Callback with the created role</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildRole(DiscordClient client, DiscordRole role, Action<DiscordRole> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordRole> CreateRole(DiscordClient client, DiscordRole role)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/roles", RequestMethod.POST, role, callback, error);
+            if (role == null) throw new ArgumentNullException(nameof(role));
+            return client.Bot.Rest.Post<DiscordRole>(client,$"guilds/{Id}/roles", role);
         }
 
         /// <summary>
@@ -1010,11 +940,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="positions">List of role with updated positions</param>
-        /// <param name="callback">Callback with a list of all guild role objects</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildRolePositions(DiscordClient client, List<GuildRolePosition> positions, Action<List<DiscordRole>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordRole>> EditRolePositions(DiscordClient client, List<GuildRolePosition> positions)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/roles", RequestMethod.PATCH, positions, callback, error);
+            if (positions == null) throw new ArgumentNullException(nameof(positions));
+            return client.Bot.Rest.Patch<List<DiscordRole>>(client,$"guilds/{Id}/roles", positions);
         }
 
         /// <summary>
@@ -1025,9 +954,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="role">Role to update</param>
-        /// <param name="callback">Callback with the updated role</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildRole(DiscordClient client, DiscordRole role, Action<DiscordRole> callback = null, Action<RestError> error = null) => ModifyGuildRole(client, role.Id, role, callback, error);
+        public IPromise<DiscordRole> EditRole(DiscordClient client, DiscordRole role) => EditRole(client, role.Id, role);
 
         /// <summary>
         /// Modify a guild role.
@@ -1038,12 +965,23 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="roleId">Role ID to update</param>
         /// <param name="role">Role to update</param>
-        /// <param name="callback">Callback with the updated role</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildRole(DiscordClient client, Snowflake roleId, DiscordRole role, Action<DiscordRole> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordRole> EditRole(DiscordClient client, Snowflake roleId, DiscordRole role)
         {
-            if (!roleId.IsValid()) throw new InvalidSnowflakeException(nameof(roleId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/roles/{roleId}", RequestMethod.PATCH, role, callback, error);
+            if (role == null) throw new ArgumentNullException(nameof(role));
+            InvalidSnowflakeException.ThrowIfInvalid(roleId, nameof(roleId));
+            return client.Bot.Rest.Patch<DiscordRole>(client,$"guilds/{Id}/roles/{roleId}", role);
+        }
+        
+        /// <summary>
+        /// Modify a guild's MFA level.
+        /// Requires guild ownership.
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-guild-mfa-level">Modify Guild MFA Level</a>
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="level"><see cref="GuildUpdateMfaLevel"/> to set</param>
+        public IPromise EditMfaLevel(DiscordClient client, GuildUpdateMfaLevel level)
+        {
+            return client.Bot.Rest.Post(client,$"guilds/{Id}/mfa/", level);
         }
 
         /// <summary>
@@ -1053,9 +991,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="role">Role to Delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildRole(DiscordClient client, DiscordRole role, Action callback = null, Action<RestError> error = null) => DeleteGuildRole(client, role.Id, callback, error);
+        public IPromise DeleteRole(DiscordClient client, DiscordRole role) => DeleteRole(client, role.Id);
 
         /// <summary>
         /// Delete a guild role.
@@ -1064,12 +1000,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="roleId">Role ID to Delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildRole(DiscordClient client, Snowflake roleId, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteRole(DiscordClient client, Snowflake roleId)
         {
-            if (!roleId.IsValid()) throw new InvalidSnowflakeException(nameof(roleId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/roles/{roleId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(roleId, nameof(roleId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/roles/{roleId}");
         }
 
         /// <summary>
@@ -1079,15 +1013,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="prune">Prune get request</param>
-        /// <param name="callback">Callback with the number of members that would be pruned</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildPruneCount(DiscordClient client, GuildPruneGet prune, Action<int?> callback = null, Action<RestError> error = null)
+        public IPromise<GuildPruneResult> GetPruneCount(DiscordClient client, GuildPruneGet prune)
         {
-            client.Bot.Rest.DoRequest<JObject>($"/guilds/{Id}/prune?{prune.ToQueryString()}", RequestMethod.GET, null, returnValue =>
-            {
-                int? pruned = returnValue.GetValue("pruned").ToObject<int?>();
-                callback?.Invoke(pruned);
-            }, error);
+            if (prune == null) throw new ArgumentNullException(nameof(prune));
+            return client.Bot.Rest.Get<GuildPruneResult>(client, $"guilds/{Id}/prune?{prune.ToQueryString()}");
         }
 
         /// <summary>
@@ -1097,15 +1026,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="prune">Prune begin request</param>
-        /// <param name="callback">Callback with number of pruned members</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void BeginGuildPrune(DiscordClient client, GuildPruneBegin prune, Action<int?> callback = null, Action<RestError> error = null)
+        public IPromise<GuildPruneResult> BeginPrune(DiscordClient client, GuildPruneBegin prune)
         {
-            client.Bot.Rest.DoRequest<JObject>($"/guilds/{Id}/prune?{prune.ToQueryString()}", RequestMethod.POST, null, returnValue =>
-            {
-                int? pruned = returnValue.GetValue("pruned").ToObject<int?>();
-                callback?.Invoke(pruned);
-            }, error);
+            if (prune == null) throw new ArgumentNullException(nameof(prune));
+            return client.Bot.Rest.Post<GuildPruneResult>(client, $"guilds/{Id}/prune?{prune.ToQueryString()}", null);
         }
 
         /// <summary>
@@ -1114,11 +1038,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-voice-regions">Get Guild Voice Regions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with list of guild voice regions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildVoiceRegions(DiscordClient client, Action<List<VoiceRegion>> callback = null, Action<RestError> error = null)
+        public IPromise<List<VoiceRegion>> GetVoiceRegions(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/regions", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<VoiceRegion>>(client,$"guilds/{Id}/regions");
         }
 
         /// <summary>
@@ -1127,11 +1049,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-invites">Get Guild Invites</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of guild invites</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildInvites(DiscordClient client, Action<List<InviteMetadata>> callback = null, Action<RestError> error = null)
+        public IPromise<List<InviteMetadata>> GetInvites(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/invites", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<InviteMetadata>>(client,$"guilds/{Id}/invites");
         }
 
         /// <summary>
@@ -1140,11 +1060,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-integrations">Get Guild Integrations</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with a list of guild integrations</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildIntegrations(DiscordClient client, Action<List<Integration>> callback = null, Action<RestError> error = null)
+        public IPromise<List<Integration>> GetIntegrations(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/integrations", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<Integration>>(client,$"guilds/{Id}/integrations");
         }
 
         /// <summary>
@@ -1155,9 +1073,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="integration">Integration to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildIntegration(DiscordClient client, Integration integration, Action callback = null, Action<RestError> error = null) => DeleteGuildIntegration(client, integration.Id, callback, error);
+        public IPromise DeleteIntegration(DiscordClient client, Integration integration) => DeleteIntegration(client, integration.Id);
 
         /// <summary>
         /// Delete the attached integration object for the guild.
@@ -1167,12 +1083,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="integrationId">Integration ID to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildIntegration(DiscordClient client, Snowflake integrationId, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteIntegration(DiscordClient client, Snowflake integrationId)
         {
-            if (!integrationId.IsValid()) throw new InvalidSnowflakeException(nameof(integrationId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/integrations/{integrationId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(integrationId, nameof(integrationId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/integrations/{integrationId}");
         }
 
         /// <summary>
@@ -1181,11 +1095,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget-settings">Get Guild Widget Settings</a>
         /// </summary>
         /// <param name="client">client to use</param>
-        /// <param name="callback">Callback with guild widget settings</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildWidgetSettings(DiscordClient client, Action<GuildWidgetSettings> callback = null, Action<RestError> error = null)
+        public IPromise<GuildWidgetSettings> GetWidgetSettings(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/widget", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<GuildWidgetSettings>(client,$"guilds/{Id}/widget");
         }
         
         /// <summary>
@@ -1195,11 +1107,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="widget">Updated widget</param>
-        /// <param name="callback">Callback with update guild widget</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildWidget(DiscordClient client, GuildWidget widget, Action<GuildWidget> callback = null, Action<RestError> error = null)
+        public IPromise<GuildWidget> EditWidget(DiscordClient client, GuildWidget widget)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/widget", RequestMethod.PATCH, widget, callback, error);
+            if (widget == null) throw new ArgumentNullException(nameof(widget));
+            return client.Bot.Rest.Patch<GuildWidget>(client,$"guilds/{Id}/widget", widget);
         }
 
         /// <summary>
@@ -1207,11 +1118,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget">Get Guild Widget</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with guild widget</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildWidget(DiscordClient client, Action<GuildWidget> callback = null, Action<RestError> error = null)
+        public IPromise<GuildWidget> GetWidget(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/widget.json", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<GuildWidget>(client,$"guilds/{Id}/widget.json");
         }
 
         /// <summary>
@@ -1219,11 +1128,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Requires the `MANAGE_GUILD` permission.
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with welcome screen for the guild</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildWelcomeScreen(DiscordClient client, Action<GuildWelcomeScreen> callback = null, Action<RestError> error = null)
+        public IPromise<GuildWelcomeScreen> GetWelcomeScreen(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/welcome-screen", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<GuildWelcomeScreen>(client,$"guilds/{Id}/welcome-screen");
         }
 
         /// <summary>
@@ -1233,11 +1140,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Update to be made to the welcome screen</param>
-        /// <param name="callback">Callback with updated welcome screen for the guild</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyWelcomeScreen(DiscordClient client, WelcomeScreenUpdate update, Action<GuildWelcomeScreen> callback = null, Action<RestError> error = null)
+        public IPromise<GuildWelcomeScreen> EditWelcomeScreen(DiscordClient client, WelcomeScreenUpdate update)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/welcome-screen", RequestMethod.PATCH, update, callback, error);
+            if (update == null) throw new ArgumentNullException(nameof(update));
+            return client.Bot.Rest.Patch<GuildWelcomeScreen>(client,$"guilds/{Id}/welcome-screen", update);
         }
 
         /// <summary>
@@ -1246,11 +1152,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Code will be null if a vanity url for the guild is not set.
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with invite </param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildVanityUrl(DiscordClient client, Action<InviteMetadata> callback = null, Action<RestError> error = null)
+        public IPromise<InviteMetadata> GetVanityUrl(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/vanity-url", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<InviteMetadata>(client,$"guilds/{Id}/vanity-url");
         }
         
         /// <summary>
@@ -1258,11 +1162,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/emoji#list-guild-emojis">List Guild Emojis</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with list of guild emojis</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListGuildEmojis(DiscordClient client, Action<List<DiscordEmoji>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordEmoji>> ListEmojis(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordEmoji>>(client,$"guilds/{Id}/emojis");
         }
         
         /// <summary>
@@ -1270,12 +1172,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/emoji#get-guild-emoji">Get Guild Emoji</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="emjoiId">Emoji to lookup</param>
-        /// <param name="callback">Callback with the guild emoji</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildEmoji(DiscordClient client, string emjoiId, Action<DiscordEmoji> callback = null, Action<RestError> error = null)
+        /// <param name="emojiId">Emoji to lookup</param>
+        public IPromise<DiscordEmoji> GetEmoji(DiscordClient client, Snowflake emojiId)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis/{emjoiId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Get<DiscordEmoji>(client,$"guilds/{Id}/emojis/{emojiId}");
         }
         
         /// <summary>
@@ -1286,11 +1187,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emoji">Emoji to create</param>
-        /// <param name="callback">Callback with the created emoji</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildEmoji(DiscordClient client, EmojiCreate emoji, Action<DiscordEmoji> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordEmoji> CreateEmoji(DiscordClient client, EmojiCreate emoji)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis", RequestMethod.POST, emoji, callback, error);
+            if (emoji == null) throw new ArgumentNullException(nameof(emoji));
+            return client.Bot.Rest.Post<DiscordEmoji>(client,$"guilds/{Id}/emojis", emoji);
         }
         
         /// <summary>
@@ -1302,11 +1202,11 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <param name="client">Client to use</param>
         /// <param name="emojiId">Emoji ID to update</param>
         /// <param name="emoji">Emoji update</param>
-        /// <param name="callback">Callback with the updated emoji</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void UpdateGuildEmoji(DiscordClient client, string emojiId, EmojiUpdate emoji, Action<DiscordEmoji> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordEmoji> EditEmoji(DiscordClient client, Snowflake emojiId, EmojiUpdate emoji)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis/{emojiId}", RequestMethod.PATCH, emoji, callback, error);
+            if (emoji == null) throw new ArgumentNullException(nameof(emoji));
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Patch<DiscordEmoji>(client,$"guilds/{Id}/emojis/{emojiId}", emoji);
         }
         
         /// <summary>
@@ -1316,69 +1216,36 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="emojiId">Emoji ID to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildEmoji(DiscordClient client, string emojiId, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteEmoji(DiscordClient client, Snowflake emojiId)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/emojis/{emojiId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/emojis/{emojiId}");
         }
 
         /// <summary>
         /// Modifies the current user's voice state.
-        /// See <a href="https://discord.com/developers/docs/resources/guild#update-current-user-voice-state">Update Current User Voice State</a>
+        /// See <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">Update Current User Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="channelId">Channel ID of the stage channel</param>
-        /// <param name="suppress">Changes the users suppressed state</param>
-        /// <param name="requestToSpeak">Sets the user's request to speak</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyCurrentUserVoiceState(DiscordClient client, Snowflake channelId, bool? suppress = null, DateTime? requestToSpeak = null, Action callback = null, Action<RestError> error = null)
+        /// <param name="update">Update to the guild voice state</param>
+        public IPromise EditCurrentUserVoiceState(DiscordClient client, GuildCurrentUserVoiceStateUpdate update)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["channel_id"] = channelId.ToString()
-            };
-
-            if (suppress.HasValue)
-            {
-                data["suppress"] = suppress.Value;
-            }
-
-            if (requestToSpeak.HasValue)
-            {
-                data["request_to_speak_timestamp"] = requestToSpeak;
-            }
-            
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/voice-states/@me", RequestMethod.PATCH, data, callback, error);
+            if (update == null) throw new ArgumentNullException(nameof(update));
+            return client.Bot.Rest.Patch(client,$"guilds/{Id}/voice-states/@me", update);
         }
-        
+
         /// <summary>
         /// Modifies another user's voice state.
         /// See <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">Update Users Voice State</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="userId">User ID of the users state to update</param>
-        /// <param name="channelId">Channel ID of the stage channel</param>
-        /// <param name="suppress">Changes the users suppressed state</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyUserVoiceState(DiscordClient client, Snowflake userId, Snowflake channelId, bool? suppress = null, Action callback = null, Action<RestError> error = null)
+        /// <param name="userId">User to modify</param>
+        /// <param name="update">Update to the guild voice state</param>
+        public IPromise EditUserVoiceState(DiscordClient client, Snowflake userId, GuildUserVoiceStateUpdate update)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["channel_id"] = channelId.ToString()
-            };
-
-            if (suppress.HasValue)
-            {
-                data["suppress"] = suppress.Value;
-            }
-            
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/voice-states/{userId}", RequestMethod.PATCH, data, callback, error);
+            if (update == null) throw new ArgumentNullException(nameof(update));
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Patch(client,$"guilds/{Id}/voice-states/{userId}", update);
         }
         
         /// <summary>
@@ -1387,11 +1254,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// See <a href="https://discord.com/developers/docs/resources/sticker#list-guild-stickers">List Guild Stickers</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the list of stickers</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ListGuildStickers(DiscordClient client, Action<List<DiscordSticker>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordSticker>> ListStickers(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordSticker>>(client,$"guilds/{Id}/stickers");
         }
         
         /// <summary>
@@ -1401,12 +1266,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker to get</param>
-        /// <param name="callback">Callback with the discord sticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetGuildSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordSticker> GetSticker(DiscordClient client, Snowflake stickerId)
         {
-            if (!stickerId.IsValid()) throw new InvalidSnowflakeException(nameof(stickerId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{stickerId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
+            return client.Bot.Rest.Get<DiscordSticker>(client,$"guilds/{Id}/stickers/{stickerId}");
         }
         
         /// <summary>
@@ -1417,11 +1280,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="sticker">Sticker to create</param>
-        /// <param name="callback">Callback with the discord sticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGuildSticker(DiscordClient client, GuildStickerCreate sticker, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordSticker> CreateSticker(DiscordClient client, GuildStickerCreate sticker)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers", RequestMethod.POST, sticker, callback, error);
+            if (sticker == null) throw new ArgumentNullException(nameof(sticker));
+            return client.Bot.Rest.Post<DiscordSticker>(client,$"guilds/{Id}/stickers", sticker);
         }
         
         /// <summary>
@@ -1432,11 +1294,10 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="sticker">Sticker to modify</param>
-        /// <param name="callback">Callback with the updated discord sticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildSticker(DiscordClient client, DiscordSticker sticker, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordSticker> EditSticker(DiscordClient client, DiscordSticker sticker)
         {
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{sticker.Id}", RequestMethod.PATCH, sticker, callback, error);
+            if (sticker == null) throw new ArgumentNullException(nameof(sticker));
+            return client.Bot.Rest.Patch<DiscordSticker>(client,$"guilds/{Id}/stickers/{sticker.Id}", sticker);
         }
         
         /// <summary>
@@ -1445,18 +1306,49 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker to delete</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
         /// See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
-        public void DeleteGuildSticker(DiscordClient client, Snowflake stickerId, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteSticker(DiscordClient client, Snowflake stickerId)
         {
-            if (!stickerId.IsValid()) throw new InvalidSnowflakeException(nameof(stickerId));
-            client.Bot.Rest.DoRequest($"/guilds/{Id}/stickers/{stickerId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
+            return client.Bot.Rest.Delete(client,$"guilds/{Id}/stickers/{stickerId}");
+        }
+        
+        /// <inheritdoc cref="AutoModRule.GetAll"/>
+        public IPromise<List<AutoModRule>> ListAutoModRules(DiscordClient client) 
+            => AutoModRule.GetAll(client, Id);
+
+        /// <inheritdoc cref="AutoModRule.Get"/>
+        public IPromise<AutoModRule> GetAutoModRule(DiscordClient client, Snowflake ruleId) 
+            => AutoModRule.Get(client, Id, ruleId);
+
+        /// <inheritdoc cref="AutoModRule.Create"/>
+        public IPromise<AutoModRule> CreateAutoModRule(DiscordClient client, AutoModRuleCreate create)
+            => AutoModRule.Create(client, Id, create);
+        
+        /// <summary>
+        /// Returns the <see cref="GuildOnboarding"/> for the guild.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// See <a href="https://discord.com/developers/docs/resources/guild#get-guild-onboarding">Get Guild Onboarding</a>
+        public IPromise<GuildOnboarding> GetOnboarding(DiscordClient client)
+        {
+            return client.Bot.Rest.Get<GuildOnboarding>(client,$"guilds/{Id}/onboarding");
+        }
+
+        /// <summary>
+        /// Modifies the onboarding configuration of the guild.
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="update">Update for the guild onboarding</param>
+        /// See <a href="">Modify Guild Onboarding</a>
+        public IPromise<GuildOnboarding> EditOnboarding(DiscordClient client, GuildOnboardingUpdate update)
+        {
+            return client.Bot.Rest.Put<GuildOnboarding>(client,$"guilds/{Id}/onboarding", update);
         }
         #endregion
 
         #region Entity Update Methods
-        internal DiscordGuild Update(DiscordGuild updatedGuild)
+        internal DiscordGuild Edit(DiscordGuild updatedGuild)
         {
             DiscordGuild previous = (DiscordGuild)MemberwiseClone();
             if (updatedGuild.Name != null)
@@ -1549,6 +1441,8 @@ namespace Oxide.Ext.Discord.Entities.Guilds
             if (updatedGuild.ScheduledEvents != null)
                 ScheduledEvents = updatedGuild.ScheduledEvents;
             PremiumProgressBarEnabled = updatedGuild.PremiumProgressBarEnabled;
+            if (updatedGuild.SafetyAlertsChannelId != null)
+                SafetyAlertsChannelId = updatedGuild.SafetyAlertsChannelId;
             return previous;
         }
         #endregion

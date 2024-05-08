@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    /// Represents a message <a href="https://discord.com/developers/docs/resources/channel#message-object">Attachment Structure</a>
+    /// Represents a message <a href="https://discord.com/developers/docs/resources/channel#attachment-object">Attachment Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class MessageAttachment : ISnowflakeEntity
@@ -68,5 +68,23 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// </summary>
         [JsonProperty("ephemeral")]
         public bool? Ephemeral { get; set; }
+        
+        /// <summary>
+        /// The duration of the audio file (currently for voice messages)
+        /// </summary>
+        [JsonProperty("duration_secs")]
+        public float? DurationSecs { get; set; }
+        
+        /// <summary>
+        /// base64 encoded bytearray representing a sampled waveform (currently for voice messages)
+        /// </summary>
+        [JsonProperty("waveform")]
+        public string Waveform { get; set; }
+        
+        /// <summary>
+        /// Attachment Flags
+        /// </summary>
+        [JsonProperty("flags")]
+        public AttachmentFlags? Flags { get; set; }
     }
 }

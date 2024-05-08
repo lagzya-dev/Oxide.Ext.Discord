@@ -1,9 +1,8 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Voice
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/voice#voice-state-object">Voice State Structure</a>
@@ -83,7 +82,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
         public bool SelfVideo { get; set; }
 
         /// <summary>
-        /// Whether this user is muted by the current user
+        /// whether this user's permission to speak is denied
         /// </summary>
         [JsonProperty("suppress")]
         public bool Suppress { get; set; }
@@ -100,7 +99,7 @@ namespace Oxide.Ext.Discord.Entities.Voice
                 ChannelId = state.ChannelId;
 
             if (state.SessionId != SessionId)
-                SessionId = state.Id;
+                SessionId = state.SessionId;
 
             Deaf = state.Deaf;
             Mute = state.Mute;

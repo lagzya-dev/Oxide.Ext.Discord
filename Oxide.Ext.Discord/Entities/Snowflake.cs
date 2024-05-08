@@ -1,7 +1,8 @@
 using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Helpers.Converters;
-using Time = Oxide.Ext.Discord.Helpers.Time;
+using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -9,8 +10,13 @@ namespace Oxide.Ext.Discord.Entities
     /// Represents an ID in discord.
     /// </summary>
     [JsonConverter(typeof(SnowflakeConverter))]
-    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>
+    public struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>, IComparable<ulong>, IEquatable<ulong>, IDiscordKey
     {
+        /// <summary>
+        /// DateTimeOffset since discord Epoch
+        /// </summary>
+        public static readonly DateTimeOffset DiscordEpoch = new DateTimeOffset(2015, 1, 1, 0, 0, 0, TimeSpan.Zero);
+
         /// <summary>
         /// Snowflake Value
         /// </summary>
@@ -29,19 +35,23 @@ namespace Oxide.Ext.Discord.Entities
         /// Create a new snowflake from a string
         /// </summary>
         /// <param name="id"></param>
-        public Snowflake(string id)
-        {
-            Id = ulong.Parse(id);
-        }
+        public Snowflake(string id): this(ulong.Parse(id)) {}
 
         /// <summary>
-        /// Create a snowflake from a DateTimeOffset
+        /// Create a new snowflake from a <see cref="ReadOnlySpan{T}"/>
+        /// </summary>
+        /// <param name="span"></param>
+        public Snowflake(ReadOnlySpan<char> span) : this(ulong.Parse(span)) {}
+
+        /// <summary>
+        /// Create a snowflake from a DateTimeOffset and increment
         /// </summary>
         /// <param name="offset"></param>
-        public Snowflake(DateTimeOffset offset)
+        /// <param name="increment">Increment value of the snowflake</param>
+        public Snowflake(DateTimeOffset offset, ulong increment = 0)
         {
-            Id = (ulong)(Time.DiscordEpoch - offset).TotalMilliseconds << 22;
-        }   
+            Id = ((ulong)(DiscordEpoch - offset).TotalMilliseconds << 22) + increment;
+        }
 
         /// <summary>
         /// Returns when the ID was created
@@ -49,7 +59,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns></returns>
         public DateTimeOffset GetCreationDate()
         {
-            return Time.DiscordEpoch + TimeSpan.FromMilliseconds(Id >> 22);
+            return DiscordEpoch + TimeSpan.FromMilliseconds(Id >> 22);
         }
         
         /// <summary>
@@ -77,6 +87,19 @@ namespace Oxide.Ext.Discord.Entities
 
             snowflake = default(Snowflake);
             return false;
+        }
+
+        /// <summary>
+        /// Try to format the snowflake into the span
+        /// </summary>
+        /// <param name="destination">Span to write the snowflake into</param>
+        /// <param name="charsWritten">Number of characters written</param>
+        /// <param name="format">Snowflake formatting</param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format = default (ReadOnlySpan<char>), IFormatProvider provider = null)
+        {
+            return Id.TryFormat(destination, out charsWritten, format, provider);
         }
 
         /// <summary>
@@ -134,7 +157,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <returns>ID as a string</returns>
         public override string ToString()
         {
-            return IsValid() ? Id.ToString() : string.Empty;
+            return StringCache<ulong>.Instance.ToString(Id);
         }
 
         /// <summary>
@@ -249,6 +272,9 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         /// <param name="id">Id to be converted to snowflake</param>
         /// <returns>ID converted to a snowflake</returns>
-        public static explicit operator Snowflake(string id) => new Snowflake(id);
+        public static explicit operator Snowflake(string id)
+        {
+            return TryParse(id, out Snowflake snowflake) ? snowflake : default(Snowflake);
+        }
     }
 }

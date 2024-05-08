@@ -1,12 +1,10 @@
-using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
-using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Stickers
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/sticker#sticker-object">Discord Sticker Structure</a>
@@ -86,7 +84,7 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// <summary>
         /// Returns the Url for the sticker
         /// </summary>
-        public string StickerUrl => DiscordCdn.GetSticker(Id);
+        public string StickerUrl => DiscordCdn.GetSticker(this);
         
         /// <summary>
         /// Returns a sticker object for the given sticker ID.
@@ -94,12 +92,10 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="stickerId">ID of the sticker</param>
-        /// <param name="callback">Callback with the DiscordSticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetSticker(DiscordClient client, Snowflake stickerId, Action<DiscordSticker> callback, Action<RestError> error = null)
+        public static IPromise<DiscordSticker> Get(DiscordClient client, Snowflake stickerId)
         {
-            if (!stickerId.IsValid()) throw new InvalidSnowflakeException(nameof(stickerId));
-            client.Bot.Rest.DoRequest($"/stickers/{stickerId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(stickerId, nameof(stickerId));
+            return client.Bot.Rest.Get<DiscordSticker>(client,$"stickers/{stickerId}");
         }
         
         /// <summary>
@@ -109,16 +105,10 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#modify-guild-sticker">Modify Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the updated discord sticker</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyGuildSticker(DiscordClient client, Action<DiscordSticker> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordSticker> ModifyGuildSticker(DiscordClient client)
         {
-            if (Type != StickerType.Guild)
-            {
-                throw new Exception("This endpoint can only be used for guild stickers");
-            }
-            
-            client.Bot.Rest.DoRequest($"/guilds/{GuildId}/stickers/{Id}", RequestMethod.PATCH, this, callback, error);
+            InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
+            return client.Bot.Rest.Patch<DiscordSticker>(client,$"guilds/{GuildId}/stickers/{Id}", this);
         }
         
         /// <summary>
@@ -127,28 +117,17 @@ namespace Oxide.Ext.Discord.Entities.Stickers
         /// See <a href="https://discord.com/developers/docs/resources/sticker#delete-guild-sticker">Delete Guild Sticker</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteGuildSticker(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public IPromise DeleteGuildSticker(DiscordClient client)
         {
-            if (Type != StickerType.Guild)
-            {
-                throw new Exception("This endpoint can only be used for guild stickers");
-            }
-            
-            client.Bot.Rest.DoRequest($"/guilds/{GuildId}/stickers/{Id}", RequestMethod.DELETE, null, callback, error);
+            InvalidGuildStickerException.ThrowIfNotGuildType(Type, "This endpoint can only be used for guild stickers");
+            return client.Bot.Rest.Delete(client,$"guilds/{GuildId}/stickers/{Id}");
         }
         
         internal void Update(DiscordSticker sticker)
         {
-            if (sticker.Name != null)
-                Name = sticker.Name;
-
-            if (sticker.Description != null)
-                Description = sticker.Description;
-
-            if (sticker.Tags != null)
-                Tags = sticker.Tags;
+            if (sticker.Name != null) Name = sticker.Name;
+            if (sticker.Description != null) Description = sticker.Description;
+            if (sticker.Tags != null) Tags = sticker.Tags;
         }
     }
 }

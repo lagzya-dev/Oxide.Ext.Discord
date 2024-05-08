@@ -1,10 +1,15 @@
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.Api;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-structure">ApplicationCommand</a>
@@ -19,13 +24,13 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public Snowflake Id { get; set; }
         
         /// <summary>
-        /// The type of command, defaults 1 if not set
+        /// The type of command, defaults to 1
         /// </summary>
         [JsonProperty("type")]
         public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
-        /// Unique id of the parent application
+        /// ID of the parent application
         /// </summary>
         [JsonProperty("application_id")]
         public Snowflake ApplicationId { get; set; }
@@ -43,10 +48,22 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         public string Name { get; set; }
         
         /// <summary>
+        /// Localization dictionary for the name field. Values follow the same restrictions as name
+        /// </summary>
+        [JsonProperty("name_localizations")]
+        public Hash<string, string> NameLocalizations { get; set; }
+        
+        /// <summary>
         /// Description of the command (1-100 characters)
         /// </summary>
         [JsonProperty("description")]
         public string Description { get; set; }
+        
+        /// <summary>
+        /// Localization dictionary for the description field. Values follow the same restrictions as description
+        /// </summary>
+        [JsonProperty("description_localizations")]
+        public Hash<string, string> DescriptionLocalizations { get; set; }
         
         /// <summary>
         /// The parameters for the command
@@ -54,18 +71,48 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         [JsonProperty("options")]
         public List<CommandOption> Options { get; set; }
+
+        [JsonProperty("default_member_permissions")]
+        private string _defaultMemberPermissions;
+
+        /// <summary>
+        /// Set of permissions represented as a bit set
+        /// </summary>
+        public PermissionFlags DefaultMemberPermissions
+        {
+            get => !string.IsNullOrEmpty(_defaultMemberPermissions) ? (PermissionFlags)ulong.Parse(_defaultMemberPermissions) : default(PermissionFlags);
+            set => _defaultMemberPermissions = StringCache<ulong>.Instance.ToString((ulong)value);
+        }
         
         /// <summary>
-        /// Whether the command is enabled by default when the app is added to a guild
+        /// Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
         /// </summary>
-        [JsonProperty("default_permission")]
-        public bool? DefaultPermissions { get; set; }
+        [JsonProperty("dm_permission")]
+        public bool? DmPermission { get; set; }
+
+        /// <summary>
+        /// Indicates whether the command is age-restricted
+        /// </summary>
+        [JsonProperty("nsfw")]
+        public bool? Nsfw { get; set; }
         
         /// <summary>
         /// Auto incrementing version identifier updated during substantial record changes
         /// </summary>
         [JsonProperty("version")]
         public Snowflake Version { get; set; }
+
+        /// <summary>
+        /// Mention the <see cref="DiscordApplicationCommand"/>
+        /// </summary>
+        public string Mention => DiscordFormatting.MentionApplicationCommand(Id, Name);
+
+        /// <summary>
+        /// Mention the <see cref="DiscordApplicationCommand"/> using a custom command string
+        /// </summary>
+        /// <param name="command">Custom commands string</param>
+        /// <returns>Mentioned Custom Command string</returns>
+        public string MentionCustom(string command) => DiscordFormatting.MentionApplicationCommandCustom(Id, command);
         
         /// <summary>
         /// Edit a command.
@@ -75,17 +122,15 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="update">Command Update</param>
-        /// <param name="callback">Callback with updated command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void Edit(DiscordClient client, CommandUpdate update, Action<DiscordApplicationCommand> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordApplicationCommand> Edit(DiscordClient client, CommandUpdate update)
         {
+            if (update == null) throw new ArgumentNullException(nameof(update));
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.PATCH, update, callback, error);
-                return;
+                return client.Bot.Rest.Patch<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", update);
             }
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands", RequestMethod.PATCH, update, callback, error);
+            return client.Bot.Rest.Patch<DiscordApplicationCommand>(client,$"applications/{ApplicationId}/commands/{Id}", update);
         }
         
         /// <summary>
@@ -94,51 +139,59 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// See <a href="https://discord.com/developers/docs/interactions/application-commands#delete-guild-application-command">Delete Guild Application Command</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void Delete(DiscordClient client, Action callback = null, Action<RestError> error = null)
+        public IPromise Delete(DiscordClient client)
         {
             if (GuildId.HasValue)
             {
-                client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
-                return;
+                return client.Bot.Rest.Delete(client,$"applications/{ApplicationId}/guilds/{GuildId}/commands/{Id}");
             }
             
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/commands/{Id}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.Delete(client,$"applications/{ApplicationId}/commands/{Id}");
         }
 
         /// <summary>
-        /// Fetches command permissions for a specific command for your application in a guild. Returns a GuildApplicationCommandPermissions object.
+        /// Fetches command permissions for a specific command for your application in a guild. Returns a <see cref="GuildCommandPermissions"/> object.
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#get-application-command-permissions">Get Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to get permissions for</param>
-        /// <param name="callback">Callback with the permissions for the command</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetPermissions(DiscordClient client, Snowflake guildId, Action<GuildCommandPermissions> callback = null, Action<RestError> error = null)
+        public IPromise<GuildCommandPermissions> GetPermissions(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            IPendingPromise<GuildCommandPermissions> promise = Promise<GuildCommandPermissions>.Create();
+
+            client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions")
+                  .Then(perms => promise.Resolve(perms))
+                  .Catch<ResponseError>(ex =>
+                  {
+                      if (ex.DiscordError?.Code != 10066)
+                      {
+                          promise.Reject(ex);
+                          return;
+                      }
+                      
+                      ex.SuppressErrorMessage();
+                      //If the command is synced we need to lookup by application ID instead
+                      client.Bot.Rest.Get<GuildCommandPermissions>(client, $"applications/{ApplicationId}/guilds/{guildId}/commands/{ApplicationId}/permissions")
+                            .Then(perms => promise.Resolve(perms))
+                            .Catch<ResponseError>(ex1 => promise.Reject(ex1));
+                  });
+            return promise;
         }
 
         /// <summary>
         /// Edits command permissions for a specific command for your application in a guild.
         /// Warning: This endpoint will overwrite existing permissions for the command in that guild
         /// Warning: Deleting or renaming a command will permanently delete all permissions for that command
+        /// See <a href="https://discord.com/developers/docs/interactions/application-commands#edit-application-command-permissions">Edit Application Command Permissions</a>
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID of the guild to edit permissions for</param>
         /// <param name="permissions">List of permissions for the command</param>
-        /// <param name="callback">Callback with the list of permissions</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void EditPermissions(DiscordClient client, Snowflake guildId, List<CommandPermissions> permissions, Action callback = null, Action<RestError> error = null)
+        public IPromise EditPermissions(DiscordClient client, Snowflake guildId, CommandUpdatePermissions permissions)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            Dictionary<string, object> data = new Dictionary<string, object>
-            {
-                ["permissions"] = permissions
-            };
-            
-            client.Bot.Rest.DoRequest($"/applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", RequestMethod.PUT, data, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Put(client,$"applications/{ApplicationId}/guilds/{guildId}/commands/{Id}/permissions", permissions);
         }
     }
 }

@@ -1,12 +1,9 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Channels.Stages;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Users;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Invites
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-object">Invite Structure</a> that when used, adds a user to a guild or group DM channel.
@@ -22,14 +19,14 @@ namespace Oxide.Ext.Discord.Entities.Invites
 
         /// <summary>
         /// The guild this invite is for
-        /// See <see cref="Guild"/>
+        /// See <see cref="DiscordGuild"/>
         /// </summary>
         [JsonProperty("guild")]
         public DiscordGuild Guild { get; set; }
         
         /// <summary>
         /// The channel this invite is for
-        /// See <see cref="Channel"/>
+        /// See <see cref="DiscordChannel"/>
         /// </summary>
         [JsonProperty("channel")]
         public DiscordChannel Channel { get; set; }
@@ -76,6 +73,7 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <summary>
         /// Stage instance data if there is a public Stage instance in the Stage channel this invite is for
         /// </summary>
+        [Obsolete("This field is considered deprecated by discord and may be removed in a future update.")]
         [JsonProperty("stage_instance")]
         public InviteStageInstance StageInstance { get; set; }
         
@@ -92,11 +90,9 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// <param name="client">Client to use</param>
         /// <param name="inviteCode">Invite code</param>
         /// <param name="lookup">Lookup query string parameters for the request</param>
-        /// <param name="callback">Callback with the invite</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetInvite(DiscordClient client, string inviteCode, InviteLookup lookup = null, Action<DiscordInvite> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordInvite> Get(DiscordClient client, string inviteCode, InviteLookup lookup = null)
         {
-            client.Bot.Rest.DoRequest($"/invites/{inviteCode}{lookup?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<DiscordInvite>(client,$"invites/{inviteCode}{lookup?.ToQueryString()}");
         }
 
         /// <summary>
@@ -106,11 +102,9 @@ namespace Oxide.Ext.Discord.Entities.Invites
         /// See <a href="https://discord.com/developers/docs/resources/invite#delete-invite">Delete Invite</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the deleted invite</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void DeleteInvite(DiscordClient client, Action<DiscordInvite> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordInvite> Delete(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/invites/{Code}", RequestMethod.DELETE, null, callback, error);
+            return client.Bot.Rest.Delete<DiscordInvite>(client,$"invites/{Code}");
         }
     }
 }

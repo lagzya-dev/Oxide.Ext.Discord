@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Integrations;
-using Oxide.Ext.Discord.Helpers.Converters;
+﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Json;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Users.Connections
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a Discord Users <a href="https://discord.com/developers/docs/resources/user#connection-object">Connection</a>
@@ -55,7 +53,13 @@ namespace Oxide.Ext.Discord.Entities.Users.Connections
         /// Whether friend sync is enabled for this connection
         /// </summary>
         [JsonProperty("friend_sync")]
-        public bool FriendSync { get; set; }        
+        public bool FriendSync { get; set; }      
+        
+        /// <summary>
+        /// Whether this connection has a corresponding third party OAuth2 token
+        /// </summary>
+        [JsonProperty("two_way_link")]
+        public bool TwoWayLink { get; set; }  
         
         /// <summary>
         /// Whether activities related to this connection will be shown in presence updates

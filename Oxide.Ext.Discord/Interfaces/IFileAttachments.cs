@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces
 {
@@ -11,6 +11,6 @@ namespace Oxide.Ext.Discord.Interfaces
         /// <summary>
         /// File attachments for an entity
         /// </summary>
-        List<MessageFileAttachment> FileAttachments { get; set; }
+        List<MessageFileAttachment> FileAttachments { get; }
     }
 }

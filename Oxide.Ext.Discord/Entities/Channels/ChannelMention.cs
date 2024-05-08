@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-mention-object-channel-mention-structure">Channel Mention Structure</a> in a message 

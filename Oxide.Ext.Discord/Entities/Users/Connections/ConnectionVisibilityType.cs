@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Users.Connections
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents connection <a href="https://discord.com/developers/docs/resources/user#connection-object-visibility-types">Visibility Types</a>
     /// </summary>
-    public enum ConnectionVisibilityType
+    public enum ConnectionVisibilityType : byte
     {
         /// <summary>
         /// Invisible to everyone except the user themselves

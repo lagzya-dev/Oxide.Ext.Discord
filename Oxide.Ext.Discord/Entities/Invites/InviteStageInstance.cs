@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Guilds;
 
-namespace Oxide.Ext.Discord.Entities.Invites
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-stage-instance-object">Invite Stage Instance</a>

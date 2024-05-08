@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Invites
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/invite#invite-object-target-user-types">Target User Types</a>
     /// </summary>
-    public enum TargetUserType
+    public enum TargetUserType : byte
     {
         /// <summary>
         /// Target user type is not defined

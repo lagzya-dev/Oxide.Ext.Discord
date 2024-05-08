@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Helpers;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Parses Interaction Data to make it easier to process for application commands
@@ -66,19 +61,19 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public readonly string TriggeredComponentId;
         
         /// <summary>
-        /// If a <see cref="SelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
+        /// If a <see cref="BaseSelectMenuComponent"/> triggered this interaction. The values selected from the select menu.
         /// </summary>
         public readonly List<string> SelectMenuValues;
 
         /// <summary>
         /// Discord User's locale converted to oxide lang locale
         /// </summary>
-        public readonly string UserOxideLocale;
+        public readonly ServerLocale UserOxideLocale;
 
         /// <summary>
         /// Discord Guild's locale converted to oxide lang locale
         /// </summary>
-        public readonly string GuildOxideLocale;
+        public readonly ServerLocale GuildOxideLocale;
 
         /// <summary>
         /// Constructor for the data parser.
@@ -88,27 +83,33 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         {
             Interaction = interaction;
             Data = interaction.Data;
+            
+            UserOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.Locale);
+            if (interaction.GuildLocale.HasValue && interaction.GuildLocale.Value.IsValid)
+            {
+                GuildOxideLocale = DiscordLocales.Instance.GetServerLanguage(interaction.GuildLocale.Value);
+            }
+            
             //Check if MessageComponent and parse data accordingly
             if (Data.ComponentType.HasValue)
             {
                 TriggeredComponentId = Data.CustomId;
-                if (Data.ComponentType == MessageComponentType.SelectMenu)
+                if (Data.ComponentType == MessageComponentType.StringSelect)
                 {
                     SelectMenuValues = Data.Values;
                 }
                 return;
             }
+            
             Type = Data.Type;
             Command = Data.Name;
+            
             //If ApplicationCommand is Message or User it can't have arguments
             if (Type == ApplicationCommandType.Message || Type == ApplicationCommandType.User)
             {
                 return;
             }
 
-            UserOxideLocale = LocaleConverter.GetOxideLocale(interaction.Locale);
-            GuildOxideLocale = LocaleConverter.GetOxideLocale(interaction.GuildLocale);
-            
             //Parse the arguments for the application command
             ParseCommand(Data.Options);
         }
@@ -176,11 +177,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="default">Default value to return if not supplied</param>
         /// <returns>String for the matching command option name</returns>
         /// <exception cref="Exception">Thrown if the option type is not a string</exception>
-        public string GetString(string name, string @default = default(string))
+        public string GetString(string name, string @default = "")
         {
-            return (string)GetArg(name, CommandOptionType.String)?.Value ?? @default;
+            return GetArg(name, CommandOptionType.String)?.GetString() ?? @default;
         }
-
+        
         /// <summary>
         /// Returns the int value supplied to command option matching the name.
         /// If the arg was optional and wasn't supplied default supplied value will be used.
@@ -191,9 +192,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not an int</exception>
         public int GetInt(string name, int @default = default(int))
         {
-            return (int?)GetArg(name, CommandOptionType.Integer)?.Value ?? @default;
+            return GetArg(name, CommandOptionType.Integer)?.GetInt() ?? @default;
         }
-        
+
         /// <summary>
         /// Returns the bool value supplied to command option matching the name.
         /// If the arg was optional and wasn't supplied default supplied value will be used.
@@ -204,7 +205,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a bool</exception>
         public bool GetBool(string name, bool @default = default(bool))
         {
-            return (bool?)GetArg(name, CommandOptionType.Boolean)?.Value ?? @default;
+            return GetArg(name, CommandOptionType.Boolean)?.GetBool() ?? @default;
         }
         
         /// <summary>
@@ -215,7 +216,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a <see cref="DiscordUser"/> or mentionable</exception>
         public DiscordUser GetUser(string name)
         {
-            return _interaction.Data.Resolved.Users[GetEntityId(GetArg(name, CommandOptionType.User)?.Value)];
+            InteractionDataOption arg = GetArg(name, CommandOptionType.User);
+            return arg != null ? _interaction.Data.Resolved.Users[arg.GetSnowflake()] : null;
         }
 
         /// <summary>
@@ -226,7 +228,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a <see cref="DiscordChannel"/></exception>
         public DiscordChannel GetChannel(string name)
         {
-            return _interaction.Data.Resolved.Channels[GetEntityId(GetArg(name, CommandOptionType.Channel)?.Value)];
+            InteractionDataOption arg = GetArg(name, CommandOptionType.Channel);
+            return arg != null ? _interaction.Data.Resolved.Channels[arg.GetSnowflake()] : null;
         }
         
         /// <summary>
@@ -237,7 +240,8 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <exception cref="Exception">Thrown if the option type is not a <see cref="DiscordRole"/> or mentionable</exception>
         public DiscordRole GetRole(string name)
         {
-            return _interaction.Data.Resolved.Roles[GetEntityId(GetArg(name, CommandOptionType.Role)?.Value)];
+            InteractionDataOption arg = GetArg(name, CommandOptionType.Role);
+            return arg != null ? _interaction.Data.Resolved.Roles[arg.GetSnowflake()] : null;
         }
 
         /// <summary>
@@ -248,9 +252,22 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <param name="default">Default value to return if not supplied</param>
         /// <returns>double for the matching command option name</returns>
         /// <exception cref="Exception">Thrown if the option type is not a double</exception>
-        public double GetNumber(string name, double @default)
+        public double GetNumber(string name, double @default = default(double))
         {
-            return (double?)GetArg(name, CommandOptionType.Number)?.Value ?? @default;
+            return GetArg(name, CommandOptionType.Number)?.GetNumber() ?? @default;
+        }
+        
+        /// <summary>
+        /// Returns the float value supplied to command option matching the name.
+        /// If the arg was optional and wasn't supplied default supplied value will be used.
+        /// </summary>
+        /// <param name="name">Name of the command option</param>
+        /// <param name="default">Default value to return if not supplied</param>
+        /// <returns>double for the matching command option name</returns>
+        /// <exception cref="Exception">Thrown if the option type is not a double</exception>
+        public float GetFloat(string name, float @default = default(float))
+        {
+            return (float?)GetArg(name, CommandOptionType.Number)?.GetNumber() ?? @default;
         }
 
         private InteractionDataOption GetArg(string name, CommandOptionType requested)
@@ -261,34 +278,9 @@ namespace Oxide.Ext.Discord.Entities.Interactions
                 return null;
             }
 
-            if (arg.Type != CommandOptionType.Mentionable)
-            {
-                ValidateArgs(name, arg.Type, requested);
-            }
-            else if (requested != CommandOptionType.Role && requested != CommandOptionType.User)
-            {
-                throw new Exception($"Attempted to parse {name} role/user type to: {requested} which is not valid.");
-            }
+            InteractionArgException.ThrowIfInvalidArgType(name, arg.Type, requested);
             
             return arg;
-        }
-
-        private void ValidateArgs(string name, CommandOptionType arg, CommandOptionType requested)
-        {
-            if (arg != requested)
-            {
-                throw new Exception($"Attempted to parse {name} {arg} type to: {requested} which is not valid.");
-            }
-        }
-
-        private Snowflake GetEntityId(JToken value)
-        {
-            if (value == null)
-            {
-                return default(Snowflake);
-            }
-
-            return value.ToObject<Snowflake>();
         }
     }
 }

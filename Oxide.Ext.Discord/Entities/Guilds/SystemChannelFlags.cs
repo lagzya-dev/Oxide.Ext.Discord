@@ -1,8 +1,7 @@
 using System;
 using System.ComponentModel;
-using System.Runtime.Serialization;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-system-channel-flags">System Channel Flags</a>
@@ -26,12 +25,24 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// Suppress server setup tips
         /// </summary>
         [Description("SUPPRESS_GUILD_REMINDER_NOTIFICATIONS")]
-        SuppressGuildReminderNotifications = 1 << 1,
+        SuppressGuildReminderNotifications = 1 << 2,
         
         /// <summary>
         /// Hide member join sticker reply buttons
         /// </summary>
         [Description("SUPPRESS_JOIN_NOTIFICATION_REPLIES")]
-        SuppressJoinNotificationReplies = 1 << 1
+        SuppressJoinNotificationReplies = 1 << 3,
+        
+        /// <summary>
+        /// Suppress role subscription purchase and renewal notifications
+        /// </summary>
+        [Description("SUPPRESS_ROLE_SUBSCRIPTION_PURCHASE_NOTIFICATIONS")]
+        SuppressRoleSubscriptionPurchaseNotifications = 1 << 4,
+        
+        /// <summary>
+        /// Hide role subscription sticker reply buttons
+        /// </summary>
+        [Description("SUPPRESS_ROLE_SUBSCRIPTION_PURCHASE_NOTIFICATION_REPLIES")]
+        SuppressRoleSubscriptionPurchaseNotificationReplies = 1 << 5,
     }
 }

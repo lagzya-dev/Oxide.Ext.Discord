@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Activities
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object">Activity Structure</a>
+    /// Represents <a href="https://discord.com/developers/docs/topics/gateway-events#activity-object">Activity Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class DiscordActivity
@@ -33,15 +32,11 @@ namespace Oxide.Ext.Discord.Entities.Activities
         public string Url { get; set; }
 
         /// <summary>
-        /// Unix timestamp of when the activity was added to the user's session
-        /// </summary>
-        [JsonProperty("created_at")]
-        public long CreatedAt { get; set; }
-        
-        /// <summary>
         /// Timestamp of when the activity was added to the user's session
         /// </summary>
-        public DateTime CreatedAtDateTime => CreatedAt.ToDateTimeOffsetFromMilliseconds();
+        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonProperty("created_at")]
+        public DateTimeOffset CreatedAt { get; set; }
         
         /// <summary>
         /// Unix timestamps for start and/or end of the game
@@ -69,8 +64,8 @@ namespace Oxide.Ext.Discord.Entities.Activities
         public string State { get; set; }
         
         /// <summary>
-        /// tTe emoji used for a custom status
-        /// See <see cref="Emoji"/>
+        /// The emoji used for a custom status
+        /// See <see cref="DiscordEmoji"/>
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }

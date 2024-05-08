@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Permissions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/topics/permissions#role-object">Role Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordRole : ISnowflakeEntity
+    public class DiscordRole : ISnowflakeEntity, IDiscordValidation
     {
         #region Discord Fields
         /// <summary>
@@ -79,6 +79,12 @@ namespace Oxide.Ext.Discord.Entities.Permissions
         public RoleTags Tags { get; set; }
         
         /// <summary>
+        /// The flags for the given role
+        /// </summary>
+        [JsonProperty("flags")]
+        public RoleFlags Flags { get; set; }
+        
+        /// <summary>
         /// Returns a string to mention this role in a message
         /// </summary>
         public string Mention => DiscordFormatting.MentionRole(Id);
@@ -125,7 +131,8 @@ namespace Oxide.Ext.Discord.Entities.Permissions
             Permissions = role.Permissions;
             Managed = role.Managed;
             Mentionable = role.Mentionable;
-
+            Flags = role.Flags;
+            
             if (role.Tags != null)
             {
                 Tags = role.Tags;
@@ -134,5 +141,11 @@ namespace Oxide.Ext.Discord.Entities.Permissions
             return previous;
         }
         #endregion
+
+        ///<inheritdoc />
+        public void Validate()
+        {
+            InvalidGuildRoleException.ThrowIfInvalidRoleName(Name);
+        }
     }
 }

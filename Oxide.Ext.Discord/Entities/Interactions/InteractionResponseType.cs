@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type">InteractionResponseType</a>
     /// </summary>
-    public enum InteractionResponseType
+    public enum InteractionResponseType : byte
     {
         /// <summary>
         /// Acknowledges a Ping
@@ -40,6 +40,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// Respond to an interaction with an modal for a user to fill-out
         /// Note: You can't respond to a <see cref="InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
         /// </summary>
-        Modal = 9
+        Modal = 9,
+        
+        /// <summary>
+        /// Respond to an interaction with an upgrade button, only available for apps with monetization enabled
+        /// </summary>
+        PremiumRequired = 10
     }
 }

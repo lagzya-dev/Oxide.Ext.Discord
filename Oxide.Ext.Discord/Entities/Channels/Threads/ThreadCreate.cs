@@ -1,17 +1,17 @@
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
 
-namespace Oxide.Ext.Discord.Entities.Channels.Threads
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message-json-params">Thread Create Structure</a> within Discord.
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message-json-params">Thread Create Structure</a> within Discord.
-    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message-json-params">Thread Create Structure</a> within Discord.
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ThreadCreate
+    public class ThreadCreate : IDiscordValidation
     {
         /// <summary>
-        /// 2-100 character thread name
+        /// 1-100 character thread name
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; } 
@@ -27,12 +27,29 @@ namespace Oxide.Ext.Discord.Entities.Channels.Threads
         /// Can only be GuildNewsThread, GuildPublicThread, or GuildPrivateThread
         /// </summary>
         [JsonProperty("type")]
-        public ChannelType Type { get; set; } = ChannelType.GuildPrivateThread;
+        public ChannelType Type { get; set; }
         
         /// <summary>
         /// Whether non-moderators can add other non-moderators to a thread; only available when creating a private thread
         /// </summary>
         [JsonProperty("invitable")]
         public bool? Invitable { get; set; }
+        
+        /// <summary>
+        /// Amount of seconds a user has to wait before sending another message (0-21600)
+        /// </summary>
+        [JsonProperty("rate_limit_per_user")]
+        public int? RateLimitPerUser { get; set; }
+
+        /// <summary>
+        /// Validates the Thread Forum Create
+        /// </summary>
+        public void Validate()
+        {
+            InvalidChannelException.ThrowIfInvalidName(Name, false);
+            InvalidChannelException.ThrowIfInvalidRateLimitPerUser(RateLimitPerUser);
+            InvalidThreadException.ThrowIfInvalidAutoArchiveDuration(AutoArchiveDuration);
+            InvalidThreadException.ThrowIfInvalidChannelType(Type);
+        }
     }
 }

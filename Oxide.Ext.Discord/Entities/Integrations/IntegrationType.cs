@@ -1,11 +1,14 @@
 using System.ComponentModel;
+using Newtonsoft.Json;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Integrations
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents Integrations types
     /// </summary>
-    public enum IntegrationType
+    [JsonConverter(typeof(DiscordEnumConverter))]
+    public enum IntegrationType : byte
     {
         /// <summary>
         /// Integration is for twitch
@@ -23,6 +26,12 @@ namespace Oxide.Ext.Discord.Entities.Integrations
         /// integration is for discord
         /// </summary>
         [Description("discord")] 
-        Discord
+        Discord,
+        
+        /// <summary>
+        /// integration is for guild subscription
+        /// </summary>
+        [Description("guild_subscription")] 
+        GuildSubscription
     }
 }

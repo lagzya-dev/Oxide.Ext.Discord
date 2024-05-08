@@ -3,7 +3,7 @@ namespace Oxide.Ext.Discord.Logging
     /// <summary>
     /// Represents the log level for a logger
     /// </summary>
-    public enum DiscordLogLevel
+    public enum DiscordLogLevel : byte
     {
         /// <summary>
         /// Verbose log level displays all message

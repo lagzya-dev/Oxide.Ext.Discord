@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-mfa-level">MFA Level</a>
     /// </summary>
-    public enum GuildMFALevel
+    public enum GuildMfaLevel : byte
     {
         /// <summary>
         /// Guild does not require MFA

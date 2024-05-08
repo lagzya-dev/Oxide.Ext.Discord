@@ -1,9 +1,8 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure">Application Command Interaction Data Option</a>
@@ -25,11 +24,41 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         
         /// <summary>
         /// The value of the option resulting from user input
-        /// Value can be string, integer, or double type
+        /// Value can be string, integer, or double, or boolean type
         /// </summary>
         [JsonProperty("value")]
-        public JToken Value { get; set; }
-        
+        private object Value { get; set; }
+
+        /// <summary>
+        /// Returns the value as a string
+        /// </summary>
+        /// <returns></returns>
+        public string GetString() => (string)Value ?? string.Empty;
+
+        /// <summary>
+        /// Returns the value as an int
+        /// </summary>
+        /// <returns></returns>
+        public int GetInt() => Convert.ToInt32(Value);
+
+        /// <summary>
+        /// Returns the value as a bool
+        /// </summary>
+        /// <returns></returns>
+        public bool GetBool() => Convert.ToBoolean(Value);
+
+        /// <summary>
+        /// Returns the value as a double
+        /// </summary>
+        /// <returns></returns>
+        public double GetNumber() => Convert.ToDouble(Value);
+
+        /// <summary>
+        /// Returns the value as a Snowflake
+        /// </summary>
+        /// <returns></returns>
+        public Snowflake GetSnowflake() => new Snowflake(Convert.ToUInt64(Value));
+
         /// <summary>
         /// Present if this option is a group or subcommand
         /// See <see cref="InteractionDataOption"/>

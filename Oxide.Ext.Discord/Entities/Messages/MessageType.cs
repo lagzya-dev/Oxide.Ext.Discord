@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
-using System.Runtime.Serialization;
 
-namespace Oxide.Ext.Discord.Entities.Messages
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#message-object-message-types">Message Types</a>
     /// </summary>
-    public enum MessageType
+    public enum MessageType : byte
     {
         /// <summary>
         /// The default message type
@@ -53,32 +52,32 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The message when a new member joined
         /// </summary>
-        [Description("GUILD_MEMBER_JOIN")]
-        GuildMemberJoin = 7,
+        [Description("USER_JOIN")]
+        UserJoin = 7,
         
         /// <summary>
         ///  The message for when a user boosts a guild
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION")]
-        UserPremiumGuildSubscription = 8,
+        [Description("GUILD_BOOST")]
+        GuildBoost = 8,
         
         /// <summary>
         /// The message for when a guild reaches Tier 1 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_1")]
-        UserPremiumGuildSubscriptionTier1 = 9,
+        [Description("GUILD_BOOST_TIER_1")]
+        GuildBoostTier1 = 9,
         
         /// <summary>
         /// The message for when a guild reaches Tier 2 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_2")]
-        UserPremiumGuildSubscriptionTier2 = 10,
+        [Description("GUILD_BOOST_TIER_2")]
+        GuildBoostTier2 = 10,
         
         /// <summary>
         /// The message for when a guild reaches Tier 3 of Nitro boosts
         /// </summary>
-        [Description("USER_PREMIUM_GUILD_SUBSCRIPTION_TIER_3")]
-        UserPremiumGuildSubscriptionTier3 = 11,
+        [Description("GUILD_BOOST_TIER_3")]
+        GuildBoostTier3 = 11,
         
         /// <summary>
         /// The message for when a news channel subscription is added to a text channel
@@ -95,7 +94,7 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// <summary>
         /// The message for when a guild discovery is requalified
         /// </summary>
-        [Description("GuildDiscoveryRequalified")]
+        [Description("GUILD_DISCOVERY_REQUALIFIED")]
         GuildDiscoveryRequalified = 15,
         
         /// <summary>
@@ -144,6 +143,60 @@ namespace Oxide.Ext.Discord.Entities.Messages
         /// Reminder for a guild invite
         /// </summary>
         [Description("CONTEXT_MENU_COMMAND")]
-        ContextMenuCommand = 23
+        ContextMenuCommand = 23,
+
+        /// <summary>
+        /// Message is an auto mod action
+        /// </summary>
+        [Description("AUTO_MODERATION_ACTION")]
+        AutoModerationAction = 24,
+        
+        /// <summary>
+        /// Message is a role subscription purchase
+        /// </summary>
+        [Description("ROLE_SUBSCRIPTION_PURCHASE")]
+        RoleSubscriptionPurchase = 25,
+        
+        /// <summary>
+        /// Message is a interaction premium upsell
+        /// </summary>
+        [Description("INTERACTION_PREMIUM_UPSELL")]
+        InteractionPremiumUpsell = 26,
+        
+        /// <summary>
+        /// Message is a stage start
+        /// </summary>
+        [Description("STAGE_START")]
+        StageStart = 27,
+        
+        /// <summary>
+        /// Message is a stage end
+        /// </summary>
+        [Description("STAGE_END")]
+        StageEnd = 28,
+        
+        /// <summary>
+        /// Message is a stage speaker
+        /// </summary>
+        [Description("STAGE_SPEAKER")]
+        StageSpeaker = 29,
+        
+        /// <summary>
+        /// Message is a stage raise hand
+        /// </summary>
+        [Description("STAGE_RAISE_HAND")]
+        StageRaiseHand = 30,
+        
+        /// <summary>
+        /// Message is a stage topic
+        /// </summary>
+        [Description("STAGE_TOPIC")]
+        StageTopic = 31,
+        
+        /// <summary>
+        /// Message is a Guild Application Premium Subscription
+        /// </summary>
+        [Description("GUILD_APPLICATION_PREMIUM_SUBSCRIPTION")]
+        GuildApplicationPremiumSubscription = 32,
     }
 }

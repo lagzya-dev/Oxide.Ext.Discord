@@ -1,6 +1,6 @@
 using System;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object-user-flags">User Flags</a>
@@ -24,7 +24,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         Partner = 1 << 1,
         
         /// <summary>
-        /// Flag given to users who are HypeSquad Events Coordinator
+        /// Flag given to users who are HypeSquad Events Member
         /// </summary>
         HypeSquad = 1 << 2,
         
@@ -74,7 +74,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         VerifiedDeveloper = 1 << 17,
         
         /// <summary>
-        /// Flag given to users that are discord certified moderators
+        /// Flag given to users that are Moderator Programs Alumni
         /// </summary>
         CertifiedModerator = 1 << 18,
         
@@ -83,66 +83,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         BotHttpInteractions = 1 << 19,
         
-        #region Obsolete
         /// <summary>
-        /// Flag given to users who are a Discord employee.
+        /// User is an <a href="https://support-dev.discord.com/hc/articles/10113997751447">Active Developer</a>
         /// </summary>
-        [Obsolete("Replaced with Staff. Will be removed April 2022")]
-        DiscordEmployee = 1 << 0,
-        
-        /// <summary>
-        /// Flag given to users who are owners of a partnered Discord server.
-        /// </summary>
-        [Obsolete("Replaced with Partner. Will be removed April 2022")]
-        PartneredServerOwner = 1 << 1,
-        
-        /// <summary>
-        /// Flag given to users in HypeSquad events.
-        /// </summary>
-        [Obsolete("Replaced with HypeSquad. Will be removed April 2022")]
-        HyperSquadEvents = 1 << 2,
-
-        /// <summary>
-        /// Flag given to users who are in the HypeSquad House of Bravery.
-        /// </summary>
-        [Obsolete("Replaced with HypeSquadOnlineHouse1. Will be removed April 2022")]
-        HouseBravery = 1 << 6,
-        
-        /// <summary>
-        /// Flag given to users who are in the HypeSquad House of Brilliance.
-        /// </summary>
-        [Obsolete("Replaced with HypeSquadOnlineHouse2. Will be removed April 2022")]
-        HouseBrilliance = 1 << 7,
-        
-        /// <summary>
-        /// Flag given to users who are in the HypeSquad House of Balance.
-        /// </summary>
-        [Obsolete("Replaced with HypeSquadOnlineHouse3. Will be removed April 2022")]
-        HouseBalance = 1 << 8,
-        
-        /// <summary>
-        /// Flag given to users who subscribed to Nitro before games were added.
-        /// </summary>
-        [Obsolete("Replaced with PremiumEarlySupporter. Will be removed April 2022")]
-        EarlySupporter = 1 << 9,
-        
-        /// <summary>
-        /// Flag given to users who are part of a team.
-        /// </summary>
-        [Obsolete("Replaced with TeamPseudoUser. Will be removed April 2022")]
-        TeamUser = 1 << 10,
-
-        /// <summary>
-        ///  Flag given to users that developed bots and early verified their accounts.
-        /// </summary>
-        [Obsolete("Replaced with VerifiedDeveloper. Will be removed April 2022")]
-        EarlyVerifiedBotDeveloper = 1 << 17,
-        
-        /// <summary>
-        /// Flag given to users that are discord certified moderators
-        /// </summary>
-        [Obsolete("Replaced with CertifiedModerator. Will be removed April 2022")]
-        DiscordCertifiedModerator = 1 << 18,
-        #endregion
+        ActiveDeveloper = 1 << 22,
     }
 }

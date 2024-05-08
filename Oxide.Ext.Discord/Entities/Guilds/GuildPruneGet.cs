@@ -1,21 +1,23 @@
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#get-guild-prune-count">Guild Prune Get</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class GuildPruneGet
+    public class GuildPruneGet : IDiscordQueryString, IDiscordValidation
     {
         /// <summary>
         /// Number of days to count prune for (1 - 30)
         /// </summary>
         [JsonProperty("days")]
-        public int Days { get; set; }
+        public int Days { get; set; } = 7;
         
         /// <summary>
         /// List of roles to include
@@ -23,20 +25,24 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         [JsonProperty("include_roles")]
         public List<Snowflake> IncludeRoles { get; set; }
         
-        /// <summary>
-        /// Returns the query string for the Guild Prune Get endpoint
-        /// </summary>
-        /// <returns>Guild Prune Get Query String</returns>
+        /// <inheritdoc/>
         public virtual string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            Validate();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             builder.Add("days", Days.ToString());
             if (IncludeRoles != null)
             {
                 builder.AddList("include_roles", IncludeRoles, ",");
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
+        }
+
+        ///<inheritdoc/>
+        public void Validate()
+        {
+            InvalidGuildPruneException.ThrowIfInvalidDays(Days);
         }
     }
 }

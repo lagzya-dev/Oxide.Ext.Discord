@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Channels
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents the type of a permission
     /// </summary>
-    public enum PermissionType
+    public enum PermissionType : byte
     {
         /// <summary>
         /// This permission belongs to a role

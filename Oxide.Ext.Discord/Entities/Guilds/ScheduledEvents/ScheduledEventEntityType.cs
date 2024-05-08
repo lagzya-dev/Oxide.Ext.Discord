@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Guilds.ScheduledEvents
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-entity-types">Scheduled Entity Type</a>
     /// </summary>
-    public enum ScheduledEventEntityType
+    public enum ScheduledEventEntityType : byte
     {
         /// <summary>
         /// Event will be held in a stage instance

@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type">ApplicationCommandOptionType</a>
     /// </summary>
-    public enum CommandOptionType
+    public enum CommandOptionType : byte
     {
         /// <summary>
         /// The command option is a sub command
@@ -54,6 +54,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands
         /// <summary>
         /// Any double between -2^53 and 2^53
         /// </summary>
-        Number = 10
+        Number = 10,
+        
+        /// <summary>
+        /// Attachment object
+        /// </summary>
+        Attachment = 11
     }
 }

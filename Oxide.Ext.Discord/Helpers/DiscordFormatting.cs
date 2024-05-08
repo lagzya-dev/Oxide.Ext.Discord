@@ -1,12 +1,14 @@
 using System;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Exceptions;
 
 namespace Oxide.Ext.Discord.Helpers
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/reference#message-formatting-formats">Message text formatting options</a>
     /// </summary>
-    public class DiscordFormatting
+    public static class DiscordFormatting
     {
         /// <summary>
         /// Mention the user with the given user ID
@@ -14,14 +16,7 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="userId">User ID to mention</param>
         /// <returns>Mention user formatted string</returns>
         public static string MentionUser(Snowflake userId) => $"<@{userId.ToString()}>";
-        
-        /// <summary>
-        /// Mention the user displaying their user name
-        /// </summary>
-        /// <param name="userId">User ID to mention</param>
-        /// <returns>Ping user formatted string</returns>
-        public static string MentionUserNickname(Snowflake userId) => $"<@!{userId.ToString()}>";
-        
+
         /// <summary>
         /// Mention the the channel with the given ID
         /// </summary>
@@ -35,6 +30,56 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="roleId">Role ID to mention</param>
         /// <returns>Mention role formatted string</returns>
         public static string MentionRole(Snowflake roleId) => $"<@&{roleId.ToString()}>";
+
+        /// <summary>
+        /// Mention the the Application command
+        /// </summary>
+        /// <param name="commandId">Application Command ID</param>
+        /// <param name="name">Name of the command</param>
+        /// <param name="subCommand">Sub Command Name (Optional)</param>
+        /// <param name="group">Sub Command Group (Optional)</param>
+        /// <returns>Mentions the application command</returns>
+        public static string MentionApplicationCommand(Snowflake commandId, string name, string subCommand = null, string group = null)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(commandId, nameof(commandId));
+            if (string.IsNullOrEmpty(name)) throw new ArgumentNullException(nameof(name));
+            if (!string.IsNullOrEmpty(subCommand))
+            {
+                if (!string.IsNullOrEmpty(group))
+                {
+                    return $"</{name} {group} {subCommand}:{commandId}>";
+                }
+                
+                return $"</{name} {subCommand}:{commandId}>";
+            }
+            return $"</{name}:{commandId}>";
+        }
+
+        /// <summary>
+        /// Mention the application command using a custom command string
+        /// </summary>
+        /// <param name="commandId">Application Command ID</param>
+        /// <param name="command">Custom Command String</param>
+        /// <returns></returns>
+        public static string MentionApplicationCommandCustom(Snowflake commandId, string command)
+        {
+            return $"</{command}:{commandId}>";
+        }
+
+        /// <summary>
+        /// Return the emoji string for a message
+        /// </summary>
+        /// <param name="emoji">Emoji to create as a string</param>
+        /// <returns>Emoji message string</returns>
+        public static string EmojiMessageString(DiscordEmoji emoji)
+        {
+            if (!emoji.EmojiId.HasValue)
+            {
+                return emoji.Name;
+            }
+
+            return CustomEmojiMessageString(emoji.Id, emoji.Name, emoji.Animated ?? false);
+        }
 
         /// <summary>
         /// Returns formatting string for custom emoji to be used in a message
@@ -57,35 +102,53 @@ namespace Oxide.Ext.Discord.Helpers
         /// <summary>
         /// Displays a timestamp 
         /// </summary>
+        /// <param name="time">Time to display</param>
+        /// <param name="style">Style of the timestamp</param>
+        /// <returns></returns>
+        public static string UnixTimestamp(DateTimeOffset time, TimestampStyles style = TimestampStyles.ShortDateTime) => UnixTimestamp(time.ToUnixTimeSeconds(), style);
+        
+        /// <summary>
+        /// Displays a timestamp 
+        /// </summary>
         /// <param name="timestamp">UNIX Timestamp</param>
         /// <param name="style">Display style for the timestamp</param>
         /// <returns></returns>
-        public static string UnixTimestamp(int timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
+        public static string UnixTimestamp(long timestamp, TimestampStyles style = TimestampStyles.ShortDateTime)
         {
             return $"<t:{timestamp.ToString()}:{GetTimestampFlag(style)}>";
         }
 
-        private static string GetTimestampFlag(TimestampStyles style)
+        private static char GetTimestampFlag(TimestampStyles style)
         {
             switch (style)
             {
                 case TimestampStyles.ShortTime:
-                    return "t";
+                    return 't';
                 case TimestampStyles.LongTime:
-                    return "T";
+                    return 'T';
                 case TimestampStyles.ShortDate:
-                    return "d";
+                    return 'd';
                 case TimestampStyles.LongDate:
-                    return "D";
+                    return 'D';
                 case TimestampStyles.ShortDateTime:
-                    return "f";
+                    return 'f';
                 case TimestampStyles.LongDateTime:
-                    return "F";
+                    return 'F';
                 case TimestampStyles.RelativeTime:
-                    return "R";
+                    return 'R';
             }
 
-            return "f";
+            return 'f';
+        }
+
+        /// <summary>
+        /// Guild Navigation Format
+        /// </summary>
+        /// <param name="type">Type to navigate to</param>
+        /// <returns>string with navigation to the navigation type</returns>
+        public static string GuildNavigation(GuildNavigationType type)
+        {
+            return $"<id:{EnumCache<GuildNavigationType>.Instance.ToLower(type)}>";
         }
         
         /// <summary>
@@ -179,5 +242,58 @@ namespace Oxide.Ext.Discord.Helpers
         /// <param name="message">Message to make block quote</param>
         /// <returns>Multiline block quote formatted message</returns>
         public static string BlockQuoteMultiLine(string message) => $">>> {message}";
+
+        /// <summary>
+        /// Will display the text as a spoiler
+        /// </summary>
+        /// <param name="message">Message to make Spoiler</param>
+        /// <returns>Spoiler message</returns>
+        public static string Spoiler(string message) => $"||{message}||";
+        
+        /// <summary>
+        /// Creates a Big Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header1(string header) => $"# {header}";
+        
+        /// <summary>
+        /// Creates a Medium Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header2(string header) => $"## {header}";
+        
+        /// <summary>
+        /// Creates a Small Header
+        /// </summary>
+        /// <param name="header">text for the header</param>
+        /// <returns></returns>
+        public static string Header3(string header) => $"### {header}";
+
+        /// <summary>
+        /// Creates a clickable link displayed as the mask text
+        /// </summary>
+        /// <param name="mask">Text to display the link as</param>
+        /// <param name="url">Url for the link</param>
+        /// <returns></returns>
+        public static string MaskLink(string mask, string url) => $"[{mask}]({url})";
+        
+        /// <summary>
+        /// Creates a list item for the given message
+        /// </summary>
+        /// <param name="message">Text for the list</param>
+        /// <param name="indent">If the list should be indented a level</param>
+        /// <returns></returns>
+        public static string List(string message, bool indent) => $"{(indent ? " " : string.Empty)}- {message}";
+
+        /// <summary>
+        /// Creates a list item for the given message
+        /// </summary>
+        /// <param name="message">Text for the list</param>
+        /// <param name="number">Number to display</param>
+        /// <param name="indent">If the list should be indented a level</param>
+        /// <returns></returns>
+        public static string NumberedList(string message, int number, bool indent) => $"{(indent ? " " : string.Empty)}{StringCache<int>.Instance.ToString(number)} {message}";
     }
 }

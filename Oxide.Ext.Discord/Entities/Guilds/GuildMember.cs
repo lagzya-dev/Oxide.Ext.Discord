@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-member-object-guild-member-structure">Guild Member Structure</a>
@@ -58,8 +57,9 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// <summary>
         /// Total permissions of the member in the channel, including overrides, returned when in the interaction object
         /// </summary>
+        [JsonConverter(typeof(PermissionFlagsStringConverter))]
         [JsonProperty("permissions")]
-        public string Permissions { get; set; }
+        public PermissionFlags? Permissions { get; set; }
         
         /// <summary>
         /// Whether the user is deafened in voice channels
@@ -72,6 +72,12 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         [JsonProperty("mute")]
         public bool Mute { get; set; }
+        
+        /// <summary>
+        /// Flags for the GuildMember
+        /// </summary>
+        [JsonProperty("flags")]
+        public GuildMemberFlags Flags { get; set; }
 
         /// <summary>
         /// Whether the user has not yet passed the guild's Membership Screening requirements
@@ -86,11 +92,28 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         public DateTime? CommunicationDisabledUntil { get; set; }
         #endregion
 
+        #region Extension Fields
+        /// <summary>
+        /// When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet
+        /// </summary>
+        public DateTime? NickNameLastUpdated { get; internal set; }
+        
+        /// <summary>
+        /// Returns if the <see cref="GuildMember"/> has left the <see cref="DiscordGuild"/> it belongs to
+        /// </summary>
+        public bool HasLeftGuild { get; internal set; }
+        #endregion
+        
         #region Helper Properties
         /// <summary>
         /// Returns the display name show for the user in a guild
         /// </summary>
-        public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.Username : Nickname;
+        public string DisplayName => string.IsNullOrEmpty(Nickname) ? User?.DisplayName : Nickname;
+        
+        /// <summary>
+        /// Returns if the GuildMember is a bot
+        /// </summary>
+        public bool IsBot => User.Bot.HasValue && User.Bot.Value;
         #endregion
         
         #region Helper Methods
@@ -115,41 +138,7 @@ namespace Oxide.Ext.Discord.Entities.Guilds
         /// </summary>
         /// <param name="roleId">Role ID to check</param>
         /// <returns>Return true if has role; False otherwise;</returns>
-        public bool HasRole(Snowflake roleId)
-        {
-            return Roles.Contains(roleId);
-        }
-        #endregion
-        
-        #region Entity Update
-        internal GuildMember Update(GuildMember update)
-        {
-            GuildMember previous = (GuildMember)MemberwiseClone();
-            if (update.User != null)
-                previous.User = User.Update(update.User);
-
-            if (update.Nickname != null)
-                Nickname = update.Nickname;
-
-            if (update.Roles != null)
-                Roles = update.Roles;
-
-            if (update.PremiumSince != null)
-                PremiumSince = update.PremiumSince;
-
-            Deaf = update.Deaf;
-            Mute = update.Mute;
-            
-            if (update.Pending != null)
-                Pending = update.Pending;
-            
-            if (update.Permissions != null)
-                Permissions = update.Permissions;
-
-            CommunicationDisabledUntil = update.CommunicationDisabledUntil;
-            
-            return previous;
-        }
+        public bool HasRole(Snowflake roleId) => Roles.Contains(roleId);
         #endregion
     }
 }

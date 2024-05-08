@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Messages.Embeds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object-embed-field-structure">Embed Field Structure</a>
@@ -8,6 +8,11 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class EmbedField
     {
+        /// <summary>
+        /// Represents a blank character to be used in embeds for empty text
+        /// </summary>
+        public const string Blank = "\u200b";
+        
         /// <summary>
         /// Name of the field
         /// </summary>
@@ -29,10 +34,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <summary>
         /// Embed Field constructor
         /// </summary>
-        public EmbedField()
-        {
-            
-        }
+        public EmbedField() { }
         
         /// <summary>
         /// Embed Field constructor
@@ -42,8 +44,8 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// <param name="inline">Should field be inlined</param>
         public EmbedField(string name, string value, bool inline)
         {
-            Name = name;
-            Value = value;
+            Name = !string.IsNullOrEmpty(name) ? name : Blank;
+            Value = !string.IsNullOrEmpty(value) ? value : Blank;
             Inline = inline;
         }
     }

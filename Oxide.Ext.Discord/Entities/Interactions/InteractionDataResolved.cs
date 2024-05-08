@@ -1,12 +1,7 @@
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure">Application Command Interaction Data Option</a>
@@ -43,5 +38,11 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("messages")]
         public Hash<Snowflake, DiscordMessage> Messages { get; set; }
+        
+        /// <summary>
+        /// The ids and attachment objects
+        /// </summary>
+        [JsonProperty("attachments")]
+        public Hash<Snowflake, MessageAttachment> Attachments { get; set; }
     }
 }

@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Oxide.Core.Libraries.Covalence;
-using Oxide.Ext.Discord.Entities.Api;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Messages.Embeds;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users.Connections;
+using Oxide.Ext.Discord.Cache;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Data;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
-using Oxide.Ext.Discord.Helpers.Cdn;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/user#user-object">User Structure</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class DiscordUser : ISnowflakeEntity
+    public class DiscordUser : ISnowflakeEntity, IDiscordCacheable<DiscordUser>, IDebugLoggable
     {
         #region Discord Fields
         /// <summary>
@@ -35,11 +34,18 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("username")]
         public string Username { get; set; }
+        
+        /// <summary>
+        /// The user's global name
+        /// </summary>
+        [JsonProperty("global_name")]
+        public string GlobalName { get; set; }
 
         /// <summary>
         /// The user's 4-digit discord-tag
         /// </summary>
         [JsonProperty("discriminator")]
+        [Obsolete("This field will be removed by discord in a future API version")]
         public string Discriminator { get; set; }
 
         /// <summary>
@@ -116,38 +122,69 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         [JsonProperty("public_flags")]
         public UserFlags? PublicFlags { get; set; }
+        
+        /// <summary>
+        /// The user's avatar decoration hash
+        /// </summary>
+        [JsonProperty("avatar_decoration")]
+        public string AvatarDecoration { get; set; }
         #endregion
 
         #region Helper Properties
         /// <summary>
         /// Returns a string to mention this users nickname in a message
         /// </summary>
-        public string Mention => DiscordFormatting.MentionUserNickname(Id);
-        
-        /// <summary>
-        /// Returns a string to mention this users username in a message
-        /// </summary>
-        public string MentionUser => DiscordFormatting.MentionUser(Id);
-        
+        public string Mention => DiscordFormatting.MentionUser(Id);
+
         /// <summary>
         /// Default Avatar Url for the User
         /// </summary>
-        public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Id, Discriminator);
+        public string GetDefaultAvatarUrl => DiscordCdn.GetUserDefaultAvatarUrl(Discriminator);
 
         /// <summary>
         /// Avatar Url for the user
         /// </summary>
         public string GetAvatarUrl => DiscordCdn.GetUserAvatarUrl(Id, Avatar);
+        
+        /// <summary>
+        /// Avatar Decoration Url for the user
+        /// </summary>
+        public string GetAvatarDecorationUrl => DiscordCdn.GetUserAvatarDecoration(Id, AvatarDecoration);
+        
+        /// <summary>
+        /// Banner Url for the user
+        /// </summary>
+        public string GetBannerUrl => DiscordCdn.GetUserBanner(Id, Banner);
 
         /// <summary>
         /// Returns the username#discriminator for the user
         /// </summary>
-        public string GetFullUserName => $"{Username}#{Discriminator}";
+        public string FullUserName => Discriminator == "0" ? Username : $"{Username}#{Discriminator}";
+
+        /// <summary>
+        /// The display name for the user
+        /// </summary>
+        public string DisplayName => GlobalName ?? Username;
+
+        /// <summary>
+        /// Returns if the DiscordUser is a bot
+        /// </summary>
+        public bool IsBot => Bot.HasValue && Bot.Value;
+        
+        /// <summary>
+        /// Returns if the DiscordUser is a system user
+        /// </summary>
+        public bool IsSystem => System.HasValue && System.Value;
+
+        /// <summary>
+        /// Returns true if the user has upgraded their username to the new username format
+        /// </summary>
+        public bool HasUpdatedUsername => !string.IsNullOrEmpty(Discriminator) && Discriminator == "0";
 
         /// <summary>
         /// Returns the IPlayer for the discord user if linked; null otherwise
         /// </summary>
-        public IPlayer Player => DiscordExtension.DiscordLink.GetPlayer(Id);
+        public IPlayer Player => DiscordLink.Instance.GetPlayer(Id);
         #endregion
 
         #region API Methods
@@ -156,11 +193,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// See <a href="https://discord.com/developers/docs/resources/user#get-current-user">Get Current User</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the logged in user</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordUser> GetCurrentUser(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<DiscordUser>(client,"users/@me");
         }
 
         /// <summary>
@@ -169,12 +204,10 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to lookup</param>
-        /// <param name="callback">Callback with the looked up user</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void GetUser(DiscordClient client, Snowflake userId, Action<DiscordUser> callback = null, Action<RestError> error = null)
+        public static IPromise<DiscordUser> GetUser(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            client.Bot.Rest.DoRequest($"/users/{userId}", RequestMethod.GET, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            return client.Bot.Rest.Get<DiscordUser>(client,$"users/{userId}");
         }
 
         /// <summary>
@@ -182,11 +215,11 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Message to be created</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SendDirectMessage(DiscordClient client, MessageCreate message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, MessageCreate message)
         {
-            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, message, callback, error); });
+            if (message == null) throw new ArgumentNullException(nameof(message));
+            return CreateDirectMessageChannel(client, Id)
+                .Then(channel => channel.CreateMessage(client, message));
         }
 
         /// <summary>
@@ -194,11 +227,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="message">Content of the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SendDirectMessage(DiscordClient client, string message, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, string message)
         {
-            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, message, callback, error); });
+            return SendDirectMessage(client, new MessageCreate{Content = message});
         }
 
         /// <summary>
@@ -206,40 +237,49 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="embeds">Embeds to be send in the message</param>
-        /// <param name="callback">Callback with the created message</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds, Action<DiscordMessage> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordMessage> SendDirectMessage(DiscordClient client, List<DiscordEmbed> embeds)
         {
-            CreateDirectMessageChannel(client, Id, channel => { channel.CreateMessage(client, embeds, callback, error); });
+            if (embeds == null) throw new ArgumentNullException(nameof(embeds));
+            return SendDirectMessage(client, new MessageCreate{Embeds = embeds});
         }
 
         /// <summary>
-        /// Modify the currently logged in user with the currently set UserName and Avatar
-        /// See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
+        /// Send a message in a DM to the user using a localized message template
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the updated user</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyCurrentUser(DiscordClient client, Action<DiscordUser> callback = null, Action<RestError> error = null) => ModifyCurrentUser(client, Username, Avatar, callback, error);
+        /// <param name="templateName">Template Name</param>
+        /// <param name="language">Oxide language to use</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        public IPromise<DiscordMessage> SendTemplateDirectMessage(DiscordClient client, TemplateKey templateName, string language = DiscordLocales.DefaultServerLanguage, MessageCreate message = null, PlaceholderData placeholders = null)
+        {
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetLocalizedTemplate(client.Plugin, templateName, language).ToMessage(placeholders, message);
+            return SendDirectMessage(client, template);
+        }
+
+        /// <summary>
+        /// Reply to a message using a global message template
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="templateName">Template Name</param>
+        /// <param name="message">Message to use (optional)</param>
+        /// <param name="placeholders">Placeholders to apply (optional)</param>
+        public IPromise<DiscordMessage> SendGlobalTemplateDirectMessage(DiscordClient client, TemplateKey templateName, MessageCreate message = null, PlaceholderData placeholders = null)
+        {
+            MessageCreate template = DiscordExtension.DiscordMessageTemplates.GetGlobalTemplate(client.Plugin, templateName).ToMessage(placeholders, message);
+            return SendDirectMessage(client, template);
+        }
 
         /// <summary>
         /// Modify the currently logged in user
         /// See <a href="https://discord.com/developers/docs/resources/user#modify-current-user">Modify Current User</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="username">Username to set</param>
-        /// <param name="avatarData">Avatar data to set</param>
-        /// <param name="callback">Callback with the updated user</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void ModifyCurrentUser(DiscordClient client, string username = "", string avatarData = "", Action<DiscordUser> callback = null, Action<RestError> error = null)
+        /// <param name="current">The updated current user information</param>
+        public IPromise<DiscordUser> ModifyCurrentUser(DiscordClient client, UserModifyCurrent current)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>
-            {
-                ["username"] = username,
-                ["avatar"] = avatarData
-            };
-
-            client.Bot.Rest.DoRequest($"/users/@me", RequestMethod.PATCH, data, callback, error);
+            if (current == null) throw new ArgumentNullException(nameof(current));
+            return client.Bot.Rest.Patch<DiscordUser>(client,"users/@me", current);
         }
 
         /// <summary>
@@ -248,22 +288,10 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="request">Request parameters for filtering guilds</param>
-        /// <param name="callback">Callback with the list of guilds</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null, Action<List<DiscordGuild>> callback = null, Action<RestError> error = null)
+        public IPromise<List<DiscordGuild>> GetCurrentUserGuilds(DiscordClient client, UserGuildsRequest request = null)
         {
-            client.Bot.Rest.DoRequest($"/users/@me/guilds{request?.ToQueryString()}", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<DiscordGuild>>(client,$"users/@me/guilds{request?.ToQueryString()}");
         }
-
-        /// <summary>
-        /// Leave the guild that the currently logged in user is in
-        /// See <a href="https://discord.com/developers/docs/resources/user#leave-guild">Leave Guild</a>
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        /// <param name="guild">Guild to leave</param>
-        /// <param name="callback">callback when the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void LeaveGuild(DiscordClient client, DiscordGuild guild, Action callback = null, Action<RestError> error = null) => LeaveGuild(client, guild.Id, callback, error);
 
         /// <summary>
         /// Leave the guild that the currently logged in user is in
@@ -271,12 +299,10 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="guildId">Guild ID to leave</param>
-        /// <param name="callback">callback when the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void LeaveGuild(DiscordClient client, Snowflake guildId, Action callback = null, Action<RestError> error = null)
+        public IPromise LeaveGuild(DiscordClient client, Snowflake guildId)
         {
-            if (!guildId.IsValid()) throw new InvalidSnowflakeException(nameof(guildId));
-            client.Bot.Rest.DoRequest($"/users/@me/guilds/{guildId}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
+            return client.Bot.Rest.Delete(client,$"users/@me/guilds/{guildId}");
         }
 
         /// <summary>
@@ -284,9 +310,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// See <a href="https://discord.com/developers/docs/resources/user#create-dm">Create DM</a>
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the direct message channel</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateDirectMessageChannel(DiscordClient client, Action<DiscordChannel> callback, Action<RestError> error = null) => CreateDirectMessageChannel(client, Id, callback, error);
+        public IPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client) => CreateDirectMessageChannel(client, Id);
 
         /// <summary>
         /// Create a Direct Message to the current User
@@ -294,22 +318,25 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="userId">User ID to send the message to</param>
-        /// <param name="callback">Callback with the direct message channel</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public static void CreateDirectMessageChannel(DiscordClient client, Snowflake userId, Action<DiscordChannel> callback, Action<RestError> error = null)
+        public static IPromise<DiscordChannel> CreateDirectMessageChannel(DiscordClient client, Snowflake userId)
         {
-            if (!userId.IsValid()) throw new InvalidSnowflakeException(nameof(userId));
-            if (userId == client.Bot.BotUser.Id)
-            {
-                client.Logger.Error("Tried to create a direct message to the bot which is not allowed.");
-                return;
-            }
+            InvalidSnowflakeException.ThrowIfInvalid(userId, nameof(userId));
+            InvalidChannelException.ThrowIfChannelToSelf(userId, client);
 
+            UserData userData = client.Bot.DirectMessagesByUserId[userId]?.UserData;
+            DateTime? isBlocked = userData?.GetBlockedUntil();
+            
+            if (isBlocked.HasValue && isBlocked.Value > DateTime.UtcNow)
+            {
+                DiscordUser user = userData.GetUser();
+                client.Logger.Debug("Blocking CreateMessage. User {0} ({1}) is DM blocked until {2}.", user.FullUserName, user.Id, userData.GetBlockedUntil());
+                return Promise<DiscordChannel>.Rejected(new BlockedUserException(userData.GetUser(), isBlocked.Value));
+            }
+            
             DiscordChannel channel = client.Bot.DirectMessagesByUserId[userId];
             if (channel != null)
             {
-                callback.Invoke(channel);
-                return;
+                return Promise<DiscordChannel>.Resolved(channel);
             }
 
             Dictionary<string, object> data = new Dictionary<string, object>
@@ -317,11 +344,28 @@ namespace Oxide.Ext.Discord.Entities.Users
                 ["recipient_id"] = userId
             };
 
-            client.Bot.Rest.DoRequest<DiscordChannel>("/users/@me/channels", RequestMethod.POST, data, newChannel =>
+            IPromise<DiscordChannel> response = client.Bot.Rest.Post<DiscordChannel>(client, "users/@me/channels", data).Then(newChannel =>
             {
                 client.Bot.AddDirectChannel(newChannel);
-                callback?.Invoke(newChannel);
-            }, error);
+            });
+
+            response.Catch<ResponseError>(error =>
+            {
+                if (error.DiscordError == null || error.DiscordError.Code != 50007)
+                {
+                    return;
+                }
+
+                if (userData == null)
+                {
+                    BotData bot = DiscordUserData.Instance.GetBotData(client.Bot.BotUser.Id);
+                    userData = bot.GetUserData(userId);
+                }
+                
+                userData.ProcessError(client, error);
+            });
+
+            return response;
         }
 
         /// <summary>
@@ -330,17 +374,15 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="accessTokens">access tokens of users that have granted your app the gdm.join scope</param>
         /// <param name="nicks">a list of user ids to their respective nicknames</param>
-        /// <param name="callback">Callback with the direct message channel</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks, Action<DiscordChannel> callback = null, Action<RestError> error = null)
+        public IPromise<DiscordChannel> CreateGroupDm(DiscordClient client, string[] accessTokens, Hash<Snowflake, string> nicks)
         {
-            Dictionary<string, object> data = new Dictionary<string, object>()
+            Dictionary<string, object> data = new Dictionary<string, object>
             {
                 ["access_tokens"] = accessTokens,
                 ["nicks"] = nicks
             };
 
-            client.Bot.Rest.DoRequest("/users/@me/channels", RequestMethod.POST, data, callback, error);
+            return client.Bot.Rest.Post<DiscordChannel>(client,"users/@me/channels", data);
         }
 
         /// <summary>
@@ -348,11 +390,9 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// Requires the connections OAuth2 scope.
         /// </summary>
         /// <param name="client">Client to use</param>
-        /// <param name="callback">Callback with the list of connections</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GetUserConnections(DiscordClient client, Action<List<Connection>> callback = null, Action<RestError> error = null)
+        public IPromise<List<Connection>> GetUserConnections(DiscordClient client)
         {
-            client.Bot.Rest.DoRequest("/users/@me/connections", RequestMethod.GET, null, callback, error);
+            return client.Bot.Rest.Get<List<Connection>>(client,"users/@me/connections");
         }
 
         /// <summary>
@@ -362,9 +402,7 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="client">Client to use</param>
         /// <param name="channel">Channel to add recipient to</param>
         /// <param name="accessToken">Users access token</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, string accessToken, Action callback = null, Action<RestError> error = null) => GroupDmAddRecipient(client, channel.Id, accessToken, Username, callback, error);
+        public IPromise GroupDmAddRecipient(DiscordClient client, DiscordChannel channel, string accessToken) => GroupDmAddRecipient(client, channel.Id, accessToken, Username);
 
         /// <summary>
         /// Adds a recipient to a Group DM using their access token
@@ -374,18 +412,16 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// <param name="channelId">Channel ID to add user to</param>
         /// <param name="accessToken">Users access token</param>
         /// <param name="nick">User nickname</param>
-        /// <param name="callback">Callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick, Action callback = null, Action<RestError> error = null)
+        public IPromise GroupDmAddRecipient(DiscordClient client, Snowflake channelId, string accessToken, string nick)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
             Dictionary<string, string> data = new Dictionary<string, string>
             {
                 ["access_token"] = accessToken,
                 ["nick"] = nick
             };
 
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.PUT, data, callback, error);
+            return client.Bot.Rest.Put(client,$"channels/{channelId}/recipients/{Id}", data);
         }
 
         /// <summary>
@@ -393,85 +429,55 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channel">Channel to remove recipient from</param>
-        /// <param name="callback">callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel, Action callback = null, Action<RestError> error = null) => GroupDmRemoveRecipient(client, channel.Id, callback, error);
+        public IPromise GroupDmRemoveRecipient(DiscordClient client, DiscordChannel channel) => GroupDmRemoveRecipient(client, channel.Id);
 
         /// <summary>
         /// Removes a recipient from a Group DM
         /// </summary>
         /// <param name="client">Client to use</param>
         /// <param name="channelId">Channel ID to remove recipient from</param>
-        /// <param name="callback">callback once the action is completed</param>
-        /// <param name="error">Callback when an error occurs with error information</param>
-        public void GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId, Action callback = null, Action<RestError> error = null)
+        public IPromise GroupDmRemoveRecipient(DiscordClient client, Snowflake channelId)
         {
-            if (!channelId.IsValid()) throw new InvalidSnowflakeException(nameof(channelId));
-            client.Bot.Rest.DoRequest($"/channels/{channelId}/recipients/{Id}", RequestMethod.DELETE, null, callback, error);
+            InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
+            return client.Bot.Rest.Delete(client,$"channels/{channelId}/recipients/{Id}");
         }
         #endregion
-
-        #region Entity Update
-        internal DiscordUser Update(DiscordUser update)
+        
+        [OnDeserialized]
+        internal void OnDeserializedMethod(StreamingContext context)
         {
-            DiscordUser previous = (DiscordUser) MemberwiseClone();
-            if (update.Username != null)
-            {
-                Username = update.Username;
-            }
-
-            if (update.Discriminator != null)
-            {
-                Discriminator = update.Discriminator;
-            }
-
-            if (update.Avatar != null)
-            {
-                Avatar = update.Avatar;
-            }
-
-            if (update.Bot != null)
-            {
-                Bot = update.Bot;
-            }
-
-            if (update.MfaEnabled != null)
-            {
-                MfaEnabled = update.MfaEnabled;
-            }
-
-            if (update.Locale != null)
-            {
-                Locale = update.Locale;
-            }
-
-            if (update.Verified != null)
-            {
-                Verified = update.Verified;
-            }
-
-            if (update.Email != null)
-            {
-                Email = update.Email;
-            }
-
-            if (update.Flags != null)
-            {
-                Flags = update.Flags;
-            }
-
-            if (update.PremiumType != null)
-            {
-                PremiumType = update.PremiumType;
-            }
-
-            if (update.PublicFlags != null)
-            {
-                PublicFlags = update.PublicFlags;
-            }
-
-            return previous;
+            DiscordUser update = EntityCache<DiscordUser>.Instance.Update(this);
+            Update(update);
         }
-        #endregion
+        
+        /// <summary>
+        /// Updates the user data with the passed in user
+        /// </summary>
+        /// <param name="update"></param>
+        public void Update(DiscordUser update)
+        {
+            if (update.Username != null) Username = update.Username;
+            if (update.GlobalName != null) GlobalName = update.GlobalName;
+            if (update.Discriminator != null) Discriminator = update.Discriminator;
+            if (update.Avatar != null) Avatar = update.Avatar;
+            if (update.MfaEnabled.HasValue) MfaEnabled = update.MfaEnabled;
+            if (update.Banner != null) Banner = update.Banner;
+            if (update.AccentColor.HasValue) AccentColor = update.AccentColor;
+            if (update.Locale != null) Locale = update.Locale;
+            if (update.Verified.HasValue) Verified = update.Verified;
+            if (update.Email != null) Email = update.Email;
+            if (update.Flags.HasValue) Flags = update.Flags;
+            if (update.PremiumType.HasValue) PremiumType = update.PremiumType;
+            if (update.PublicFlags.HasValue) PublicFlags = update.PublicFlags;
+            if (update.AvatarDecoration != null) AvatarDecoration = update.AvatarDecoration;
+        }
+        
+        ///<inheritdoc/>
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Id", Id);
+            logger.AppendField("Name", FullUserName);
+            logger.AppendField("Bot", IsBot);
+        }
     }
 }

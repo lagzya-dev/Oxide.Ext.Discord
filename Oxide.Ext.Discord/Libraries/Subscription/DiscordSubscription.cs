@@ -1,31 +1,40 @@
 using System;
-using Oxide.Core;
-using Oxide.Core.Libraries;
+using System.Linq;
 using Oxide.Core.Plugins;
+using Oxide.Ext.Discord.Callbacks;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Messages;
+using Oxide.Ext.Discord.Extensions;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries.Subscription
+namespace Oxide.Ext.Discord.Libraries
 {
     /// <summary>
     /// Represents a channel subscription for a plugin
     /// </summary>
-    public class DiscordSubscription
+    public class DiscordSubscription : IDebugLoggable
     {
-        private Plugin _plugin;
-        private readonly Action<DiscordMessage> _callback;
         private readonly Snowflake _channelId;
+        private readonly PluginId _pluginId;
+        private readonly DiscordClient _client;
+        private readonly Action<DiscordMessage> _callback;
+        
+        private Plugin _plugin;
 
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="client">Discord Client for the subscription</param>
         /// <param name="channelId">ID of the channel</param>
-        /// <param name="plugin">Plugin the subscription is for</param>
         /// <param name="callback">Callback when the channel message is sent</param>
-        public DiscordSubscription(Snowflake channelId, Plugin plugin, Action<DiscordMessage> callback)
+        public DiscordSubscription(DiscordClient client, Snowflake channelId, Action<DiscordMessage> callback)
         {
+            _client = client;
+            _plugin = client.Plugin;
             _channelId = channelId;
-            _plugin = plugin;
+            _pluginId = _plugin.Id();
             _callback = callback;
         }
 
@@ -37,8 +46,22 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <returns>True if same bot client; false otherwise</returns>
         public bool CanRun(BotClient client)
         {
-            return client != null && DiscordClient.Clients[_plugin.Name]?.Bot == client;
+            return client != null && _client.Bot == client;
         }
+
+        /// <summary>
+        /// Returns if this subscription is for this plugin
+        /// </summary>
+        /// <param name="plugin">Plugin to check</param>
+        /// <returns>True if the subscription is for this plugin; False otherwise</returns>
+        public bool IsForPlugin(Plugin plugin) => plugin != null && plugin.Id() == _pluginId;
+
+        /// <summary>
+        /// Returns if this subscription is for the given channel
+        /// </summary>
+        /// <param name="channelId">Channel ID to check</param>
+        /// <returns>True if the subscription is for this channel; False otherwise</returns>
+        public bool IsForChannel(Snowflake channelId) => _channelId == channelId;
 
         /// <summary>
         /// Invokes the callback with the message
@@ -46,19 +69,37 @@ namespace Oxide.Ext.Discord.Libraries.Subscription
         /// <param name="message">Message that was sent in the given channel</param>
         public void Invoke(DiscordMessage message)
         {
-            Interface.Oxide.NextTick(() =>
+            SubscriptionCallback.Start(_plugin, message, _callback);
+        }
+
+        ///<inheritdoc/>
+        public void LogDebug(DebugLogger logger)
+        {
+            logger.AppendField("Plugin", _plugin.FullName());
+            logger.AppendMethod("Method", _callback.Method);
+            
+            DiscordGuild guild = _client?.Bot.Servers.Values.FirstOrDefault(g => g.Channels.ContainsKey(_channelId));
+            if (guild == null)
             {
-                try
-                {
-                    _plugin.TrackStart();
-                    _callback.Invoke(message);
-                    _plugin.TrackEnd();
-                }
-                catch(Exception ex)
-                {
-                    DiscordExtension.GlobalLogger.Exception($"An exception occured for discord subscription in channel {_channelId.ToString()} for plugin {_plugin?.Name}", ex);   
-                }
-            });
+                logger.AppendField("Guild", "Unknown Guild");
+                return;
+            }
+            
+            DiscordChannel channel = guild.Channels[_channelId];
+            if (channel == null)
+            {
+                logger.AppendField("Channel", "Unknown Channel");
+                return;
+            }
+
+            DiscordChannel parent = null;
+            if (channel.ParentId.HasValue)
+            {
+                parent = guild.Channels[channel.ParentId.Value];
+            }
+            
+            logger.AppendChannelPath("Path", guild, channel, parent);
+            logger.AppendObject("Channel", channel);
         }
 
         internal void OnRemoved()

@@ -1,12 +1,13 @@
-using System.Text;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities.Users
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/user#get-current-user-guilds-query-string-params">Users Guild Request</a>
     /// </summary>
-    public class UserGuildsRequest
+    public class UserGuildsRequest : IDiscordQueryString
     {
         /// <summary>
         /// Get guilds before this guild ID
@@ -23,13 +24,10 @@ namespace Oxide.Ext.Discord.Entities.Users
         /// </summary>
         public int Limit { get; set; } = 200;
 
-        /// <summary>
-        /// Returns the query string for the request
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public virtual string ToQueryString()
         {
-            QueryStringBuilder builder = new QueryStringBuilder();
+            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             builder.Add("limit", Limit.ToString());
 
             if (Before.HasValue)
@@ -42,7 +40,7 @@ namespace Oxide.Ext.Discord.Entities.Users
                 builder.Add("after", After.ToString());
             }
 
-            return builder.ToString();
+            return builder.ToStringAndFree();
         }
     }
 }

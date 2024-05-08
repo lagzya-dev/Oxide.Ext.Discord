@@ -1,14 +1,21 @@
 using System.Collections.Generic;
 using System.Text;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder used to build query strings for urls
     /// </summary>
-    public class QueryStringBuilder
+    public class QueryStringBuilder : BasePoolable
     {
-        private readonly StringBuilder _builder = new StringBuilder("?");
+        private StringBuilder _builder;
+
+        /// <summary>
+        /// Creates a pooled <see cref="QueryStringBuilder"/>
+        /// </summary>
+        /// <returns><see cref="QueryStringBuilder"/></returns>
+        public static QueryStringBuilder Create(DiscordPluginPool pool) => pool.Get<QueryStringBuilder>();
 
         /// <summary>
         /// Add a key value pair to the query string
@@ -17,10 +24,8 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="value">Key value</param>
         public void Add(string key, string value)
         {
-            _builder.Append(key);
-            _builder.Append('=');
+            AddKey(key);
             _builder.Append(value);
-            _builder.Append('&');
         }
 
         /// <summary>
@@ -32,8 +37,7 @@ namespace Oxide.Ext.Discord.Builders
         /// <typeparam name="T"></typeparam>
         public void AddList<T>(string key, List<T> list, string separator)
         {
-            _builder.Append(key);
-            _builder.Append('=');
+            AddKey(key);
             for (int index = 0; index < list.Count; index++)
             {
                 T entry = list[index];
@@ -43,8 +47,17 @@ namespace Oxide.Ext.Discord.Builders
                     _builder.Append(separator);
                 }
             }
+        }
 
-            _builder.Append('&');
+        private void AddKey(string key)
+        {
+            if (_builder.Length > 1)
+            {
+                _builder.Append('&');
+            }
+            
+            _builder.Append(key);
+            _builder.Append('=');
         }
 
         /// <summary>
@@ -53,7 +66,31 @@ namespace Oxide.Ext.Discord.Builders
         /// <returns></returns>
         public override string ToString()
         {
-            return _builder.ToString();
+            return _builder.Length <= 1 ? string.Empty : _builder.ToString();
+        }
+        
+        /// <summary>
+        /// Returns the query string and returns the builder back to the pool
+        /// </summary>
+        /// <returns></returns>
+        public string ToStringAndFree()
+        {
+            string query = ToString();
+            Dispose();
+            return query;
+        }
+
+        /// <inheritdoc/>
+        protected override void EnterPool()
+        {
+            PluginPool.FreeStringBuilder(_builder);
+        }
+
+        /// <inheritdoc/>
+        protected override void LeavePool()
+        {
+            _builder = PluginPool.GetStringBuilder();
+            _builder.Append("?");
         }
     }
 }

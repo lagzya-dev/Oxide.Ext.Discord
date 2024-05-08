@@ -1,17 +1,10 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Channels;
-using Oxide.Ext.Discord.Entities.Guilds;
-using Oxide.Ext.Discord.Entities.Interactions.ApplicationCommands;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Entities.Permissions;
-using Oxide.Ext.Discord.Entities.Users;
 
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data-structure">ApplicationCommandInteractionData</a>
+    /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data">ApplicationCommandInteractionData</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public class InteractionData
@@ -35,7 +28,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         public ApplicationCommandType? Type { get; set; }
         
         /// <summary>
-        /// Converted <see cref="DiscordUser"/>s, <see cref="DiscordRole"/>s, <see cref="DiscordChannel"/>s, <see cref="GuildMember"/>s, <see cref="DiscordMessage"/>s
+        /// Converted <see cref="DiscordUser"/>s, <see cref="DiscordRole"/>s, <see cref="DiscordChannel"/>s, <see cref="GuildMember"/>s, <see cref="DiscordMessage"/>s <see cref="MessageAttachment"/>s
         /// </summary>
         [JsonProperty("resolved")]
         public InteractionDataResolved Resolved { get; set; }
@@ -45,6 +38,12 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("options")]
         public List<InteractionDataOption> Options { get; set; }
+        
+        /// <summary>
+        /// The id of the guild the command is registered to
+        /// </summary>
+        [JsonProperty("guild_id")]
+        public Snowflake? GuildId { get; set; }
         
         /// <summary>
         /// For components, the custom_id of the component
@@ -69,5 +68,33 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// </summary>
         [JsonProperty("target_id")]
         public Snowflake? TargetId { get; set; }
+        
+        /// <summary>
+        /// The values submitted by the user (Modal Submit)
+        /// </summary>
+        [JsonProperty("components")]
+        public List<ActionRowComponent> Components { get; set; }
+        
+        /// <summary>
+        /// Returns a Component of type {T} with a custom ID that equals customId 
+        /// </summary>
+        /// <param name="customId">Custom ID to match on</param>
+        /// <typeparam name="T">Type to return</typeparam>
+        /// <returns></returns>
+        public T GetComponent<T>(string customId) where T : BaseInteractableComponent
+        {
+            foreach (ActionRowComponent row in Components)
+            {
+                foreach (BaseComponent baseComponent in row.Components)
+                {
+                    if (baseComponent is T component && component.CustomId == customId)
+                    {
+                        return component;
+                    }
+                }
+            }
+
+            return null;
+        }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace Oxide.Ext.Discord.Entities.Channels
+﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/resources/channel#channel-object-channel-types">Types of Channels</a>
     /// </summary>
-    public enum ChannelType
+    public enum ChannelType : byte
     {
         /// <summary>
         /// A text channel within a server
@@ -34,19 +34,14 @@
         /// A channel that users can follow and crosspost into their own server
         /// </summary>
         GuildNews = 5,
-        
-        /// <summary>
-        /// A channel in which game developers can sell their game on Discord
-        /// </summary>
-        GuildStore = 6,
-        
+
         /// <summary>
         /// A temporary sub-channel within a GUILD_NEWS channel
         /// </summary>
         GuildNewsThread = 10,
         
         /// <summary>
-        /// A temporary sub-channel within a GUILD_TEXT channel
+        /// A temporary sub-channel within a GUILD_TEXT or GUILD_FORUM channel
         /// </summary>
         GuildPublicThread = 11,
         
@@ -59,5 +54,20 @@
         /// A voice channel for <a href="https://support.discord.com/hc/en-us/articles/1500005513722">hosting events with an audience</a>
         /// </summary>
         GuildStageVoice = 13,
+        
+        /// <summary>
+        /// The channel in a <a href="https://support.discord.com/hc/en-us/articles/4406046651927-Discord-Student-Hubs-FAQ">hub</a>
+        /// </summary>
+        GuildDirectory = 14,
+        
+        /// <summary>
+        /// A channel that can only contain threads
+        /// </summary>
+        GuildForum = 15,
+        
+        /// <summary>
+        /// Channel that can only contain threads, similar to `GUILD_FORUM` channels
+        /// </summary>
+        GuildMedia = 16,
     }
 }

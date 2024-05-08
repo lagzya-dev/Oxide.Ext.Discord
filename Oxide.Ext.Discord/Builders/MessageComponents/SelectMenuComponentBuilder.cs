@@ -1,19 +1,19 @@
 using System;
-using Oxide.Ext.Discord.Entities.Emojis;
-using Oxide.Ext.Discord.Entities.Interactions.MessageComponents;
+using System.Collections.Generic;
+using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 
-namespace Oxide.Ext.Discord.Builders.MessageComponents
+namespace Oxide.Ext.Discord.Builders
 {
     /// <summary>
     /// Builder for Select Menus
     /// </summary>
     public class SelectMenuComponentBuilder
     {
-        private readonly SelectMenuComponent _menu;
+        private readonly BaseSelectMenuComponent _menu;
         private readonly MessageComponentBuilder _builder;
         
-        internal SelectMenuComponentBuilder(SelectMenuComponent menu, MessageComponentBuilder builder)
+        internal SelectMenuComponentBuilder(BaseSelectMenuComponent menu, MessageComponentBuilder builder)
         {
             _menu = menu;
             _builder = builder;
@@ -30,17 +30,16 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
         /// <exception cref="Exception">Throw is more than 25 options are added</exception>
         public SelectMenuComponentBuilder AddOption(string label, string value, string description, bool @default = false, DiscordEmoji emoji = null)
         {
-            if (string.IsNullOrEmpty(label))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(label));
-            if (string.IsNullOrEmpty(value))
-                throw new ArgumentException("Value cannot be null or empty.", nameof(value));
+            InvalidSelectMenuComponentException.ThrowIfTypeCantAddOptions(_menu.Type);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionLabel(label);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionValue(value);
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionDescription(description);
 
-            if (_menu.Options.Count >= 25)
-            {
-                throw new InvalidMessageComponentException("Select Menu Options cannot have more than 25 options");
-            }
+            StringSelectComponent text = (StringSelectComponent)_menu;
             
-            _menu.Options.Add(new SelectMenuOption
+            InvalidSelectMenuComponentException.ThrowIfInvalidSelectMenuOptionCount(text.Options.Count);
+
+            text.Options.Add(new SelectMenuOption
             {
                 Label = label,
                 Value = value,
@@ -48,6 +47,49 @@ namespace Oxide.Ext.Discord.Builders.MessageComponents
                 Default = @default,
                 Emoji = emoji
             });
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds an allow channel type for <see cref="MessageComponentType.ChannelSelect"/>
+        /// </summary>
+        /// <param name="type">Channel Type to add</param>
+        /// <returns>This</returns>
+        public SelectMenuComponentBuilder AddChannelType(ChannelType type)
+        {
+            InvalidSelectMenuComponentException.ThrowIfTypeCantAddChannelTypes(_menu.Type);
+
+            ChannelSelectComponent text = (ChannelSelectComponent)_menu;
+            text.ChannelTypes.Add(type);
+            return this;
+        }
+        
+        /// <summary>
+        /// Adds an allow channel type for <see cref="MessageComponentType.ChannelSelect"/>
+        /// </summary>
+        /// <param name="id">ID of the default value to add</param>
+        /// <returns>This</returns>
+        public SelectMenuComponentBuilder AddDefaultValue(Snowflake id)
+        {
+            InvalidSelectMenuComponentException.ThrowIfCantAddDefaultValue(_menu.Type);
+            if (_menu.DefaultValues == null)
+            {
+                _menu.DefaultValues = new List<SelectMenuDefaultValue>();
+            }
+            
+            switch (_menu.Type)
+            {
+                case MessageComponentType.UserSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.User));
+                    break;
+                case MessageComponentType.RoleSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.Role));
+                    break;
+                case MessageComponentType.ChannelSelect:
+                    _menu.DefaultValues.Add(new SelectMenuDefaultValue(id, SelectMenuDefaultValueType.Channel));
+                    break;
+            }
+            
             return this;
         }
 

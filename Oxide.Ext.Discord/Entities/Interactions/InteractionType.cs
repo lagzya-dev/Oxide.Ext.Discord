@@ -1,9 +1,9 @@
-namespace Oxide.Ext.Discord.Entities.Interactions
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
     /// </summary>
-    public enum InteractionType
+    public enum InteractionType : byte
     {
         /// <summary>
         /// The interaction is a ping
@@ -23,7 +23,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions
         /// <summary>
         /// The interaction is a application command autocomplete
         /// </summary>
-        ApplicationCommandAutocomplete = 4,
+        ApplicationCommandAutoComplete = 4,
         
         /// <summary>
         /// The interaction is a modal

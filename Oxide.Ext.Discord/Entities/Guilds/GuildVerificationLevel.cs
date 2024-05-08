@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 
-namespace Oxide.Ext.Discord.Entities.Guilds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/guild#guild-object-verification-level">Verification Level</a>
     /// </summary>
-    public enum GuildVerificationLevel
+    public enum GuildVerificationLevel : byte
     {
         /// <summary>
         /// Unrestricted

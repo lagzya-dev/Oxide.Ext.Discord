@@ -1,5 +1,7 @@
 using Newtonsoft.Json;
-namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
+using Oxide.Ext.Discord.Exceptions;
+
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents a <a href="https://discord.com/developers/docs/interactions/message-components#input-text">Input Text Component</a> within discord.
@@ -8,7 +10,7 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
     public class InputTextComponent : BaseInteractableComponent
     {
         /// <summary>
-        /// The style of the input text
+        /// Style of the input text
         /// </summary>
         [JsonProperty("style")]
         public InputTextStyles Style { get; set; }
@@ -20,41 +22,52 @@ namespace Oxide.Ext.Discord.Entities.Interactions.MessageComponents
         public string Label { get; set; }
         
         /// <summary>
-        /// The minimum length of the text input
+        /// Minimum length of the text input
         /// </summary>
         [JsonProperty("min_length")]
         public int? MinLength { get; set; }
         
         /// <summary>
-        /// The maximum length of the text input
+        /// Maximum length of the text input
         /// </summary>
         [JsonProperty("max_length")]
         public int? MaxLength { get; set; }
-        
+
         /// <summary>
-        /// The placeholder for the text input field
+        /// Whether this component is required to be filled
+        /// defaults to true
         /// </summary>
-        [JsonProperty("placeholder")]
-        public string Placeholder { get; set; }
+        [JsonProperty("required")]
+        public bool? Required { get; set; }
         
         /// <summary>
-        /// The pre-filled value for text input
+        /// Pre-filled value for text input
         /// </summary>
         [JsonProperty("value")]
         public string Value { get; set; }
         
         /// <summary>
-        /// Is the Input Text Required to be filled out
+        /// Custom placeholder text if the input is empty
+        /// Max 100 characters
         /// </summary>
-        [JsonProperty("required")]
-        public bool? Required { get; set; }
-        
+        [JsonProperty("placeholder")]
+        public string Placeholder { get; set; }
+
         /// <summary>
         /// Input Text Constructor
         /// </summary>
         public InputTextComponent()
         {
             Type = MessageComponentType.InputText;
+        }
+
+        ///<inheritdoc />
+        public override void Validate()
+        {
+            base.Validate();
+            InvalidMessageComponentException.ThrowIfInvalidTextInputLabel(Label);
+            InvalidMessageComponentException.ThrowIfInvalidTextInputValue(Value);
+            InvalidMessageComponentException.ThrowIfInvalidTextInputLength(MinLength, MaxLength);
         }
     }
 }

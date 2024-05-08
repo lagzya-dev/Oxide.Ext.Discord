@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Oxide.Ext.Discord.Entities.Permissions;
 
-namespace Oxide.Ext.Discord.Entities.Messages.Embeds
+namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
     /// Represents <a href="https://discord.com/developers/docs/resources/channel#embed-object">Embed Structure</a>
@@ -46,7 +45,7 @@ namespace Oxide.Ext.Discord.Entities.Messages.Embeds
         /// Color code of the embed
         /// </summary>
         [JsonProperty("color")]
-        public DiscordColor Color { get; set; }
+        public DiscordColor? Color { get; set; }
 
         /// <summary>
         /// Footer information

@@ -6,6 +6,7 @@ namespace Oxide.Ext.Discord.Attributes
     /// Used to identify guild bot commands
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
+    [Obsolete("Guild Command is deprecated and will be removed in a future update. Please upgrade to application commands")]
     public class GuildCommandAttribute : BaseCommandAttribute
     {
         /// <summary>
