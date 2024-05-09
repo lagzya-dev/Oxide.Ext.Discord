@@ -3843,7 +3843,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordExtension.TestVersion">
             <summary>
-            Test version information if using test version
+            Test version information if using a test version
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.DiscordExtension.ExtensionVersion">
