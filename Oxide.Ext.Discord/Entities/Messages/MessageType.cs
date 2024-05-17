@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,193 +10,193 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// The default message type
         /// </summary>
-        [Description("DEFAULT")]
+        [DiscordEnum("DEFAULT")]
         Default = 0,
         
         /// <summary>
         /// The message when a recipient is added
         /// </summary>
-        [Description("RECIPIENT_ADD")]
+        [DiscordEnum("RECIPIENT_ADD")]
         RecipientAdd = 1,
         
         /// <summary>
         /// The message when a recipient is removed
         /// </summary>
-        [Description("RECIPIENT_REMOVE")]
+        [DiscordEnum("RECIPIENT_REMOVE")]
         RecipientRemove = 2,
         
         /// <summary>
         /// The message when a user is called
         /// </summary>
-        [Description("CALL")]
+        [DiscordEnum("CALL")]
         Call = 3,
         
         /// <summary>
         /// The message when a channel name is changed
         /// </summary>
-        [Description("CHANNEL_NAME_CHANGE")]
+        [DiscordEnum("CHANNEL_NAME_CHANGE")]
         ChannelNameChange = 4,
         
         /// <summary>
         /// The message when a channel icon is changed
         /// </summary>
-        [Description("CHANNEL_ICON_CHANGE")]
+        [DiscordEnum("CHANNEL_ICON_CHANGE")]
         ChannelIconChange = 5,
         
         /// <summary>
         /// The message when another message is pinned
         /// </summary>
-        [Description("CHANNEL_PINNED_MESSAGE")]
+        [DiscordEnum("CHANNEL_PINNED_MESSAGE")]
         ChannelPinnedMessage = 6,
         
         /// <summary>
         /// The message when a new member joined
         /// </summary>
-        [Description("USER_JOIN")]
+        [DiscordEnum("USER_JOIN")]
         UserJoin = 7,
         
         /// <summary>
         ///  The message for when a user boosts a guild
         /// </summary>
-        [Description("GUILD_BOOST")]
+        [DiscordEnum("GUILD_BOOST")]
         GuildBoost = 8,
         
         /// <summary>
         /// The message for when a guild reaches Tier 1 of Nitro boosts
         /// </summary>
-        [Description("GUILD_BOOST_TIER_1")]
+        [DiscordEnum("GUILD_BOOST_TIER_1")]
         GuildBoostTier1 = 9,
         
         /// <summary>
         /// The message for when a guild reaches Tier 2 of Nitro boosts
         /// </summary>
-        [Description("GUILD_BOOST_TIER_2")]
+        [DiscordEnum("GUILD_BOOST_TIER_2")]
         GuildBoostTier2 = 10,
         
         /// <summary>
         /// The message for when a guild reaches Tier 3 of Nitro boosts
         /// </summary>
-        [Description("GUILD_BOOST_TIER_3")]
+        [DiscordEnum("GUILD_BOOST_TIER_3")]
         GuildBoostTier3 = 11,
         
         /// <summary>
         /// The message for when a news channel subscription is added to a text channel
         /// </summary>
-        [Description("ChannelFollowAdd")]
+        [DiscordEnum("ChannelFollowAdd")]
         ChannelFollowAdd = 12,
         
         /// <summary>
         /// The message for when a guild discovery is disqualified
         /// </summary>
-        [Description("GuildDiscoveryDisqualified")]
+        [DiscordEnum("GuildDiscoveryDisqualified")]
         GuildDiscoveryDisqualified = 14,
         
         /// <summary>
         /// The message for when a guild discovery is requalified
         /// </summary>
-        [Description("GUILD_DISCOVERY_REQUALIFIED")]
+        [DiscordEnum("GUILD_DISCOVERY_REQUALIFIED")]
         GuildDiscoveryRequalified = 15,
         
         /// <summary>
         /// The message for grace period initial warning
         /// </summary>
-        [Description("GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING")]
+        [DiscordEnum("GUILD_DISCOVERY_GRACE_PERIOD_INITIAL_WARNING")]
         GuildDiscoveryGracePeriodInitialWarning = 16,
         
         /// <summary>
         /// The message for grace period final warning
         /// </summary>
-        [Description("GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING")]
+        [DiscordEnum("GUILD_DISCOVERY_GRACE_PERIOD_FINAL_WARNING")]
         GuildDiscoveryGracePeriodFinalWarning = 17,
         
         /// <summary>
         /// The message created a thread
         /// </summary>
-        [Description("THREAD_CREATED")]
+        [DiscordEnum("THREAD_CREATED")]
         ThreadCreated = 18,
         
         /// <summary>
         /// The message for when the message is a reply
         /// </summary>
-        [Description("REPLY")]
+        [DiscordEnum("REPLY")]
         Reply = 19,
         
         /// <summary>
         /// The message for when the message is an application command
         /// </summary>
-        [Description("CHAT_INPUT_COMMAND")]
+        [DiscordEnum("CHAT_INPUT_COMMAND")]
         ChatInputCommand = 20,
         
         /// <summary>
         /// Starter message for a thread
         /// </summary>
-        [Description("THREAD_STARTER_MESSAGE")]
+        [DiscordEnum("THREAD_STARTER_MESSAGE")]
         ThreadStarterMessage = 21,
 
         /// <summary>
         /// Reminder for a guild invite
         /// </summary>
-        [Description("GUILD_INVITE_REMINDER")]
+        [DiscordEnum("GUILD_INVITE_REMINDER")]
         GuildInviteReminder = 22,
 
         /// <summary>
         /// Reminder for a guild invite
         /// </summary>
-        [Description("CONTEXT_MENU_COMMAND")]
+        [DiscordEnum("CONTEXT_MENU_COMMAND")]
         ContextMenuCommand = 23,
 
         /// <summary>
         /// Message is an auto mod action
         /// </summary>
-        [Description("AUTO_MODERATION_ACTION")]
+        [DiscordEnum("AUTO_MODERATION_ACTION")]
         AutoModerationAction = 24,
         
         /// <summary>
         /// Message is a role subscription purchase
         /// </summary>
-        [Description("ROLE_SUBSCRIPTION_PURCHASE")]
+        [DiscordEnum("ROLE_SUBSCRIPTION_PURCHASE")]
         RoleSubscriptionPurchase = 25,
         
         /// <summary>
         /// Message is a interaction premium upsell
         /// </summary>
-        [Description("INTERACTION_PREMIUM_UPSELL")]
+        [DiscordEnum("INTERACTION_PREMIUM_UPSELL")]
         InteractionPremiumUpsell = 26,
         
         /// <summary>
         /// Message is a stage start
         /// </summary>
-        [Description("STAGE_START")]
+        [DiscordEnum("STAGE_START")]
         StageStart = 27,
         
         /// <summary>
         /// Message is a stage end
         /// </summary>
-        [Description("STAGE_END")]
+        [DiscordEnum("STAGE_END")]
         StageEnd = 28,
         
         /// <summary>
         /// Message is a stage speaker
         /// </summary>
-        [Description("STAGE_SPEAKER")]
+        [DiscordEnum("STAGE_SPEAKER")]
         StageSpeaker = 29,
         
         /// <summary>
         /// Message is a stage raise hand
         /// </summary>
-        [Description("STAGE_RAISE_HAND")]
+        [DiscordEnum("STAGE_RAISE_HAND")]
         StageRaiseHand = 30,
         
         /// <summary>
         /// Message is a stage topic
         /// </summary>
-        [Description("STAGE_TOPIC")]
+        [DiscordEnum("STAGE_TOPIC")]
         StageTopic = 31,
         
         /// <summary>
         /// Message is a Guild Application Premium Subscription
         /// </summary>
-        [Description("GUILD_APPLICATION_PREMIUM_SUBSCRIPTION")]
+        [DiscordEnum("GUILD_APPLICATION_PREMIUM_SUBSCRIPTION")]
         GuildApplicationPremiumSubscription = 32,
     }
 }

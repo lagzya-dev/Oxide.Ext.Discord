@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// If the user has been invited
         /// </summary>
-        [Description("INVITED")]
+        [DiscordEnum("INVITED")]
         Invited = 1,
         
         /// <summary>
         /// If the is part of the team
         /// </summary>
-        [Description("ACCEPTED")]
+        [DiscordEnum("ACCEPTED")]
         Accepted = 2
     }
 }

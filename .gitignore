@@ -78,3 +78,5 @@ _ReSharper*/
 _TeamCity*
 *.StyleCop
 *.Cache
+
+References/

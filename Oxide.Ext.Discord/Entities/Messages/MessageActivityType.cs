@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,25 +10,25 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Message Activity Join
         /// </summary>
-        [Description("JOIN")]
+        [DiscordEnum("JOIN")]
         Join = 1,
         
         /// <summary>
         /// Message Activity Spectate
         /// </summary>
-        [Description("SPECTATE")]
+        [DiscordEnum("SPECTATE")]
         Spectate = 2,
         
         /// <summary>
         /// Message Activity Listen
         /// </summary>
-        [Description("LISTEN")]
+        [DiscordEnum("LISTEN")]
         Listen = 3,
         
         /// <summary>
         /// Message Activity JoinRequest
         /// </summary>
-        [Description("JOIN_REQUEST")]
+        [DiscordEnum("JOIN_REQUEST")]
         JoinRequest = 5,
     }
 }

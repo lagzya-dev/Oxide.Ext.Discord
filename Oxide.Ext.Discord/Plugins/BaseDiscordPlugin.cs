@@ -4,7 +4,6 @@ using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
 {
@@ -14,13 +13,13 @@ namespace Oxide.Ext.Discord.Plugins
         protected readonly Lang Lang = OxideLibrary.Instance.Lang;
         protected readonly Oxide.Core.Libraries.Plugins Plugins = OxideLibrary.Instance.Plugins;
         protected readonly Permission Permission = OxideLibrary.Instance.Permission;
-        internal readonly PluginTimers Timer;
+        //internal readonly PluginTimers Timer;
 
         protected BaseDiscordPlugin()
         {
             Author = DiscordExtension.Authors;
             Version = DiscordExtension.ExtensionVersion;
-            Timer = new PluginTimers(this);
+            //Timer = new PluginTimers(this);
         }
         
         #region Helper Methods
