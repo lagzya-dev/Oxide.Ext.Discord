@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Returns the IPlayer for the Player ID
         /// </summary>
-        public IPlayer Player => IsValid ? ServerPlayerCache.Instance.GetOrAddPlayerById(Id) : null;
+        public IPlayer Player => IsValid ? ServerPlayerCache.Instance.GetPlayerById(Id) : null;
         
         /// <summary>
         /// Constructor

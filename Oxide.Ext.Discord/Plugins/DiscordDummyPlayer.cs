@@ -1,12 +1,15 @@
 using System;
 using System.Globalization;
+using Oxide.Core.Libraries;
 using Oxide.Core.Libraries.Covalence;
+using Oxide.Ext.Discord.Cache;
 
 namespace Oxide.Ext.Discord.Plugins
 {
     internal class DiscordDummyPlayer : IPlayer
     {
         private static readonly GenericPosition Default = new GenericPosition();
+        private static readonly Permission Permission = OxideLibrary.Instance.Permission;
         
         public string Id { get; }
 
@@ -66,12 +69,12 @@ namespace Oxide.Ext.Discord.Plugins
         public void Reply(string message, string prefix, params object[] args) {}
         public void Reply(string message) {}
         public void Command(string command, params object[] args) {}
-        public bool HasPermission(string perm) => false;
-        public void GrantPermission(string perm) {}
-        public void RevokePermission(string perm) {}
-        public bool BelongsToGroup(string group) => false;
-        public void AddToGroup(string group) {}
-        public void RemoveFromGroup(string group) {}
+        public bool HasPermission(string perm) => Permission.UserHasPermission(Id, perm);
+        public void GrantPermission(string perm) => Permission.GrantUserPermission(Id, perm, null);
+        public void RevokePermission(string perm) => Permission.RevokeUserPermission(Id, perm);
+        public bool BelongsToGroup(string group) => Permission.UserHasGroup(Id, group);
+        public void AddToGroup(string group) => Permission.AddUserGroup(Id, group);
+        public void RemoveFromGroup(string group) => Permission.RemoveUserGroup(Id, group);
         
         public void Position(out float x, out float y, out float z)
         {
