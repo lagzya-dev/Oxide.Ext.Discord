@@ -1,5 +1,4 @@
 ﻿using Oxide.Core.Plugins;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
 {

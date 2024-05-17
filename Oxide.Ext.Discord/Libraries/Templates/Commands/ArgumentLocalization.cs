@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {

@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// This permissions uses Role ID
         /// </summary>
-        [Description("ROLE")]
+        [DiscordEnum("ROLE")]
         Role = 1,
         
         /// <summary>
         /// This permission uses User ID
         /// </summary>
-        [Description("USER")]
+        [DiscordEnum("USER")]
         User = 2,
         
         /// <summary>
         /// This permission uses Channel ID
         /// </summary>
-        [Description("CHANNEL")]
+        [DiscordEnum("CHANNEL")]
         Channel = 3
     }
 }

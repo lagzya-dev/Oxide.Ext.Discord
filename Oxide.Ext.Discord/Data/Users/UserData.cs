@@ -4,7 +4,6 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Plugins;
 using ProtoBuf;
 
 namespace Oxide.Ext.Discord.Data

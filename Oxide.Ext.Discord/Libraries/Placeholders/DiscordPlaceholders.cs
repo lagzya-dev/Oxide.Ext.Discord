@@ -12,7 +12,6 @@ using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {

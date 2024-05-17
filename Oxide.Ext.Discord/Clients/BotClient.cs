@@ -18,7 +18,6 @@ using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Types;
 using Oxide.Ext.Discord.WebSockets;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Clients
 {

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,31 +10,31 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Unrestricted
         /// </summary>
-        [Description("NONE")]
+        [DiscordEnum("NONE")]
         None = 0,
         
         /// <summary>
         /// Must have verified email on account
         /// </summary>
-        [Description("LOW")]
+        [DiscordEnum("LOW")]
         Low = 1,
         
         /// <summary>
         /// Must be registered on Discord for longer than 5 minutes
         /// </summary>
-        [Description("MEDIUM")]
+        [DiscordEnum("MEDIUM")]
         Medium = 2,
         
         /// <summary>
         /// Must be a member of the server for longer than 10 minutes
         /// </summary>
-        [Description("HIGH")]
+        [DiscordEnum("HIGH")]
         High = 3,
         
         /// <summary>
         /// Must have a verified phone number
         /// </summary>
-        [Description("VERY_HIGH")]
+        [DiscordEnum("VERY_HIGH")]
         VeryHigh = 4
     }
 }

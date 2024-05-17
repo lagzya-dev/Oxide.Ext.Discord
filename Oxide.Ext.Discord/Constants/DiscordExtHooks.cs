@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Constants
 {

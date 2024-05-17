@@ -4,7 +4,6 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Libraries;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Builders
 {

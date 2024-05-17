@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,25 +10,25 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Default NSFW Level
         /// </summary>
-        [Description("DEFAULT")]
+        [DiscordEnum("DEFAULT")]
         Default = 0,
         
         /// <summary>
         /// Guild is explicitly NSFW
         /// </summary>
-        [Description("EXPLICIT")]
+        [DiscordEnum("EXPLICIT")]
         Explicit = 1,
         
         /// <summary>
         /// Guild is safe from NSFW
         /// </summary>
-        [Description("SAFE")]
+        [DiscordEnum("SAFE")]
         Safe = 2,
         
         /// <summary>
         /// Guild is age restricted
         /// </summary>
-        [Description("AGE_RESTRICTED")]
+        [DiscordEnum("AGE_RESTRICTED")]
         AgeRestricted = 3
     }
 }

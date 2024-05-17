@@ -4,7 +4,6 @@ using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Factory
 {

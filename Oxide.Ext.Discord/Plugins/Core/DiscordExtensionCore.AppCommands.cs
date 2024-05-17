@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Clients;
@@ -9,7 +8,6 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
 {

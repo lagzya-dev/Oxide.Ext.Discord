@@ -10,7 +10,6 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Types;
-using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {

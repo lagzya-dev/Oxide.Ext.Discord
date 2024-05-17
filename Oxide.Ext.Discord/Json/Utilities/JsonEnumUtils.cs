@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Concurrent;
 using System.Reflection;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Plugins;
-using DescriptionAttribute = System.ComponentModel.DescriptionAttribute;
 
 namespace Oxide.Ext.Discord.Json
 {
@@ -70,7 +69,7 @@ namespace Oxide.Ext.Discord.Json
             foreach (FieldInfo field in type.GetFields())
             {
                 string name = field.Name;
-                string propertyName = field.GetCustomAttribute<DescriptionAttribute>()?.Description ?? field.Name;
+                string propertyName = field.GetCustomAttribute<DiscordEnumAttribute>()?.Name ?? field.Name;
                 Add(name, propertyName);
             }
         }
