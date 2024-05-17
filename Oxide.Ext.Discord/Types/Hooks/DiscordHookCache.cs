@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Types
 {

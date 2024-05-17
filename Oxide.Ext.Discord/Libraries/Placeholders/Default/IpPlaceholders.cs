@@ -2,6 +2,7 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Data.Ip;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries
 {

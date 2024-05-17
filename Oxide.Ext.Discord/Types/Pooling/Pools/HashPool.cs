@@ -1,3 +1,5 @@
+using Oxide.Plugins;
+
 namespace Oxide.Ext.Discord.Types
 {
     /// <summary>

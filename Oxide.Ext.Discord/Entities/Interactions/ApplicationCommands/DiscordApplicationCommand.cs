@@ -7,6 +7,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities
 {

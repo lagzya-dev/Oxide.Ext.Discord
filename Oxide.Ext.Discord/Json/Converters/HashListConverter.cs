@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Json
 {

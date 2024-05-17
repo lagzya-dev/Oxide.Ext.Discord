@@ -10,6 +10,7 @@ using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
+using Oxide.Plugins;
 using UserData = Oxide.Ext.Discord.Data.UserData;
 
 namespace Oxide.Ext.Discord.Entities

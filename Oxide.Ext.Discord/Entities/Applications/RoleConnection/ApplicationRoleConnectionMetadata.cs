@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Entities
 {

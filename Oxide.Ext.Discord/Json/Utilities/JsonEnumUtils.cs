@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Reflection;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Extensions;
+using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Json
 {
