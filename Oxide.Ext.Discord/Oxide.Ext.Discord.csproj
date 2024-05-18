@@ -80,6 +80,15 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Content Include="..\.github\workflows\ci.yml">
+      <Link>ci.yml</Link>
+    </Content>
+    <Content Include="..\.github\workflows\develop.yml">
+      <Link>develop.yml</Link>
+    </Content>
+    <Content Include="..\.github\workflows\release.yml">
+      <Link>release.yml</Link>
+    </Content>
     <Content Include="..\.gitignore">
       <Link>.gitignore</Link>
     </Content>
