@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
@@ -13,19 +13,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Select Menu Default Value Type is User
         /// </summary>
-        [Description("user")]
+        [DiscordEnum("user")]
         User,
         
         /// <summary>
         /// Select Menu Default Value Type is Role
         /// </summary>
-        [Description("role")]
+        [DiscordEnum("role")]
         Role,
         
         /// <summary>
         /// Select Menu Default Value Type is Channel
         /// </summary>
-        [Description("channel")]
+        [DiscordEnum("channel")]
         Channel
     }
 }

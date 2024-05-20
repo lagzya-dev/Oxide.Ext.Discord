@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
+using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Libraries
 {
@@ -26,6 +27,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// Components of the Modal
         /// </summary>
+        [JsonConverter(typeof(TemplateComponentsConverter))]
         [JsonProperty("Modal Components")]
         public List<BaseComponentTemplate> Components { get; set; } = new List<BaseComponentTemplate>();
         

@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Guild does not require MFA
         /// </summary>
-        [Description("NONE")]
+        [DiscordEnum("NONE")]
         None = 0,
         
         /// <summary>
         /// Guild requires elevated MFA
         /// </summary>
-        [Description("ELEVATED")]
+        [DiscordEnum("ELEVATED")]
         Elevated = 1
     }
 }

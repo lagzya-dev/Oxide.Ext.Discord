@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Notify for all guild messages
         /// </summary>
-        [Description("ALL_MESSAGES")]
+        [DiscordEnum("ALL_MESSAGES")]
         AllMessages = 0,
         
         /// <summary>
         /// Notify for only mentions
         /// </summary>
-        [Description("ONLY_MENTIONS")]
+        [DiscordEnum("ONLY_MENTIONS")]
         OnlyMentions = 1
     }
 }

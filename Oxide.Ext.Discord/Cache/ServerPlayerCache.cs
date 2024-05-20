@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Ext.Discord.Configuration;
 using Oxide.Ext.Discord.Plugins;
@@ -15,35 +14,20 @@ namespace Oxide.Ext.Discord.Cache
     /// </summary>
     public sealed class ServerPlayerCache : Singleton<ServerPlayerCache>
     {
-        private readonly ConcurrentDictionary<string, IPlayer> _cache = new ConcurrentDictionary<string, IPlayer>();
-        private readonly Func<string, IPlayer> _valueFactory = id => Players.FindPlayerById(id) ?? new DiscordDummyPlayer(id);
+        private readonly ConcurrentDictionary<string, IPlayer> _dummyPlayerCache = new ConcurrentDictionary<string, IPlayer>();
+        private readonly Func<string, IPlayer> _valueFactory = id => new DiscordDummyPlayer(id);
         private IPlayerSearchService _search;
-
-        /// <summary>
-        /// Readonly Cache of <see cref="IPlayer"/>
-        /// </summary>
-        public readonly IReadOnlyDictionary<string, IPlayer> Cache;
 
         private static readonly IPlayerManager Players = OxideLibrary.Instance.Covalence.Players;
 
-        private ServerPlayerCache()
-        {
-            Cache = new ReadOnlyDictionary<string, IPlayer>(_cache);
-        }
+        private ServerPlayerCache() { }
 
         /// <summary>
         /// Returns the <see cref="IPlayer"/> for the given ID
         /// </summary>
         /// <param name="id">ID of the player</param>
         /// <returns><see cref="IPlayer"/></returns>
-        public IPlayer GetPlayerById(string id) => _cache.GetValueOrDefault(id);
-        
-        /// <summary>
-        /// Returns the <see cref="IPlayer"/> for the given ID
-        /// </summary>
-        /// <param name="id">ID of the player</param>
-        /// <returns><see cref="IPlayer"/></returns>
-        internal IPlayer GetOrAddPlayerById(string id) => _cache.GetOrAdd(id, _valueFactory);
+        public IPlayer GetPlayerById(string id) => Players.FindPlayerById(id) ?? _dummyPlayerCache.GetOrAdd(id, _valueFactory);
 
         /// <summary>
         /// Returns an <see cref="IEnumerable{T}"/> matching player names that are online
@@ -74,8 +58,6 @@ namespace Oxide.Ext.Discord.Cache
         internal void OnUserConnected(IPlayer player)
         {
             _search.OnUserConnected(player);
-            _cache.TryRemove(player.Id, out IPlayer _);
-            _cache.TryAdd(player.Id, player);
         }
 
         internal void OnUserDisconnected(IPlayer player) => _search.OnUserDisconnected(player);
