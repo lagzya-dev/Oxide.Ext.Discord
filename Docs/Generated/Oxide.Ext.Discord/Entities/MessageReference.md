@@ -15,6 +15,7 @@ public class MessageReference
 | [FailIfNotExists](#failifnotexists-property) { get; set; } | When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true |
 | [GuildId](#guildid-property) { get; set; } | ID of the originating message's guild |
 | [MessageId](#messageid-property) { get; set; } | ID of the originating message |
+| [Type](#type-property) { get; set; } | Type of reference. |
 
 ## See Also
 
@@ -33,6 +34,22 @@ public MessageReference()
 
 ## See Also
 
+* class [MessageReference](./MessageReference.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of reference.
+
+```csharp
+public MessageReferenceType? Type { get; set; }
+```
+
+## See Also
+
+* enum [MessageReferenceType](./MessageReferenceType.md)
 * class [MessageReference](./MessageReference.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

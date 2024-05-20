@@ -322,6 +322,8 @@
 | class [MessageReactionRemovedAllEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedAllEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all) |
 | class [MessageReactionRemovedEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedEvent.md) | Represents [Message Reaction Remove](https://discord.com/developers/docs/topics/gateway#message-reaction-remove) |
 | class [MessageReference](./Oxide.Ext.Discord/Entities/MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
+| enum [MessageReferenceType](./Oxide.Ext.Discord/Entities/MessageReferenceType.md) | Represents [Message Reference Type](https://discord.com/developers/docs/resources/channel#message-reference-types) |
+| class [MessageSnapshot](./Oxide.Ext.Discord/Entities/MessageSnapshot.md) | Represents a [Message Snapshot](https://discord.com/developers/docs/resources/channel#message-snapshot-object) |
 | enum [MessageType](./Oxide.Ext.Discord/Entities/MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./Oxide.Ext.Discord/Entities/MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
 | class [OnboardingPrompt](./Oxide.Ext.Discord/Entities/OnboardingPrompt.md) | Represents [Onboarding Prompt Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure) |

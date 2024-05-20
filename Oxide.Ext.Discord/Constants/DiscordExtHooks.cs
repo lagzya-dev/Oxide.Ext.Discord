@@ -1419,6 +1419,7 @@ namespace Oxide.Ext.Discord.Constants
         ///     Puts("OnDiscordPollVoteAdded Works!");
         /// }
         /// </code>
+        /// </summary>
         public const string OnDiscordPollVoteAdded = nameof(OnDiscordPollVoteAdded);
         
         /// <code>
@@ -1429,6 +1430,7 @@ namespace Oxide.Ext.Discord.Constants
         /// </code>
         public const string OnDiscordPollVoteRemoved = nameof(OnDiscordPollVoteRemoved);
         
+        /// <summary>
         /// <code>
         /// void OnDiscordUnhandledCommand(EventPayload payload)
         /// {

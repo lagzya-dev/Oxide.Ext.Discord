@@ -3767,12 +3767,17 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPollVoteAdded">
+            <summary>
+            Called when we receive an event we do not handle yet.
+            If you need this event, you can listen to it using this hook until we support it
+            Please create an issue on uMod if this error ever occurs 
             <code>
             void OnDiscordPollVoteAdded(MessagePollVoteAddedEvent vote, DiscordGuild guild)
             {
                 Puts("OnDiscordPollVoteAdded Works!");
             }
             </code>
+            </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordPollVoteRemoved">
             <code>
@@ -3784,9 +3789,6 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.DiscordExtHooks.OnDiscordUnhandledCommand">
             <summary>
-            Called when we receive an event we do not handle yet.
-            If you need this event, you can listen to it using this hook until we support it
-            Please create an issue on uMod if this error ever occurs 
             <code>
             void OnDiscordUnhandledCommand(EventPayload payload)
             {
@@ -13914,6 +13916,13 @@
             <see cref="T:Oxide.Ext.Discord.Entities.MessageReference"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.MessageSnapshots">
+            <summary>
+            The message associated with the message_reference.
+            This is a minimal subset of fields in a message (e.g. author is excluded.)
+            <see cref="T:Oxide.Ext.Discord.Entities.MessageReference"/>
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.Flags">
             <summary>
             Message flags combined as a bitfield
@@ -14773,7 +14782,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageCreate.MessageReference">
             <summary>
-            Include to make your message a reply
+            Include to make your message a reply or a forward
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageFileAttachment">
@@ -14941,6 +14950,11 @@
             Represents a <a href="https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure">Message Reference Structure</a> for a message
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReference.Type">
+            <summary>
+            Type of reference.
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageReference.MessageId">
             <summary>
             ID of the originating message
@@ -14960,6 +14974,36 @@
         <member name="P:Oxide.Ext.Discord.Entities.MessageReference.FailIfNotExists">
             <summary>
             When sending, whether to error if the referenced message doesn't exist instead of sending as a normal (non-reply) message, default true
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessageReferenceType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/channel#message-reference-types">Message Reference Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageReferenceType.Default">
+            <summary>
+            A standard reference used by replies.
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageReferenceType.Forward">
+            <summary>
+            Reference used to point to a message at a point in time.
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessageSnapshot">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-snapshot-object">Message Snapshot</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageSnapshot.Message">
+            <summary>
+            Subset of fields in the message object
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageSnapshot.GuildId">
+            <summary>
+            ID of the origin message's guild
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageType">
@@ -16075,6 +16119,11 @@
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.UseClydeAi">
+            <summary>
+            Allows sending polls
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.SendPolls">
             <summary>
             Allows sending polls
             </summary>
