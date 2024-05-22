@@ -24,14 +24,15 @@ jobs:
       - name: Set VERSION variable from tag or latest release
         shell: pwsh
         run: |
-          $env:VERSION = $env:GITHUB_REF -replace '^refs/tags/', ''
-          if ([string]::IsNullOrEmpty($env:VERSION)) {
-            Write-Host "Tag not found. Getting latest release..."
-            $env:VERSION = gh release list --limit 1 --json tagName --jq '.[0].tagName'
-          }
-          
+          $env:VERSION = gh release list --limit 1 --json tagName --jq '.[0].tagName'
           if ([string]::IsNullOrEmpty($env:VERSION)) {
             Write-Error "Error: VERSION is empty."
+            exit 1
+          }
+
+          $versionPattern = '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z\-\.]+)?(\+[0-9A-Za-z\-\.]+)?$'
+          if ($env:VERSION -notmatch $versionPattern) {
+            Write-Error "Error: VERSION is not a valid Semantic Version (https://semver.org)."
             exit 1
           } else {
             Write-Host "VERSION: $env:VERSION"
@@ -39,7 +40,7 @@ jobs:
           }
         env:
           GITHUB_REF: ${{ github.ref }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download References
         shell: pwsh
