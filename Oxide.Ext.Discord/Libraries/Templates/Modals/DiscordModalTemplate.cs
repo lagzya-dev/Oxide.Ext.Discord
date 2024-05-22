@@ -72,7 +72,7 @@ namespace Oxide.Ext.Discord.Libraries
             for (int index = 0; index < Components.Count; index++)
             {
                 BaseComponentTemplate component = Components[index];
-                if (component is InputTextTemplate input)
+                if (component is InputTextTemplate input && input.Visible)
                 {
                     InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(modal.Components.Count);
                     modal.Components.Add(new ActionRowComponent
