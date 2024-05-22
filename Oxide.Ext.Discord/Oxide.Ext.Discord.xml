@@ -13357,6 +13357,9 @@
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.InteractionResponse.FileAttachments">
+            <inheritdoc />
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.InteractionResponse.#ctor">
             <summary>
             Default Constructor
