@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
 
@@ -7,8 +8,11 @@ namespace Oxide.Ext.Discord.Entities
     /// Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
     /// </summary>
     [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class InteractionResponse : BaseInteractionResponse<InteractionCallbackData>, IDiscordValidation
+    public class InteractionResponse : BaseInteractionResponse<InteractionCallbackData>, IDiscordValidation, IFileAttachments
     {
+        /// <inheritdoc />
+        public List<MessageFileAttachment> FileAttachments => Data?.FileAttachments;
+        
         /// <summary>
         /// Default Constructor
         /// </summary>
