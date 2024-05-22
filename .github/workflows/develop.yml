@@ -21,7 +21,7 @@ jobs:
 #      - name: Display .NET version
 #        run: dotnet --version
 
-      - name: Set VERSION variable from tag or latest release
+      - name: Set VERSION variable from latest release
         shell: pwsh
         run: |
           $env:VERSION = gh release list --limit 1 --json tagName --jq '.[0].tagName'
