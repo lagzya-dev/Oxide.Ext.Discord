@@ -50,11 +50,11 @@ jobs:
         run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Oxide /p:Version=$env:VERSION /p:BuildServer=Github -f net48
         working-directory: Oxide.Ext.Discord
 
-      - name: Build DLL (Carbon)
-        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Carbon /p:Version=$env:VERSION /p:BuildServer=Github -f net48
-        working-directory: Oxide.Ext.Discord
+#      - name: Build DLL (Carbon)
+#        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Carbon /p:Version=$env:VERSION /p:BuildServer=Github -f net48
+#        working-directory: Oxide.Ext.Discord
 
       - name: Upload Release Assets
-        run: gh release upload $env:VERSION Oxide.Ext.Discord/bin/Oxide/Release/net48/Oxide.Ext.Discord.dll Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll --clobber
+        run: gh release upload --clobber $env:VERSION Oxide.Ext.Discord/bin/Oxide/Release/net48/Oxide.Ext.Discord.dll #Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
