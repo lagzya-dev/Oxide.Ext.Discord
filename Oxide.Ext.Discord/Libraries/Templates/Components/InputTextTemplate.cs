@@ -1,5 +1,5 @@
-using System.Collections.Specialized;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Libraries
@@ -18,7 +18,7 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// The style of the input text
         /// </summary>
-        [JsonConverter(typeof(StringEnumerator))]
+        [JsonConverter(typeof(StringEnumConverter))]
         [JsonProperty("Input Text Style")]
         public InputTextStyles Style { get; set; } = InputTextStyles.Short;
         

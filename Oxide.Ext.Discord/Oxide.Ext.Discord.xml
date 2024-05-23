@@ -1871,19 +1871,7 @@
             Cache for server <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Cache.ServerPlayerCache.Cache">
-            <summary>
-            Readonly Cache of <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/>
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Cache.ServerPlayerCache.GetPlayerById(System.String)">
-            <summary>
-            Returns the <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> for the given ID
-            </summary>
-            <param name="id">ID of the player</param>
-            <returns><see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Cache.ServerPlayerCache.GetOrAddPlayerById(System.String)">
             <summary>
             Returns the <see cref="T:Oxide.Core.Libraries.Covalence.IPlayer"/> for the given ID
             </summary>
@@ -13368,6 +13356,9 @@
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
             </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.InteractionResponse.FileAttachments">
+            <inheritdoc />
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.InteractionResponse.#ctor">
             <summary>

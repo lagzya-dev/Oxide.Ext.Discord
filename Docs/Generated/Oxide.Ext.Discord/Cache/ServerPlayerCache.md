@@ -10,7 +10,6 @@ public sealed class ServerPlayerCache : Singleton<ServerPlayerCache>
 
 | name | description |
 | --- | --- |
-| readonly [Cache](#cache-field) | Readonly Cache of IPlayer |
 | [GetAllPlayers](#getallplayers-method)(…) | Returns an IEnumerable matching player names |
 | [GetOnlinePlayers](#getonlineplayers-method)(…) | Returns an IEnumerable matching player names that are online |
 | [GetPlayerById](#getplayerbyid-method)(…) | Returns the IPlayer for the given ID |
@@ -76,21 +75,6 @@ public IEnumerable<IPlayer> GetAllPlayers(string name)
 | parameter | description |
 | --- | --- |
 | name | Name to match on |
-
-## See Also
-
-* class [ServerPlayerCache](./ServerPlayerCache.md)
-* namespace [Oxide.Ext.Discord.Cache](./CacheNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Cache field
-
-Readonly Cache of IPlayer
-
-```csharp
-public readonly IReadOnlyDictionary<string, IPlayer> Cache;
-```
 
 ## See Also
 

@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
@@ -18,19 +18,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Controls role mentions
         /// </summary>
-        [Description("roles")] 
+        [DiscordEnum("roles")] 
         Roles,
         
         /// <summary>
         /// 	Controls user mentions
         /// </summary>
-        [Description("users")] 
+        [DiscordEnum("users")] 
         Users,
         
         /// <summary>
         /// Controls @everyone and @here mentions
         /// </summary>
-        [Description("everyone")] 
+        [DiscordEnum("everyone")] 
         Everyone,
     }
 }

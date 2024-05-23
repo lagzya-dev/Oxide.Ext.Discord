@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,25 +10,25 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Sticker format type PNG
         /// </summary>
-        [Description("PNG")]
+        [DiscordEnum("PNG")]
         Png = 1,
         
         /// <summary>
         /// Sticker format type APNG
         /// </summary>
-        [Description("APNG")]
+        [DiscordEnum("APNG")]
         Apng = 2,
         
         /// <summary>
         /// Sticker format type LOTTIE
         /// </summary>
-        [Description("LOTTIE")]
+        [DiscordEnum("LOTTIE")]
         Lottie = 3,
         
         /// <summary>
         /// Sticker format type GIF
         /// </summary>
-        [Description("GIF")]
+        [DiscordEnum("GIF")]
         Gif = 4
     }
 }

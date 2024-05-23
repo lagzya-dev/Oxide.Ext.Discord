@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -12,13 +12,13 @@ namespace Oxide.Ext.Discord.Entities
         /// The Stage instance is visible publicly. (deprecated)
         /// </summary>
         [Obsolete("Deprecated by Discord")]
-        [Description("PUBLIC")]
+        [DiscordEnum("PUBLIC")]
         Public = 1,
         
         /// <summary>
         /// The Stage instance is visible to only guild members.
         /// </summary>
-        [Description("GUILD_ONLY")]
+        [DiscordEnum("GUILD_ONLY")]
         GuildOnly = 2
     }
 }
