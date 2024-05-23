@@ -52,6 +52,6 @@ jobs:
 #        working-directory: Oxide.Ext.Discord
 
       - name: Upload Release Assets
-        run: gh release upload --clobber $env:VERSION Oxide.Ext.Discord/bin/Oxide/Release/net48/Oxide.Ext.Discord.dll #Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll
+        run: gh release upload --clobber $env:VERSION Oxide.Ext.Discord/bin/Release/net48/Oxide.Ext.Discord.dll #Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
