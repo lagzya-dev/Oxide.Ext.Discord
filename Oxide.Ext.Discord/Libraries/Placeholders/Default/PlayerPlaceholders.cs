@@ -52,17 +52,17 @@ namespace Oxide.Ext.Discord.Libraries
         /// <summary>
         /// <see cref="IPlayer.Health"/> placeholder
         /// </summary>
-        public static float Health(IPlayer player) => player.Health;
+        public static float Health(IPlayer player) => player.Object != null ? player.Health : 0;
         
         /// <summary>
         /// <see cref="IPlayer.MaxHealth"/> placeholder
         /// </summary>
-        public static float MaxHealth(IPlayer player) => player.MaxHealth;
+        public static float MaxHealth(IPlayer player) => player.Object != null ? player.MaxHealth : 0;
         
         /// <summary>
         /// <see cref="IPlayer.Position()"/> placeholder
         /// </summary>
-        public static GenericPosition Position(IPlayer player) => player.Position();
+        public static GenericPosition Position(IPlayer player) => player.Object != null ? player.Position() : new GenericPosition();
         
         /// <summary>
         /// <see cref="IPlayer.Ping"/> placeholder
