@@ -19,7 +19,13 @@ namespace Oxide.Ext.Discord.Entities
         /// If passed, modifies the user's avatar
         /// </summary>
         [JsonProperty("avatar")]
-        public string Avatar { get; set; }
+        public DiscordImageData Avatar { get; set; }
+        
+        /// <summary>
+        /// If passed, modifies the user's banner
+        /// </summary>
+        [JsonProperty("banner")]
+        public DiscordImageData Banner { get; set; }
         
         /// <inheritdoc/>
         public void Validate()
