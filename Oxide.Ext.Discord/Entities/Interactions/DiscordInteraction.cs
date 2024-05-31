@@ -47,6 +47,12 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Guild that the interaction was sent from
         /// </summary>
+        [JsonProperty("guild")]
+        public DiscordGuild Guild { get; set; }
+        
+        /// <summary>
+        /// Guild that the interaction was sent from
+        /// </summary>
         [JsonProperty("guild_id")]
         public Snowflake? GuildId { get; set; }
         
