@@ -21,6 +21,16 @@ namespace Oxide.Ext.Discord.Entities
         [DiscordEnum("battlenet")] BattleNet,
         
         /// <summary>
+        /// Connection type is Bungie.net
+        /// </summary>
+        [DiscordEnum("bungie")] Bungie,
+        
+        /// <summary>
+        /// Connection type is Domain              
+        /// </summary>
+        [DiscordEnum("domain")] Domain,
+        
+        /// <summary>
         /// Connection type is Epic Games
         /// </summary>
         // ReSharper disable once InconsistentNaming
