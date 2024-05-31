@@ -241,6 +241,18 @@ namespace Oxide.Ext.Discord.Entities
         public RoleSubscription RoleSubscriptionData { get; set; }
         
         /// <summary>
+        /// Poll object
+        /// </summary>
+        [JsonProperty("poll")]
+        public DiscordPoll Poll { get; set; }
+        
+        /// <summary>
+        /// The call associated with the message   
+        /// </summary>
+        [JsonProperty("call")]
+        public MessageCall Call { get; set; }
+        
+        /// <summary>
         /// File Attachments to add to the message on edit
         /// </summary>
         public List<MessageFileAttachment> FileAttachments { get; set; }
