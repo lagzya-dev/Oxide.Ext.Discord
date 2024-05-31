@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
+using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 
@@ -11,6 +12,12 @@ namespace Oxide.Ext.Discord.Entities
     /// </summary>
     public class GetPollAnswerVoters : IDiscordQueryString
     {
+        /// <summary>
+        /// The type of reaction
+        /// </summary>
+        [JsonProperty("type")]
+        public PollReactionType Type { get; set; } = PollReactionType.Normal;
+        
         /// <summary>
         /// Get users after this user ID
         /// </summary>
@@ -27,6 +34,11 @@ namespace Oxide.Ext.Discord.Entities
         public string ToQueryString()
         {
             QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+            
+            if(Type != PollReactionType.Normal)
+            {
+                builder.Add("type", StringCache<byte>.Instance.ToString((byte)Type));
+            }
             
             if (After.HasValue)
             {
