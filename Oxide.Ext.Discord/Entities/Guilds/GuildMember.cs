@@ -90,6 +90,12 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("communication_disabled_until")]
         public DateTime? CommunicationDisabledUntil { get; set; }
+        
+        /// <summary>
+        /// Data for the member's guild avatar decoration
+        /// </summary>
+        [JsonProperty("avatar_decoration_data")]
+        public AvatarDecorationData AvatarDecoration { get; set; }
         #endregion
 
         #region Extension Fields
