@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Entities
         public Snowflake? GuildId { get; set; }
         
         /// <summary>
-        /// For consumable items, whether the entitlement has been consumed                      |
+        /// For consumable items, whether the entitlement has been consumed
         /// </summary>
         [JsonProperty("consumed")]
         public bool? Consumed { get; set; }
