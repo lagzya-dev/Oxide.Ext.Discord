@@ -12,6 +12,12 @@ namespace Oxide.Ext.Discord.Entities
     public class DiscordInvite
     {
         /// <summary>
+        /// The type of the invite
+        /// </summary>
+        [JsonProperty("type")]
+        public InviteType Type { get; set; }
+        
+        /// <summary>
         /// The invite code (unique ID)
         /// </summary>
         [JsonProperty("code")]

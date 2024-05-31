@@ -9,6 +9,12 @@ namespace Oxide.Ext.Discord.Entities
     public class MessageReference
     {
         /// <summary>
+        /// Type of reference.
+        /// </summary>
+        [JsonProperty("type")]
+        public MessageReferenceType? Type { get; set; }
+        
+        /// <summary>
         /// ID of the originating message
         /// </summary>
         [JsonProperty("message_id")]

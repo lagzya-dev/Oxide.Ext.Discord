@@ -10,6 +10,13 @@ public enum EntitlementType
 
 | name | value | description |
 | --- | --- | --- |
+| Purchase | `Purchase` | Entitlement was purchased by user |
+| PremiumSubscription | `PremiumSubscription` | Entitlement for Discord Nitro subscription |
+| DeveloperGift | `DeveloperGift` | Entitlement was gifted by developer |
+| TestModePurchase | `TestModePurchase` | Entitlement was purchased by a dev in application test mode |
+| FreePurchase | `FreePurchase` | Entitlement was granted when the SKU was free |
+| UserGift | `UserGift` | Entitlement was claimed by user for free as a Nitro Subscriber |
+| PremiumPurchase | `PremiumPurchase` | Entitlement was purchased as an app subscription |
 | ApplicationSubscription | `ApplicationSubscription` | Entitlement was purchased as an app subscription |
 
 ## See Also

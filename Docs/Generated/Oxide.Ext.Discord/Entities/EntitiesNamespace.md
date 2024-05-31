@@ -222,6 +222,8 @@
 | class [MessageReactionRemovedAllEvent](./MessageReactionRemovedAllEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all) |
 | class [MessageReactionRemovedEvent](./MessageReactionRemovedEvent.md) | Represents [Message Reaction Remove](https://discord.com/developers/docs/topics/gateway#message-reaction-remove) |
 | class [MessageReference](./MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
+| enum [MessageReferenceType](./MessageReferenceType.md) | Represents [Message Reference Type](https://discord.com/developers/docs/resources/channel#message-reference-types) |
+| class [MessageSnapshot](./MessageSnapshot.md) | Represents a [Message Snapshot](https://discord.com/developers/docs/resources/channel#message-snapshot-object) |
 | enum [MessageType](./MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
 | class [OnboardingPrompt](./OnboardingPrompt.md) | Represents [Onboarding Prompt Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure) |

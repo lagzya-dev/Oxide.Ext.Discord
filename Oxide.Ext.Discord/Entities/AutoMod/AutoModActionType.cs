@@ -21,5 +21,10 @@ namespace Oxide.Ext.Discord.Entities
         /// MODERATE_MEMBERS permission is required to use the TIMEOUT action type.
         /// </summary>
         Timeout = 3,
+        
+        /// <summary>
+        /// Prevents a member from using text, voice, or other interactions
+        /// </summary>
+        BlockMemberInteraction = 4,
     }
 }

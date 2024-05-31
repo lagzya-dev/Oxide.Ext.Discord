@@ -3,7 +3,8 @@
 Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object)
 
 ```csharp
-public class InteractionResponse : BaseInteractionResponse<InteractionCallbackData>
+public class InteractionResponse : BaseInteractionResponse<InteractionCallbackData>, 
+    IFileAttachments
 ```
 
 ## Public Members
@@ -12,12 +13,14 @@ public class InteractionResponse : BaseInteractionResponse<InteractionCallbackDa
 | --- | --- |
 | [InteractionResponse](#interactionresponse-constructor)() | Default Constructor |
 | [InteractionResponse](#interactionresponse-constructor)(…) | Creates a [`InteractionResponse`](./InteractionResponse.md) |
+| [FileAttachments](#fileattachments-property) { get; } |  |
 | [Validate](#validate-method)() |  |
 
 ## See Also
 
 * class [BaseInteractionResponse&lt;T&gt;](./BaseInteractionResponse%7BT%7D.md)
 * class [InteractionCallbackData](./InteractionCallbackData.md)
+* interface [IFileAttachments](../Interfaces/IFileAttachments.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [InteractionResponse.cs](../../../../Oxide.Ext.Discord/Entities/InteractionResponse.cs)
@@ -69,6 +72,20 @@ public InteractionResponse(InteractionResponseType type, InteractionCallbackData
 
 * enum [InteractionResponseType](./InteractionResponseType.md)
 * class [InteractionCallbackData](./InteractionCallbackData.md)
+* class [InteractionResponse](./InteractionResponse.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# FileAttachments property
+
+```csharp
+public List<MessageFileAttachment> FileAttachments { get; }
+```
+
+## See Also
+
+* class [MessageFileAttachment](./MessageFileAttachment.md)
 * class [InteractionResponse](./InteractionResponse.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

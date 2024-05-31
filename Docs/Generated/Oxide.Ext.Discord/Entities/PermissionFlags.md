@@ -64,7 +64,8 @@ public enum PermissionFlags : ulong
 | CreateEvents | `1 << 44` | Allows for creating scheduled events, and editing and deleting those created by the current user |
 | UseExternalSounds | `1 << 45` | Allows the usage of custom soundboard sounds from other servers |
 | SendVoiceMessages | `1 << 46` | Allows sending voice messages |
-| UseClydeAi | `1 << 49` | Allows sending polls |
+| UseClydeAi | `1 << 47` | Allows sending polls |
+| SendPolls | `1 << 49` | Allows sending polls |
 
 ## See Also
 

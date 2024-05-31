@@ -73,7 +73,6 @@ namespace Oxide.Ext.Discord.Libraries
             logger.AppendField("Type", GetCommandType());
             logger.AppendField("Plugin", PluginName);
             logger.AppendField("Command", CommandId.ToString());
-
         }
     }
 }

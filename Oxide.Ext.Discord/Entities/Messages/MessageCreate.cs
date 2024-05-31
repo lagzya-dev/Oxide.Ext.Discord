@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities
         public bool EnforceNonce { get; set; }
         
         /// <summary>
-        /// Include to make your message a reply
+        /// Include to make your message a reply or a forward
         /// </summary>
         [JsonProperty("message_reference")]
         public MessageReference MessageReference { get; set; }

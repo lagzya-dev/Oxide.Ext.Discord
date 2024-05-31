@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Disable explicit content filter
         /// </summary>
-        [Description("DISABLED")]
+        [DiscordEnum("DISABLED")]
         Disabled = 0,
         
         /// <summary>
         /// Filter for only members without roles
         /// </summary>
-        [Description("MEMBERS_WITHOUT_ROLES")]
+        [DiscordEnum("MEMBERS_WITHOUT_ROLES")]
         MembersWithoutRoles = 1,
         
         /// <summary>
         /// Filter for all members
         /// </summary>
-        [Description("ALL_MEMBERS")]
+        [DiscordEnum("ALL_MEMBERS")]
         AllMembers = 2
     }
 }

@@ -183,6 +183,14 @@ namespace Oxide.Ext.Discord.Entities
         public MessageReference MessageReference { get; set; }
         
         /// <summary>
+        /// The message associated with the message_reference.
+        /// This is a minimal subset of fields in a message (e.g. author is excluded.)
+        /// <see cref="Entities.MessageReference"/>
+        /// </summary>
+        [JsonProperty("message_snapshots")]
+        public List<MessageSnapshot> MessageSnapshots { get; set; }
+        
+        /// <summary>
         /// Message flags combined as a bitfield
         /// <see cref="MessageFlags"/>
         /// </summary>
@@ -238,6 +246,18 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("role_subscription_data")]
         public RoleSubscription RoleSubscriptionData { get; set; }
+        
+        /// <summary>
+        /// Poll object
+        /// </summary>
+        [JsonProperty("poll")]
+        public DiscordPoll Poll { get; set; }
+        
+        /// <summary>
+        /// The call associated with the message   
+        /// </summary>
+        [JsonProperty("call")]
+        public MessageCall Call { get; set; }
         
         /// <summary>
         /// File Attachments to add to the message on edit
@@ -792,7 +812,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="client">Client to use</param>
         public IPromise<DiscordMessage> EndPoll(DiscordClient client)
         {
-            return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{ChannelId}/polls/{Id}/expire", new object());
+            return client.Bot.Rest.Post<DiscordMessage>(client, $"channels/{ChannelId}/polls/{Id}/expire", null);
         }
     }
 }

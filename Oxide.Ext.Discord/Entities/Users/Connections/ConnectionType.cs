@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using Newtonsoft.Json;
+using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Json;
 
 namespace Oxide.Ext.Discord.Entities
@@ -18,102 +18,112 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Connection type is Battle.net
         /// </summary>
-        [Description("battlenet")] BattleNet,
+        [DiscordEnum("battlenet")] BattleNet,
+        
+        /// <summary>
+        /// Connection type is Bungie.net
+        /// </summary>
+        [DiscordEnum("bungie")] Bungie,
+        
+        /// <summary>
+        /// Connection type is Domain              
+        /// </summary>
+        [DiscordEnum("domain")] Domain,
         
         /// <summary>
         /// Connection type is Epic Games
         /// </summary>
         // ReSharper disable once InconsistentNaming
-        [Description("ebay")] eBay,
+        [DiscordEnum("ebay")] eBay,
         
         /// <summary>
         /// Connection type is Epic Games
         /// </summary>
-        [Description("epicgames")] EpicGames,
+        [DiscordEnum("epicgames")] EpicGames,
         
         /// <summary>
         /// Connection type is Facebook
         /// </summary>
-        [Description("facebook")] Facebook,
+        [DiscordEnum("facebook")] Facebook,
         
         /// <summary>
         /// Connection type is GitHub
         /// </summary>
-        [Description("github")] GitHub,
+        [DiscordEnum("github")] GitHub,
         
         /// <summary>
         /// Connection type is Instagram
         /// </summary>
-        [Description("instagram")] Instagram,
+        [DiscordEnum("instagram")] Instagram,
         
         /// <summary>
         /// Connection type is League of Legends
         /// </summary>
-        [Description("paypal")] PayPal,
+        [DiscordEnum("paypal")] PayPal,
         
         /// <summary>
         /// Connection type is League of Legends
         /// </summary>
-        [Description("leagueoflegends")] LeagueOfLegends,
+        [DiscordEnum("leagueoflegends")] LeagueOfLegends,
         
         /// <summary>
         /// Connection type is PlayStation Network
         /// </summary>
-        [Description("playstation")] PlayStationNetwork,
+        [DiscordEnum("playstation")] PlayStationNetwork,
         
         /// <summary>
         /// Connection type is Reddit
         /// </summary>
-        [Description("reddit")] Reddit,
+        [DiscordEnum("reddit")] Reddit,
         
         /// <summary>
         /// Connection type is Reddit
         /// </summary>
-        [Description("riotgames")] RiotGames,
+        [DiscordEnum("riotgames")] RiotGames,
 
         /// <summary>
         /// Connection type is Spotify
         /// </summary>
-        [Description("spotify")] Spotify,    
+        [DiscordEnum("spotify")] Spotify,    
         
         /// <summary>
         /// Connection type is Skype
         /// </summary>
-        [Description("skype")] Skype,     
+        [DiscordEnum("skype")] Skype,     
         
         /// <summary>
         /// Connection type is Steam
         /// </summary>
-        [Description("steam")] Steam, 
+        [DiscordEnum("steam")] Steam, 
         
         /// <summary>
         /// Connection type is TikTok
         /// </summary>
-        [Description("tiktok")] TikTok, 
+        [DiscordEnum("tiktok")] TikTok, 
         
         /// <summary>
         /// Connection type is Twitch
         /// </summary>
-        [Description("twitch")] Twitch,      
+        [DiscordEnum("twitch")] Twitch,      
         
         /// <summary>
         /// Connection type is Twitter
         /// </summary>
-        [Description("twitter")] Twitter,   
+        [DiscordEnum("twitter")] Twitter,   
         
         /// <summary>
         /// Connection type is X (Twitter)
         /// </summary>
-        [Description("twitter")] X,   
+        [DiscordEnum("twitter")] X,   
         
         /// <summary>
         /// Connection type is Xbox
         /// </summary>
-        [Description("xbox")] Xbox,        
+        [DiscordEnum("xbox")] Xbox,        
         
         /// <summary>
         /// Connection type is Youtube
         /// </summary>
-        [Description("youtube")] Youtube,
+        [DiscordEnum("youtube")] Youtube,
     }
 }

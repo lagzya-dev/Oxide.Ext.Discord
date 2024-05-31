@@ -209,21 +209,21 @@ namespace Oxide.Ext.Discord.Helpers
                     throw new ArgumentException("ImageFormat is not valid for Guild Member Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
             }
         }
-        
+
         /// <summary>
         /// Returns the Url of the User Avatar Decoration
         /// </summary>
-        /// <param name="userId">Discord User ID</param>
-        /// <param name="decorationHash">Guild Member avatar</param>
+        /// <param name="data">Avatar Decoration Data</param>
         /// <param name="format">Format the avatar is in</param>
         /// <returns>Url of the Guild Member avatar</returns>
-        public static string GetUserAvatarDecoration(Snowflake userId, string decorationHash, DiscordImageFormat format = DiscordImageFormat.Auto)
+        public static string GetUserAvatarDecoration(AvatarDecorationData data, DiscordImageFormat format = DiscordImageFormat.Auto)
         {
-            switch (format)
+            if (data == null) throw new ArgumentNullException(nameof(data));
+            switch (format) 
             {
                 case DiscordImageFormat.Auto:
                 case DiscordImageFormat.Png:
-                    return $"{CdnUrl}/avatar-decorations/{userId}/{decorationHash}.{GetExtension(format, decorationHash)}";
+                    return $"{CdnUrl}/avatar-decoration-presets/{data.Asset}.{GetExtension(format, data.Asset)}";
 
                 default:
                     throw new ArgumentException("ImageFormat is not valid for User Avatar Decoration. Valid types are (Auto, Png)", nameof(format));

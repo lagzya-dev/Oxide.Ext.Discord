@@ -18,28 +18,28 @@ Here you will find some examples of plugins using the discord extension. Some of
 ```c#
 using System.Linq;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Plugins
 {
     [Info("Connect Example", "MJSU", "1.0.0")]
     [Description("Example on how to connect to the discord extension")]
-    internal class ConnectExample : CovalencePlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin
     {
         #region Class Fields
-        [DiscordClient] private DiscordClient _client;
+        public DiscordClient Client {get; set;}
         #endregion
 
         private void OnServerInitialized()
         {
-           _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+            Client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -53,106 +53,28 @@ This example is if you're wanting to connect to the discord before the OnServerI
 ```c#
 using System.Linq;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Plugins
 {
     [Info("Connect Example", "MJSU", "1.0.0")]
     [Description("Example on how to connect to the discord extension")]
-    internal class ConnectExample : CovalencePlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin
     {
         #region Class Fields
-        [DiscordClient] private DiscordClient _client;
+        public DiscordClient Client {get; set;}
         #endregion
 
         private void OnDiscordClientCreated()
         {
-           _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+            Client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
-        private void OnDiscordGatewayReady(GatewayReadyEvent ready)
-        {
-            Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
-        }
-    }
-}
-```
-
-## Early Connecting Example Option 2
-This example is if you're wanting to connect to the discord during Init or Loaded Hooks
-```c#
-using System.Linq;
-using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-
-namespace Oxide.Plugins
-{
-    [Info("Connect Example", "MJSU", "1.0.0")]
-    [Description("Example on how to connect to the discord extension")]
-    internal class ConnectExample : CovalencePlugin
-    {
-        #region Class Fields
-        [DiscordClient] private DiscordClient _client;
-        #endregion
-
-        private void Init() 
-        {
-            DiscordClient.CreateClient(this);
-            _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
-        }
-
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
-        private void OnDiscordGatewayReady(GatewayReadyEvent ready)
-        {
-            Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
-        }
-    }
-}
-```
-
-## Advanced Connecting Example
-
-```c#
-using System.Linq;
-using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
-using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Logging;
-
-namespace Oxide.Plugins
-{
-    [Info("Advanced Connect Example", "MJSU", "1.0.0")]
-    [Description("Example on how to do an advanced connect to the discord extension")]
-    internal class ConnectExample : CovalencePlugin
-    {
-        #region Class Fields
-        [DiscordClient] private DiscordClient _client;
-
-        private readonly DiscordSettings _discordSettings = new DiscordSettings();
-        #endregion
-
-        private void OnServerInitialized()
-        {
-            _discordSettings.ApiToken = "YourBotToken";
-            _discordSettings.Intents = GatewayIntents.Guilds | GatewayIntents.GuildMembers;
-            _discordSettings.LogLevel = LogLevel.Info;
-            
-           _client.Connect(_discordSettings);
-        }
-
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -163,33 +85,28 @@ namespace Oxide.Plugins
 
 ## Registering Plugin for Discord Link
 ```c#
-using System;
+using System.Collections.Generic;
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Entities.Users;
-using Oxide.Ext.Discord.Libraries.Linking;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Plugins
 {
     [Info("Discord Link Example", "MJSU", "1.0.0")]
     [Description("Example on how to use Discord Link")]
-    internal class ConnectExample : CovalencePlugin, IDiscordLinkPlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin, IDiscordLink
     {
         #region Class Fields
-        [DiscordClient] private DiscordClient _client;
+        public DiscordClient Client {get; set;}
         
         private readonly DiscordLink _link = Interface.Oxide.GetLibrary<DiscordLink>();
-        
-        private Action<IPlayer, DiscordUser> _onLinked;
-        private Action<IPlayer, DiscordUser> _onUnlinked;
         #endregion
 
         private void OnServerInitialized()
@@ -197,10 +114,10 @@ namespace Oxide.Plugins
             //Register your plugin as a discord link plugin
             _link.AddLinkPlugin(this);
             
-            _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+            Client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -208,60 +125,61 @@ namespace Oxide.Plugins
 
         //Return your saved discord to server links.
         //Note this is only called once while registering plugin to link
-        public Hash<string, Snowflake> GetSteamToDiscordIds()
+        public IDictionary<PlayerId, Snowflake> GetPlayerIdToDiscordIds()
         {
-            return new Hash<string, Snowflake>
+            return new Hash<PlayerId, Snowflake>
             {
-                ["SavedSteamId"] = new Snowflake(12321321)
+                [new PlayerId("512312512")] = new Snowflake(12321321)
             };
         }
         
         //Method in your plugin should call _link.OnLinked whenever a player and discord are linked
         public void OnLinked(IPlayer player, DiscordUser user) 
         {
-            _link.OnLinked(player, user);
+            _link.OnLinked(this, player, user);
         }
         
         //Method in your plugin should call _link.OnUnlinked whenever a player and discord are unlinked
         public void OnUnlinked(IPlayer player, DiscordUser user) 
         {
-            _link.OnUnlinked(player, user);
+            _link.OnUnlinked(this, player, user);
         }
     }
 }
 ```
 
 ## Discord Command Example
+**NOTE** Discord Command is considered deprecated and will be removed in a future update
+
 ```c#
 using System.Linq;
 using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Constants;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Plugins
 {
     [Info("Command Example", "MJSU", "1.0.0")]
     [Description("Example on how to use discord commands")]
-    internal class ConnectExample : CovalencePlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin
     {
         #region Class Fields
-        [DiscordClient] private DiscordClient _client;
+        public DiscordClient Client { get; set; }
         
         private readonly DiscordCommand _dcCommands = Interface.Oxide.GetLibrary<DiscordCommand>();
         #endregion
 
         private void OnServerInitialized()
         {
-            _client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
+            Client.Connect("YourBotToken", GatewayIntents.Guilds | GatewayIntents.GuildMembers);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -271,21 +189,21 @@ namespace Oxide.Plugins
         [GuildCommand("myguildcommand", false)]
         private void MyGuildCommand(DiscordMessage message, string cmd, string[] args)
         {
-            message.Reply(_client,"You used the guild command");
+            message.Reply(Client,"You used the guild command");
         }
         
         //By passing true instead of false it will use the lang key with the given string as the command
         [DirectMessageCommand("mydirectcommand", false)]
         private void MyDirectCommand(DiscordMessage message, string cmd, string[] args)
         {
-            message.Reply(_client,"You used the direct message command command");
+            message.Reply(Client,"You used the direct message command command");
         }
     }
 }
 ```
 
 ## Advanced command example
-
+**NOTE** Discord Command is considered deprecated and will be removed in a future update
 ```c#
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -294,32 +212,30 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Libraries.Command;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Plugins
 {
     [Info("Advanced Command Example", "MJSU", "1.0.0")]
     [Description("Example on how to do advanced command setup")]
-    internal class ConnectExample : CovalencePlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin
     {
         #region Class Fields
-        [DiscordClient]
-        private DiscordClient _client;
+
+        public DiscordClient Client { get; set; }
 
         private PluginConfig _pluginConfig;
 
         private readonly DiscordCommand _dcCommands = Interface.Oxide.GetLibrary<DiscordCommand>();
 
-        private readonly DiscordSettings _discordSettings = new DiscordSettings();
-        
+        private readonly BotConnection _discordSettings = new();
+
         #endregion
 
         private void OnServerInitialized()
@@ -327,14 +243,14 @@ namespace Oxide.Plugins
             _discordSettings.ApiToken = _pluginConfig.DiscordApiKey;
             _discordSettings.Intents = GatewayIntents.GuildMessages | GatewayIntents.DirectMessages | GatewayIntents.Guilds | GatewayIntents.GuildMembers;
             _discordSettings.LogLevel = _pluginConfig.ExtensionDebugging;
-            
+
             RegisterDiscordCommand(nameof(MyDiscordCommand), "myDiscordCommand", _pluginConfig.AllowInDm, _pluginConfig.AllowInGuild, _pluginConfig.AllowedChannels);
             RegisterDiscordLangCommand(nameof(MyDiscordCommand), "lang key", _pluginConfig.AllowInDm, _pluginConfig.AllowInGuild, _pluginConfig.AllowedChannels);
-            
-            _client.Connect(_discordSettings);
+
+            Client.Connect(_discordSettings);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -342,7 +258,7 @@ namespace Oxide.Plugins
 
         private void MyDiscordCommand(DiscordMessage message, string cmd, string[] args)
         {
-            message.Reply(_client, "You used my discord command");
+            message.Reply(Client, "You used my discord command");
         }
 
         //Registers a command by name
@@ -358,7 +274,7 @@ namespace Oxide.Plugins
                 _dcCommands.AddGuildCommand(name, this, allowedChannels, command);
             }
         }
-        
+
         //Registers a command by lang key
         public void RegisterDiscordLangCommand(string command, string langKey, bool direct, bool guild, List<Snowflake> allowedChannels)
         {
@@ -389,11 +305,11 @@ namespace Oxide.Plugins
 
             [JsonProperty(PropertyName = "Allow Guild Commands Only In The Following Guild Channel Or Category (Channel ID Or Category ID)")]
             public List<Snowflake> AllowedChannels { get; set; }
-            
+
             [JsonConverter(typeof(StringEnumConverter))]
-            [DefaultValue(LogLevel.Info)]
+            [DefaultValue(DiscordLogLevel.Info)]
             [JsonProperty(PropertyName = "Discord Extension Log Level (Verbose, Debug, Info, Warning, Error, Exception, Off)")]
-            public LogLevel ExtensionDebugging { get; set; }
+            public DiscordLogLevel ExtensionDebugging { get; set; }
         }
     }
 }
@@ -407,31 +323,28 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Oxide.Core;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord;
-using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Entities.Gatway;
-using Oxide.Ext.Discord.Entities.Gatway.Events;
-using Oxide.Ext.Discord.Entities.Messages;
-using Oxide.Ext.Discord.Libraries.Subscription;
+using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 
 namespace Oxide.Plugins
 {
     [Info("Channels Subscriptions Example", "MJSU", "1.0.0")]
     [Description("Example on how to subscribe to a channel")]
-    internal class ConnectExample : CovalencePlugin
+    internal class ConnectExample : CovalencePlugin, IDiscordPlugin
     {
         #region Class Fields
-        [DiscordClient]
-        private DiscordClient _client;
+        public DiscordClient Client { get; set; }
 
         private PluginConfig _pluginConfig;
 
         private readonly DiscordSubscriptions _subscriptions = Interface.Oxide.GetLibrary<DiscordSubscriptions>();
 
-        private readonly DiscordSettings _discordSettings = new DiscordSettings();
+        private readonly BotConnection _discordSettings = new BotConnection();
         
         #endregion
 
@@ -441,11 +354,11 @@ namespace Oxide.Plugins
             _discordSettings.Intents = GatewayIntents.GuildMessages | GatewayIntents.DirectMessages | GatewayIntents.Guilds | GatewayIntents.GuildMembers;
             _discordSettings.LogLevel = _pluginConfig.ExtensionDebugging;
 
-            _subscriptions.AddChannelSubscription(this, _pluginConfig.SubscribedChannelId, OnChannelMessage);
-            _client.Connect(_discordSettings);
+            _subscriptions.AddChannelSubscription(Client, _pluginConfig.SubscribedChannelId, OnChannelMessage);
+            Client.Connect(_discordSettings);
         }
 
-        [HookMethod(DiscordHooks.OnDiscordGatewayReady)]
+        [HookMethod(DiscordExtHooks.OnDiscordGatewayReady)]
         private void OnDiscordGatewayReady(GatewayReadyEvent ready)
         {
             Puts($"Bot connected to:{ready.Guilds.FirstOrDefault().Value.Name}");
@@ -453,7 +366,7 @@ namespace Oxide.Plugins
         
         private void OnChannelMessage(DiscordMessage message)
         {
-            message.Reply(_client, "I am subscribed to listen to messages in this channel");
+            message.Reply(Client, "I am subscribed to listen to messages in this channel");
         }
 
         private class PluginConfig
@@ -467,9 +380,9 @@ namespace Oxide.Plugins
             public Snowflake SubscribedChannelId { get; set; }
 
             [JsonConverter(typeof(StringEnumConverter))]
-            [DefaultValue(LogLevel.Info)]
+            [DefaultValue(DiscordLogLevel.Info)]
             [JsonProperty(PropertyName = "Discord Extension Log Level (Verbose, Debug, Info, Warning, Error, Exception, Off)")]
-            public LogLevel ExtensionDebugging { get; set; }
+            public DiscordLogLevel ExtensionDebugging { get; set; }
         }
     }
 }

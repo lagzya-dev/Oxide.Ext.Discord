@@ -124,10 +124,10 @@ namespace Oxide.Ext.Discord.Entities
         public UserFlags? PublicFlags { get; set; }
         
         /// <summary>
-        /// The user's avatar decoration hash
+        /// The user's avatar decoration
         /// </summary>
-        [JsonProperty("avatar_decoration")]
-        public string AvatarDecoration { get; set; }
+        [JsonProperty("avatar_decoration_data")]
+        public AvatarDecorationData AvatarDecoration { get; set; }
         #endregion
 
         #region Helper Properties
@@ -149,7 +149,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Avatar Decoration Url for the user
         /// </summary>
-        public string GetAvatarDecorationUrl => DiscordCdn.GetUserAvatarDecoration(Id, AvatarDecoration);
+        public string GetAvatarDecorationUrl => DiscordCdn.GetUserAvatarDecoration(AvatarDecoration);
         
         /// <summary>
         /// Banner Url for the user

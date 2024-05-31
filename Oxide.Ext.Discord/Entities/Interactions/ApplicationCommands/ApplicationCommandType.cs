@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,19 +10,19 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Slash commands; a text-based command that shows up when a user types /
         /// </summary>
-        [Description("CHAT_INPUT")]
+        [DiscordEnum("CHAT_INPUT")]
         ChatInput = 1,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a user
         /// </summary>
-        [Description("USER")]
+        [DiscordEnum("USER")]
         User = 2,
         
         /// <summary>
         /// A UI-based command that shows up when you right click or tap on a messages
         /// </summary>
-        [Description("MESSAGE")]
+        [DiscordEnum("MESSAGE")]
         Message = 3
     }
 }

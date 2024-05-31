@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Logging;
@@ -27,6 +28,9 @@ namespace Oxide.Ext.Discord.Libraries
         /// <returns></returns>
         public ServerLocale GetServerLocale() => DiscordLocales.Instance.GetServerLanguage(this);
         
+        private static DateTime _lastError;
+        private static readonly List<string> LocaleError = new List<string>();
+        
         private DiscordLocale(string id) 
         {
             Id = id;
@@ -42,8 +46,14 @@ namespace Oxide.Ext.Discord.Libraries
             DiscordLocale discordLocale = new DiscordLocale(locale);
             if (!DiscordLocales.Instance.Contains(discordLocale))
             {
-                DiscordExtension.GlobalLogger.Warning("Parsed DiscordLocale '{0}' which does not exist in DiscordLang. " +
-                                                      "Please give this message to the Discord Extension Authors", locale);
+                if (!LocaleError.Contains(locale) || _lastError + TimeSpan.FromMinutes(5) < DateTime.UtcNow)
+                {
+                    LocaleError.Remove(locale);
+                    LocaleError.Add(locale);
+                    _lastError = DateTime.UtcNow;
+                    DiscordExtension.GlobalLogger.Warning("Parsed DiscordLocale '{0}' which does not exist in DiscordLang. " +
+                                                          "Please give this message to the Discord Extension Authors", locale);
+                }
             }
 
             return discordLocale;

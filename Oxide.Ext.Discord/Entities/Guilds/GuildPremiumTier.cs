@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,25 +10,25 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Guild does not have any premium tier
         /// </summary>
-        [Description("NONE")]
+        [DiscordEnum("NONE")]
         None = 0,
         
         /// <summary>
         /// Guild is premium tier 1
         /// </summary>
-        [Description("TIER_1")]
+        [DiscordEnum("TIER_1")]
         Tier1 = 1,
         
         /// <summary>
         /// Guild is premium tier 2
         /// </summary>
-        [Description("TIER_2")]
+        [DiscordEnum("TIER_2")]
         Tier2 = 2,
         
         /// <summary>
         /// Guild is premium tier 3
         /// </summary>
-        [Description("TIER_3")]
+        [DiscordEnum("TIER_3")]
         Tier3 = 3
     }
 }

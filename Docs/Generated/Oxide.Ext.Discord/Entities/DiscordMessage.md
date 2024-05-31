@@ -32,6 +32,7 @@ public class DiscordMessage : IFileAttachments
 | [Mentions](#mentions-property) { get; set; } | Users specifically mentioned in the message [`DiscordUser`](./DiscordUser.md) |
 | [MentionsChannels](#mentionschannels-property) { get; set; } | Channels specifically mentioned in this message [`ChannelMention`](./ChannelMention.md) |
 | [MessageReference](#messagereference-property) { get; set; } | Data showing the source of a crosspost, channel follow add, pin, or reply message [`MessageReference`](./MessageReference.md) |
+| [MessageSnapshots](#messagesnapshots-property) { get; set; } | The message associated with the message_reference. This is a minimal subset of fields in a message (e.g. author is excluded.) [`MessageReference`](./MessageReference.md) |
 | [Nonce](#nonce-property) { get; set; } | Used for validating a message was sent |
 | [Pinned](#pinned-property) { get; set; } | Whether this message is pinned |
 | [Position](#position-property) { get; set; } | A generally increasing integer (there may be gaps or duplicates) that represents the approximate position of the message in a thread, it can be used to estimate the relative position of the message in a thread in company with total_message_sent on parent thread |
@@ -1382,6 +1383,22 @@ public MessageReference MessageReference { get; set; }
 ## See Also
 
 * class [MessageReference](./MessageReference.md)
+* class [DiscordMessage](./DiscordMessage.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# MessageSnapshots property
+
+The message associated with the message_reference. This is a minimal subset of fields in a message (e.g. author is excluded.) [`MessageReference`](./MessageReference.md)
+
+```csharp
+public List<MessageSnapshot> MessageSnapshots { get; set; }
+```
+
+## See Also
+
+* class [MessageSnapshot](./MessageSnapshot.md)
 * class [DiscordMessage](./DiscordMessage.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -12,7 +12,7 @@ public class MessageCreate : BaseMessageCreate
 | --- | --- |
 | [MessageCreate](#messagecreate-constructor)() | The default constructor. |
 | [EnforceNonce](#enforcenonce-property) { get; set; } | If true and nonce is present, it will be checked for uniqueness in the past few minutes. If another message was created by the same author with the same nonce, that message will be returned and no new message will be created. |
-| [MessageReference](#messagereference-property) { get; set; } | Include to make your message a reply |
+| [MessageReference](#messagereference-property) { get; set; } | Include to make your message a reply or a forward |
 | [Nonce](#nonce-property) { get; set; } | Can be used to verify a message was sent (up to 25 characters). Value will appear in the Message Create event. |
 
 ## See Also
@@ -70,7 +70,7 @@ public bool EnforceNonce { get; set; }
    
 # MessageReference property
 
-Include to make your message a reply
+Include to make your message a reply or a forward
 
 ```csharp
 public MessageReference MessageReference { get; set; }

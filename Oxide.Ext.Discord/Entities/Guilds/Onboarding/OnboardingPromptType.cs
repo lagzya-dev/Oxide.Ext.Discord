@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Oxide.Ext.Discord.Attributes;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -10,13 +10,13 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// Multiple Choice Prompt Type
         /// </summary>
-        [Description("MULTIPLE_CHOICE")]
+        [DiscordEnum("MULTIPLE_CHOICE")]
         MultipleChoice = 0,
         
         /// <summary>
         /// Dropdown Prompt Type
         /// </summary>
-        [Description("DROPDOWN")]
+        [DiscordEnum("DROPDOWN")]
         Dropdown = 1,
     }
 }
