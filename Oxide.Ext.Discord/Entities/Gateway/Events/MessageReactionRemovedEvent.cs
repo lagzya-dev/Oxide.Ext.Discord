@@ -33,9 +33,15 @@ namespace Oxide.Ext.Discord.Entities
         public Snowflake? GuildId { get; set; }
 
         /// <summary>
-        /// The emoji removed
+        /// Emoji used to react
         /// </summary>
         [JsonProperty("emoji")]
         public DiscordEmoji Emoji { get; set; }
+        
+        /// <summary>
+        /// True if this is a super-reaction 
+        /// </summary>
+        [JsonProperty("burst")]
+        public bool Burst { get; set; }
     }
 }

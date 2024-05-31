@@ -39,6 +39,11 @@ namespace Oxide.Ext.Discord.Json
                 return new DiscordColor(uint.Parse(reader.Value.ToString()));
             }
             
+            if (reader.TokenType == JsonToken.String)
+            {
+                return new DiscordColor(reader.Value.ToString());
+            }
+            
             throw new JsonException($"Unexpected token {reader.TokenType} when parsing discord color. Path: {reader.Path}");
         }
 

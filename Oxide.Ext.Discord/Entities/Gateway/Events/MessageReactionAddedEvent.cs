@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Oxide.Ext.Discord.Entities
 {
@@ -49,5 +50,17 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("message_author_id")]
         public Snowflake? MessageAuthorId { get; set; }
+        
+        /// <summary>
+        /// True if this is a super-reaction 
+        /// </summary>
+        [JsonProperty("burst")]
+        public bool Burst { get; set; }
+        
+        /// <summary>
+        /// Colors used for super-reaction animation
+        /// </summary>
+        [JsonProperty("burst_colors")]
+        public List<DiscordColor> BurstColors { get; set; }
     }
 }
