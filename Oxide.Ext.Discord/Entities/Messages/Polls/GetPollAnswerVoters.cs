@@ -16,7 +16,7 @@ namespace Oxide.Ext.Discord.Entities
         /// The type of reaction
         /// </summary>
         [JsonProperty("type")]
-        public PollReactionType Type { get; set; } = PollReactionType.Normal;
+        public ReactionType Type { get; set; } = ReactionType.Normal;
         
         /// <summary>
         /// Get users after this user ID
@@ -35,7 +35,7 @@ namespace Oxide.Ext.Discord.Entities
         {
             QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
             
-            if(Type != PollReactionType.Normal)
+            if(Type != ReactionType.Normal)
             {
                 builder.Add("type", StringCache<byte>.Instance.ToString((byte)Type));
             }

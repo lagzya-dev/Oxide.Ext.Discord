@@ -1,9 +1,9 @@
 ﻿namespace Oxide.Ext.Discord.Entities
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/poll#reaction-types">Discord Poll Reaction Type</a>
+    /// Represents a <a href="https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types">Discord Reaction Type</a>
     /// </summary>
-    public enum PollReactionType
+    public enum ReactionType
     {
         /// <summary>
         /// Normal Reaction Type

@@ -43,5 +43,11 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("burst")]
         public bool Burst { get; set; }
+        
+        /// <summary>
+        /// The type of the reaction
+        /// </summary>
+        [JsonProperty("type")]
+        public ReactionType Type { get; set; }
     }
 }
