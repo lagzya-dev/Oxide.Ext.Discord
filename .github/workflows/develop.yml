@@ -3,7 +3,8 @@ name: Create Pre Release Release
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+-preview.[0-9]+.[0-9]+.[0-9]"
+      - "[0-9]+.[0-9]+.[0-9]+-preview.[0-9]+.[0-9]+.[0-9]"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,33 +18,40 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
 
-      - name: Set VERSION variable from tag
-        run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - name: Set VERSION variable from latest release
+        shell: pwsh
+        run: |
+          $env:VERSION = gh release list --limit 1 --json tagName --jq '.[0].tagName'
+          if ([string]::IsNullOrEmpty($env:VERSION)) {
+            Write-Error "Error: VERSION is empty."
+            exit 1
+          }
+
+          $versionPattern = '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z\-\.]+)?(\+[0-9A-Za-z\-\.]+)?$'
+          if ($env:VERSION -notmatch $versionPattern) {
+            Write-Error "Error: VERSION is not a valid Semantic Version (https://semver.org)."
+            exit 1
+          } else {
+            Write-Host "VERSION: $env:VERSION"
+            echo "VERSION=$env:VERSION" >> $env:GITHUB_ENV
+          }
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Download References
         shell: pwsh
-        run: |
-          .\Download-References.ps1
+        run: .\Download-References.ps1
 
-      - name: Build DLLs - Oxide
-        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Oxide /p:Version=$VERSION /p:BuildServer=Github -f net48
+      - name: Build DLL (Oxide)
+        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Oxide /p:Version=$env:VERSION /p:BuildServer=Github -f net48
         working-directory: Oxide.Ext.Discord
 
-      - name: Build DLLs - Carbon
-        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Carbon /p:Version=$VERSION /p:BuildServer=Github -f net48
-        working-directory: Oxide.Ext.Discord
-
-      - name: Move DLLs
-        run: |
-          mkdir -p bin
-          mv Oxide.Ext.Discord/bin/Oxide/Release/net48/Oxide.Ext.Discord.dll bin/
-          mv Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll bin/
-        working-directory: src
+#      - name: Build DLL (Carbon)
+#        run: dotnet build Oxide.Ext.Discord.csproj -c Release /p:Platform=Carbon /p:Version=$env:VERSION /p:BuildServer=Github -f net48
+#        working-directory: Oxide.Ext.Discord
 
       - name: Upload Release Assets
-        run: |
-          $TAG=($env:GITHUB_REF -replace 'refs/tags/', '')
-          $dllPath = Get-ChildItem -Path src/bin -Filter *.dll -File | Select-Object -ExpandProperty FullName
-          gh release upload $TAG $dllPath
+        run: gh release upload --clobber $env:VERSION Oxide.Ext.Discord/bin/Release/net48/Oxide.Ext.Discord.dll #Oxide.Ext.Discord/bin/Carbon/Release/net48/Carbon.Discord.dll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
