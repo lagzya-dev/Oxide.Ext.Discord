@@ -323,14 +323,13 @@ Url of the Guild Member avatar
 Returns the Url of the User Avatar Decoration
 
 ```csharp
-public static string GetUserAvatarDecoration(Snowflake userId, string decorationHash, 
+public static string GetUserAvatarDecoration(AvatarDecorationData data, 
     DiscordImageFormat format = DiscordImageFormat.Auto)
 ```
 
 | parameter | description |
 | --- | --- |
-| userId | Discord User ID |
-| decorationHash | Guild Member avatar |
+| data | Avatar Decoration Data |
 | format | Format the avatar is in |
 
 ## Return Value
@@ -339,7 +338,7 @@ Url of the Guild Member avatar
 
 ## See Also
 
-* struct [Snowflake](../Entities/Snowflake.md)
+* class [AvatarDecorationData](../Entities/AvatarDecorationData.md)
 * enum [DiscordImageFormat](../Entities/DiscordImageFormat.md)
 * class [DiscordCdn](./DiscordCdn.md)
 * namespace [Oxide.Ext.Discord.Helpers](./HelpersNamespace.md)

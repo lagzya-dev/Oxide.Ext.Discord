@@ -12,7 +12,7 @@ public class DiscordEntitlement
 | --- | --- |
 | [DiscordEntitlement](#discordentitlement-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | ID of the parent application |
-| [Consumed](#consumed-property) { get; set; } | For consumable items, whether the entitlement has been consumed &#x7C; |
+| [Consumed](#consumed-property) { get; set; } | For consumable items, whether the entitlement has been consumed |
 | [Deleted](#deleted-property) { get; set; } | Entitlement was deleted |
 | [EndsAt](#endsat-property) { get; set; } | Date at which the entitlement is no longer valid. Not present when using test entitlements. |
 | [GuildId](#guildid-property) { get; set; } | ID of the guild that is granted access to the entitlement's sku |
@@ -283,7 +283,7 @@ public Snowflake? GuildId { get; set; }
    
 # Consumed property
 
-For consumable items, whether the entitlement has been consumed &#x7C;
+For consumable items, whether the entitlement has been consumed
 
 ```csharp
 public bool? Consumed { get; set; }

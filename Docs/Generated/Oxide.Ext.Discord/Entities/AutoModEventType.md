@@ -11,6 +11,7 @@ public enum AutoModEventType : byte
 | name | value | description |
 | --- | --- | --- |
 | MessageSend | `MessageSend` | When a member sends or edits a message in the guild |
+| MemberUpdate | `MessageSend` | When a member edits their profile |
 
 ## See Also
 

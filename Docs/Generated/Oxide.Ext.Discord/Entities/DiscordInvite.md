@@ -21,6 +21,7 @@ public class DiscordInvite
 | [Inviter](#inviter-property) { get; set; } | The user who created the invite See [`DiscordUser`](./DiscordUser.md) |
 | [StageInstance](#stageinstance-property) { get; set; } | Stage instance data if there is a public Stage instance in the Stage channel this invite is for |
 | [TargetUser](#targetuser-property) { get; set; } | The target user for this invite See [`DiscordUser`](./DiscordUser.md) |
+| [Type](#type-property) { get; set; } | The type of the invite |
 | [UserTargetType](#usertargettype-property) { get; set; } | The type of user target for this invite See [`TargetUserType`](./TargetUserType.md) |
 | [Delete](#delete-method)(…) | Delete an invite. Requires the MANAGE_CHANNELS permission on the channel this invite belongs to, or MANAGE_GUILD to remove any invite across the guild. Returns an invite object on success. See [Delete Invite](https://discord.com/developers/docs/resources/invite#delete-invite) |
 | static [Get](#get-method)(…) | Returns an invite object for the given code. See [Get Invite](https://discord.com/developers/docs/resources/invite#get-invite) |
@@ -88,6 +89,22 @@ public DiscordInvite()
 
 ## See Also
 
+* class [DiscordInvite](./DiscordInvite.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of the invite
+
+```csharp
+public InviteType Type { get; set; }
+```
+
+## See Also
+
+* enum [InviteType](./InviteType.md)
 * class [DiscordInvite](./DiscordInvite.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

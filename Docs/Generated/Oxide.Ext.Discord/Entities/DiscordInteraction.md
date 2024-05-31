@@ -12,12 +12,15 @@ public class DiscordInteraction
 | --- | --- |
 | [DiscordInteraction](#discordinteraction-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | ID of the application this interaction is for |
-| [AppPermissions](#apppermissions-property) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
+| [AppPermissions](#apppermissions-property) { get; set; } | Bitwise set of permissions the app has in the source location of the interaction |
+| [AuthorizingIntegrationOwners](#authorizingintegrationowners-property) { get; set; } | Mapping of installation contexts that the interaction was authorized for to related user or guild IDs |
 | [Channel](#channel-property) { get; set; } | Channel that the interaction was sent from |
 | [ChannelId](#channelid-property) { get; set; } | Channel that the interaction was sent from |
+| [Contexts](#contexts-property) { get; set; } | Context where the interaction was triggered from |
 | [Data](#data-property) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
 | [Entitlements](#entitlements-property) { get; set; } | For monetized apps, any entitlements for the invoking user, representing access to premium SKUs |
 | [Focused](#focused-property) { get; } | Returns the Focused option for Auto Complete |
+| [Guild](#guild-property) { get; set; } | Guild that the interaction was sent from |
 | [GuildId](#guildid-property) { get; set; } | Guild that the interaction was sent from |
 | [GuildLocale](#guildlocale-property) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
 | [Id](#id-property) { get; set; } | Id of the interaction |
@@ -802,6 +805,22 @@ public InteractionData Data { get; set; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
+# Guild property
+
+Guild that the interaction was sent from
+
+```csharp
+public DiscordGuild Guild { get; set; }
+```
+
+## See Also
+
+* class [DiscordGuild](./DiscordGuild.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
 # GuildId property
 
 Guild that the interaction was sent from
@@ -930,7 +949,7 @@ public DiscordMessage Message { get; set; }
    
 # AppPermissions property
 
-Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+Bitwise set of permissions the app has in the source location of the interaction
 
 ```csharp
 public PermissionFlags? AppPermissions { get; set; }
@@ -987,6 +1006,39 @@ public List<DiscordEntitlement> Entitlements { get; set; }
 ## See Also
 
 * class [DiscordEntitlement](./DiscordEntitlement.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AuthorizingIntegrationOwners property
+
+Mapping of installation contexts that the interaction was authorized for to related user or guild IDs
+
+```csharp
+public Hash<ApplicationIntegrationType, Snowflake> AuthorizingIntegrationOwners { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* struct [Snowflake](./Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Contexts property
+
+Context where the interaction was triggered from
+
+```csharp
+public List<InteractionContextTypes> Contexts { get; set; }
+```
+
+## See Also
+
+* enum [InteractionContextTypes](./InteractionContextTypes.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

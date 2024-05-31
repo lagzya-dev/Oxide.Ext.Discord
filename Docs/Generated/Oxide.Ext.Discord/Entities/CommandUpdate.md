@@ -11,11 +11,13 @@ public class CommandUpdate
 | name | description |
 | --- | --- |
 | [CommandUpdate](#commandupdate-constructor)() | The default constructor. |
+| [Contexts](#contexts-property) { get; set; } | Interaction context(s) where the command can be used |
 | [DefaultMemberPermissions](#defaultmemberpermissions-property) { get; set; } | Set of permissions represented as a bit set |
 | [DefaultPermissions](#defaultpermissions-property) { get; set; } | Whether the command is enabled by default when the app is added to a guild |
 | [Description](#description-property) { get; set; } | Description of the command (1-100 characters) |
 | [DescriptionLocalizations](#descriptionlocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
 | [DmPermission](#dmpermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
+| [IntegrationTypes](#integrationtypes-property) { get; set; } | Installation context(s) where the command is available |
 | [Name](#name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
 | [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
 | [Nsfw](#nsfw-property) { get; set; } | Indicates whether the command is age-restricted |
@@ -140,6 +142,7 @@ public PermissionFlags DefaultMemberPermissions { get; set; }
 Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
 
 ```csharp
+[Obsolete("Deprecated (use Contexts instead)")]
 public bool? DmPermission { get; set; }
 ```
 
@@ -160,6 +163,38 @@ public bool? DefaultPermissions { get; set; }
 
 ## See Also
 
+* class [CommandUpdate](./CommandUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IntegrationTypes property
+
+Installation context(s) where the command is available
+
+```csharp
+public List<ApplicationIntegrationType> IntegrationTypes { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* class [CommandUpdate](./CommandUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Contexts property
+
+Interaction context(s) where the command can be used
+
+```csharp
+public List<InteractionContextTypes> Contexts { get; set; }
+```
+
+## See Also
+
+* enum [InteractionContextTypes](./InteractionContextTypes.md)
 * class [CommandUpdate](./CommandUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

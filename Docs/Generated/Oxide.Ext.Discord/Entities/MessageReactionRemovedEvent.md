@@ -11,10 +11,12 @@ public class MessageReactionRemovedEvent
 | name | description |
 | --- | --- |
 | [MessageReactionRemovedEvent](#messagereactionremovedevent-constructor)() | The default constructor. |
+| [Burst](#burst-property) { get; set; } | True if this is a super-reaction |
 | [ChannelId](#channelid-property) { get; set; } | The id of the channel |
-| [Emoji](#emoji-property) { get; set; } | The emoji removed |
+| [Emoji](#emoji-property) { get; set; } | Emoji used to react |
 | [GuildId](#guildid-property) { get; set; } | The id of the guild |
 | [MessageId](#messageid-property) { get; set; } | The id of the message |
+| [Type](#type-property) { get; set; } | The type of the reaction |
 | [UserId](#userid-property) { get; set; } | The id of the user |
 
 ## See Also
@@ -105,7 +107,7 @@ public Snowflake? GuildId { get; set; }
    
 # Emoji property
 
-The emoji removed
+Emoji used to react
 
 ```csharp
 public DiscordEmoji Emoji { get; set; }
@@ -114,6 +116,37 @@ public DiscordEmoji Emoji { get; set; }
 ## See Also
 
 * class [DiscordEmoji](./DiscordEmoji.md)
+* class [MessageReactionRemovedEvent](./MessageReactionRemovedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Burst property
+
+True if this is a super-reaction
+
+```csharp
+public bool Burst { get; set; }
+```
+
+## See Also
+
+* class [MessageReactionRemovedEvent](./MessageReactionRemovedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of the reaction
+
+```csharp
+public ReactionType Type { get; set; }
+```
+
+## See Also
+
+* enum [ReactionType](./ReactionType.md)
 * class [MessageReactionRemovedEvent](./MessageReactionRemovedEvent.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

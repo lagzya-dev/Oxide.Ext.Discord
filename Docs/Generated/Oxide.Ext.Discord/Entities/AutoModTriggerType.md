@@ -14,6 +14,7 @@ public enum AutoModTriggerType : byte
 | Spam | `Spam` | Check if content represents generic spam |
 | KeywordPreset | `KeywordPreset` | Check if content contains words from internal pre-defined wordsets |
 | MentionSpam | `MentionSpam` | Check if content contains more unique mentions than allowed |
+| MemberProfile | `MemberProfile` | Check if member profile contains words from a user defined list of keywords |
 
 ## See Also
 

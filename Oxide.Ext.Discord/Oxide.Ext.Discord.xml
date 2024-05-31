@@ -4550,6 +4550,31 @@
             Indicates if an app has registered global application commands
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.ApplicationIntegrationType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/application#application-object-application-integration-types">Application Integration Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ApplicationIntegrationType.GuildInstall">
+            <summary>
+            App is installable to servers
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ApplicationIntegrationType.UserInstall">
+            <summary>
+            App is installable to users
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.ApplicationIntegrationTypeConfiguration">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/application#application-object-application-integration-type-configuration-object">Application Integration Type Configuration</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationIntegrationTypeConfiguration.Oauth2InstallParams">
+            <summary>
+            Install params for each installation context's default in-app authorization link
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.ApplicationUpdate">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/application#edit-current-application-json-params">Edit Application Structure</a>
@@ -4573,6 +4598,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.ApplicationUpdate.InstallParams">
             <summary>
             Settings for the application's default in-app authorization link, if enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationUpdate.IntegrationTypesConfig">
+            <summary>
+            Default scopes and permissions for each supported installation context.
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.ApplicationUpdate.Flags">
@@ -4728,6 +4758,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.DiscordApplication.InstallParams">
             <summary>
             Settings for the application's default in-app authorization link, if enabled
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordApplication.IntegrationTypesConfig">
+            <summary>
+            Default scopes and permissions for each supported installation context
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordApplication.CustomInstallUrl">
@@ -5029,6 +5064,11 @@
             MODERATE_MEMBERS permission is required to use the TIMEOUT action type.
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoModActionType.BlockMemberInteraction">
+            <summary>
+            Prevents a member from using text, voice, or other interactions
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoModEventType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-event-types">Auto Mod Event Type</a>
@@ -5037,6 +5077,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.AutoModEventType.MessageSend">
             <summary>
             When a member sends or edits a message in the guild
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoModEventType.MemberUpdate">
+            <summary>
+            When a member edits their profile
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.AutoModKeywordPresetType">
@@ -5333,6 +5378,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.AutoModTriggerType.MentionSpam">
             <summary>
             Check if content contains more unique mentions than allowed
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.AutoModTriggerType.MemberProfile">
+            <summary>
+            Check if member profile contains words from a user defined list of keywords
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.ChannelCreate">
@@ -8215,6 +8265,21 @@
             ID of the user who authored the message which was reacted to
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReactionAddedEvent.Burst">
+            <summary>
+            True if this is a super-reaction 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReactionAddedEvent.BurstColors">
+            <summary>
+            Colors used for super-reaction animation
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReactionAddedEvent.Type">
+            <summary>
+            The type of the reaction
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageReactionRemovedAllEmojiEvent">
             <summary>
             Represents <a href="https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji">Message Reaction Remove All</a>
@@ -8272,7 +8337,17 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageReactionRemovedEvent.Emoji">
             <summary>
-            The emoji removed
+            Emoji used to react
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReactionRemovedEvent.Burst">
+            <summary>
+            True if this is a super-reaction 
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageReactionRemovedEvent.Type">
+            <summary>
+            The type of the reaction
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.PresenceUpdatedEvent">
@@ -9979,6 +10054,11 @@
             When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.GuildMember.AvatarDecoration">
+            <summary>
+            Data for the member's guild avatar decoration
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.GuildMember.NickNameLastUpdated">
             <summary>
             When the Nickname was last updated UTC. Null if we haven't seen a nickname update yet
@@ -11648,14 +11728,24 @@
             Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible.
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.CommandCreate.Nsfw">
+        <member name="P:Oxide.Ext.Discord.Entities.CommandCreate.IntegrationTypes">
             <summary>
-            Indicates whether the command is age-restricted
+            Installation context(s) where the command is available
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.CommandCreate.Contexts">
+            <summary>
+            Interaction context(s) where the command can be used
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.CommandCreate.Type">
             <summary>
             The <see cref="T:Oxide.Ext.Discord.Entities.ApplicationCommandType"/> of the command
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.CommandCreate.Nsfw">
+            <summary>
+            Indicates whether the command is age-restricted
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.CommandCreate.#ctor">
@@ -11974,6 +12064,16 @@
             Whether the command is enabled by default when the app is added to a guild
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.CommandUpdate.IntegrationTypes">
+            <summary>
+            Installation context(s) where the command is available
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.CommandUpdate.Contexts">
+            <summary>
+            Interaction context(s) where the command can be used
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.CommandUpdate.Nsfw">
             <summary>
             Indicates whether the command is age-restricted
@@ -12053,6 +12153,18 @@
         <member name="P:Oxide.Ext.Discord.Entities.DiscordApplicationCommand.Nsfw">
             <summary>
             Indicates whether the command is age-restricted
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordApplicationCommand.IntegrationTypes">
+            <summary>
+            Installation context(s) where the command is available, only for globally-scoped commands.
+            Defaults to GUILD_INSTALL (0)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordApplicationCommand.Contexts">
+            <summary>
+            Interaction context(s) where the command can be used, only for globally-scoped commands.
+            By default, all interaction context types included for new commands..
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordApplicationCommand.Version">
@@ -12161,6 +12273,11 @@
             See <see cref="T:Oxide.Ext.Discord.Entities.InteractionData"/>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.Guild">
+            <summary>
+            Guild that the interaction was sent from
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.GuildId">
             <summary>
             Guild that the interaction was sent from
@@ -12205,7 +12322,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.AppPermissions">
             <summary>
-            Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+            Bitwise set of permissions the app has in the source location of the interaction
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.Locale">
@@ -12223,6 +12340,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.Entitlements">
             <summary>
             For monetized apps, any entitlements for the invoking user, representing access to premium SKUs
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.AuthorizingIntegrationOwners">
+            <summary>
+            Mapping of installation contexts that the interaction was authorized for to related user or guild IDs
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.Contexts">
+            <summary>
+            Context where the interaction was triggered from
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInteraction.Parsed">
@@ -12463,6 +12590,26 @@
             </summary>
             <param name="client">Client to use</param>
             <param name="messageId">Message ID to delete</param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.InteractionContextTypes">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types">Interaction Context Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InteractionContextTypes.Guild">
+            <summary>
+            Interaction can be used within servers
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InteractionContextTypes.BotDm">
+            <summary>
+            Interaction can be used within DMs with the app's bot user
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InteractionContextTypes.PrivateChannel">
+            <summary>
+            Interaction can be used within Group DMs and DMs other than the app's bot user
+            </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.InteractionData">
             <summary>
@@ -13458,6 +13605,11 @@
             Represents an <a href="https://discord.com/developers/docs/resources/invite#invite-object">Invite Structure</a> that when used, adds a user to a guild or group DM channel.
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordInvite.Type">
+            <summary>
+            The type of the invite
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordInvite.Code">
             <summary>
             The invite code (unique ID)
@@ -13612,6 +13764,26 @@
         <member name="P:Oxide.Ext.Discord.Entities.InviteStageInstance.Topic">
             <summary>
             The topic of the Stage instance (1-120 characters)
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.InviteType">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/invite#invite-types">Invite Types</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InviteType.Guild">
+            <summary>
+            Guild Invite
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InviteType.GroupDm">
+            <summary>
+            Guild Invite
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.InviteType.Friend">
+            <summary>
+            Guild Invite
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.TargetUserType">
@@ -13937,6 +14109,11 @@
             The message associated with the message_reference
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.InteractionMetadata">
+            <summary>
+            sent if the message is sent as a result of an interaction
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.Interaction">
             <summary>
             Sent if the message is a response to an Interaction
@@ -13965,6 +14142,16 @@
         <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.RoleSubscriptionData">
             <summary>
             The data of the role subscription purchase or renewal that prompted this ROLE_SUBSCRIPTION_PURCHASE message
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.Poll">
+            <summary>
+            Poll object
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.Call">
+            <summary>
+            The call associated with the message   
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordMessage.FileAttachments">
@@ -14767,6 +14954,21 @@
             Attachment Flags
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessageCall">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-call-object">Message Call Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageCall.Participants">
+            <summary>
+            Array of user ids that participated in the call
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageCall.EndedTimestamp">
+            <summary>
+            Time when call ended   
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageCreate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#create-message-jsonform-params">Message Create Structure</a> to be created in discord
@@ -14909,6 +15111,46 @@
         <member name="P:Oxide.Ext.Discord.Entities.MessageInteraction.Member">
             <summary>
             Member who invoked the interaction in the guild
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.MessageInteractionMetadata">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object-message-interaction-metadata-structure">Message Interaction Metadata Structure</a> within Discord.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.Id">
+            <summary>
+            ID of the interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.Type">
+            <summary>
+            Type of interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.User">
+            <summary>
+            IUser who triggered the interaction
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.AuthorizingIntegrationOwners">
+            <summary>
+            IDs for installation context(s) related to an interaction.
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.OriginalResponseMessageId">
+            <summary>
+            ID of the original response message, present only on follow-up messages
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.InteractedMessageId">
+            <summary>
+            ID of the message that contained interactive component, present only on messages created from component interactions
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageInteractionMetadata.TriggeringInteractionMetadata">
+            <summary>
+            Metadata for the interaction that was used to open the modal, present only on modal submit interactions
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageReaction">
@@ -15288,6 +15530,11 @@
             Represents a <a href="https://discord.com/developers/docs/resources/poll#get-answer-voters-query-string-params">Get Answer Voters Query String Params</a>
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.GetPollAnswerVoters.Type">
+            <summary>
+            The type of reaction
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.GetPollAnswerVoters.After">
             <summary>
             Get users after this user ID
@@ -15421,6 +15668,21 @@
             Count of normal reactions
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.ReactionType">
+            <summary>
+            Represents a <a href="https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types">Discord Reaction Type</a>
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ReactionType.Normal">
+            <summary>
+            Normal Reaction Type
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ReactionType.Burst">
+            <summary>
+            Burst Reaction Type
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.CreateTestEntitlement">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/monetization/entitlements#create-test-entitlement-json-params">Create Test Entitlement Structure</a>
@@ -15493,7 +15755,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordEntitlement.Consumed">
             <summary>
-            For consumable items, whether the entitlement has been consumed                      |
+            For consumable items, whether the entitlement has been consumed
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordEntitlement.GetEntitlements(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.GetEntitlements)">
@@ -16728,6 +16990,21 @@
             Read-only members can access information about a team and any team-owned apps. Some examples include getting the IDs of applications and exporting payout records.
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Entities.AvatarDecorationData">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/user#avatar-decoration-data-object-avatar-decoration-data-structure">Avatar Decoration Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AvatarDecorationData.Asset">
+            <summary>
+            The avatar decoration hash
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.AvatarDecorationData.SkuId">
+            <summary>
+            Id of the avatar decoration's SKU
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.Connection">
             <summary>
             Represents a Discord Users <a href="https://discord.com/developers/docs/resources/user#connection-object">Connection</a>
@@ -16799,6 +17076,16 @@
         <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.BattleNet">
             <summary>
             Connection type is Battle.net
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.Bungie">
+            <summary>
+            Connection type is Bungie.net
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.Domain">
+            <summary>
+            Connection type is Domain              
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.eBay">
@@ -17001,7 +17288,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordUser.AvatarDecoration">
             <summary>
-            The user's avatar decoration hash
+            The user's avatar decoration
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordUser.Mention">
@@ -17331,6 +17618,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.UserModifyCurrent.Avatar">
             <summary>
             If passed, modifies the user's avatar
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.UserModifyCurrent.Banner">
+            <summary>
+            If passed, modifies the user's banner
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.UserModifyCurrent.Validate">
@@ -19069,12 +19361,11 @@
             <param name="format">Format the avatar is in</param>
             <returns>Url of the Guild Member avatar</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserAvatarDecoration(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
+        <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserAvatarDecoration(Oxide.Ext.Discord.Entities.AvatarDecorationData,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
             Returns the Url of the User Avatar Decoration
             </summary>
-            <param name="userId">Discord User ID</param>
-            <param name="decorationHash">Guild Member avatar</param>
+            <param name="data">Avatar Decoration Data</param>
             <param name="format">Format the avatar is in</param>
             <returns>Url of the Guild Member avatar</returns>
         </member>

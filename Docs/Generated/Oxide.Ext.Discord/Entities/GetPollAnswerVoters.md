@@ -13,6 +13,7 @@ public class GetPollAnswerVoters : IDiscordQueryString
 | [GetPollAnswerVoters](#getpollanswervoters-constructor)() | The default constructor. |
 | [After](#after-property) { get; set; } | Get users after this user ID |
 | [Limit](#limit-property) { get; set; } | Max number of users to return (1-100) |
+| [Type](#type-property) { get; set; } | The type of reaction |
 | [ToQueryString](#toquerystring-method)() |  |
 
 ## See Also
@@ -46,6 +47,22 @@ public GetPollAnswerVoters()
 
 ## See Also
 
+* class [GetPollAnswerVoters](./GetPollAnswerVoters.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of reaction
+
+```csharp
+public ReactionType Type { get; set; }
+```
+
+## See Also
+
+* enum [ReactionType](./ReactionType.md)
 * class [GetPollAnswerVoters](./GetPollAnswerVoters.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

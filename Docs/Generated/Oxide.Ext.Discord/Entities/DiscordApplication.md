@@ -26,6 +26,7 @@ public class DiscordApplication : IDebugLoggable
 | [Icon](#icon-property) { get; set; } | Icon hash of the app |
 | [Id](#id-property) { get; set; } | ID of the app |
 | [InstallParams](#installparams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
+| [IntegrationTypesConfig](#integrationtypesconfig-property) { get; set; } | Default scopes and permissions for each supported installation context |
 | [InteractionsEndpointUrl](#interactionsendpointurl-property) { get; set; } | Interactions endpoint URL for the app |
 | [Name](#name-property) { get; set; } | Name of the app |
 | [Owner](#owner-property) { get; set; } | Partial user object containing info on the owner of the application |
@@ -828,6 +829,24 @@ public InstallParams InstallParams { get; set; }
 ## See Also
 
 * class [InstallParams](./InstallParams.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IntegrationTypesConfig property
+
+Default scopes and permissions for each supported installation context
+
+```csharp
+public Hash<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration> 
+    IntegrationTypesConfig { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* class [ApplicationIntegrationTypeConfiguration](./ApplicationIntegrationTypeConfiguration.md)
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

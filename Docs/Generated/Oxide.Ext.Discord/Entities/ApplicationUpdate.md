@@ -17,6 +17,7 @@ public class ApplicationUpdate
 | [Flags](#flags-property) { get; set; } | App's public flags |
 | [Icon](#icon-property) { get; set; } | Icon for the app |
 | [InstallParams](#installparams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
+| [IntegrationTypesConfig](#integrationtypesconfig-property) { get; set; } | Default scopes and permissions for each supported installation context. |
 | [InteractionsEndpointUrl](#interactionsendpointurl-property) { get; set; } | Interactions endpoint URL for the app |
 | [RoleConnectionsVerificationUrl](#roleconnectionsverificationurl-property) { get; set; } | Role connection verification URL for the app |
 | [Tags](#tags-property) { get; set; } | List of tags describing the content and functionality of the app (max of 20 characters per tag). Max of 5 tags. |
@@ -99,6 +100,24 @@ public InstallParams InstallParams { get; set; }
 ## See Also
 
 * class [InstallParams](./InstallParams.md)
+* class [ApplicationUpdate](./ApplicationUpdate.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IntegrationTypesConfig property
+
+Default scopes and permissions for each supported installation context.
+
+```csharp
+public Hash<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration> 
+    IntegrationTypesConfig { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* class [ApplicationIntegrationTypeConfiguration](./ApplicationIntegrationTypeConfiguration.md)
 * class [ApplicationUpdate](./ApplicationUpdate.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

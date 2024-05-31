@@ -12,6 +12,8 @@ public enum ConnectionType : byte
 | --- | --- | --- |
 | Unknown | `Unknown` | Discord Extension doesn't currently support this connection type |
 | BattleNet | `BattleNet` | Connection type is Battle.net |
+| Bungie | `Bungie` | Connection type is Bungie.net |
+| Domain | `Domain` | Connection type is Domain |
 | eBay | `eBay` | Connection type is Epic Games |
 | EpicGames | `EpicGames` | Connection type is Epic Games |
 | Facebook | `Facebook` | Connection type is Facebook |

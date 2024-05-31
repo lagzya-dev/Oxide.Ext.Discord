@@ -13,6 +13,7 @@ public enum AutoModActionType : byte
 | BlockMessage | `BlockMessage` | Blocks the content of a message according to the rule |
 | SendAlertMessage | `SendAlertMessage` | Logs user content to a specified channel |
 | Timeout | `Timeout` | Timeout user for a specified duration A TIMEOUT action can only be setup for KEYWORD rules. MODERATE_MEMBERS permission is required to use the TIMEOUT action type. |
+| BlockMemberInteraction | `BlockMemberInteraction` | Prevents a member from using text, voice, or other interactions |
 
 ## See Also
 
