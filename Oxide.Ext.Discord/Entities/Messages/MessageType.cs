@@ -198,5 +198,29 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [DiscordEnum("GUILD_APPLICATION_PREMIUM_SUBSCRIPTION")]
         GuildApplicationPremiumSubscription = 32,
+        
+        /// <summary>
+        /// Message is a Guild Incident Alert Mode Enabled
+        /// </summary>
+        [DiscordEnum("GUILD_INCIDENT_ALERT_MODE_ENABLED")]
+        GuildIncidentAlertModeEnabled = 36,
+        
+        /// <summary>
+        /// Message is a Guild Incident Alert Mode Disabled
+        /// </summary>
+        [DiscordEnum("GUILD_INCIDENT_ALERT_MODE_DISABLED")]
+        GuildIncidentAlertModeDisabled = 37,
+        
+        /// <summary>
+        /// Message is a Guild Incident Report Raid
+        /// </summary>
+        [DiscordEnum("GUILD_INCIDENT_REPORT_RAID")]
+        GuildIncidentReportRaid = 38,
+        
+        /// <summary>
+        /// Message is a Guild Incident Report False Alarm
+        /// </summary>
+        [DiscordEnum("GUILD_INCIDENT_REPORT_FALSE_ALARM")]
+        GuildIncidentReportFalseAlarm = 39,
     }
 }
