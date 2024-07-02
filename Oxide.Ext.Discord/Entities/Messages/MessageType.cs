@@ -82,13 +82,13 @@ namespace Oxide.Ext.Discord.Entities
         /// <summary>
         /// The message for when a news channel subscription is added to a text channel
         /// </summary>
-        [DiscordEnum("ChannelFollowAdd")]
+        [DiscordEnum("CHANNEL_FOLLOW_ADD")]
         ChannelFollowAdd = 12,
         
         /// <summary>
         /// The message for when a guild discovery is disqualified
         /// </summary>
-        [DiscordEnum("GuildDiscoveryDisqualified")]
+        [DiscordEnum("GUILD_DISCOVERY_DISQUALIFIED")]
         GuildDiscoveryDisqualified = 14,
         
         /// <summary>
@@ -222,5 +222,11 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [DiscordEnum("GUILD_INCIDENT_REPORT_FALSE_ALARM")]
         GuildIncidentReportFalseAlarm = 39,
+        
+        /// <summary>
+        /// Message is a Purchase Notification
+        /// </summary>
+        [DiscordEnum("PURCHASE_NOTIFICATION")]
+        PurchaseNotification = 44,
     }
 }
