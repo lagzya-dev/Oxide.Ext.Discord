@@ -22,7 +22,7 @@ namespace Oxide.Ext.Discord.Entities
         public List<PollAnswers> Answers { get; set; }
         
         /// <summary>
-        /// Number of hours the poll should be open for, up to 7 days
+        /// Number of hours the poll should be open for, up to 32 days
         /// </summary>
         [JsonProperty("duration")]
         public int Duration { get; set; }
