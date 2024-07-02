@@ -297,7 +297,6 @@
 | class [InteractionModalMessage](./Oxide.Ext.Discord/Entities/InteractionModalMessage.md) | Represents an Interaction Modal Message |
 | class [InteractionModalResponse](./Oxide.Ext.Discord/Entities/InteractionModalResponse.md) | Represents an Interaction Modal Response |
 | class [InteractionPremiumRequiredMessage](./Oxide.Ext.Discord/Entities/InteractionPremiumRequiredMessage.md) | Message for Premium Required |
-| class [InteractionPremiumRequiredResponse](./Oxide.Ext.Discord/Entities/InteractionPremiumRequiredResponse.md) | Response for premium Required |
 | class [InteractionResponse](./Oxide.Ext.Discord/Entities/InteractionResponse.md) | Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object) |
 | enum [InteractionResponseType](./Oxide.Ext.Discord/Entities/InteractionResponseType.md) | Represents [InteractionResponseType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type) |
 | enum [InteractionType](./Oxide.Ext.Discord/Entities/InteractionType.md) | Represents [InteractionType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type) |

@@ -36,7 +36,6 @@ public class DiscordInteraction
 | [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
 | [CreateFollowUpTemplateResponse](#createfollowuptemplateresponse-method)(…) | Creates a interaction follow up message response from a message template |
 | [CreateModalResponse](#createmodalresponse-method)(…) | Creates a interaction modal response from a modal template |
-| [CreatePremiumRequiredResponse](#createpremiumrequiredresponse-method)(…) | Creates a response indication that the interaction requires premium to be purchased. |
 | [CreateResponse](#createresponse-method-1-of-7)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
 | [CreateTemplateResponse](#createtemplateresponse-method)(…) | Creates a interaction message response from a message template |
 | [DefferResponse](#defferresponse-method)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
@@ -424,27 +423,6 @@ Creates a response indicating that: for application commands there will be an up
 
 ```csharp
 public IPromise DefferResponse(DiscordClient client)
-```
-
-| parameter | description |
-| --- | --- |
-| client | Client to use |
-
-## See Also
-
-* interface [IPromise](../Interfaces/IPromise.md)
-* class [DiscordClient](../Clients/DiscordClient.md)
-* class [DiscordInteraction](./DiscordInteraction.md)
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# CreatePremiumRequiredResponse method
-
-Creates a response indication that the interaction requires premium to be purchased.
-
-```csharp
-public IPromise CreatePremiumRequiredResponse(DiscordClient client)
 ```
 
 | parameter | description |

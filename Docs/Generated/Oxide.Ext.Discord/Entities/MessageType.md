@@ -42,6 +42,11 @@ public enum MessageType : byte
 | StageRaiseHand | `StageRaiseHand` | Message is a stage raise hand |
 | StageTopic | `StageTopic` | Message is a stage topic |
 | GuildApplicationPremiumSubscription | `GuildApplicationPremiumSubscription` | Message is a Guild Application Premium Subscription |
+| GuildIncidentAlertModeEnabled | `GuildIncidentAlertModeEnabled` | Message is a Guild Incident Alert Mode Enabled |
+| GuildIncidentAlertModeDisabled | `GuildIncidentAlertModeDisabled` | Message is a Guild Incident Alert Mode Disabled |
+| GuildIncidentReportRaid | `GuildIncidentReportRaid` | Message is a Guild Incident Report Raid |
+| GuildIncidentReportFalseAlarm | `GuildIncidentReportFalseAlarm` | Message is a Guild Incident Report False Alarm |
+| PurchaseNotification | `PurchaseNotification` | Message is a Purchase Notification |
 
 ## See Also
 

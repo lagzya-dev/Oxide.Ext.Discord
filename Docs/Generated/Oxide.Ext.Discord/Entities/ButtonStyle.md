@@ -15,6 +15,7 @@ public enum ButtonStyle : byte
 | Success | `Success` | Color green Requires CustomId field |
 | Danger | `Danger` | Color red Requires CustomId field |
 | Link | `Link` | Color grey Navigates to a URL Requires Url field |
+| Premium | `Premium` | Color blurple Navigates to a URL Requires SkuId field |
 
 ## See Also
 

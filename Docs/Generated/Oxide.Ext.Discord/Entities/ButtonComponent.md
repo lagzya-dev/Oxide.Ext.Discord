@@ -14,6 +14,7 @@ public class ButtonComponent : BaseInteractableComponent
 | [Disabled](#disabled-property) { get; set; } | Whether the button is disabled Default false |
 | [Emoji](#emoji-property) { get; set; } | Emoji on the component |
 | [Label](#label-property) { get; set; } | Text that appears on the button Max 80 characters |
+| [SkuId](#skuid-property) { get; set; } | Identifier for a purchasable SKU, only available when using premium-style buttons |
 | [Style](#style-property) { get; set; } | Style for the button component |
 | [Url](#url-property) { get; set; } | URL for link-style buttons |
 | override [Validate](#validate-method)() |  |
@@ -96,6 +97,22 @@ public DiscordEmoji Emoji { get; set; }
 ## See Also
 
 * class [DiscordEmoji](./DiscordEmoji.md)
+* class [ButtonComponent](./ButtonComponent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# SkuId property
+
+Identifier for a purchasable SKU, only available when using premium-style buttons
+
+```csharp
+public Snowflake? SkuId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
 * class [ButtonComponent](./ButtonComponent.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

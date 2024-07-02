@@ -12501,12 +12501,6 @@
             </summary>
             <param name="client">Client to use</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.CreatePremiumRequiredResponse(Oxide.Ext.Discord.Clients.DiscordClient)">
-            <summary>
-            Creates a response indication that the interaction requires premium to be purchased.
-            </summary>
-            <param name="client">Client to use</param>
-        </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordInteraction.GetOriginalResponse(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Gets the initial Interaction response
@@ -12979,11 +12973,6 @@
             Note: You can't respond to a <see cref="F:Oxide.Ext.Discord.Entities.InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Entities.InteractionResponseType.PremiumRequired">
-            <summary>
-            Respond to an interaction with an upgrade button, only available for apps with monetization enabled
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.InteractionType">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type">InteractionType</a>
@@ -13081,6 +13070,11 @@
             Emoji on the component
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ButtonComponent.SkuId">
+            <summary>
+            Identifier for a purchasable SKU, only available when using premium-style buttons
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.ButtonComponent.Url">
             <summary>
             URL for link-style buttons
@@ -13135,6 +13129,13 @@
             Color grey
             Navigates to a URL
             Requires Url field
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ButtonStyle.Premium">
+            <summary>
+            Color blurple
+            Navigates to a URL
+            Requires SkuId field
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.InputTextComponent">
@@ -13565,16 +13566,6 @@
         <member name="T:Oxide.Ext.Discord.Entities.InteractionPremiumRequiredMessage">
             <summary>
             Message for Premium Required
-            </summary>
-        </member>
-        <member name="T:Oxide.Ext.Discord.Entities.InteractionPremiumRequiredResponse">
-            <summary>
-            Response for premium Required
-            </summary>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Entities.InteractionPremiumRequiredResponse.#ctor">
-            <summary>
-            Constructor
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.InteractionResponse">
@@ -15416,6 +15407,31 @@
             Message is a Guild Application Premium Subscription
             </summary>
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageType.GuildIncidentAlertModeEnabled">
+            <summary>
+            Message is a Guild Incident Alert Mode Enabled
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageType.GuildIncidentAlertModeDisabled">
+            <summary>
+            Message is a Guild Incident Alert Mode Disabled
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageType.GuildIncidentReportRaid">
+            <summary>
+            Message is a Guild Incident Report Raid
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageType.GuildIncidentReportFalseAlarm">
+            <summary>
+            Message is a Guild Incident Report False Alarm
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.MessageType.PurchaseNotification">
+            <summary>
+            Message is a Purchase Notification
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Entities.MessageUpdate">
             <summary>
             Represents a <a href="https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params">Message Update Structure</a> sent in a channel within Discord..
@@ -16391,6 +16407,11 @@
         <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.SendPolls">
             <summary>
             Allows sending polls
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.PermissionFlags.UseExternalApps">
+            <summary>
+            Allows user-installed apps to send public responses. When disabled, users will still be allowed to use their apps but the responses will be ephemeral. This only applies to apps not also installed to the server.  
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.RoleFlags">

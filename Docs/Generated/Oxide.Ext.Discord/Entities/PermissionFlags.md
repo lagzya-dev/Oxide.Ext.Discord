@@ -66,6 +66,7 @@ public enum PermissionFlags : ulong
 | SendVoiceMessages | `1 << 46` | Allows sending voice messages |
 | UseClydeAi | `1 << 47` | Allows sending polls |
 | SendPolls | `1 << 49` | Allows sending polls |
+| UseExternalApps | `1 << 50` | Allows user-installed apps to send public responses. When disabled, users will still be allowed to use their apps but the responses will be ephemeral. This only applies to apps not also installed to the server. |
 
 ## See Also
 
