@@ -196,7 +196,6 @@
 | class [InteractionDataResolved](./InteractionDataResolved.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure) |
 | class [InteractionModalMessage](./InteractionModalMessage.md) | Represents an Interaction Modal Message |
 | class [InteractionModalResponse](./InteractionModalResponse.md) | Represents an Interaction Modal Response |
-| class [InteractionPremiumRequiredMessage](./InteractionPremiumRequiredMessage.md) | Message for Premium Required |
 | class [InteractionResponse](./InteractionResponse.md) | Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object) |
 | enum [InteractionResponseType](./InteractionResponseType.md) | Represents [InteractionResponseType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type) |
 | enum [InteractionType](./InteractionType.md) | Represents [InteractionType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type) |

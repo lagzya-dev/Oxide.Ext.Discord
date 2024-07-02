@@ -66,7 +66,7 @@ Adds an attachment to the message
 
 ```csharp
 public void AddAttachment(string filename, byte[] data, string contentType, 
-    string description = null)
+    string description = null, string title = null)
 ```
 
 | parameter | description |
@@ -75,6 +75,7 @@ public void AddAttachment(string filename, byte[] data, string contentType,
 | data | byte[] of the attachment |
 | contentType | Attachment content type |
 | description | Description for the attachment |
+| title | Title of the attachment |
 
 ## See Also
 

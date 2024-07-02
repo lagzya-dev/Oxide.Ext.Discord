@@ -13,7 +13,7 @@ public class PollCreate
 | [PollCreate](#pollcreate-constructor)() | The default constructor. |
 | [AllowMultiselect](#allowmultiselect-property) { get; set; } | Whether a user can select multiple answers |
 | [Answers](#answers-property) { get; set; } | Each of the answers available in the poll. |
-| [Duration](#duration-property) { get; set; } | Number of hours the poll should be open for, up to 7 days |
+| [Duration](#duration-property) { get; set; } | Number of hours the poll should be open for, up to 32 days |
 | [LayoutType](#layouttype-property) { get; set; } | The layout type of the poll |
 | [Question](#question-property) { get; set; } | The question of the poll. Only text is supported. |
 
@@ -73,7 +73,7 @@ public List<PollAnswers> Answers { get; set; }
    
 # Duration property
 
-Number of hours the poll should be open for, up to 7 days
+Number of hours the poll should be open for, up to 32 days
 
 ```csharp
 public int Duration { get; set; }

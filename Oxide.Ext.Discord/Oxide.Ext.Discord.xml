@@ -1608,7 +1608,7 @@
             <param name="builder">Build to add components from</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.AddAttachment(System.String,System.Byte[],System.String,System.String,System.String)">
             <summary>
             Adds an attachment to the message
             </summary>
@@ -1616,6 +1616,7 @@
             <param name="data">byte[] of the attachment</param>
             <param name="contentType">Attachment content type</param>
             <param name="description">Description for the attachment</param>
+            <param name="title">Title of the attachment</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.BaseMessageBuilder`2.Build">
             <summary>
@@ -6827,7 +6828,7 @@
             Attachments for the message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.ThreadForumCreate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.ThreadForumCreate.AddAttachment(System.String,System.Byte[],System.String,System.String,System.String)">
             <summary>
             Adds an attachment to the message
             </summary>
@@ -6835,6 +6836,7 @@
             <param name="data">byte[] of the attachment</param>
             <param name="contentType">Attachment content type</param>
             <param name="description">Description for the attachment</param>
+            <param name="title">Title of the attachment</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.ThreadForumCreate.Validate">
             <summary>
@@ -13563,11 +13565,6 @@
             </summary>
             <param name="message">Message to use for the response</param>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.InteractionPremiumRequiredMessage">
-            <summary>
-            Message for Premium Required
-            </summary>
-        </member>
         <member name="T:Oxide.Ext.Discord.Entities.InteractionResponse">
             <summary>
             Represents <a href="https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object">Interaction Response</a>
@@ -13920,7 +13917,7 @@
             Attachments for the message
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.BaseMessageCreate.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.BaseMessageCreate.AddAttachment(System.String,System.Byte[],System.String,System.String,System.String)">
             <summary>
             Adds an attachment to the message
             </summary>
@@ -13928,6 +13925,7 @@
             <param name="data">byte[] of the attachment</param>
             <param name="contentType">Attachment content type</param>
             <param name="description">Description for the attachment</param>
+            <param name="title">Title of the attachment</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.BaseMessageCreate.Validate">
             <inheritdoc/>
@@ -14890,6 +14888,11 @@
             Name of file attached
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Entities.MessageAttachment.Title">
+            <summary>
+            Title of the file      
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Entities.MessageAttachment.Description">
             <summary>
             Description for the file
@@ -15616,7 +15619,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.PollCreate.Duration">
             <summary>
-            Number of hours the poll should be open for, up to 7 days
+            Number of hours the poll should be open for, up to 32 days
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.PollCreate.AllowMultiselect">
@@ -18190,7 +18193,7 @@
             <returns>This</returns>
             <exception cref="T:System.IndexOutOfRangeException">Thrown if more than 10 embeds are added in a send as that is the discord limit</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.WebhookEditMessage.AddAttachment(System.String,System.Byte[],System.String,System.String)">
+        <member name="M:Oxide.Ext.Discord.Entities.WebhookEditMessage.AddAttachment(System.String,System.Byte[],System.String,System.String,System.String)">
             <summary>
             Adds an attachment to the message
             </summary>
@@ -18198,6 +18201,7 @@
             <param name="data">byte[] of the attachment</param>
             <param name="contentType">Attachment content type</param>
             <param name="description">Description for the attachment</param>
+            <param name="title">Title of the attachment</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.WebhookEditMessage.Validate">
             <inheritdoc/>
