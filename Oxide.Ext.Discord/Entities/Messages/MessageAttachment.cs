@@ -22,6 +22,12 @@ namespace Oxide.Ext.Discord.Entities
         public string Filename { get; set; }
         
         /// <summary>
+        /// Title of the file      
+        /// </summary>
+        [JsonProperty("title")]
+        public string Title { get; set; }
+        
+        /// <summary>
         /// Description for the file
         /// </summary>
         [JsonProperty("description")]

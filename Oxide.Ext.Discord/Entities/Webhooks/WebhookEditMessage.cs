@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Entities
             Embeds.Add(embed);
             return this;
         }
-        
+
         /// <summary>
         /// Adds an attachment to the message
         /// </summary>
@@ -69,7 +69,8 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="data">byte[] of the attachment</param>
         /// <param name="contentType">Attachment content type</param>
         /// <param name="description">Description for the attachment</param>
-        public void AddAttachment(string filename, byte[] data, string contentType, string description = null)
+        /// <param name="title">Title of the attachment</param>
+        public void AddAttachment(string filename, byte[] data, string contentType, string description = null, string title = null)
         {
             InvalidFileNameException.ThrowIfInvalid(filename);
             InvalidMessageException.ThrowIfInvalidAttachmentDescription(description);
@@ -85,7 +86,7 @@ namespace Oxide.Ext.Discord.Entities
             }
 
             FileAttachments.Add(new MessageFileAttachment(filename, data, contentType));
-            Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description});
+            Attachments.Add(new MessageAttachment {Id = new Snowflake((ulong)FileAttachments.Count), Filename = filename, Description = description, Title = title});
         }
 
         ///<inheritdoc/>

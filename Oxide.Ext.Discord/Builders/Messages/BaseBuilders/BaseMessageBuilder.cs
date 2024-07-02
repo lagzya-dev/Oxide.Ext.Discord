@@ -172,7 +172,7 @@ namespace Oxide.Ext.Discord.Builders
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             return AddComponents(builder.Build());
         }
-        
+
         /// <summary>
         /// Adds an attachment to the message
         /// </summary>
@@ -180,9 +180,10 @@ namespace Oxide.Ext.Discord.Builders
         /// <param name="data">byte[] of the attachment</param>
         /// <param name="contentType">Attachment content type</param>
         /// <param name="description">Description for the attachment</param>
-        public virtual TBuilder AddAttachment(string filename, byte[] data, string contentType, string description = null)
+        /// <param name="title">Title of the attachment</param>
+        public virtual TBuilder AddAttachment(string filename, byte[] data, string contentType, string description = null, string title = null)
         {
-            Message.AddAttachment(filename, data, contentType, description);
+            Message.AddAttachment(filename, data, contentType, description, title);
             return Builder;
         }
 
