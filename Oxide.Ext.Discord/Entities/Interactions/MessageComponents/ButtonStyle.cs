@@ -34,6 +34,13 @@ namespace Oxide.Ext.Discord.Entities
         /// Navigates to a URL
         /// Requires Url field
         /// </summary>
-        Link = 5
+        Link = 5,
+        
+        /// <summary>
+        /// Color blurple
+        /// Navigates to a URL
+        /// Requires SkuId field
+        /// </summary>
+        Premium = 6
     }
 }

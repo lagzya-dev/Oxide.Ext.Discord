@@ -440,15 +440,6 @@ namespace Oxide.Ext.Discord.Entities
             InteractionResponseType type = Type == InteractionType.ApplicationCommand ? InteractionResponseType.DeferredChannelMessageWithSource : InteractionResponseType.DeferredUpdateMessage;
             return CreateResponse(client, type);
         }
-
-        /// <summary>
-        /// Creates a response indication that the interaction requires premium to be purchased.
-        /// </summary>
-        /// <param name="client">Client to use</param>
-        public IPromise CreatePremiumRequiredResponse(DiscordClient client)
-        {
-            return CreateResponse(client, new InteractionPremiumRequiredResponse());
-        }
         
         /// <summary>
         /// Gets the initial Interaction response

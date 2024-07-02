@@ -29,6 +29,12 @@ namespace Oxide.Ext.Discord.Entities
         public DiscordEmoji Emoji { get; set; }
 
         /// <summary>
+        /// Identifier for a purchasable SKU, only available when using premium-style buttons
+        /// </summary>
+        [JsonProperty("sku_id")]
+        public Snowflake? SkuId { get; set; }
+        
+        /// <summary>
         /// URL for link-style buttons
         /// </summary>
         [JsonProperty("url")]

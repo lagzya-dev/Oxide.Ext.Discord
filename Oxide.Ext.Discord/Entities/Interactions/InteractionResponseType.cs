@@ -40,11 +40,6 @@ namespace Oxide.Ext.Discord.Entities
         /// Respond to an interaction with an modal for a user to fill-out
         /// Note: You can't respond to a <see cref="InteractionType.ModalSubmit">ModalSubmit</see> with a new MODAL.
         /// </summary>
-        Modal = 9,
-        
-        /// <summary>
-        /// Respond to an interaction with an upgrade button, only available for apps with monetization enabled
-        /// </summary>
-        PremiumRequired = 10
+        Modal = 9
     }
 }
