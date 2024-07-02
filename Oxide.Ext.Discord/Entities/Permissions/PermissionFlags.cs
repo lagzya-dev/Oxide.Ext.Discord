@@ -375,5 +375,11 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [DiscordEnum("SEND_POLLS")]
         SendPolls = 1ul << 49,
+        
+        /// <summary>
+        /// Allows user-installed apps to send public responses. When disabled, users will still be allowed to use their apps but the responses will be ephemeral. This only applies to apps not also installed to the server.  
+        /// </summary>
+        [DiscordEnum("USE_EXTERNAL_APPS")]
+        UseExternalApps = 1ul << 50,
     }
 }
