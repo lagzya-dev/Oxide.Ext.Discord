@@ -26,7 +26,7 @@ namespace Oxide.Ext.Discord.Entities
         public ActivityType Type { get; set; }
         
         /// <summary>
-        /// Stream url, is validated when type is 1
+        /// Stream url is validated when type is 1
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
@@ -43,7 +43,7 @@ namespace Oxide.Ext.Discord.Entities
         /// See <see cref="ActivityTimestamps"/>
         /// </summary>
         [JsonProperty("timestamps")]
-        public List<ActivityTimestamps> Timestamps { get; set; }
+        public ActivityTimestamps Timestamps { get; set; }
         
         /// <summary>
         /// Application id for the game

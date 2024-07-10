@@ -59,8 +59,8 @@ namespace Oxide.Ext.Discord.Rest
         ///<inheritdoc/>
         protected override void OnRequestError(RequestResponse response)
         {
-            _promise.Reject(response.Error);
             _promise.Finally(response.Error.LogError);
+            _promise.Reject(response.Error);
         }
         
         internal override void Abort()
