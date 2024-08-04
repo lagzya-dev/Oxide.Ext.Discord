@@ -84,6 +84,13 @@ namespace Oxide.Ext.Discord.Entities
         /// </summary>
         [JsonProperty("source_channel")]
         public Snowflake SourceChannel { get; set; }
+        
+        /// <summary>
+        /// Client for the webhook
+        /// </summary>
+        public WebhookClient Client { get; internal set; }
+        
+        private BaseClient GetClient(DiscordClient client) => (BaseClient)Client ?? client.Bot;
 
         /// <summary>
         /// Create a new webhook.
@@ -96,7 +103,7 @@ namespace Oxide.Ext.Discord.Entities
         public static IPromise<DiscordWebhook> CreateWebhook(DiscordClient client, Snowflake channelId, WebhookCreate create)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            return client.Rest.Post<DiscordWebhook>(client,$"channels/{channelId}/webhooks", create);
+            return client.Bot.Rest.Post<DiscordWebhook>(client,$"channels/{channelId}/webhooks", create);
         }
 
         /// <summary>
@@ -108,7 +115,7 @@ namespace Oxide.Ext.Discord.Entities
         public static IPromise<List<DiscordWebhook>> GetChannelWebhooks(DiscordClient client, Snowflake channelId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(channelId, nameof(channelId));
-            return client.Rest.Get<List<DiscordWebhook>>(client,$"channels/{channelId}/webhooks");
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"channels/{channelId}/webhooks");
         }
 
         /// <summary>
@@ -120,7 +127,7 @@ namespace Oxide.Ext.Discord.Entities
         public static IPromise<List<DiscordWebhook>> GetGuildWebhooks(DiscordClient client, Snowflake guildId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(guildId, nameof(guildId));
-            return client.Rest.Get<List<DiscordWebhook>>(client,$"guilds/{guildId}/webhooks");
+            return client.Bot.Rest.Get<List<DiscordWebhook>>(client,$"guilds/{guildId}/webhooks");
         }
 
         /// <summary>
@@ -132,7 +139,7 @@ namespace Oxide.Ext.Discord.Entities
         public static IPromise<DiscordWebhook> GetWebhook(DiscordClient client, Snowflake webhookId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
-            return client.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}");
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}");
         }
 
         /// <summary>
@@ -147,7 +154,13 @@ namespace Oxide.Ext.Discord.Entities
         public static IPromise<DiscordWebhook> GetWebhookWithToken(DiscordClient client, Snowflake webhookId, string webhookToken)
         {
             InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
-            return client.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}");
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}");
+        }
+        
+        internal static IPromise<DiscordWebhook> GetWebhookWithToken(DiscordClient client, WebhookClient webhookClient, Snowflake webhookId, string webhookToken)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(webhookId, nameof(webhookId));
+            return webhookClient.Rest.Get<DiscordWebhook>(client,$"webhooks/{webhookId}/{webhookToken}");
         }
 
         /// <summary>
@@ -164,7 +177,7 @@ namespace Oxide.Ext.Discord.Entities
             string id = webhookInfo[webhookInfo.Length - 2];
             string token = webhookInfo[webhookInfo.Length - 1];
             
-            return client.Rest.Get<DiscordWebhook>(client,$"webhooks/{id}/{token}");
+            return client.Bot.Rest.Get<DiscordWebhook>(client,$"webhooks/{id}/{token}");
         }
 
         /// <summary>
@@ -176,7 +189,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="edit">Edit request for the webhook</param>
         public IPromise<DiscordWebhook> EditWebhook(DiscordClient client, WebhookEdit edit)
         {
-            return client.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}", edit);
+            return client.Bot.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}", edit);
         }
 
         /// <summary>
@@ -188,7 +201,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="edit">Edit request for the webhook</param>
         public IPromise<DiscordWebhook> ModifyWebhookWithToken(DiscordClient client, WebhookEdit edit)
         {
-            return client.Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}/{Token}", edit);
+            return GetClient(client).Rest.Patch<DiscordWebhook>(client,$"webhooks/{Id}/{Token}", edit);
         }
 
         /// <summary>
@@ -199,7 +212,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="client">Client to use</param>
         public IPromise DeleteWebhook(DiscordClient client)
         {
-            return client.Rest.Delete(client,$"webhooks/{Id}");
+            return client.Bot.Rest.Delete(client,$"webhooks/{Id}");
         }
 
         /// <summary>
@@ -210,7 +223,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="client">Client to use</param>
         public IPromise DeleteWebhookWithToken(DiscordClient client)
         {
-            return client.Rest.Delete(client,$"webhooks/{Id}/{Token}");
+            return GetClient(client).Rest.Delete(client,$"webhooks/{Id}/{Token}");
         }
 
         /// <summary>
@@ -227,7 +240,7 @@ namespace Oxide.Ext.Discord.Entities
                 executeParams = WebhookExecuteParams.Default;
             }
 
-            return client.Rest.Post(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
+            return GetClient(client).Rest.Post(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
         }
         
         /// <summary>
@@ -256,7 +269,7 @@ namespace Oxide.Ext.Discord.Entities
                 executeParams = WebhookExecuteParams.DefaultWait;
             }
 
-            return client.Rest.Post<DiscordMessage>(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
+            return GetClient(client).Rest.Post<DiscordMessage>(client,$"webhooks/{Id}/{Token}{executeParams.GetWebhookFormat()}{executeParams.ToQueryString()}", message);
         }
         
         /// <summary>
@@ -310,7 +323,7 @@ namespace Oxide.Ext.Discord.Entities
         public IPromise<DiscordMessage> GetWebhookMessage(DiscordClient client, Snowflake messageId, WebhookMessageParams messageParams = null)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Rest.Get<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}");
+            return GetClient(client).Rest.Get<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}");
         }
         
         /// <summary>
@@ -323,7 +336,7 @@ namespace Oxide.Ext.Discord.Entities
         /// <param name="message">The updated message</param>
         public IPromise<DiscordMessage> EditWebhookMessage(DiscordClient client, Snowflake messageId, WebhookEditMessage message, WebhookMessageParams messageParams = null)
         {
-            return client.Rest.Patch<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", message);
+            return GetClient(client).Rest.Patch<DiscordMessage>(client,$"webhooks/{Id}/{Token}/messages/{messageId}{messageParams?.ToQueryString()}", message);
         }
 
         /// <summary>
@@ -367,7 +380,7 @@ namespace Oxide.Ext.Discord.Entities
         public IPromise DeleteWebhookMessage(DiscordClient client, Snowflake messageId)
         {
             InvalidSnowflakeException.ThrowIfInvalid(messageId, nameof(messageId));
-            return client.Rest.Delete(client,$"webhooks/{Id}/{Token}/messages/{messageId}");
+            return GetClient(client).Rest.Delete(client,$"webhooks/{Id}/{Token}/messages/{messageId}");
         }
     }
 }

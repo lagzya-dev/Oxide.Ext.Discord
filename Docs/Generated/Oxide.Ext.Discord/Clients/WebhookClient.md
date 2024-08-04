@@ -12,6 +12,7 @@ public class WebhookClient : BaseClient, IDebugLoggable
 | --- | --- |
 | [WebhookClient](#webhookclient-constructor)(…) | Constructor |
 | [Webhook](#webhook-property) { get; } | Webhook that has been connected to |
+| override [AddClient](#addclient-method)(…) |  |
 | [LogDebug](#logdebug-method)(…) |  |
 
 ## See Also
@@ -21,6 +22,21 @@ public class WebhookClient : BaseClient, IDebugLoggable
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [WebhookClient.cs](../../../../Oxide.Ext.Discord/Clients/WebhookClient.cs)
+   
+   
+# AddClient method
+
+```csharp
+public override bool AddClient(DiscordClient client, PluginSetup setup)
+```
+
+## See Also
+
+* class [DiscordClient](./DiscordClient.md)
+* class [PluginSetup](../Plugins/PluginSetup.md)
+* class [WebhookClient](./WebhookClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # LogDebug method

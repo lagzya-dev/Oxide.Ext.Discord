@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
@@ -8,7 +10,6 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
-using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Clients
 {
@@ -36,16 +37,11 @@ namespace Oxide.Ext.Discord.Clients
         /// The bot client that is unique to the Token used
         /// </summary>
         public BotClient Bot { get; private set; }
-        
+
         /// <summary>
         /// The webhook client that is unique to the webhook used
         /// </summary>
-        public WebhookClient Webhook { get; private set; }
-
-        /// <summary>
-        /// Rest handler for API requests
-        /// </summary>
-        public RestHandler Rest => Bot?.Rest ?? Webhook?.Rest;
+        public List<WebhookClient> Webhooks { get; private set; } = new List<WebhookClient>(0);
         
         /// <summary>
         /// Settings used to connect to discord and configure the extension
@@ -79,7 +75,7 @@ namespace Oxide.Ext.Discord.Clients
         /// <param name="connection">Discord connection settings</param>
         public void Connect(BotConnection connection)
         {
-            if (Webhook != null)
+            if (Webhooks != null)
             {
                 Logger.Error("Cannot connect to bot when webhook is already connected!");
                 return;
@@ -112,26 +108,20 @@ namespace Oxide.Ext.Discord.Clients
         /// Connect to the webhook
         /// </summary>
         /// <param name="webhookUrl">Webhook URL to connect to</param>
-        public void Connect(string webhookUrl) => Connect(new WebhookConnection(webhookUrl));
+        public WebhookClient Connect(string webhookUrl) => Connect(new WebhookConnection(webhookUrl));
         
         /// <summary>
         /// Connect to the webhook
         /// </summary>
         /// <param name="connection">Webhook connection to connect to</param>
-        public void Connect(WebhookConnection connection)
+        public WebhookClient Connect(WebhookConnection connection)
         {
-            if (Bot != null)
-            {
-                Logger.Error("Cannot connect to webhook when bot is already connected!");
-                return;
-            }
-            
             Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
             if (connection.WebhookId == default(Snowflake) || string.IsNullOrEmpty(connection.WebhookToken))
             {
                 Logger.Error("Webhook Id or Token is null or empty!");
-                return;
+                return null;
             }
             
             if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
@@ -141,9 +131,10 @@ namespace Oxide.Ext.Discord.Clients
             
             Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
-            Webhook = WebhookClientFactory.Instance.InitializeWebhookClient(this, connection);
+            WebhookClient client = WebhookClientFactory.Instance.InitializeWebhookClient(this, connection);
             PluginSetup setup = new PluginSetup(Plugin, Logger);
-            Webhook.AddClient(this, setup);
+            client.AddClient(this, setup);
+            return client;
         }
 
         /// <summary>
@@ -153,15 +144,19 @@ namespace Oxide.Ext.Discord.Clients
         {
             Bot?.RemoveClient(this);
             Bot = null;
-            Webhook?.RemoveClient(this);
-            Webhook = null;
+            for (int index = Webhooks.Count - 1; index >= 0; index--)
+            {
+                WebhookClient client = Webhooks[index];
+                client.RemoveClient(this);
+                Webhooks.RemoveAt(index);
+            }
         }
 
         /// <summary>
         /// Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized
         /// </summary>
         /// <returns></returns>
-        public bool IsConnected() => Bot?.Initialized ?? Webhook?.Initialized ?? false;
+        public bool IsConnected() => Bot?.Initialized ?? Webhooks.Any(w => w.Initialized);
 
         #region Websocket Commands
         /// <summary>

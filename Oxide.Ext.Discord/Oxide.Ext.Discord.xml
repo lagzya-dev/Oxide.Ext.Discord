@@ -2217,14 +2217,9 @@
             The bot client that is unique to the Token used
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Webhook">
+        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Webhooks">
             <summary>
             The webhook client that is unique to the webhook used
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Rest">
-            <summary>
-            Rest handler for API requests
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Connection">
@@ -18058,6 +18053,11 @@
         <member name="P:Oxide.Ext.Discord.Entities.DiscordWebhook.SourceChannel">
             <summary>
             The channel that this webhook is following (returned for Channel Follower Webhooks)
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.DiscordWebhook.Client">
+            <summary>
+            Client for the webhook
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordWebhook.CreateWebhook(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.WebhookCreate)">

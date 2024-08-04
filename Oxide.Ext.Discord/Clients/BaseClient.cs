@@ -100,11 +100,6 @@ namespace Oxide.Ext.Discord.Clients
         /// <exception cref="Exception">Thrown if <see cref="DiscordClient"/> already has been added to this bot / webhook client</exception>
         public virtual bool AddClient(DiscordClient client, PluginSetup setup)
         {
-            if (_clients.Contains(client))
-            {
-                throw new Exception("Duplicate Client Exception");
-            }
-            
             _clients.Add(client);
             Hooks.AddPlugin(client, setup);
 

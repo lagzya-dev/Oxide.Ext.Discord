@@ -12,8 +12,7 @@ public class DiscordClient
 | --- | --- |
 | [Bot](#bot-property) { get; } | The bot client that is unique to the Token used |
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
-| [Rest](#rest-property) { get; } | Rest handler for API requests |
-| [Webhook](#webhook-property) { get; } | The webhook client that is unique to the webhook used |
+| [Webhooks](#webhooks-property) { get; } | The webhook client that is unique to the webhook used |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
 | [Connect](#connect-method-1-of-4)(…) | Starts a connection to discord with the given apiKey and intents (4 methods) |
@@ -56,7 +55,7 @@ public void Connect(BotConnection connection)
 Connect to the webhook
 
 ```csharp
-public void Connect(string webhookUrl)
+public WebhookClient Connect(string webhookUrl)
 ```
 
 | parameter | description |
@@ -65,6 +64,7 @@ public void Connect(string webhookUrl)
 
 ## See Also
 
+* class [WebhookClient](./WebhookClient.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -76,7 +76,7 @@ public void Connect(string webhookUrl)
 Connect to the webhook
 
 ```csharp
-public void Connect(WebhookConnection connection)
+public WebhookClient Connect(WebhookConnection connection)
 ```
 
 | parameter | description |
@@ -85,6 +85,7 @@ public void Connect(WebhookConnection connection)
 
 ## See Also
 
+* class [WebhookClient](./WebhookClient.md)
 * class [WebhookConnection](../Connections/WebhookConnection.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
@@ -234,33 +235,17 @@ public BotClient Bot { get; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# Webhook property
+# Webhooks property
 
 The webhook client that is unique to the webhook used
 
 ```csharp
-public WebhookClient Webhook { get; }
+public List<WebhookClient> Webhooks { get; }
 ```
 
 ## See Also
 
 * class [WebhookClient](./WebhookClient.md)
-* class [DiscordClient](./DiscordClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Rest property
-
-Rest handler for API requests
-
-```csharp
-public RestHandler Rest { get; }
-```
-
-## See Also
-
-* class [RestHandler](../Rest/RestHandler.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

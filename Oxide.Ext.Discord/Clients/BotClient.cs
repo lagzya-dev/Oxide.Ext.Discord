@@ -158,6 +158,11 @@ namespace Oxide.Ext.Discord.Clients
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Connection);
 
+            if (_clients.Contains(client))
+            {
+                throw new Exception("This client is already in the list of clients");
+            }
+            
             if (base.AddClient(client, setup))
             {
                 return true;

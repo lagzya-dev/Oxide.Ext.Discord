@@ -1,8 +1,10 @@
-﻿using Oxide.Ext.Discord.Connections;
+﻿using System.Linq;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Clients
@@ -32,9 +34,23 @@ namespace Oxide.Ext.Discord.Clients
 
         internal override void HandleConnect()
         {
-            DiscordWebhook.GetWebhookWithToken(_clients[0], Connection.WebhookId, Connection.WebhookToken)
-                .Then(webhook => Webhook = webhook)
+            DiscordWebhook.GetWebhookWithToken(_clients[0], this, Connection.WebhookId, Connection.WebhookToken)
+                .Then(webhook =>
+                {
+                    Webhook = webhook;
+                    Webhook.Client = this;
+                })
                 .Catch(ex => Logger.Exception("An error occured connecting the webhook", ex));
+        }
+
+        public override bool AddClient(DiscordClient client, PluginSetup setup)
+        {
+            if (!_clients.Contains(client))
+            {
+                return base.AddClient(client, setup);
+            }
+
+            return false;
         }
 
         internal override void HandleShutdown()
