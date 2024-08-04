@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Entities.Emojis;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Helpers;
 using Oxide.Ext.Discord.Interfaces;
@@ -371,6 +372,59 @@ namespace Oxide.Ext.Discord.Entities
         {
             DiscordApplicationException.ThrowIfInvalidApplicationRoleConnectionMetadataLength(records);
             return client.Bot.Rest.Put<List<ApplicationRoleConnectionMetadata>>(client,$"applications/{Id}/role-connections/metadata", records);
+        }
+
+        /// <summary>
+        /// Returns the list of all application emojis
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        public IPromise<ApplicationEmojis> GetApplicationEmojis(DiscordClient client)
+        {
+            return client.Bot.Rest.Get<ApplicationEmojis>(client, $"applications/{Id}/emojis");
+        }
+
+        /// <summary>
+        /// Return an application emoji by ID
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="emojiId">ID of the emoji</param>
+        public IPromise<DiscordEmoji> GetApplicationEmoji(DiscordClient client, Snowflake emojiId)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Get<DiscordEmoji>(client, $"applications/{Id}/emojis/{emojiId}");
+        }
+
+        /// <summary>
+        /// Creates a new application emoji
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="create">Emoji to create</param>
+        public IPromise<DiscordEmoji> CreateApplicationEmoji(DiscordClient client, ApplicationEmojiCreate create)
+        {
+            return client.Bot.Rest.Post<DiscordEmoji>(client, $"applications/{Id}/emojis", create);
+        }
+
+        /// <summary>
+        /// Updates an existing application emoji
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="emojiId">ID of the emoji to update</param>
+        /// <param name="update">Update to the application emoji</param>
+        public IPromise<DiscordEmoji> UpdateApplicationEmoji(DiscordClient client, Snowflake emojiId, ApplicationEmojiUpdate update)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Patch<DiscordEmoji>(client, $"applications/{Id}/emojis/{emojiId}", update);
+        }
+        
+        /// <summary>
+        /// Deletes an application emoji
+        /// </summary>
+        /// <param name="client">Client to use</param>
+        /// <param name="emojiId">ID of the emoji to delete</param>
+        public IPromise DeleteApplicationEmoji(DiscordClient client, Snowflake emojiId)
+        {
+            InvalidSnowflakeException.ThrowIfInvalid(emojiId, nameof(emojiId));
+            return client.Bot.Rest.Delete(client, $"applications/{Id}/emojis/{emojiId}");
         }
 
         ///<inheritdoc/>
