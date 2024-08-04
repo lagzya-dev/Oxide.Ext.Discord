@@ -2005,6 +2005,58 @@
         <member name="M:Oxide.Ext.Discord.Callbacks.BaseNextTickCallback.Run">
             <inheritdoc/>
         </member>
+        <member name="T:Oxide.Ext.Discord.Clients.BaseClient">
+            <summary>
+            BaseClient that can connect to discord
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Clients.BaseClient.Rest">
+            <summary>
+            Rest handler for all discord API calls
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Clients.BaseClient.Initialized">
+            <summary>
+            If the connection is initialized and not disconnected
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Clients.BaseClient._clients">
+            <summary>
+            List of all clients using this client
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Clients.BaseClient.Clients">
+            <summary>
+            List of all clients that are using this bot client
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.GetClientPluginList">
+            <summary>
+            Returns the list of plugins for this bot
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
+            <summary>
+            Add a <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> to this bot / webhook client
+            </summary>
+            <param name="client">Client to add</param>
+            <param name="setup">Setup data for the plugin</param>
+            <returns>True if this is the initial setup of the client; false otherwise</returns>
+            <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> already has been added to this bot / webhook client</exception>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.RemoveClient(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Removes the <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> from this bot / webhook client
+            </summary>
+            <param name="client">Client to remove</param>
+            <returns>returns true if the client is shutting down; false otherwise</returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Clients.BotClient">
             <summary>
             Represents a bot that is connected to discord
@@ -2025,11 +2077,6 @@
             All the direct messages that we have seen by User ID
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Clients.BotClient.Initialized">
-            <summary>
-            If the connection is initialized and not disconnected
-            </summary>
-        </member>
         <member name="P:Oxide.Ext.Discord.Clients.BotClient.Application">
             <summary>
             Application reference for this bot
@@ -2038,11 +2085,6 @@
         <member name="P:Oxide.Ext.Discord.Clients.BotClient.BotUser">
             <summary>
             Bot User
-            </summary>
-        </member>
-        <member name="P:Oxide.Ext.Discord.Clients.BotClient.Rest">
-            <summary>
-            Rest handler for all discord API calls
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Clients.BotClient.IsFullyLoaded">
@@ -2056,18 +2098,13 @@
             Returns if ReadyData is set
             </summary>
         </member>
-        <member name="F:Oxide.Ext.Discord.Clients.BotClient.Clients">
-            <summary>
-            List of all clients that are using this bot client
-            </summary>
-        </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.#ctor(Oxide.Ext.Discord.Connections.BotConnection)">
             <summary>
             Connection settings to use for the bot
             </summary>
             <param name="connection"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.ConnectWebSocket">
+        <member name="M:Oxide.Ext.Discord.Clients.BotClient.HandleConnect">
             <summary>
             Connects the websocket to discord. Should only be called if the websocket is disconnected
             </summary>
@@ -2079,30 +2116,16 @@
             <param name="reconnect">Should we attempt to reconnect to discord after closing</param>
             <param name="resume">Should we attempt to resume the previous session</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.ShutdownBot">
+        <member name="M:Oxide.Ext.Discord.Clients.BotClient.HandleShutdown">
             <summary>
             Called when bot client is no longer used by any client and can be shutdown.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
-            <summary>
-            Add a client to this bot client
-            </summary>
-            <param name="client">Client to add to the bot</param>
-            <param name="setup">Setup data for the plugin</param>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.RemoveClient(Oxide.Ext.Discord.Clients.DiscordClient)">
-            <summary>
-            Remove a client from the bot client
-            If not clients are left bot will shutdown
-            </summary>
-            <param name="client">Client to remove from bot client</param>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.GetClientPluginList">
-            <summary>
-            Returns the list of plugins for this bot
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.GetFirstClient">
             <summary>
@@ -2171,7 +2194,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Clients.DiscordClient">
             <summary>
-            Represents the object a plugin uses to connects to discord
+            Represents the object a plugin uses to connect to discord
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Plugin">
@@ -2194,6 +2217,16 @@
             The bot client that is unique to the Token used
             </summary>
         </member>
+        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Webhook">
+            <summary>
+            The webhook client that is unique to the webhook used
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Rest">
+            <summary>
+            Rest handler for API requests
+            </summary>
+        </member>
         <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Connection">
             <summary>
             Settings used to connect to discord and configure the extension
@@ -2210,13 +2243,25 @@
             Starts a connection to discord with the given apiKey and intents
             </summary>
             <param name="apiKey">API key for the connecting bot</param>
-            <param name="intents">Intents the bot needs in order to function</param>
+            <param name="intents">Intents the bot needs to function</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.Connect(Oxide.Ext.Discord.Connections.BotConnection)">
             <summary>
             Starts a connection to discord with the given discord settings
             </summary>
             <param name="connection">Discord connection settings</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.Connect(System.String)">
+            <summary>
+            Connect to the webhook
+            </summary>
+            <param name="webhookUrl">Webhook URL to connect to</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.Connect(Oxide.Ext.Discord.Connections.WebhookConnection)">
+            <summary>
+            Connect to the webhook
+            </summary>
+            <param name="connection">Webhook connection to connect to</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.Disconnect">
             <summary>
@@ -2225,7 +2270,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.IsConnected">
             <summary>
-            Returns if the client is connected to a bot and if the bot is initialized
+            Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized
             </summary>
             <returns></returns>
         </member>
@@ -2246,6 +2291,25 @@
             Used to update the bots status in discord
             </summary>
             <param name="presenceUpdate"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Clients.WebhookClient">
+            <summary>
+            A client that can connect to a webhook
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Clients.WebhookClient.Webhook">
+            <summary>
+            Webhook that has been connected to
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.#ctor(Oxide.Ext.Discord.Connections.WebhookConnection)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="connection">Connection for the webhook</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Configuration.DiscordBotConfig">
             <summary>
@@ -2476,6 +2540,34 @@
             </summary>
             <param name="hiddenToken"></param>
             <param name="applicationId"></param>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Connections.WebhookConnection">
+            <summary>
+            Connection for a webhook
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Connections.WebhookConnection.WebhookId">
+            <summary>
+            API token for the bot
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Connections.WebhookConnection.WebhookToken">
+            <summary>
+            Token for the webhook
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Connections.WebhookConnection.LogLevel">
+            <summary>
+            Discord Extension Logging Level.
+            See <see cref="T:Oxide.Ext.Discord.Logging.DiscordLogLevel"/>
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Connections.WebhookConnection.#ctor(System.String,Oxide.Ext.Discord.Logging.DiscordLogLevel)">
+            <summary>
+            Constructor for a webhook connection
+            </summary>
+            <param name="webhookUrl">URL of the webhook</param>
+            <param name="logLevel">Log level for the webhook</param>
         </member>
         <member name="T:Oxide.Ext.Discord.Constants.DiscordEncoding">
             <summary>
@@ -4095,7 +4187,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordActivity.Url">
             <summary>
-            Stream url, is validated when type is 1
+            Stream url is validated when type is 1
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordActivity.CreatedAt">
@@ -19109,11 +19201,12 @@
             List of active bots by bot API key
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Factory.BotClientFactory.InitializeBotClient(Oxide.Ext.Discord.Clients.DiscordClient)">
+        <member name="M:Oxide.Ext.Discord.Factory.BotClientFactory.InitializeBotClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Connections.BotConnection)">
             <summary>
             Gets or creates a new bot client for the given discord client
             </summary>
             <param name="client">Client to use for creating / loading the bot client</param>
+            <param name="connection">Connection for the bot</param>
             <returns>Bot client that is created or already exists</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Factory.BucketIdFactory.GenerateId(Oxide.Core.Libraries.RequestMethod,System.String)">
@@ -19169,6 +19262,19 @@
             Returns the generated snowflake ID
             </summary>
             <returns></returns>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Factory.WebhookClientFactory._activeWebhooks">
+            <summary>
+            List of active bots by bot API key
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Factory.WebhookClientFactory.InitializeWebhookClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Connections.WebhookConnection)">
+            <summary>
+            Gets or creates a new bot client for the given discord client
+            </summary>
+            <param name="client">Client to use for creating / loading the bot client</param>
+            <param name="connection">Connection for the webhook</param>
+            <returns>Bot client that is created or already exists</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Helpers.DiscordAppRoutes">
             <summary>
@@ -20381,6 +20487,12 @@
             The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise.
             </summary> 
         </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IPromise.GetAwaiter">
+            <summary>
+            returns the task awaiter for this promise
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IPromise`1">
             <summary>
             Implements a C# promise.
@@ -20482,6 +20594,12 @@
             ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error.
             The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise.
             </summary> 
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IPromise`1.GetAwaiter">
+            <summary>
+            returns the task awaiter for this promise
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IRejectable">
             <summary>
@@ -26161,6 +26279,12 @@
             Route to Bucket ID
             </summary>
         </member>
+        <member name="M:Oxide.Ext.Discord.Rest.RestHandler.#ctor(Oxide.Ext.Discord.Interfaces.ILogger)">
+            <summary>
+            Creates a new REST handler for bot / webhook clients
+            </summary>
+            <param name="logger"></param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.#ctor(Oxide.Ext.Discord.Clients.BotClient,Oxide.Ext.Discord.Interfaces.ILogger)">
             <summary>
             Creates a new REST handler for a bot client
@@ -26817,7 +26941,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Types.Promise">
             <summary>
-            Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.
+            Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value.
             https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
             </summary>
         </member>
@@ -26859,6 +26983,9 @@
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.Resolve">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise.Reject(System.Exception)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.Catch(System.Action{System.Exception})">
@@ -26935,6 +27062,9 @@
         <member name="M:Oxide.Ext.Discord.Types.Promise.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.IPromise{``0}})">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise.GetAwaiter">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.EnterPool">
             <inheritdoc/>
         </member>
@@ -27005,6 +27135,9 @@
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.Resolve(`0)">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise`1.Reject(System.Exception)">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.InvokeResolveHandlers(`0)">
             <summary>
             Invoke all resolve handlers.
@@ -27070,6 +27203,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise`1.GetAwaiter">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.ClearHandlers">

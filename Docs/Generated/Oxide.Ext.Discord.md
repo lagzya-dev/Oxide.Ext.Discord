@@ -79,8 +79,10 @@
 
 | public type | description |
 | --- | --- |
+| abstract class [BaseClient](./Oxide.Ext.Discord/Clients/BaseClient.md) | BaseClient that can connect to discord |
 | class [BotClient](./Oxide.Ext.Discord/Clients/BotClient.md) | Represents a bot that is connected to discord |
-| class [DiscordClient](./Oxide.Ext.Discord/Clients/DiscordClient.md) | Represents the object a plugin uses to connects to discord |
+| class [DiscordClient](./Oxide.Ext.Discord/Clients/DiscordClient.md) | Represents the object a plugin uses to connect to discord |
+| class [WebhookClient](./Oxide.Ext.Discord/Clients/WebhookClient.md) | A client that can connect to a webhook |
 
 ## Oxide.Ext.Discord.Connections namespace
 
@@ -88,6 +90,7 @@
 | --- | --- |
 | class [BotConnection](./Oxide.Ext.Discord/Connections/BotConnection.md) | Bot Connection Settings |
 | class [BotTokenData](./Oxide.Ext.Discord/Connections/BotTokenData.md) | Represents the parsed Bot Token data |
+| class [WebhookConnection](./Oxide.Ext.Discord/Connections/WebhookConnection.md) | Connection for a webhook |
 
 ## Oxide.Ext.Discord.Constants namespace
 
@@ -695,7 +698,7 @@
 | interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Types/IPool%7BT%7D.md) | Represents a pool of type T |
 | class [PoolSettings](./Oxide.Ext.Discord/Types/PoolSettings.md) | Settings for the pools |
 | struct [PoolSize](./Oxide.Ext.Discord/Types/PoolSize.md) | Represents size constraints for a pool |
-| class [Promise](./Oxide.Ext.Discord/Types/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| class [Promise](./Oxide.Ext.Discord/Types/Promise.md) | Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Types/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./Oxide.Ext.Discord/Types/PromiseState.md) | Specifies the state of a promise. |
 | struct [RejectHandler](./Oxide.Ext.Discord/Types/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |

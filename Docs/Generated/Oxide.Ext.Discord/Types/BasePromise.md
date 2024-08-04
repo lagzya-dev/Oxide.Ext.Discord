@@ -12,7 +12,7 @@ public class BasePromise : BasePoolable, IRejectable
 | --- | --- |
 | [Id](#id-property) { get; } | ID of the promise |
 | [State](#state-property) { get; protected set; } | Tracks the current state of the promise. |
-| [Reject](#reject-method)(…) |  |
+| virtual [Reject](#reject-method)(…) |  |
 
 ## Protected Members
 
@@ -38,7 +38,7 @@ public class BasePromise : BasePoolable, IRejectable
 # Reject method
 
 ```csharp
-public void Reject(Exception ex)
+public virtual void Reject(Exception ex)
 ```
 
 ## See Also

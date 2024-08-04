@@ -12,7 +12,7 @@
 | interface [IPool&lt;T&gt;](./IPool%7BT%7D.md) | Represents a pool of type T |
 | class [PoolSettings](./PoolSettings.md) | Settings for the pools |
 | struct [PoolSize](./PoolSize.md) | Represents size constraints for a pool |
-| class [Promise](./Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| class [Promise](./Promise.md) | Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./PromiseState.md) | Specifies the state of a promise. |
 | struct [RejectHandler](./RejectHandler.md) | Represents a handler invoked when the promise is rejected. |

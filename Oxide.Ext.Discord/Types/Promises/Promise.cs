@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Oxide.Core;
 using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Exceptions;
@@ -18,7 +19,7 @@ using Oxide.Ext.Discord.Logging;
 namespace Oxide.Ext.Discord.Types
 {
     /// <summary>
-    /// Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value.
+    /// Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value.
     /// https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
     /// </summary>
     public sealed class Promise : BasePromise, IPendingPromise
@@ -30,6 +31,8 @@ namespace Oxide.Ext.Discord.Types
 
         private readonly Action _onResolve;
         private readonly Action _onResolveInternal;
+
+        private readonly ManualResetValueTaskSource _taskSource = new ManualResetValueTaskSource();
 
         /// <summary>
         /// Constructor for the promise
@@ -117,7 +120,15 @@ namespace Oxide.Ext.Discord.Types
             PromiseException.ThrowIfDisposed(this);
             PromiseException.ThrowIfNotPending(State);
             State = PromiseState.Resolved;
+            _taskSource.SetResult();
             InvokeResolveHandlers();
+        }
+
+        ///<inheritdoc/>
+        public override void Reject(Exception ex)
+        {
+            base.Reject(ex);
+            _taskSource.SetException(ex);
         }
 
         ///<inheritdoc/>
@@ -463,10 +474,17 @@ namespace Oxide.Ext.Discord.Types
         }
 
         ///<inheritdoc/>
+        public ValueTaskAwaiter GetAwaiter()
+        {
+            return _taskSource.GetTask().GetAwaiter();
+        }
+
+        ///<inheritdoc/>
         protected override void EnterPool()
         {
             base.EnterPool();
             _resolves.Clear();
+            _taskSource.Reset();
         }
     }
 }

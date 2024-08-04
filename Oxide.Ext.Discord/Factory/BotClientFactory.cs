@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Clients;
+using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
@@ -19,23 +20,24 @@ namespace Oxide.Ext.Discord.Factory
         public IEnumerable<BotClient> Clients => _activeBots.Values;
         
         private BotClientFactory() {}
-        
+
         /// <summary>
         /// Gets or creates a new bot client for the given discord client
         /// </summary>
         /// <param name="client">Client to use for creating / loading the bot client</param>
+        /// <param name="connection">Connection for the bot</param>
         /// <returns>Bot client that is created or already exists</returns>
-        public BotClient InitializeBotClient(DiscordClient client)
+        public BotClient InitializeBotClient(DiscordClient client, BotConnection connection)
         {
             try
             {
-                BotClient bot = _activeBots[client.Connection.ApiToken];
+                BotClient bot = _activeBots[connection.ApiToken];
                 if (bot == null)
                 {
                     DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Creating new BotClient");
-                    bot = new BotClient(client.Connection);
-                    _activeBots[client.Connection.ApiToken] = bot;
-                    _applicationBots[bot.Connection.ApplicationId] = bot;
+                    bot = new BotClient(connection);
+                    _activeBots[connection.ApiToken] = bot;
+                    _applicationBots[connection.ApplicationId] = bot;
                 }
                 
                 DiscordExtension.GlobalLogger.Debug($"{nameof(BotClientFactory)}.{nameof(InitializeBotClient)} Adding {{0}} client to bot {{1}}", client.PluginName, bot.BotUser?.FullUserName);

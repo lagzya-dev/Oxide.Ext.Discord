@@ -61,7 +61,7 @@ namespace Oxide.Ext.Discord.Types
         }
         
         ///<inheritdoc/>
-        public void Reject(Exception ex)
+        public virtual void Reject(Exception ex)
         {
             PromiseException.ThrowIfDisposed(this);
             PromiseException.ThrowIfNotPending(State);

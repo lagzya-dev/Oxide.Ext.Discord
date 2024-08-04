@@ -134,6 +134,7 @@ namespace Oxide.Ext.Discord.Plugins
         private void ResetRestApiCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllRestApis();
+            WebhookClientFactory.Instance.ResetAllRestApis();
             Chat(player, LangKeys.RestApi.Reset);
         }
         
@@ -215,6 +216,7 @@ namespace Oxide.Ext.Discord.Plugins
                 Chat(player, LangKeys.Log.Set, "Console", log);
                 
                 BotClientFactory.Instance.UpdateLogLevel();
+                WebhookClientFactory.Instance.UpdateLogLevel();
             }
             catch
             {
@@ -241,6 +243,7 @@ namespace Oxide.Ext.Discord.Plugins
                 Chat(player, LangKeys.Log.Set, "File", log);
                 
                 BotClientFactory.Instance.UpdateLogLevel();
+                WebhookClientFactory.Instance.UpdateLogLevel();
                 DiscordClientFactory.Instance.UpdateLogLevel();
             }
             catch

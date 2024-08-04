@@ -44,13 +44,12 @@ namespace Oxide.Ext.Discord.Rest
         public readonly ConcurrentDictionary<BucketId, BucketId> RouteToBucketId = new ConcurrentDictionary<BucketId, BucketId>();
 
         private readonly ILogger _logger;
-        
+
         /// <summary>
-        /// Creates a new REST handler for a bot client
+        /// Creates a new REST handler for bot / webhook clients
         /// </summary>
-        /// <param name="client">Client the request is for</param>
-        /// <param name="logger">Logger from the client</param>
-        public RestHandler(BotClient client, ILogger logger)
+        /// <param name="logger"></param>
+        public RestHandler(ILogger logger)
         {
             HttpClientHandler handler = new HttpClientHandler
             {
@@ -62,13 +61,22 @@ namespace Oxide.Ext.Discord.Rest
                 Timeout = TimeSpan.FromSeconds(15),
                 BaseAddress = new Uri(DiscordEndpoints.Rest.ApiUrl)
             };
-            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Connection.ApiToken);
             Client.DefaultRequestHeaders.Accept.Add(MediaTypeWithQualityHeaderValue.Parse("application/json"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add( StringWithQualityHeaderValue.Parse("gzip"));
             Client.DefaultRequestHeaders.AcceptEncoding.Add(StringWithQualityHeaderValue.Parse("deflate"));
             Client.DefaultRequestHeaders.Add("user-agent", $"DiscordBot (https://github.com/dassjosh/Oxide.Ext.Discord, v{DiscordExtension.FullExtensionVersion})");
             _logger = logger;
             RateLimit = new RestRateLimit(logger);
+        }
+        
+        /// <summary>
+        /// Creates a new REST handler for a bot client
+        /// </summary>
+        /// <param name="client">Client the request is for</param>
+        /// <param name="logger">Logger from the client</param>
+        public RestHandler(BotClient client, ILogger logger) : this(logger)
+        {
+            Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bot", client.Connection.ApiToken);
         }
 
         /// <summary>
