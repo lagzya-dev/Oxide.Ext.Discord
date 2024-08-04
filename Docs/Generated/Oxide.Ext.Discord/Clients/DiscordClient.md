@@ -1,6 +1,6 @@
 # DiscordClient class
 
-Represents the object a plugin uses to connects to discord
+Represents the object a plugin uses to connect to discord
 
 ```csharp
 public class DiscordClient
@@ -12,11 +12,13 @@ public class DiscordClient
 | --- | --- |
 | [Bot](#bot-property) { get; } | The bot client that is unique to the Token used |
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
+| [Rest](#rest-property) { get; } | Rest handler for API requests |
+| [Webhook](#webhook-property) { get; } | The webhook client that is unique to the webhook used |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
-| [Connect](#connect-method-1-of-2)(…) | Starts a connection to discord with the given apiKey and intents (2 methods) |
+| [Connect](#connect-method-1-of-4)(…) | Starts a connection to discord with the given apiKey and intents (4 methods) |
 | [Disconnect](#disconnect-method)() | Disconnects this client from discord |
-| [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot and if the bot is initialized |
+| [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized |
 | [RequestGuildMembers](#requestguildmembers-method)(…) | Used to request guild members from discord for a specific guild |
 | [UpdateStatus](#updatestatus-method)(…) | Used to update the bots status in discord |
 | [UpdateVoiceState](#updatevoicestate-method)(…) | Used to update the voice state for the bot |
@@ -28,7 +30,7 @@ public class DiscordClient
 * [DiscordClient.cs](../../../../Oxide.Ext.Discord/Clients/DiscordClient.cs)
    
    
-# Connect method (1 of 2)
+# Connect method (1 of 4)
 
 Starts a connection to discord with the given discord settings
 
@@ -49,7 +51,48 @@ public void Connect(BotConnection connection)
 
 ---
 
-# Connect method (2 of 2)
+# Connect method (2 of 4)
+
+Connect to the webhook
+
+```csharp
+public void Connect(string webhookUrl)
+```
+
+| parameter | description |
+| --- | --- |
+| webhookUrl | Webhook URL to connect to |
+
+## See Also
+
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Connect method (3 of 4)
+
+Connect to the webhook
+
+```csharp
+public void Connect(WebhookConnection connection)
+```
+
+| parameter | description |
+| --- | --- |
+| connection | Webhook connection to connect to |
+
+## See Also
+
+* class [WebhookConnection](../Connections/WebhookConnection.md)
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# Connect method (4 of 4)
 
 Starts a connection to discord with the given apiKey and intents
 
@@ -60,7 +103,7 @@ public void Connect(string apiKey, GatewayIntents intents)
 | parameter | description |
 | --- | --- |
 | apiKey | API key for the connecting bot |
-| intents | Intents the bot needs in order to function |
+| intents | Intents the bot needs to function |
 
 ## See Also
 
@@ -87,7 +130,7 @@ public void Disconnect()
    
 # IsConnected method
 
-Returns if the client is connected to a bot and if the bot is initialized
+Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized
 
 ```csharp
 public bool IsConnected()
@@ -186,6 +229,38 @@ public BotClient Bot { get; }
 ## See Also
 
 * class [BotClient](./BotClient.md)
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Webhook property
+
+The webhook client that is unique to the webhook used
+
+```csharp
+public WebhookClient Webhook { get; }
+```
+
+## See Also
+
+* class [WebhookClient](./WebhookClient.md)
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Rest property
+
+Rest handler for API requests
+
+```csharp
+public RestHandler Rest { get; }
+```
+
+## See Also
+
+* class [RestHandler](../Rest/RestHandler.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

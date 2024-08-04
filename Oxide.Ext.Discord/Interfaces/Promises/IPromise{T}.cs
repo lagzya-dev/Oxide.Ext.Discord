@@ -110,6 +110,10 @@ namespace Oxide.Ext.Discord.Interfaces
         /// </summary> 
         IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete);
         
+        /// <summary>
+        /// returns the task awaiter for this promise
+        /// </summary>
+        /// <returns></returns>
         ValueTaskAwaiter<TPromised> GetAwaiter();
     }
 }

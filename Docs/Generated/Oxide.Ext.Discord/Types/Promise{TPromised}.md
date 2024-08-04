@@ -17,6 +17,8 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | [ContinueWith](#continuewith-method)(…) |  |
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) |  |
 | [Finally](#finally-method)(…) |  |
+| [GetAwaiter](#getawaiter-method)() |  |
+| override [Reject](#reject-method)(…) |  |
 | [Resolve](#resolve-method)(…) |  |
 | [Then](#then-method-1-of-4)(…) |  (4 methods) |
 | [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3)(…) |  (3 methods) |
@@ -130,6 +132,19 @@ public static IPromise<TPromised> Rejected(Exception ex)
 
 ```csharp
 public void Resolve(TPromised value)
+```
+
+## See Also
+
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Reject method
+
+```csharp
+public override void Reject(Exception ex)
 ```
 
 ## See Also
@@ -391,6 +406,19 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetAwaiter method
+
+```csharp
+public ValueTaskAwaiter<TPromised> GetAwaiter()
+```
+
+## See Also
+
 * class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -1,6 +1,6 @@
 # Promise class
 
-Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
+Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
 ```csharp
 public sealed class Promise : BasePromise, IPendingPromise
@@ -17,6 +17,8 @@ public sealed class Promise : BasePromise, IPendingPromise
 | [ContinueWith](#continuewith-method)(…) |  |
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) |  |
 | [Finally](#finally-method)(…) |  |
+| [GetAwaiter](#getawaiter-method)() |  |
+| override [Reject](#reject-method)(…) |  |
 | [Resolve](#resolve-method)() |  |
 | [Then](#then-method-1-of-5)(…) |  (5 methods) |
 | [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-2)(…) |  (2 methods) |
@@ -110,6 +112,19 @@ protected override void ClearHandlers()
 
 ```csharp
 public void Resolve()
+```
+
+## See Also
+
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Reject method
+
+```csharp
+public override void Reject(Exception ex)
 ```
 
 ## See Also
@@ -402,6 +417,19 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetAwaiter method
+
+```csharp
+public ValueTaskAwaiter GetAwaiter()
+```
+
+## See Also
+
 * class [Promise](./Promise.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

@@ -16,6 +16,7 @@ public interface IPromise
 | [ContinueWith](#continuewith-method)(…) | Add a callback that chains a non-value promise. ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The state of the returning promise will be based on the new non-value promise, not the preceding (rejected or resolved) promise. |
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) | Add a callback that chains a value promise (optionally converting to a different value type). ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise. |
 | [Finally](#finally-method)(…) | Add a finally callback. Finally callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The returned promise will be resolved or rejected, as per the preceding promise. |
+| [GetAwaiter](#getawaiter-method)() | returns the task awaiter for this promise |
 | [Then](#then-method-1-of-5)(…) | Add a resolved callback that chains a non-value promise. (5 methods) |
 | [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-2)(…) | Add a resolved callback that chains a value promise (optionally converting to a different value type). (2 methods) |
 | [ThenAll](#thenall-method)(…) | Chain an enumerable of promises, all of which must resolve. The resulting promise is resolved when all of the promises have resolved. It is rejected as soon as any of the promises have been rejected. |
@@ -269,6 +270,21 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md)
+* interface [IPromise](./IPromise.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetAwaiter method
+
+returns the task awaiter for this promise
+
+```csharp
+public ValueTaskAwaiter GetAwaiter()
+```
+
+## See Also
+
 * interface [IPromise](./IPromise.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

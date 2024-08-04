@@ -27,7 +27,7 @@ public class DiscordActivity
 | [State](#state-property) { get; set; } | The user's current party status |
 | [Timestamps](#timestamps-property) { get; set; } | Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md) |
 | [Type](#type-property) { get; set; } | Activity type See [`ActivityType`](./ActivityType.md) |
-| [Url](#url-property) { get; set; } | Stream url, is validated when type is 1 |
+| [Url](#url-property) { get; set; } | Stream url is validated when type is 1 |
 
 ## See Also
 
@@ -84,7 +84,7 @@ public ActivityType Type { get; set; }
    
 # Url property
 
-Stream url, is validated when type is 1
+Stream url is validated when type is 1
 
 ```csharp
 public string Url { get; set; }
@@ -117,7 +117,7 @@ public DateTimeOffset CreatedAt { get; set; }
 Unix timestamps for start and/or end of the game See [`ActivityTimestamps`](./ActivityTimestamps.md)
 
 ```csharp
-public List<ActivityTimestamps> Timestamps { get; set; }
+public ActivityTimestamps Timestamps { get; set; }
 ```
 
 ## See Also

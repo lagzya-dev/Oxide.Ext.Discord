@@ -10,7 +10,7 @@ public class RestHandler : IDebugLoggable
 
 | name | description |
 | --- | --- |
-| [RestHandler](#resthandler-constructor)(…) | Creates a new REST handler for a bot client |
+| [RestHandler](#resthandler-constructor-1-of-2)(…) | Creates a new REST handler for bot / webhook clients (2 constructors) |
 | readonly [Buckets](#buckets-field) | Buckets with Routes we don't know the Hash of yet |
 | readonly [Client](#client-field) | HttpClient for API Requests |
 | readonly [RateLimit](#ratelimit-field) | Global Rate Limit for the bot |
@@ -364,7 +364,28 @@ public void LogDebug(DebugLogger logger)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# RestHandler constructor
+# RestHandler constructor (1 of 2)
+
+Creates a new REST handler for bot / webhook clients
+
+```csharp
+public RestHandler(ILogger logger)
+```
+
+| parameter | description |
+| --- | --- |
+| logger |  |
+
+## See Also
+
+* interface [ILogger](../Interfaces/ILogger.md)
+* class [RestHandler](./RestHandler.md)
+* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# RestHandler constructor (2 of 2)
 
 Creates a new REST handler for a bot client
 
