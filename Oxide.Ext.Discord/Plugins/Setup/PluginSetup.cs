@@ -18,7 +18,6 @@ namespace Oxide.Ext.Discord.Plugins
         internal readonly string PluginName;
 
         internal readonly List<string> PluginHooks = new List<string>(0);
-        internal readonly List<string> GlobalHooks = new List<string>(0);
         private readonly List<PluginCallback> _callbacks = new List<PluginCallback>(0);
         //private readonly List<PluginField> _fields = new List<PluginField>(0);
 
@@ -65,12 +64,7 @@ namespace Oxide.Ext.Discord.Plugins
             
             if (DiscordExtHooks.IsDiscordHook(name))
             {
-                if (DiscordExtHooks.IsGlobalHook(name))
-                {
-                    GlobalHooks.Add(name);
-                    logger.Verbose("Adding Global Hook: {0}.{1}", Plugin.Name, name);
-                }
-                else
+                if (!DiscordExtHooks.IsGlobalHook(name))
                 {
                     PluginHooks.Add(name);
                     logger.Verbose("Adding Plugin Hook: {0}.{1}", Plugin.Name, name);

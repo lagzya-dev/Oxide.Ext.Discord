@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Oxide.Core;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Clients;
@@ -14,8 +15,6 @@ namespace Oxide.Ext.Discord.Types
         private readonly DiscordHookCache _cache;
         private readonly ILogger _logger;
 
-        private static readonly DiscordHookCache Global = new DiscordHookCache(DiscordExtension.GlobalLogger);
-
         internal DiscordHook(ILogger logger) 
         {
             _logger = logger;
@@ -26,13 +25,11 @@ namespace Oxide.Ext.Discord.Types
         internal void AddPlugin(DiscordClient client, PluginSetup setup)
         {
             _cache.AddPlugin(client, setup.PluginHooks);
-            Global.AddPlugin(client, setup.GlobalHooks);
         }
 
         internal void RemovePlugin(Plugin plugin)
         {
             _cache.RemovePlugin(plugin);
-            Global.RemovePlugin(plugin);
         }
         #endregion
 
@@ -46,11 +43,11 @@ namespace Oxide.Ext.Discord.Types
         #endregion
 
         #region Global Hooks
-        internal static void CallGlobalHook(string hookName) => CallHookInternal(Global, hookName);
-        internal static void CallGlobalHook<T0>(string hookName, T0 arg0) => CallHookInternal(Global, hookName, arg0);
-        internal static void CallGlobalHook<T0, T1>(string hookName, T0 arg0, T1 arg1) => CallHookInternal(Global, hookName, arg0, arg1);
-        internal static void CallGlobalHook<T0, T1, T2>(string hookName, T0 arg0, T1 arg1, T2 arg2) => CallHookInternal(Global, hookName, arg0, arg1, arg2);
-        internal static void CallGlobalHook<T0, T1, T2, T3>(string hookName, T0 arg0, T1 arg1, T2 arg2, T3 arg3) => CallHookInternal(Global, hookName, arg0, arg1, arg2, arg3);
+        internal static void CallGlobalHook(string hookName) => Interface.Oxide.CallHook(hookName);
+        internal static void CallGlobalHook<T0>(string hookName, T0 arg0) => Interface.Oxide.CallHook(hookName, arg0);
+        internal static void CallGlobalHook<T0, T1>(string hookName, T0 arg0, T1 arg1) => Interface.Oxide.CallHook(hookName, arg0, arg1);
+        internal static void CallGlobalHook<T0, T1, T2>(string hookName, T0 arg0, T1 arg1, T2 arg2) => Interface.Oxide.CallHook(hookName, arg0, arg1, arg2);
+        internal static void CallGlobalHook<T0, T1, T2, T3>(string hookName, T0 arg0, T1 arg1, T2 arg2, T3 arg3) => Interface.Oxide.CallHook(hookName, arg0, arg1, arg2, arg3);
         #endregion
 
         #region Plugin Hooks
