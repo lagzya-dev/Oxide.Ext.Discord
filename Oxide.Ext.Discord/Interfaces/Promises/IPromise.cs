@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces
@@ -109,5 +110,8 @@ namespace Oxide.Ext.Discord.Interfaces
         /// The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise.
         /// </summary> 
         IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete);
+
+        //<in
+        ValueTaskAwaiter GetAwaiter();
     }
 }

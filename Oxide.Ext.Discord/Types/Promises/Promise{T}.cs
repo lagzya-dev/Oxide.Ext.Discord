@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Oxide.Core;
 using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Exceptions;
@@ -36,6 +37,8 @@ namespace Oxide.Ext.Discord.Types
 
         private readonly Action<TPromised> _onResolve;
         private readonly Action _onResolveInternal;
+        
+        private readonly ManualResetValueTaskSource<TPromised> _taskSource = new ManualResetValueTaskSource<TPromised>();
 
         /// <summary>
         /// Constructor
@@ -119,8 +122,15 @@ namespace Oxide.Ext.Discord.Types
 
             _resolveValue = value;
             State = PromiseState.Resolved;
-
+            _taskSource.SetResult(value);
             InvokeResolveHandlers(value);
+        }
+        
+        ///<inheritdoc/>
+        public override void Reject(Exception ex)
+        {
+            base.Reject(ex);
+            _taskSource.SetException(ex);
         }
 
         /// <summary>
@@ -511,7 +521,13 @@ namespace Oxide.Ext.Discord.Types
 
             return promise.Then(onComplete);
         }
-        
+
+        ///<inheritdoc/>
+        public ValueTaskAwaiter<TPromised> GetAwaiter()
+        {
+            return _taskSource.GetTask().GetAwaiter();
+        }
+
         ///<inheritdoc/>
         protected override void ClearHandlers()
         {
@@ -525,6 +541,7 @@ namespace Oxide.Ext.Discord.Types
             base.EnterPool();
             _resolveValue = default(TPromised);
             _resolves.Clear();
+            _taskSource.Reset();
         }
     }
 }
