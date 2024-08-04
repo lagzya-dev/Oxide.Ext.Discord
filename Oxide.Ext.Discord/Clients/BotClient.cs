@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
-using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
@@ -12,7 +8,6 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Rest;
@@ -25,7 +20,7 @@ namespace Oxide.Ext.Discord.Clients
     /// <summary>
     /// Represents a bot that is connected to discord
     /// </summary>
-    public class BotClient : IDebugLoggable
+    public class BotClient : BaseClient, IDebugLoggable
     {
         /// <summary>
         /// All the servers that this bot is in
@@ -43,11 +38,6 @@ namespace Oxide.Ext.Discord.Clients
         public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByUserId = new Hash<Snowflake, DiscordChannel>();
 
         /// <summary>
-        /// If the connection is initialized and not disconnected
-        /// </summary>
-        public bool Initialized { get; private set; }
-
-        /// <summary>
         /// Application reference for this bot
         /// </summary>
         public DiscordApplication Application { get; private set; }
@@ -56,11 +46,6 @@ namespace Oxide.Ext.Discord.Clients
         /// Bot User
         /// </summary>
         public DiscordUser BotUser { get; private set; }
-
-        /// <summary>
-        /// Rest handler for all discord API calls
-        /// </summary>
-        public RestHandler Rest { get; private set; }
         
         /// <summary>
         /// Returns if the bot has fully loaded.
@@ -73,19 +58,8 @@ namespace Oxide.Ext.Discord.Clients
         /// </summary>
         public bool IsReady => _readyData != null;
         
-        internal readonly DiscordHook Hooks;
-        internal readonly ILogger Logger;
         internal readonly BotConnection Connection;
-        internal readonly JsonSerializerSettings JsonSettings;
-        internal readonly JsonSerializer JsonSerializer;
         internal DiscordWebSocket WebSocket;
-
-        private readonly List<DiscordClient> _clients = new List<DiscordClient>();
-
-        /// <summary>
-        /// List of all clients that are using this bot client
-        /// </summary>
-        public readonly IReadOnlyList<DiscordClient> Clients;
 
         private GatewayReadyEvent _readyData;
 
@@ -96,33 +70,20 @@ namespace Oxide.Ext.Discord.Clients
         public BotClient(BotConnection connection)
         {
             Connection = new BotConnection(connection);
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
-
-            JsonSettings = new JsonSerializerSettings
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.None
-            };
-            
-            JsonSerializer = JsonSerializer.Create(JsonSettings);
 
             Initialized = true;
-            
-            Hooks = new DiscordHook(Logger);
             Rest = new RestHandler(this, Logger);
             WebSocket = new DiscordWebSocket(this, Logger);
-            
-            Clients = new ReadOnlyCollection<DiscordClient>(_clients);
         }
 
         /// <summary>
         /// Connects the websocket to discord. Should only be called if the websocket is disconnected
         /// </summary>
-        public void ConnectWebSocket()
+        internal override void HandleConnect()
         {
             if (Initialized)
             {
-                Logger.Debug($"{nameof(BotClient)}.{nameof(ConnectWebSocket)} Connecting to websocket");
+                Logger.Debug($"{nameof(BotClient)}.{nameof(HandleConnect)} Connecting to websocket");
                 WebSocket.Connect();
             }
         }
@@ -153,7 +114,7 @@ namespace Oxide.Ext.Discord.Clients
             }
         }
         
-        internal void ResetRestApi()
+        internal override void ResetRestApi()
         {
             try
             {
@@ -168,9 +129,9 @@ namespace Oxide.Ext.Discord.Clients
         /// <summary>
         /// Called when bot client is no longer used by any client and can be shutdown.
         /// </summary>
-        internal void ShutdownBot()
+        internal override void HandleShutdown()
         {
-            Logger.Debug($"{nameof(BotClient)}.{nameof(ShutdownBot)} Shutting down the bot");
+            Logger.Debug($"{nameof(BotClient)}.{nameof(HandleShutdown)} Shutting down the bot");
             Initialized = false;
             BotClientFactory.Instance.RemoveBot(this);
 
@@ -180,53 +141,26 @@ namespace Oxide.Ext.Discord.Clients
             }
             catch (Exception ex)
             {
-                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot websocket.", ex);
+                Logger.Exception($"{nameof(BotClient)}.{nameof(HandleShutdown)} An error occured shutting down the bot websocket.", ex);
             }
             finally
             {
                 WebSocket = null;
             }
 
-            try
-            {
-                Rest?.Shutdown();
-            }
-            catch (Exception ex)
-            {
-                Logger.Exception($"{nameof(BotClient)}.{nameof(ShutdownBot)} An error occured shutting down the bot rest client.", ex);
-            }
-            finally
-            {
-                Rest = null;
-            }
+            ShutdownRest();
                 
             _readyData = null;
         }
-
-        /// <summary>
-        /// Add a client to this bot client
-        /// </summary>
-        /// <param name="client">Client to add to the bot</param>
-        /// <param name="setup">Setup data for the plugin</param>
-        public void AddClient(DiscordClient client, PluginSetup setup)
+        
+        ///<inheritdoc/>
+        public override bool AddClient(DiscordClient client, PluginSetup setup)
         {
             TokenMismatchException.ThrowIfMismatchedToken(client, Connection);
 
-            if (_clients.Contains(client))
+            if (base.AddClient(client, setup))
             {
-                throw new Exception("Duplicate Client Exception");
-            }
-            
-            _clients.Add(client);
-            Hooks.AddPlugin(client, setup);
-
-            Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Add client for plugin {{0}}", client.Plugin.Title);
-            
-            if (_clients.Count == 1)
-            {
-                Logger.Debug($"{nameof(BotClient)}.{nameof(AddClient)} Clients.Count == 1 connecting bot");
-                ConnectWebSocket();
-                return;
+                return true;
             }
 
             GatewayIntents intents = Connection.Intents | client.Connection.Intents;
@@ -265,24 +199,15 @@ namespace Oxide.Ext.Discord.Clients
                     DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordBotFullyLoaded);
                 }
             }
+            return false;
         }
 
-        /// <summary>
-        /// Remove a client from the bot client
-        /// If not clients are left bot will shutdown
-        /// </summary>
-        /// <param name="client">Client to remove from bot client</param>
-        public void RemoveClient(DiscordClient client)
+        ///<inheritdoc/>
+        public override bool RemoveClient(DiscordClient client)
         {
-            Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Removing Client {{0}}", client.PluginName);
-            _clients.Remove(client);
-            Rest.OnClientClosed(client);
-            Hooks.RemovePlugin(client.Plugin);
-            if (_clients.Count == 0)
+            if (base.RemoveClient(client))
             {
-                ShutdownBot();
-                Logger.Debug($"{nameof(BotClient)}.{nameof(RemoveClient)} Bot count 0 shutting down bot");
-                return;
+                return true;
             }
             
             GatewayIntents intents = GatewayIntents.None;
@@ -294,35 +219,7 @@ namespace Oxide.Ext.Discord.Clients
 
             //Update Intents so the next reconnect we supply the correct GatewayIntents for connected plugins
             Connection.Intents = intents;
-        }
-
-        /// <summary>
-        /// Returns the list of plugins for this bot
-        /// </summary>
-        /// <returns></returns>
-        public string GetClientPluginList()
-        {
-            StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-            for (int index = 0; index < _clients.Count; index++)
-            {
-                DiscordClient client = _clients[index];
-                if (index != 0)
-                {
-                    sb.Append(",");
-                }
-                
-                sb.Append('[');
-                sb.Append(client.PluginName);
-                sb.Append(']');
-            }
-
-            return DiscordPool.Internal.ToStringAndFree(sb);
-        }
-
-        internal void UpdateLogLevel(DiscordLogLevel level)
-        {
-            Logger.UpdateLogLevel(level);
-            Logger.Debug($"{nameof(BotClient)}.{nameof(UpdateLogLevel)} Updating log level from: {{0}} to: {{1}}", Logger.LogLevel, level);
+            return false;
         }
 
         internal void OnClientReady(GatewayReadyEvent ready)
