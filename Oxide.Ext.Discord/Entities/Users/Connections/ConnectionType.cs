@@ -77,9 +77,14 @@ namespace Oxide.Ext.Discord.Entities
         [DiscordEnum("reddit")] Reddit,
         
         /// <summary>
-        /// Connection type is Reddit
+        /// Connection type is Riot Games
         /// </summary>
         [DiscordEnum("riotgames")] RiotGames,
+        
+        /// <summary>
+        /// Connection type is Roblox
+        /// </summary>
+        [DiscordEnum("roblox")] Roblox,
 
         /// <summary>
         /// Connection type is Spotify
