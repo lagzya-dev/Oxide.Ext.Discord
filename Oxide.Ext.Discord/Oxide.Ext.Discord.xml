@@ -4154,6 +4154,9 @@
         <member name="F:Oxide.Ext.Discord.Entities.ActivityType.Game">
             Playing {name}
         </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ActivityType.Playing">
+            Playing {name}
+        </member>
         <member name="F:Oxide.Ext.Discord.Entities.ActivityType.Streaming">
             Streaming {name}
         </member>
@@ -4995,7 +4998,85 @@
             <param name="client">Client to use</param>
             <param name="records">The records to update on the application</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.GetApplicationEmojis(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Returns the list of all application emojis
+            </summary>
+            <param name="client">Client to use</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.GetApplicationEmoji(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Return an application emoji by ID
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="emojiId">ID of the emoji</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.CreateApplicationEmoji(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.ApplicationEmojiCreate)">
+            <summary>
+            Creates a new application emoji
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="create">Emoji to create</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.UpdateApplicationEmoji(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.ApplicationEmojiUpdate)">
+            <summary>
+            Updates an existing application emoji
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="emojiId">ID of the emoji to update</param>
+            <param name="update">Update to the application emoji</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.DeleteApplicationEmoji(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.Snowflake)">
+            <summary>
+            Deletes an application emoji
+            </summary>
+            <param name="client">Client to use</param>
+            <param name="emojiId">ID of the emoji to delete</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Entities.DiscordApplication.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.ApplicationEmojiCreate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/emoji#create-application-emoji-json-params">Application Emoji Create Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationEmojiCreate.Name">
+            <summary>
+            Emoji name
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationEmojiCreate.ImageData">
+            <summary>
+            The 128x128 emoji image
+            Emojis and animated emojis have a maximum file size of 256kb.
+            Attempting to upload an emoji larger than this limit will fail and return 400 Bad Request
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.ApplicationEmojiCreate.Validate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.Emojis.ApplicationEmojis">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/emoji#list-application-emojis">Application Emojis</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.Emojis.ApplicationEmojis.Items">
+            <summary>
+            List of application emojis
+            </summary>
+        </member>
+        <member name="T:Oxide.Ext.Discord.Entities.ApplicationEmojiUpdate">
+            <summary>
+            Represents <a href="https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params">Emoji Update Structure</a>
+            </summary>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationEmojiUpdate.Name">
+            <summary>
+            Emoji name
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.ApplicationEmojiUpdate.Validate">
             <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.InstallParams">
@@ -17251,7 +17332,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.RiotGames">
             <summary>
-            Connection type is Reddit
+            Connection type is Riot Games
+            </summary>
+        </member>
+        <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.Roblox">
+            <summary>
+            Connection type is Roblox
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.ConnectionType.Spotify">

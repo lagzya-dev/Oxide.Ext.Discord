@@ -23,7 +23,8 @@ public enum ConnectionType : byte
 | LeagueOfLegends | `LeagueOfLegends` | Connection type is League of Legends |
 | PlayStationNetwork | `PlayStationNetwork` | Connection type is PlayStation Network |
 | Reddit | `Reddit` | Connection type is Reddit |
-| RiotGames | `RiotGames` | Connection type is Reddit |
+| RiotGames | `RiotGames` | Connection type is Riot Games |
+| Roblox | `Roblox` | Connection type is Roblox |
 | Spotify | `Spotify` | Connection type is Spotify |
 | Skype | `Skype` | Connection type is Skype |
 | Steam | `Steam` | Connection type is Steam |

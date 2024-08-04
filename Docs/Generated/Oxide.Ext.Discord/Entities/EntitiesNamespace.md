@@ -13,6 +13,8 @@
 | class [AllowedMentions](./AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
 | enum [AllowedMentionTypes](./AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 | enum [ApplicationCommandType](./ApplicationCommandType.md) | Represents [Application Command Type](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types) |
+| class [ApplicationEmojiCreate](./ApplicationEmojiCreate.md) | Represents [Application Emoji Create Structure](https://discord.com/developers/docs/resources/emoji#create-application-emoji-json-params) |
+| class [ApplicationEmojiUpdate](./ApplicationEmojiUpdate.md) | Represents [Emoji Update Structure](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params) |
 | [Flags] enum [ApplicationFlags](./ApplicationFlags.md) | Represents [Application Flags](https://discord.com/developers/docs/resources/application#application-object-application-flags) |
 | enum [ApplicationIntegrationType](./ApplicationIntegrationType.md) | Represents a [Application Integration Types](https://discord.com/developers/docs/resources/application#application-object-application-integration-types) |
 | class [ApplicationIntegrationTypeConfiguration](./ApplicationIntegrationTypeConfiguration.md) | Represents a [Application Integration Type Configuration](https://discord.com/developers/docs/resources/application#application-object-application-integration-type-configuration-object) |

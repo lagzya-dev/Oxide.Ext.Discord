@@ -11,6 +11,7 @@ public enum ActivityType : byte
 | name | value | description |
 | --- | --- | --- |
 | Game | `Game` |  |
+| Playing | `Game` |  |
 | Streaming | `Streaming` |  |
 | Listening | `Listening` |  |
 | Watching | `Watching` |  |
