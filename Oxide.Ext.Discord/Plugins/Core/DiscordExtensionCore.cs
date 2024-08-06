@@ -17,6 +17,7 @@ using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Rest;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins
@@ -134,7 +135,6 @@ namespace Oxide.Ext.Discord.Plugins
         private void ResetRestApiCommand(IPlayer player)
         {
             BotClientFactory.Instance.ResetAllRestApis();
-            WebhookClientFactory.Instance.ResetAllRestApis();
             Chat(player, LangKeys.RestApi.Reset);
         }
         
@@ -283,6 +283,8 @@ namespace Oxide.Ext.Discord.Plugins
             ThreadPool.GetMaxThreads(out int maxWorker, out int maxPort);
             
             logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
+            logger.AppendList("Webhook Clients", WebhookClientFactory.Instance.Clients);
+            logger.AppendObject("Global Rest", RestHandler.Global);
             logger.StartObject("Threads");
             logger.AppendFieldOutOf("Worker", worker, maxWorker);
             logger.AppendFieldOutOf("Port", port, maxPort);

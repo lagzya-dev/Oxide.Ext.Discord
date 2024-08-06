@@ -12,9 +12,9 @@ public class DiscordClient
 | --- | --- |
 | [Bot](#bot-property) { get; } | The bot client that is unique to the Token used |
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
-| [Webhooks](#webhooks-property) { get; } | The webhook client that is unique to the webhook used |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
+| readonly [Webhooks](#webhooks-field) | The webhook client that is unique to the webhook used |
 | [Connect](#connect-method-1-of-4)(…) | Starts a connection to discord with the given apiKey and intents (4 methods) |
 | [Disconnect](#disconnect-method)() | Disconnects this client from discord |
 | [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized |
@@ -235,22 +235,6 @@ public BotClient Bot { get; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# Webhooks property
-
-The webhook client that is unique to the webhook used
-
-```csharp
-public List<WebhookClient> Webhooks { get; }
-```
-
-## See Also
-
-* class [WebhookClient](./WebhookClient.md)
-* class [DiscordClient](./DiscordClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # PluginId field
 
 The ID of the plugin
@@ -277,6 +261,22 @@ public readonly string PluginName;
 
 ## See Also
 
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Webhooks field
+
+The webhook client that is unique to the webhook used
+
+```csharp
+public readonly List<WebhookClient> Webhooks;
+```
+
+## See Also
+
+* class [WebhookClient](./WebhookClient.md)
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

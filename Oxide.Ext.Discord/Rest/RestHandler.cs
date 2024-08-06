@@ -44,6 +44,8 @@ namespace Oxide.Ext.Discord.Rest
         public readonly ConcurrentDictionary<BucketId, BucketId> RouteToBucketId = new ConcurrentDictionary<BucketId, BucketId>();
 
         private readonly ILogger _logger;
+        
+        internal static readonly RestHandler Global = new RestHandler(DiscordExtension.GlobalLogger);
 
         /// <summary>
         /// Creates a new REST handler for bot / webhook clients

@@ -2217,7 +2217,7 @@
             The bot client that is unique to the Token used
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Webhooks">
+        <member name="F:Oxide.Ext.Discord.Clients.DiscordClient.Webhooks">
             <summary>
             The webhook client that is unique to the webhook used
             </summary>

@@ -70,7 +70,6 @@ namespace Oxide.Ext.Discord.Clients
         public BotClient(BotConnection connection)
         {
             Connection = new BotConnection(connection);
-
             Initialized = true;
             Rest = new RestHandler(this, Logger);
             WebSocket = new DiscordWebSocket(this, Logger);
@@ -114,7 +113,7 @@ namespace Oxide.Ext.Discord.Clients
             }
         }
         
-        internal override void ResetRestApi()
+        internal void ResetRestApi()
         {
             try
             {

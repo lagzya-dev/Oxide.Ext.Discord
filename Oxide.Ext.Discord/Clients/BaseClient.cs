@@ -64,7 +64,6 @@ namespace Oxide.Ext.Discord.Clients
             Clients = new ReadOnlyCollection<DiscordClient>(_clients);
         }
         
-        internal abstract void ResetRestApi();
         internal abstract void HandleConnect();
         internal abstract void HandleShutdown();
         

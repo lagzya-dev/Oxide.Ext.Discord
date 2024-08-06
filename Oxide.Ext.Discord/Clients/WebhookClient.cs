@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using Oxide.Ext.Discord.Connections;
+﻿using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
@@ -29,7 +28,13 @@ namespace Oxide.Ext.Discord.Clients
         {
             Connection = connection;
             Initialized = true;
-            Rest = new RestHandler(Logger);
+            Rest = RestHandler.Global;
+            Webhook = new DiscordWebhook
+            {
+                Id = connection.WebhookId,
+                Token = connection.WebhookToken,
+                Client = this
+            };
         }
 
         internal override void HandleConnect()
@@ -58,19 +63,7 @@ namespace Oxide.Ext.Discord.Clients
             Logger.Debug($"{nameof(WebhookClient)}.{nameof(HandleShutdown)} Shutting down the webhook");
             Initialized = false;
             WebhookClientFactory.Instance.RemoveWebhook(this);
-            ShutdownRest();
-        }
-        
-        internal override void ResetRestApi()
-        {
-            try
-            {
-                Rest?.Shutdown();
-            }
-            finally
-            {
-                Rest = new RestHandler(Logger);
-            }
+            Rest = null;
         }
         
         ///<inheritdoc/>
@@ -80,7 +73,6 @@ namespace Oxide.Ext.Discord.Clients
             logger.AppendField("Initialized", Initialized);
             logger.AppendFieldEnum("Log Level", Logger.LogLevel);
             logger.AppendField("Plugins", GetClientPluginList());
-            logger.AppendObject("REST API", Rest);
         }
     }
 }

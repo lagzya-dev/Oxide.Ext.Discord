@@ -41,7 +41,7 @@ namespace Oxide.Ext.Discord.Clients
         /// <summary>
         /// The webhook client that is unique to the webhook used
         /// </summary>
-        public List<WebhookClient> Webhooks { get; private set; } = new List<WebhookClient>(0);
+        public readonly List<WebhookClient> Webhooks = new List<WebhookClient>(0);
         
         /// <summary>
         /// Settings used to connect to discord and configure the extension
@@ -75,14 +75,8 @@ namespace Oxide.Ext.Discord.Clients
         /// <param name="connection">Discord connection settings</param>
         public void Connect(BotConnection connection)
         {
-            if (Webhooks != null)
-            {
-                Logger.Error("Cannot connect to bot when webhook is already connected!");
-                return;
-            }
-            
             Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
+            Logger = Logger ?? DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
             if (string.IsNullOrEmpty(Connection.ApiToken))
             {
@@ -116,7 +110,7 @@ namespace Oxide.Ext.Discord.Clients
         /// <param name="connection">Webhook connection to connect to</param>
         public WebhookClient Connect(WebhookConnection connection)
         {
-            Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
+            Logger = Logger ?? DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
             if (connection.WebhookId == default(Snowflake) || string.IsNullOrEmpty(connection.WebhookToken))
             {

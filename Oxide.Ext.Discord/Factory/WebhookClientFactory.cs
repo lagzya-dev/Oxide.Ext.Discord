@@ -52,14 +52,6 @@ namespace Oxide.Ext.Discord.Factory
             _activeWebhooks.Remove(client.Connection.WebhookToken);
         }
 
-        public void ResetAllRestApis()
-        {
-            foreach (WebhookClient client in _activeWebhooks.Values)
-            {
-                client.ResetRestApi();
-            }
-        }
-
         public void UpdateLogLevel()
         {
             foreach (WebhookClient client in _activeWebhooks.Values)
