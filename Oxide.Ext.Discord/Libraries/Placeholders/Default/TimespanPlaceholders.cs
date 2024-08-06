@@ -29,7 +29,7 @@ namespace Oxide.Ext.Discord.Libraries
             DiscordInteraction interaction = state.Data.Get<DiscordInteraction>();
             if (time < TimeSpan.Zero)
             {
-                return interaction.GetLangMessage(DiscordExtensionCore.Instance, LangKeys.TimeSpan.Infinity);
+                return interaction?.GetLangMessage(DiscordExtensionCore.Instance, LangKeys.TimeSpan.Infinity) ?? DiscordLocales.Instance.GetLangMessage(DiscordExtensionCore.Instance, null, LangKeys.TimeSpan.Infinity);
             }
 
             StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
@@ -50,10 +50,12 @@ namespace Oxide.Ext.Discord.Libraries
                 {
                     sb.Append(' ');
                 }
+
+                string langKey = value == 1 ? singular : plural;
                 
                 sb.Append(value.ToString());
                 sb.Append(' ');
-                sb.Append(interaction.GetLangMessage(DiscordExtensionCore.Instance, value == 1 ? singular : plural));
+                sb.Append(interaction?.GetLangMessage(DiscordExtensionCore.Instance, langKey) ?? DiscordLocales.Instance.GetLangMessage(DiscordExtensionCore.Instance, null, langKey));
             }
         }
         

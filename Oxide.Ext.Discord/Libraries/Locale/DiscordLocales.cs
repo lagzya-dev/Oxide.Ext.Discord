@@ -203,6 +203,18 @@ namespace Oxide.Ext.Discord.Libraries
             return !string.IsNullOrEmpty(message) ? message : langKey;
         }
 
+        internal string GetLangMessage(Plugin plugin, IPlayer player, string langKey)
+        {
+            if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+            if (langKey == null) throw new ArgumentNullException(nameof(langKey));
+            
+            string message = (player != null ? GetLanguageMessages(plugin, GetPlayerLanguage(player))?[langKey] : null)
+                             ?? GetLanguageMessages(plugin, ServerLanguage)?[langKey]
+                             ?? GetLanguageMessages(plugin, ServerLocale.Default)?[langKey];
+            
+            return !string.IsNullOrEmpty(message) ? message : langKey;
+        }
+
         /// <summary>
         /// Retrieves the lang message for a Discord Interaction
         /// </summary>
