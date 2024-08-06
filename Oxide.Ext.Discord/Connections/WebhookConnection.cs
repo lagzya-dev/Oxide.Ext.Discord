@@ -1,6 +1,7 @@
 ﻿using System;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Connections
 {
@@ -32,13 +33,12 @@ namespace Oxide.Ext.Discord.Connections
         /// <param name="logLevel">Log level for the webhook</param>
         public WebhookConnection(string webhookUrl, DiscordLogLevel logLevel = DiscordLogLevel.Info)
         {
-            ReadOnlySpan<char> span = webhookUrl.AsSpan();
-            span = span.TrimEnd('/');
-            int index = span.LastIndexOf('/');
-            WebhookToken = span.Slice(index + 1).ToString();
-            span = span.Slice(0, index);
-            index = span.LastIndexOf('/');
-            WebhookId = new Snowflake(span.Slice(index + 1));
+            ReverseStringTokenizer tokenizer = ReverseStringTokenizer.Create(webhookUrl, '/');
+            tokenizer.MoveNext();
+            WebhookId = new Snowflake(tokenizer.Current.Span);
+            tokenizer.MoveNext();
+            WebhookToken = tokenizer.Current.ToString();
+            tokenizer.Dispose();
             LogLevel = logLevel;
         }
     }
