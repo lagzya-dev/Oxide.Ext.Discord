@@ -68,7 +68,7 @@ namespace Oxide.Ext.Discord.Types
 
         protected override void EnterPool()
         {
-            _stringIndex = 0;
+            _string = null;
             Current = null;
             _token = default(char);
             _maxLength = 0;
