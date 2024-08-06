@@ -2,17 +2,16 @@
 using System.Text;
 using Oxide.Core.Plugins;
 
-namespace Oxide.Ext.Discord.Libraries
+namespace Oxide.Ext.Discord.Libraries;
+
+internal interface IPlaceholder
 {
-    internal interface IPlaceholder
-    {
-        string PluginName { get; }
-        bool IsExtensionPlaceholder { get; }
+    string PluginName { get; }
+    bool IsExtensionPlaceholder { get; }
 
-        void Invoke(StringBuilder sb, PlaceholderState state);
+    void Invoke(StringBuilder sb, PlaceholderState state);
 
-        bool IsForPlugin(Plugin plugin);
+    bool IsForPlugin(Plugin plugin);
         
-        Type GetReturnType();
-    }
+    Type GetReturnType();
 }

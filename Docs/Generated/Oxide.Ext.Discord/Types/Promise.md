@@ -34,7 +34,7 @@ public sealed class Promise : BasePromise, IPendingPromise
 
 | name | description |
 | --- | --- |
-| override [ClearHandlers](#clearhandlers-method)() | Helper function clear out all handlers after resolution or rejection. |
+| override [ClearHandlers](#clearhandlers-method)() | Helper function to clear out all handlers after resolution or rejection. |
 | override [EnterPool](#enterpool-method)() |  |
 
 ## See Also
@@ -95,7 +95,7 @@ public static IPromise Rejected(Exception ex)
    
 # ClearHandlers method
 
-Helper function clear out all handlers after resolution or rejection.
+Helper function to clear out all handlers after resolution or rejection.
 
 ```csharp
 protected override void ClearHandlers()

@@ -10,9 +10,9 @@ public static class DiscordUserExt
 
 | name | description |
 | --- | --- |
-| static [HasPermission](#haspermission-method)(…) | Return if the discord user has the given oxide permission. If the user is not linked this will return false |
+| static [HasPermission](#haspermission-method)(…) | Return if the discord user has the given oxide permission. If the user is not linked, this will return false |
 | static [IsLinked](#islinked-method)(…) | Returns true if the player is linked |
-| static [SendChatMessage](#sendchatmessage-method-1-of-2)(…) | Send chat message to the user if they're connected (2 methods) |
+| static [SendChatMessage](#sendchatmessage-method-1-of-2)(…) | Send a chat message to the user if they're connected (2 methods) |
 
 ## See Also
 
@@ -23,7 +23,7 @@ public static class DiscordUserExt
    
 # SendChatMessage method (1 of 2)
 
-Send chat message to the user if they're connected
+Send a chat message to the user if they're connected
 
 ```csharp
 public static void SendChatMessage(this DiscordUser user, string message)
@@ -45,7 +45,7 @@ public static void SendChatMessage(this DiscordUser user, string message)
 
 # SendChatMessage method (2 of 2)
 
-Send chat message to the user if they're connected
+Send a chat message to the user if they're connected
 
 ```csharp
 public static void SendChatMessage(this DiscordUser user, string message, string prefix, 
@@ -69,7 +69,7 @@ public static void SendChatMessage(this DiscordUser user, string message, string
    
 # HasPermission method
 
-Return if the discord user has the given oxide permission. If the user is not linked this will return false
+Return if the discord user has the given oxide permission. If the user is not linked, this will return false
 
 ```csharp
 public static bool HasPermission(this DiscordUser user, string permission)

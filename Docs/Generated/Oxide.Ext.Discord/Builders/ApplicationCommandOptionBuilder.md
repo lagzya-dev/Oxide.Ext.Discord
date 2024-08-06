@@ -160,7 +160,7 @@ public ApplicationCommandOptionBuilder AutoComplete(bool autoComplete = true)
 
 | parameter | description |
 | --- | --- |
-| autoComplete | If the option support auto complete (Default: true) |
+| autoComplete | If the option supports auto complete (Default: true) |
 
 ## Return Value
 
@@ -366,7 +366,7 @@ This
 
 | exception | condition |
 | --- | --- |
-| Exception | Thrown if option type is not double |
+| Exception | Thrown if the option type is not double |
 
 ## See Also
 
@@ -399,7 +399,7 @@ This
 
 | exception | condition |
 | --- | --- |
-| Exception | Thrown if option type is not int |
+| Exception | Thrown if the option type is not int |
 
 ## See Also
 
@@ -432,7 +432,7 @@ This
 
 | exception | condition |
 | --- | --- |
-| Exception | Thrown if option type is not string |
+| Exception | Thrown if the option type is not string |
 
 ## See Also
 

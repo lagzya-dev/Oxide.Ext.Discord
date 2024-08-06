@@ -13,7 +13,7 @@ public sealed class EntityCache<T> : Singleton<EntityCache>
 | --- | --- |
 | readonly [Cache](#cache-field) | Readonly Cache of [`DiscordUser`](../Entities/DiscordUser.md) |
 | [Get](#get-method)(…) | Returns the cached entity with the given ID; default(T) otherwise |
-| [GetOrCreate](#getorcreate-method)(…) | Returns a cached for the given user ID or creates a new with that ID |
+| [GetOrCreate](#getorcreate-method)(…) | Returns a cached {T} for the given user ID or creates a new {T} with that ID |
 | [Update](#update-method)(…) | Updates the cached entity |
 
 ## See Also
@@ -47,7 +47,7 @@ public T Get(Snowflake id)
    
 # GetOrCreate method
 
-Returns a cached for the given user ID or creates a new with that ID
+Returns a cached {T} for the given user ID or creates a new {T} with that ID
 
 ```csharp
 public T GetOrCreate(Snowflake id)

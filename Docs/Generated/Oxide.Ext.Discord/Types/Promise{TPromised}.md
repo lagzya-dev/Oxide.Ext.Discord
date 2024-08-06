@@ -24,7 +24,7 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3)(…) |  (3 methods) |
 | [ThenAll](#thenall-method)(…) |  |
 | [ThenAll&lt;TConvert&gt;](#thenall&amp;lt;tconvert&amp;gt;-method)(…) |  |
-| static [All](#all-method-1-of-2)(…) | Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
+| static [All](#all-method-1-of-2)(…) | Returns a promise that resolves when all the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results. (2 methods) |
 | static [Create](#create-method)(…) |  |
 | static [Create&lt;TConvert&gt;](#create&amp;lt;tconvert&amp;gt;-method)() | Returns a promise that is currently pending |
 | static [Rejected](#rejected-method)(…) | Convert an exception directly into a rejected promise. |
@@ -354,7 +354,7 @@ public static IPromise<IEnumerable<TPromised>> All(
 
 # All method (2 of 2)
 
-Returns a promise that resolves when all of the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results.
+Returns a promise that resolves when all the promises in the enumerable argument have resolved. Returns a promise of a collection of the resolved results.
 
 ```csharp
 public static IPromise<IEnumerable<TPromised>> All(params IPromise<TPromised>[] promises)

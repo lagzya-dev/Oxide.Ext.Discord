@@ -554,7 +554,7 @@
             <summary>
             Enable auto complete for the option
             </summary>
-            <param name="autoComplete">If the option support auto complete (Default: true)</param>
+            <param name="autoComplete">If the option supports auto complete (Default: true)</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.MinValue(System.Int32)">
@@ -617,7 +617,7 @@
             <param name="value">Value of the choice</param>
             <param name="nameLocalizations">Localizations for the name</param>
             <returns>This</returns>
-            <exception cref="T:System.Exception">Thrown if option type is not string</exception>
+            <exception cref="T:System.Exception">Thrown if the option type is not string</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Int32,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
@@ -627,7 +627,7 @@
             <param name="value">Value of the choice</param>
             <param name="nameLocalizations">Localizations for the name</param>
             <returns>This</returns>
-            <exception cref="T:System.Exception">Thrown if option type is not int</exception>
+            <exception cref="T:System.Exception">Thrown if the option type is not int</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.ApplicationCommandOptionBuilder.AddChoice(System.String,System.Double,Oxide.Plugins.Hash{System.String,System.String})">
             <summary>
@@ -637,7 +637,7 @@
             <param name="value">Value of the choice</param>
             <param name="nameLocalizations">Localizations for the name</param>
             <returns>This</returns>
-            <exception cref="T:System.Exception">Thrown if option type is not double</exception>
+            <exception cref="T:System.Exception">Thrown if the option type is not double</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Builders.ApplicationSubCommandBuilder">
             <summary>
@@ -755,7 +755,7 @@
             Adds an author to the embed message. The author will appear above the title
             </summary>
             <param name="name">Name of the author</param>
-            <param name="url">Url to go to when the authors name is clicked on</param>
+            <param name="url">Url to go to when the author's name is clicked on</param>
             <param name="iconUrl">Icon Url to use for the author</param>
             <param name="proxyIconUrl">Backup icon url. Can be left null if you only have one icon url</param>
             <returns>This</returns>
@@ -804,9 +804,9 @@
             <summary>
             Adds a RGB based color. Color appears as a bar on the left side of the message
             </summary>
-            <param name="red">Red value between 0 - 255</param>
-            <param name="green">Green value between 0 - 255</param>
-            <param name="blue">Blue value between 0 - 255</param>
+            <param name="red">Red value between 0-255</param>
+            <param name="green">Green value between 0-255</param>
+            <param name="blue">Blue value between 0-255</param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
         </member>
@@ -814,9 +814,9 @@
             <summary>
             Adds a RGB based color. Color appears as a bar on the left side of the message
             </summary>
-            <param name="red">Red value between 0 - 1</param>
-            <param name="green">Green value between 0 - 1</param>
-            <param name="blue">Blue value between 0 - 1</param>
+            <param name="red">Red value between 0-1</param>
+            <param name="green">Green value between 0-1</param>
+            <param name="blue">Blue value between 0-1</param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
         </member>
@@ -824,9 +824,9 @@
             <summary>
             Adds a RGB based color. Color appears as a bar on the left side of the message
             </summary>
-            <param name="red">Red value between 0 - 1</param>
-            <param name="green">Green value between 0 - 1</param>
-            <param name="blue">Blue value between 0 - 1</param>
+            <param name="red">Red value between 0-1</param>
+            <param name="green">Green value between 0-1</param>
+            <param name="blue">Blue value between 0-1</param>
             <returns>This</returns>
             <exception cref="T:System.Exception">Thrown if red, green, or blue is outside of range</exception>
         </member>
@@ -846,8 +846,8 @@
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddBlankField(System.Boolean)">
             <summary>
             Adds a blank field.
-            If inline it will add a blank column.
-            If not inline will add a blank row
+            If inline, it will add a blank column.
+            If not, inline will add a blank row
             </summary>
             <param name="inline">If the field is inline</param>
             <returns>This</returns>
@@ -855,7 +855,7 @@
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddField(System.String,System.String,System.Boolean)">
             <summary>
             Adds a new field with the name as the title and value as the value.
-            If inline will add a new column. If row will add in a new row.
+            If inline add a new column. If row adds in a new row.
             </summary>
             <param name="name">Name of the field</param>
             <param name="value">Value of the field</param>
@@ -865,7 +865,7 @@
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddImage(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
             Adds an image to the embed. The url should point to the url of the image.
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            If using attachment image, you can make the url: "attachment://{image name}.{image extension}
             </summary>
             <param name="url">Url for the image</param>
             <param name="width">width of the image</param>
@@ -875,8 +875,8 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordEmbedBuilder.AddThumbnail(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
-            Adds a thumbnail in the top right corner of the embed
-            If using attachment image you can make the url: "attachment://{image name}.{image extension}
+            Adds a thumbnail in the top right corner of the embed,
+            If using attachment image, you can make the url: "attachment://{image name}.{image extension}
             </summary>
             <param name="url">Url for the image</param>
             <param name="width">width of the image</param>
@@ -976,7 +976,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.PlayerId">
             <summary>
-            Include Player Id in the player name
+            Include Player ID in the player name
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Builders.PlayerNameFormatter.All">
@@ -1215,7 +1215,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddByPlayerId(System.String,Oxide.Ext.Discord.Builders.PlayerNameFormatter)">
             <summary>
-            Adds a player by player Id to the list
+            Adds a player by player ID to the list
             </summary>
             <param name="playerId">Player ID to add</param>
             <param name="formatter">Formatter for the player name</param>
@@ -1352,7 +1352,7 @@
             <param name="emoji">Emoji to display with the button</param>
             <returns><see cref="T:Oxide.Ext.Discord.Builders.MessageComponentBuilder"/></returns>
             <exception cref="T:System.Exception">
-                Throw if the button style is link or if the button goes outside the max number of action rows
+                Throw if the button style is a link or if the button goes outside the max number of action rows
             </exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.MessageComponentBuilder.AddDummyButton(System.String,System.Boolean)">
@@ -1663,7 +1663,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.DiscordMessageBuilder.#ctor(Oxide.Ext.Discord.Entities.MessageCreate)">
             <summary>
-            Constructor to use existing message
+            Constructor to use an existing message
             </summary>
             <param name="message">Message to use</param>
         </member>
@@ -1718,7 +1718,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.ToStringAndFree">
             <summary>
-            Returns the query string and returns the builder back to the pool
+            Returns the query string and returns the builder to the pool
             </summary>
             <returns></returns>
         </member>
@@ -1753,7 +1753,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.EmojiToText(System.String)">
             <summary>
-            Convert an emoji character to emoji string text
+            Convert an emoji character to the emoji string text
             </summary>
             <param name="emoji">Emoji to convert</param>
             <returns></returns>
@@ -1799,7 +1799,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.EntityCache`1.GetOrCreate(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Returns a cached for the given user ID or creates a new with that ID
+            Returns a cached {T} for the given user ID or creates a new {T} with that ID
             </summary>
             <param name="id">User ID to lookup in the cache</param>
             <returns>Cached <see cref="T:Oxide.Ext.Discord.Entities.DiscordUser"/></returns>
@@ -1850,7 +1850,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.EnumCache`1.Next(`0)">
             <summary>
-            Returns the next enum values. If the value is the last value it will start from the beginning
+            Returns the next enum values. If the value is the last value, it will start from the beginning
             </summary>
             <param name="value">Value to get the next enum from</param>
             <returns>Next enum from the given value</returns>
@@ -1901,14 +1901,14 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.StringCache`1.ToString(`0)">
             <summary>
-            Returns a cached ToString call of type {T}
+            Returns a cached ToString call of the type {T}
             </summary>
             <param name="value">value to ToString</param>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.StringCache`1.ToLower(`0)">
             <summary>
-            Returns the lowered string representation of type {T}
+            Returns the lowered string representation of the type {T}
             </summary>
             <param name="value">value to lower</param>
             <returns></returns>
@@ -2059,7 +2059,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Clients.BotClient">
             <summary>
-            Represents a bot that is connected to discord
+            Represents a bot connected to discord
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Clients.BotClient.Servers">
@@ -2069,7 +2069,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Clients.BotClient.DirectMessagesByChannelId">
             <summary>
-            All the direct messages that we have seen by channel Id
+            All the direct messages that we have seen by channel ID
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Clients.BotClient.DirectMessagesByUserId">
@@ -2118,7 +2118,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.HandleShutdown">
             <summary>
-            Called when bot client is no longer used by any client and can be shutdown.
+            Called when the bot client is no longer used by any client and can be shutdown.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
@@ -2152,8 +2152,8 @@
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.GetChannel(Oxide.Ext.Discord.Entities.Snowflake,System.Nullable{Oxide.Ext.Discord.Entities.Snowflake})">
             <summary>
             Returns the channel for the given channel ID.
-            If guild ID is null it will search for a direct message channel
-            If guild ID is not null it will search for a guild channel
+            If guild ID is null, it will search for a direct message channel
+            If guild ID is not null, it will search for a guild channel
             </summary>
             <param name="channelId"></param>
             <param name="guildId"></param>
@@ -2283,7 +2283,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.DiscordClient.UpdateStatus(Oxide.Ext.Discord.Entities.UpdatePresenceCommand)">
             <summary>
-            Used to update the bots status in discord
+            Used to update the bot status in discord
             </summary>
             <param name="presenceUpdate"></param>
         </member>
@@ -2505,17 +2505,17 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Connections.BotConnection.HasIntents(Oxide.Ext.Discord.Entities.GatewayIntents)">
             <summary>
-            Returns if the settings has the given intents
+            Returns if the settings have the given intents
             </summary>
             <param name="intents">Intents to be compared against</param>
-            <returns>True if settings has the given intents; False otherwise</returns>
+            <returns>True if settings have the given intents; False otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Connections.BotConnection.HasAnyIntent(Oxide.Ext.Discord.Entities.GatewayIntents)">
             <summary>
-            Returns if the settings has any intent specified
+            Returns if the settings have any intent specified
             </summary>
             <param name="intents">Intents to compare against</param>
-            <returns>True if settings has at least one of the given intents</returns>
+            <returns>True if settings have at least one of the given intents</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Connections.BotTokenData">
             <summary>
@@ -3920,7 +3920,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.RateLimitHeaders.BucketResetAfter">
             <summary>
-            Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision
+            Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond rate-limit precision
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Constants.RateLimitHeaders.BucketReset">
@@ -18928,14 +18928,14 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.SendChatMessage(Oxide.Ext.Discord.Entities.DiscordUser,System.String)">
             <summary>
-            Send chat message to the user if they're connected
+            Send a chat message to the user if they're connected
             </summary>
             <param name="user">User to send the message to on the server</param>
             <param name="message">Message to send</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.SendChatMessage(Oxide.Ext.Discord.Entities.DiscordUser,System.String,System.String,System.Object[])">
             <summary>
-            Send chat message to the user if they're connected
+            Send a chat message to the user if they're connected
             </summary>
             <param name="user">User to send the message to on the server</param>
             <param name="message">Message to send</param>
@@ -18945,7 +18945,7 @@
         <member name="M:Oxide.Ext.Discord.Extensions.DiscordUserExt.HasPermission(Oxide.Ext.Discord.Entities.DiscordUser,System.String)">
             <summary>
             Return if the discord user has the given oxide permission.
-            If the user is not linked this will return false
+            If the user is not linked, this will return false
             </summary>
             <param name="user">User to check for permission</param>
             <param name="permission">Permission to check for</param>
@@ -18984,7 +18984,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.HashExt.Clone``2(Oxide.Plugins.Hash{``0,``1})">
             <summary>
-            Creates a clone of a hash with it's current key value pairs
+            Creates a clone of a hash with its current key value pairs
             </summary>
             <param name="hash">Hash to be copied</param>
             <typeparam name="TKey"></typeparam>
@@ -19004,7 +19004,7 @@
             <param name="pluginPool">The <see cref="T:Oxide.Ext.Discord.Types.DiscordPluginPool"/> to pool from</param>
             <typeparam name="TSource">Type of the list</typeparam>
             <returns>Pooled List{TSource}</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the source is null</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToHash``3(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Func{``0,``2})">
             <summary>
@@ -19017,7 +19017,7 @@
             <typeparam name="TKey">Key type for the hash</typeparam>
             <typeparam name="TElement">Value type for the hash</typeparam>
             <returns>Pooled Hash{TKey, TElement}</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the source is null</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Extensions.IEnumerableExt.ToPooledHash``3(System.Collections.Generic.IEnumerable{``0},Oxide.Ext.Discord.Types.DiscordPluginPool,System.Func{``0,``1},System.Func{``0,``2})">
             <summary>
@@ -19031,7 +19031,7 @@
             <typeparam name="TKey">Key type for the hash</typeparam>
             <typeparam name="TElement">Value type for the hash</typeparam>
             <returns>Pooled Hash{TKey, TElement}</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown if source is null</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if the source is null</exception>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.MathExt">
             <summary>
@@ -19249,7 +19249,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Extensions.ThreadEx.IsMain">
             <summary>
-            Determine if current thread is main thread
+            Determine if current thread is the main thread
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Extensions.TypeExt">
@@ -19314,7 +19314,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.CreateClient(Oxide.Core.Plugins.Plugin)">
             <summary>
-            Creates the client for the given plugin. If one already exist the existing one is returned
+            Creates the client for the given plugin. If one already exists, the existing one is returned
             </summary>
             <param name="plugin">Plugin the client is for</param>
             <returns>DiscordClient for plugin</returns>
@@ -19324,21 +19324,21 @@
             <summary>
             Gets the client for the given plugin
             </summary>
-            <param name="plugin">Plugin to get client for</param>
+            <param name="plugin">Plugin to get the client for</param>
             <returns>Discord client for the plugin</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(Oxide.Ext.Discord.Plugins.PluginId)">
             <summary>
             Gets the client for the given plugin
             </summary>
-            <param name="pluginId">Plugin to get client for</param>
+            <param name="pluginId">Plugin to get the client for</param>
             <returns>Discord client for the plugin</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Factory.DiscordClientFactory.GetClient(System.String)">
             <summary>
             Gets the client for the given plugin name
             </summary>
-            <param name="pluginName">Plugin Name to get client for</param>
+            <param name="pluginName">Plugin Name to get the client for</param>
             <returns>Discord client for the plugin name</returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Factory.SnowflakeIdFactory">
@@ -19504,7 +19504,7 @@
             <param name="emojiId">ID of the emoji</param>
             <param name="format">The format the emoji is in</param>
             <returns>Url of the emoji</returns>
-            <exception cref="T:System.ArgumentException">Thrown if format is Jpg or WebP</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the format is Jpg or WebP</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildIconUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19523,7 +19523,7 @@
             <param name="guildSplash">Guild Splash from guild</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the guild splash</returns>
-            <exception cref="T:System.ArgumentException">Thrown if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildDiscoverySplashUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19533,7 +19533,7 @@
             <param name="guildDiscoverySplash">Guild Discovery Splash from guild</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the guild discovery splash</returns>
-            <exception cref="T:System.ArgumentException">Thrown if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildBannerUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19543,7 +19543,7 @@
             <param name="guildBanner">Guild Banner from guild</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the guild banner</returns>
-            <exception cref="T:System.ArgumentException">Thrown if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserBanner(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19553,7 +19553,7 @@
             <param name="userBanner">User Banner from user</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the User banner</returns>
-            <exception cref="T:System.ArgumentException">Thrown if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetUserDefaultAvatarUrl(System.String)">
             <summary>
@@ -19569,7 +19569,7 @@
             <param name="userId">Discord User ID</param>
             <param name="userAvatar">User avatar from user</param>
             <param name="format">Format the avatar is in</param>
-            <returns>Url of the users avatar</returns>
+            <returns>Url of the user's avatar</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildMemberAvatar(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19597,7 +19597,7 @@
             <param name="icon">Icon field from application</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the application icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetApplicationCoverUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19607,7 +19607,7 @@
             <param name="coverImage">Icon field from application</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the application icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetApplicationAssetUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19617,7 +19617,7 @@
             <param name="assetId">Asset ID for the application</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the application asset icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetAchievementIconUrl(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
@@ -19627,7 +19627,7 @@
             <param name="achievementId">Achievement ID</param>
             <param name="iconHash">Achievement Icon Hash</param>
             <returns>Url of the achievement icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetStorePageAssetUrl(Oxide.Ext.Discord.Entities.Snowflake,System.UInt64,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19637,7 +19637,7 @@
             <param name="assetId">Asset ID</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the achievement icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetTeamIconUrl(Oxide.Ext.Discord.Entities.Snowflake,System.String,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19647,7 +19647,7 @@
             <param name="teamIcon">Icon field from Team</param>
             <param name="format">Format the icon is in</param>
             <returns>Url of the achievement icon</returns>
-            <exception cref="T:System.ArgumentException">Throw if format is Gif</exception>
+            <exception cref="T:System.ArgumentException">Throw if the format is GIF</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetStickerPackBanner(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19657,7 +19657,7 @@
             <param name="bannerAssetId">Banner Asset ID for the stickers</param>
             <param name="format">Image Formatting for the banner</param>
             <returns>Url to the sticker pack banner</returns>
-            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG,JPEG, or WebP</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the image type is not PNG, JPEG, or WebP</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetSticker(Oxide.Ext.Discord.Entities.DiscordSticker)">
             <summary>
@@ -19673,7 +19673,7 @@
             <param name="roleId">ID of the role</param>
             <param name="format">Format for the icon to be returned in</param>
             <returns>Return url for the role icon</returns>
-            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildScheduledEventCover(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19682,7 +19682,7 @@
             <param name="scheduledEventId">Scheduled Event ID</param>
             <param name="format">Format for the icon to be returned in</param>
             <returns>Return url for the guild schedule event cover icon</returns>
-            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetGuildMemberBanner(Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.Snowflake,Oxide.Ext.Discord.Entities.DiscordImageFormat)">
             <summary>
@@ -19692,7 +19692,7 @@
             <param name="userId">User ID of the user</param>
             <param name="format">Format for the icon to be returned in</param>
             <returns>Return url for the guild member banner</returns>
-            <exception cref="T:System.ArgumentException">Thrown if image type is not PNG or Lottie</exception>
+            <exception cref="T:System.ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordCdn.GetChannelIcon(Oxide.Ext.Discord.Entities.Snowflake,System.String)">
             <summary>
@@ -19725,21 +19725,21 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionChannel(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Mention the the channel with the given ID
+            Mention the channel with the given ID
             </summary>
             <param name="channelId">Channel ID to mention</param>
             <returns>Mention channel formatted string</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionRole(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
-            Mention the the role with the given ID
+            Mention the role with the given ID
             </summary>
             <param name="roleId">Role ID to mention</param>
             <returns>Mention role formatted string</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.MentionApplicationCommand(Oxide.Ext.Discord.Entities.Snowflake,System.String,System.String,System.String)">
             <summary>
-            Mention the the Application command
+            Mention the Application command
             </summary>
             <param name="commandId">Application Command ID</param>
             <param name="name">Name of the command</param>
@@ -19861,7 +19861,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Helpers.DiscordFormatting.CodeBlockOneLine(System.String)">
             <summary>
-            Will display the message as a one line code block
+            Will display the message as a one-line code block
             </summary>
             <param name="message">Message to make code block</param>
             <returns>Code block formatted message</returns>
@@ -20242,7 +20242,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Interfaces.IDiscordCacheable`1.Id">
             <summary>
-            Id of the entity
+            ID of the entity
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.IDiscordCacheable`1.Update(`0)">
@@ -20276,7 +20276,7 @@
         <member name="M:Oxide.Ext.Discord.Interfaces.IDiscordValidation.Validate">
             <summary>
             Validates data being passed to the discord API.
-            Throws an exception with base type of <see cref="T:Oxide.Ext.Discord.Exceptions.BaseDiscordException"/> if the validation fails
+            Throws an exception with a base type of <see cref="T:Oxide.Ext.Discord.Exceptions.BaseDiscordException"/> if the validation fails
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Interfaces.IFileAttachments">
@@ -20776,12 +20776,12 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Json.DiscordColorConverter.CanConvert(System.Type)">
             <summary>
-            Check if can convert
+            Check if it can convert
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Json.DiscordEnumConverter">
             <summary>
-            Handles deserializing JSON values as strings. If the value doesn't exist return the default value.
+            Handles deserializing JSON values as strings. If the value doesn't exist, return the default value.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.DiscordEnumConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -20910,7 +20910,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.MessageComponentsConverter">
             <summary>
-            Converter for list of message components
+            Converter for a list of message components
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.MessageComponentsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -21014,7 +21014,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.SnowflakeConverter">
             <summary>
-            Converts a snowflake to and from it's JSON string value
+            Converts a snowflake to and from its JSON string value
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.SnowflakeConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -21045,7 +21045,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.TemplateComponentsConverter">
             <summary>
-            Converter for list of message components
+            Converter for a list of message components
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.TemplateComponentsConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -21082,7 +21082,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Json.TemplateKeyConverter">
             <summary>
-            Json Template Key Converter
+            JSON Template Key Converter
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Json.TemplateKeyConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
@@ -21420,7 +21420,7 @@
             </summary>
             <param name="langKey">Lang Key on the plugin that contains the command</param>
             <param name="plugin">Plugin to add the localized command for</param>
-            <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
+            <param name="allowedChannels">Channel or Category ID's this command is allowed in</param>
             <param name="callback">Method name of the callback</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommand.AddGuildCommand(System.String,Oxide.Core.Plugins.Plugin,System.Collections.Generic.List{Oxide.Ext.Discord.Entities.Snowflake},System.String)">
@@ -21430,7 +21430,7 @@
             </summary>
             <param name="command">Name of the command</param>
             <param name="plugin">Plugin to add the localized command for</param>
-            <param name="allowedChannels">Channel or Category Id's this command is allowed in</param>
+            <param name="allowedChannels">Channel or Category ID's this command is allowed in</param>
             <param name="callback">Method name of the callback</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommand.RemoveDiscordCommand(System.String,Oxide.Core.Plugins.Plugin)">
@@ -21580,14 +21580,14 @@
             Returns the Player ID of the given Discord ID if there is a link
             </summary>
             <param name="discordId">Discord ID to get player ID for</param>
-            <returns>Player ID of the given given discord ID if linked; null otherwise</returns>
+            <returns>Player ID of the given discord ID if linked; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.GetPlayerId(Oxide.Ext.Discord.Entities.DiscordUser)">
             <summary>
             Returns the Player ID of the given Discord ID if there is a link
             </summary>
-            <param name="user"><see cref="T:Oxide.Ext.Discord.Entities.DiscordUser"/> to get player Id for</param>
-            <returns>Player ID of the given given discord ID if linked; null otherwise</returns>
+            <param name="user"><see cref="T:Oxide.Ext.Discord.Entities.DiscordUser"/> to get player ID for</param>
+            <returns>Player ID of the given discord ID if linked; null otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.GetPlayer(Oxide.Ext.Discord.Entities.Snowflake)">
             <summary>
@@ -21672,7 +21672,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordLink.OnUnlinked(Oxide.Core.Plugins.Plugin,Oxide.Core.Libraries.Covalence.IPlayer,Oxide.Ext.Discord.Entities.DiscordUser)">
             <summary>
-            Called by a link plugin when an unlink occured
+            Called by a link plugin when an unlink has occured
             </summary>
             <param name="plugin">Plugin that is unlinking</param>
             <param name="player">Player being unlinked</param>
@@ -22748,7 +22748,7 @@
             </summary>
             <param name="text">Text to process placeholders for</param>
             <param name="data">Placeholder Data for the placeholders</param>
-            <returns>string with placeholders replaced. If no placeholders are found the original string is returned</returns>
+            <returns>String with placeholders replaced. If no placeholders are found, the original string is returned</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordPlaceholders.CreateData(Oxide.Core.Plugins.Plugin)">
             <summary>
@@ -23907,7 +23907,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderData.AddIp(System.String)">
             <summary>
-            Adds a IP
+            Adds an IP
             </summary>
             <param name="ip"></param>
             <returns></returns>
@@ -24002,7 +24002,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderFormatting.Replace(System.Text.StringBuilder,Oxide.Ext.Discord.Libraries.PlaceholderState,System.ReadOnlySpan{System.Char})">
             <summary>
-            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.PlaceholderState"/> with the the string value
+            Replace the <see cref="T:Oxide.Ext.Discord.Libraries.PlaceholderState"/> with the string value
             </summary>
             <param name="builder"><see cref="T:System.Text.StringBuilder"/> for the placeholder</param>
             <param name="state"><see cref="T:Oxide.Ext.Discord.Libraries.PlaceholderState"/> for the placeholder</param>
@@ -26012,7 +26012,7 @@
             <summary>
             Creates a new bucket for the given <see cref="T:Oxide.Ext.Discord.Rest.RestHandler"/>
             </summary>
-            <param name="bucketId">ID of the bucket. If not a known bucket then will be part of the route. If know bucket will be the Discord bucket ID</param>
+            <param name="bucketId">ID of the bucket. If not a known bucket, then it will be part of the route. If known bucket, it will be the Discord bucket ID</param>
             <param name="rest">The handler that owns this Bucket</param>
             <param name="logger">Logger for this bucket</param>
         </member>
@@ -26207,7 +26207,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RequestCompletedStatus.Cancelled">
             <summary>
-            The request was cancelled. The <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> was disconnected while making the request
+            The request was canceled. The <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> was disconnected while making the request
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.RequestHandler">
@@ -26301,12 +26301,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.Completed">
             <summary>
-            Request completed and was not cancelled
+            Request completed and was not canceled
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Rest.RequestStatus.Cancelled">
             <summary>
-            Request was cancelled
+            Request was canceled
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.Request`1">
@@ -26383,7 +26383,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Get``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Get Request with TResult response
+            Performs ann HTTP Get Request with TResult response
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26401,7 +26401,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Post``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Post Request with TResult response
+            Performs an HTTP Post Request with TResult response
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26411,7 +26411,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Put(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Put Request
+            Performs an HTTP Put Request
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26420,7 +26420,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Put``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Put Request with TResult response
+            Performs an HTTP Put Request with TResult response
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26430,7 +26430,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Patch(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Patch Request
+            Performs an HTTP Patch Request
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26439,7 +26439,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Patch``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Patch Request with TResult response
+            Performs an HTTP Patch Request with TResult response
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26457,7 +26457,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.Delete``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Performs a HTTP Delete Request with TResult response
+            Performs an HTTP Delete Request with TResult response
             </summary>
             <param name="client">Client for the request</param>
             <param name="url">Url for the request</param>
@@ -26466,7 +26466,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Creates a new request and queues it to be ran
+            Creates a new request and queues it to be run
             </summary>
             <param name="client">Client making the request</param>
             <param name="url">URL of the request</param>
@@ -26476,7 +26476,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.RestHandler.CreateRequest``1(Oxide.Ext.Discord.Clients.DiscordClient,System.String,Oxide.Core.Libraries.RequestMethod,System.Object,System.Nullable{Oxide.Ext.Discord.Rest.RequestOptions})">
             <summary>
-            Creates a new request and queues it to be ran
+            Creates a new request and queues it to be run
             </summary>
             <param name="client">Client making the request</param>
             <param name="url">URL of the request</param>
@@ -26593,7 +26593,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Types.BasePool`2.CreateNew">
             <summary>
-            Creates new type of T
+            Creates a new type of T
             </summary>
             <returns>Newly created type of T</returns>
         </member>
@@ -26627,7 +26627,7 @@
             Returns if an item can be freed to the pool
             </summary>
             <param name="item">Item to be freed</param>
-            <returns>True if can be freed; false otherwise</returns>
+            <returns>True if the item can be freed; false otherwise</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.BasePool`2.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
@@ -26838,7 +26838,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Types.IPool`1.Free(`0)">
             <summary>
-            Returns the pooled type back to the pool
+            Returns the pooled type to the pool
             </summary>
             <param name="poolable"></param>
         </member>
@@ -27063,7 +27063,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.ClearHandlers">
             <summary>
-            Helper function clear out all handlers after resolution or rejection.
+            Helper function to clear out all handlers after resolution or rejection.
             </summary>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.InvokeResolveHandlers">
@@ -27275,7 +27275,7 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.All(Oxide.Ext.Discord.Interfaces.IPromise{`0}[])">
             <summary>
-            Returns a promise that resolves when all of the promises in the enumerable argument have resolved.
+            Returns a promise that resolves when all the promises in the enumerable argument have resolved.
             Returns a promise of a collection of the resolved results.
             </summary>
         </member>
@@ -27776,7 +27776,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.ShardingRequired">
             <summary>
-            The session would have handled too many guilds - you are required to shard your connection in order to connect.
+            The session would have handled too many guilds - you are required to shard your connection to connect.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.InvalidApiVersion">
@@ -27791,7 +27791,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.DisallowedIntent">
             <summary>
-            You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for.
+            You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not allowlisted for.
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.DiscordWebsocketCloseCode.DiscordExtensionReconnect">
@@ -28176,7 +28176,7 @@
         <member name="M:Oxide.Ext.Discord.WebSockets.DiscordHeartbeatHandler.SendHeartbeat">
             <summary>
             Sends a heartbeat to discord.
-            If the previous heartbeat wasn't acknowledged then we will attempt to reconnect
+            If the previous heartbeat wasn't acknowledged, then we will attempt to reconnect
             </summary>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.WebSocketCommandHandler">
@@ -28303,7 +28303,7 @@
             <summary>
             Disconnects from the websocket with the given code and reason
             </summary>
-            <param name="client">Client for the websockk</param>
+            <param name="client">Client for the websocket</param>
             <param name="status">Status to close with</param>
             <param name="reason">Reason for the close</param>
             <param name="closeReceived">If we received a close from the websocket</param>
@@ -28349,12 +28349,12 @@
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connecting">
             <summary>
-            Socket is in the process of connecting
+            Websocket is in the process of connecting
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Connected">
             <summary>
-            Socket is connect and functioning normally
+            Websocket is connected and functioning normally
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.WebSockets.SocketState.Disconnecting">

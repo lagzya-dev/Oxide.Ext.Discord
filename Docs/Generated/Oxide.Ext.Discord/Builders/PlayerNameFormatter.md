@@ -13,7 +13,7 @@ public class PlayerNameFormatter
 | static readonly [All](#all-field) | Include all name options in the player name |
 | static readonly [ClanName](#clanname-field) | Include clan name in the player name |
 | static readonly [Default](#default-field) | Default Player Name Formatter |
-| static readonly [PlayerId](#playerid-field) | Include Player Id in the player name |
+| static readonly [PlayerId](#playerid-field) | Include Player ID in the player name |
 | static [Create](#create-method)(…) | Create a new Player Name formatter with the given Custom Name Function |
 | [Format](#format-method)(…) | Formats the player name |
 
@@ -102,7 +102,7 @@ public static readonly PlayerNameFormatter ClanName;
    
 # PlayerId field
 
-Include Player Id in the player name
+Include Player ID in the player name
 
 ```csharp
 public static readonly PlayerNameFormatter PlayerId;

@@ -15,7 +15,7 @@ public class QueryStringBuilder : BasePoolable
 | [Add](#add-method)(…) | Add a key value pair to the query string |
 | [AddList&lt;T&gt;](#addlist&amp;lt;t&amp;gt;-method)(…) | Add a list of values with the specified separator |
 | override [ToString](#tostring-method)() | Returns the query string as a string. |
-| [ToStringAndFree](#tostringandfree-method)() | Returns the query string and returns the builder back to the pool |
+| [ToStringAndFree](#tostringandfree-method)() | Returns the query string and returns the builder to the pool |
 
 ## Protected Members
 
@@ -111,7 +111,7 @@ public override string ToString()
    
 # ToStringAndFree method
 
-Returns the query string and returns the builder back to the pool
+Returns the query string and returns the builder to the pool
 
 ```csharp
 public string ToStringAndFree()

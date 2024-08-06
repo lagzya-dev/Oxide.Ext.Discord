@@ -16,16 +16,16 @@ public class RestHandler : IDebugLoggable
 | readonly [RateLimit](#ratelimit-field) | Global Rate Limit for the bot |
 | readonly [RouteToBucketId](#routetobucketid-field) | Route to Bucket ID |
 | [Delete](#delete-method)(…) | Performs a HTTP Delete Request |
-| [Delete&lt;TResult&gt;](#delete&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Delete Request with TResult response |
-| [Get&lt;TResult&gt;](#get&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Get Request with TResult response |
+| [Delete&lt;TResult&gt;](#delete&amp;lt;tresult&amp;gt;-method)(…) | Performs an HTTP Delete Request with TResult response |
+| [Get&lt;TResult&gt;](#get&amp;lt;tresult&amp;gt;-method)(…) | Performs ann HTTP Get Request with TResult response |
 | [GetBucket](#getbucket-method)(…) | Returns the bucket with the given ID |
 | [LogDebug](#logdebug-method)(…) |  |
-| [Patch](#patch-method)(…) | Performs a HTTP Patch Request |
-| [Patch&lt;TResult&gt;](#patch&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Patch Request with TResult response |
+| [Patch](#patch-method)(…) | Performs an HTTP Patch Request |
+| [Patch&lt;TResult&gt;](#patch&amp;lt;tresult&amp;gt;-method)(…) | Performs an HTTP Patch Request with TResult response |
 | [Post](#post-method)(…) | Performs a HTTP Post Request |
-| [Post&lt;TResult&gt;](#post&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Post Request with TResult response |
-| [Put](#put-method)(…) | Performs a HTTP Put Request |
-| [Put&lt;TResult&gt;](#put&amp;lt;tresult&amp;gt;-method)(…) | Performs a HTTP Put Request with TResult response |
+| [Post&lt;TResult&gt;](#post&amp;lt;tresult&amp;gt;-method)(…) | Performs an HTTP Post Request with TResult response |
+| [Put](#put-method)(…) | Performs an HTTP Put Request |
+| [Put&lt;TResult&gt;](#put&amp;lt;tresult&amp;gt;-method)(…) | Performs an HTTP Put Request with TResult response |
 | [QueueBucket](#queuebucket-method)(…) | Queues the request for the bucket |
 | [Shutdown](#shutdown-method)() | Shutdown the REST handler |
 | [StartRequest](#startrequest-method)(…) | Starts the request |
@@ -40,7 +40,7 @@ public class RestHandler : IDebugLoggable
    
 # Get&lt;TResult&gt; method
 
-Performs a HTTP Get Request with TResult response
+Performs ann HTTP Get Request with TResult response
 
 ```csharp
 public IPromise<TResult> Get<TResult>(DiscordClient client, string url, 
@@ -93,7 +93,7 @@ public IPromise Post(DiscordClient client, string url, object data,
 
 # Post&lt;TResult&gt; method (2 of 2)
 
-Performs a HTTP Post Request with TResult response
+Performs an HTTP Post Request with TResult response
 
 ```csharp
 public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object data, 
@@ -120,7 +120,7 @@ public IPromise<TResult> Post<TResult>(DiscordClient client, string url, object 
    
 # Put method (1 of 2)
 
-Performs a HTTP Put Request
+Performs an HTTP Put Request
 
 ```csharp
 public IPromise Put(DiscordClient client, string url, object data, 
@@ -147,7 +147,7 @@ public IPromise Put(DiscordClient client, string url, object data,
 
 # Put&lt;TResult&gt; method (2 of 2)
 
-Performs a HTTP Put Request with TResult response
+Performs an HTTP Put Request with TResult response
 
 ```csharp
 public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object data, 
@@ -174,7 +174,7 @@ public IPromise<TResult> Put<TResult>(DiscordClient client, string url, object d
    
 # Patch method (1 of 2)
 
-Performs a HTTP Patch Request
+Performs an HTTP Patch Request
 
 ```csharp
 public IPromise Patch(DiscordClient client, string url, object data, 
@@ -201,7 +201,7 @@ public IPromise Patch(DiscordClient client, string url, object data,
 
 # Patch&lt;TResult&gt; method (2 of 2)
 
-Performs a HTTP Patch Request with TResult response
+Performs an HTTP Patch Request with TResult response
 
 ```csharp
 public IPromise<TResult> Patch<TResult>(DiscordClient client, string url, object data, 
@@ -253,7 +253,7 @@ public IPromise Delete(DiscordClient client, string url, RequestOptions? options
 
 # Delete&lt;TResult&gt; method (2 of 2)
 
-Performs a HTTP Delete Request with TResult response
+Performs an HTTP Delete Request with TResult response
 
 ```csharp
 public IPromise<TResult> Delete<TResult>(DiscordClient client, string url, 

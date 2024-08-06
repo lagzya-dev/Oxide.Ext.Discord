@@ -1,18 +1,17 @@
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
+/// </summary>
+public enum ScheduledEventPrivacyLevel : byte
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/guild-scheduled-event#guild-scheduled-event-object-guild-scheduled-event-privacy-level">Guild Scheduled Event Privacy Level</a>
+    /// No Privacy Level
     /// </summary>
-    public enum ScheduledEventPrivacyLevel : byte
-    {
-        /// <summary>
-        /// No Privacy Level
-        /// </summary>
-        None = 0,
+    None = 0,
         
-        /// <summary>
-        /// The scheduled event is only accessible to guild members
-        /// </summary>
-        GuildOnly = 2
-    }
+    /// <summary>
+    /// The scheduled event is only accessible to guild members
+    /// </summary>
+    GuildOnly = 2
 }

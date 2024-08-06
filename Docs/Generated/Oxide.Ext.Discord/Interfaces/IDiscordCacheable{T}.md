@@ -14,7 +14,7 @@ public interface IDiscordCacheable<in T>
 
 | name | description |
 | --- | --- |
-| [Id](#id-property) { get; set; } | Id of the entity |
+| [Id](#id-property) { get; set; } | ID of the entity |
 | [Update](#update-method)(…) | Method to update the entity |
 
 ## See Also
@@ -45,7 +45,7 @@ public void Update(T update)
    
 # Id property
 
-Id of the entity
+ID of the entity
 
 ```csharp
 public Snowflake Id { get; set; }

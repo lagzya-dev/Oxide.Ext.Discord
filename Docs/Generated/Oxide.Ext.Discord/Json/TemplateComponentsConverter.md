@@ -1,6 +1,6 @@
 # TemplateComponentsConverter class
 
-Converter for list of message components
+Converter for a list of message components
 
 ```csharp
 public class TemplateComponentsConverter : JsonConverter

@@ -10,7 +10,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
 
 | name | description |
 | --- | --- |
-| [CreateClient](#createclient-method)(…) | Creates the client for the given plugin. If one already exist the existing one is returned |
+| [CreateClient](#createclient-method)(…) | Creates the client for the given plugin. If one already exists, the existing one is returned |
 | [GetClient](#getclient-method-1-of-2)(…) | Gets the client for the given plugin (2 methods) |
 
 ## See Also
@@ -23,7 +23,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
    
 # CreateClient method
 
-Creates the client for the given plugin. If one already exist the existing one is returned
+Creates the client for the given plugin. If one already exists, the existing one is returned
 
 ```csharp
 public DiscordClient CreateClient(Plugin plugin)
@@ -61,7 +61,7 @@ public DiscordClient GetClient(Plugin plugin)
 
 | parameter | description |
 | --- | --- |
-| plugin | Plugin to get client for |
+| plugin | Plugin to get the client for |
 
 ## Return Value
 
@@ -86,7 +86,7 @@ public DiscordClient GetClient(string pluginName)
 
 | parameter | description |
 | --- | --- |
-| pluginName | Plugin Name to get client for |
+| pluginName | Plugin Name to get the client for |
 
 ## Return Value
 

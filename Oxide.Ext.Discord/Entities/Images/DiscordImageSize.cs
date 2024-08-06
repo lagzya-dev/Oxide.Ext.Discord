@@ -1,28 +1,27 @@
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents an image size
+/// </summary>
+public enum DiscordImageSize : byte
 {
     /// <summary>
-    /// Represents an image size
+    /// Image Size in bytes
     /// </summary>
-    public enum DiscordImageSize : byte
-    {
-        /// <summary>
-        /// Image Size in bytes
-        /// </summary>
-        Bytes,
+    Bytes,
         
-        /// <summary>
-        /// Image size in kilobytes
-        /// </summary>
-        KiloBytes,
+    /// <summary>
+    /// Image size in kilobytes
+    /// </summary>
+    KiloBytes,
         
-        /// <summary>
-        /// Image Size in megabytes
-        /// </summary>
-        MegaBytes,
+    /// <summary>
+    /// Image Size in megabytes
+    /// </summary>
+    MegaBytes,
         
-        /// <summary>
-        /// Image Size in gigabytes
-        /// </summary>
-        GigaBytes
-    }
+    /// <summary>
+    /// Image Size in gigabytes
+    /// </summary>
+    GigaBytes
 }

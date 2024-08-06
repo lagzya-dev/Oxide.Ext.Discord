@@ -7,81 +7,80 @@ using Oxide.Ext.Discord.Logging;
 using Oxide.Plugins;
 using ProtoBuf;
 
-namespace Oxide.Ext.Discord.Data
+namespace Oxide.Ext.Discord.Data;
+
+[ProtoContract]
+internal class UserData
 {
-    [ProtoContract]
-    internal class UserData
+    [ProtoMember(1)]
+    public Snowflake UserId { get; set; }
+        
+    [ProtoMember(2)]
+    public Snowflake DmChannelId { get; set; }
+        
+    [ProtoMember(3)]
+    public DateTime? DmBlockedDate { get; set; }
+
+    //Needed by ProtoBuff
+    internal UserData() { }
+        
+    public UserData(Snowflake userId)
     {
-        [ProtoMember(1)]
-        public Snowflake UserId { get; set; }
-        
-        [ProtoMember(2)]
-        public Snowflake DmChannelId { get; set; }
-        
-        [ProtoMember(3)]
-        public DateTime? DmBlockedDate { get; set; }
+        UserId = userId;
+    }
 
-        //Needed by ProtoBuff
-        internal UserData() { }
-        
-        public UserData(Snowflake userId)
+    public void ProcessError(DiscordClient client, ResponseError request)
+    {
+        ResponseErrorMessage error = request?.DiscordError;
+        if (error != null && error.Code == 50007)
         {
-            UserId = userId;
+            SetDmBlock();
+            DiscordUser user = GetUser();
+            client.Logger.Debug("We're unable to send DM's to {0} ({1}). We are blocking attempts until {2}.", user.FullUserName, user.Id, GetBlockedUntil());
+            request.SuppressErrorMessage();
         }
+    }
 
-        public void ProcessError(DiscordClient client, ResponseError request)
+    public DiscordChannel CreateDmChannel()
+    {
+        return new DiscordChannel
         {
-            ResponseErrorMessage error = request?.DiscordError;
-            if (error != null && error.Code == 50007)
+            Id = DmChannelId,
+            Type = ChannelType.Dm,
+            Recipients = new Hash<Snowflake, DiscordUser>
             {
-                SetDmBlock();
-                DiscordUser user = GetUser();
-                client.Logger.Debug("We're unable to send DM's to {0} ({1}). We are blocking attempts until {2}.", user.FullUserName, user.Id, GetBlockedUntil());
-                request.SuppressErrorMessage();
+                [UserId] = GetUser()
             }
-        }
+        };
+    }
 
-        public DiscordChannel CreateDmChannel()
-        {
-            return new DiscordChannel
-            {
-                Id = DmChannelId,
-                Type = ChannelType.Dm,
-                Recipients = new Hash<Snowflake, DiscordUser>
-                {
-                    [UserId] = GetUser()
-                }
-            };
-        }
+    public void SetDmBlock()
+    {
+        DmBlockedDate = DateTime.UtcNow;
+        DiscordUserData.Instance.OnDataChanged();
+    }
 
-        public void SetDmBlock()
+    public void ClearBlockIfExpired()
+    {
+        if (DmBlockedDate.HasValue && DmBlockedDate.Value < DateTime.UtcNow)
         {
-            DmBlockedDate = DateTime.UtcNow;
+            DmBlockedDate = null;
             DiscordUserData.Instance.OnDataChanged();
         }
+    }
 
-        public void ClearBlockIfExpired()
-        {
-            if (DmBlockedDate.HasValue && DmBlockedDate.Value < DateTime.UtcNow)
-            {
-                DmBlockedDate = null;
-                DiscordUserData.Instance.OnDataChanged();
-            }
-        }
-
-        public DateTime? GetBlockedUntil()
-        {
-            return DmBlockedDate.HasValue ? DmBlockedDate.Value + TimeSpan.FromHours(DiscordConfig.Instance.Users.DmBlockedDuration) : (DateTime?)null;
-        }
+    public DateTime? GetBlockedUntil()
+    {
+        return DmBlockedDate.HasValue ? DmBlockedDate.Value + TimeSpan.FromHours(DiscordConfig.Instance.Users.DmBlockedDuration) : null;
+    }
         
-        public bool IsDmBlocked()
-        {
-            return DmBlockedDate.HasValue && GetBlockedUntil() > DateTime.UtcNow;
-        }
+    public bool IsDmBlocked()
+    {
+        return DmBlockedDate.HasValue && GetBlockedUntil() > DateTime.UtcNow;
+    }
 
-        public DiscordUser GetUser()
-        {
-            return EntityCache<DiscordUser>.Instance.GetOrCreate(UserId);
-        }
+    public DiscordUser GetUser()
+    {
+        return EntityCache<DiscordUser>.Instance.GetOrCreate(UserId);
     }
 }

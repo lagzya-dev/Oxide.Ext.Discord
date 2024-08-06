@@ -19,7 +19,7 @@ public class DiscordClient
 | [Disconnect](#disconnect-method)() | Disconnects this client from discord |
 | [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized |
 | [RequestGuildMembers](#requestguildmembers-method)(…) | Used to request guild members from discord for a specific guild |
-| [UpdateStatus](#updatestatus-method)(…) | Used to update the bots status in discord |
+| [UpdateStatus](#updatestatus-method)(…) | Used to update the bot status in discord |
 | [UpdateVoiceState](#updatevoicestate-method)(…) | Used to update the voice state for the bot |
 
 ## See Also
@@ -186,7 +186,7 @@ public void UpdateVoiceState(UpdateVoiceStatusCommand voiceState)
    
 # UpdateStatus method
 
-Used to update the bots status in discord
+Used to update the bot status in discord
 
 ```csharp
 public void UpdateStatus(UpdatePresenceCommand presenceUpdate)

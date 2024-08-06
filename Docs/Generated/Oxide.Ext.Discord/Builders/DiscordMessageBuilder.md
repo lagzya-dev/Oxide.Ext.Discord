@@ -11,7 +11,7 @@ public class DiscordMessageBuilder : BaseChannelMessageBuilder<MessageCreate, Di
 | name | description |
 | --- | --- |
 | [DiscordMessageBuilder](#discordmessagebuilder-constructor)() | Constructor creating a new message |
-| [DiscordMessageBuilder](#discordmessagebuilder-constructor)(…) | Constructor to use existing message |
+| [DiscordMessageBuilder](#discordmessagebuilder-constructor)(…) | Constructor to use an existing message |
 
 ## See Also
 
@@ -40,7 +40,7 @@ public DiscordMessageBuilder()
 
 # DiscordMessageBuilder constructor (2 of 2)
 
-Constructor to use existing message
+Constructor to use an existing message
 
 ```csharp
 public DiscordMessageBuilder(MessageCreate message)

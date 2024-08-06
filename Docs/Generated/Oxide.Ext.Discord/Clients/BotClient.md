@@ -1,6 +1,6 @@
 # BotClient class
 
-Represents a bot that is connected to discord
+Represents a bot connected to discord
 
 ```csharp
 public class BotClient : BaseClient, IDebugLoggable
@@ -15,7 +15,7 @@ public class BotClient : BaseClient, IDebugLoggable
 | [BotUser](#botuser-property) { get; } | Bot User |
 | [IsFullyLoaded](#isfullyloaded-property) { get; } | Returns if the bot has fully loaded. All guilds are loaded and if GuildMembers is specified all guild members have been loaded |
 | [IsReady](#isready-property) { get; } | Returns if ReadyData is set |
-| readonly [DirectMessagesByChannelId](#directmessagesbychannelid-field) | All the direct messages that we have seen by channel Id |
+| readonly [DirectMessagesByChannelId](#directmessagesbychannelid-field) | All the direct messages that we have seen by channel ID |
 | readonly [DirectMessagesByUserId](#directmessagesbyuserid-field) | All the direct messages that we have seen by User ID |
 | readonly [Servers](#servers-field) | All the servers that this bot is in |
 | override [AddClient](#addclient-method)(…) |  |
@@ -23,7 +23,7 @@ public class BotClient : BaseClient, IDebugLoggable
 | [AddGuild](#addguild-method)(…) | Adds a guild to the list of servers a bot is in |
 | [AddGuildOrUpdate](#addguildorupdate-method)(…) | Adds a guild if it does not exist or updates the guild with |
 | [DisconnectWebsocket](#disconnectwebsocket-method)(…) | Close the websocket with discord |
-| [GetChannel](#getchannel-method)(…) | Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel |
+| [GetChannel](#getchannel-method)(…) | Returns the channel for the given channel ID. If guild ID is null, it will search for a direct message channel If guild ID is not null, it will search for a guild channel |
 | [GetGuild](#getguild-method)(…) | Returns a guild for the specific ID |
 | [LogDebug](#logdebug-method)(…) |  |
 | override [RemoveClient](#removeclient-method)(…) |  |
@@ -138,7 +138,7 @@ Guild with the specified ID
    
 # GetChannel method
 
-Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel
+Returns the channel for the given channel ID. If guild ID is null, it will search for a direct message channel If guild ID is not null, it will search for a guild channel
 
 ```csharp
 public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
@@ -353,7 +353,7 @@ public readonly Hash<Snowflake, DiscordGuild> Servers;
    
 # DirectMessagesByChannelId field
 
-All the direct messages that we have seen by channel Id
+All the direct messages that we have seen by channel ID
 
 ```csharp
 public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByChannelId;

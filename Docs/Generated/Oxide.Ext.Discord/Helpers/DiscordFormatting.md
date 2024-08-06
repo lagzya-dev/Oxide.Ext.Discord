@@ -15,7 +15,7 @@ public static class DiscordFormatting
 | static [Bold](#bold-method)(…) | Will display the message in bold |
 | static [CodeBlockLanguage](#codeblocklanguage-method)(…) | Will display a multiline code bloc with the specified language |
 | static [CodeBlockMultiLine](#codeblockmultiline-method)(…) | Will display the message as a multiline code block |
-| static [CodeBlockOneLine](#codeblockoneline-method)(…) | Will display the message as a one line code block |
+| static [CodeBlockOneLine](#codeblockoneline-method)(…) | Will display the message as a one-line code block |
 | static [CustomEmojiDataString](#customemojidatastring-method)(…) | Returns formatting string for custom emoji to be used in a url |
 | static [CustomEmojiMessageString](#customemojimessagestring-method)(…) | Returns formatting string for custom emoji to be used in a message |
 | static [EmojiMessageString](#emojimessagestring-method)(…) | Return the emoji string for a message |
@@ -27,10 +27,10 @@ public static class DiscordFormatting
 | static [ItalicsBold](#italicsbold-method)(…) | Will display the message in italics and bold |
 | static [List](#list-method)(…) | Creates a list item for the given message |
 | static [MaskLink](#masklink-method)(…) | Creates a clickable link displayed as the mask text |
-| static [MentionApplicationCommand](#mentionapplicationcommand-method)(…) | Mention the the Application command |
+| static [MentionApplicationCommand](#mentionapplicationcommand-method)(…) | Mention the Application command |
 | static [MentionApplicationCommandCustom](#mentionapplicationcommandcustom-method)(…) | Mention the application command using a custom command string |
-| static [MentionChannel](#mentionchannel-method)(…) | Mention the the channel with the given ID |
-| static [MentionRole](#mentionrole-method)(…) | Mention the the role with the given ID |
+| static [MentionChannel](#mentionchannel-method)(…) | Mention the channel with the given ID |
+| static [MentionRole](#mentionrole-method)(…) | Mention the role with the given ID |
 | static [MentionUser](#mentionuser-method)(…) | Mention the user with the given user ID |
 | static [NumberedList](#numberedlist-method)(…) | Creates a list item for the given message |
 | static [Spoiler](#spoiler-method)(…) | Will display the text as a spoiler |
@@ -74,7 +74,7 @@ Mention user formatted string
    
 # MentionChannel method
 
-Mention the the channel with the given ID
+Mention the channel with the given ID
 
 ```csharp
 public static string MentionChannel(Snowflake channelId)
@@ -98,7 +98,7 @@ Mention channel formatted string
    
 # MentionRole method
 
-Mention the the role with the given ID
+Mention the role with the given ID
 
 ```csharp
 public static string MentionRole(Snowflake roleId)
@@ -122,7 +122,7 @@ Mention role formatted string
    
 # MentionApplicationCommand method
 
-Mention the the Application command
+Mention the Application command
 
 ```csharp
 public static string MentionApplicationCommand(Snowflake commandId, string name, 
@@ -500,7 +500,7 @@ Strikethrough formatted message
    
 # CodeBlockOneLine method
 
-Will display the message as a one line code block
+Will display the message as a one-line code block
 
 ```csharp
 public static string CodeBlockOneLine(string message)

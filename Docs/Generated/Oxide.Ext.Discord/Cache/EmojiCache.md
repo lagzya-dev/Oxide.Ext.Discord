@@ -10,7 +10,7 @@ public sealed class EmojiCache : Singleton<EmojiCache>
 
 | name | description |
 | --- | --- |
-| [EmojiToText](#emojitotext-method)(…) | Convert an emoji character to emoji string text |
+| [EmojiToText](#emojitotext-method)(…) | Convert an emoji character to the emoji string text |
 | [ReplaceEmojiWithText](#replaceemojiwithtext-method)(…) | Replaces emoji character with emoji string characters |
 | [ReplaceTextWithEmoji](#replacetextwithemoji-method)(…) | Replaces emoji string text with emoji characters |
 | [TextToEmoji](#texttoemoji-method)(…) | Convert emoji string text to an emoji character |
@@ -25,7 +25,7 @@ public sealed class EmojiCache : Singleton<EmojiCache>
    
 # EmojiToText method
 
-Convert an emoji character to emoji string text
+Convert an emoji character to the emoji string text
 
 ```csharp
 public string EmojiToText(string emoji)

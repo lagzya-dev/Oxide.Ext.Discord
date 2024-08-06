@@ -3,64 +3,63 @@ using System.Linq;
 using System.Net.Http.Headers;
 using Oxide.Ext.Discord.Rest;
 
-namespace Oxide.Ext.Discord.Extensions
+namespace Oxide.Ext.Discord.Extensions;
+
+internal static class HttpResponseHeadersExt
 {
-    internal static class HttpResponseHeadersExt
+    internal static string Get(this HttpResponseHeaders headers, string key)
     {
-        internal static string Get(this HttpResponseHeaders headers, string key)
-        {
-            return headers.TryGetValues(key, out IEnumerable<string> values) ? values.FirstOrDefault() : null;
-        }
+        return headers.TryGetValues(key, out IEnumerable<string> values) ? values.FirstOrDefault() : null;
+    }
         
-        internal static bool GetBool(this HttpResponseHeaders headers, string key)
+    internal static bool GetBool(this HttpResponseHeaders headers, string key)
+    {
+        string value = headers.Get(key);
+        if (string.IsNullOrEmpty(value) || !bool.TryParse(value, out bool result))
         {
-            string value = headers.Get(key);
-            if (string.IsNullOrEmpty(value) || !bool.TryParse(value, out bool result))
-            {
-                return default(bool);
-            }
-
-            return result;
+            return default;
         }
+
+        return result;
+    }
         
-        internal static int GetInt(this HttpResponseHeaders headers, string key)
+    internal static int GetInt(this HttpResponseHeaders headers, string key)
+    {
+        string value = headers.Get(key);
+        if (string.IsNullOrEmpty(value) || !int.TryParse(value, out int result))
         {
-            string value = headers.Get(key);
-            if (string.IsNullOrEmpty(value) || !int.TryParse(value, out int result))
-            {
-                return default(int);
-            }
-
-            return result;
+            return default;
         }
 
-        internal static bool TryGetInt(this HttpResponseHeaders headers, string key, out int value)
-        {
-            string headerValue = headers.Get(key);
-            if (string.IsNullOrEmpty(headerValue) || !int.TryParse(headerValue, out value))
-            {
-                value = 0;
-                return false;
-            }
+        return result;
+    }
 
-            return true;
+    internal static bool TryGetInt(this HttpResponseHeaders headers, string key, out int value)
+    {
+        string headerValue = headers.Get(key);
+        if (string.IsNullOrEmpty(headerValue) || !int.TryParse(headerValue, out value))
+        {
+            value = 0;
+            return false;
         }
+
+        return true;
+    }
         
-        internal static double GetDouble(this HttpResponseHeaders headers, string key)
+    internal static double GetDouble(this HttpResponseHeaders headers, string key)
+    {
+        string value = headers.Get(key);
+        if (string.IsNullOrEmpty(value) || !double.TryParse(value, out double result))
         {
-            string value = headers.Get(key);
-            if (string.IsNullOrEmpty(value) || !double.TryParse(value, out double result))
-            {
-                return default(double);
-            }
+            return default;
+        }
 
-            return result;
-        }
+        return result;
+    }
         
-        internal static BucketId GetBucketId(this HttpResponseHeaders headers, string key)
-        {
-            string value = headers.Get(key);
-            return !string.IsNullOrEmpty(value) ? new BucketId(value) : default(BucketId);
-        }
+    internal static BucketId GetBucketId(this HttpResponseHeaders headers, string key)
+    {
+        string value = headers.Get(key);
+        return !string.IsNullOrEmpty(value) ? new BucketId(value) : default;
     }
 }

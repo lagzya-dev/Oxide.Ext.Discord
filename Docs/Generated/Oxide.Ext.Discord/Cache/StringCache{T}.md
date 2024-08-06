@@ -14,8 +14,8 @@ public sealed class StringCache<T> : Singleton<StringCache>
 
 | name | description |
 | --- | --- |
-| [ToLower](#tolower-method)(…) | Returns the lowered string representation of type {T} |
-| [ToString](#tostring-method)(…) | Returns a cached ToString call of type {T} |
+| [ToLower](#tolower-method)(…) | Returns the lowered string representation of the type {T} |
+| [ToString](#tostring-method)(…) | Returns a cached ToString call of the type {T} |
 
 ## See Also
 
@@ -27,7 +27,7 @@ public sealed class StringCache<T> : Singleton<StringCache>
    
 # ToString method
 
-Returns a cached ToString call of type {T}
+Returns a cached ToString call of the type {T}
 
 ```csharp
 public string ToString(T value)
@@ -46,7 +46,7 @@ public string ToString(T value)
    
 # ToLower method
 
-Returns the lowered string representation of type {T}
+Returns the lowered string representation of the type {T}
 
 ```csharp
 public string ToLower(T value)

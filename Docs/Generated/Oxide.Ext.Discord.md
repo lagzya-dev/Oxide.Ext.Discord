@@ -80,7 +80,7 @@
 | public type | description |
 | --- | --- |
 | abstract class [BaseClient](./Oxide.Ext.Discord/Clients/BaseClient.md) | BaseClient that can connect to discord |
-| class [BotClient](./Oxide.Ext.Discord/Clients/BotClient.md) | Represents a bot that is connected to discord |
+| class [BotClient](./Oxide.Ext.Discord/Clients/BotClient.md) | Represents a bot connected to discord |
 | class [DiscordClient](./Oxide.Ext.Discord/Clients/DiscordClient.md) | Represents the object a plugin uses to connect to discord |
 | class [WebhookClient](./Oxide.Ext.Discord/Clients/WebhookClient.md) | A client that can connect to a webhook |
 
@@ -557,18 +557,18 @@
 | public type | description |
 | --- | --- |
 | class [DiscordColorConverter](./Oxide.Ext.Discord/Json/DiscordColorConverter.md) | Handles the JSON Serialization / Deserialization for DiscordColor |
-| class [DiscordEnumConverter](./Oxide.Ext.Discord/Json/DiscordEnumConverter.md) | Handles deserializing JSON values as strings. If the value doesn't exist return the default value. |
+| class [DiscordEnumConverter](./Oxide.Ext.Discord/Json/DiscordEnumConverter.md) | Handles deserializing JSON values as strings. If the value doesn't exist, return the default value. |
 | class [DiscordImageDataConverter](./Oxide.Ext.Discord/Json/DiscordImageDataConverter.md) | Represents the JsonConverter for [`DiscordImageData`](./Oxide.Ext.Discord/Entities/DiscordImageData.md) |
 | class [DiscordJsonReader](./Oxide.Ext.Discord/Json/DiscordJsonReader.md) | This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async |
 | class [DiscordJsonWriter](./Oxide.Ext.Discord/Json/DiscordJsonWriter.md) | This is a pooled JSON writer that can write JSON to a stream |
 | class [EventPayloadConverter](./Oxide.Ext.Discord/Json/EventPayloadConverter.md) | JSON converter for [`EventPayload`](./Oxide.Ext.Discord/Entities/EventPayload.md) |
 | class [HashListConverter&lt;TValue&gt;](./Oxide.Ext.Discord/Json/HashListConverter%7BTValue%7D.md) | Converts to and from a list in JSON to a hash |
-| class [MessageComponentsConverter](./Oxide.Ext.Discord/Json/MessageComponentsConverter.md) | Converter for list of message components |
+| class [MessageComponentsConverter](./Oxide.Ext.Discord/Json/MessageComponentsConverter.md) | Converter for a list of message components |
 | class [PermissionFlagsStringConverter](./Oxide.Ext.Discord/Json/PermissionFlagsStringConverter.md) | Converts Permission Flags to and from a JSON string |
 | class [RoleTagsConverter](./Oxide.Ext.Discord/Json/RoleTagsConverter.md) | Handles converting [`RoleTags`](./Oxide.Ext.Discord/Entities/RoleTags.md) This type contains special deserialization types |
-| class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from it's JSON string value |
-| class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for list of message components |
-| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | Json Template Key Converter |
+| class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from its JSON string value |
+| class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for a list of message components |
+| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | JSON Template Key Converter |
 | class [UnixDateTimeConverter](./Oxide.Ext.Discord/Json/UnixDateTimeConverter.md) | Converts a DateTimeOffset to and from a json long |
 
 ## Oxide.Ext.Discord.Libraries namespace

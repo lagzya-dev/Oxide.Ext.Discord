@@ -1,37 +1,36 @@
-namespace Oxide.Ext.Discord.Exceptions
+namespace Oxide.Ext.Discord.Exceptions;
+
+/// <summary>
+/// Exception for invalid Auto Complete choices
+/// </summary>
+public class InvalidAutoCompleteChoiceException : BaseDiscordException
 {
     /// <summary>
-    /// Exception for invalid Auto Complete choices
+    /// Constructor
     /// </summary>
-    public class InvalidAutoCompleteChoiceException : BaseDiscordException
+    /// <param name="message">Exception message</param>
+    protected InvalidAutoCompleteChoiceException(string message) : base(message) { }
+
+    internal static void ThrowIfInvalidName(string name)
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="message">Exception message</param>
-        protected InvalidAutoCompleteChoiceException(string message) : base(message) { }
-
-        internal static void ThrowIfInvalidName(string name)
-        {
-            const int MaxLength = 100;
+        const int MaxLength = 100;
             
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new InvalidAutoCompleteChoiceException("Name must contain at least 1 character");
-            }
-
-            if (name.Length > MaxLength)
-            {
-                throw new InvalidAutoCompleteChoiceException($"Name cannot be greater than {MaxLength} characters");
-            }
+        if (string.IsNullOrEmpty(name))
+        {
+            throw new InvalidAutoCompleteChoiceException("Name must contain at least 1 character");
         }
 
-        internal static void ThrowIfInvalidValue(object value)
+        if (name.Length > MaxLength)
         {
-            if (value == null)
-            {
-                throw new InvalidAutoCompleteChoiceException("Value cannot be null");
-            }
+            throw new InvalidAutoCompleteChoiceException($"Name cannot be greater than {MaxLength} characters");
+        }
+    }
+
+    internal static void ThrowIfInvalidValue(object value)
+    {
+        if (value == null)
+        {
+            throw new InvalidAutoCompleteChoiceException("Value cannot be null");
         }
     }
 }

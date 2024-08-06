@@ -14,7 +14,7 @@ public static class RateLimitHeaders
 | const [BucketLimit](#bucketlimit-field) | The number of requests that can be made |
 | const [BucketRemaining](#bucketremaining-field) | The number of remaining requests that can be made |
 | const [BucketReset](#bucketreset-field) | Epoch time (seconds since 00:00:00 UTC on January 1, 1970) at which the rate limit resets |
-| const [BucketResetAfter](#bucketresetafter-field) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision |
+| const [BucketResetAfter](#bucketresetafter-field) | Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond rate-limit precision |
 | const [IsGlobal](#isglobal-field) | Returned only on HTTP 429 responses if the rate limit encountered is the global rate limit (not per-route) |
 | const [RetryAfter](#retryafter-field) | The number of seconds to wait before submitting another request. |
 | const [Scope](#scope-field) | Scope of the rate limit |
@@ -103,7 +103,7 @@ public const string BucketRemaining;
    
 # BucketResetAfter field
 
-Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond ratelimit precision
+Total time (in seconds) of when the current rate limit bucket will reset. Can have decimals to match previous millisecond rate-limit precision
 
 ```csharp
 public const string BucketResetAfter;

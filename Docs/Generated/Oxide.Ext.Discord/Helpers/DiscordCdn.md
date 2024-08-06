@@ -63,7 +63,7 @@ Url of the emoji
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if format is Jpg or WebP |
+| ArgumentException | Thrown if the format is Jpg or WebP |
 
 ## See Also
 
@@ -125,7 +125,7 @@ Url of the guild splash
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if format is Gif |
+| ArgumentException | Thrown if the format is GIF |
 
 ## See Also
 
@@ -159,7 +159,7 @@ Url of the guild discovery splash
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if format is Gif |
+| ArgumentException | Thrown if the format is GIF |
 
 ## See Also
 
@@ -193,7 +193,7 @@ Url of the guild banner
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if format is Gif |
+| ArgumentException | Thrown if the format is GIF |
 
 ## See Also
 
@@ -227,7 +227,7 @@ Url of the User banner
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if format is Gif |
+| ArgumentException | Thrown if the format is GIF |
 
 ## See Also
 
@@ -278,7 +278,7 @@ public static string GetUserAvatarUrl(Snowflake userId, string userAvatar,
 
 ## Return Value
 
-Url of the users avatar
+Url of the user's avatar
 
 ## See Also
 
@@ -368,7 +368,7 @@ Url of the application icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -402,7 +402,7 @@ Url of the application icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -436,7 +436,7 @@ Url of the application asset icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -470,7 +470,7 @@ Url of the achievement icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -503,7 +503,7 @@ Url of the achievement icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -537,7 +537,7 @@ Url of the achievement icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Throw if format is Gif |
+| ArgumentException | Throw if the format is GIF |
 
 ## See Also
 
@@ -571,7 +571,7 @@ Url to the sticker pack banner
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if image type is not PNG,JPEG, or WebP |
+| ArgumentException | Thrown if the image type is not PNG, JPEG, or WebP |
 
 ## See Also
 
@@ -628,7 +628,7 @@ Return url for the role icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if image type is not PNG or Lottie |
+| ArgumentException | Thrown if the image type is not PNG or Lottie |
 
 ## See Also
 
@@ -661,7 +661,7 @@ Return url for the guild schedule event cover icon
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if image type is not PNG or Lottie |
+| ArgumentException | Thrown if the image type is not PNG or Lottie |
 
 ## See Also
 
@@ -695,7 +695,7 @@ Return url for the guild member banner
 
 | exception | condition |
 | --- | --- |
-| ArgumentException | Thrown if image type is not PNG or Lottie |
+| ArgumentException | Thrown if the image type is not PNG or Lottie |
 
 ## See Also
 

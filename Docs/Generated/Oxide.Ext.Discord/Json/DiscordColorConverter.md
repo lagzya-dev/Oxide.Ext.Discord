@@ -11,7 +11,7 @@ public class DiscordColorConverter : JsonConverter
 | name | description |
 | --- | --- |
 | [DiscordColorConverter](#discordcolorconverter-constructor)() | The default constructor. |
-| override [CanConvert](#canconvert-method)(…) | Check if can convert |
+| override [CanConvert](#canconvert-method)(…) | Check if it can convert |
 | override [ReadJson](#readjson-method)(…) | Reads from JSON |
 | override [WriteJson](#writejson-method)(…) | Writes to JSON |
 
@@ -55,7 +55,7 @@ public override object ReadJson(JsonReader reader, Type objectType, object exist
    
 # CanConvert method
 
-Check if can convert
+Check if it can convert
 
 ```csharp
 public override bool CanConvert(Type objectType)

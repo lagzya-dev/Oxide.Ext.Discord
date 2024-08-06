@@ -1,30 +1,29 @@
 using Oxide.Ext.Discord.Clients;
 
-namespace Oxide.Ext.Discord.Rest
+namespace Oxide.Ext.Discord.Rest;
+
+/// <summary>
+/// Represents the completed status for the request
+/// </summary>
+public enum RequestCompletedStatus : byte
 {
     /// <summary>
-    /// Represents the completed status for the request
+    /// The request completed successfully
     /// </summary>
-    public enum RequestCompletedStatus : byte
-    {
-        /// <summary>
-        /// The request completed successfully
-        /// </summary>
-        Success,
+    Success,
         
-        /// <summary>
-        /// The request encountered a fatal error
-        /// </summary>
-        ErrorFatal,
+    /// <summary>
+    /// The request encountered a fatal error
+    /// </summary>
+    ErrorFatal,
         
-        /// <summary>
-        /// The error attempt multiple times to complete the request and was unsuccessful
-        /// </summary>
-        ErrorRetry,
+    /// <summary>
+    /// The error attempt multiple times to complete the request and was unsuccessful
+    /// </summary>
+    ErrorRetry,
         
-        /// <summary>
-        /// The request was cancelled. The <see cref="DiscordClient"/> was disconnected while making the request
-        /// </summary>
-        Cancelled
-    }
+    /// <summary>
+    /// The request was canceled. The <see cref="DiscordClient"/> was disconnected while making the request
+    /// </summary>
+    Cancelled
 }

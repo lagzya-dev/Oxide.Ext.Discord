@@ -1,71 +1,44 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types
+namespace Oxide.Ext.Discord.Types;
+
+internal ref struct ReverseStringTokenizer
 {
-    internal class ReverseStringTokenizer : BasePoolable, IEnumerator<ReadOnlyMemory<char>>
+    private ReadOnlySpan<char> _remaining;
+    private readonly ReadOnlySpan<char> _token;
+
+    public ReadOnlySpan<char> Current { get; private set; }
+        
+    public ReverseStringTokenizer(string str, string token)
     {
-        private string _string;
-        private char _token;
-        private int _stringIndex;
+        _remaining = str;
+        _token = token;
+    }
 
-        public ReadOnlyMemory<char> Current { get; private set; }
-
-        object IEnumerator.Current => Current;
-
-        public static ReverseStringTokenizer Create(string str, char token)
+    public bool MoveNext()
+    {
+        if (_remaining.Length == 0)
         {
-            ReverseStringTokenizer tokenizer = DiscordPool.Internal.Get<ReverseStringTokenizer>();
-            tokenizer.Init(str, token);
-            return tokenizer;
+            return false;
         }
-
-        private void Init(string str, char token)
-        {
-            _string = str;
-            _token = token;
-            _stringIndex = str.Length - 1;
-        }
-
-        public bool MoveNext()
-        {
-            if (_stringIndex <= 0)
-            {
-                return false;
-            }
             
-            int index = _string.LastIndexOf(_token, _stringIndex) + 1;
-            if (index < 0)
-            {
-                index = 0;
-            }
-            
-            int length = _stringIndex - index + 1;
-            if (length == 0)
-            {
-                _stringIndex = index - 2;
-                return MoveNext();
-            }
-
-            Current = _string.AsMemory().Slice(index, length);
-            _stringIndex = index - 2;
+        int index = _remaining.LastIndexOf(_token);
+        if (index < 0)
+        {
+            Current = _remaining;
+            _remaining = default;
             return true;
         }
-
-        public void Reset()
+            
+        int length = _remaining.Length - index;
+        if (length <= 1)
         {
-            _stringIndex = 0;
-            Current = null;
+            _remaining = _remaining.Slice(0, index);
+            return MoveNext();
         }
 
-        protected override void EnterPool()
-        {
-            _string = null;
-            Current = null;
-            _token = default(char);
-            _stringIndex = 0;
-        }
+        Current = _remaining.Slice(index + 1, length - 1);
+        _remaining = _remaining.Slice(0, Math.Min(index, _remaining.Length));
+        return true;
     }
 }

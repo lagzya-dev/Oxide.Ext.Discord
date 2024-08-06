@@ -1,36 +1,35 @@
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents a file attachment for a discord message
+/// </summary>
+public class MessageFileAttachment
 {
     /// <summary>
-    /// Represents a file attachment for a discord message
+    /// Name of the file attachment
     /// </summary>
-    public class MessageFileAttachment
-    {
-        /// <summary>
-        /// Name of the file attachment
-        /// </summary>
-        public string FileName { get; set; }
+    public string FileName { get; set; }
         
-        /// <summary>
-        /// Data for the file attachment
-        /// </summary>
-        public byte[] Data { get; set; }
+    /// <summary>
+    /// Data for the file attachment
+    /// </summary>
+    public byte[] Data { get; set; }
         
-        /// <summary>
-        /// Web Content Type for the file attachment
-        /// </summary>
-        public string ContentType { get; set; }
+    /// <summary>
+    /// Web Content Type for the file attachment
+    /// </summary>
+    public string ContentType { get; set; }
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="fileName">File Attachment Name</param>
-        /// <param name="data">Data for the file</param>
-        /// <param name="contentType">Web Content Type for the file attachment</param>
-        public MessageFileAttachment(string fileName, byte[] data, string contentType)
-        {
-            FileName = fileName;
-            Data = data;
-            ContentType = contentType;
-        }
+    /// <summary>
+    /// Constructor
+    /// </summary>
+    /// <param name="fileName">File Attachment Name</param>
+    /// <param name="data">Data for the file</param>
+    /// <param name="contentType">Web Content Type for the file attachment</param>
+    public MessageFileAttachment(string fileName, byte[] data, string contentType)
+    {
+        FileName = fileName;
+        Data = data;
+        ContentType = contentType;
     }
 }

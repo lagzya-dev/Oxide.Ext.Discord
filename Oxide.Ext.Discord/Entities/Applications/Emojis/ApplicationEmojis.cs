@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Oxide.Ext.Discord.Entities.Emojis
+namespace Oxide.Ext.Discord.Entities.Emojis;
+
+/// <summary>
+/// Represents <a href="https://discord.com/developers/docs/resources/emoji#list-application-emojis">Application Emojis</a>
+/// </summary>
+public class ApplicationEmojis
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/resources/emoji#list-application-emojis">Application Emojis</a>
+    /// List of application emojis
     /// </summary>
-    public class ApplicationEmojis
-    {
-        /// <summary>
-        /// List of application emojis
-        /// </summary>
-        [JsonProperty("items")]
-        public List<DiscordEmoji> Items { get; set; }
-    }
+    [JsonProperty("items")]
+    public List<DiscordEmoji> Items { get; set; }
 }

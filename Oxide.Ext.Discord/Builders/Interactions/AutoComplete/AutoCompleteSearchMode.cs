@@ -1,23 +1,22 @@
-namespace Oxide.Ext.Discord.Builders
+namespace Oxide.Ext.Discord.Builders;
+
+/// <summary>
+/// AutoComplete Search Mode for <see cref="InteractionAutoCompleteBuilder"/>
+/// </summary>
+public enum AutoCompleteSearchMode : byte
 {
     /// <summary>
-    /// AutoComplete Search Mode for <see cref="InteractionAutoCompleteBuilder"/>
+    /// Filter using StartsWith
     /// </summary>
-    public enum AutoCompleteSearchMode : byte
-    {
-        /// <summary>
-        /// Filter using StartsWith
-        /// </summary>
-        StartsWith,
+    StartsWith,
         
-        /// <summary>
-        /// Filter using Contains
-        /// </summary>
-        Contains,
+    /// <summary>
+    /// Filter using Contains
+    /// </summary>
+    Contains,
         
-        /// <summary>
-        /// Filter using EndsWith
-        /// </summary>
-        EndsWith
-    }
+    /// <summary>
+    /// Filter using EndsWith
+    /// </summary>
+    EndsWith
 }

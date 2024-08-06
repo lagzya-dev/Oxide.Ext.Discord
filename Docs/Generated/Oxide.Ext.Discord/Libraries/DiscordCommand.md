@@ -138,7 +138,7 @@ public void AddGuildLocalizedCommand(string langKey, Plugin plugin,
 | --- | --- |
 | langKey | Lang Key on the plugin that contains the command |
 | plugin | Plugin to add the localized command for |
-| allowedChannels | Channel or Category Id's this command is allowed in |
+| allowedChannels | Channel or Category ID's this command is allowed in |
 | callback | Method name of the callback |
 
 ## See Also
@@ -162,7 +162,7 @@ public void AddGuildCommand(string command, Plugin plugin, List<Snowflake> allow
 | --- | --- |
 | command | Name of the command |
 | plugin | Plugin to add the localized command for |
-| allowedChannels | Channel or Category Id's this command is allowed in |
+| allowedChannels | Channel or Category ID's this command is allowed in |
 | callback | Method name of the callback |
 
 ## See Also

@@ -86,7 +86,7 @@ public string ProcessPlaceholders(string text, PlaceholderData data)
 
 ## Return Value
 
-string with placeholders replaced. If no placeholders are found the original string is returned
+String with placeholders replaced. If no placeholders are found, the original string is returned
 
 ## See Also
 

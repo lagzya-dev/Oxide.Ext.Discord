@@ -1,6 +1,6 @@
 # SnowflakeConverter class
 
-Converts a snowflake to and from it's JSON string value
+Converts a snowflake to and from its JSON string value
 
 ```csharp
 public class SnowflakeConverter : JsonConverter

@@ -1,18 +1,17 @@
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents the type of a permission
+/// </summary>
+public enum PermissionType : byte
 {
     /// <summary>
-    /// Represents the type of a permission
+    /// This permission belongs to a role
     /// </summary>
-    public enum PermissionType : byte
-    {
-        /// <summary>
-        /// This permission belongs to a role
-        /// </summary>
-        Role = 0,
+    Role = 0,
         
-        /// <summary>
-        /// This permission belongs to a member
-        /// </summary>
-        Member = 1
-    }
+    /// <summary>
+    /// This permission belongs to a member
+    /// </summary>
+    Member = 1
 }

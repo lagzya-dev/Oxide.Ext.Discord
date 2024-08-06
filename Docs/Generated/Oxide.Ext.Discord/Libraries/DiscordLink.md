@@ -25,7 +25,7 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
 | [IsLinked](#islinked-method-1-of-5)(…) | Returns if the specified ID is linked (5 methods) |
 | [LogDebug](#logdebug-method)(…) |  |
 | [OnLinked](#onlinked-method)(…) | Called by a link plugin when a link occured |
-| [OnUnlinked](#onunlinked-method)(…) | Called by a link plugin when an unlink occured |
+| [OnUnlinked](#onunlinked-method)(…) | Called by a link plugin when an unlink has occured |
 | [RemoveLinkPlugin](#removelinkplugin-method)(…) | Removes a link plugin from the Discord Link library |
 
 ## Protected Members
@@ -228,11 +228,11 @@ public PlayerId GetPlayerId(DiscordUser user)
 
 | parameter | description |
 | --- | --- |
-| user | [`DiscordUser`](../Entities/DiscordUser.md) to get player Id for |
+| user | [`DiscordUser`](../Entities/DiscordUser.md) to get player ID for |
 
 ## Return Value
 
-Player ID of the given given discord ID if linked; null otherwise
+Player ID of the given discord ID if linked; null otherwise
 
 ## See Also
 
@@ -258,7 +258,7 @@ public PlayerId GetPlayerId(Snowflake discordId)
 
 ## Return Value
 
-Player ID of the given given discord ID if linked; null otherwise
+Player ID of the given discord ID if linked; null otherwise
 
 ## See Also
 
@@ -548,7 +548,7 @@ public void OnLinked(Plugin plugin, IPlayer player, DiscordUser discord)
    
 # OnUnlinked method
 
-Called by a link plugin when an unlink occured
+Called by a link plugin when an unlink has occured
 
 ```csharp
 public void OnUnlinked(Plugin plugin, IPlayer player, DiscordUser discord)

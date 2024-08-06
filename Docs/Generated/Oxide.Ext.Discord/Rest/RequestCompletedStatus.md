@@ -13,7 +13,7 @@ public enum RequestCompletedStatus : byte
 | Success | `Success` | The request completed successfully |
 | ErrorFatal | `ErrorFatal` | The request encountered a fatal error |
 | ErrorRetry | `ErrorRetry` | The error attempt multiple times to complete the request and was unsuccessful |
-| Cancelled | `Cancelled` | The request was cancelled. The [`DiscordClient`](../Clients/DiscordClient.md) was disconnected while making the request |
+| Cancelled | `Cancelled` | The request was canceled. The [`DiscordClient`](../Clients/DiscordClient.md) was disconnected while making the request |
 
 ## See Also
 
