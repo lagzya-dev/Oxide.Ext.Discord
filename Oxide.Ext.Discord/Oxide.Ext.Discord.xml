@@ -5054,12 +5054,12 @@
         <member name="M:Oxide.Ext.Discord.Entities.ApplicationEmojiCreate.Validate">
             <inheritdoc/>
         </member>
-        <member name="T:Oxide.Ext.Discord.Entities.Emojis.ApplicationEmojis">
+        <member name="T:Oxide.Ext.Discord.Entities.ApplicationEmojis">
             <summary>
             Represents <a href="https://discord.com/developers/docs/resources/emoji#list-application-emojis">Application Emojis</a>
             </summary>
         </member>
-        <member name="P:Oxide.Ext.Discord.Entities.Emojis.ApplicationEmojis.Items">
+        <member name="P:Oxide.Ext.Discord.Entities.ApplicationEmojis.Items">
             <summary>
             List of application emojis
             </summary>

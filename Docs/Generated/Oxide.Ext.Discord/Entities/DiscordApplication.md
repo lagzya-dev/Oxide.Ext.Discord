@@ -442,7 +442,7 @@ public IPromise<ApplicationEmojis> GetApplicationEmojis(DiscordClient client)
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
-* class [ApplicationEmojis](./Emojis/ApplicationEmojis.md)
+* class [ApplicationEmojis](./ApplicationEmojis.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
