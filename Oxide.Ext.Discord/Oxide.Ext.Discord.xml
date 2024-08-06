@@ -2303,6 +2303,9 @@
             </summary>
             <param name="connection">Connection for the webhook</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>

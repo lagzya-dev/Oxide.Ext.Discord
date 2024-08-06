@@ -48,6 +48,7 @@ namespace Oxide.Ext.Discord.Clients
                 .Catch(ex => Logger.Exception("An error occured connecting the webhook", ex));
         }
 
+        ///<inheritdoc/>
         public override bool AddClient(DiscordClient client, PluginSetup setup)
         {
             if (!_clients.Contains(client))
