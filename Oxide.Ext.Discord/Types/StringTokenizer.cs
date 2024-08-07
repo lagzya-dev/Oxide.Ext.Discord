@@ -4,7 +4,7 @@ namespace Oxide.Ext.Discord.Types;
 
 internal ref struct StringTokenizer
 {
-    private ReadOnlySpan<char> _string;
+    private ReadOnlySpan<char> _remaining;
     private readonly ReadOnlySpan<char> _token;
     private readonly int _maxLength;
     public int Index { get; private set; } = -1;
@@ -15,32 +15,32 @@ internal ref struct StringTokenizer
 
     public StringTokenizer(string str, string token, int maxLength)
     {
-        _string = str;
+        _remaining = str;
         _token = token;
         _maxLength = maxLength;
     }
 
     public bool MoveNext()
     {
-        if (_string.Length == 0)
+        if (_remaining.Length == 0)
         {
             return false;
         }
             
-        int index = _string.IndexOf(_token);
-        if (index == -1 || index >= _maxLength)
+        int index = _remaining.IndexOf(_token);
+        if (index == -1 || index > _maxLength)
         {
-            index = _maxLength;
+            index = _remaining.Length;
         }
             
         if (index == 0)
         {
-            _string = _string.Slice(1);
+            _remaining = _remaining.Slice(1);
             return MoveNext();
         }
 
-        Current = _string.Slice(0, index);
-        _string = _string.Slice(index + 1);
+        Current = _remaining.Slice(0, index);
+        _remaining = _remaining.Slice(Math.Min(_remaining.Length, index + 1));
         Index++;
         return true;
     }
