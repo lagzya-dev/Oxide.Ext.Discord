@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
@@ -37,11 +38,13 @@ public class DiscordClient
     /// The bot client that is unique to the Token used
     /// </summary>
     public BotClient Bot { get; private set; }
+    
+    private readonly List<WebhookClient> _webhooks = [];
 
     /// <summary>
     /// The webhook client that is unique to the webhook used
     /// </summary>
-    public readonly List<WebhookClient> Webhooks = [];
+    public readonly IReadOnlyList<WebhookClient> Webhooks;
         
     /// <summary>
     /// Settings used to connect to discord and configure the extension
@@ -60,6 +63,7 @@ public class DiscordClient
         PluginId = plugin.Id();
         PluginName = plugin.FullName();
         PluginExt.OnPluginLoaded(Plugin);
+        Webhooks = new ReadOnlyCollection<WebhookClient>(_webhooks);
     }
         
     /// <summary>
@@ -76,7 +80,7 @@ public class DiscordClient
     public void Connect(BotConnection connection)
     {
         Connection = connection ?? throw new ArgumentNullException(nameof(connection));
-        Logger = Logger ?? DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
+        Logger ??= DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
         if (string.IsNullOrEmpty(Connection.ApiToken))
         {
@@ -110,7 +114,7 @@ public class DiscordClient
     /// <param name="connection">Webhook connection to connect to</param>
     public WebhookClient Connect(WebhookConnection connection)
     {
-        Logger = Logger ?? DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
+        Logger ??= DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
             
         if (connection.WebhookId == default || string.IsNullOrEmpty(connection.WebhookToken))
         {
@@ -128,7 +132,7 @@ public class DiscordClient
         WebhookClient client = WebhookClientFactory.Instance.InitializeWebhookClient(this, connection);
         PluginSetup setup = new(Plugin, Logger);
         client.AddClient(this, setup);
-        Webhooks.Add(client);
+        _webhooks.Add(client);
         return client;
     }
 
@@ -139,11 +143,11 @@ public class DiscordClient
     {
         Bot?.RemoveClient(this);
         Bot = null;
-        for (int index = Webhooks.Count - 1; index >= 0; index--)
+        for (int index = _webhooks.Count - 1; index >= 0; index--)
         {
-            WebhookClient client = Webhooks[index];
+            WebhookClient client = _webhooks[index];
             client.RemoveClient(this);
-            Webhooks.RemoveAt(index);
+            _webhooks.RemoveAt(index);
         }
     }
 
@@ -151,7 +155,7 @@ public class DiscordClient
     /// Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized
     /// </summary>
     /// <returns></returns>
-    public bool IsConnected() => Bot?.Initialized ?? Webhooks.Any(w => w.Initialized);
+    public bool IsConnected() => Bot?.Initialized ?? _webhooks.Any(w => w.Initialized);
 
     #region Websocket Commands
     /// <summary>

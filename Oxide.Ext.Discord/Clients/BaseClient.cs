@@ -35,7 +35,7 @@ public abstract class BaseClient
     /// <summary>
     /// List of all clients using this client
     /// </summary>
-    protected readonly List<DiscordClient> _clients = new();
+    protected readonly List<DiscordClient> _clients = [];
         
     /// <summary>
     /// List of all clients that are using this bot client
