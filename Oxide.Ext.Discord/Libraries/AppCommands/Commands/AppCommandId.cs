@@ -5,7 +5,7 @@ using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Libraries;
 
-internal readonly struct AppCommandId : IEquatable<AppCommandId>
+internal readonly record struct AppCommandId
 {
     public readonly InteractionType Type;
     public readonly string Command;
@@ -22,26 +22,6 @@ internal readonly struct AppCommandId : IEquatable<AppCommandId>
         Group = group;
         SubCommand = subCommand;
         Argument = argument;
-    }
-        
-    public static bool operator == (AppCommandId left, AppCommandId right) => left.Equals(right);
-    public static bool operator !=(AppCommandId left, AppCommandId right) => !(left == right);
-
-    public bool Equals(AppCommandId other) => Type == other.Type && Command == other.Command && Group == other.Group && SubCommand == other.SubCommand && Argument == other.Argument;
-
-    public override bool Equals(object obj) => obj is AppCommandId other && Equals(other);
-
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            int hashCode = (int)Type;
-            hashCode = (hashCode * 397) ^ (Command != null ? Command.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (Group != null ? Group.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (SubCommand != null ? SubCommand.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (Argument != null ? Argument.GetHashCode() : 0);
-            return hashCode;
-        }
     }
         
     public override string ToString()

@@ -3,7 +3,6 @@ using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
-using Oxide.Ext.Discord.Plugins;
 using Oxide.Ext.Discord.Rest;
 
 namespace Oxide.Ext.Discord.Clients;
@@ -49,14 +48,12 @@ public class WebhookClient : BaseClient, IDebugLoggable
     }
 
     ///<inheritdoc/>
-    public override bool AddClient(DiscordClient client, PluginSetup setup)
+    public override void AddClient(DiscordClient client)
     {
         if (!_clients.Contains(client))
         {
-            return base.AddClient(client, setup);
+            base.AddClient(client);
         }
-
-        return false;
     }
 
     internal override void HandleShutdown()

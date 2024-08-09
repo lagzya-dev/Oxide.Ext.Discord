@@ -120,25 +120,18 @@ public static class DiscordFormatting
 
     private static char GetTimestampFlag(TimestampStyles style)
     {
-        switch (style)
+        return style switch
         {
-            case TimestampStyles.ShortTime:
-                return 't';
-            case TimestampStyles.LongTime:
-                return 'T';
-            case TimestampStyles.ShortDate:
-                return 'd';
-            case TimestampStyles.LongDate:
-                return 'D';
-            case TimestampStyles.ShortDateTime:
-                return 'f';
-            case TimestampStyles.LongDateTime:
-                return 'F';
-            case TimestampStyles.RelativeTime:
-                return 'R';
-        }
+            TimestampStyles.ShortTime => 't',
+            TimestampStyles.LongTime => 'T',
+            TimestampStyles.ShortDate => 'd',
+            TimestampStyles.LongDate => 'D',
+            TimestampStyles.ShortDateTime => 'f',
+            TimestampStyles.LongDateTime => 'F',
+            TimestampStyles.RelativeTime => 'R',
+            _ => 'f'
+        };
 
-        return 'f';
     }
 
     /// <summary>

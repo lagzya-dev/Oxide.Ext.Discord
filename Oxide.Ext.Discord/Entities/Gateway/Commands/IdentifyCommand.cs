@@ -70,15 +70,12 @@ public class ConnectionProperties
     {
         get
         {
-            switch (Environment.OSVersion.Platform)
+            return Environment.OSVersion.Platform switch
             {
-                case PlatformID.Unix:
-                    return "unix";
-                case PlatformID.MacOSX:
-                    return "mac";
-                default:
-                    return "windows";
-            }
+                PlatformID.Unix => "unix",
+                PlatformID.MacOSX => "mac",
+                _ => "windows"
+            };
         }
     }
 

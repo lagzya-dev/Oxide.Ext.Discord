@@ -57,111 +57,43 @@ public static class DiscordAppRoutes
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static string Settings(SettingsPage page)
         {
-            string path;
-            switch (page)
+            string path = page switch
             {
-                case SettingsPage.Account:
-                    path = "account";
-                    break;
-                case SettingsPage.ProfileCustomization:
-                    path = "profile-customization";
-                    break;
-                case SettingsPage.PrivacyAndSafety:
-                    path = "privacy-and-safety";
-                    break;
-                case SettingsPage.AuthorizedApps:
-                    path = "authorized-apps";
-                    break;
-                case SettingsPage.Connections:
-                    path = "connections";
-                    break;
-                case SettingsPage.Premium:
-                    path = "premium";
-                    break;
-                case SettingsPage.PremiumGuildSubscriptions:
-                    path = "premium-guild-subscription";
-                    break;
-                case SettingsPage.Subscriptions:
-                    path = "subscriptions";
-                    break;
-                case SettingsPage.Inventory:
-                    path = "inventory";
-                    break;
-                case SettingsPage.Billing:
-                    path = "billing";
-                    break;
-                case SettingsPage.Appearance:
-                    path = "appearance";
-                    break;
-                case SettingsPage.Accessibility:
-                    path = "accessibility";
-                    break;
-                case SettingsPage.Voice:
-                    path = "voice";
-                    break;
-                case SettingsPage.Text:
-                    path = "text";
-                    break;
-                case SettingsPage.Notifications:
-                    path = "notifications";
-                    break;
-                case SettingsPage.Keybinds:
-                    path = "keybinds";
-                    break;
-                case SettingsPage.Locale:
-                    path = "locale";
-                    break;
-                case SettingsPage.Windows:
-                    path = "windows";
-                    break;
-                case SettingsPage.Linux:
-                    path = "linux";
-                    break;
-                case SettingsPage.StreamerMode:
-                    path = "streamer-mode";
-                    break;
-                case SettingsPage.Advanced:
-                    path = "advanced";
-                    break;
-                case SettingsPage.ActivityStatus:
-                    path = "activity-status";
-                    break;
-                case SettingsPage.Overlay:
-                    path = "overlay";
-                    break;
-                case SettingsPage.HypesquadOnline:
-                    path = "hypesquad-online";
-                    break;
-                case SettingsPage.Changelogs:
-                    path = "changelogs";
-                    break;
-                case SettingsPage.Experiments:
-                    path = "experiments";
-                    break;
-                case SettingsPage.DeveloperOptions:
-                    path = "developer-options";
-                    break;
-                case SettingsPage.HotspotOptions:
-                    path = "hotspot-options";
-                    break;
-                case SettingsPage.DismissibleContentOptions:
-                    path = "dismissible-content-options";
-                    break;
-                case SettingsPage.FamilyCenter:
-                    path = "family-center";
-                    break;
-                case SettingsPage.Sessions:
-                    path = "sessions";
-                    break;
-                case SettingsPage.FriendRequests:
-                    path = "friend-requests";
-                    break;
-                case SettingsPage.RegisteredGames:
-                    path = "registered-games";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(page), page, null);
-            }
+                SettingsPage.Account => "account",
+                SettingsPage.ProfileCustomization => "profile-customization",
+                SettingsPage.PrivacyAndSafety => "privacy-and-safety",
+                SettingsPage.AuthorizedApps => "authorized-apps",
+                SettingsPage.Connections => "connections",
+                SettingsPage.Premium => "premium",
+                SettingsPage.PremiumGuildSubscriptions => "premium-guild-subscription",
+                SettingsPage.Subscriptions => "subscriptions",
+                SettingsPage.Inventory => "inventory",
+                SettingsPage.Billing => "billing",
+                SettingsPage.Appearance => "appearance",
+                SettingsPage.Accessibility => "accessibility",
+                SettingsPage.Voice => "voice",
+                SettingsPage.Text => "text",
+                SettingsPage.Notifications => "notifications",
+                SettingsPage.Keybinds => "keybinds",
+                SettingsPage.Locale => "locale",
+                SettingsPage.Windows => "windows",
+                SettingsPage.Linux => "linux",
+                SettingsPage.StreamerMode => "streamer-mode",
+                SettingsPage.Advanced => "advanced",
+                SettingsPage.ActivityStatus => "activity-status",
+                SettingsPage.Overlay => "overlay",
+                SettingsPage.HypesquadOnline => "hypesquad-online",
+                SettingsPage.Changelogs => "changelogs",
+                SettingsPage.Experiments => "experiments",
+                SettingsPage.DeveloperOptions => "developer-options",
+                SettingsPage.HotspotOptions => "hotspot-options",
+                SettingsPage.DismissibleContentOptions => "dismissible-content-options",
+                SettingsPage.FamilyCenter => "family-center",
+                SettingsPage.Sessions => "sessions",
+                SettingsPage.FriendRequests => "friend-requests",
+                SettingsPage.RegisteredGames => "registered-games",
+                _ => throw new ArgumentOutOfRangeException(nameof(page), page, null)
+            };
 
             return $"{BaseUrl}/{path}";
         }

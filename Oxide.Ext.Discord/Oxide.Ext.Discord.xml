@@ -2041,12 +2041,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
+        <member name="M:Oxide.Ext.Discord.Clients.BaseClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Add a <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> to this bot / webhook client
             </summary>
             <param name="client">Client to add</param>
-            <param name="setup">Setup data for the plugin</param>
             <returns>True if this is the initial setup of the client; false otherwise</returns>
             <exception cref="T:System.Exception">Thrown if <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/> already has been added to this bot / webhook client</exception>
         </member>
@@ -2121,7 +2120,7 @@
             Called when the bot client is no longer used by any client and can be shutdown.
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
+        <member name="M:Oxide.Ext.Discord.Clients.BotClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.BotClient.RemoveClient(Oxide.Ext.Discord.Clients.DiscordClient)">
@@ -2219,7 +2218,7 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Clients.DiscordClient.Webhooks">
             <summary>
-            The webhook client that is unique to the webhook used
+            Webhook clients for this DiscordClient
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Clients.DiscordClient.Connection">
@@ -2303,7 +2302,7 @@
             </summary>
             <param name="connection">Connection for the webhook</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Plugins.PluginSetup)">
+        <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.AddClient(Oxide.Ext.Discord.Clients.DiscordClient)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Clients.WebhookClient.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
@@ -21303,7 +21302,7 @@
             <param name="subCommand">Sub Command for the command</param>
             <exception cref="T:System.ArgumentNullException">Thrown if command is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAppCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordAppCommand.OnClientBotConnect(Oxide.Ext.Discord.Clients.DiscordClient)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordAppCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -21322,12 +21321,17 @@
             Constructor
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginLoaded(Oxide.Ext.Discord.Clients.DiscordClient)">
             <summary>
             Called on the library when a plugin is loaded
             </summary>
-            <param name="data">Plugin that was loaded</param>
-            <param name="connection">Connection for the plugin</param>
+            <param name="client">Client for the loaded plugin</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnClientBotConnect(Oxide.Ext.Discord.Clients.DiscordClient)">
+            <summary>
+            Called on the library when a plugin is loaded
+            </summary>
+            <param name="client">Client for the connecting bot</param>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.BaseDiscordLibrary.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
             <summary>
@@ -21470,7 +21474,7 @@
             <param name="args"></param>
             <param name="message"></param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommand.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommand.OnClientBotConnect(Oxide.Ext.Discord.Clients.DiscordClient)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordCommand.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -21725,15 +21729,6 @@
             </summary>
             <param name="player">IPlayer for the ID</param>
             <exception cref="T:System.ArgumentNullException">Thrown if the IPlayer is null</exception>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.Equals(Oxide.Ext.Discord.Libraries.PlayerId)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.GetHashCode">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordLocale">
             <summary>
@@ -24158,7 +24153,7 @@
             <returns></returns>
             <exception cref="T:System.ArgumentNullException">Thrown if the plugin is null</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Plugins.PluginSetup,Oxide.Ext.Discord.Connections.BotConnection)">
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordPool.OnPluginLoaded(Oxide.Ext.Discord.Clients.DiscordClient)">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordPool.OnPluginUnloaded(Oxide.Core.Plugins.Plugin)">
@@ -28246,7 +28241,7 @@
             Called when a socket receives a message
             </summary>
             <param name="webSocketId">ID of the web socket</param>
-            <param name="reader">Json Reader containing the message</param>
+            <param name="reader">JSON Reader containing the message</param>
         </member>
         <member name="M:Oxide.Ext.Discord.WebSockets.WebSocketEventHandler.HandleDispatchPresenceUpdate(Oxide.Ext.Discord.Entities.PresenceUpdatedEvent)">
             <summary>

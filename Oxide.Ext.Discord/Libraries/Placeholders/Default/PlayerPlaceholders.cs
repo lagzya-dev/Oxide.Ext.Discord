@@ -31,17 +31,13 @@ public static class PlayerPlaceholders
             return player.Name;
         }
 
-        switch (mode)
+        return mode switch
         {
-            case PlayerDisplayNameMode.Clan:
-                return PlayerNameFormatter.ClanName.Format(player);
-            case PlayerDisplayNameMode.PlayerId:
-                return PlayerNameFormatter.PlayerId.Format(player);
-            case PlayerDisplayNameMode.All:
-                return PlayerNameFormatter.All.Format(player);
-            default:
-                return PlayerNameFormatter.Default.Format(player);
-        }
+            PlayerDisplayNameMode.Clan => PlayerNameFormatter.ClanName.Format(player),
+            PlayerDisplayNameMode.PlayerId => PlayerNameFormatter.PlayerId.Format(player),
+            PlayerDisplayNameMode.All => PlayerNameFormatter.All.Format(player),
+            _ => PlayerNameFormatter.Default.Format(player)
+        };
     }
 
     /// <summary>

@@ -10,20 +10,14 @@ internal static class DiscordHttpMethods
 
     public static HttpMethod GetMethod(RequestMethod method)
     {
-        switch (method)
+        return method switch
         {
-            case RequestMethod.DELETE:
-                return HttpMethod.Delete;
-            case RequestMethod.GET:
-                return HttpMethod.Get;
-            case RequestMethod.PATCH:
-                return Patch;
-            case RequestMethod.POST:
-                return HttpMethod.Post;
-            case RequestMethod.PUT:
-                return HttpMethod.Put;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(method), method, null);
-        }
+            RequestMethod.DELETE => HttpMethod.Delete,
+            RequestMethod.GET => HttpMethod.Get,
+            RequestMethod.PATCH => Patch,
+            RequestMethod.POST => HttpMethod.Post,
+            RequestMethod.PUT => HttpMethod.Put,
+            _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
+        };
     }
 }

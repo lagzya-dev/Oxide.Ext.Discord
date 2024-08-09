@@ -23,17 +23,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the format is Jpg or WebP</exception>
     public static string GetCustomEmojiUrl(Snowflake emojiId, DiscordImageFormat format)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/emojis/{emojiId.ToString()}.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Custom Emoji. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
-        }
+            DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/emojis/{emojiId.ToString()}.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Custom Emoji. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -45,18 +39,11 @@ public static class DiscordCdn
     /// <returns>Url of the guild icon</returns>
     public static string GetGuildIconUrl(Snowflake guildId, string guildIcon, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/icons/{guildId.ToString()}/{guildIcon}.{GetExtension(format, guildIcon)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Icon. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/icons/{guildId.ToString()}/{guildIcon}.{GetExtension(format, guildIcon)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Icon. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -69,16 +56,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the format is GIF</exception>
     public static string GetGuildSplashUrl(Snowflake guildId, string guildSplash, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/splashes/{guildId.ToString()}/{guildSplash}.{GetExtension(format)}";
-                
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/splashes/{guildId.ToString()}/{guildSplash}.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Splash. Valid types are (Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -91,17 +73,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the format is GIF</exception>
     public static string GetGuildDiscoverySplashUrl(Snowflake guildId, string guildDiscoverySplash, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/discovery-splashes/{guildId.ToString()}/{guildDiscoverySplash}.{GetExtension(format, guildDiscoverySplash)}";
-                
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Discovery Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/discovery-splashes/{guildId.ToString()}/{guildDiscoverySplash}.{GetExtension(format, guildDiscoverySplash)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Discovery Splash. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -114,18 +90,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the format is GIF</exception>
     public static string GetGuildBannerUrl(Snowflake guildId, string guildBanner, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/banners/{guildId.ToString()}/{guildBanner}.{GetExtension(format, guildBanner)}";
-                
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/banners/{guildId.ToString()}/{guildBanner}.{GetExtension(format, guildBanner)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -138,18 +107,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the format is GIF</exception>
     public static string GetUserBanner(Snowflake userId, string userBanner, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/banners/{userId.ToString()}/{userBanner}.{GetExtension(format, userBanner)}";
-                
-            default:
-                throw new ArgumentException("ImageFormat is not valid for User Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/banners/{userId.ToString()}/{userBanner}.{GetExtension(format, userBanner)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for User Banner. Valid types are (Auto, Png, Jpeg, WebP, GIF)", nameof(format))
+        };
     }
 
     /// <summary>
@@ -172,18 +134,11 @@ public static class DiscordCdn
     /// <returns>Url of the user's avatar</returns>
     public static string GetUserAvatarUrl(Snowflake userId, string userAvatar, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/avatars/{userId.ToString()}/{userAvatar}.{GetExtension(format, userAvatar)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for User Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/avatars/{userId.ToString()}/{userAvatar}.{GetExtension(format, userAvatar)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for User Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format))
+        };
     }
 
     /// <summary>
@@ -196,18 +151,11 @@ public static class DiscordCdn
     /// <returns>Url of the Guild Member avatar</returns>
     public static string GetGuildMemberAvatar(Snowflake guildId, Snowflake userId, string memberAvatar, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/avatars/{memberAvatar}.{GetExtension(format, memberAvatar)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Member Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/avatars/{memberAvatar}.{GetExtension(format, memberAvatar)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Member Avatar. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format))
+        };
     }
 
     /// <summary>
@@ -219,15 +167,11 @@ public static class DiscordCdn
     public static string GetUserAvatarDecoration(AvatarDecorationData data, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
         if (data == null) throw new ArgumentNullException(nameof(data));
-        switch (format) 
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Png:
-                return $"{CdnUrl}/avatar-decoration-presets/{data.Asset}.{GetExtension(format, data.Asset)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for User Avatar Decoration. Valid types are (Auto, Png)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Png => $"{CdnUrl}/avatar-decoration-presets/{data.Asset}.{GetExtension(format, data.Asset)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for User Avatar Decoration. Valid types are (Auto, Png)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -240,17 +184,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Throw if the format is GIF</exception>
     public static string GetApplicationIconUrl(Snowflake applicationId, string icon, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/app-icons/{applicationId.ToString()}/{icon}.{GetExtension(format, icon)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Application Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/app-icons/{applicationId.ToString()}/{icon}.{GetExtension(format, icon)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Application Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -263,17 +201,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Throw if the format is GIF</exception>
     public static string GetApplicationCoverUrl(Snowflake applicationId, string coverImage, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/app-icons/{applicationId.ToString()}/{coverImage}.{GetExtension(format, coverImage)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Application Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/app-icons/{applicationId.ToString()}/{coverImage}.{GetExtension(format, coverImage)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Application Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -286,17 +218,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Throw if the format is GIF</exception>
     public static string GetApplicationAssetUrl(Snowflake applicationId, string assetId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/app-assets/{applicationId.ToString()}/{assetId}.{GetExtension(format, assetId)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Application Asset. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/app-assets/{applicationId.ToString()}/{assetId}.{GetExtension(format, assetId)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Application Asset. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -322,17 +248,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Throw if the format is GIF</exception>
     public static string GetStorePageAssetUrl(Snowflake applicationId, ulong assetId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{StringCache<ulong>.Instance.ToString(assetId)}.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Store Page Asset Url. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{StringCache<ulong>.Instance.ToString(assetId)}.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Store Page Asset Url. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -345,17 +265,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Throw if the format is GIF</exception>
     public static string GetTeamIconUrl(Snowflake teamId, string teamIcon, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/team-icons/{teamId.ToString()}/{teamIcon}.{GetExtension(format, teamIcon)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Team Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/team-icons/{teamId.ToString()}/{teamIcon}.{GetExtension(format, teamIcon)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Team Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
 
@@ -369,17 +283,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the image type is not PNG, JPEG, or WebP</exception>
     public static string GetStickerPackBanner(Snowflake applicationId, Snowflake bannerAssetId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{bannerAssetId.ToString()}.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/app-assets/{applicationId.ToString()}/store/{bannerAssetId.ToString()}.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Sticker Pack Banner. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -390,18 +298,13 @@ public static class DiscordCdn
     public static string GetSticker(DiscordSticker sticker)
     {
         if (sticker == null) throw new ArgumentNullException(nameof(sticker));
-        switch (sticker.FormatType)
+        return sticker.FormatType switch
         {
-            case StickerFormatType.Png:
-            case StickerFormatType.Apng:
-                return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Png)}";
-            case StickerFormatType.Lottie:
-                return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Lottie)}";
-            case StickerFormatType.Gif:
-                return $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Gif)}";
-            default:
-                throw new ArgumentException("Sticker does not container a valid format type", nameof(sticker.FormatType));
-        }
+            StickerFormatType.Png or StickerFormatType.Apng => $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Png)}",
+            StickerFormatType.Lottie => $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Lottie)}",
+            StickerFormatType.Gif => $"{CdnUrl}/stickers/{sticker.Id.ToString()}.{GetExtension(DiscordImageFormat.Gif)}",
+            _ => throw new ArgumentException("Sticker does not container a valid format type", nameof(sticker.FormatType))
+        };
     }
         
     /// <summary>
@@ -413,17 +316,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
     public static string GetRoleIcon(Snowflake roleId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Role Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/role-icons/{roleId.ToString()}.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Role Icon. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -435,17 +332,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
     public static string GetGuildScheduledEventCover(Snowflake scheduledEventId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-                return $"{CdnUrl}/guild-events/{scheduledEventId.ToString()}/scheduled_event_cover_image.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Scheduled Event Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP => $"{CdnUrl}/guild-events/{scheduledEventId.ToString()}/scheduled_event_cover_image.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Scheduled Event Cover. Valid types are (Auto, Png, Jpeg, WebP)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -458,18 +349,11 @@ public static class DiscordCdn
     /// <exception cref="ArgumentException">Thrown if the image type is not PNG or Lottie</exception>
     public static string GetGuildMemberBanner(Snowflake guildId, Snowflake userId, DiscordImageFormat format = DiscordImageFormat.Auto)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Jpg:
-            case DiscordImageFormat.Png:
-            case DiscordImageFormat.WebP:
-            case DiscordImageFormat.Gif:
-                return $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/banners/member_banner.{GetExtension(format)}";
-
-            default:
-                throw new ArgumentException("ImageFormat is not valid for Guild Member Banner. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format));
-        }
+            DiscordImageFormat.Auto or DiscordImageFormat.Jpg or DiscordImageFormat.Png or DiscordImageFormat.WebP or DiscordImageFormat.Gif => $"{CdnUrl}/guilds/{guildId.ToString()}/users/{userId.ToString()}/banners/member_banner.{GetExtension(format)}",
+            _ => throw new ArgumentException("ImageFormat is not valid for Guild Member Banner. Valid types are (Auto, Png, Jpeg, WebP, Gif)", nameof(format))
+        };
     }
         
     /// <summary>
@@ -502,21 +386,14 @@ public static class DiscordCdn
 
     private static string GetExtension(DiscordImageFormat format)
     {
-        switch (format)
+        return format switch
         {
-            case DiscordImageFormat.Jpg:
-                return "jpeg";
-            case DiscordImageFormat.Auto:
-            case DiscordImageFormat.Png:
-                return "png";
-            case DiscordImageFormat.WebP:
-                return "webp";
-            case DiscordImageFormat.Gif:
-                return "gif";
-            case DiscordImageFormat.Lottie:
-                return "json";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(format), format.ToString(), "Format is not a valid ImageFormat");
-        }
+            DiscordImageFormat.Jpg => "jpeg",
+            DiscordImageFormat.Auto or DiscordImageFormat.Png => "png",
+            DiscordImageFormat.WebP => "webp",
+            DiscordImageFormat.Gif => "gif",
+            DiscordImageFormat.Lottie => "json",
+            _ => throw new ArgumentOutOfRangeException(nameof(format), format.ToString(), "Format is not a valid ImageFormat")
+        };
     }
 }

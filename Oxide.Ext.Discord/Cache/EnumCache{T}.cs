@@ -120,23 +120,14 @@ public sealed class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, ICo
 
     private int GetTypeSize()
     {
-        switch (_typeCode)
+        return _typeCode switch
         {
-            case TypeCode.SByte:
-            case TypeCode.Byte:
-                return 8;
-            case TypeCode.Int16:
-            case TypeCode.UInt16:
-                return 16;
-            case TypeCode.Int32:
-            case TypeCode.UInt32:
-                return 32;
-            case TypeCode.Int64:
-            case TypeCode.UInt64:
-                return 64;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+            TypeCode.SByte or TypeCode.Byte => 8,
+            TypeCode.Int16 or TypeCode.UInt16 => 16,
+            TypeCode.Int32 or TypeCode.UInt32 => 32,
+            TypeCode.Int64 or TypeCode.UInt64 => 64,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
         
     private string CreateFlagsString(T value)

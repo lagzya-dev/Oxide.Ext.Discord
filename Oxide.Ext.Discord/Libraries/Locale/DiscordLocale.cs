@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// Represents a Locale in Discord
 /// </summary>
 [JsonConverter(typeof(DiscordLocaleConverter))]
-public readonly struct DiscordLocale : IEquatable<DiscordLocale>
+public readonly record struct DiscordLocale
 {
     /// <summary>
     /// ID of the locale
@@ -60,31 +60,6 @@ public readonly struct DiscordLocale : IEquatable<DiscordLocale>
     }
 
     internal static DiscordLocale Create(string locale) => new(locale);
-        
-    ///<inheritdoc/>
-    public bool Equals(DiscordLocale other) => Id == other.Id;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is DiscordLocale other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
-
-    /// <summary>
-    /// Returns if two Discord Locales are equal to each other
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator == (DiscordLocale left, DiscordLocale right) => left.Equals(right);
-        
-    /// <summary>
-    /// Returns if two Discord Locales are not equal to each other
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator != (DiscordLocale left, DiscordLocale right) => !(left == right);
         
     /// <summary>
     /// Returns the ID of the Locale

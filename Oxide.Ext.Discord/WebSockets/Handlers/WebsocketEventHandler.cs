@@ -59,7 +59,7 @@ public class WebSocketEventHandler : IWebSocketEventHandler
     /// <param name="message">Close message from the web socket</param>
     public ValueTask SocketClosed(Snowflake websocketId, WebSocketCloseStatus status, string message)
     {
-        //If the socket close came from the extension then this will be true
+        //If the socket close came from the extension, then this will be true
         if (!_webSocket.IsCurrentSocket(websocketId))
         {
             _logger.Verbose($"{nameof(WebSocketEventHandler)}.{nameof(SocketClosed)} Socket closed event for non matching socket. Code: {{0}}, reason: {{1}}", status, message);
@@ -227,7 +227,7 @@ public class WebSocketEventHandler : IWebSocketEventHandler
     /// Called when a socket receives a message
     /// </summary>
     /// <param name="webSocketId">ID of the web socket</param>
-    /// <param name="reader">Json Reader containing the message</param>
+    /// <param name="reader">JSON Reader containing the message</param>
     public async ValueTask SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
     {
         EventPayload payload = reader.Deserialize<EventPayload>(_client.JsonSerializer);
@@ -263,7 +263,7 @@ public class WebSocketEventHandler : IWebSocketEventHandler
                     HandleReconnect();
                     break;
 
-                // Invalid Session (used to notify client they have an invalid session ID)
+                // Invalid Session (used to notify the client they have an invalid session ID)
                 case GatewayEventCode.InvalidSession:
                     HandleInvalidSession(payload.ShouldResume);
                     break;

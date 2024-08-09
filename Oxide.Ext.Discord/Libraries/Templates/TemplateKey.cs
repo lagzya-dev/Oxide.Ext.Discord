@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// Represents a Template Key. This is the key for template lookup
 /// </summary>
 [JsonConverter(typeof(TemplateKeyConverter))]
-public readonly struct TemplateKey: IEquatable<TemplateKey>, IDiscordKey
+public readonly record struct TemplateKey: IDiscordKey
 {
     /// <summary>
     /// Placeholder Key
@@ -29,31 +29,6 @@ public readonly struct TemplateKey: IEquatable<TemplateKey>, IDiscordKey
     {
         Name = name;
     }
-        
-    /// <inheritdoc />
-    public bool Equals(TemplateKey other) => Name == other.Name;
-        
-    /// <inheritdoc />
-    public override bool Equals(object obj) => obj is TemplateKey other && Equals(other);
-        
-    /// <inheritdoc />
-    public override int GetHashCode() => Name != null ? Name.GetHashCode() : 0;
-
-    /// <summary>
-    /// Template Key == operator
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator ==(TemplateKey left, TemplateKey right) => left.Name == right.Name;
-
-    /// <summary>
-    /// Template Key != operator
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator !=(TemplateKey left, TemplateKey right) => !(left == right);
 
     /// <summary>
     /// Returns the template name

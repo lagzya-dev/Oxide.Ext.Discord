@@ -14,7 +14,7 @@ public class DiscordClient
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
-| readonly [Webhooks](#webhooks-field) | The webhook client that is unique to the webhook used |
+| readonly [Webhooks](#webhooks-field) | Webhook clients for this DiscordClient |
 | [Connect](#connect-method-1-of-4)(…) | Starts a connection to discord with the given apiKey and intents (4 methods) |
 | [Disconnect](#disconnect-method)() | Disconnects this client from discord |
 | [IsConnected](#isconnected-method)() | Returns if the client is connected to a bot / webhook and if the bot / webhook is initialized |
@@ -268,10 +268,10 @@ public readonly string PluginName;
    
 # Webhooks field
 
-The webhook client that is unique to the webhook used
+Webhook clients for this DiscordClient
 
 ```csharp
-public readonly List<WebhookClient> Webhooks;
+public readonly IReadOnlyList<WebhookClient> Webhooks;
 ```
 
 ## See Also

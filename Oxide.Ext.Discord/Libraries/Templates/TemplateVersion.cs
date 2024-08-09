@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// Version of a specific template
 /// </summary>
 [JsonConverter(typeof(TemplateVersionConverter))]
-public readonly struct TemplateVersion : IEquatable<TemplateVersion>, IComparable<TemplateVersion>
+public readonly record struct TemplateVersion : IComparable<TemplateVersion>
 {
     /// <summary>
     /// Major Version
@@ -37,31 +37,7 @@ public readonly struct TemplateVersion : IEquatable<TemplateVersion>, IComparabl
         Minor = minor;
         Revision = revision;
     }
-
-    ///<inheritdoc/>
-    public bool Equals(TemplateVersion other)
-    {
-        return Major == other.Major && Minor == other.Minor && Revision == other.Revision;
-    }
-        
-    ///<inheritdoc/>
-    public override bool Equals(object obj)
-    {
-        return obj is TemplateVersion other && Equals(other);
-    }
-        
-    ///<inheritdoc/>
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            int hashCode = Major.GetHashCode();
-            hashCode = (hashCode * 397) ^ Minor.GetHashCode();
-            hashCode = (hashCode * 397) ^ Revision.GetHashCode();
-            return hashCode;
-        }
-    }
-
+    
     ///<inheritdoc/>
     public int CompareTo(TemplateVersion other)
     {
@@ -73,22 +49,6 @@ public readonly struct TemplateVersion : IEquatable<TemplateVersion>, IComparabl
             return minorComparison;
         return Revision.CompareTo(other.Revision);
     }
-
-    /// <summary>
-    /// Returns if the template versions are equal
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator == (TemplateVersion left, TemplateVersion right) => left.Equals(right);
-        
-    /// <summary>
-    /// Returns if the template versions are not equal
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator != (TemplateVersion left, TemplateVersion right) => !(left == right);
         
     /// <summary>
     /// Returns if the left template version is less than the right

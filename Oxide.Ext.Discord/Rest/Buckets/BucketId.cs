@@ -5,7 +5,7 @@ namespace Oxide.Ext.Discord.Rest;
 /// <summary>
 /// Represents an ID for a bucket
 /// </summary>
-public readonly struct BucketId : IEquatable<BucketId>
+public readonly record struct BucketId
 {
     /// <summary>
     /// ID of the bucket
@@ -28,30 +28,5 @@ public readonly struct BucketId : IEquatable<BucketId>
     }
 
     ///<inheritdoc/>
-    public bool Equals(BucketId other) => Id == other.Id;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is BucketId other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
-
-    ///<inheritdoc/>
     public override string ToString() => Id;
-        
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator == (BucketId left, BucketId right) => left.Equals(right);
-        
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator != (BucketId left, BucketId right) => !(left == right);
 }

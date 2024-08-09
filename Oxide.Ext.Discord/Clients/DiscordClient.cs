@@ -42,7 +42,7 @@ public class DiscordClient
     private readonly List<WebhookClient> _webhooks = [];
 
     /// <summary>
-    /// The webhook client that is unique to the webhook used
+    /// Webhook clients for this DiscordClient
     /// </summary>
     public readonly IReadOnlyList<WebhookClient> Webhooks;
         
@@ -53,6 +53,8 @@ public class DiscordClient
 
     internal ILogger Logger;
 
+    internal PluginSetup PluginSetup { get; private set; }
+
     /// <summary>
     /// Constructor for a discord client
     /// </summary>
@@ -60,10 +62,11 @@ public class DiscordClient
     internal DiscordClient(Plugin plugin)
     {
         Plugin = plugin;
+        PluginExt.OnPluginLoaded(Plugin);
         PluginId = plugin.Id();
         PluginName = plugin.FullName();
-        PluginExt.OnPluginLoaded(Plugin);
         Webhooks = new ReadOnlyCollection<WebhookClient>(_webhooks);
+        BaseDiscordLibrary.ProcessPluginLoaded(this);
     }
         
     /// <summary>
@@ -96,10 +99,10 @@ public class DiscordClient
         Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
 
         Connection.Initialize(this);
-        PluginSetup setup = new(Plugin, Logger);
-        BaseDiscordLibrary.ProcessPluginLoaded(setup, Connection);
+        PluginSetup = new PluginSetup(Plugin, Logger);
+        BaseDiscordLibrary.ProcessBotConnection(this);
         Bot = BotClientFactory.Instance.InitializeBotClient(this, Connection);
-        Bot.AddClient(this, setup);
+        Bot.AddClient(this);
     }
 
     /// <summary>
@@ -130,8 +133,7 @@ public class DiscordClient
         Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
             
         WebhookClient client = WebhookClientFactory.Instance.InitializeWebhookClient(this, connection);
-        PluginSetup setup = new(Plugin, Logger);
-        client.AddClient(this, setup);
+        client.AddClient(this);
         _webhooks.Add(client);
         return client;
     }
@@ -204,6 +206,7 @@ public class DiscordClient
             }
                 
             Plugin = null;
+            PluginSetup = null;
         }
     }
 }

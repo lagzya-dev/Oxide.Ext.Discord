@@ -11,7 +11,7 @@ namespace Oxide.Ext.Discord.Entities;
 /// Represents a Discord Color
 /// </summary>
 [JsonConverter(typeof(DiscordColorConverter))]
-public readonly struct DiscordColor
+public readonly record struct DiscordColor
 {
     /// <summary>
     /// Default Role Color

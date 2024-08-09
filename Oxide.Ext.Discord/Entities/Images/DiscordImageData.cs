@@ -97,19 +97,14 @@ public readonly struct DiscordImageData
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public double GetImageSize(DiscordImageSize size)
     {
-        switch (size)
+        return size switch
         {
-            case DiscordImageSize.Bytes:
-                return Image.Length;
-            case DiscordImageSize.KiloBytes:
-                return Image.Length / KiloBytes;
-            case DiscordImageSize.MegaBytes:
-                return Image.Length / MegaBytes;
-            case DiscordImageSize.GigaBytes:
-                return Image.Length / Gigabytes;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(size), size, null);
-        }
+            DiscordImageSize.Bytes => Image.Length,
+            DiscordImageSize.KiloBytes => Image.Length / KiloBytes,
+            DiscordImageSize.MegaBytes => Image.Length / MegaBytes,
+            DiscordImageSize.GigaBytes => Image.Length / Gigabytes,
+            _ => throw new ArgumentOutOfRangeException(nameof(size), size, null)
+        };
     }
 
     /// <summary>

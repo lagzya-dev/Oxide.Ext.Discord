@@ -62,13 +62,12 @@ public void DisconnectWebsocket(bool reconnect = false, bool resume = false)
 # AddClient method
 
 ```csharp
-public override bool AddClient(DiscordClient client, PluginSetup setup)
+public override void AddClient(DiscordClient client)
 ```
 
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* class [PluginSetup](../Plugins/PluginSetup.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

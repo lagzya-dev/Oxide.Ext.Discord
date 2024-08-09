@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// <summary>
 /// Represents a Placeholder Key. This is the key for placeholder usage and lookup
 /// </summary>
-public readonly struct PlaceholderKey : IEquatable<PlaceholderKey>, IComparable<PlaceholderKey>, IDiscordKey
+public readonly record struct PlaceholderKey : IComparable<PlaceholderKey>, IDiscordKey
 {
     /// <summary>
     /// Placeholder Key
@@ -54,15 +54,6 @@ public readonly struct PlaceholderKey : IEquatable<PlaceholderKey>, IComparable<
     /// </summary>
     /// <returns></returns>
     public override string ToString() => $"{{{Placeholder}}}";
-
-    ///<inheritdoc/>
-    public bool Equals(PlaceholderKey other) => Placeholder == other.Placeholder;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is PlaceholderKey other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Placeholder != null ? Placeholder.GetHashCode() : 0;
 
     /// <inheritdoc />
     public int CompareTo(PlaceholderKey other) => string.Compare(Placeholder, other.Placeholder, StringComparison.OrdinalIgnoreCase);

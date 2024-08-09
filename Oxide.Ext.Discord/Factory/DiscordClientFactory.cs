@@ -36,7 +36,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
         OnPluginUnloaded(plugin);
 
         // ReSharper disable once SuspiciousTypeConversion.Global
-        if (!(plugin is IDiscordPlugin discordPlugin))
+        if (plugin is not IDiscordPlugin discordPlugin)
         {
             return null;
         }
@@ -70,7 +70,7 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
     /// </summary>
     /// <param name="pluginId">Plugin to get the client for</param>
     /// <returns>Discord client for the plugin</returns>
-    internal DiscordClient GetClient(PluginId pluginId)
+    private DiscordClient GetClient(PluginId pluginId)
     {
         return _clients[pluginId];
     }

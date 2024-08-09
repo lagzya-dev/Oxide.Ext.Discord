@@ -111,33 +111,16 @@ public class MessageComponentBuilder
             
         UpdateActionRow<BaseSelectMenuComponent>(false);
 
-        BaseSelectMenuComponent select;
-        switch (type)
+        BaseSelectMenuComponent select = type switch
         {
-            case MessageComponentType.StringSelect:
-                select = new StringSelectComponent();
-                break;
-                
-            case MessageComponentType.UserSelect:
-                select = new UserSelectComponent();
-                break;
-                
-            case MessageComponentType.RoleSelect:
-                select = new RoleSelectComponent();
-                break;
-                
-            case MessageComponentType.MentionableSelect:
-                select = new MentionableSelectComponent();
-                break;
-                
-            case MessageComponentType.ChannelSelect:
-                select = new ChannelSelectComponent();
-                break;
-                
-            default:
-                throw new ArgumentOutOfRangeException(nameof(type), type, null);
-        }
-            
+            MessageComponentType.StringSelect => new StringSelectComponent(),
+            MessageComponentType.UserSelect => new UserSelectComponent(),
+            MessageComponentType.RoleSelect => new RoleSelectComponent(),
+            MessageComponentType.MentionableSelect => new MentionableSelectComponent(),
+            MessageComponentType.ChannelSelect => new ChannelSelectComponent(),
+            _ => throw new ArgumentOutOfRangeException(nameof(type), type, null)
+        };
+
         select.CustomId = customId;
         select.Placeholder = placeholder;
         select.MinValues = minValues;

@@ -14,7 +14,6 @@ namespace Oxide.Ext.Discord.Plugins;
 /// </summary>
 public class PluginSetup
 {
-    internal readonly Plugin Plugin;
     internal readonly string PluginName;
 
     internal readonly List<string> PluginHooks = [];
@@ -28,8 +27,8 @@ public class PluginSetup
     /// <param name="logger">Logger</param>
     public PluginSetup(Plugin plugin, ILogger logger)
     {
-        Plugin = plugin ?? throw new ArgumentNullException(nameof(plugin));
-        PluginName = Plugin.Name;
+        if (plugin == null) throw new ArgumentNullException(nameof(plugin));
+        PluginName = plugin.Name;
         MemberInfo[] methods = plugin.GetType().GetMembers(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
         for (int index = 0; index < methods.Length; index++)
         {
@@ -39,7 +38,7 @@ public class PluginSetup
             {
                 case MethodInfo hook:
                 {
-                    ProcessMethod(hook, attributes, logger);
+                    ProcessMethod(plugin, hook, attributes, logger);
                     break;
                 }
 
@@ -55,7 +54,7 @@ public class PluginSetup
         }
     }
 
-    private void ProcessMethod(MethodInfo hook, Attribute[] attributes, ILogger logger)
+    private void ProcessMethod(Plugin plugin, MethodInfo hook, Attribute[] attributes, ILogger logger)
     {
         if (!ParseHook(hook, attributes, out string name))
         {
@@ -67,13 +66,13 @@ public class PluginSetup
             if (!DiscordExtHooks.IsGlobalHook(name))
             {
                 PluginHooks.Add(name);
-                logger.Verbose("Adding Plugin Hook: {0}.{1}", Plugin.Name, name);
+                logger.Verbose("Adding Plugin Hook: {0}.{1}", plugin.Name, name);
             }
         }
                            
         if (IsCallbackMethod(attributes))
         {
-            logger.Verbose("Adding Callback Hook: {0}.{1}", Plugin.Name, name);
+            logger.Verbose("Adding Callback Hook: {0}.{1}", plugin.Name, name);
             _callbacks.Add(new PluginCallback(name, hook, attributes));
         }
     }

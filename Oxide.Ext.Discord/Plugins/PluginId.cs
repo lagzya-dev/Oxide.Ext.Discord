@@ -9,7 +9,7 @@ namespace Oxide.Ext.Discord.Plugins;
 /// <summary>
 /// Represents a Plugin ID
 /// </summary>
-public readonly struct PluginId : IEquatable<PluginId>, IDebugLoggable
+public readonly record struct PluginId : IDebugLoggable
 {
     /// <summary>
     /// Hashcode value of the Plugin Name
@@ -32,31 +32,6 @@ public readonly struct PluginId : IEquatable<PluginId>, IDebugLoggable
     {
         Id = id?.GetHashCode() ?? throw new ArgumentNullException(nameof(id));
     }
-
-    ///<inheritdoc/>
-    public bool Equals(PluginId other) => Id == other.Id;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is PluginId other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Id;
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator == (PluginId left, PluginId right) => left.Equals(right);
-        
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator !=(PluginId left, PluginId right) => !(left == right);
 
     /// <summary>
     /// Returns the PluginName

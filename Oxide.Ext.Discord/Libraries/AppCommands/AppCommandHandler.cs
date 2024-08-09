@@ -23,17 +23,13 @@ internal class AppCommandHandler
 
     public BaseAppCommand GetCommandById(AppCommandId id)
     {
-        switch (id.Type)
+        return id.Type switch
         {
-            case InteractionType.ApplicationCommand:
-            case InteractionType.ApplicationCommandAutoComplete:
-                return _commands.GetValueOrDefault(id);
-            case InteractionType.MessageComponent:
-            case InteractionType.ModalSubmit:
-                return GetComponentCommand(id);
-        }
+            InteractionType.ApplicationCommand or InteractionType.ApplicationCommandAutoComplete => _commands.GetValueOrDefault(id),
+            InteractionType.MessageComponent or InteractionType.ModalSubmit => GetComponentCommand(id),
+            _ => null
+        };
 
-        return null;
     }
 
     public void AddAppCommand(BaseAppCommand command)

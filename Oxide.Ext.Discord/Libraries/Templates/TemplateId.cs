@@ -6,7 +6,7 @@ using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Libraries;
 
-internal readonly struct TemplateId : IEquatable<TemplateId>
+internal readonly record struct TemplateId
 {
     internal readonly PluginId PluginId;
     public readonly TemplateKey TemplateName;
@@ -39,21 +39,6 @@ internal readonly struct TemplateId : IEquatable<TemplateId>
     }
 
     public string GetLanguageName() => IsGlobal ? "Global" : Language.Id;
-        
-    public bool Equals(TemplateId other) => PluginId == other.PluginId && TemplateName == other.TemplateName && Language == other.Language;
-
-    public override bool Equals(object obj) => obj is TemplateId other && Equals(other);
 
     public override string ToString() => $"Plugin: {PluginId} Template: {TemplateName} Language: {GetLanguageName()}";
-
-    public override int GetHashCode()
-    {
-        unchecked
-        {
-            int hashCode = PluginId.GetHashCode();
-            hashCode = (hashCode * 397) ^ (TemplateName.IsValid ? TemplateName.GetHashCode() : 0);
-            hashCode = (hashCode * 397) ^ (Language.IsValid ? Language.GetHashCode() : 0);
-            return hashCode;
-        }
-    }
 }

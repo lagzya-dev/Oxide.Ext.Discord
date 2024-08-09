@@ -52,7 +52,7 @@ internal partial class DiscordExtensionCore
         if (_create != null && client.IsReady)
         {
             client.Application.CreateGlobalCommand(client.GetFirstClient(), _create);
-            DiscordAppCommand.Instance.RegisterApplicationCommands(_setup, client.Connection);
+            DiscordAppCommand.Instance.RegisterApplicationCommands(this, _setup, client.Connection);
         }
     }
 

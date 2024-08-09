@@ -402,18 +402,14 @@ public class InteractionAutoCompleteBuilder
         {
             return true;
         }
-            
-        switch (search)
+
+        return search switch
         {
-            case AutoCompleteSearchMode.StartsWith:
-                return value.StartsWith(filter, comparison);
-            case AutoCompleteSearchMode.Contains:
-                return value.IndexOf(filter, comparison) != -1;
-            case AutoCompleteSearchMode.EndsWith:
-                return value.EndsWith(filter, comparison);
-            default:
-                throw new ArgumentOutOfRangeException(nameof(search), search, null);
-        }
+            AutoCompleteSearchMode.StartsWith => value.StartsWith(filter, comparison),
+            AutoCompleteSearchMode.Contains => value.IndexOf(filter, comparison) != -1,
+            AutoCompleteSearchMode.EndsWith => value.EndsWith(filter, comparison),
+            _ => throw new ArgumentOutOfRangeException(nameof(search), search, null)
+        };
     }
     #endregion
 }

@@ -51,13 +51,12 @@ public string GetClientPluginList()
 Add a [`DiscordClient`](./DiscordClient.md) to this bot / webhook client
 
 ```csharp
-public virtual bool AddClient(DiscordClient client, PluginSetup setup)
+public virtual void AddClient(DiscordClient client)
 ```
 
 | parameter | description |
 | --- | --- |
 | client | Client to add |
-| setup | Setup data for the plugin |
 
 ## Return Value
 
@@ -72,7 +71,6 @@ True if this is the initial setup of the client; false otherwise
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* class [PluginSetup](../Plugins/PluginSetup.md)
 * class [BaseClient](./BaseClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

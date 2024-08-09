@@ -11,6 +11,7 @@ public abstract class BaseDiscordLibrary : Library
 | name | description |
 | --- | --- |
 | [BaseDiscordLibrary](#basediscordlibrary-constructor)() | Constructor |
+| virtual [OnClientBotConnect](#onclientbotconnect-method)(…) | Called on the library when a plugin is loaded |
 | virtual [OnPluginLoaded](#onpluginloaded-method)(…) | Called on the library when a plugin is loaded |
 | virtual [OnPluginUnloaded](#onpluginunloaded-method)(…) | Called on the library when a plugin is unloaded |
 
@@ -26,18 +27,36 @@ public abstract class BaseDiscordLibrary : Library
 Called on the library when a plugin is loaded
 
 ```csharp
-protected virtual void OnPluginLoaded(PluginSetup data, BotConnection connection)
+protected virtual void OnPluginLoaded(DiscordClient client)
 ```
 
 | parameter | description |
 | --- | --- |
-| data | Plugin that was loaded |
-| connection | Connection for the plugin |
+| client | Client for the loaded plugin |
 
 ## See Also
 
-* class [PluginSetup](../Plugins/PluginSetup.md)
-* class [BotConnection](../Connections/BotConnection.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [BaseDiscordLibrary](./BaseDiscordLibrary.md)
+* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnClientBotConnect method
+
+Called on the library when a plugin is loaded
+
+```csharp
+protected virtual void OnClientBotConnect(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client for the connecting bot |
+
+## See Also
+
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [BaseDiscordLibrary](./BaseDiscordLibrary.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

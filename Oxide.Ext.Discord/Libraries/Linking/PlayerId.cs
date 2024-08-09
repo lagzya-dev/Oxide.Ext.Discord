@@ -7,7 +7,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// <summary>
 /// Represents a <see cref="DiscordLink"/> Player ID
 /// </summary>
-public readonly struct PlayerId : IEquatable<PlayerId>
+public readonly record struct PlayerId
 {
     /// <summary>
     /// ID of the player
@@ -43,13 +43,4 @@ public readonly struct PlayerId : IEquatable<PlayerId>
     {
         Id = player?.Id ?? throw new ArgumentNullException(nameof(player));
     }
-
-    ///<inheritdoc/>
-    public bool Equals(PlayerId other) => Id == other.Id;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is PlayerId other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
 }

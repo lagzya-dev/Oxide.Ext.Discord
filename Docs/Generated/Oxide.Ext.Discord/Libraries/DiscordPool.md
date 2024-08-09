@@ -58,13 +58,12 @@ public DiscordPluginPool GetOrCreate(Plugin plugin)
 # OnPluginLoaded method
 
 ```csharp
-protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
+protected override void OnPluginLoaded(DiscordClient client)
 ```
 
 ## See Also
 
-* class [PluginSetup](../Plugins/PluginSetup.md)
-* class [BotConnection](../Connections/BotConnection.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordPool](./DiscordPool.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

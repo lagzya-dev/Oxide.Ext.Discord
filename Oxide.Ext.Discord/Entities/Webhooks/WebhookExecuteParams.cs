@@ -56,16 +56,12 @@ public class WebhookExecuteParams : IDiscordQueryString
     /// <exception cref="ArgumentOutOfRangeException"></exception>
     public string GetWebhookFormat()
     {
-        switch (SendType)
+        return SendType switch
         {
-            case WebhookSendType.Discord:
-                return string.Empty;
-            case WebhookSendType.Slack:
-                return "/slack";
-            case WebhookSendType.Github:
-                return "/github";
-            default:
-                throw new ArgumentOutOfRangeException(nameof(SendType), SendType, null);
-        }
+            WebhookSendType.Discord => string.Empty,
+            WebhookSendType.Slack => "/slack",
+            WebhookSendType.Github => "/github",
+            _ => throw new ArgumentOutOfRangeException(nameof(SendType), SendType, null)
+        };
     }
 }

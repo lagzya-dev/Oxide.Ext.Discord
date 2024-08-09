@@ -6,7 +6,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// Represents a Placeholder Data Key
 /// This is the key used to store a value into Placeholder Data
 /// </summary>
-public readonly struct PlaceholderDataKey : IEquatable<PlaceholderDataKey>
+public readonly record struct PlaceholderDataKey
 {
     /// <summary>
     /// Value of the key
@@ -26,13 +26,4 @@ public readonly struct PlaceholderDataKey : IEquatable<PlaceholderDataKey>
     {
         Key = key;
     }
-        
-    ///<inheritdoc/>
-    public bool Equals(PlaceholderDataKey other) => Key == other.Key;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is PlaceholderDataKey other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => (Key != null ? Key.GetHashCode() : 0);
 }

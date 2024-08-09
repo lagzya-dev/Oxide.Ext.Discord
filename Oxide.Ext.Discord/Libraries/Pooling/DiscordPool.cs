@@ -1,6 +1,6 @@
 ﻿using System;
 using Oxide.Core.Plugins;
-using Oxide.Ext.Discord.Connections;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Logging;
@@ -56,12 +56,12 @@ public class DiscordPool : BaseDiscordLibrary<DiscordPool>, IDebugLoggable
     }
 
     ///<inheritdoc/>
-    protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
+    protected override void OnPluginLoaded(DiscordClient client)
     {
         // ReSharper disable once SuspiciousTypeConversion.Global
-        if (data.Plugin is IDiscordPool pool)
+        if (client.Plugin is IDiscordPool pool)
         {
-            pool.Pool = GetOrCreate(data.Plugin);
+            pool.Pool = GetOrCreate(client.Plugin);
         }
     }
 

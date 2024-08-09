@@ -10,7 +10,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// Represents a Server Locale
 /// </summary>
 [JsonConverter(typeof(ServerLocaleConverter))]
-public readonly struct ServerLocale : IEquatable<ServerLocale>
+public readonly record struct ServerLocale
 {
     /// <summary>
     /// ID of the Locale
@@ -71,31 +71,6 @@ public readonly struct ServerLocale : IEquatable<ServerLocale>
     }
 
     internal static ServerLocale Create(string locale) => new(locale);
-
-    ///<inheritdoc/>
-    public bool Equals(ServerLocale other) => Id == other.Id;
-
-    ///<inheritdoc/>
-    public override bool Equals(object obj) => obj is ServerLocale other && Equals(other);
-
-    ///<inheritdoc/>
-    public override int GetHashCode() => Id != null ? Id.GetHashCode() : 0;
-        
-    /// <summary>
-    /// Returns if two Server Locales are equal to each other
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator == (ServerLocale left, ServerLocale right) => left.Equals(right);
-        
-    /// <summary>
-    /// Returns if two Server Locales are not equal to each other
-    /// </summary>
-    /// <param name="left"></param>
-    /// <param name="right"></param>
-    /// <returns></returns>
-    public static bool operator != (ServerLocale left, ServerLocale right) => !(left == right);
 
     /// <summary>
     /// Returns the ID of the ServerLocale

@@ -124,9 +124,12 @@ internal class WebSocketReconnectHandler
 
     private int GetReconnectDelay()
     {
-        if (_reconnectRetries == 0) return 1000 / 60;
-        if (_reconnectRetries <= 3) return 1 * 1000 + Core.Random.Range(100, 250);
-        if (_reconnectRetries <= 25) return 15 * 1000 + Core.Random.Range(250, 500);
-        return 60 * 1000 + Core.Random.Range(500, 1000);
+        return _reconnectRetries switch
+        {
+            0 => 1000 / 60,
+            <= 3 => 1 * 1000 + Core.Random.Range(100, 250),
+            <= 25 => 15 * 1000 + Core.Random.Range(250, 500),
+            _ => 60 * 1000 + Core.Random.Range(500, 1000)
+        };
     }
 }

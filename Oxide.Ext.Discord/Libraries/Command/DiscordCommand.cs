@@ -5,7 +5,6 @@ using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Clients;
-using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
@@ -317,9 +316,10 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
     }
         
     ///<inheritdoc/>
-    protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
+    protected override void OnClientBotConnect(DiscordClient client)
     {
-        foreach (PluginHookResult<DirectMessageCommandAttribute> result in data.GetCallbacksWithAttribute<DirectMessageCommandAttribute>())
+        Plugin plugin = client.Plugin;
+        foreach (PluginHookResult<DirectMessageCommandAttribute> result in client.PluginSetup.GetCallbacksWithAttribute<DirectMessageCommandAttribute>())
         {
             if (!result.IsValid)
             {
@@ -329,17 +329,17 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
             DirectMessageCommandAttribute command = result.Attribute;
             if (command.IsLocalized)
             {
-                AddDirectMessageLocalizedCommand(command.Name, data.Plugin, result.Name);
+                AddDirectMessageLocalizedCommand(command.Name, plugin, result.Name);
                 _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, result.Name);
             }
             else
             {
-                AddDirectMessageCommand(command.Name, data.Plugin, result.Name);
+                AddDirectMessageCommand(command.Name, plugin, result.Name);
                 _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, result.Name);
             }
         }
             
-        foreach (PluginHookResult<GuildCommandAttribute> result in data.GetCallbacksWithAttribute<GuildCommandAttribute>())
+        foreach (PluginHookResult<GuildCommandAttribute> result in client.PluginSetup.GetCallbacksWithAttribute<GuildCommandAttribute>())
         {
             if (!result.IsValid)
             {
@@ -349,12 +349,12 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
             GuildCommandAttribute command = result.Attribute;
             if (command.IsLocalized)
             {
-                AddGuildLocalizedCommand(command.Name, data.Plugin, null, result.Name);
+                AddGuildLocalizedCommand(command.Name, plugin, null, result.Name);
                 _logger.Debug("Adding Localized Direct Message Command {0} Method: {1}", command.Name, result.Name);
             }
             else
             {
-                AddGuildCommand(command.Name, data.Plugin, null, result.Name);
+                AddGuildCommand(command.Name, plugin, null, result.Name);
                 _logger.Debug("Adding Direct Message Command {0} Method: {1}", command.Name, result.Name);
             }
         }

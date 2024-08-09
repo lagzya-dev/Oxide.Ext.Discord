@@ -5,7 +5,6 @@ using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Plugins;
 
 namespace Oxide.Ext.Discord.Types;
 
@@ -21,9 +20,9 @@ internal class DiscordHook
     }
 
     #region Plugin Handling
-    internal void AddPlugin(DiscordClient client, PluginSetup setup)
+    internal void AddPlugin(DiscordClient client)
     {
-        _cache.AddPlugin(client, setup.PluginHooks);
+        _cache.AddPlugin(client, client.PluginSetup.PluginHooks);
     }
 
     internal void RemovePlugin(Plugin plugin)

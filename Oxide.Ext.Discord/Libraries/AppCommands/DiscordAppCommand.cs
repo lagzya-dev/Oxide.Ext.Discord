@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
+using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Exceptions;
@@ -200,13 +201,12 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
         }
     }
 
-    internal void RegisterApplicationCommands(PluginSetup data, BotConnection connection)
+    internal void RegisterApplicationCommands(Plugin plugin, PluginSetup setup, BotConnection connection)
     {
-        _logger.Debug("Registering application commands for {0}", data.PluginName);
-
-        Plugin plugin = data.Plugin;
+        _logger.Debug("Registering application commands for {0}", setup.PluginName);
+        
         Snowflake applicationId = connection.ApplicationId;
-        foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in data.GetCallbacksWithAttribute<BaseApplicationCommandAttribute>())
+        foreach (PluginHookResult<BaseApplicationCommandAttribute> hook in setup.GetCallbacksWithAttribute<BaseApplicationCommandAttribute>())
         {
             switch (hook.Attribute)
             {
@@ -258,7 +258,7 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
     }
 
     ///<inheritdoc/>
-    protected override void OnPluginLoaded(PluginSetup data, BotConnection connection) => RegisterApplicationCommands(data, connection);
+    protected override void OnClientBotConnect(DiscordClient client) => RegisterApplicationCommands(client.Plugin, client.PluginSetup, client.Connection);
 
     ///<inheritdoc/>
     protected override void OnPluginUnloaded(Plugin plugin)

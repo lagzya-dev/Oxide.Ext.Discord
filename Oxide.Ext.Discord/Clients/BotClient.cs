@@ -60,6 +60,7 @@ public class BotClient : BaseClient, IDebugLoggable
         
     internal readonly BotConnection Connection;
     internal DiscordWebSocket WebSocket;
+    internal readonly DiscordHook Hooks;
 
     private GatewayReadyEvent _readyData;
 
@@ -73,6 +74,7 @@ public class BotClient : BaseClient, IDebugLoggable
         Initialized = true;
         Rest = new RestHandler(this, Logger);
         WebSocket = new DiscordWebSocket(this, Logger);
+        Hooks = new DiscordHook(Logger);
     }
 
     /// <summary>
@@ -153,7 +155,7 @@ public class BotClient : BaseClient, IDebugLoggable
     }
         
     ///<inheritdoc/>
-    public override bool AddClient(DiscordClient client, PluginSetup setup)
+    public override void AddClient(DiscordClient client)
     {
         TokenMismatchException.ThrowIfMismatchedToken(client, Connection);
 
@@ -161,12 +163,13 @@ public class BotClient : BaseClient, IDebugLoggable
         {
             throw new Exception("This client is already in the list of clients");
         }
-            
-        if (base.AddClient(client, setup))
-        {
-            return true;
-        }
 
+        base.AddClient(client);
+        Hooks.AddPlugin(client);
+    }
+
+    internal override void HandleAlreadyConnected(DiscordClient client)
+    {
         GatewayIntents intents = Connection.Intents | client.Connection.Intents;
                 
         //Our intents have changed. Disconnect websocket and reconnect with new intents.
@@ -203,7 +206,6 @@ public class BotClient : BaseClient, IDebugLoggable
                 DiscordHook.CallPluginHook(client.Plugin, DiscordExtHooks.OnDiscordBotFullyLoaded);
             }
         }
-        return false;
     }
 
     ///<inheritdoc/>
@@ -213,6 +215,8 @@ public class BotClient : BaseClient, IDebugLoggable
         {
             return true;
         }
+        
+        Hooks.RemovePlugin(client.Plugin);
             
         GatewayIntents intents = GatewayIntents.None;
         for (int index = 0; index < _clients.Count; index++)
