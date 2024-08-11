@@ -33,7 +33,7 @@ public class TemplateComponentsConverter : JsonConverter
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         JArray array = JArray.Load(reader);
-        if (!(existingValue is List<BaseComponentTemplate> components))
+        if (existingValue is not List<BaseComponentTemplate> components)
         {
             components = new List<BaseComponentTemplate>();
         }

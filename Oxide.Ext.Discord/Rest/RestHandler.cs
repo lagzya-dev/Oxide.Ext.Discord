@@ -202,7 +202,7 @@ public class RestHandler : IDebugLoggable
 
     private void PerformValidation(object data)
     {
-        if (!DiscordConfig.Instance.Validation.EnableValidation || !(data is IDiscordValidation validate))
+        if (!DiscordConfig.Instance.Validation.EnableValidation || data is not IDiscordValidation validate)
         {
             return;
         }

@@ -330,7 +330,7 @@ public class DiscordLink : BaseDiscordLibrary<DiscordLink>, IDebugLoggable
     private bool IsValidLinkPlugin(Plugin plugin)
     {
         // ReSharper disable once SuspiciousTypeConversion.Global
-        if (!(plugin is IDiscordLink link))
+        if (plugin is not IDiscordLink link)
         {
             _logger.Error($"{plugin.Name} tried to link but is not registered as a link plugin");
             return false;

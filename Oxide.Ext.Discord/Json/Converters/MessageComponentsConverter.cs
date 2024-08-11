@@ -35,7 +35,7 @@ public class MessageComponentsConverter : JsonConverter
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
         JArray array = JArray.Load(reader);
-        if (!(existingValue is List<BaseComponent> components))
+        if (existingValue is not List<BaseComponent> components)
         {
             components = new List<BaseComponent>();
         }
