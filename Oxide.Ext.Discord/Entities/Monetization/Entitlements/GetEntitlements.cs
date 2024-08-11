@@ -3,7 +3,6 @@ using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -51,7 +50,7 @@ public class GetEntitlements : IDiscordQueryString, IDiscordValidation
     public string ToQueryString()
     {
         Validate();
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
             
         if(UserId.HasValue) builder.Add("user_id", UserId.Value);
         if(SkuIds != null) builder.AddList("sku_ids", SkuIds, ",");
@@ -61,7 +60,7 @@ public class GetEntitlements : IDiscordQueryString, IDiscordValidation
         if(GuildId.HasValue) builder.Add("guild_id", GuildId.Value.ToString());
         if(ExcludeEnded.HasValue) builder.Add("exclude_ended", StringCache<bool>.Instance.ToString(ExcludeEnded.Value));
             
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 
     ///<inheritdoc/>

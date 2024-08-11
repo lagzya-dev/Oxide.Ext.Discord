@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.Text;
 using Oxide.Core.Libraries.Covalence;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Builders;
-using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins;
@@ -84,9 +83,8 @@ internal partial class DiscordExtensionCore
             return name;
         }
 
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-
-        sb.Clear();
+        ValueStringBuilder sb = new();
+        
         if (_clans is {IsLoaded: true} && HasFlag(options, PlayerDisplayNameMode.Clan))
         {
             string clan = _clans.Call<string>("GetClanOf", player.Id);
@@ -107,7 +105,7 @@ internal partial class DiscordExtensionCore
             sb.Append(')');
         }
 
-        name = DiscordPool.Internal.ToStringAndFree(sb);
+        name = sb.ToString();
         cache[player.Id] = name;
         return name;
     }

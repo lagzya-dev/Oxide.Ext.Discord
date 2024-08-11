@@ -1,6 +1,5 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -17,12 +16,12 @@ public class ScheduledEventLookup : IDiscordQueryString
     /// <inheritdoc/>
     public string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         if (WithUserCount.HasValue)
         {
             builder.Add("with_user_count", WithUserCount.Value.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

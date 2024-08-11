@@ -1,7 +1,6 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -25,7 +24,7 @@ public class GuildSearchMembers : IDiscordQueryString, IDiscordValidation
     public string ToQueryString()
     {
         Validate();
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         builder.Add("query", Query);
             
         if (Limit.HasValue)
@@ -33,7 +32,7 @@ public class GuildSearchMembers : IDiscordQueryString, IDiscordValidation
             builder.Add("limit", Limit.Value.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 
     /// <inheritdoc/>

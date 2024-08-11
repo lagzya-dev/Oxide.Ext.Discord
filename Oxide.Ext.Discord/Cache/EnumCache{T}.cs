@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using Oxide.Ext.Discord.Extensions;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Cache;
@@ -132,7 +130,7 @@ public sealed class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, ICo
         
     private string CreateFlagsString(T value)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         bool initial = true;
         int length = GetTypeSize();
         for (int index = 0; index < length; index++)
@@ -161,7 +159,7 @@ public sealed class EnumCache<T> : Singleton<EnumCache<T>> where T : struct, ICo
             }
         }
 
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 
 }

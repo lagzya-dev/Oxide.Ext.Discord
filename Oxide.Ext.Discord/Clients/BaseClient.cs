@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Clients;
 
@@ -71,7 +70,7 @@ public abstract class BaseClient
     /// <returns></returns>
     public string GetClientPluginList()
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         for (int index = 0; index < _clients.Count; index++)
         {
             DiscordClient client = _clients[index];
@@ -85,7 +84,7 @@ public abstract class BaseClient
             sb.Append(']');
         }
 
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 
     /// <summary>

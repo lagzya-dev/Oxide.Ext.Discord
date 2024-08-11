@@ -2,7 +2,6 @@ using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -29,7 +28,7 @@ public class ThreadArchivedLookup : IDiscordQueryString
     /// <inheritdoc/>
     public string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         if (Before.HasValue)
         {
             builder.Add("before", Before.Value.ToString("o"));
@@ -40,6 +39,6 @@ public class ThreadArchivedLookup : IDiscordQueryString
             builder.Add("limit", Limit.Value.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

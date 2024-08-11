@@ -1688,12 +1688,6 @@
             Builder used to build query strings for urls
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.Create(Oxide.Ext.Discord.Types.DiscordPluginPool)">
-            <summary>
-            Creates a pooled <see cref="T:Oxide.Ext.Discord.Builders.QueryStringBuilder"/>
-            </summary>
-            <returns><see cref="T:Oxide.Ext.Discord.Builders.QueryStringBuilder"/></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.Add(System.String,System.String)">
             <summary>
             Add a key value pair to the query string
@@ -1715,18 +1709,6 @@
             Returns the query string as a string.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.ToStringAndFree">
-            <summary>
-            Returns the query string and returns the builder to the pool
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.EnterPool">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Builders.QueryStringBuilder.LeavePool">
-            <inheritdoc/>
         </member>
         <member name="T:Oxide.Ext.Discord.Cache.DiscordPluginCache">
             <summary>
@@ -21758,31 +21740,6 @@
             <param name="locale">Locale to Parse</param>
             <returns>Parsed Discord Locale</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.Equals(Oxide.Ext.Discord.Libraries.DiscordLocale)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.op_Equality(Oxide.Ext.Discord.Libraries.DiscordLocale,Oxide.Ext.Discord.Libraries.DiscordLocale)">
-            <summary>
-            Returns if two Discord Locales are equal to each other
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.op_Inequality(Oxide.Ext.Discord.Libraries.DiscordLocale,Oxide.Ext.Discord.Libraries.DiscordLocale)">
-            <summary>
-            Returns if two Discord Locales are not equal to each other
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.ToString">
             <summary>
             Returns the ID of the Locale
@@ -21934,31 +21891,6 @@
             Parses a locale returning a <see cref="T:Oxide.Ext.Discord.Libraries.ServerLocale"/>
             </summary>
             <param name="locale"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.Equals(Oxide.Ext.Discord.Libraries.ServerLocale)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.op_Equality(Oxide.Ext.Discord.Libraries.ServerLocale,Oxide.Ext.Discord.Libraries.ServerLocale)">
-            <summary>
-            Returns if two Server Locales are equal to each other
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.op_Inequality(Oxide.Ext.Discord.Libraries.ServerLocale,Oxide.Ext.Discord.Libraries.ServerLocale)">
-            <summary>
-            Returns if two Server Locales are not equal to each other
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.ToString">
@@ -23981,15 +23913,6 @@
             </summary>
             <param name="key">Value of the key</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.Equals(Oxide.Ext.Discord.Libraries.PlaceholderDataKey)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.GetHashCode">
-            <inheritdoc/>
-        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.PlaceholderFormatting">
             <summary>
             Formatting Helpers for Placeholders
@@ -24080,15 +24003,6 @@
             Returns the PlaceholderKey formatted as a usable placeholder in text
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.Equals(Oxide.Ext.Discord.Libraries.PlaceholderKey)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.GetHashCode">
-            <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.CompareTo(Oxide.Ext.Discord.Libraries.PlaceholderKey)">
             <inheritdoc />
@@ -25401,31 +25315,6 @@
             </summary>
             <param name="name">Placeholder Value</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(Oxide.Ext.Discord.Libraries.TemplateKey)">
-            <inheritdoc />
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(System.Object)">
-            <inheritdoc />
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.GetHashCode">
-            <inheritdoc />
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.op_Equality(Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.TemplateKey)">
-            <summary>
-            Template Key == operator
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.op_Inequality(Oxide.Ext.Discord.Libraries.TemplateKey,Oxide.Ext.Discord.Libraries.TemplateKey)">
-            <summary>
-            Template Key != operator
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.ToString">
             <summary>
             Returns the template name
@@ -25517,33 +25406,8 @@
             <param name="minor">Minor Version</param>
             <param name="revision">Revision Version</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.Equals(Oxide.Ext.Discord.Libraries.TemplateVersion)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.GetHashCode">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.CompareTo(Oxide.Ext.Discord.Libraries.TemplateVersion)">
             <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.op_Equality(Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
-            <summary>
-            Returns if the template versions are equal
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.op_Inequality(Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
-            <summary>
-            Returns if the template versions are not equal
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.op_LessThan(Oxide.Ext.Discord.Libraries.TemplateVersion,Oxide.Ext.Discord.Libraries.TemplateVersion)">
             <summary>
@@ -25932,31 +25796,6 @@
             Returns if the PluginId is valid
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.Equals(Oxide.Ext.Discord.Plugins.PluginId)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.op_Equality(Oxide.Ext.Discord.Plugins.PluginId,Oxide.Ext.Discord.Plugins.PluginId)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.op_Inequality(Oxide.Ext.Discord.Plugins.PluginId,Oxide.Ext.Discord.Plugins.PluginId)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Plugins.PluginId.ToString">
             <summary>
             Returns the PluginName
@@ -26048,33 +25887,8 @@
             <param name="id">ID of the bucket</param>
             <exception cref="T:System.ArgumentNullException">Thrown if ID is null or empty</exception>
         </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketId.Equals(Oxide.Ext.Discord.Rest.BucketId)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketId.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketId.GetHashCode">
-            <inheritdoc/>
-        </member>
         <member name="M:Oxide.Ext.Discord.Rest.BucketId.ToString">
             <inheritdoc/>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketId.op_Equality(Oxide.Ext.Discord.Rest.BucketId,Oxide.Ext.Discord.Rest.BucketId)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
-        </member>
-        <member name="M:Oxide.Ext.Discord.Rest.BucketId.op_Inequality(Oxide.Ext.Discord.Rest.BucketId,Oxide.Ext.Discord.Rest.BucketId)">
-            <summary>
-            
-            </summary>
-            <param name="left"></param>
-            <param name="right"></param>
-            <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.BaseRequest">
             <summary>
@@ -27576,6 +27390,39 @@
             </summary>
             <param name="key">Key for the record</param>
             <param name="value">Value of the record</param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.ValueStringBuilder.GetPinnableReference">
+            <summary>
+            Get a pinnable reference to the builder.
+            Does not ensure there is a null char after <see cref="P:Oxide.Ext.Discord.Types.ValueStringBuilder.Length"/>
+            This overload is pattern matched in the C# 7.3+ compiler so you can omit
+            the explicit method call, and write eg "fixed (char* c = builder)"
+            </summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.ValueStringBuilder.GetPinnableReference(System.Boolean)">
+            <summary>
+            Get a pinnable reference to the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:Oxide.Ext.Discord.Types.ValueStringBuilder.Length"/></param>
+        </member>
+        <member name="P:Oxide.Ext.Discord.Types.ValueStringBuilder.RawChars">
+            <summary>Returns the underlying storage of the builder.</summary>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.ValueStringBuilder.AsSpan(System.Boolean)">
+            <summary>
+            Returns a span around the contents of the builder.
+            </summary>
+            <param name="terminate">Ensures that the builder has a null char after <see cref="P:Oxide.Ext.Discord.Types.ValueStringBuilder.Length"/></param>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.ValueStringBuilder.Grow(System.Int32)">
+            <summary>
+            Resize the internal buffer either by doubling current buffer size or
+            by adding <paramref name="additionalCapacityBeyondPos"/> to
+            <see cref="F:Oxide.Ext.Discord.Types.ValueStringBuilder._pos"/> whichever is greater.
+            </summary>
+            <param name="additionalCapacityBeyondPos">
+            Number of chars requested beyond current position.
+            </param>
         </member>
         <member name="T:Oxide.Ext.Discord.WebSockets.DiscordWebSocket">
             <summary>

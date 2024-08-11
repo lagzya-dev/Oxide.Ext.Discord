@@ -8,6 +8,7 @@ using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -81,12 +82,12 @@ public readonly struct DiscordImageData
     /// <returns></returns>
     public string GetBase64Image()
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         sb.Append("data:image/");
         sb.Append(EnumCache<DiscordImageFormat>.Instance.ToLower(Type));
         sb.Append(";base64,");
         sb.Append(Convert.ToBase64String(Image));
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 
     /// <summary>

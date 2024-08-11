@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using System.Text;
-using Oxide.Ext.Discord.Libraries;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Extensions;
 
@@ -48,7 +47,7 @@ internal static class TypeExt
             return t.Name;
         }
 
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         sb.Append(t.Name.AsSpan().Slice(0, t.Name.IndexOf('`')));
         sb.Append('<');
         Type[] args = t.GetGenericArguments();
@@ -62,6 +61,6 @@ internal static class TypeExt
             sb.Append(GetRealTypeName(arg));
         }
         sb.Append('>');
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 }

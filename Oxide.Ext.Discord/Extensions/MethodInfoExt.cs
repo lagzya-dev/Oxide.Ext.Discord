@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Reflection;
-using System.Text;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Extensions;
 
@@ -56,7 +55,7 @@ internal static class MethodInfoExt
 
     private static string BuildExpected(MethodInfo methodInfo, params Type[] types)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         sb.Append("void ");
         sb.Append(methodInfo.Name);
         sb.Append('(');
@@ -73,12 +72,12 @@ internal static class MethodInfoExt
             sb.Append(index);
         }
         sb.Append(')');
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     } 
         
     private static string BuildActual(MethodInfo info)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         sb.Append(info.ReturnType.Name);
         sb.Append(' ');
         sb.Append(info.Name);
@@ -99,7 +98,7 @@ internal static class MethodInfoExt
         }
 
         sb.Append(')');
-            
-        return DiscordPool.Internal.ToStringAndFree(sb);
+
+        return sb.ToString();
     }
 }

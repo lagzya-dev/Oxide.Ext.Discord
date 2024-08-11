@@ -13,13 +13,8 @@ public struct TemplateKey : IDiscordKey, IEquatable<TemplateKey>
 | [TemplateKey](#templatekey-constructor)(…) | Constructor |
 | [IsValid](#isvalid-property) { get; } | If [`Name`](#name-field) Is a Valid Key |
 | readonly [Name](#name-field) | Placeholder Key |
-| override [Equals](#equals-method)(…) |  |
-| [Equals](#equals-method)(…) |  |
-| override [GetHashCode](#gethashcode-method)() |  |
 | override [ToString](#tostring-method)() | Returns the template name |
-| [operator ==](#templatekey-equality-operator) | Template Key == operator |
 | [implicit operator](#templatekey-implicit-operator) | Implicitly converts to String by calling the [`ToString`](#tostring-method) method. |
-| [operator !=](#templatekey-inequality-operator) | Template Key != operator |
 
 ## See Also
 
@@ -27,86 +22,6 @@ public struct TemplateKey : IDiscordKey, IEquatable<TemplateKey>
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [TemplateKey.cs](../../../../Oxide.Ext.Discord/Libraries/TemplateKey.cs)
-   
-   
-# Equals method (1 of 2)
-
-```csharp
-public override bool Equals(object obj)
-```
-
-## See Also
-
-* struct [TemplateKey](./TemplateKey.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-
----
-
-# Equals method (2 of 2)
-
-```csharp
-public bool Equals(TemplateKey other)
-```
-
-## See Also
-
-* struct [TemplateKey](./TemplateKey.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# GetHashCode method
-
-```csharp
-public override int GetHashCode()
-```
-
-## See Also
-
-* struct [TemplateKey](./TemplateKey.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# TemplateKey Equality operator
-
-Template Key == operator
-
-```csharp
-public static bool operator ==(TemplateKey left, TemplateKey right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
-
-## See Also
-
-* struct [TemplateKey](./TemplateKey.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# TemplateKey Inequality operator
-
-Template Key != operator
-
-```csharp
-public static bool operator !=(TemplateKey left, TemplateKey right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
-
-## See Also
-
-* struct [TemplateKey](./TemplateKey.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # ToString method

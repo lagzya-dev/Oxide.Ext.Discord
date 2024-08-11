@@ -12,7 +12,7 @@ namespace Oxide.Ext.Discord.Entities;
 public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
 {
     /// <summary>
-    /// The ID for the emoji if it is custom; Otherwise invalid snowflake
+    /// The ID for the emoji if it is custom; Otherwise default snowflake
     /// </summary>
     public Snowflake Id => EmojiId ?? default(Snowflake);
 

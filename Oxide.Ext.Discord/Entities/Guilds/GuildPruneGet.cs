@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -29,14 +28,14 @@ public class GuildPruneGet : IDiscordQueryString, IDiscordValidation
     public virtual string ToQueryString()
     {
         Validate();
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         builder.Add("days", Days.ToString());
         if (IncludeRoles != null)
         {
             builder.AddList("include_roles", IncludeRoles, ",");
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 
     ///<inheritdoc/>

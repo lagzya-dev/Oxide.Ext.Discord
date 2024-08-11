@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using Oxide.Core;
 using Oxide.Core.Libraries.Covalence;
@@ -18,6 +17,7 @@ using Oxide.Ext.Discord.Interfaces;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Rest;
+using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
 namespace Oxide.Ext.Discord.Plugins;
@@ -168,7 +168,7 @@ internal partial class DiscordExtensionCore : BaseDiscordPlugin
     [HookMethod(nameof(PlaceholdersList))]
     private void PlaceholdersList(IPlayer player)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         string extensionName = this.PluginName();
         foreach (KeyValuePair<PlaceholderKey, IPlaceholder> placeholder in DiscordPlaceholders.Instance.GetPlaceholders().OrderBy(p => p.Key))
         {
@@ -177,10 +177,11 @@ internal partial class DiscordExtensionCore : BaseDiscordPlugin
             sb.Append("} - Return Type: ");
             sb.Append(placeholder.Value.GetReturnType().Name);
             sb.Append(" Plugin: ");
-            sb.AppendLine(placeholder.Value.IsExtensionPlaceholder ? extensionName : placeholder.Value.PluginName);
+            sb.Append(placeholder.Value.IsExtensionPlaceholder ? extensionName : placeholder.Value.PluginName);
+            sb.AppendLine();
         }
             
-        Chat(player, LangKeys.Placeholders.List, DiscordPool.Internal.ToStringAndFree(sb));
+        Chat(player, LangKeys.Placeholders.List, sb.ToString());
     }
         
     [HookMethod(nameof(ClearEntitiesDiscordPool))]

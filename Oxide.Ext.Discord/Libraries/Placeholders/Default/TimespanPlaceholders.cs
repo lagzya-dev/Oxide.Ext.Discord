@@ -1,8 +1,8 @@
 using System;
-using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Plugins;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Libraries;
 
@@ -32,17 +32,17 @@ public static class TimeSpanPlaceholders
             return interaction?.GetLangMessage(DiscordExtensionCore.Instance, LangKeys.TimeSpan.Infinity) ?? DiscordLocales.Instance.GetLangMessage(DiscordExtensionCore.Instance, null, LangKeys.TimeSpan.Infinity);
         }
 
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
             
         AppendTime(interaction, sb, time.TotalDays, time.Days, LangKeys.TimeSpan.Day, LangKeys.TimeSpan.Days);
         AppendTime(interaction, sb, time.TotalHours, time.Hours, LangKeys.TimeSpan.Hour, LangKeys.TimeSpan.Hours);
         AppendTime(interaction, sb, time.TotalMinutes, time.Minutes, LangKeys.TimeSpan.Minute, LangKeys.TimeSpan.Minutes);
         AppendTime(interaction, sb, time.TotalSeconds, time.Seconds, LangKeys.TimeSpan.Second, LangKeys.TimeSpan.Seconds);
 
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 
-    private static void AppendTime(DiscordInteraction interaction, StringBuilder sb, double total, int value, string singular, string plural)
+    private static void AppendTime(DiscordInteraction interaction, ValueStringBuilder sb, double total, int value, string singular, string plural)
     {
         if (total >= 1)
         {

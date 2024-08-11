@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Libraries;
@@ -47,6 +48,7 @@ public readonly record struct PlaceholderKey : IComparable<PlaceholderKey>, IDis
     /// </summary>
     /// <param name="format">Format to be applied</param>
     /// <returns>string placeholder containing the placeholder with the given format</returns>
+    [Pure]
     public string WithFormat(string format) => $"{{{Placeholder}:{format}}}";
 
     /// <summary>

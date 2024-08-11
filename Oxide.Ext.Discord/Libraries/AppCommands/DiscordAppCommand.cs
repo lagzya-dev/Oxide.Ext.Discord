@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Attributes;
 using Oxide.Ext.Discord.Clients;
@@ -263,32 +262,19 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
     ///<inheritdoc/>
     protected override void OnPluginUnloaded(Plugin plugin)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
-        try
+        List<BaseAppCommand> commands = DiscordPool.Internal.GetList<BaseAppCommand>();
+        foreach (KeyValuePair<Snowflake, AppCommandHandler> handler in _handlers)
         {
-            List<BaseAppCommand> commands = DiscordPool.Internal.GetList<BaseAppCommand>();
-            foreach (KeyValuePair<Snowflake, AppCommandHandler> handler in _handlers)
-            {
-                sb.AppendLine($"C - {handler.Key} = {handler.Value == null}");
-                commands.AddRange(handler.Value.GetCommandsForPlugin(plugin));
-            }
+            commands.AddRange(handler.Value.GetCommandsForPlugin(plugin));
+        }
                 
-            for (int index = 0; index < commands.Count; index++)
-            {
-                BaseAppCommand command = commands[index];
-                RemoveApplicationCommandInternal(command);
-            }
+        for (int index = 0; index < commands.Count; index++)
+        {
+            BaseAppCommand command = commands[index];
+            RemoveApplicationCommandInternal(command);
+        }
                 
-            DiscordPool.Internal.FreeList(commands);
-        }
-        catch (Exception ex)
-        {
-            _logger.Exception($"An error occured during unload\n{sb}", ex);
-        }
-        finally
-        {
-            DiscordPool.Internal.FreeStringBuilder(sb);
-        }
+        DiscordPool.Internal.FreeList(commands);
     }
 
     internal bool HandleInteraction(DiscordInteraction interaction)

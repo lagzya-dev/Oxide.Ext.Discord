@@ -1,7 +1,6 @@
 ﻿using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -23,8 +22,8 @@ public class GetThreadMember : IDiscordQueryString
             return string.Empty;
         }
             
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         builder.Add("with_member", StringCache<bool>.Instance.ToString(WithMember));
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

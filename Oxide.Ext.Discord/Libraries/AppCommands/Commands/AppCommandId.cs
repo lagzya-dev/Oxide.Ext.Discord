@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Entities;
+using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Libraries;
 
@@ -26,7 +26,7 @@ internal readonly record struct AppCommandId
         
     public override string ToString()
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
         sb.Append(EnumCache<InteractionType>.Instance.ToString(Type));
         sb.Append(':');
         sb.Append(Command);
@@ -46,6 +46,6 @@ internal readonly record struct AppCommandId
             sb.Append(Argument);
         }
 
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
 }

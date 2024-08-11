@@ -2,7 +2,6 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Cache;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -29,7 +28,7 @@ public class ListThreadMembers : IDiscordQueryString
     ///<inheritdoc/>
     public string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
 
         if (WithMember)
         {
@@ -46,6 +45,6 @@ public class ListThreadMembers : IDiscordQueryString
             builder.Add("limit", StringCache<int>.Instance.ToString(Math.Clamp(Limit.Value, 1, 100)));
         }
             
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

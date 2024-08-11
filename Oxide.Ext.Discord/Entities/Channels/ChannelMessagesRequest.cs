@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -37,7 +36,7 @@ public class ChannelMessagesRequest : IDiscordQueryString
     /// <inheritdoc/>
     public string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
 
         //Per Documentation "The before, after, and around keys are mutually exclusive, only one may be passed at a time."
         if (Around.HasValue)
@@ -58,6 +57,6 @@ public class ChannelMessagesRequest : IDiscordQueryString
             builder.Add("limit", Limit.Value.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

@@ -1,6 +1,5 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -27,7 +26,7 @@ public class GuildBansRequest : IDiscordQueryString
     /// <inheritdoc/>
     public string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
             
         if (Limit.HasValue)
         {
@@ -43,6 +42,6 @@ public class GuildBansRequest : IDiscordQueryString
             builder.Add("after", After.Value.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

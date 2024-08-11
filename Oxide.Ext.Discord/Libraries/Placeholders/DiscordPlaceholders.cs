@@ -21,7 +21,7 @@ namespace Oxide.Ext.Discord.Libraries;
 /// </summary>
 public class DiscordPlaceholders : BaseDiscordLibrary<DiscordPlaceholders>
 {
-    private readonly Regex _placeholderRegex = new(@"{([^\d][^:{}""]+)(?::([^{}""]+))*?}", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
+    private readonly Regex _placeholderRegex = new("""{([^\d][^:{}"]+)(?::([^{}"]+))*?}""", RegexOptions.Compiled, TimeSpan.FromSeconds(1));
     private readonly Hash<PlaceholderKey, IPlaceholder> _placeholders = new();
     private readonly Hash<PlaceholderKey, IPlaceholder> _internalPlaceholders = new();
     private readonly ILogger _logger;

@@ -42,7 +42,7 @@
 | class [MessageComponentBuilder](./Oxide.Ext.Discord/Builders/MessageComponentBuilder.md) | Builder for Message Components |
 | [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) |
 | class [PlayerNameFormatter](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) | Formatter for player names |
-| class [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
+| struct [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
 | class [SelectMenuComponentBuilder](./Oxide.Ext.Discord/Builders/SelectMenuComponentBuilder.md) | Builder for Select Menus |
 | class [WebhookMessageBuilder](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) | Represents a builder for [`WebhookMessageBuilder`](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) |
 
@@ -708,6 +708,7 @@
 | class [RestRateLimit](./Oxide.Ext.Discord/Types/RestRateLimit.md) | Represents a rate limit for rest requests |
 | abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Types/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
 | class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Types/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
+| struct [ValueStringBuilder](./Oxide.Ext.Discord/Types/ValueStringBuilder.md) |  |
 | class [WebsocketRateLimit](./Oxide.Ext.Discord/Types/WebsocketRateLimit.md) | Represents a WebSocket Rate Limit |
 
 ## Oxide.Ext.Discord.WebSockets namespace

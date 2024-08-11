@@ -1,6 +1,5 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -27,7 +26,7 @@ public class UserGuildsRequest : IDiscordQueryString
     /// <inheritdoc/>
     public virtual string ToQueryString()
     {
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
         builder.Add("limit", Limit.ToString());
 
         if (Before.HasValue)
@@ -40,6 +39,6 @@ public class UserGuildsRequest : IDiscordQueryString
             builder.Add("after", After.ToString());
         }
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }

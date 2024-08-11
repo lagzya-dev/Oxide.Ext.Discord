@@ -1,9 +1,10 @@
-# QueryStringBuilder class
+# QueryStringBuilder structure
 
 Builder used to build query strings for urls
 
 ```csharp
-public class QueryStringBuilder : BasePoolable
+[Obsolete("Types with embedded references are not supported in this version of your compiler.")]
+public struct QueryStringBuilder
 ```
 
 ## Public Members
@@ -11,45 +12,15 @@ public class QueryStringBuilder : BasePoolable
 | name | description |
 | --- | --- |
 | [QueryStringBuilder](#querystringbuilder-constructor)() | The default constructor. |
-| static [Create](#create-method)(…) | Creates a pooled [`QueryStringBuilder`](./QueryStringBuilder.md) |
 | [Add](#add-method)(…) | Add a key value pair to the query string |
 | [AddList&lt;T&gt;](#addlist&amp;lt;t&amp;gt;-method)(…) | Add a list of values with the specified separator |
 | override [ToString](#tostring-method)() | Returns the query string as a string. |
-| [ToStringAndFree](#tostringandfree-method)() | Returns the query string and returns the builder to the pool |
-
-## Protected Members
-
-| name | description |
-| --- | --- |
-| override [EnterPool](#enterpool-method)() |  |
-| override [LeavePool](#leavepool-method)() |  |
 
 ## See Also
 
-* class [BasePoolable](../Types/BasePoolable.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [QueryStringBuilder.cs](../../../../Oxide.Ext.Discord/Builders/QueryStringBuilder.cs)
-   
-   
-# Create method
-
-Creates a pooled [`QueryStringBuilder`](./QueryStringBuilder.md)
-
-```csharp
-public static QueryStringBuilder Create(DiscordPluginPool pool)
-```
-
-## Return Value
-
-[`QueryStringBuilder`](./QueryStringBuilder.md)
-
-## See Also
-
-* class [DiscordPluginPool](../Types/DiscordPluginPool.md)
-* class [QueryStringBuilder](./QueryStringBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # Add method
@@ -67,7 +38,7 @@ public void Add(string key, string value)
 
 ## See Also
 
-* class [QueryStringBuilder](./QueryStringBuilder.md)
+* struct [QueryStringBuilder](./QueryStringBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
@@ -89,7 +60,7 @@ public void AddList<T>(string key, List<T> list, string separator)
 
 ## See Also
 
-* class [QueryStringBuilder](./QueryStringBuilder.md)
+* struct [QueryStringBuilder](./QueryStringBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
@@ -104,48 +75,7 @@ public override string ToString()
 
 ## See Also
 
-* class [QueryStringBuilder](./QueryStringBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# ToStringAndFree method
-
-Returns the query string and returns the builder to the pool
-
-```csharp
-public string ToStringAndFree()
-```
-
-## See Also
-
-* class [QueryStringBuilder](./QueryStringBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# EnterPool method
-
-```csharp
-protected override void EnterPool()
-```
-
-## See Also
-
-* class [QueryStringBuilder](./QueryStringBuilder.md)
-* namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# LeavePool method
-
-```csharp
-protected override void LeavePool()
-```
-
-## See Also
-
-* class [QueryStringBuilder](./QueryStringBuilder.md)
+* struct [QueryStringBuilder](./QueryStringBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
@@ -160,7 +90,7 @@ public QueryStringBuilder()
 
 ## See Also
 
-* class [QueryStringBuilder](./QueryStringBuilder.md)
+* struct [QueryStringBuilder](./QueryStringBuilder.md)
 * namespace [Oxide.Ext.Discord.Builders](./BuildersNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 

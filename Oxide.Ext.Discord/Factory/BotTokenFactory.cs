@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Entities;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
@@ -43,13 +42,13 @@ internal class BotTokenFactory : Singleton<BotTokenFactory>
         
     private static string GenerateHiddenToken(string token)
     {
-        StringBuilder sb = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder sb = new();
 
         int last = token.LastIndexOf('.') + 1;
-        sb.Append(token, 0, last);
+        sb.Append(token.AsSpan().Slice(0, last));
         sb.Append('#', token.Length - last);
 
-        return DiscordPool.Internal.ToStringAndFree(sb);
+        return sb.ToString();
     }
         
     private BotTokenData ParseToken(string token, string pluginName)

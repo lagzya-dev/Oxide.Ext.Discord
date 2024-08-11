@@ -26,7 +26,7 @@ public class EventPayload : BasePoolable
     /// <summary>
     /// Event data
     /// </summary>
-    public object Data { get; internal set; }
+    public object Data { get; private set; }
 
     /// <summary>
     /// Sequence number, used for resuming sessions and heartbeats

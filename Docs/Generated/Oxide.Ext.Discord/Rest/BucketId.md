@@ -13,12 +13,7 @@ public struct BucketId : IEquatable<BucketId>
 | [BucketId](#bucketid-constructor)(…) | Constructor |
 | [IsValid](#isvalid-property) { get; } | If the bucket ID is valid |
 | readonly [Id](#id-field) | ID of the bucket |
-| [Equals](#equals-method)(…) |  |
-| override [Equals](#equals-method)(…) |  |
-| override [GetHashCode](#gethashcode-method)() |  |
 | override [ToString](#tostring-method)() |  |
-| [operator ==](#bucketid-equality-operator) |  |
-| [operator !=](#bucketid-inequality-operator) |  |
 
 ## See Also
 
@@ -27,87 +22,11 @@ public struct BucketId : IEquatable<BucketId>
 * [BucketId.cs](../../../../Oxide.Ext.Discord/Rest/BucketId.cs)
    
    
-# Equals method (1 of 2)
-
-```csharp
-public bool Equals(BucketId other)
-```
-
-## See Also
-
-* struct [BucketId](./BucketId.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-
----
-
-# Equals method (2 of 2)
-
-```csharp
-public override bool Equals(object obj)
-```
-
-## See Also
-
-* struct [BucketId](./BucketId.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# GetHashCode method
-
-```csharp
-public override int GetHashCode()
-```
-
-## See Also
-
-* struct [BucketId](./BucketId.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # ToString method
 
 ```csharp
 public override string ToString()
 ```
-
-## See Also
-
-* struct [BucketId](./BucketId.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# BucketId Equality operator
-
-```csharp
-public static bool operator ==(BucketId left, BucketId right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
-
-## See Also
-
-* struct [BucketId](./BucketId.md)
-* namespace [Oxide.Ext.Discord.Rest](./RestNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# BucketId Inequality operator
-
-```csharp
-public static bool operator !=(BucketId left, BucketId right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
 
 ## See Also
 

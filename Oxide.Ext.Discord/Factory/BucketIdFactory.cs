@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
 using Oxide.Core.Libraries;
 using Oxide.Ext.Discord.Cache;
-using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Rest;
 using Oxide.Ext.Discord.Types;
 
@@ -34,7 +32,7 @@ internal static class BucketIdFactory
         tokenizer.MoveNext();
         ReadOnlySpan<char> previous = tokenizer.Current;
             
-        StringBuilder bucket = DiscordPool.Internal.GetStringBuilder();
+        ValueStringBuilder bucket = new();
         bucket.Append(EnumCache<RequestMethod>.Instance.ToString(method));
         bucket.Append(':');
         bucket.Append(previous);
@@ -56,7 +54,7 @@ internal static class BucketIdFactory
             previous = current;
         }
 
-        return new BucketId(DiscordPool.Internal.ToStringAndFree(bucket));
+        return new BucketId(bucket.ToString());
     }
         
     private static ReadOnlySpan<char> GetCurrent(int index, ReadOnlySpan<char> previous, ReadOnlySpan<char> token)

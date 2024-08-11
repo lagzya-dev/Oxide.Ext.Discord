@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Text;
 using Oxide.Ext.Discord.Types;
 
 namespace Oxide.Ext.Discord.Builders;
@@ -7,15 +6,14 @@ namespace Oxide.Ext.Discord.Builders;
 /// <summary>
 /// Builder used to build query strings for urls
 /// </summary>
-public class QueryStringBuilder : BasePoolable
+public ref struct QueryStringBuilder
 {
-    private StringBuilder _builder;
+    private ValueStringBuilder _builder;
 
-    /// <summary>
-    /// Creates a pooled <see cref="QueryStringBuilder"/>
-    /// </summary>
-    /// <returns><see cref="QueryStringBuilder"/></returns>
-    public static QueryStringBuilder Create(DiscordPluginPool pool) => pool.Get<QueryStringBuilder>();
+    public QueryStringBuilder()
+    {
+        _builder = new ValueStringBuilder();
+    }
 
     /// <summary>
     /// Add a key value pair to the query string
@@ -67,29 +65,5 @@ public class QueryStringBuilder : BasePoolable
     public override string ToString()
     {
         return _builder.Length <= 1 ? string.Empty : _builder.ToString();
-    }
-        
-    /// <summary>
-    /// Returns the query string and returns the builder to the pool
-    /// </summary>
-    /// <returns></returns>
-    public string ToStringAndFree()
-    {
-        string query = ToString();
-        Dispose();
-        return query;
-    }
-
-    /// <inheritdoc/>
-    protected override void EnterPool()
-    {
-        PluginPool.FreeStringBuilder(_builder);
-    }
-
-    /// <inheritdoc/>
-    protected override void LeavePool()
-    {
-        _builder = PluginPool.GetStringBuilder();
-        _builder.Append("?");
     }
 }

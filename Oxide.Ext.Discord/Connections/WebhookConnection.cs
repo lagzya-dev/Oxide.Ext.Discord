@@ -34,9 +34,9 @@ public class WebhookConnection
     {
         ReverseStringTokenizer tokenizer = new(webhookUrl, "/");
         tokenizer.MoveNext();
-        WebhookId = new Snowflake(tokenizer.Current);
-        tokenizer.MoveNext();
         WebhookToken = tokenizer.Current.ToString();
+        tokenizer.MoveNext();
+        WebhookId = new Snowflake(tokenizer.Current);
         LogLevel = logLevel;
     }
 }

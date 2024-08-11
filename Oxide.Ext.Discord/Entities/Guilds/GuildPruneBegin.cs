@@ -1,7 +1,6 @@
 using System;
 using Newtonsoft.Json;
 using Oxide.Ext.Discord.Builders;
-using Oxide.Ext.Discord.Libraries;
 
 namespace Oxide.Ext.Discord.Entities;
 
@@ -31,7 +30,7 @@ public class GuildPruneBegin : GuildPruneGet
     public override string ToQueryString()
     {
         Validate();
-        QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
+        QueryStringBuilder builder = new();
             
         builder.Add("days", Days.ToString());
         builder.Add("compute_prune_count", ComputePruneCount.ToString());
@@ -48,6 +47,6 @@ public class GuildPruneBegin : GuildPruneGet
         }
 #pragma warning restore CS0618
 
-        return builder.ToStringAndFree();
+        return builder.ToString();
     }
 }
