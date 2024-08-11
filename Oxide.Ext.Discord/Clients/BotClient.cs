@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
 using Oxide.Ext.Discord.Constants;
@@ -61,6 +62,8 @@ public class BotClient : BaseClient, IDebugLoggable
     internal readonly BotConnection Connection;
     internal DiscordWebSocket WebSocket;
     internal readonly DiscordHook Hooks;
+    internal readonly JsonSerializerSettings JsonSettings;
+    internal readonly JsonSerializer JsonSerializer;
 
     private GatewayReadyEvent _readyData;
 
@@ -75,6 +78,14 @@ public class BotClient : BaseClient, IDebugLoggable
         Rest = new RestHandler(this, Logger);
         WebSocket = new DiscordWebSocket(this, Logger);
         Hooks = new DiscordHook(Logger);
+        
+        JsonSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore,
+            Formatting = Formatting.None
+        };
+
+        JsonSerializer = JsonSerializer.Create(JsonSettings);
     }
 
     /// <summary>

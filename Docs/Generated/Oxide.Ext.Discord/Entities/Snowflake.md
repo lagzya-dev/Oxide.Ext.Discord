@@ -22,7 +22,7 @@ public struct Snowflake : IComparable<Snowflake>, IComparable<ulong>, IDiscordKe
 | override [ToString](#tostring-method)() | Returns ID as a string |
 | [TryFormat](#tryformat-method)(…) | Try to format the snowflake into the span |
 | static readonly [DiscordEpoch](#discordepoch-field) | DateTimeOffset since discord Epoch |
-| static [TryParse](#tryparse-method)(…) | Try to parse the a string into a snowflake value |
+| static [TryParse](#tryparse-method-1-of-2)(…) | Try to parse the a string into a snowflake value (2 methods) |
 | [operator ==](#snowflake-equality-operator) | Returns true if left and right are equal |
 | [explicit operator](#snowflake-explicit-operator-1-of-2) | Converts a ulong to a snowflake (2 operators) |
 | [operator &gt;](#snowflake-greaterthan-operator) | Returns true if left snowflake's ID is greater than right's ID |
@@ -70,7 +70,32 @@ public bool IsValid()
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# TryParse method
+# TryParse method (1 of 2)
+
+Try to parse the a string into a snowflake value
+
+```csharp
+public static bool TryParse(ReadOnlySpan<char> value, out Snowflake snowflake)
+```
+
+| parameter | description |
+| --- | --- |
+| value | String to parse |
+| snowflake | Snowflake to return |
+
+## Return Value
+
+True if parse succeeded; false otherwise
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# TryParse method (2 of 2)
 
 Try to parse the a string into a snowflake value
 

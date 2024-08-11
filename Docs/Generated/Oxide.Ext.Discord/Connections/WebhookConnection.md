@@ -14,6 +14,7 @@ public class WebhookConnection
 | [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md) |
 | readonly [WebhookId](#webhookid-field) | API token for the bot |
 | readonly [WebhookToken](#webhooktoken-field) | Token for the webhook |
+| readonly [WebhookUrl](#webhookurl-field) |  |
 
 ## See Also
 
@@ -81,6 +82,19 @@ Token for the webhook
 
 ```csharp
 public readonly string WebhookToken;
+```
+
+## See Also
+
+* class [WebhookConnection](./WebhookConnection.md)
+* namespace [Oxide.Ext.Discord.Connections](./ConnectionsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# WebhookUrl field
+
+```csharp
+public readonly string WebhookUrl;
 ```
 
 ## See Also

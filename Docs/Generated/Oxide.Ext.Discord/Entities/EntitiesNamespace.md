@@ -239,7 +239,7 @@
 | enum [OnboardingPromptType](./OnboardingPromptType.md) | Represents [Prompt Types](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types) |
 | class [Overwrite](./Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
 | [Flags] enum [PermissionFlags](./PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
-| enum [PermissionType](./PermissionType.md) | Represents the type of a permission |
+| enum [PermissionType](./PermissionType.md) | Represents the type of permission |
 | class [PollAnswerCount](./PollAnswerCount.md) | Represents a [Discord Poll Answer Count](https://discord.com/developers/docs/resources/poll#poll-results-object-poll-answer-count-object-structure) |
 | class [PollAnswers](./PollAnswers.md) | Represents a [Discord Poll Answers](https://discord.com/developers/docs/resources/poll#poll-answer-object) |
 | class [PollCreate](./PollCreate.md) | Represents a [Discord Poll Create](https://discord.com/developers/docs/resources/poll#poll-create-request-object-poll-create-request-object-structure) |

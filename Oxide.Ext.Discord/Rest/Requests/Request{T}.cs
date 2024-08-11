@@ -47,7 +47,7 @@ public class Request<T> : BaseRequest
     {
         try
         {
-            T data = JsonConvert.DeserializeObject<T>(response.Content, Client.Bot.JsonSettings);
+            T data = JsonConvert.DeserializeObject<T>(response.Content, Client.JsonSettings);
             _promise.Resolve(data);
         }
         catch (Exception ex)

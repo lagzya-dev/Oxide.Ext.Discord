@@ -25,8 +25,6 @@ public abstract class BaseClient
     public bool Initialized { get; protected set; }
     
     internal readonly ILogger Logger;
-    internal readonly JsonSerializerSettings JsonSettings;
-    internal readonly JsonSerializer JsonSerializer;
 
     /// <summary>
     /// List of all clients using this client
@@ -44,14 +42,6 @@ public abstract class BaseClient
     protected BaseClient()
     {
         Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
-
-        JsonSettings = new JsonSerializerSettings
-        {
-            NullValueHandling = NullValueHandling.Ignore,
-            Formatting = Formatting.None
-        };
-
-        JsonSerializer = JsonSerializer.Create(JsonSettings);
 
         Initialized = true;
         

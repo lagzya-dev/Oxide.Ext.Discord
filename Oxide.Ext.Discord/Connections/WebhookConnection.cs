@@ -18,6 +18,8 @@ public class WebhookConnection
     /// Token for the webhook
     /// </summary>
     public readonly string WebhookToken;
+
+    public readonly string WebhookUrl;
         
     /// <summary>
     /// Discord Extension Logging Level.
@@ -32,11 +34,18 @@ public class WebhookConnection
     /// <param name="logLevel">Log level for the webhook</param>
     public WebhookConnection(string webhookUrl, DiscordLogLevel logLevel = DiscordLogLevel.Info)
     {
+        WebhookUrl = webhookUrl;
         ReverseStringTokenizer tokenizer = new(webhookUrl, "/");
-        tokenizer.MoveNext();
-        WebhookToken = tokenizer.Current.ToString();
-        tokenizer.MoveNext();
-        WebhookId = new Snowflake(tokenizer.Current);
+        if (tokenizer.MoveNext())
+        {
+            WebhookToken = tokenizer.Current.ToString();
+        }
+
+        if (tokenizer.MoveNext())
+        {
+            Snowflake.TryParse(tokenizer.Current, out WebhookId);
+        }
+        
         LogLevel = logLevel;
     }
 }

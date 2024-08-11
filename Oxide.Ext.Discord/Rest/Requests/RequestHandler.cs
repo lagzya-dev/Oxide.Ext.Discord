@@ -292,7 +292,7 @@ public class RequestHandler : BasePoolable, IDebugLoggable
 
     private StringContent GetJsonContent(object data)
     {
-        string json = JsonConvert.SerializeObject(data, Request.Client.Bot.JsonSettings);
+        string json = JsonConvert.SerializeObject(data, Request.Client.JsonSettings);
         _logger.Verbose($"{nameof(RequestHandler)}.{nameof(GetJsonContent)} Data: {{0}}", json);
         StringContent content = new(json);
         content.Headers.ContentType = MediaTypeHeaderCache.Instance.Get("application/json");

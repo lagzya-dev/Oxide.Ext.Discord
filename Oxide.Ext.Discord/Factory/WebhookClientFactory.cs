@@ -34,7 +34,7 @@ internal sealed class WebhookClientFactory : Singleton<WebhookClientFactory>
             {
                 DiscordExtension.GlobalLogger.Debug($"{nameof(WebhookClientFactory)}.{nameof(InitializeWebhookClient)} Creating new ${nameof(WebhookClient)}");
                 bot = new WebhookClient(connection);
-                _activeWebhooks[client.Connection.ApiToken] = bot;
+                _activeWebhooks[connection.WebhookToken] = bot;
             }
                 
             DiscordExtension.GlobalLogger.Debug($"{nameof(WebhookClientFactory)}.{nameof(InitializeWebhookClient)} Adding {{0}} client to webhook {{1}}", client.PluginName, connection.WebhookId);

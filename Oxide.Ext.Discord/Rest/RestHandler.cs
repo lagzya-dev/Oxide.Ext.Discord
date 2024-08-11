@@ -12,6 +12,7 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Types;
@@ -212,12 +213,7 @@ public class RestHandler : IDebugLoggable
         }
         catch (Exception)
         {
-            JsonSerializerSettings settings = new()
-            {
-                NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented
-            };
-            _logger.Error($"An error occured duration object validation.\n{JsonConvert.SerializeObject(data, settings)}");
+            _logger.Error($"An error occured duration object validation.\n{JsonConvert.SerializeObject(data, DiscordJson.IndentedSettings)}");
             throw;
         }
     }

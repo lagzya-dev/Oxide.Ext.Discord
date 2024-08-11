@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Newtonsoft.Json;
 using Oxide.Core.Plugins;
 using Oxide.Ext.Discord.Connections;
+using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Entities;
 using Oxide.Ext.Discord.Extensions;
 using Oxide.Ext.Discord.Factory;
 using Oxide.Ext.Discord.Interfaces;
+using Oxide.Ext.Discord.Json;
 using Oxide.Ext.Discord.Libraries;
 using Oxide.Ext.Discord.Logging;
 using Oxide.Ext.Discord.Plugins;
@@ -45,6 +48,8 @@ public class DiscordClient
     /// Webhook clients for this DiscordClient
     /// </summary>
     public readonly IReadOnlyList<WebhookClient> Webhooks;
+    
+    public JsonSerializerSettings JsonSettings => Bot?.JsonSettings ?? DiscordJson.Settings;
         
     /// <summary>
     /// Settings used to connect to discord and configure the extension
@@ -96,7 +101,7 @@ public class DiscordClient
             Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
         }
 
-        Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
+        Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} Bot connect for {{0}}", Plugin.FullName());
 
         Connection.Initialize(this);
         PluginSetup = new PluginSetup(Plugin, Logger);
@@ -118,19 +123,31 @@ public class DiscordClient
     public WebhookClient Connect(WebhookConnection connection)
     {
         Logger ??= DiscordLoggerFactory.Instance.CreateExtensionLogger(connection.LogLevel);
-            
-        if (connection.WebhookId == default || string.IsNullOrEmpty(connection.WebhookToken))
+        
+        if (string.IsNullOrEmpty(connection.WebhookUrl) || !connection.WebhookUrl.StartsWith("https://discord.com/api/webhooks/"))
         {
-            Logger.Error("Webhook Id or Token is null or empty!");
+            Logger.Debug("Skipping Webhook connect. Webhook URL is null, empty, or invalid: {0}", connection.WebhookUrl);
             return null;
         }
-            
+        
+        if (string.IsNullOrEmpty(connection.WebhookToken))
+        {
+            Logger.Error("Failed to parse Webhook token from webhook URL: {0}", connection.WebhookUrl);
+            return null;
+        }
+        
+        if (connection.WebhookId == default)
+        {
+            Logger.Error("Failed to parse webhook ID from webhook URL: {0}", connection.WebhookUrl);
+            return null;
+        }
+        
         if (!string.IsNullOrEmpty(DiscordExtension.TestVersion))
         {
             Logger.Warning("Using Discord Test Version: {0}", DiscordExtension.FullExtensionVersion);
         }
             
-        Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} AddDiscordClient for {{0}}", Plugin.FullName());
+        Logger.Debug($"{nameof(DiscordClient)}.{nameof(Connect)} Webhook connect for {{0}}", Plugin.FullName());
             
         WebhookClient client = WebhookClientFactory.Instance.InitializeWebhookClient(this, connection);
         client.AddClient(this);

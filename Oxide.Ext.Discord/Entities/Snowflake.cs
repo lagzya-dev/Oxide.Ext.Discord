@@ -88,6 +88,24 @@ public readonly struct Snowflake : IComparable<Snowflake>, IEquatable<Snowflake>
         snowflake = default;
         return false;
     }
+    
+    /// <summary>
+    /// Try to parse the a string into a snowflake value
+    /// </summary>
+    /// <param name="value">String to parse</param>
+    /// <param name="snowflake">Snowflake to return</param>
+    /// <returns>True if parse succeeded; false otherwise</returns>
+    public static bool TryParse(ReadOnlySpan<char> value, out Snowflake snowflake)
+    {
+        if(ulong.TryParse(value, out ulong id))
+        {
+            snowflake = new Snowflake(id);
+            return true;
+        }
+
+        snowflake = default;
+        return false;
+    }
 
     /// <summary>
     /// Try to format the snowflake into the span

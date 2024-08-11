@@ -161,7 +161,7 @@ public class ResponseError : BaseDiscordException
             return;
         }
             
-        DiscordError = JsonConvert.DeserializeObject<ResponseErrorMessage>(content, _client.Bot.JsonSettings);
+        DiscordError = JsonConvert.DeserializeObject<ResponseErrorMessage>(content, _client.JsonSettings);
         if (DiscordError == null)
         {
             return;

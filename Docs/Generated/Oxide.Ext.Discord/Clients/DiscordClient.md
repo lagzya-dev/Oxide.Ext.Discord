@@ -11,6 +11,7 @@ public class DiscordClient
 | name | description |
 | --- | --- |
 | [Bot](#bot-property) { get; } | The bot client that is unique to the Token used |
+| [JsonSettings](#jsonsettings-property) { get; } |  |
 | [Plugin](#plugin-property) { get; } | Which plugin is the owner of this client |
 | readonly [PluginId](#pluginid-field) | The ID of the plugin |
 | readonly [PluginName](#pluginname-field) | The full plugin name including author and version |
@@ -230,6 +231,19 @@ public BotClient Bot { get; }
 ## See Also
 
 * class [BotClient](./BotClient.md)
+* class [DiscordClient](./DiscordClient.md)
+* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# JsonSettings property
+
+```csharp
+public JsonSerializerSettings JsonSettings { get; }
+```
+
+## See Also
+
 * class [DiscordClient](./DiscordClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

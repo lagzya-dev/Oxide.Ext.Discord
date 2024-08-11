@@ -13,6 +13,7 @@ public ref struct QueryStringBuilder
     public QueryStringBuilder()
     {
         _builder = new ValueStringBuilder();
+        _builder.Append('?');
     }
 
     /// <summary>

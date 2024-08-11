@@ -140,7 +140,7 @@ public ref struct ValueStringBuilder
         _pos += count;
     }
 
-    public void Insert(int index, string? s)
+    public void Insert(int index, string s)
     {
         if (s == null)
         {

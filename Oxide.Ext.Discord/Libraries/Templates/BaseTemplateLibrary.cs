@@ -131,7 +131,7 @@ public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where 
         try
         {
             string json = File.ReadAllText(path);
-            return JsonConvert.DeserializeObject<DiscordTemplate<TTemplate>>(json, JsonSettings.Indented);
+            return JsonConvert.DeserializeObject<DiscordTemplate<TTemplate>>(json, DiscordJson.IndentedSettings);
         }
         catch (Exception ex)
         {
@@ -153,7 +153,7 @@ public abstract class BaseTemplateLibrary<TTemplate> : BaseDiscordLibrary where 
             Directory.CreateDirectory(dir);
         }
 
-        string json = JsonConvert.SerializeObject(template, JsonSettings.Indented);
+        string json = JsonConvert.SerializeObject(template, DiscordJson.IndentedSettings);
         File.WriteAllText(path, json);
     }
 

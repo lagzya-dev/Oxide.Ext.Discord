@@ -6610,7 +6610,7 @@
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.PermissionType">
             <summary>
-            Represents the type of a permission
+            Represents the type of permission
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Entities.PermissionType.Role">
@@ -7337,7 +7337,7 @@
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordEmoji.Id">
             <summary>
-            The ID for the emoji if it is custom; Otherwise invalid snowflake
+            The ID for the emoji if it is custom; Otherwise default snowflake
             </summary>
         </member>
         <member name="P:Oxide.Ext.Discord.Entities.DiscordEmoji.EmojiId">
@@ -16697,6 +16697,14 @@
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Entities.Snowflake.TryParse(System.String,Oxide.Ext.Discord.Entities.Snowflake@)">
+            <summary>
+            Try to parse the a string into a snowflake value
+            </summary>
+            <param name="value">String to parse</param>
+            <param name="snowflake">Snowflake to return</param>
+            <returns>True if parse succeeded; false otherwise</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.Snowflake.TryParse(System.ReadOnlySpan{System.Char},Oxide.Ext.Discord.Entities.Snowflake@)">
             <summary>
             Try to parse the a string into a snowflake value
             </summary>

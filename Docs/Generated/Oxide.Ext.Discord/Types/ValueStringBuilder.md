@@ -172,7 +172,7 @@ public bool TryCopyTo(Span<char> destination, out int charsWritten)
 # Insert method (1 of 2)
 
 ```csharp
-public void Insert(int index, string? s)
+public void Insert(int index, string s)
 ```
 
 ## See Also
