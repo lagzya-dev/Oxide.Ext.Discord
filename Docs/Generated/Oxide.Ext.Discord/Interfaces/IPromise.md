@@ -11,6 +11,7 @@ public interface IPromise
 | name | description |
 | --- | --- |
 | [Id](#id-property) { get; } | ID of the promise, useful for debugging. |
+| [AsTask](#astask-method)() | returns the task for this promise |
 | [Catch](#catch-method)(…) | Handle errors for the promise. |
 | [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) | Catches a specified exception |
 | [ContinueWith](#continuewith-method)(…) | Add a callback that chains a non-value promise. ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The state of the returning promise will be based on the new non-value promise, not the preceding (rejected or resolved) promise. |
@@ -270,6 +271,21 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md)
+* interface [IPromise](./IPromise.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AsTask method
+
+returns the task for this promise
+
+```csharp
+public ValueTask AsTask()
+```
+
+## See Also
+
 * interface [IPromise](./IPromise.md)
 * namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

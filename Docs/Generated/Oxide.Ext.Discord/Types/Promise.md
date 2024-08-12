@@ -12,6 +12,7 @@ public sealed class Promise : BasePromise, IPendingPromise
 | --- | --- |
 | [Promise](#promise-constructor)() | Constructor for the promise |
 | static [Create](#create-method)() | Creates a Promise |
+| [AsTask](#astask-method)() |  |
 | [Catch](#catch-method)(…) |  |
 | [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) |  |
 | [ContinueWith](#continuewith-method)(…) |  |
@@ -417,6 +418,19 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [Promise](./Promise.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AsTask method
+
+```csharp
+public ValueTask AsTask()
+```
+
+## See Also
+
 * class [Promise](./Promise.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

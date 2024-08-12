@@ -20565,6 +20565,12 @@
             The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise.
             </summary> 
         </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IPromise.AsTask">
+            <summary>
+            returns the task for this promise
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.IPromise.GetAwaiter">
             <summary>
             returns the task awaiter for this promise
@@ -20672,6 +20678,12 @@
             ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error.
             The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise.
             </summary> 
+        </member>
+        <member name="M:Oxide.Ext.Discord.Interfaces.IPromise`1.AsTask">
+            <summary>
+            returns the task for this promise
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.IPromise`1.GetAwaiter">
             <summary>
@@ -26968,6 +26980,9 @@
         <member name="M:Oxide.Ext.Discord.Types.Promise.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.IPromise{``0}})">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise.AsTask">
+            <inheritdoc/>
+        </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise.GetAwaiter">
             <inheritdoc/>
         </member>
@@ -27109,6 +27124,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.ContinueWith``1(System.Func{Oxide.Ext.Discord.Interfaces.IPromise{``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Types.Promise`1.AsTask">
             <inheritdoc/>
         </member>
         <member name="M:Oxide.Ext.Discord.Types.Promise`1.GetAwaiter">

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Oxide.Ext.Discord.Entities;
 
 namespace Oxide.Ext.Discord.Interfaces;
@@ -111,6 +112,12 @@ public interface IPromise
     /// </summary> 
     IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete);
 
+    /// <summary>
+    /// returns the task for this promise
+    /// </summary>
+    /// <returns></returns>
+    ValueTask AsTask();
+    
     /// <summary>
     /// returns the task awaiter for this promise
     /// </summary>

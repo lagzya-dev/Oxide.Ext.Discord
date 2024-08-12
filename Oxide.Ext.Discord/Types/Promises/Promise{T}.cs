@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Oxide.Core;
 using Oxide.Ext.Discord.Callbacks;
 using Oxide.Ext.Discord.Exceptions;
@@ -521,6 +522,12 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
         return promise.Then(onComplete);
     }
 
+    ///<inheritdoc/>
+    public ValueTask<TPromised> AsTask()
+    {
+        return _taskSource.GetTask();
+    }
+    
     ///<inheritdoc/>
     public ValueTaskAwaiter<TPromised> GetAwaiter()
     {

@@ -12,6 +12,7 @@ public sealed class Promise<TPromised> : BasePromise, IPendingPromise<TPromised>
 | --- | --- |
 | [Promise](#promise&amp;lt;tpromised&amp;gt;-constructor)() | Constructor |
 | static [Create](#create-method)() | Returns a promise that is currently pending |
+| [AsTask](#astask-method)() |  |
 | [Catch](#catch-method-1-of-2)(…) |  (2 methods) |
 | [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) |  |
 | [ContinueWith](#continuewith-method)(…) |  |
@@ -406,6 +407,19 @@ public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComp
 ## See Also
 
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AsTask method
+
+```csharp
+public ValueTask<TPromised> AsTask()
+```
+
+## See Also
+
 * class [Promise&lt;TPromised&gt;](./Promise%7BTPromised%7D.md)
 * namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
