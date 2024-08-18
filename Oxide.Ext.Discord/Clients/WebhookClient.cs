@@ -26,7 +26,6 @@ public class WebhookClient : BaseClient, IDebugLoggable
     public WebhookClient(WebhookConnection connection)
     {
         Connection = connection;
-        Initialized = true;
         Rest = RestHandler.Global;
         Webhook = new DiscordWebhook
         {
@@ -34,6 +33,7 @@ public class WebhookClient : BaseClient, IDebugLoggable
             Token = connection.WebhookToken,
             Client = this
         };
+        Initialized = true;
     }
 
     internal override void HandleConnect()
@@ -59,9 +59,9 @@ public class WebhookClient : BaseClient, IDebugLoggable
     internal override void HandleShutdown()
     {
         Logger.Debug($"{nameof(WebhookClient)}.{nameof(HandleShutdown)} Shutting down the webhook");
-        Initialized = false;
         WebhookClientFactory.Instance.RemoveWebhook(this);
         Rest = null;
+        Initialized = false;
     }
         
     ///<inheritdoc/>

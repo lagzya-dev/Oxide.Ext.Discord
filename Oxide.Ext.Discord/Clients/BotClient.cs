@@ -74,7 +74,6 @@ public class BotClient : BaseClient, IDebugLoggable
     public BotClient(BotConnection connection)
     {
         Connection = new BotConnection(connection);
-        Initialized = true;
         Rest = new RestHandler(this, Logger);
         WebSocket = new DiscordWebSocket(this, Logger);
         Hooks = new DiscordHook(Logger);
@@ -86,6 +85,7 @@ public class BotClient : BaseClient, IDebugLoggable
         };
 
         JsonSerializer = JsonSerializer.Create(JsonSettings);
+        Initialized = true;
     }
 
     /// <summary>
@@ -144,7 +144,6 @@ public class BotClient : BaseClient, IDebugLoggable
     internal override void HandleShutdown()
     {
         Logger.Debug($"{nameof(BotClient)}.{nameof(HandleShutdown)} Shutting down the bot");
-        Initialized = false;
         BotClientFactory.Instance.RemoveBot(this);
 
         try
@@ -163,6 +162,7 @@ public class BotClient : BaseClient, IDebugLoggable
         ShutdownRest();
                 
         _readyData = null;
+        Initialized = false;
     }
         
     ///<inheritdoc/>

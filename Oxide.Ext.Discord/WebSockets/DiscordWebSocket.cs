@@ -132,7 +132,7 @@ public class DiscordWebSocket : IDebugLoggable
 
             if (requested)
             {
-                await Handler.Disconnect(4199, "Discord Requested Reconnect").ConfigureAwait(false);
+                await Handler.Disconnect((int)DiscordWebsocketCloseCode.DiscordExtensionReconnect, "Discord Requested Reconnect").ConfigureAwait(false);
             }
             else
             {
@@ -355,7 +355,7 @@ public class DiscordWebSocket : IDebugLoggable
     internal void OnReconnectRequested()
     {
         _logger.Debug("Discord has requested a reconnect. Reconnecting...");
-        //If we disconnect normally our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
+        //If we disconnect normally, our session becomes invalid per: https://discord.com/developers/docs/topics/gateway#resuming
         Disconnect(true, true, true);
     }
         
