@@ -43,7 +43,7 @@ public abstract class BaseDiscordLibrary : Library
             for (int index = 0; index < Libraries.Count; index++)
             {
                 BaseDiscordLibrary library = Libraries[index];
-                library.OnPluginLoaded(client);
+                library.OnClientBotConnect(client);
             }
         }
     }
