@@ -1464,18 +1464,18 @@
             <param name="stickerId">Sticker ID to be added</param>
             <returns>This</returns>
         </member>
-        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Snowflake})">
-            <summary>
-            Adds stickers to the message
-            </summary>
-            <param name="stickerIds">Sticker ID's to be added</param>
-            <returns>This</returns>
-        </member>
         <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddSticker(Oxide.Ext.Discord.Entities.DiscordSticker)">
             <summary>
             Adds a sticker to the message
             </summary>
             <param name="sticker">Sticker to be added</param>
+            <returns>This</returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.Snowflake})">
+            <summary>
+            Adds stickers to the message
+            </summary>
+            <param name="stickerIds">Sticker ID's to be added</param>
             <returns>This</returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Builders.BaseChannelMessageBuilder`2.AddStickers(System.Collections.Generic.ICollection{Oxide.Ext.Discord.Entities.DiscordSticker})">

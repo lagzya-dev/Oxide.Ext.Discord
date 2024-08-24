@@ -15,7 +15,7 @@ public abstract class BaseAsyncCallback : BasePoolable
     /// <summary>
     /// The callback to be called by the delegate
     /// </summary>
-    private readonly Action _callback;
+    private readonly Func<ValueTask> _callback;
         
     /// <summary>
     /// Constructor
@@ -44,7 +44,7 @@ public abstract class BaseAsyncCallback : BasePoolable
         Task.Run(_callback);
     }
 
-    private async void CallbackInternal()
+    private async ValueTask CallbackInternal()
     {
         try
         {

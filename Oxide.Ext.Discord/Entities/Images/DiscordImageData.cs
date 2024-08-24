@@ -28,8 +28,8 @@ public readonly struct DiscordImageData
     /// </summary>
     public readonly byte[] Image;
 
-    private static readonly Regex ImageDataRegex = new("^data:image\\/(jpeg|png|gif){1};base64,([A-Za-z\\d+\\/]+)$", RegexOptions.Compiled);
-    private static readonly byte[] Gif = Encoding.ASCII.GetBytes("GIF");
+    private static readonly Regex ImageDataRegex = new(@"^data:image\/(jpeg|png|gif){1};base64,([A-Za-z\d+\/]+)$", RegexOptions.Compiled);
+    private static readonly byte[] Gif = "GIF"u8.ToArray();
     private static readonly byte[] Png = [137, 80, 78, 71];
     private static readonly byte[] Jpeg = [255, 216, 255, 224];
     private static readonly byte[] Jpeg2 = [255, 216, 255, 225];

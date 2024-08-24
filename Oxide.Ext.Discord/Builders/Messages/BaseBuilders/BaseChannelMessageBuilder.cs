@@ -29,32 +29,9 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> : BaseMessag
     public TBuilder AddSticker(Snowflake stickerId)
     {
         InvalidSnowflakeException.ThrowIfInvalid(stickerId);
-        if (Message.StickerIds == null)
-        {
-            Message.StickerIds = new List<Snowflake>();
-        }
-            
+        Message.StickerIds ??= new List<Snowflake>();
         InvalidMessageException.ThrowIfMaxStickers(Message.StickerIds.Count + 1);
         Message.StickerIds.Add(stickerId);
-        return Builder;
-    }
-        
-    /// <summary>
-    /// Adds stickers to the message
-    /// </summary>
-    /// <param name="stickerIds">Sticker ID's to be added</param>
-    /// <returns>This</returns>
-    public TBuilder AddStickers(ICollection<Snowflake> stickerIds)
-    {
-        if (stickerIds == null) throw new ArgumentNullException(nameof(stickerIds));
-        InvalidSnowflakeException.ThrowIfInvalid(stickerIds);
-        if (Message.StickerIds == null)
-        {
-            Message.StickerIds = new List<Snowflake>();
-        }
-            
-        InvalidMessageException.ThrowIfMaxStickers(Message.StickerIds.Count + stickerIds.Count);
-        Message.StickerIds.AddRange(stickerIds);
         return Builder;
     }
         
@@ -67,6 +44,21 @@ public abstract class BaseChannelMessageBuilder<TMessage, TBuilder> : BaseMessag
     {
         if (sticker == null) throw new ArgumentNullException(nameof(sticker));
         return AddSticker(sticker.Id);
+    }
+    
+    /// <summary>
+    /// Adds stickers to the message
+    /// </summary>
+    /// <param name="stickerIds">Sticker ID's to be added</param>
+    /// <returns>This</returns>
+    public TBuilder AddStickers(ICollection<Snowflake> stickerIds)
+    {
+        if (stickerIds == null) throw new ArgumentNullException(nameof(stickerIds));
+        InvalidSnowflakeException.ThrowIfInvalid(stickerIds);
+        Message.StickerIds ??= new List<Snowflake>();
+        InvalidMessageException.ThrowIfMaxStickers(Message.StickerIds.Count + stickerIds.Count);
+        Message.StickerIds.AddRange(stickerIds);
+        return Builder;
     }
         
     /// <summary>
