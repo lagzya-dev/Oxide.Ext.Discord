@@ -114,4 +114,29 @@ internal class BidirectionalDictionary<TKey, TValue>
 
     public ICollection<TKey> AsKeyCollection() => _keyToValue.Keys;
     public ICollection<TValue> AsValueCollection() => _valueToKey.Keys;
+
+    public override string ToString()
+    {
+        ValueStringBuilder sb = new();
+
+        sb.AppendLine(nameof(BidirectionalDictionary<TKey, TValue>));
+        sb.AppendLine("{");
+        sb.AppendLine("\tKeyToValue:");
+        sb.AppendLine("\t{");
+        foreach (TKey key in _keyToValue.Keys)
+        {
+            sb.AppendLine($"\t\t{key}: {_keyToValue[key]}");
+        }
+        sb.AppendLine("\t}");
+        sb.AppendLine("\valueToKey:");
+        sb.AppendLine("\t{");
+        foreach (TValue key in _valueToKey.Keys)
+        {
+            sb.AppendLine($"\t\t{key}: {_valueToKey[key]}");
+        }
+        sb.AppendLine("\t}");
+        sb.AppendLine("}");
+        
+        return sb.ToString();
+    }
 }

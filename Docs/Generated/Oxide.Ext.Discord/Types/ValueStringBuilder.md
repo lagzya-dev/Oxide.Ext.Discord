@@ -16,6 +16,7 @@ public struct ValueStringBuilder
 | [RawChars](#rawchars-property) { get; } | Returns the underlying storage of the builder. |
 | [Append](#append-method-1-of-12)(…) |  (12 methods) |
 | [AppendLine](#appendline-method)() |  |
+| [AppendLine](#appendline-method)(…) |  |
 | [AppendSpan](#appendspan-method)(…) |  |
 | [AsSpan](#asspan-method)() |  |
 | [AsSpan](#asspan-method-1-of-3)(…) | Returns a span around the contents of the builder. (3 methods) |
@@ -376,10 +377,24 @@ public Span<char> AppendSpan(int length)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# AppendLine method
+# AppendLine method (1 of 2)
 
 ```csharp
 public void AppendLine()
+```
+
+## See Also
+
+* struct [ValueStringBuilder](./ValueStringBuilder.md)
+* namespace [Oxide.Ext.Discord.Types](./TypesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+---
+
+# AppendLine method (2 of 2)
+
+```csharp
+public void AppendLine(string s)
 ```
 
 ## See Also

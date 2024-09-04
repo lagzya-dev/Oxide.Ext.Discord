@@ -75,6 +75,8 @@ public class DiscordLocales : BaseDiscordLibrary<DiscordLocales>
         _logger = logger;
 
         AddOxideLocale(ServerLocale.Create("pt-BR"), DiscordLocale.Create("pt-BR"));
+        AddOxideLocale(ServerLocale.Create("es-ES"), DiscordLocale.Create("es-ES"));
+        AddOxideLocale(ServerLocale.Create("zh-CN"), DiscordLocale.Create("zh-CN"));
         AddDiscordLocale(DiscordLocale.Create("en-GB"), ServerLocale.Create("en"));
         AddDiscordLocale(DiscordLocale.Create("zh-TW"), ServerLocale.Create("zh"));
         AddDiscordLocale(DiscordLocale.Create("es-419"), ServerLocale.Create("es"));

@@ -343,7 +343,15 @@ public ref struct ValueStringBuilder
             Append(value.ToString(format, provider));
         }
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void AppendLine(string s)
+    {
+        Append(s);
+        AppendLine();
+    }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void AppendLine() => Append(Environment.NewLine);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
