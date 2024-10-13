@@ -148,4 +148,4 @@ You won't be able to use an IPlayer placeholder if there is no IPlayer available
 
 ## Contributing
 
-Want to contribute? Create a fork of the repo and create a pull request for any changes you wish to make! 
+Want to contribute? Create a fork of the repo and create a pull request for any changes you wish to make!
