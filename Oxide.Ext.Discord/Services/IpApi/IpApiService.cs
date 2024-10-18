@@ -23,6 +23,7 @@ internal sealed class IpApiService : Singleton<IpApiService>
         
     private const string RemainingRequestsHeader = "X-Rl";
     private const string RemainingSecondsHeader = "X-Ttl";
+    private const int MaxRetries = 3;
         
     private IpApiService()
     {
@@ -50,7 +51,7 @@ internal sealed class IpApiService : Singleton<IpApiService>
 
     private async ValueTask<IpResult> GetCountryCodeInternal(string url, int retries)
     {
-        if (retries >= 3)
+        if (retries++ >= MaxRetries)
         {
             _logger.Verbose($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} Failed to get IP data after {{0}} retries", retries);
             return null;
@@ -76,14 +77,17 @@ internal sealed class IpApiService : Singleton<IpApiService>
                 return ipResult?.IsSuccess ?? false ? ipResult : null;
             }
 
-            _logger.Error($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} An error occured during request. Code: {{0}} Message: {{1}}", result.StatusCode, await result.Content.ReadAsStringAsync().ConfigureAwait(false));
+            if (retries >= MaxRetries)
+            {
+                _logger.Error($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} An error occured during request. Code: {{0}} Message: {{1}}", result.StatusCode, await result.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
                 
             switch (result.StatusCode)
             {
                 case HttpStatusCode.ServiceUnavailable:
                 case HttpStatusCode.InternalServerError:
                     await (DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1)).DelayUntil().ConfigureAwait(false);
-                    return await GetCountryCodeInternal(url, retries + 1).ConfigureAwait(false);
+                    return await GetCountryCodeInternal(url, retries).ConfigureAwait(false);
             }
 
             return null;
@@ -95,9 +99,13 @@ internal sealed class IpApiService : Singleton<IpApiService>
         }
         catch (Exception ex)
         {
-            _logger.Exception($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} An error occured during IP lookup.", ex);
+            if (retries >= MaxRetries)
+            {
+                _logger.Exception($"{nameof(IpApiService)}.{nameof(GetCountryCodeInternal)} An error occured during IP lookup.", ex);
+            }
+           
             await (DateTimeOffset.UtcNow + TimeSpan.FromSeconds(1)).DelayUntil().ConfigureAwait(false);
-            return await GetCountryCodeInternal(url, retries + 1).ConfigureAwait(false);
+            return await GetCountryCodeInternal(url, retries).ConfigureAwait(false);
         }
         finally
         {
