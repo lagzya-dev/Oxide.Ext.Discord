@@ -283,6 +283,7 @@ internal partial class DiscordExtensionCore : BaseDiscordPlugin
         ThreadPool.GetAvailableThreads(out int worker, out int port);
         ThreadPool.GetMaxThreads(out int maxWorker, out int maxPort);
             
+        logger.AppendLine($"Discord Extension Version: {DiscordExtension.FullExtensionVersion}");
         logger.AppendList("Bot Clients", BotClientFactory.Instance.Clients);
         logger.AppendList("Webhook Clients", WebhookClientFactory.Instance.Clients);
         logger.AppendObject("Global Rest", RestHandler.Global);
