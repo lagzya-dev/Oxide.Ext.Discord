@@ -18881,6 +18881,11 @@
             Thrown when the minimum template version is higher than the current template version
             </summary>
         </member>
+        <member name="T:Oxide.Ext.Discord.Exceptions.DiscordLoggerException">
+            <summary>
+            Exceptions for the <see cref="T:Oxide.Ext.Discord.Clients.DiscordClient"/>
+            </summary>
+        </member>
         <member name="T:Oxide.Ext.Discord.Exceptions.InvalidPoolException">
             <summary>
             An exception when something is invalid with a pool
@@ -25805,27 +25810,27 @@
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Debug">
             <summary>
-            Debug log level display all messages up to and include Debug
+            Debug log level display all messages up to and including Debug
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Info">
             <summary>
-            Info log level display all messages up to and include Info
+            Info log level display all messages up to and including Info
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Warning">
             <summary>
-            Warning log level display all messages up to and include Warning
+            Warning log level display all messages up to and including Warning
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Error">
             <summary>
-            Error log level display all messages up to and include Error
+            Error log level display all messages up to and including Error
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Exception">
             <summary>
-            Exception log level display all messages up to and include Exception
+            Exception log level display all messages up to and including Exception
             </summary>
         </member>
         <member name="F:Oxide.Ext.Discord.Logging.DiscordLogLevel.Off">
