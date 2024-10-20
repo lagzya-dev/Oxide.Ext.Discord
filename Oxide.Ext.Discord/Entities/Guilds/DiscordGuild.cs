@@ -699,7 +699,7 @@ public class DiscordGuild : ISnowflakeEntity
     /// </summary>
     /// <param name="client">Client to use</param>
     /// <param name="list">Query string request for the list</param>
-    public IPromise<List<GuildMember>> Listembers(DiscordClient client, GuildListMembers list = null)
+    public IPromise<List<GuildMember>> ListMembers(DiscordClient client, GuildListMembers list = null)
     {
         return client.Bot.Rest.Get<List<GuildMember>>(client,$"guilds/{Id}/members{list?.ToQueryString()}");
     }
