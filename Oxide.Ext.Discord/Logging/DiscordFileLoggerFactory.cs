@@ -8,7 +8,7 @@ namespace Oxide.Ext.Discord.Logging;
 internal sealed class DiscordFileLoggerFactory : Singleton<DiscordFileLoggerFactory>
 {
     private readonly Thread _writerThread;
-    private readonly List<DiscordFileLogger> _loggers = new();
+    private readonly List<DiscordFileLogger> _loggers = [];
     private readonly AutoResetEvent _reset = new(false);
     private bool _exit;
 

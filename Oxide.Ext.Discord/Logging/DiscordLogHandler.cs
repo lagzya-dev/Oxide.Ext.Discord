@@ -7,6 +7,7 @@ internal class DiscordLogHandler
 {
     private readonly DiscordConsoleLogger _consoleLogger;
     private readonly DiscordFileLogger _fileLogger;
+    public bool IsShutdown { get; private set; }
 
     public DiscordLogHandler(string pluginName, IDiscordLoggingConfig config, bool isExtension)
     {
@@ -28,5 +29,6 @@ internal class DiscordLogHandler
     {
         _consoleLogger?.OnShutdown();
         _fileLogger?.OnShutdown();
+        IsShutdown = true;
     }
 }

@@ -113,7 +113,6 @@ public sealed class DiscordClientFactory : Singleton<DiscordClientFactory>
 
         PluginExt.OnPluginUnloaded(plugin);
         DiscordPluginCache.Instance.OnPluginUnloaded(plugin);
-        DiscordLoggerFactory.Instance.OnPluginUnloaded(plugin);
     }
 
     internal void RemoveClient(DiscordClient client)

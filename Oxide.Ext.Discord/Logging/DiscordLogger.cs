@@ -1,4 +1,5 @@
 using System;
+using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
 
 namespace Oxide.Ext.Discord.Logging;
@@ -29,6 +30,7 @@ public class DiscordLogger : ILogger
     /// <inheritdoc/>
     public void Log(DiscordLogLevel level, string log, object[] args, Exception exception = null)
     {
+        DiscordLoggerException.ThrowIfShutdown(_handler);
         if (IsConsoleLogging(level))
         {
             _handler.LogConsole(level, log, args,  exception);

@@ -39,8 +39,7 @@ internal class DiscordFileLogger : IOutputLogger
     {
         StringBuilder sb = Builder.Value;
         sb.Clear();
-        char[] formatting = ArrayPool<char>.Shared.Rent(_dateTimeFormat.Length);
-        Span<char> span = formatting.AsSpan();
+        Span<char> span = stackalloc char[_dateTimeFormat.Length];
         DateTime.Now.TryFormat(span, out int written, _dateTimeFormat);
         sb.Append(span.Slice(0, written));
         sb.Append(" [");
@@ -61,7 +60,6 @@ internal class DiscordFileLogger : IOutputLogger
             _messages.Enqueue(ex.ToString());
         }
         _reset.Set();
-        ArrayPool<char>.Shared.Return(formatting);
     }
         
     internal void WriteLog()

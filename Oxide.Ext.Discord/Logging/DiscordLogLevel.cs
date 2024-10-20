@@ -11,27 +11,27 @@ public enum DiscordLogLevel : byte
     Verbose,
         
     /// <summary>
-    /// Debug log level display all messages up to and include Debug
+    /// Debug log level display all messages up to and including Debug
     /// </summary>
     Debug,
         
     /// <summary>
-    /// Info log level display all messages up to and include Info
+    /// Info log level display all messages up to and including Info
     /// </summary>
     Info,
         
     /// <summary>
-    /// Warning log level display all messages up to and include Warning
+    /// Warning log level display all messages up to and including Warning
     /// </summary>
     Warning,
         
     /// <summary>
-    /// Error log level display all messages up to and include Error
+    /// Error log level display all messages up to and including Error
     /// </summary>
     Error,
         
     /// <summary>
-    /// Exception log level display all messages up to and include Exception
+    /// Exception log level display all messages up to and including Exception
     /// </summary>
     Exception,
         

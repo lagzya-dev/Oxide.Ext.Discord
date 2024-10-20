@@ -131,7 +131,12 @@ public class DiscordExtension : Extension
         Interface.Oxide.Config.Compiler.PreprocessorDirectives.AddRange(GetPreProcessorDirectives());
             
         Interface.Oxide.RootPluginManager.OnPluginAdded += DiscordClientFactory.Instance.OnPluginLoaded;
-        Interface.Oxide.RootPluginManager.OnPluginRemoved += DiscordClientFactory.Instance.OnPluginUnloaded;
+        Interface.Oxide.RootPluginManager.OnPluginRemoved += plugin =>
+        {
+            DiscordClientFactory.Instance.OnPluginUnloaded(plugin);
+            //Only remove logger if we actually unload a plugin and not if a client is created. Causes issues with plugin loggers otherwise.
+            DiscordLoggerFactory.Instance.OnPluginUnloaded(plugin);
+        };
     }
 
     /// <summary>
