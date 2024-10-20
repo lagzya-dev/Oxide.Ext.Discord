@@ -687,7 +687,10 @@ public class DiscordGuild : ISnowflakeEntity
     public IPromise<GuildMember> GetMember(DiscordClient client, Snowflake userId)
     {
         InvalidSnowflakeException.ThrowIfInvalid(userId);
-        return client.Bot.Rest.Get<GuildMember>(client,$"guilds/{Id}/members/{userId}");
+        return client.Bot.Rest.Get<GuildMember>(client,$"guilds/{Id}/members/{userId}").Then(member =>
+        {
+            Members.TryAdd(member.Id, member);
+        });
     }
 
     /// <summary>
