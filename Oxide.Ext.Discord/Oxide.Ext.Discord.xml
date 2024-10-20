@@ -1751,16 +1751,48 @@
             <summary>
             Replaces emoji character with emoji string characters
             </summary>
-            <param name="text"></param>
-            <param name="nonMatchReplacement"></param>
+            <param name="text">Text to replace</param>
+            <param name="nonMatchReplacement">Replacement Text to use if non-matching</param>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceTextWithEmoji(System.String,System.String)">
             <summary>
             Replaces emoji string text with emoji characters
             </summary>
-            <param name="text"></param>
-            <param name="nonMatchReplacement"></param>
+            <param name="text">Text to replace</param>
+            <param name="nonMatchReplacement">Replacement Text to use if non-matching</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceEmojiWithText(System.String,System.Text.RegularExpressions.MatchEvaluator)">
+            <summary>
+            Replaces emoji character with emoji string characters
+            </summary>
+            <param name="text">Text to replace</param>
+            <param name="evaluator">Replacement Evaluator function</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceTextWithEmoji(System.String,System.Text.RegularExpressions.MatchEvaluator)">
+            <summary>
+            Replaces emoji string text with emoji characters
+            </summary>
+            <param name="text">Text to replace</param>
+            <param name="evaluator">Replacement Evaluator function</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceEmojiWithText(System.String)">
+            <summary>
+            Replaces emoji character with emoji string characters
+            If no match is found then the original text is used
+            </summary>
+            <param name="text">Text to replace</param>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.EmojiCache.ReplaceTextWithEmoji(System.String)">
+            <summary>
+            Replaces emoji string text with emoji characters
+            If no match is found then the original text is used
+            </summary>
+            <param name="text">Text to replace</param>
             <returns></returns>
         </member>
         <member name="T:Oxide.Ext.Discord.Cache.EntityCache`1">
@@ -9327,7 +9359,7 @@
             <param name="client">Client to use</param>
             <param name="userId">UserID to get guild member for</param>
         </member>
-        <member name="M:Oxide.Ext.Discord.Entities.DiscordGuild.Listembers(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.GuildListMembers)">
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordGuild.ListMembers(Oxide.Ext.Discord.Clients.DiscordClient,Oxide.Ext.Discord.Entities.GuildListMembers)">
             <summary>
             Returns a list of guild member objects that are members of the guild.
             In the future, this endpoint will be restricted in line with our Privileged Intents
