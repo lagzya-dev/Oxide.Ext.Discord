@@ -12,9 +12,11 @@ namespace Oxide.Ext.Discord.Cache;
 /// </summary>
 public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
 {
-    private readonly List<string> _loadablePlugins = new();
-    private readonly List<string> _loadedPlugins = new();
-    private DateTime _nextUpdate = DateTime.MinValue;
+    private readonly List<string> _loadablePlugins = [];
+    private readonly List<string> _loadedPlugins = [];
+    private readonly List<string> _allPlugins = [];
+    private DateTime _nextLoadedUpdate = DateTime.MinValue;
+    private DateTime _nextAllUpdate = DateTime.MinValue;
 
     private DiscordPluginCache() {}
         
@@ -44,14 +46,31 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
     /// <returns></returns>
     public IReadOnlyList<string> GetLoadablePlugins()
     {
-        if (_nextUpdate > DateTime.UtcNow)
+        if (_nextLoadedUpdate > DateTime.UtcNow)
         {
             return _loadablePlugins;
         }
             
         _loadablePlugins.Clear();
         _loadablePlugins.AddRange(OxideLibrary.Instance.PluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).Except(GetLoadedPlugins()).OrderBy(p => p));
-        _nextUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(5);
+        _nextLoadedUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(15);
+        return _loadablePlugins;
+    }
+    
+    /// <summary>
+    /// Returns a list of all plugins in the plugin folder
+    /// </summary>
+    /// <returns></returns>
+    public IReadOnlyList<string> GetAllPlugins()
+    {
+        if (_nextAllUpdate > DateTime.UtcNow)
+        {
+            return _allPlugins;
+        }
+            
+        _allPlugins.Clear();
+        _allPlugins.AddRange(OxideLibrary.Instance.PluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).OrderBy(p => p));
+        _nextAllUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(15);
         return _loadablePlugins;
     }
 
@@ -59,7 +78,7 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
         if (!plugin.IsCorePlugin)
         {
-            _nextUpdate = DateTime.UtcNow;
+            _nextLoadedUpdate = DateTime.UtcNow;
             _loadedPlugins.Clear();
         }
     }
@@ -68,7 +87,7 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
     {
         if (!plugin.IsCorePlugin)
         {
-            _nextUpdate = DateTime.UtcNow;
+            _nextLoadedUpdate = DateTime.UtcNow;
             _loadedPlugins.Clear();
         }
     }
