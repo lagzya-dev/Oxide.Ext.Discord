@@ -17,7 +17,7 @@ public class InvalidSnowflakeException : BaseDiscordException
 
     internal static InvalidSnowflakeException InvalidException(string paramName) => new($"Invalid Snowflake ID. Parameter Name: {paramName}");
         
-    internal static void ThrowIfInvalid(Snowflake snowflake, [CallerArgumentExpression("snowflake")] string paramName = null)
+    public static void ThrowIfInvalid(Snowflake snowflake, [CallerArgumentExpression("snowflake")] string paramName = null)
     {
         if (!snowflake.IsValid())
         {
@@ -25,7 +25,7 @@ public class InvalidSnowflakeException : BaseDiscordException
         }
     }
         
-    internal static void ThrowIfInvalid(Snowflake? snowflake, [CallerArgumentExpression("snowflake")] string paramName = null)
+    public static void ThrowIfInvalid(Snowflake? snowflake, [CallerArgumentExpression("snowflake")] string paramName = null)
     {
         if (snowflake.HasValue && !snowflake.Value.IsValid())
         {
@@ -33,7 +33,7 @@ public class InvalidSnowflakeException : BaseDiscordException
         }
     }
         
-    internal static void ThrowIfInvalid(ICollection<Snowflake> snowflakes, [CallerArgumentExpression("snowflakes")] string paramName = null)
+    public static void ThrowIfInvalid(ICollection<Snowflake> snowflakes, [CallerArgumentExpression("snowflakes")] string paramName = null)
     {
         int index = 0;
         foreach (Snowflake snowflake in snowflakes)
@@ -46,7 +46,7 @@ public class InvalidSnowflakeException : BaseDiscordException
         }
     }
         
-    internal static void ThrowIfInvalid(Snowflake? snowflake, bool requireValue, [CallerArgumentExpression("snowflake")] string paramName = null)
+    public static void ThrowIfInvalid(Snowflake? snowflake, bool requireValue, [CallerArgumentExpression("snowflake")] string paramName = null)
     {
         if (requireValue && !snowflake.HasValue)
         {
