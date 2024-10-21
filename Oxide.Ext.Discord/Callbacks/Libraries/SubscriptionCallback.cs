@@ -29,7 +29,7 @@ internal class SubscriptionCallback : BaseNextTickCallback
 
     protected override void HandleCallback()
     {
-        if (_plugin == null || !_plugin.IsLoaded)
+        if (_plugin is not {IsLoaded: true})
         {
             return;
         }

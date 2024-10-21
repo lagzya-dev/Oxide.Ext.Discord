@@ -42,17 +42,14 @@ public abstract class BaseClient
     protected BaseClient()
     {
         Logger = DiscordLoggerFactory.Instance.CreateExtensionLogger();
-
-        Initialized = true;
-        
         Clients = new ReadOnlyCollection<DiscordClient>(_clients);
+        Initialized = true;
     }
         
     internal abstract void HandleConnect();
     internal abstract void HandleShutdown();
     
     internal virtual void HandleAlreadyConnected(DiscordClient client) {}
-
         
     /// <summary>
     /// Returns the list of plugins for this bot
