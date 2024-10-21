@@ -13,7 +13,7 @@ public class DiscordUser : IDebugLoggable, IDiscordCacheable<DiscordUser>, ISnow
 | [DiscordUser](#discorduser-constructor)() | The default constructor. |
 | [AccentColor](#accentcolor-property) { get; set; } | The user's banner color encoded as an integer representation of hexadecimal color code |
 | [Avatar](#avatar-property) { get; set; } | The user's avatar hash |
-| [AvatarDecoration](#avatardecoration-property) { get; set; } | The user's avatar decoration hash |
+| [AvatarDecoration](#avatardecoration-property) { get; set; } | The user's avatar decoration |
 | [Banner](#banner-property) { get; set; } | The user's banner, or null if unset |
 | [Bot](#bot-property) { get; set; } | Whether the user belongs to an OAuth2 application |
 | [Discriminator](#discriminator-property) { get; set; } | The user's 4-digit discord-tag |
@@ -805,14 +805,15 @@ public UserFlags? PublicFlags { get; set; }
    
 # AvatarDecoration property
 
-The user's avatar decoration hash
+The user's avatar decoration
 
 ```csharp
-public string AvatarDecoration { get; set; }
+public AvatarDecorationData AvatarDecoration { get; set; }
 ```
 
 ## See Also
 
+* class [AvatarDecorationData](./AvatarDecorationData.md)
 * class [DiscordUser](./DiscordUser.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

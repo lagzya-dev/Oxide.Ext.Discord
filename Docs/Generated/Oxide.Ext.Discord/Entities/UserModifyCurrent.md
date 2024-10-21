@@ -12,6 +12,7 @@ public class UserModifyCurrent
 | --- | --- |
 | [UserModifyCurrent](#usermodifycurrent-constructor)() | The default constructor. |
 | [Avatar](#avatar-property) { get; set; } | If passed, modifies the user's avatar |
+| [Banner](#banner-property) { get; set; } | If passed, modifies the user's banner |
 | [Username](#username-property) { get; set; } | User's username, if changed may cause the user's discriminator to be randomized. |
 | [Validate](#validate-method)() |  |
 
@@ -70,11 +71,28 @@ public string Username { get; set; }
 If passed, modifies the user's avatar
 
 ```csharp
-public string Avatar { get; set; }
+public DiscordImageData Avatar { get; set; }
 ```
 
 ## See Also
 
+* struct [DiscordImageData](./DiscordImageData.md)
+* class [UserModifyCurrent](./UserModifyCurrent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Banner property
+
+If passed, modifies the user's banner
+
+```csharp
+public DiscordImageData Banner { get; set; }
+```
+
+## See Also
+
+* struct [DiscordImageData](./DiscordImageData.md)
 * class [UserModifyCurrent](./UserModifyCurrent.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

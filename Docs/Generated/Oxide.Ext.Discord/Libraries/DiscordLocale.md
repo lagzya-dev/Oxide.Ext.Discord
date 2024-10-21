@@ -13,13 +13,8 @@ public struct DiscordLocale : IEquatable<DiscordLocale>
 | static [Parse](#parse-method)(…) | Parses a Discord Locale |
 | [IsValid](#isvalid-property) { get; } | Is the Locale Valid |
 | readonly [Id](#id-field) | ID of the locale |
-| [Equals](#equals-method)(…) |  |
-| override [Equals](#equals-method)(…) |  |
-| override [GetHashCode](#gethashcode-method)() |  |
 | [GetServerLocale](#getserverlocale-method)() | Returns the Server Locale for this Discord Locale |
 | override [ToString](#tostring-method)() | Returns the ID of the Locale |
-| [operator ==](#discordlocale-equality-operator) | Returns if two Discord Locales are equal to each other |
-| [operator !=](#discordlocale-inequality-operator) | Returns if two Discord Locales are not equal to each other |
 
 ## See Also
 
@@ -59,86 +54,6 @@ public static DiscordLocale Parse(string locale)
 ## Return Value
 
 Parsed Discord Locale
-
-## See Also
-
-* struct [DiscordLocale](./DiscordLocale.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Equals method (1 of 2)
-
-```csharp
-public bool Equals(DiscordLocale other)
-```
-
-## See Also
-
-* struct [DiscordLocale](./DiscordLocale.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-
----
-
-# Equals method (2 of 2)
-
-```csharp
-public override bool Equals(object obj)
-```
-
-## See Also
-
-* struct [DiscordLocale](./DiscordLocale.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# GetHashCode method
-
-```csharp
-public override int GetHashCode()
-```
-
-## See Also
-
-* struct [DiscordLocale](./DiscordLocale.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# DiscordLocale Equality operator
-
-Returns if two Discord Locales are equal to each other
-
-```csharp
-public static bool operator ==(DiscordLocale left, DiscordLocale right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
-
-## See Also
-
-* struct [DiscordLocale](./DiscordLocale.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# DiscordLocale Inequality operator
-
-Returns if two Discord Locales are not equal to each other
-
-```csharp
-public static bool operator !=(DiscordLocale left, DiscordLocale right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
 
 ## See Also
 

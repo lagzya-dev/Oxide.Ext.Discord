@@ -108,11 +108,13 @@ public static class DiscordExtHooks
 | const [OnDiscordPlayerLinked](#ondiscordplayerlinked-field) | These hooks are called when a player is linked or unlinked using discord link. It will be called for every plugins registered to receive hooks. **Note:** If your plugin supports discord link you should not supply any other hooks as the extension provides them for you. **Note:** Discord Link hooks are considered global hooks and will be called on all plugins regardless of bot |
 | const [OnDiscordPlayerUnlink](#ondiscordplayerunlink-field) | Called when a player is being unlinked from DiscordLink Library This is called before the unlink occurs |
 | const [OnDiscordPlayerUnlinked](#ondiscordplayerunlinked-field) | Called when a player has unlinked their discord and player together using the DiscordLink library |
+| const [OnDiscordPollVoteAdded](#ondiscordpollvoteadded-field) | Called when we receive an event we do not handle yet. If you need this event, you can listen to it using this hook until we support it Please create an issue on uMod if this error ever occurs |
+| const [OnDiscordPollVoteRemoved](#ondiscordpollvoteremoved-field) |  |
 | const [OnDiscordSetupHeartbeat](#ondiscordsetupheartbeat-field) | Called when we receive the heartbeat interval from the websocket |
 | const [OnDiscordStageInstanceCreated](#ondiscordstageinstancecreated-field) | Called when a stage instance is created |
 | const [OnDiscordStageInstanceDeleted](#ondiscordstageinstancedeleted-field) | Called when a stage instance is deleted |
 | const [OnDiscordStageInstanceUpdated](#ondiscordstageinstanceupdated-field) | Called when a stage instance is updated |
-| const [OnDiscordUnhandledCommand](#ondiscordunhandledcommand-field) | Called when we receive an event we do not handle yet. If you need this event, you can listen to it using this hook until we support it Please create an issue on uMod if this error ever occurs |
+| const [OnDiscordUnhandledCommand](#ondiscordunhandledcommand-field) | void OnDiscordUnhandledCommand(EventPayload payload) { Puts("OnDiscordUnhandledCommand Works!"); } |
 | const [OnDiscordUserUpdated](#ondiscorduserupdated-field) | Called when a discord user is updated |
 | const [OnDiscordWebsocketClosed](#ondiscordwebsocketclosed-field) | Called when the web socket is closed for any reason. |
 | const [OnDiscordWebsocketErrored](#ondiscordwebsocketerrored-field) | Called when the web socket has an error. |
@@ -2513,9 +2515,42 @@ public const string OnDiscordAutoModActionExecuted;
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# OnDiscordUnhandledCommand field
+# OnDiscordPollVoteAdded field
 
 Called when we receive an event we do not handle yet. If you need this event, you can listen to it using this hook until we support it Please create an issue on uMod if this error ever occurs
+
+```csharp
+void OnDiscordPollVoteAdded(MessagePollVoteAddedEvent vote, DiscordGuild guild)
+{
+    Puts("OnDiscordPollVoteAdded Works!");
+}
+```
+
+```csharp
+public const string OnDiscordPollVoteAdded;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordPollVoteRemoved field
+
+```csharp
+public const string OnDiscordPollVoteRemoved;
+```
+
+## See Also
+
+* class [DiscordExtHooks](./DiscordExtHooks.md)
+* namespace [Oxide.Ext.Discord.Constants](./ConstantsNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OnDiscordUnhandledCommand field
 
 ```csharp
 void OnDiscordUnhandledCommand(EventPayload payload)

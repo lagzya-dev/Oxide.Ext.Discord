@@ -11,11 +11,13 @@ public interface IPromise<TPromised>
 | name | description |
 | --- | --- |
 | [Id](#id-property) { get; } | ID of the promise, useful for debugging. |
+| [AsTask](#astask-method)() | returns the task for this promise |
 | [Catch](#catch-method-1-of-2)(…) | Handle errors for the promise. (2 methods) |
 | [Catch&lt;TException&gt;](#catch&amp;lt;texception&amp;gt;-method)(…) | Catches a specified exception |
 | [ContinueWith](#continuewith-method)(…) | Add a callback that chains a non-value promise. ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The state of the returning promise will be based on the new non-value promise, not the preceding (rejected or resolved) promise. |
 | [ContinueWith&lt;TConvert&gt;](#continuewith&amp;lt;tconvert&amp;gt;-method)(…) | Add a callback that chains a value promise (optionally converting to a different value type). ContinueWith callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The state of the returning promise will be based on the new value promise, not the preceding (rejected or resolved) promise. |
 | [Finally](#finally-method)(…) | Add a finally callback. Finally callbacks will always be called, even if any preceding promise is rejected, or encounters an error. The returned promise will be resolved or rejected, as per the preceding promise. |
+| [GetAwaiter](#getawaiter-method)() | returns the task awaiter for this promise |
 | [Then](#then-method-1-of-4)(…) | Add a resolved callback. (4 methods) |
 | [Then&lt;TConvert&gt;](#then&amp;lt;tconvert&amp;gt;-method-1-of-3)(…) | Add a resolved callback that chains a value promise (optionally converting to a different value type). (3 methods) |
 | [ThenAll](#thenall-method)(…) | Chain an enumerable of promises, all of which must resolve. Converts to a non-value promise. The resulting promise is resolved when all of the promises have resolved. It is rejected as soon as any of the promises have been rejected. |
@@ -260,6 +262,36 @@ Add a callback that chains a value promise (optionally converting to a different
 
 ```csharp
 public IPromise<TConvert> ContinueWith<TConvert>(Func<IPromise<TConvert>> onComplete)
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AsTask method
+
+returns the task for this promise
+
+```csharp
+public ValueTask<TPromised> AsTask()
+```
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](./IPromise%7BTPromised%7D.md)
+* namespace [Oxide.Ext.Discord.Interfaces](./InterfacesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetAwaiter method
+
+returns the task awaiter for this promise
+
+```csharp
+public ValueTaskAwaiter<TPromised> GetAwaiter()
 ```
 
 ## See Also

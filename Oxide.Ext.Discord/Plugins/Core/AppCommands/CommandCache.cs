@@ -2,30 +2,29 @@ using System;
 using System.Collections.Generic;
 using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Plugins
+namespace Oxide.Ext.Discord.Plugins;
+
+internal class CommandCache
 {
-    internal class CommandCache
+    public readonly List<DiscordApplicationCommand> Commands;
+    private readonly DateTime _cachedDateTime = DateTime.UtcNow;
+
+    public CommandCache(List<DiscordApplicationCommand> commands)
     {
-        public readonly List<DiscordApplicationCommand> Commands;
-        private readonly DateTime _cachedDateTime = DateTime.UtcNow;
-
-        public CommandCache(List<DiscordApplicationCommand> commands)
-        {
-            Commands = commands;
-        }
+        Commands = commands;
+    }
         
-        public bool IsExpired => _cachedDateTime + TimeSpan.FromSeconds(15) < DateTime.UtcNow;
+    public bool IsExpired => _cachedDateTime + TimeSpan.FromSeconds(15) < DateTime.UtcNow;
 
-        public void RemoveCommand(Snowflake id)
+    public void RemoveCommand(Snowflake id)
+    {
+        for (int index = 0; index < Commands.Count; index++)
         {
-            for (int index = 0; index < Commands.Count; index++)
+            DiscordApplicationCommand command = Commands[index];
+            if (command.Id == id)
             {
-                DiscordApplicationCommand command = Commands[index];
-                if (command.Id == id)
-                {
-                    Commands.RemoveAt(index);
-                    break;
-                }
+                Commands.RemoveAt(index);
+                break;
             }
         }
     }

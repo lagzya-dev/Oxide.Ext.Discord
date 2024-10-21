@@ -26,7 +26,7 @@ public class DiscordCommand : BaseDiscordLibrary<DiscordCommand>, IDebugLoggable
 
 | name | description |
 | --- | --- |
-| override [OnPluginLoaded](#onpluginloaded-method)(…) |  |
+| override [OnClientBotConnect](#onclientbotconnect-method)(…) |  |
 | override [OnPluginUnloaded](#onpluginunloaded-method)(…) | Called when a plugin has been unloaded |
 
 ## See Also
@@ -138,7 +138,7 @@ public void AddGuildLocalizedCommand(string langKey, Plugin plugin,
 | --- | --- |
 | langKey | Lang Key on the plugin that contains the command |
 | plugin | Plugin to add the localized command for |
-| allowedChannels | Channel or Category Id's this command is allowed in |
+| allowedChannels | Channel or Category ID's this command is allowed in |
 | callback | Method name of the callback |
 
 ## See Also
@@ -162,7 +162,7 @@ public void AddGuildCommand(string command, Plugin plugin, List<Snowflake> allow
 | --- | --- |
 | command | Name of the command |
 | plugin | Plugin to add the localized command for |
-| allowedChannels | Channel or Category Id's this command is allowed in |
+| allowedChannels | Channel or Category ID's this command is allowed in |
 | callback | Method name of the callback |
 
 ## See Also
@@ -193,16 +193,15 @@ public void RemoveDiscordCommand(string command, Plugin plugin)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# OnPluginLoaded method
+# OnClientBotConnect method
 
 ```csharp
-protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
+protected override void OnClientBotConnect(DiscordClient client)
 ```
 
 ## See Also
 
-* class [PluginSetup](../Plugins/PluginSetup.md)
-* class [BotConnection](../Connections/BotConnection.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordCommand](./DiscordCommand.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

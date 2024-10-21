@@ -10,8 +10,8 @@ public enum SocketState : byte
 
 | name | value | description |
 | --- | --- | --- |
-| Connecting | `Connecting` | Socket is in the process of connecting |
-| Connected | `Connected` | Socket is connect and functioning normally |
+| Connecting | `Connecting` | Websocket is in the process of connecting |
+| Connected | `Connected` | Websocket is connected and functioning normally |
 | Disconnecting | `Disconnecting` | Websocket is currently disconnecting from a connected web socket |
 | Disconnected | `Disconnected` | Websocket is currently disconnect and not waiting to connect |
 

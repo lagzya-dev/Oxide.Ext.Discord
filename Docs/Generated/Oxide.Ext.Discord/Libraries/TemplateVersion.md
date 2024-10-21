@@ -15,14 +15,9 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 | readonly [Minor](#minor-field) | Minor Version |
 | readonly [Revision](#revision-field) | Revision Version |
 | [CompareTo](#compareto-method)(…) |  |
-| override [Equals](#equals-method)(…) |  |
-| [Equals](#equals-method)(…) |  |
-| override [GetHashCode](#gethashcode-method)() |  |
 | override [ToString](#tostring-method)() |  |
-| [operator ==](#templateversion-equality-operator) | Returns if the template versions are equal |
 | [operator &gt;](#templateversion-greaterthan-operator) | Returns if the right template version is greater than the left |
 | [operator &gt;=](#templateversion-greaterthanorequal-operator) | Returns if the right template version is greater or equal than the left |
-| [operator !=](#templateversion-inequality-operator) | Returns if the template versions are not equal |
 | [operator &lt;](#templateversion-lessthan-operator) | Returns if the left template version is less than the right |
 | [operator &lt;=](#templateversion-lessthanorequal-operator) | Returns if the left template version is less than or equal the right |
 
@@ -33,91 +28,11 @@ public struct TemplateVersion : IComparable<TemplateVersion>, IEquatable<Templat
 * [TemplateVersion.cs](../../../../Oxide.Ext.Discord/Libraries/TemplateVersion.cs)
    
    
-# Equals method (1 of 2)
-
-```csharp
-public override bool Equals(object obj)
-```
-
-## See Also
-
-* struct [TemplateVersion](./TemplateVersion.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-
----
-
-# Equals method (2 of 2)
-
-```csharp
-public bool Equals(TemplateVersion other)
-```
-
-## See Also
-
-* struct [TemplateVersion](./TemplateVersion.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# GetHashCode method
-
-```csharp
-public override int GetHashCode()
-```
-
-## See Also
-
-* struct [TemplateVersion](./TemplateVersion.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # CompareTo method
 
 ```csharp
 public int CompareTo(TemplateVersion other)
 ```
-
-## See Also
-
-* struct [TemplateVersion](./TemplateVersion.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# TemplateVersion Equality operator
-
-Returns if the template versions are equal
-
-```csharp
-public static bool operator ==(TemplateVersion left, TemplateVersion right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
-
-## See Also
-
-* struct [TemplateVersion](./TemplateVersion.md)
-* namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# TemplateVersion Inequality operator
-
-Returns if the template versions are not equal
-
-```csharp
-public static bool operator !=(TemplateVersion left, TemplateVersion right)
-```
-
-| parameter | description |
-| --- | --- |
-| left |  |
-| right |  |
 
 ## See Also
 

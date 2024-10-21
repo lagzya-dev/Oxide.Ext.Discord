@@ -17,6 +17,7 @@ public abstract class BaseMessageCreate : IDiscordMessageTemplate, IFileAttachme
 | [Embeds](#embeds-property) { get; set; } | Embeds for the message Embeds are deduplicated by URL. If a message contains multiple embeds with the same URL, only the first is shown. |
 | [FileAttachments](#fileattachments-property) { get; set; } | Attachments for a discord message |
 | [Flags](#flags-property) { get; set; } | Attachments for the message |
+| [Poll](#poll-property) { get; set; } | Poll Create Request |
 | [StickerIds](#stickerids-property) { get; set; } | IDs of up to 3 stickers in the server to send in the message |
 | [Tts](#tts-property) { get; set; } | Whether this was a TTS message |
 | [AddAttachment](#addattachment-method)(…) | Adds an attachment to the message |
@@ -45,7 +46,7 @@ Adds an attachment to the message
 
 ```csharp
 public void AddAttachment(string filename, byte[] data, string contentType, 
-    string description = null)
+    string description = null, string title = null)
 ```
 
 | parameter | description |
@@ -54,6 +55,7 @@ public void AddAttachment(string filename, byte[] data, string contentType,
 | data | byte[] of the attachment |
 | contentType | Attachment content type |
 | description | Description for the attachment |
+| title | Title of the attachment |
 
 ## See Also
 
@@ -231,6 +233,22 @@ public MessageFlags? Flags { get; set; }
 ## See Also
 
 * enum [MessageFlags](./MessageFlags.md)
+* class [BaseMessageCreate](./BaseMessageCreate.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Poll property
+
+Poll Create Request
+
+```csharp
+public PollCreate Poll { get; set; }
+```
+
+## See Also
+
+* class [PollCreate](./PollCreate.md)
 * class [BaseMessageCreate](./BaseMessageCreate.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

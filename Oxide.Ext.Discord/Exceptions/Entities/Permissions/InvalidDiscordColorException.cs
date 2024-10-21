@@ -1,49 +1,48 @@
-namespace Oxide.Ext.Discord.Exceptions
+namespace Oxide.Ext.Discord.Exceptions;
+
+/// <summary>
+/// Represents an invalid discord color
+/// </summary>
+public class InvalidDiscordColorException : BaseDiscordException
 {
     /// <summary>
-    /// Represents an invalid discord color
+    /// Constructor
     /// </summary>
-    public class InvalidDiscordColorException : BaseDiscordException
+    /// <param name="message">Exception message</param>
+    private InvalidDiscordColorException(string message) : base(message)
     {
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="message">Exception message</param>
-        private InvalidDiscordColorException(string message) : base(message)
-        {
             
-        }
+    }
 
-        internal static void ThrowIfInvalidColor(uint color)
+    internal static void ThrowIfInvalidColor(uint color)
+    {
+        if (color > 0xFFFFFF)
         {
-            if (color > 0xFFFFFF)
-            {
-                throw new InvalidDiscordColorException($"Color '{color}' is greater than the max color of 0xFFFFFF");
-            }
+            throw new InvalidDiscordColorException($"Color '{color}' is greater than the max color of 0xFFFFFF");
         }
+    }
 
-        internal static void ThrowIfOutOfColorRange(string color, int value)
+    internal static void ThrowIfOutOfColorRange(string color, int value)
+    {
+        if (value < 0 || value > byte.MaxValue)
         {
-            if (value < 0 || value > byte.MaxValue)
-            {
-                throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
-            }
+            throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
         }
+    }
         
-        internal static void ThrowIfOutOfColorRange(string color, uint value)
+    internal static void ThrowIfOutOfColorRange(string color, uint value)
+    {
+        if (value > byte.MaxValue)
         {
-            if (value > byte.MaxValue)
-            {
-                throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
-            }
+            throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
         }
+    }
         
-        internal static void ThrowIfOutOfColorRange(string color, float value)
+    internal static void ThrowIfOutOfColorRange(string color, float value)
+    {
+        if (value < 0f || value > 1f)
         {
-            if (value < 0f || value > 1f)
-            {
-                throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
-            }
+            throw new InvalidDiscordColorException($"{color} must be between 0 - 255");
         }
     }
 }

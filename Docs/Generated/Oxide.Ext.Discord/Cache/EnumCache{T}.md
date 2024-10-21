@@ -16,7 +16,7 @@ public sealed class EnumCache<T> : Singleton<EnumCache>
 | name | description |
 | --- | --- |
 | readonly [Values](#values-field) | Readonly Collection of Enum Values |
-| [Next](#next-method)(…) | Returns the next enum values. If the value is the last value it will start from the beginning |
+| [Next](#next-method)(…) | Returns the next enum values. If the value is the last value, it will start from the beginning |
 | [Previous](#previous-method)(…) | Returns the previous enum values. |
 | [ToLower](#tolower-method)(…) | Returns the lowered string representation of the enum |
 | [ToNumber](#tonumber-method)(…) | Converts the enum to it's number form as a string |
@@ -97,7 +97,7 @@ public string ToNumber(T value)
    
 # Next method
 
-Returns the next enum values. If the value is the last value it will start from the beginning
+Returns the next enum values. If the value is the last value, it will start from the beginning
 
 ```csharp
 public T Next(T value)

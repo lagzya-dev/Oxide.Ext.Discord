@@ -20,7 +20,7 @@
 | class [MessageComponentBuilder](./MessageComponentBuilder.md) | Builder for Message Components |
 | [Flags] enum [PlayerDisplayNameMode](./PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) |
 | class [PlayerNameFormatter](./PlayerNameFormatter.md) | Formatter for player names |
-| class [QueryStringBuilder](./QueryStringBuilder.md) | Builder used to build query strings for urls |
+| struct [QueryStringBuilder](./QueryStringBuilder.md) | Builder used to build query strings for urls |
 | class [SelectMenuComponentBuilder](./SelectMenuComponentBuilder.md) | Builder for Select Menus |
 | class [WebhookMessageBuilder](./WebhookMessageBuilder.md) | Represents a builder for [`WebhookMessageBuilder`](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) |
 

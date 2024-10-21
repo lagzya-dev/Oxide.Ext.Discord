@@ -44,7 +44,7 @@ Pooled List{TSource}
 
 | exception | condition |
 | --- | --- |
-| ArgumentNullException | Thrown if source is null |
+| ArgumentNullException | Thrown if the source is null |
 
 ## See Also
 
@@ -81,7 +81,7 @@ Pooled Hash{TKey, TElement}
 
 | exception | condition |
 | --- | --- |
-| ArgumentNullException | Thrown if source is null |
+| ArgumentNullException | Thrown if the source is null |
 
 ## See Also
 
@@ -118,7 +118,7 @@ Pooled Hash{TKey, TElement}
 
 | exception | condition |
 | --- | --- |
-| ArgumentNullException | Thrown if source is null |
+| ArgumentNullException | Thrown if the source is null |
 
 ## See Also
 

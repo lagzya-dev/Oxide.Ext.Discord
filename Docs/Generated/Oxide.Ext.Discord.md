@@ -42,7 +42,7 @@
 | class [MessageComponentBuilder](./Oxide.Ext.Discord/Builders/MessageComponentBuilder.md) | Builder for Message Components |
 | [Flags] enum [PlayerDisplayNameMode](./Oxide.Ext.Discord/Builders/PlayerDisplayNameMode.md) | Player Name Formatting options for [`PlayerNameFormatter`](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) |
 | class [PlayerNameFormatter](./Oxide.Ext.Discord/Builders/PlayerNameFormatter.md) | Formatter for player names |
-| class [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
+| struct [QueryStringBuilder](./Oxide.Ext.Discord/Builders/QueryStringBuilder.md) | Builder used to build query strings for urls |
 | class [SelectMenuComponentBuilder](./Oxide.Ext.Discord/Builders/SelectMenuComponentBuilder.md) | Builder for Select Menus |
 | class [WebhookMessageBuilder](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) | Represents a builder for [`WebhookMessageBuilder`](./Oxide.Ext.Discord/Builders/WebhookMessageBuilder.md) |
 
@@ -79,8 +79,10 @@
 
 | public type | description |
 | --- | --- |
-| class [BotClient](./Oxide.Ext.Discord/Clients/BotClient.md) | Represents a bot that is connected to discord |
-| class [DiscordClient](./Oxide.Ext.Discord/Clients/DiscordClient.md) | Represents the object a plugin uses to connects to discord |
+| abstract class [BaseClient](./Oxide.Ext.Discord/Clients/BaseClient.md) | BaseClient that can connect to discord |
+| class [BotClient](./Oxide.Ext.Discord/Clients/BotClient.md) | Represents a bot connected to discord |
+| class [DiscordClient](./Oxide.Ext.Discord/Clients/DiscordClient.md) | Represents the object a plugin uses to connect to discord |
+| class [WebhookClient](./Oxide.Ext.Discord/Clients/WebhookClient.md) | A client that can connect to a webhook |
 
 ## Oxide.Ext.Discord.Connections namespace
 
@@ -88,6 +90,7 @@
 | --- | --- |
 | class [BotConnection](./Oxide.Ext.Discord/Connections/BotConnection.md) | Bot Connection Settings |
 | class [BotTokenData](./Oxide.Ext.Discord/Connections/BotTokenData.md) | Represents the parsed Bot Token data |
+| class [WebhookConnection](./Oxide.Ext.Discord/Connections/WebhookConnection.md) | Connection for a webhook |
 
 ## Oxide.Ext.Discord.Constants namespace
 
@@ -113,7 +116,12 @@
 | class [AllowedMentions](./Oxide.Ext.Discord/Entities/AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
 | enum [AllowedMentionTypes](./Oxide.Ext.Discord/Entities/AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 | enum [ApplicationCommandType](./Oxide.Ext.Discord/Entities/ApplicationCommandType.md) | Represents [Application Command Type](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types) |
+| class [ApplicationEmojiCreate](./Oxide.Ext.Discord/Entities/ApplicationEmojiCreate.md) | Represents [Application Emoji Create Structure](https://discord.com/developers/docs/resources/emoji#create-application-emoji-json-params) |
+| class [ApplicationEmojis](./Oxide.Ext.Discord/Entities/ApplicationEmojis.md) | Represents [Application Emojis](https://discord.com/developers/docs/resources/emoji#list-application-emojis) |
+| class [ApplicationEmojiUpdate](./Oxide.Ext.Discord/Entities/ApplicationEmojiUpdate.md) | Represents [Emoji Update Structure](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params) |
 | [Flags] enum [ApplicationFlags](./Oxide.Ext.Discord/Entities/ApplicationFlags.md) | Represents [Application Flags](https://discord.com/developers/docs/resources/application#application-object-application-flags) |
+| enum [ApplicationIntegrationType](./Oxide.Ext.Discord/Entities/ApplicationIntegrationType.md) | Represents a [Application Integration Types](https://discord.com/developers/docs/resources/application#application-object-application-integration-types) |
+| class [ApplicationIntegrationTypeConfiguration](./Oxide.Ext.Discord/Entities/ApplicationIntegrationTypeConfiguration.md) | Represents a [Application Integration Type Configuration](https://discord.com/developers/docs/resources/application#application-object-application-integration-type-configuration-object) |
 | class [ApplicationRoleConnectionMetadata](./Oxide.Ext.Discord/Entities/ApplicationRoleConnectionMetadata.md) | Represents [Application Role Connection Metadata Structure](https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-structure) |
 | enum [ApplicationRoleConnectionMetadataType](./Oxide.Ext.Discord/Entities/ApplicationRoleConnectionMetadataType.md) | Represents [Application Role Connection Metadata Type](Application Role Connection Metadata Structure) |
 | class [ApplicationUpdate](./Oxide.Ext.Discord/Entities/ApplicationUpdate.md) | Represents [Edit Application Structure](https://discord.com/developers/docs/resources/application#edit-current-application-json-params) |
@@ -129,6 +137,7 @@
 | class [AutoModRuleModify](./Oxide.Ext.Discord/Entities/AutoModRuleModify.md) | Represents [Auto Mod Rule Modify](https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params) |
 | class [AutoModTriggerMetadata](./Oxide.Ext.Discord/Entities/AutoModTriggerMetadata.md) | Represents [Auto Mod Trigger Metadata](https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata) |
 | enum [AutoModTriggerType](./Oxide.Ext.Discord/Entities/AutoModTriggerType.md) | Represents [Auto Mod Trigger Types](https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types) |
+| class [AvatarDecorationData](./Oxide.Ext.Discord/Entities/AvatarDecorationData.md) | Represents [Avatar Decoration Structure](https://discord.com/developers/docs/resources/user#avatar-decoration-data-object-avatar-decoration-data-structure) |
 | abstract class [BaseComponent](./Oxide.Ext.Discord/Entities/BaseComponent.md) | Represents [Message Component](https://discord.com/developers/docs/interactions/message-components#component-object) within discord |
 | abstract class [BaseInteractableComponent](./Oxide.Ext.Discord/Entities/BaseInteractableComponent.md) | Represent a MessageComponent that can be interacted with |
 | abstract class [BaseInteractionMessage](./Oxide.Ext.Discord/Entities/BaseInteractionMessage.md) | Represents a Base Message for an interaction |
@@ -182,6 +191,7 @@
 | class [DiscordInteraction](./Oxide.Ext.Discord/Entities/DiscordInteraction.md) | Represents [Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure) |
 | class [DiscordInvite](./Oxide.Ext.Discord/Entities/DiscordInvite.md) | Represents an [Invite Structure](https://discord.com/developers/docs/resources/invite#invite-object) that when used, adds a user to a guild or group DM channel. |
 | class [DiscordMessage](./Oxide.Ext.Discord/Entities/DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
+| class [DiscordPoll](./Oxide.Ext.Discord/Entities/DiscordPoll.md) | Represents a [Discord Poll](https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure) |
 | class [DiscordRole](./Oxide.Ext.Discord/Entities/DiscordRole.md) | Represents [Role Structure](https://discord.com/developers/docs/topics/permissions#role-object) |
 | class [DiscordSku](./Oxide.Ext.Discord/Entities/DiscordSku.md) | Represents a [SKU Structure](https://discord.com/developers/docs/monetization/skus#sku-object-sku-structure) |
 | enum [DiscordSkuType](./Oxide.Ext.Discord/Entities/DiscordSkuType.md) | Represents a [Discord SKU Types](https://discord.com/developers/docs/monetization/skus#sku-object-sku-types) |
@@ -213,6 +223,8 @@
 | class [GatewayReadyEvent](./Oxide.Ext.Discord/Entities/GatewayReadyEvent.md) | Represents [Ready](https://discord.com/developers/docs/topics/gateway#ready) The ready event is dispatched when a client has completed the initial handshake with the gateway (for new sessions) |
 | class [GatewayResumedEvent](./Oxide.Ext.Discord/Entities/GatewayResumedEvent.md) | Represents [Resumed](https://discord.com/developers/docs/topics/gateway#resumed) The resumed event is dispatched when a client has sent a resume payload to the gateway (for resuming existing sessions). |
 | class [GetEntitlements](./Oxide.Ext.Discord/Entities/GetEntitlements.md) | Get Entitlements Query String Builder |
+| class [GetPollAnswerResponse](./Oxide.Ext.Discord/Entities/GetPollAnswerResponse.md) | Represents a [Get Poll Answers Response](https://discord.com/developers/docs/resources/poll#get-answer-voters-response-body) |
+| class [GetPollAnswerVoters](./Oxide.Ext.Discord/Entities/GetPollAnswerVoters.md) | Represents a [Get Answer Voters Query String Params](https://discord.com/developers/docs/resources/poll#get-answer-voters-query-string-params) |
 | class [GetThreadMember](./Oxide.Ext.Discord/Entities/GetThreadMember.md) | Represents [Get Thread Member Query String Params](https://discord.com/developers/docs/resources/channel#get-thread-member-query-string-params) |
 | class [GroupDmChannelUpdate](./Oxide.Ext.Discord/Entities/GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
 | class [GuildBan](./Oxide.Ext.Discord/Entities/GuildBan.md) | Represents [Guild Ban Structure](https://discord.com/developers/docs/resources/guild#ban-object-ban-structure) |
@@ -282,6 +294,7 @@
 | class [InteractionAutoCompleteMessage](./Oxide.Ext.Discord/Entities/InteractionAutoCompleteMessage.md) | Interaction Auto Complete Response Message |
 | class [InteractionAutoCompleteResponse](./Oxide.Ext.Discord/Entities/InteractionAutoCompleteResponse.md) | Represents an Auto Complete response in Discord |
 | class [InteractionCallbackData](./Oxide.Ext.Discord/Entities/InteractionCallbackData.md) | Represents [Interaction Application Command Callback Data Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure) |
+| enum [InteractionContextTypes](./Oxide.Ext.Discord/Entities/InteractionContextTypes.md) | Represents a [Interaction Context Types](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types) |
 | class [InteractionData](./Oxide.Ext.Discord/Entities/InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data) |
 | class [InteractionDataArgs](./Oxide.Ext.Discord/Entities/InteractionDataArgs.md) | Args supplied for the interaction |
 | class [InteractionDataOption](./Oxide.Ext.Discord/Entities/InteractionDataOption.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure) |
@@ -289,8 +302,6 @@
 | class [InteractionDataResolved](./Oxide.Ext.Discord/Entities/InteractionDataResolved.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure) |
 | class [InteractionModalMessage](./Oxide.Ext.Discord/Entities/InteractionModalMessage.md) | Represents an Interaction Modal Message |
 | class [InteractionModalResponse](./Oxide.Ext.Discord/Entities/InteractionModalResponse.md) | Represents an Interaction Modal Response |
-| class [InteractionPremiumRequiredMessage](./Oxide.Ext.Discord/Entities/InteractionPremiumRequiredMessage.md) | Message for Premium Required |
-| class [InteractionPremiumRequiredResponse](./Oxide.Ext.Discord/Entities/InteractionPremiumRequiredResponse.md) | Response for premium Required |
 | class [InteractionResponse](./Oxide.Ext.Discord/Entities/InteractionResponse.md) | Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object) |
 | enum [InteractionResponseType](./Oxide.Ext.Discord/Entities/InteractionResponseType.md) | Represents [InteractionResponseType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type) |
 | enum [InteractionType](./Oxide.Ext.Discord/Entities/InteractionType.md) | Represents [InteractionType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type) |
@@ -299,24 +310,31 @@
 | class [InviteLookup](./Oxide.Ext.Discord/Entities/InviteLookup.md) | Represents a [Scheduled Event Lookup Structure](https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params) within Discord. |
 | class [InviteMetadata](./Oxide.Ext.Discord/Entities/InviteMetadata.md) | Represents [Invite Metadata Structure](https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure) |
 | class [InviteStageInstance](./Oxide.Ext.Discord/Entities/InviteStageInstance.md) | Represents an [Invite Stage Instance](https://discord.com/developers/docs/resources/invite#invite-stage-instance-object) |
+| enum [InviteType](./Oxide.Ext.Discord/Entities/InviteType.md) | Represents [Invite Types](https://discord.com/developers/docs/resources/invite#invite-types) |
 | class [ListThreadMembers](./Oxide.Ext.Discord/Entities/ListThreadMembers.md) | Represents [List Thread Member Query String Params](https://discord.com/developers/docs/resources/channel#list-thread-members-query-string-params) |
 | class [MentionableSelectComponent](./Oxide.Ext.Discord/Entities/MentionableSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [MessageActivity](./Oxide.Ext.Discord/Entities/MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |
 | enum [MessageActivityType](./Oxide.Ext.Discord/Entities/MessageActivityType.md) | Represents a [Message Activity Types](https://discord.com/developers/docs/resources/channel#message-object-message-activity-types) |
 | class [MessageAttachment](./Oxide.Ext.Discord/Entities/MessageAttachment.md) | Represents a message [Attachment Structure](https://discord.com/developers/docs/resources/channel#attachment-object) |
 | class [MessageBulkDeletedEvent](./Oxide.Ext.Discord/Entities/MessageBulkDeletedEvent.md) | Represents [Message Delete Bulk](https://discord.com/developers/docs/topics/gateway#message-delete-bulk) |
+| class [MessageCall](./Oxide.Ext.Discord/Entities/MessageCall.md) | Represents a [Message Call Structure](https://discord.com/developers/docs/resources/channel#message-call-object) |
 | enum [MessageComponentType](./Oxide.Ext.Discord/Entities/MessageComponentType.md) | Represents a [Message Component Type](https://discord.com/developers/docs/interactions/message-components#component-types) within Discord.. |
 | class [MessageCreate](./Oxide.Ext.Discord/Entities/MessageCreate.md) | Represents a [Message Create Structure](https://discord.com/developers/docs/resources/channel#create-message-jsonform-params) to be created in discord |
 | class [MessageDeletedEvent](./Oxide.Ext.Discord/Entities/MessageDeletedEvent.md) | Represents [Message Delete](https://discord.com/developers/docs/topics/gateway#message-delete) |
 | class [MessageFileAttachment](./Oxide.Ext.Discord/Entities/MessageFileAttachment.md) | Represents a file attachment for a discord message |
 | [Flags] enum [MessageFlags](./Oxide.Ext.Discord/Entities/MessageFlags.md) | Represents [Message Flags](https://discord.com/developers/docs/resources/channel#message-object-message-flags) for a message |
 | class [MessageInteraction](./Oxide.Ext.Discord/Entities/MessageInteraction.md) | Represents a [Message Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object) within Discord. |
+| class [MessageInteractionMetadata](./Oxide.Ext.Discord/Entities/MessageInteractionMetadata.md) | Represents a [Message Interaction Metadata Structure](https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object-message-interaction-metadata-structure) within Discord. |
+| class [MessagePollVoteAddedEvent](./Oxide.Ext.Discord/Entities/MessagePollVoteAddedEvent.md) | Represents [Message Poll Vote Added Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add) |
+| class [MessagePollVoteRemovedEvent](./Oxide.Ext.Discord/Entities/MessagePollVoteRemovedEvent.md) | Represents [Message Poll Vote Removed Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove) |
 | class [MessageReaction](./Oxide.Ext.Discord/Entities/MessageReaction.md) | Represents a [Reaction Structure](https://discord.com/developers/docs/resources/channel#reaction-object) |
 | class [MessageReactionAddedEvent](./Oxide.Ext.Discord/Entities/MessageReactionAddedEvent.md) | Represents [Message Reaction Add](https://discord.com/developers/docs/topics/gateway#message-reaction-add) |
 | class [MessageReactionRemovedAllEmojiEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedAllEmojiEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji) |
 | class [MessageReactionRemovedAllEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedAllEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all) |
 | class [MessageReactionRemovedEvent](./Oxide.Ext.Discord/Entities/MessageReactionRemovedEvent.md) | Represents [Message Reaction Remove](https://discord.com/developers/docs/topics/gateway#message-reaction-remove) |
 | class [MessageReference](./Oxide.Ext.Discord/Entities/MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
+| enum [MessageReferenceType](./Oxide.Ext.Discord/Entities/MessageReferenceType.md) | Represents [Message Reference Type](https://discord.com/developers/docs/resources/channel#message-reference-types) |
+| class [MessageSnapshot](./Oxide.Ext.Discord/Entities/MessageSnapshot.md) | Represents a [Message Snapshot](https://discord.com/developers/docs/resources/channel#message-snapshot-object) |
 | enum [MessageType](./Oxide.Ext.Discord/Entities/MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./Oxide.Ext.Discord/Entities/MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
 | class [OnboardingPrompt](./Oxide.Ext.Discord/Entities/OnboardingPrompt.md) | Represents [Onboarding Prompt Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure) |
@@ -324,11 +342,18 @@
 | enum [OnboardingPromptType](./Oxide.Ext.Discord/Entities/OnboardingPromptType.md) | Represents [Prompt Types](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types) |
 | class [Overwrite](./Oxide.Ext.Discord/Entities/Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
 | [Flags] enum [PermissionFlags](./Oxide.Ext.Discord/Entities/PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
-| enum [PermissionType](./Oxide.Ext.Discord/Entities/PermissionType.md) | Represents the type of a permission |
+| enum [PermissionType](./Oxide.Ext.Discord/Entities/PermissionType.md) | Represents the type of permission |
+| class [PollAnswerCount](./Oxide.Ext.Discord/Entities/PollAnswerCount.md) | Represents a [Discord Poll Answer Count](https://discord.com/developers/docs/resources/poll#poll-results-object-poll-answer-count-object-structure) |
+| class [PollAnswers](./Oxide.Ext.Discord/Entities/PollAnswers.md) | Represents a [Discord Poll Answers](https://discord.com/developers/docs/resources/poll#poll-answer-object) |
+| class [PollCreate](./Oxide.Ext.Discord/Entities/PollCreate.md) | Represents a [Discord Poll Create](https://discord.com/developers/docs/resources/poll#poll-create-request-object-poll-create-request-object-structure) |
+| enum [PollLayoutType](./Oxide.Ext.Discord/Entities/PollLayoutType.md) | Represents a [Discord Poll Layout Type](https://discord.com/developers/docs/resources/poll#layout-type) |
+| class [PollMedia](./Oxide.Ext.Discord/Entities/PollMedia.md) | Represents a [Discord Poll Media](https://discord.com/developers/docs/resources/poll#poll-media-object) |
+| class [PollResults](./Oxide.Ext.Discord/Entities/PollResults.md) | Represents a [Discord Poll Results](https://discord.com/developers/docs/resources/poll#poll-results-object) |
 | class [PresenceUpdatedEvent](./Oxide.Ext.Discord/Entities/PresenceUpdatedEvent.md) | Represents [Presence Update](https://discord.com/developers/docs/topics/gateway#presence-update) |
 | enum [PrivacyLevel](./Oxide.Ext.Discord/Entities/PrivacyLevel.md) | Represents a [Stage Privacy Level](https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level) within Discord. |
 | class [RateLimitResponse](./Oxide.Ext.Discord/Entities/RateLimitResponse.md) | Represents a rate limit response from an API request |
 | class [ReactionCountDetails](./Oxide.Ext.Discord/Entities/ReactionCountDetails.md) | Represents a [Reaction Count Details Structure](https://discord.com/developers/docs/resources/channel#reaction-count-details-object) |
+| enum [ReactionType](./Oxide.Ext.Discord/Entities/ReactionType.md) | Represents a [Discord Reaction Type](https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types) |
 | enum [RequestErrorType](./Oxide.Ext.Discord/Entities/RequestErrorType.md) | Represents a Discord Request Error Type |
 | class [RequestResponse](./Oxide.Ext.Discord/Entities/RequestResponse.md) | Represents a REST response from discord |
 | class [ResponseError](./Oxide.Ext.Discord/Entities/ResponseError.md) | Error object that is returned to the caller when a request fails |
@@ -412,6 +437,7 @@
 | class [DiscordApplicationException](./Oxide.Ext.Discord/Exceptions/DiscordApplicationException.md) | Exceptions for [`DiscordApplication`](./Oxide.Ext.Discord/Entities/DiscordApplication.md) |
 | class [DiscordClientException](./Oxide.Ext.Discord/Exceptions/DiscordClientException.md) | Exceptions for the [`DiscordClient`](./Oxide.Ext.Discord/Clients/DiscordClient.md) |
 | class [DiscordLocaleNotFoundException](./Oxide.Ext.Discord/Exceptions/DiscordLocaleNotFoundException.md) | Exception thrown when Discord Locale is not found |
+| class [DiscordLoggerException](./Oxide.Ext.Discord/Exceptions/DiscordLoggerException.md) | Exceptions for the [`DiscordClient`](./Oxide.Ext.Discord/Clients/DiscordClient.md) |
 | class [DiscordTemplateException](./Oxide.Ext.Discord/Exceptions/DiscordTemplateException.md) | Exception for Discord Templates |
 | class [DiscordWebSocketException](./Oxide.Ext.Discord/Exceptions/DiscordWebSocketException.md) | Represents an exception that occured with the websocket |
 | class [DuplicateTemplateException](./Oxide.Ext.Discord/Exceptions/DuplicateTemplateException.md) | Thrown when duplicate templates have been registered for the same type, plugin, and name |
@@ -527,18 +553,18 @@
 | public type | description |
 | --- | --- |
 | class [DiscordColorConverter](./Oxide.Ext.Discord/Json/DiscordColorConverter.md) | Handles the JSON Serialization / Deserialization for DiscordColor |
-| class [DiscordEnumConverter](./Oxide.Ext.Discord/Json/DiscordEnumConverter.md) | Handles deserializing JSON values as strings. If the value doesn't exist return the default value. |
+| class [DiscordEnumConverter](./Oxide.Ext.Discord/Json/DiscordEnumConverter.md) | Handles deserializing JSON values as strings. If the value doesn't exist, return the default value. |
 | class [DiscordImageDataConverter](./Oxide.Ext.Discord/Json/DiscordImageDataConverter.md) | Represents the JsonConverter for [`DiscordImageData`](./Oxide.Ext.Discord/Entities/DiscordImageData.md) |
 | class [DiscordJsonReader](./Oxide.Ext.Discord/Json/DiscordJsonReader.md) | This is a pooled JSON reader that can read as string, deserialize object, or populate a given object async |
 | class [DiscordJsonWriter](./Oxide.Ext.Discord/Json/DiscordJsonWriter.md) | This is a pooled JSON writer that can write JSON to a stream |
 | class [EventPayloadConverter](./Oxide.Ext.Discord/Json/EventPayloadConverter.md) | JSON converter for [`EventPayload`](./Oxide.Ext.Discord/Entities/EventPayload.md) |
 | class [HashListConverter&lt;TValue&gt;](./Oxide.Ext.Discord/Json/HashListConverter%7BTValue%7D.md) | Converts to and from a list in JSON to a hash |
-| class [MessageComponentsConverter](./Oxide.Ext.Discord/Json/MessageComponentsConverter.md) | Converter for list of message components |
+| class [MessageComponentsConverter](./Oxide.Ext.Discord/Json/MessageComponentsConverter.md) | Converter for a list of message components |
 | class [PermissionFlagsStringConverter](./Oxide.Ext.Discord/Json/PermissionFlagsStringConverter.md) | Converts Permission Flags to and from a JSON string |
 | class [RoleTagsConverter](./Oxide.Ext.Discord/Json/RoleTagsConverter.md) | Handles converting [`RoleTags`](./Oxide.Ext.Discord/Entities/RoleTags.md) This type contains special deserialization types |
-| class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from it's JSON string value |
-| class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for list of message components |
-| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | Json Template Key Converter |
+| class [SnowflakeConverter](./Oxide.Ext.Discord/Json/SnowflakeConverter.md) | Converts a snowflake to and from its JSON string value |
+| class [TemplateComponentsConverter](./Oxide.Ext.Discord/Json/TemplateComponentsConverter.md) | Converter for a list of message components |
+| class [TemplateKeyConverter](./Oxide.Ext.Discord/Json/TemplateKeyConverter.md) | JSON Template Key Converter |
 | class [UnixDateTimeConverter](./Oxide.Ext.Discord/Json/UnixDateTimeConverter.md) | Converts a DateTimeOffset to and from a json long |
 
 ## Oxide.Ext.Discord.Libraries namespace
@@ -676,13 +702,14 @@
 | interface [IPool&lt;T&gt;](./Oxide.Ext.Discord/Types/IPool%7BT%7D.md) | Represents a pool of type T |
 | class [PoolSettings](./Oxide.Ext.Discord/Types/PoolSettings.md) | Settings for the pools |
 | struct [PoolSize](./Oxide.Ext.Discord/Types/PoolSize.md) | Represents size constraints for a pool |
-| class [Promise](./Oxide.Ext.Discord/Types/Promise.md) | Implements a non-generic C# promise, this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
+| class [Promise](./Oxide.Ext.Discord/Types/Promise.md) | Implements a non-generic C# promise; this is a promise that simply resolves without delivering a value. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | class [Promise&lt;TPromised&gt;](./Oxide.Ext.Discord/Types/Promise%7BTPromised%7D.md) | Implements a C# promise. https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise |
 | enum [PromiseState](./Oxide.Ext.Discord/Types/PromiseState.md) | Specifies the state of a promise. |
 | struct [RejectHandler](./Oxide.Ext.Discord/Types/RejectHandler.md) | Represents a handler invoked when the promise is rejected. |
 | class [RestRateLimit](./Oxide.Ext.Discord/Types/RestRateLimit.md) | Represents a rate limit for rest requests |
 | abstract class [Singleton&lt;T&gt;](./Oxide.Ext.Discord/Types/Singleton%7BT%7D.md) | Represents a singleton of type {T} |
 | class [UkkonenTrie&lt;T&gt;](./Oxide.Ext.Discord/Types/UkkonenTrie%7BT%7D.md) | A Ukkonen Suffix Trie |
+| struct [ValueStringBuilder](./Oxide.Ext.Discord/Types/ValueStringBuilder.md) |  |
 | class [WebsocketRateLimit](./Oxide.Ext.Discord/Types/WebsocketRateLimit.md) | Represents a WebSocket Rate Limit |
 
 ## Oxide.Ext.Discord.WebSockets namespace

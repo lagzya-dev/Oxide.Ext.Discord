@@ -14,6 +14,7 @@ public class DiscordWebhook
 | [ApplicationId](#applicationid-property) { get; set; } | The bot/OAuth2 application that created this webhook |
 | [Avatar](#avatar-property) { get; set; } | the default user avatar hash of the webhook |
 | [ChannelId](#channelid-property) { get; set; } | The channel id this webhook is for, if any |
+| [Client](#client-property) { get; } | Client for the webhook |
 | [GuildId](#guildid-property) { get; set; } | The guild id this webhook is for, if any |
 | [Id](#id-property) { get; set; } | The id of the webhook |
 | [Name](#name-property) { get; set; } | The default name of the webhook |
@@ -789,6 +790,22 @@ public Snowflake SourceChannel { get; set; }
 ## See Also
 
 * struct [Snowflake](./Snowflake.md)
+* class [DiscordWebhook](./DiscordWebhook.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Client property
+
+Client for the webhook
+
+```csharp
+public WebhookClient Client { get; }
+```
+
+## See Also
+
+* class [WebhookClient](../Clients/WebhookClient.md)
 * class [DiscordWebhook](./DiscordWebhook.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

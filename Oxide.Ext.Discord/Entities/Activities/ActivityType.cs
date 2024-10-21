@@ -1,26 +1,31 @@
-﻿namespace Oxide.Ext.Discord.Entities
+﻿using System;
+
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">Activity Types</a>
+/// </summary>
+public enum ActivityType : byte
 {
-    /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/topics/gateway#activity-object-activity-types">Activity Types</a>
-    /// </summary>
-    public enum ActivityType : byte
-    {
-        /// Playing {name}
-        Game = 0,       
+    /// Playing {name}
+    [Obsolete("This field has been deprecated and will be removed in a future version. Use ActivityType.Playing instead.")]
+    Game = 0,      
         
-        /// Streaming {name}
-        Streaming = 1,  
+    /// Playing {name}
+    Playing = 0,    
         
-        /// Listening {name}
-        Listening = 2,  
+    /// Streaming {name}
+    Streaming = 1,  
         
-        /// Watching {name}
-        Watching = 3,   
+    /// Listening {name}
+    Listening = 2,  
         
-        ///{emoji} {name} EX: ":smiley: I am cool"
-        Custom = 4,     
+    /// Watching {name}
+    Watching = 3,   
         
-        /// Competing in {name}
-        Competing = 5   
-    }
+    ///{emoji} {name} EX: ":smiley: I am cool"
+    Custom = 4,     
+        
+    /// Competing in {name}
+    Competing = 5   
 }

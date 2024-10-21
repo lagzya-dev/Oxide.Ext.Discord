@@ -1,17 +1,16 @@
 // Originally from: https://github.com/gmamaladze/trienet
 // Modified by: MJSU
 
-namespace Oxide.Ext.Discord.Types
+namespace Oxide.Ext.Discord.Types;
+
+internal class Edge<T>
 {
-    internal class Edge<T>
-    {
-        public StringSlice Label;
-        public readonly Node<T> Node;
+    public StringSlice Label;
+    public readonly Node<T> Node;
         
-        public Edge(StringSlice label, Node<T> node) 
-        {
-            Label = label;
-            Node = node;
-        }
+    public Edge(StringSlice label, Node<T> node) 
+    {
+        Label = label;
+        Node = node;
     }
 }

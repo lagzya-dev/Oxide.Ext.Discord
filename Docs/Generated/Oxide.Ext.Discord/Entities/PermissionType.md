@@ -1,6 +1,6 @@
 # PermissionType enumeration
 
-Represents the type of a permission
+Represents the type of permission
 
 ```csharp
 public enum PermissionType : byte

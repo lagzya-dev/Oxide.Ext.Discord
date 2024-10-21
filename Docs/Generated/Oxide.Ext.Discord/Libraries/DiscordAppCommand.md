@@ -21,7 +21,7 @@ public class DiscordAppCommand : BaseDiscordLibrary<DiscordAppCommand>, IDebugLo
 
 | name | description |
 | --- | --- |
-| override [OnPluginLoaded](#onpluginloaded-method)(…) |  |
+| override [OnClientBotConnect](#onclientbotconnect-method)(…) |  |
 | override [OnPluginUnloaded](#onpluginunloaded-method)(…) |  |
 
 ## See Also
@@ -187,16 +187,15 @@ public void RemoveApplicationCommand(Plugin plugin, DiscordApplication app, Inte
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# OnPluginLoaded method
+# OnClientBotConnect method
 
 ```csharp
-protected override void OnPluginLoaded(PluginSetup data, BotConnection connection)
+protected override void OnClientBotConnect(DiscordClient client)
 ```
 
 ## See Also
 
-* class [PluginSetup](../Plugins/PluginSetup.md)
-* class [BotConnection](../Connections/BotConnection.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
 * class [DiscordAppCommand](./DiscordAppCommand.md)
 * namespace [Oxide.Ext.Discord.Libraries](./LibrariesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

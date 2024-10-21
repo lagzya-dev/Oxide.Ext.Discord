@@ -1,38 +1,37 @@
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents a Discord Request Error Type
+/// </summary>
+public enum RequestErrorType : byte
 {
     /// <summary>
-    /// Represents a Discord Request Error Type
+    /// A generic web error occured
     /// </summary>
-    public enum RequestErrorType : byte
-    {
-        /// <summary>
-        /// A generic web error occured
-        /// </summary>
-        GenericWeb,
+    GenericWeb,
         
-        /// <summary>
-        /// An Internal HTTP Error Occured
-        /// </summary>
-        Internal,
+    /// <summary>
+    /// An Internal HTTP Error Occured
+    /// </summary>
+    Internal,
         
-        /// <summary>
-        /// A Ratelimit Error Occured
-        /// </summary>
-        RateLimit,
+    /// <summary>
+    /// A Ratelimit Error Occured
+    /// </summary>
+    RateLimit,
         
-        /// <summary>
-        /// An Invalid request was passed to discord
-        /// </summary>
-        ApiError,
+    /// <summary>
+    /// An Invalid request was passed to discord
+    /// </summary>
+    ApiError,
 
-        /// <summary>
-        /// An error occured during JSON serialization
-        /// </summary>
-        Serialization,
+    /// <summary>
+    /// An error occured during JSON serialization
+    /// </summary>
+    Serialization,
         
-        /// <summary>
-        /// A non web error occured
-        /// </summary>
-        Generic
-    }
+    /// <summary>
+    /// A non web error occured
+    /// </summary>
+    Generic
 }

@@ -16,7 +16,7 @@ public class PlaceholderData : BasePoolable
 | [AddGuild](#addguild-method-1-of-2)(…) | Add a [`DiscordGuild`](../Entities/DiscordGuild.md) by [`DiscordClient`](../Clients/DiscordClient.md) and GuildId (2 methods) |
 | [AddGuildMember](#addguildmember-method-1-of-2)(…) | Add a [`GuildMember`](../Entities/GuildMember.md) by [`DiscordClient`](../Clients/DiscordClient.md), GuildId, and UserId (2 methods) |
 | [AddInteraction](#addinteraction-method)(…) | Adds a [`DiscordInteraction`](../Entities/DiscordInteraction.md) |
-| [AddIp](#addip-method)(…) | Adds a IP |
+| [AddIp](#addip-method)(…) | Adds an IP |
 | [AddMessage](#addmessage-method)(…) | Add a [`DiscordMessage`](../Entities/DiscordMessage.md) |
 | [AddPlayer](#addplayer-method)(…) | Adds a IPlayer |
 | [AddPlugin](#addplugin-method)(…) | Adds a Plugin |
@@ -702,7 +702,7 @@ This
    
 # AddIp method
 
-Adds a IP
+Adds an IP
 
 ```csharp
 public PlaceholderData AddIp(string ip)

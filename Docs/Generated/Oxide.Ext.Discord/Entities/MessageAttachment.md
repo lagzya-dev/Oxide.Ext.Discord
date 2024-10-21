@@ -21,6 +21,7 @@ public class MessageAttachment : ISnowflakeEntity
 | [Id](#id-property) { get; set; } | Attachment ID |
 | [ProxyUrl](#proxyurl-property) { get; set; } | A proxied url of file |
 | [Size](#size-property) { get; set; } | Size of file in bytes |
+| [Title](#title-property) { get; set; } | Title of the file |
 | [Url](#url-property) { get; set; } | Source url of file |
 | [Waveform](#waveform-property) { get; set; } | base64 encoded bytearray representing a sampled waveform (currently for voice messages) |
 | [Width](#width-property) { get; set; } | Width of file (if image) |
@@ -70,6 +71,21 @@ Name of file attached
 
 ```csharp
 public string Filename { get; set; }
+```
+
+## See Also
+
+* class [MessageAttachment](./MessageAttachment.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Title property
+
+Title of the file
+
+```csharp
+public string Title { get; set; }
 ```
 
 ## See Also

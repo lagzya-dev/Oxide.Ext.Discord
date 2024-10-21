@@ -41,7 +41,7 @@ public void Init(BucketId bucketId, RestHandler rest, ILogger logger)
 
 | parameter | description |
 | --- | --- |
-| bucketId | ID of the bucket. If not a known bucket then will be part of the route. If know bucket will be the Discord bucket ID |
+| bucketId | ID of the bucket. If not a known bucket, then it will be part of the route. If known bucket, it will be the Discord bucket ID |
 | rest | The handler that owns this Bucket |
 | logger | Logger for this bucket |
 

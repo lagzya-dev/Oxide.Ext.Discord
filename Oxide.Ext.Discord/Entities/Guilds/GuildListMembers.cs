@@ -1,48 +1,46 @@
 using Oxide.Ext.Discord.Builders;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Interfaces;
-using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents a <a href="https://discord.com/developers/docs/resources/guild#list-guild-members-query-string-params">List Guild Members</a> Stucture
+/// </summary>
+public class GuildListMembers : IDiscordQueryString, IDiscordValidation
 {
     /// <summary>
-    /// Represents a <a href="https://discord.com/developers/docs/resources/guild#list-guild-members-query-string-params">List Guild Members</a> Stucture
+    /// Max number of members to return (1-1000)
+    /// Default is 1
     /// </summary>
-    public class GuildListMembers : IDiscordQueryString, IDiscordValidation
+    public int? Limit { get; set; }
+        
+    /// <summary>
+    /// The highest user id in the previous page
+    /// </summary>
+    public Snowflake? After { get; set; }
+        
+    ///<inheritdoc/>
+    public string ToQueryString()
     {
-        /// <summary>
-        /// Max number of members to return (1-1000)
-        /// Default is 1
-        /// </summary>
-        public int? Limit { get; set; }
-        
-        /// <summary>
-        /// The highest user id in the previous page
-        /// </summary>
-        public Snowflake? After { get; set; }
-        
-        ///<inheritdoc/>
-        public string ToQueryString()
+        Validate();
+        QueryStringBuilder builder = new();
+        if (Limit.HasValue)
         {
-            Validate();
-            QueryStringBuilder builder = QueryStringBuilder.Create(DiscordPool.Internal);
-            if (Limit.HasValue)
-            {
-                builder.Add("limit", Limit.Value.ToString());
-            }
-
-            if (After.HasValue)
-            {
-                builder.Add("after", After.Value.ToString());
-            }
-
-            return builder.ToStringAndFree();
+            builder.Add("limit", Limit.Value.ToString());
         }
 
-        /// <inheritdoc/>
-        public void Validate()
+        if (After.HasValue)
         {
-            InvalidGuildListMembersException.ThrowIfInvalidLimit(Limit);
+            builder.Add("after", After.Value.ToString());
         }
+
+        return builder.ToString();
+    }
+
+    /// <inheritdoc/>
+    public void Validate()
+    {
+        InvalidGuildListMembersException.ThrowIfInvalidLimit(Limit);
     }
 }

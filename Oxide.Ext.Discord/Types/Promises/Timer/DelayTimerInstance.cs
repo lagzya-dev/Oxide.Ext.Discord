@@ -3,31 +3,30 @@
 
 using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types
+namespace Oxide.Ext.Discord.Types;
+
+internal sealed class DelayTimerInstance : BaseTimerInstance
 {
-    internal sealed class DelayTimerInstance : BaseTimerInstance
+    private float _endTime;
+
+    public static DelayTimerInstance Create(float endTime)
     {
-        private float _endTime;
+        DelayTimerInstance timer = DiscordPool.Internal.Get<DelayTimerInstance>();
+        timer.Init(endTime);
+        return timer;
+    }
 
-        public static DelayTimerInstance Create(float endTime)
-        {
-            DelayTimerInstance timer = DiscordPool.Internal.Get<DelayTimerInstance>();
-            timer.Init(endTime);
-            return timer;
-        }
-
-        private void Init(float endTime)
-        {
-            base.Init();
-            _endTime = endTime;
-        }
+    private void Init(float endTime)
+    {
+        base.Init();
+        _endTime = endTime;
+    }
         
-        public override void Update(float currentTime)
+    public override void Update(float currentTime)
+    {
+        if (_endTime <= currentTime)
         {
-            if (_endTime <= currentTime)
-            {
-               Resolve();
-            }
+            Resolve();
         }
     }
 }

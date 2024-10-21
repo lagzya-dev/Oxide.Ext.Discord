@@ -17,8 +17,8 @@ public class BotConnection
 | [HiddenToken](#hiddentoken-property) { get; } | Hidden Bot Token. Used when needing to display the token. |
 | [Intents](#intents-property) { get; set; } | Intents that your bot needs to work See [`GatewayIntents`](../Entities/GatewayIntents.md) |
 | [LogLevel](#loglevel-property) { get; set; } | Discord Extension Logging Level. See [`DiscordLogLevel`](../Logging/DiscordLogLevel.md) |
-| [HasAnyIntent](#hasanyintent-method)(…) | Returns if the settings has any intent specified |
-| [HasIntents](#hasintents-method)(…) | Returns if the settings has the given intents |
+| [HasAnyIntent](#hasanyintent-method)(…) | Returns if the settings have any intent specified |
+| [HasIntents](#hasintents-method)(…) | Returns if the settings have the given intents |
 
 ## See Also
 
@@ -29,7 +29,7 @@ public class BotConnection
    
 # HasIntents method
 
-Returns if the settings has the given intents
+Returns if the settings have the given intents
 
 ```csharp
 public bool HasIntents(GatewayIntents intents)
@@ -41,7 +41,7 @@ public bool HasIntents(GatewayIntents intents)
 
 ## Return Value
 
-True if settings has the given intents; False otherwise
+True if settings have the given intents; False otherwise
 
 ## See Also
 
@@ -53,7 +53,7 @@ True if settings has the given intents; False otherwise
    
 # HasAnyIntent method
 
-Returns if the settings has any intent specified
+Returns if the settings have any intent specified
 
 ```csharp
 public bool HasAnyIntent(GatewayIntents intents)
@@ -65,7 +65,7 @@ public bool HasAnyIntent(GatewayIntents intents)
 
 ## Return Value
 
-True if settings has at least one of the given intents
+True if settings have at least one of the given intents
 
 ## See Also
 

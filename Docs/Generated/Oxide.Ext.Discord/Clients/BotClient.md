@@ -1,9 +1,9 @@
 # BotClient class
 
-Represents a bot that is connected to discord
+Represents a bot connected to discord
 
 ```csharp
-public class BotClient : IDebugLoggable
+public class BotClient : BaseClient, IDebugLoggable
 ```
 
 ## Public Members
@@ -13,49 +13,30 @@ public class BotClient : IDebugLoggable
 | [BotClient](#botclient-constructor)(…) | Connection settings to use for the bot |
 | [Application](#application-property) { get; } | Application reference for this bot |
 | [BotUser](#botuser-property) { get; } | Bot User |
-| [Initialized](#initialized-property) { get; } | If the connection is initialized and not disconnected |
 | [IsFullyLoaded](#isfullyloaded-property) { get; } | Returns if the bot has fully loaded. All guilds are loaded and if GuildMembers is specified all guild members have been loaded |
 | [IsReady](#isready-property) { get; } | Returns if ReadyData is set |
-| [Rest](#rest-property) { get; } | Rest handler for all discord API calls |
-| readonly [Clients](#clients-field) | List of all clients that are using this bot client |
-| readonly [DirectMessagesByChannelId](#directmessagesbychannelid-field) | All the direct messages that we have seen by channel Id |
+| readonly [DirectMessagesByChannelId](#directmessagesbychannelid-field) | All the direct messages that we have seen by channel ID |
 | readonly [DirectMessagesByUserId](#directmessagesbyuserid-field) | All the direct messages that we have seen by User ID |
 | readonly [Servers](#servers-field) | All the servers that this bot is in |
-| [AddClient](#addclient-method)(…) | Add a client to this bot client |
+| override [AddClient](#addclient-method)(…) |  |
 | [AddDirectChannel](#adddirectchannel-method)(…) | Adds a Direct Message Channel to the bot cache |
 | [AddGuild](#addguild-method)(…) | Adds a guild to the list of servers a bot is in |
 | [AddGuildOrUpdate](#addguildorupdate-method)(…) | Adds a guild if it does not exist or updates the guild with |
-| [ConnectWebSocket](#connectwebsocket-method)() | Connects the websocket to discord. Should only be called if the websocket is disconnected |
 | [DisconnectWebsocket](#disconnectwebsocket-method)(…) | Close the websocket with discord |
-| [GetChannel](#getchannel-method)(…) | Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel |
-| [GetClientPluginList](#getclientpluginlist-method)() | Returns the list of plugins for this bot |
+| [GetChannel](#getchannel-method)(…) | Returns the channel for the given channel ID. If guild ID is null, it will search for a direct message channel If guild ID is not null, it will search for a guild channel |
 | [GetGuild](#getguild-method)(…) | Returns a guild for the specific ID |
 | [LogDebug](#logdebug-method)(…) |  |
-| [RemoveClient](#removeclient-method)(…) | Remove a client from the bot client If not clients are left bot will shutdown |
+| override [RemoveClient](#removeclient-method)(…) |  |
 | [RemoveDirectMessageChannel](#removedirectmessagechannel-method)(…) | Removes a direct message channel if it exists |
 | [SendWebSocketCommand](#sendwebsocketcommand-method)(…) | Sends a websocket command |
 
 ## See Also
 
+* class [BaseClient](./BaseClient.md)
 * interface [IDebugLoggable](../Interfaces/IDebugLoggable.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
 * [BotClient.cs](../../../../Oxide.Ext.Discord/Clients/BotClient.cs)
-   
-   
-# ConnectWebSocket method
-
-Connects the websocket to discord. Should only be called if the websocket is disconnected
-
-```csharp
-public void ConnectWebSocket()
-```
-
-## See Also
-
-* class [BotClient](./BotClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
 # DisconnectWebsocket method
@@ -80,21 +61,13 @@ public void DisconnectWebsocket(bool reconnect = false, bool resume = false)
    
 # AddClient method
 
-Add a client to this bot client
-
 ```csharp
-public void AddClient(DiscordClient client, PluginSetup setup)
+public override void AddClient(DiscordClient client)
 ```
-
-| parameter | description |
-| --- | --- |
-| client | Client to add to the bot |
-| setup | Setup data for the plugin |
 
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* class [PluginSetup](../Plugins/PluginSetup.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -102,34 +75,13 @@ public void AddClient(DiscordClient client, PluginSetup setup)
    
 # RemoveClient method
 
-Remove a client from the bot client If not clients are left bot will shutdown
-
 ```csharp
-public void RemoveClient(DiscordClient client)
+public override bool RemoveClient(DiscordClient client)
 ```
-
-| parameter | description |
-| --- | --- |
-| client | Client to remove from bot client |
 
 ## See Also
 
 * class [DiscordClient](./DiscordClient.md)
-* class [BotClient](./BotClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# GetClientPluginList method
-
-Returns the list of plugins for this bot
-
-```csharp
-public string GetClientPluginList()
-```
-
-## See Also
-
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -185,7 +137,7 @@ Guild with the specified ID
    
 # GetChannel method
 
-Returns the channel for the given channel ID. If guild ID is null it will search for a direct message channel If guild ID is not null it will search for a guild channel
+Returns the channel for the given channel ID. If guild ID is null, it will search for a direct message channel If guild ID is not null, it will search for a guild channel
 
 ```csharp
 public DiscordChannel GetChannel(Snowflake channelId, Snowflake? guildId)
@@ -319,21 +271,6 @@ public BotClient(BotConnection connection)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# Initialized property
-
-If the connection is initialized and not disconnected
-
-```csharp
-public bool Initialized { get; }
-```
-
-## See Also
-
-* class [BotClient](./BotClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # Application property
 
 Application reference for this bot
@@ -361,22 +298,6 @@ public DiscordUser BotUser { get; }
 ## See Also
 
 * class [DiscordUser](../Entities/DiscordUser.md)
-* class [BotClient](./BotClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Rest property
-
-Rest handler for all discord API calls
-
-```csharp
-public RestHandler Rest { get; }
-```
-
-## See Also
-
-* class [RestHandler](../Rest/RestHandler.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -431,7 +352,7 @@ public readonly Hash<Snowflake, DiscordGuild> Servers;
    
 # DirectMessagesByChannelId field
 
-All the direct messages that we have seen by channel Id
+All the direct messages that we have seen by channel ID
 
 ```csharp
 public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByChannelId;
@@ -458,22 +379,6 @@ public readonly Hash<Snowflake, DiscordChannel> DirectMessagesByUserId;
 
 * struct [Snowflake](../Entities/Snowflake.md)
 * class [DiscordChannel](../Entities/DiscordChannel.md)
-* class [BotClient](./BotClient.md)
-* namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
-# Clients field
-
-List of all clients that are using this bot client
-
-```csharp
-public readonly IReadOnlyList<DiscordClient> Clients;
-```
-
-## See Also
-
-* class [DiscordClient](./DiscordClient.md)
 * class [BotClient](./BotClient.md)
 * namespace [Oxide.Ext.Discord.Clients](./ClientsNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

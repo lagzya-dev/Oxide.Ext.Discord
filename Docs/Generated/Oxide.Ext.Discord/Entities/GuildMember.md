@@ -12,6 +12,7 @@ public class GuildMember : ISnowflakeEntity
 | --- | --- |
 | [GuildMember](#guildmember-constructor)() | The default constructor. |
 | [Avatar](#avatar-property) { get; set; } | The member's guild avatar hash |
+| [AvatarDecoration](#avatardecoration-property) { get; set; } | Data for the member's guild avatar decoration |
 | [CommunicationDisabledUntil](#communicationdisableduntil-property) { get; set; } | When the user's timeout will expire and the user will be able to communicate in the guild again, null or a time in the past if the user is not timed out |
 | [Deaf](#deaf-property) { get; set; } | Whether the user is deafened in voice channels |
 | [DisplayName](#displayname-property) { get; } | Returns the display name show for the user in a guild |
@@ -303,6 +304,22 @@ public DateTime? CommunicationDisabledUntil { get; set; }
 
 ## See Also
 
+* class [GuildMember](./GuildMember.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AvatarDecoration property
+
+Data for the member's guild avatar decoration
+
+```csharp
+public AvatarDecorationData AvatarDecoration { get; set; }
+```
+
+## See Also
+
+* class [AvatarDecorationData](./AvatarDecorationData.md)
 * class [GuildMember](./GuildMember.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

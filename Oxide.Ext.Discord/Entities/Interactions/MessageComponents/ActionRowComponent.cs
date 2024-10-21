@@ -3,39 +3,38 @@ using Newtonsoft.Json;
 using Oxide.Ext.Discord.Exceptions;
 using Oxide.Ext.Discord.Json;
 
-namespace Oxide.Ext.Discord.Entities
+namespace Oxide.Ext.Discord.Entities;
+
+/// <summary>
+/// Represents <a href="https://discord.com/developers/docs/interactions/message-components#actionrow">Action Row Component</a> within discord
+/// </summary>
+[JsonObject(MemberSerialization = MemberSerialization.OptIn)]
+public class ActionRowComponent : BaseComponent
 {
     /// <summary>
-    /// Represents <a href="https://discord.com/developers/docs/interactions/message-components#actionrow">Action Row Component</a> within discord
+    /// The components on the action row
     /// </summary>
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class ActionRowComponent : BaseComponent
+    [JsonConverter(typeof(MessageComponentsConverter))]
+    [JsonProperty("components")]
+    public List<BaseComponent> Components { get; } = new();
+
+    /// <summary>
+    /// Constructor for ActionRowComponent
+    /// Sets the Type to ActionRow
+    /// </summary>
+    public ActionRowComponent()
     {
-        /// <summary>
-        /// The components on the action row
-        /// </summary>
-        [JsonConverter(typeof(MessageComponentsConverter))]
-        [JsonProperty("components")]
-        public List<BaseComponent> Components { get; } = new List<BaseComponent>();
+        Type = MessageComponentType.ActionRow;
+    }
 
-        /// <summary>
-        /// Constructor for ActionRowComponent
-        /// Sets the Type to ActionRow
-        /// </summary>
-        public ActionRowComponent()
+    ///<inheritdoc />
+    public override void Validate()
+    {
+        InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(Components.Count);
+        for (int index = 0; index < Components.Count; index++)
         {
-            Type = MessageComponentType.ActionRow;
-        }
-
-        ///<inheritdoc />
-        public override void Validate()
-        {
-            InvalidMessageComponentException.ThrowIfInvalidMaxActionRows(Components.Count);
-            for (int index = 0; index < Components.Count; index++)
-            {
-                BaseComponent component = Components[index];
-                component.Validate();
-            }
+            BaseComponent component = Components[index];
+            component.Validate();
         }
     }
 }

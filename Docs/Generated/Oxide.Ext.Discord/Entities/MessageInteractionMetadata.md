@@ -1,0 +1,155 @@
+# MessageInteractionMetadata class
+
+Represents a [Message Interaction Metadata Structure](https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object-message-interaction-metadata-structure) within Discord.
+
+```csharp
+public class MessageInteractionMetadata
+```
+
+## Public Members
+
+| name | description |
+| --- | --- |
+| [MessageInteractionMetadata](#messageinteractionmetadata-constructor)() | The default constructor. |
+| [AuthorizingIntegrationOwners](#authorizingintegrationowners-property) { get; set; } | IDs for installation context(s) related to an interaction. |
+| [Id](#id-property) { get; set; } | ID of the interaction |
+| [InteractedMessageId](#interactedmessageid-property) { get; set; } | ID of the message that contained interactive component, present only on messages created from component interactions |
+| [OriginalResponseMessageId](#originalresponsemessageid-property) { get; set; } | ID of the original response message, present only on follow-up messages |
+| [TriggeringInteractionMetadata](#triggeringinteractionmetadata-property) { get; set; } | Metadata for the interaction that was used to open the modal, present only on modal submit interactions |
+| [Type](#type-property) { get; set; } | Type of interaction |
+| [User](#user-property) { get; set; } | IUser who triggered the interaction |
+
+## See Also
+
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+* [MessageInteractionMetadata.cs](../../../../Oxide.Ext.Discord/Entities/MessageInteractionMetadata.cs)
+   
+   
+# MessageInteractionMetadata constructor
+
+The default constructor.
+
+```csharp
+public MessageInteractionMetadata()
+```
+
+## See Also
+
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Id property
+
+ID of the interaction
+
+```csharp
+public Snowflake Id { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+Type of interaction
+
+```csharp
+public InteractionType Type { get; set; }
+```
+
+## See Also
+
+* enum [InteractionType](./InteractionType.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# User property
+
+IUser who triggered the interaction
+
+```csharp
+public DiscordUser User { get; set; }
+```
+
+## See Also
+
+* class [DiscordUser](./DiscordUser.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AuthorizingIntegrationOwners property
+
+IDs for installation context(s) related to an interaction.
+
+```csharp
+public Hash<ApplicationIntegrationType, Snowflake> AuthorizingIntegrationOwners { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* struct [Snowflake](./Snowflake.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# OriginalResponseMessageId property
+
+ID of the original response message, present only on follow-up messages
+
+```csharp
+public Snowflake? OriginalResponseMessageId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# InteractedMessageId property
+
+ID of the message that contained interactive component, present only on messages created from component interactions
+
+```csharp
+public Snowflake? InteractedMessageId { get; set; }
+```
+
+## See Also
+
+* struct [Snowflake](./Snowflake.md)
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# TriggeringInteractionMetadata property
+
+Metadata for the interaction that was used to open the modal, present only on modal submit interactions
+
+```csharp
+public MessageInteractionMetadata TriggeringInteractionMetadata { get; set; }
+```
+
+## See Also
+
+* class [MessageInteractionMetadata](./MessageInteractionMetadata.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+
+<!-- DO NOT EDIT: generated by xmldocmd for Oxide.Ext.Discord.dll -->

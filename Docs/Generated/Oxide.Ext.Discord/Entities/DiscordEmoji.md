@@ -16,7 +16,7 @@ public class DiscordEmoji : EmojiUpdate, ISnowflakeEntity
 | [Animated](#animated-property) { get; set; } | Whether this emoji is animated |
 | [Available](#available-property) { get; set; } | Whether this emoji can be used, may be false due to loss of Server Boosts |
 | [EmojiId](#emojiid-property) { get; set; } | Emoji id |
-| [Id](#id-property) { get; } | The ID for the emoji if it is custom; Otherwise invalid snowflake |
+| [Id](#id-property) { get; } | The ID for the emoji if it is custom; Otherwise default snowflake |
 | [Managed](#managed-property) { get; set; } | Whether this emoji is managed |
 | [Mention](#mention-property) { get; } | Show the emoji in a message |
 | [RequireColons](#requirecolons-property) { get; set; } | Whether this emoji must be wrapped in colons |
@@ -105,7 +105,7 @@ public DiscordEmoji()
    
 # Id property
 
-The ID for the emoji if it is custom; Otherwise invalid snowflake
+The ID for the emoji if it is custom; Otherwise default snowflake
 
 ```csharp
 public Snowflake Id { get; }

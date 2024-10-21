@@ -3,30 +3,29 @@ using Oxide.Ext.Discord.Constants;
 using Oxide.Ext.Discord.Types;
 using Oxide.Plugins;
 
-namespace Oxide.Ext.Discord.Cache
+namespace Oxide.Ext.Discord.Cache;
+
+internal sealed class MediaTypeHeaderCache : Singleton<MediaTypeHeaderCache>
 {
-    internal sealed class MediaTypeHeaderCache : Singleton<MediaTypeHeaderCache>
+    private readonly Hash<string, MediaTypeHeaderValue> _cache = new();
+    private const string JsonHeader = "application/json";
+
+    private MediaTypeHeaderCache()
     {
-        private readonly Hash<string, MediaTypeHeaderValue> _cache = new Hash<string, MediaTypeHeaderValue>();
-        private const string JsonHeader = "application/json";
+        MediaTypeHeaderValue header = MediaTypeHeaderValue.Parse(JsonHeader);
+        header.CharSet = DiscordEncoding.Instance.Encoding.WebName;
+        _cache[JsonHeader] = header;
+    }
 
-        private MediaTypeHeaderCache()
+    public MediaTypeHeaderValue Get(string value)
+    {
+        MediaTypeHeaderValue header = _cache[value];
+        if (header == null)
         {
-            MediaTypeHeaderValue header = MediaTypeHeaderValue.Parse(JsonHeader);
-            header.CharSet = DiscordEncoding.Instance.Encoding.WebName;
-            _cache[JsonHeader] = header;
+            header = MediaTypeHeaderValue.Parse(value);
+            _cache[value] = header;
         }
 
-        public MediaTypeHeaderValue Get(string value)
-        {
-            MediaTypeHeaderValue header = _cache[value];
-            if (header == null)
-            {
-                header = MediaTypeHeaderValue.Parse(value);
-                _cache[value] = header;
-            }
-
-            return header;
-        }
+        return header;
     }
 }

@@ -14,7 +14,7 @@ public interface IPool<T> : IPool
 
 | name | description |
 | --- | --- |
-| [Free](#free-method)(…) | Returns the pooled type back to the pool |
+| [Free](#free-method)(…) | Returns the pooled type to the pool |
 | [Get](#get-method)() | Returns the Pooled type or a new instance if pool is empty. |
 
 ## See Also
@@ -42,7 +42,7 @@ public T Get()
    
 # Free method
 
-Returns the pooled type back to the pool
+Returns the pooled type to the pool
 
 ```csharp
 public void Free(T poolable)

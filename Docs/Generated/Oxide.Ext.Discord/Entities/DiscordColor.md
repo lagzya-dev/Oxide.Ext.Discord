@@ -3,7 +3,7 @@
 Represents a Discord Color
 
 ```csharp
-public struct DiscordColor
+public struct DiscordColor : IEquatable<DiscordColor>
 ```
 
 ## Public Members

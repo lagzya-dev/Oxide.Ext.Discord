@@ -13,7 +13,12 @@
 | class [AllowedMentions](./AllowedMentions.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object) |
 | enum [AllowedMentionTypes](./AllowedMentionTypes.md) | Represents a [Allowed Mention Types](https://discord.com/developers/docs/resources/channel#allowed-mentions-object-allowed-mention-types) for a message |
 | enum [ApplicationCommandType](./ApplicationCommandType.md) | Represents [Application Command Type](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-types) |
+| class [ApplicationEmojiCreate](./ApplicationEmojiCreate.md) | Represents [Application Emoji Create Structure](https://discord.com/developers/docs/resources/emoji#create-application-emoji-json-params) |
+| class [ApplicationEmojis](./ApplicationEmojis.md) | Represents [Application Emojis](https://discord.com/developers/docs/resources/emoji#list-application-emojis) |
+| class [ApplicationEmojiUpdate](./ApplicationEmojiUpdate.md) | Represents [Emoji Update Structure](https://discord.com/developers/docs/resources/emoji#modify-guild-emoji-json-params) |
 | [Flags] enum [ApplicationFlags](./ApplicationFlags.md) | Represents [Application Flags](https://discord.com/developers/docs/resources/application#application-object-application-flags) |
+| enum [ApplicationIntegrationType](./ApplicationIntegrationType.md) | Represents a [Application Integration Types](https://discord.com/developers/docs/resources/application#application-object-application-integration-types) |
+| class [ApplicationIntegrationTypeConfiguration](./ApplicationIntegrationTypeConfiguration.md) | Represents a [Application Integration Type Configuration](https://discord.com/developers/docs/resources/application#application-object-application-integration-type-configuration-object) |
 | class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md) | Represents [Application Role Connection Metadata Structure](https://discord.com/developers/docs/resources/application-role-connection-metadata#application-role-connection-metadata-object-application-role-connection-metadata-structure) |
 | enum [ApplicationRoleConnectionMetadataType](./ApplicationRoleConnectionMetadataType.md) | Represents [Application Role Connection Metadata Type](Application Role Connection Metadata Structure) |
 | class [ApplicationUpdate](./ApplicationUpdate.md) | Represents [Edit Application Structure](https://discord.com/developers/docs/resources/application#edit-current-application-json-params) |
@@ -29,6 +34,7 @@
 | class [AutoModRuleModify](./AutoModRuleModify.md) | Represents [Auto Mod Rule Modify](https://discord.com/developers/docs/resources/auto-moderation#modify-auto-moderation-rule-json-params) |
 | class [AutoModTriggerMetadata](./AutoModTriggerMetadata.md) | Represents [Auto Mod Trigger Metadata](https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-metadata) |
 | enum [AutoModTriggerType](./AutoModTriggerType.md) | Represents [Auto Mod Trigger Types](https://discord.com/developers/docs/resources/auto-moderation#auto-moderation-rule-object-trigger-types) |
+| class [AvatarDecorationData](./AvatarDecorationData.md) | Represents [Avatar Decoration Structure](https://discord.com/developers/docs/resources/user#avatar-decoration-data-object-avatar-decoration-data-structure) |
 | abstract class [BaseComponent](./BaseComponent.md) | Represents [Message Component](https://discord.com/developers/docs/interactions/message-components#component-object) within discord |
 | abstract class [BaseInteractableComponent](./BaseInteractableComponent.md) | Represent a MessageComponent that can be interacted with |
 | abstract class [BaseInteractionMessage](./BaseInteractionMessage.md) | Represents a Base Message for an interaction |
@@ -82,6 +88,7 @@
 | class [DiscordInteraction](./DiscordInteraction.md) | Represents [Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-structure) |
 | class [DiscordInvite](./DiscordInvite.md) | Represents an [Invite Structure](https://discord.com/developers/docs/resources/invite#invite-object) that when used, adds a user to a guild or group DM channel. |
 | class [DiscordMessage](./DiscordMessage.md) | Represents a [Message Structure](https://discord.com/developers/docs/resources/channel#message-object) sent in a channel within Discord.. |
+| class [DiscordPoll](./DiscordPoll.md) | Represents a [Discord Poll](https://discord.com/developers/docs/resources/poll#poll-object-poll-object-structure) |
 | class [DiscordRole](./DiscordRole.md) | Represents [Role Structure](https://discord.com/developers/docs/topics/permissions#role-object) |
 | class [DiscordSku](./DiscordSku.md) | Represents a [SKU Structure](https://discord.com/developers/docs/monetization/skus#sku-object-sku-structure) |
 | enum [DiscordSkuType](./DiscordSkuType.md) | Represents a [Discord SKU Types](https://discord.com/developers/docs/monetization/skus#sku-object-sku-types) |
@@ -113,6 +120,8 @@
 | class [GatewayReadyEvent](./GatewayReadyEvent.md) | Represents [Ready](https://discord.com/developers/docs/topics/gateway#ready) The ready event is dispatched when a client has completed the initial handshake with the gateway (for new sessions) |
 | class [GatewayResumedEvent](./GatewayResumedEvent.md) | Represents [Resumed](https://discord.com/developers/docs/topics/gateway#resumed) The resumed event is dispatched when a client has sent a resume payload to the gateway (for resuming existing sessions). |
 | class [GetEntitlements](./GetEntitlements.md) | Get Entitlements Query String Builder |
+| class [GetPollAnswerResponse](./GetPollAnswerResponse.md) | Represents a [Get Poll Answers Response](https://discord.com/developers/docs/resources/poll#get-answer-voters-response-body) |
+| class [GetPollAnswerVoters](./GetPollAnswerVoters.md) | Represents a [Get Answer Voters Query String Params](https://discord.com/developers/docs/resources/poll#get-answer-voters-query-string-params) |
 | class [GetThreadMember](./GetThreadMember.md) | Represents [Get Thread Member Query String Params](https://discord.com/developers/docs/resources/channel#get-thread-member-query-string-params) |
 | class [GroupDmChannelUpdate](./GroupDmChannelUpdate.md) | Represents a [Group DM Channel Update Structure](https://discord.com/developers/docs/resources/channel#modify-channel-json-params-group-dm) |
 | class [GuildBan](./GuildBan.md) | Represents [Guild Ban Structure](https://discord.com/developers/docs/resources/guild#ban-object-ban-structure) |
@@ -182,6 +191,7 @@
 | class [InteractionAutoCompleteMessage](./InteractionAutoCompleteMessage.md) | Interaction Auto Complete Response Message |
 | class [InteractionAutoCompleteResponse](./InteractionAutoCompleteResponse.md) | Represents an Auto Complete response in Discord |
 | class [InteractionCallbackData](./InteractionCallbackData.md) | Represents [Interaction Application Command Callback Data Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-data-structure) |
+| enum [InteractionContextTypes](./InteractionContextTypes.md) | Represents a [Interaction Context Types](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-context-types) |
 | class [InteractionData](./InteractionData.md) | Represents [ApplicationCommandInteractionData](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-data) |
 | class [InteractionDataArgs](./InteractionDataArgs.md) | Args supplied for the interaction |
 | class [InteractionDataOption](./InteractionDataOption.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-interaction-data-option-structure) |
@@ -189,8 +199,6 @@
 | class [InteractionDataResolved](./InteractionDataResolved.md) | Represents [Application Command Interaction Data Option](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-resolved-data-structure) |
 | class [InteractionModalMessage](./InteractionModalMessage.md) | Represents an Interaction Modal Message |
 | class [InteractionModalResponse](./InteractionModalResponse.md) | Represents an Interaction Modal Response |
-| class [InteractionPremiumRequiredMessage](./InteractionPremiumRequiredMessage.md) | Message for Premium Required |
-| class [InteractionPremiumRequiredResponse](./InteractionPremiumRequiredResponse.md) | Response for premium Required |
 | class [InteractionResponse](./InteractionResponse.md) | Represents [Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object) |
 | enum [InteractionResponseType](./InteractionResponseType.md) | Represents [InteractionResponseType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-response-object-interaction-callback-type) |
 | enum [InteractionType](./InteractionType.md) | Represents [InteractionType](https://discord.com/developers/docs/interactions/receiving-and-responding#interaction-object-interaction-type) |
@@ -199,24 +207,31 @@
 | class [InviteLookup](./InviteLookup.md) | Represents a [Scheduled Event Lookup Structure](https://discord.com/developers/docs/resources/guild-scheduled-event#list-scheduled-events-for-guild-query-string-params) within Discord. |
 | class [InviteMetadata](./InviteMetadata.md) | Represents [Invite Metadata Structure](https://discord.com/developers/docs/resources/invite#invite-metadata-object-invite-metadata-structure) |
 | class [InviteStageInstance](./InviteStageInstance.md) | Represents an [Invite Stage Instance](https://discord.com/developers/docs/resources/invite#invite-stage-instance-object) |
+| enum [InviteType](./InviteType.md) | Represents [Invite Types](https://discord.com/developers/docs/resources/invite#invite-types) |
 | class [ListThreadMembers](./ListThreadMembers.md) | Represents [List Thread Member Query String Params](https://discord.com/developers/docs/resources/channel#list-thread-members-query-string-params) |
 | class [MentionableSelectComponent](./MentionableSelectComponent.md) | Represents a [Select Menus Component](https://discord.com/developers/docs/interactions/message-components#select-menus) within discord. |
 | class [MessageActivity](./MessageActivity.md) | Represents a [Message Activity Structure](https://discord.com/developers/docs/resources/channel#message-object-message-activity-structure) |
 | enum [MessageActivityType](./MessageActivityType.md) | Represents a [Message Activity Types](https://discord.com/developers/docs/resources/channel#message-object-message-activity-types) |
 | class [MessageAttachment](./MessageAttachment.md) | Represents a message [Attachment Structure](https://discord.com/developers/docs/resources/channel#attachment-object) |
 | class [MessageBulkDeletedEvent](./MessageBulkDeletedEvent.md) | Represents [Message Delete Bulk](https://discord.com/developers/docs/topics/gateway#message-delete-bulk) |
+| class [MessageCall](./MessageCall.md) | Represents a [Message Call Structure](https://discord.com/developers/docs/resources/channel#message-call-object) |
 | enum [MessageComponentType](./MessageComponentType.md) | Represents a [Message Component Type](https://discord.com/developers/docs/interactions/message-components#component-types) within Discord.. |
 | class [MessageCreate](./MessageCreate.md) | Represents a [Message Create Structure](https://discord.com/developers/docs/resources/channel#create-message-jsonform-params) to be created in discord |
 | class [MessageDeletedEvent](./MessageDeletedEvent.md) | Represents [Message Delete](https://discord.com/developers/docs/topics/gateway#message-delete) |
 | class [MessageFileAttachment](./MessageFileAttachment.md) | Represents a file attachment for a discord message |
 | [Flags] enum [MessageFlags](./MessageFlags.md) | Represents [Message Flags](https://discord.com/developers/docs/resources/channel#message-object-message-flags) for a message |
 | class [MessageInteraction](./MessageInteraction.md) | Represents a [Message Interaction Structure](https://discord.com/developers/docs/interactions/receiving-and-responding#message-interaction-object) within Discord. |
+| class [MessageInteractionMetadata](./MessageInteractionMetadata.md) | Represents a [Message Interaction Metadata Structure](https://discord.com/developers/docs/resources/channel#message-interaction-metadata-object-message-interaction-metadata-structure) within Discord. |
+| class [MessagePollVoteAddedEvent](./MessagePollVoteAddedEvent.md) | Represents [Message Poll Vote Added Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-add) |
+| class [MessagePollVoteRemovedEvent](./MessagePollVoteRemovedEvent.md) | Represents [Message Poll Vote Removed Event](https://discord.com/developers/docs/topics/gateway-events#message-poll-vote-remove) |
 | class [MessageReaction](./MessageReaction.md) | Represents a [Reaction Structure](https://discord.com/developers/docs/resources/channel#reaction-object) |
 | class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md) | Represents [Message Reaction Add](https://discord.com/developers/docs/topics/gateway#message-reaction-add) |
 | class [MessageReactionRemovedAllEmojiEvent](./MessageReactionRemovedAllEmojiEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-emoji-message-reaction-remove-emoji) |
 | class [MessageReactionRemovedAllEvent](./MessageReactionRemovedAllEvent.md) | Represents [Message Reaction Remove All](https://discord.com/developers/docs/topics/gateway#message-reaction-remove-all) |
 | class [MessageReactionRemovedEvent](./MessageReactionRemovedEvent.md) | Represents [Message Reaction Remove](https://discord.com/developers/docs/topics/gateway#message-reaction-remove) |
 | class [MessageReference](./MessageReference.md) | Represents a [Message Reference Structure](https://discord.com/developers/docs/resources/channel#message-reference-object-message-reference-structure) for a message |
+| enum [MessageReferenceType](./MessageReferenceType.md) | Represents [Message Reference Type](https://discord.com/developers/docs/resources/channel#message-reference-types) |
+| class [MessageSnapshot](./MessageSnapshot.md) | Represents a [Message Snapshot](https://discord.com/developers/docs/resources/channel#message-snapshot-object) |
 | enum [MessageType](./MessageType.md) | Represents [Message Types](https://discord.com/developers/docs/resources/channel#message-object-message-types) |
 | class [MessageUpdate](./MessageUpdate.md) | Represents a [Message Update Structure](https://discord.com/developers/docs/resources/channel#edit-message-jsonform-params) sent in a channel within Discord.. |
 | class [OnboardingPrompt](./OnboardingPrompt.md) | Represents [Onboarding Prompt Structure](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-onboarding-prompt-structure) |
@@ -224,11 +239,18 @@
 | enum [OnboardingPromptType](./OnboardingPromptType.md) | Represents [Prompt Types](https://discord.com/developers/docs/resources/guild#guild-onboarding-object-prompt-types) |
 | class [Overwrite](./Overwrite.md) | Represents a [Overwrite Structure](https://discord.com/developers/docs/resources/channel#overwrite-object-overwrite-structure) |
 | [Flags] enum [PermissionFlags](./PermissionFlags.md) | Represents [Permission Flags](https://discord.com/developers/docs/topics/permissions#permissions-bitwise-permission-flags) for user or role |
-| enum [PermissionType](./PermissionType.md) | Represents the type of a permission |
+| enum [PermissionType](./PermissionType.md) | Represents the type of permission |
+| class [PollAnswerCount](./PollAnswerCount.md) | Represents a [Discord Poll Answer Count](https://discord.com/developers/docs/resources/poll#poll-results-object-poll-answer-count-object-structure) |
+| class [PollAnswers](./PollAnswers.md) | Represents a [Discord Poll Answers](https://discord.com/developers/docs/resources/poll#poll-answer-object) |
+| class [PollCreate](./PollCreate.md) | Represents a [Discord Poll Create](https://discord.com/developers/docs/resources/poll#poll-create-request-object-poll-create-request-object-structure) |
+| enum [PollLayoutType](./PollLayoutType.md) | Represents a [Discord Poll Layout Type](https://discord.com/developers/docs/resources/poll#layout-type) |
+| class [PollMedia](./PollMedia.md) | Represents a [Discord Poll Media](https://discord.com/developers/docs/resources/poll#poll-media-object) |
+| class [PollResults](./PollResults.md) | Represents a [Discord Poll Results](https://discord.com/developers/docs/resources/poll#poll-results-object) |
 | class [PresenceUpdatedEvent](./PresenceUpdatedEvent.md) | Represents [Presence Update](https://discord.com/developers/docs/topics/gateway#presence-update) |
 | enum [PrivacyLevel](./PrivacyLevel.md) | Represents a [Stage Privacy Level](https://discord.com/developers/docs/resources/stage-instance#stage-instance-object-privacy-level) within Discord. |
 | class [RateLimitResponse](./RateLimitResponse.md) | Represents a rate limit response from an API request |
 | class [ReactionCountDetails](./ReactionCountDetails.md) | Represents a [Reaction Count Details Structure](https://discord.com/developers/docs/resources/channel#reaction-count-details-object) |
+| enum [ReactionType](./ReactionType.md) | Represents a [Discord Reaction Type](https://discord.com/developers/docs/resources/channel#get-reactions-reaction-types) |
 | enum [RequestErrorType](./RequestErrorType.md) | Represents a Discord Request Error Type |
 | class [RequestResponse](./RequestResponse.md) | Represents a REST response from discord |
 | class [ResponseError](./ResponseError.md) | Error object that is returned to the caller when a request fails |

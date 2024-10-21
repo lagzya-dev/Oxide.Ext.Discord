@@ -1,79 +1,47 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Oxide.Ext.Discord.Libraries;
 
-namespace Oxide.Ext.Discord.Types
+namespace Oxide.Ext.Discord.Types;
+
+internal ref struct StringTokenizer
 {
-    internal class StringTokenizer : BasePoolable, IEnumerator<ReadOnlyMemory<char>>
+    private ReadOnlySpan<char> _remaining;
+    private readonly ReadOnlySpan<char> _token;
+    private readonly int _maxLength;
+    public int Index { get; private set; } = -1;
+
+    public ReadOnlySpan<char> Current { get; private set; }
+
+    public StringTokenizer(string str, string token) : this(str, token, str.Length) { }
+
+    public StringTokenizer(string str, string token, int maxLength)
     {
-        private string _string;
-        private char _token;
-        private int _maxLength;
-        private int _stringIndex;
-        public int Index { get; private set; } = -1;
+        _remaining = str;
+        _token = token;
+        _maxLength = maxLength;
+    }
 
-        public ReadOnlyMemory<char> Current { get; private set; }
-
-        object IEnumerator.Current => Current;
-
-        public static StringTokenizer Create(string str, char token) => Create(str, token, str.Length);
-
-        public static StringTokenizer Create(string str, char token, int maxLength)
+    public bool MoveNext()
+    {
+        if (_remaining.Length == 0)
         {
-            StringTokenizer tokenizer = DiscordPool.Internal.Get<StringTokenizer>();
-            tokenizer.Init(str, token, maxLength);
-            return tokenizer;
+            return false;
         }
-
-        private void Init(string str, char token, int maxLength)
-        {
-            _string = str;
-            _token = token;
-            _maxLength = maxLength;
-        }
-
-        public bool MoveNext()
-        {
-            if (_stringIndex >= _maxLength)
-            {
-                return false;
-            }
             
-            int index = _string.IndexOf(_token, _stringIndex);
-            if (index == -1 || index >= _maxLength)
-            {
-                index = _maxLength;
-            }
+        int index = _remaining.IndexOf(_token);
+        if (index == -1 || index > _maxLength)
+        {
+            index = _remaining.Length;
+        }
             
-            int length = index - _stringIndex;
-            if (length == 0)
-            {
-                _stringIndex = index + 1;
-                return MoveNext();
-            }
-
-            Current = _string.AsMemory().Slice(_stringIndex, length);
-            _stringIndex = index + 1;
-            Index++;
-            return true;
-        }
-
-        public void Reset()
+        if (index == 0)
         {
-            _stringIndex = 0;
-            Current = null;
-            Index = -1;
+            _remaining = _remaining.Slice(1);
+            return MoveNext();
         }
 
-        protected override void EnterPool()
-        {
-            _stringIndex = 0;
-            Current = null;
-            _token = default(char);
-            _maxLength = 0;
-            _stringIndex = 0;
-            Index = -1;
-        }
+        Current = _remaining.Slice(0, index);
+        _remaining = _remaining.Slice(Math.Min(_remaining.Length, index + 1));
+        Index++;
+        return true;
     }
 }

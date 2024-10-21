@@ -94,7 +94,7 @@ public ValueTask SocketMessage(Snowflake webSocketId, DiscordJsonReader reader)
 | parameter | description |
 | --- | --- |
 | webSocketId | ID of the web socket |
-| reader | Json Reader containing the message |
+| reader | JSON Reader containing the message |
 
 ## See Also
 

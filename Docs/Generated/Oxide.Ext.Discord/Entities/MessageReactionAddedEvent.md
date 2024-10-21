@@ -11,12 +11,15 @@ public class MessageReactionAddedEvent
 | name | description |
 | --- | --- |
 | [MessageReactionAddedEvent](#messagereactionaddedevent-constructor)() | The default constructor. |
+| [Burst](#burst-property) { get; set; } | True if this is a super-reaction |
+| [BurstColors](#burstcolors-property) { get; set; } | Colors used for super-reaction animation |
 | [ChannelId](#channelid-property) { get; set; } | The id of the channel |
 | [Emoji](#emoji-property) { get; set; } | The emoji used to react |
 | [GuildId](#guildid-property) { get; set; } | The id of the guild |
 | [Member](#member-property) { get; set; } | The member who reacted if this happened in a guild |
 | [MessageAuthorId](#messageauthorid-property) { get; set; } | ID of the user who authored the message which was reacted to |
 | [MessageId](#messageid-property) { get; set; } | The id of the message |
+| [Type](#type-property) { get; set; } | The type of the reaction |
 | [UserId](#userid-property) { get; set; } | The id of the user |
 
 ## See Also
@@ -148,6 +151,53 @@ public Snowflake? MessageAuthorId { get; set; }
 ## See Also
 
 * struct [Snowflake](./Snowflake.md)
+* class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Burst property
+
+True if this is a super-reaction
+
+```csharp
+public bool Burst { get; set; }
+```
+
+## See Also
+
+* class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# BurstColors property
+
+Colors used for super-reaction animation
+
+```csharp
+public List<DiscordColor> BurstColors { get; set; }
+```
+
+## See Also
+
+* struct [DiscordColor](./DiscordColor.md)
+* class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Type property
+
+The type of the reaction
+
+```csharp
+public ReactionType Type { get; set; }
+```
+
+## See Also
+
+* enum [ReactionType](./ReactionType.md)
 * class [MessageReactionAddedEvent](./MessageReactionAddedEvent.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

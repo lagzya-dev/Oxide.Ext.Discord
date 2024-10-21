@@ -17,7 +17,6 @@ public enum InteractionResponseType : byte
 | UpdateMessage | `UpdateMessage` | For components, edit the message the component was attached to |
 | ApplicationCommandAutocompleteResult | `ApplicationCommandAutocompleteResult` | Respond to an autocomplete interaction with suggested choices |
 | Modal | `Modal` | Respond to an interaction with an modal for a user to fill-out Note: You can't respond to a ModalSubmit with a new MODAL. |
-| PremiumRequired | `PremiumRequired` | Respond to an interaction with an upgrade button, only available for apps with monetization enabled |
 
 ## See Also
 

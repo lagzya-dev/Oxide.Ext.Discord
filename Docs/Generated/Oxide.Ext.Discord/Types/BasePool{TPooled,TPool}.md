@@ -31,7 +31,7 @@ public abstract class BasePool<TPooled, TPool> : IPool<TPooled>
 | --- | --- |
 | [BasePool](#basepool&amp;lt;tpooled,tpool&amp;gt;-constructor)() | The default constructor. |
 | [PluginPool](#pluginpool-field) | Plugin Pool for this pool |
-| abstract [CreateNew](#createnew-method)() | Creates new type of T |
+| abstract [CreateNew](#createnew-method)() | Creates a new type of T |
 | abstract [GetPoolSize](#getpoolsize-method)(…) | Returns the pool size from the pool settings for the pool |
 | virtual [OnFreeItem](#onfreeitem-method)(…) | Returns if an item can be freed to the pool |
 | virtual [OnGetItem](#ongetitem-method)(…) | Called when an item is retrieved from the pool |
@@ -102,7 +102,7 @@ public TPooled Get()
    
 # CreateNew method
 
-Creates new type of T
+Creates a new type of T
 
 ```csharp
 protected abstract TPooled CreateNew()
@@ -215,7 +215,7 @@ protected virtual bool OnFreeItem(ref TPooled item)
 
 ## Return Value
 
-True if can be freed; false otherwise
+True if the item can be freed; false otherwise
 
 ## See Also
 

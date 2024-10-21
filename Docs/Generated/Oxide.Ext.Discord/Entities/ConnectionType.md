@@ -12,6 +12,8 @@ public enum ConnectionType : byte
 | --- | --- | --- |
 | Unknown | `Unknown` | Discord Extension doesn't currently support this connection type |
 | BattleNet | `BattleNet` | Connection type is Battle.net |
+| Bungie | `Bungie` | Connection type is Bungie.net |
+| Domain | `Domain` | Connection type is Domain |
 | eBay | `eBay` | Connection type is Epic Games |
 | EpicGames | `EpicGames` | Connection type is Epic Games |
 | Facebook | `Facebook` | Connection type is Facebook |
@@ -21,7 +23,8 @@ public enum ConnectionType : byte
 | LeagueOfLegends | `LeagueOfLegends` | Connection type is League of Legends |
 | PlayStationNetwork | `PlayStationNetwork` | Connection type is PlayStation Network |
 | Reddit | `Reddit` | Connection type is Reddit |
-| RiotGames | `RiotGames` | Connection type is Reddit |
+| RiotGames | `RiotGames` | Connection type is Riot Games |
+| Roblox | `Roblox` | Connection type is Roblox |
 | Spotify | `Spotify` | Connection type is Spotify |
 | Skype | `Skype` | Connection type is Skype |
 | Steam | `Steam` | Connection type is Steam |

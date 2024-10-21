@@ -20,10 +20,10 @@ public enum DiscordWebsocketCloseCode
 | RateLimited | `RateLimited` | Woah nelly! You're sending payloads to us too quickly. Slow it down! You will be disconnected on receiving this. |
 | SessionTimedOut | `SessionTimedOut` | Your session timed out. Reconnect and start a new one. |
 | InvalidShard | `InvalidShard` | You sent us an invalid shard when identifying. |
-| ShardingRequired | `ShardingRequired` | The session would have handled too many guilds - you are required to shard your connection in order to connect. |
+| ShardingRequired | `ShardingRequired` | The session would have handled too many guilds - you are required to shard your connection to connect. |
 | InvalidApiVersion | `InvalidApiVersion` | You sent an invalid version for the gateway. |
 | InvalidIntents | `InvalidIntents` | You sent an invalid intent for a Gateway Intent. You may have incorrectly calculated the bitwise value. |
-| DisallowedIntent | `DisallowedIntent` | You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not whitelisted for. |
+| DisallowedIntent | `DisallowedIntent` | You sent a disallowed intent for a Gateway Intent. You may have tried to specify an intent that you have not enabled or are not allowlisted for. |
 | DiscordExtensionReconnect | `DiscordExtensionReconnect` | Used to identify a reconnect should occur to discord |
 | UnknownCloseCode | `UnknownCloseCode` | Used when a code is sent that we don't have yet. |
 

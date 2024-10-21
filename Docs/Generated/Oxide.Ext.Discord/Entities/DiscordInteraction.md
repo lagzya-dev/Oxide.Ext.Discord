@@ -12,12 +12,15 @@ public class DiscordInteraction
 | --- | --- |
 | [DiscordInteraction](#discordinteraction-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | ID of the application this interaction is for |
-| [AppPermissions](#apppermissions-property) { get; set; } | Bitwise set of permissions the app or bot has within the channel the interaction was sent from |
+| [AppPermissions](#apppermissions-property) { get; set; } | Bitwise set of permissions the app has in the source location of the interaction |
+| [AuthorizingIntegrationOwners](#authorizingintegrationowners-property) { get; set; } | Mapping of installation contexts that the interaction was authorized for to related user or guild IDs |
 | [Channel](#channel-property) { get; set; } | Channel that the interaction was sent from |
 | [ChannelId](#channelid-property) { get; set; } | Channel that the interaction was sent from |
+| [Contexts](#contexts-property) { get; set; } | Context where the interaction was triggered from |
 | [Data](#data-property) { get; set; } | Interaction data payload See [`InteractionData`](./InteractionData.md) |
 | [Entitlements](#entitlements-property) { get; set; } | For monetized apps, any entitlements for the invoking user, representing access to premium SKUs |
 | [Focused](#focused-property) { get; } | Returns the Focused option for Auto Complete |
+| [Guild](#guild-property) { get; set; } | Guild that the interaction was sent from |
 | [GuildId](#guildid-property) { get; set; } | Guild that the interaction was sent from |
 | [GuildLocale](#guildlocale-property) { get; set; } | The guild's preferred locale, if invoked in a guild [Discord Locale Values](https://discord.com/developers/docs/dispatch/field-values#predefined-field-values-accepted-locales) |
 | [Id](#id-property) { get; set; } | Id of the interaction |
@@ -33,7 +36,6 @@ public class DiscordInteraction
 | [CreateFollowUpMessage](#createfollowupmessage-method-1-of-2)(…) | Create a followup message for an Interaction See [Create Followup Message](https://discord.com/developers/docs/interactions/receiving-and-responding#create-followup-message) (2 methods) |
 | [CreateFollowUpTemplateResponse](#createfollowuptemplateresponse-method)(…) | Creates a interaction follow up message response from a message template |
 | [CreateModalResponse](#createmodalresponse-method)(…) | Creates a interaction modal response from a modal template |
-| [CreatePremiumRequiredResponse](#createpremiumrequiredresponse-method)(…) | Creates a response indication that the interaction requires premium to be purchased. |
 | [CreateResponse](#createresponse-method-1-of-7)(…) | Create a response to an Interaction from the gateway. See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) (7 methods) |
 | [CreateTemplateResponse](#createtemplateresponse-method)(…) | Creates a interaction message response from a message template |
 | [DefferResponse](#defferresponse-method)(…) | Creates a response indicating that: for application commands there will be an update in the future for message component commands that you have acknowledged the command and there may be an update in the future See [Create Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#create-interaction-response) |
@@ -436,27 +438,6 @@ public IPromise DefferResponse(DiscordClient client)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
-# CreatePremiumRequiredResponse method
-
-Creates a response indication that the interaction requires premium to be purchased.
-
-```csharp
-public IPromise CreatePremiumRequiredResponse(DiscordClient client)
-```
-
-| parameter | description |
-| --- | --- |
-| client | Client to use |
-
-## See Also
-
-* interface [IPromise](../Interfaces/IPromise.md)
-* class [DiscordClient](../Clients/DiscordClient.md)
-* class [DiscordInteraction](./DiscordInteraction.md)
-* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
-* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
-   
-   
 # GetOriginalResponse method
 
 Gets the initial Interaction response See [Get Original Interaction Response](https://discord.com/developers/docs/interactions/receiving-and-responding#get-original-interaction-response)
@@ -802,6 +783,22 @@ public InteractionData Data { get; set; }
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
    
    
+# Guild property
+
+Guild that the interaction was sent from
+
+```csharp
+public DiscordGuild Guild { get; set; }
+```
+
+## See Also
+
+* class [DiscordGuild](./DiscordGuild.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
 # GuildId property
 
 Guild that the interaction was sent from
@@ -930,7 +927,7 @@ public DiscordMessage Message { get; set; }
    
 # AppPermissions property
 
-Bitwise set of permissions the app or bot has within the channel the interaction was sent from
+Bitwise set of permissions the app has in the source location of the interaction
 
 ```csharp
 public PermissionFlags? AppPermissions { get; set; }
@@ -987,6 +984,39 @@ public List<DiscordEntitlement> Entitlements { get; set; }
 ## See Also
 
 * class [DiscordEntitlement](./DiscordEntitlement.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# AuthorizingIntegrationOwners property
+
+Mapping of installation contexts that the interaction was authorized for to related user or guild IDs
+
+```csharp
+public Hash<ApplicationIntegrationType, Snowflake> AuthorizingIntegrationOwners { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* struct [Snowflake](./Snowflake.md)
+* class [DiscordInteraction](./DiscordInteraction.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Contexts property
+
+Context where the interaction was triggered from
+
+```csharp
+public List<InteractionContextTypes> Contexts { get; set; }
+```
+
+## See Also
+
+* enum [InteractionContextTypes](./InteractionContextTypes.md)
 * class [DiscordInteraction](./DiscordInteraction.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

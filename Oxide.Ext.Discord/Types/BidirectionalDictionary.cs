@@ -2,125 +2,141 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Oxide.Ext.Discord.Types
+namespace Oxide.Ext.Discord.Types;
+
+/// <summary>
+/// A Dictionary that stores the keys -> values and values -> keys
+/// </summary>
+/// <typeparam name="TKey">Type of the key</typeparam>
+/// <typeparam name="TValue">Type of the value</typeparam>
+internal class BidirectionalDictionary<TKey, TValue>
 {
+    private readonly Dictionary<TKey, TValue> _keyToValue = new();
+    private readonly Dictionary<TValue, TKey> _valueToKey = new();
+
     /// <summary>
-    /// A Dictionary that stores the keys -> values and values -> keys
+    /// Count of the 
     /// </summary>
-    /// <typeparam name="TKey">Type of the key</typeparam>
-    /// <typeparam name="TValue">Type of the value</typeparam>
-    internal class BidirectionalDictionary<TKey, TValue>
+    public int Count => Math.Min(_keyToValue.Count, _valueToKey.Count);
+
+    /// <summary>
+    /// Returns true of the dictionary contains the given key
+    /// </summary>
+    /// <param name="key">Key to check for</param>
+    /// <returns></returns>
+    public bool ContainsKey(TKey key) => _keyToValue.ContainsKey(key);
+
+    /// <summary>
+    /// Returns true of the dictionary contains the given key
+    /// </summary>
+    /// <param name="key">Key to check for</param>
+    /// <returns></returns>
+    public bool ContainsKey(TValue key) => _valueToKey.ContainsKey(key);
+        
+    public bool TryGetValue(TKey key, out TValue value) => _keyToValue.TryGetValue(key, out value);
+
+    public bool TryGetValue(TValue key, out TKey value) => _valueToKey.TryGetValue(key, out value);
+
+    public TValue this[TKey key]
     {
-        private readonly Dictionary<TKey, TValue> _keyToValue = new Dictionary<TKey, TValue>();
-        private readonly Dictionary<TValue, TKey> _valueToKey = new Dictionary<TValue, TKey>();
-
-        /// <summary>
-        /// Count of the 
-        /// </summary>
-        public int Count => Math.Min(_keyToValue.Count, _valueToKey.Count);
-
-        /// <summary>
-        /// Returns true of the dictionary contains the given key
-        /// </summary>
-        /// <param name="key">Key to check for</param>
-        /// <returns></returns>
-        public bool ContainsKey(TKey key) => _keyToValue.ContainsKey(key);
-
-        /// <summary>
-        /// Returns true of the dictionary contains the given key
-        /// </summary>
-        /// <param name="key">Key to check for</param>
-        /// <returns></returns>
-        public bool ContainsKey(TValue key) => _valueToKey.ContainsKey(key);
-        
-        public bool TryGetValue(TKey key, out TValue value) => _keyToValue.TryGetValue(key, out value);
-
-        public bool TryGetValue(TValue key, out TKey value) => _valueToKey.TryGetValue(key, out value);
-
-        public TValue this[TKey key]
-        {
-            get => _keyToValue[key];
-            set
-            {
-                _keyToValue[key] = value;
-                _valueToKey[value] = key;
-            }
-        }
-        
-        public TKey this[TValue key]
-        {
-            get => _valueToKey[key];
-            set
-            {
-                _valueToKey[key] = value;
-                _keyToValue[value] = key;
-            }
-        }
-
-        public void Add(TKey key, TValue value)
-        {
-            _valueToKey.Add(value, key);
-            _keyToValue.Add(key, value);
-        }
-        
-        public void Add(TValue key, TKey value)
-        {
-            _keyToValue.Add(value, key);
-            _valueToKey.Add(key, value);
-        }
-
-        public void AddKey(TKey key, TValue value)
+        get => _keyToValue[key];
+        set
         {
             _keyToValue[key] = value;
+            _valueToKey[value] = key;
         }
+    }
         
-        public void AddValue(TValue key, TKey value)
+    public TKey this[TValue key]
+    {
+        get => _valueToKey[key];
+        set
         {
             _valueToKey[key] = value;
+            _keyToValue[value] = key;
         }
+    }
 
-        public bool Remove(TKey key)
-        {
-            if (!_keyToValue.TryGetValue(key, out TValue valueKey))
-            {
-                return false;
-            }
-            
-            _keyToValue.Remove(key);
-            if (_valueToKey.TryGetValue(valueKey, out TKey _))
-            {
-                _valueToKey.Remove(valueKey);
-            }
-
-            return true;
-        }
+    public void Add(TKey key, TValue value)
+    {
+        _valueToKey.Add(value, key);
+        _keyToValue.Add(key, value);
+    }
         
-        public bool Remove(TValue key)
-        {
-            if (!_valueToKey.TryGetValue(key, out TKey valueKey))
-            {
-                return false;
-            }
-            
-            _valueToKey.Remove(key);
-            if (_keyToValue.TryGetValue(valueKey, out TValue _))
-            {
-                _keyToValue.Remove(valueKey);
-            }
+    public void Add(TValue key, TKey value)
+    {
+        _keyToValue.Add(value, key);
+        _valueToKey.Add(key, value);
+    }
 
-            return true;
+    public void AddKey(TKey key, TValue value)
+    {
+        _keyToValue[key] = value;
+    }
+        
+    public void AddValue(TValue key, TKey value)
+    {
+        _valueToKey[key] = value;
+    }
+
+    public bool Remove(TKey key)
+    {
+        if (!_keyToValue.Remove(key, out TValue valueKey))
+        {
+            return false;
         }
 
-        public void Clear()
+        _valueToKey.Remove(valueKey, out TKey _);
+
+        return true;
+    }
+        
+    public bool Remove(TValue key)
+    {
+        if (!_valueToKey.Remove(key, out TKey valueKey))
         {
-            _keyToValue.Clear();
-            _valueToKey.Clear();
+            return false;
         }
 
-        public ReadOnlyDictionary<TKey, TValue> AsReadOnlyKeyToValue() => new ReadOnlyDictionary<TKey, TValue>(_keyToValue);
-        public ReadOnlyDictionary<TValue, TKey> AsReadOnlyValueToKey() => new ReadOnlyDictionary<TValue, TKey>(_valueToKey);
+        _keyToValue.Remove(valueKey, out TValue _);
 
-        public ICollection<TKey> AsKeyCollection() => _keyToValue.Keys;
-        public ICollection<TValue> AsValueCollection() => _valueToKey.Keys;
+        return true;
+    }
+
+    public void Clear()
+    {
+        _keyToValue.Clear();
+        _valueToKey.Clear();
+    }
+
+    public ReadOnlyDictionary<TKey, TValue> AsReadOnlyKeyToValue() => new(_keyToValue);
+    public ReadOnlyDictionary<TValue, TKey> AsReadOnlyValueToKey() => new(_valueToKey);
+
+    public ICollection<TKey> AsKeyCollection() => _keyToValue.Keys;
+    public ICollection<TValue> AsValueCollection() => _valueToKey.Keys;
+
+    public override string ToString()
+    {
+        ValueStringBuilder sb = new();
+
+        sb.AppendLine(nameof(BidirectionalDictionary<TKey, TValue>));
+        sb.AppendLine("{");
+        sb.AppendLine("\tKeyToValue:");
+        sb.AppendLine("\t{");
+        foreach (TKey key in _keyToValue.Keys)
+        {
+            sb.AppendLine($"\t\t{key}: {_keyToValue[key]}");
+        }
+        sb.AppendLine("\t}");
+        sb.AppendLine("\valueToKey:");
+        sb.AppendLine("\t{");
+        foreach (TValue key in _valueToKey.Keys)
+        {
+            sb.AppendLine($"\t\t{key}: {_valueToKey[key]}");
+        }
+        sb.AppendLine("\t}");
+        sb.AppendLine("}");
+        
+        return sb.ToString();
     }
 }

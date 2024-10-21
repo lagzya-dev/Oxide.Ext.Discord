@@ -51,7 +51,7 @@ public MessageComponentBuilder AddActionButton(ButtonStyle style, string label, 
 
 | exception | condition |
 | --- | --- |
-| Exception | Throw if the button style is link or if the button goes outside the max number of action rows |
+| Exception | Throw if the button style is a link or if the button goes outside the max number of action rows |
 
 ## See Also
 

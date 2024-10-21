@@ -1,6 +1,6 @@
 # DiscordEnumConverter class
 
-Handles deserializing JSON values as strings. If the value doesn't exist return the default value.
+Handles deserializing JSON values as strings. If the value doesn't exist, return the default value.
 
 ```csharp
 public class DiscordEnumConverter : JsonConverter

@@ -1,6 +1,6 @@
 # TemplateKeyConverter class
 
-Json Template Key Converter
+JSON Template Key Converter
 
 ```csharp
 public class TemplateKeyConverter : JsonConverter

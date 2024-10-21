@@ -12,12 +12,14 @@ public class DiscordApplicationCommand
 | --- | --- |
 | [DiscordApplicationCommand](#discordapplicationcommand-constructor)() | The default constructor. |
 | [ApplicationId](#applicationid-property) { get; set; } | ID of the parent application |
+| [Contexts](#contexts-property) { get; set; } | Interaction context(s) where the command can be used, only for globally-scoped commands. By default, all interaction context types included for new commands.. |
 | [DefaultMemberPermissions](#defaultmemberpermissions-property) { get; set; } | Set of permissions represented as a bit set |
 | [Description](#description-property) { get; set; } | Description of the command (1-100 characters) |
 | [DescriptionLocalizations](#descriptionlocalizations-property) { get; set; } | Localization dictionary for the description field. Values follow the same restrictions as description |
 | [DmPermission](#dmpermission-property) { get; set; } | Indicates whether the command is available in DMs with the app, only for globally-scoped commands. By default, commands are visible. |
 | [GuildId](#guildid-property) { get; set; } | Guild ID of the command, if not global |
 | [Id](#id-property) { get; set; } | Unique id of the command |
+| [IntegrationTypes](#integrationtypes-property) { get; set; } | Installation context(s) where the command is available, only for globally-scoped commands. Defaults to GUILD_INSTALL (0) |
 | [Mention](#mention-property) { get; } | Mention the [`DiscordApplicationCommand`](./DiscordApplicationCommand.md) |
 | [Name](#name-property) { get; set; } | 1-32 lowercase character name matching ^[\w-]{1,32}$ |
 | [NameLocalizations](#namelocalizations-property) { get; set; } | Localization dictionary for the name field. Values follow the same restrictions as name |
@@ -351,6 +353,38 @@ public bool? Nsfw { get; set; }
 
 ## See Also
 
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IntegrationTypes property
+
+Installation context(s) where the command is available, only for globally-scoped commands. Defaults to GUILD_INSTALL (0)
+
+```csharp
+public List<ApplicationIntegrationType> IntegrationTypes { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# Contexts property
+
+Interaction context(s) where the command can be used, only for globally-scoped commands. By default, all interaction context types included for new commands..
+
+```csharp
+public List<InteractionContextTypes> Contexts { get; set; }
+```
+
+## See Also
+
+* enum [InteractionContextTypes](./InteractionContextTypes.md)
 * class [DiscordApplicationCommand](./DiscordApplicationCommand.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

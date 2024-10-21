@@ -26,6 +26,7 @@ public class DiscordApplication : IDebugLoggable
 | [Icon](#icon-property) { get; set; } | Icon hash of the app |
 | [Id](#id-property) { get; set; } | ID of the app |
 | [InstallParams](#installparams-property) { get; set; } | Settings for the application's default in-app authorization link, if enabled |
+| [IntegrationTypesConfig](#integrationtypesconfig-property) { get; set; } | Default scopes and permissions for each supported installation context |
 | [InteractionsEndpointUrl](#interactionsendpointurl-property) { get; set; } | Interactions endpoint URL for the app |
 | [Name](#name-property) { get; set; } | Name of the app |
 | [Owner](#owner-property) { get; set; } | Partial user object containing info on the owner of the application |
@@ -40,11 +41,15 @@ public class DiscordApplication : IDebugLoggable
 | [TermsOfServiceUrl](#termsofserviceurl-property) { get; set; } | URL of the app's terms of service |
 | [Verify](#verify-property) { get; set; } | Hex encoded key for verification in interactions and the GameSDK's GetTicket |
 | [BulkOverwriteGlobalCommands](#bulkoverwriteglobalcommands-method)(…) | Takes a list of application commands, overwriting existing commands that are registered globally for this application. Updates will be available in all guilds after 1 hour. See [Bulk Overwrite Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#bulk-overwrite-global-application-commands) |
+| [CreateApplicationEmoji](#createapplicationemoji-method)(…) | Creates a new application emoji |
 | [CreateGlobalCommand](#createglobalcommand-method)(…) | Create a new global command. New global commands will be available in all guilds after 1 hour. Note: Creating a command with the same name as an existing command for your application will overwrite the old command. See [Create Global Application Command](https://discord.com/developers/docs/interactions/application-commands#create-global-application-command) |
 | [CreateGuildCommand](#createguildcommand-method)(…) | Create a new guild command. New guild commands will be available in the guild immediately. See [Create Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#create-guild-application-command) |
+| [DeleteApplicationEmoji](#deleteapplicationemoji-method)(…) | Deletes an application emoji |
 | [Edit](#edit-method)(…) | Edit properties of the app associated with the requesting bot user. Only properties that are passed will be updated. |
 | [EditRoleConnectionMetadata](#editroleconnectionmetadata-method)(…) | Updates and returns a list of application role connection metadata objects for the given application. See [Update Application Role Connection Metadata Records](https://discord.com/developers/docs/resources/application-role-connection-metadata#update-application-role-connection-metadata-records) |
 | [GetAllCommands](#getallcommands-method)(…) | Returns all commands registered to this application |
+| [GetApplicationEmoji](#getapplicationemoji-method)(…) | Return an application emoji by ID |
+| [GetApplicationEmojis](#getapplicationemojis-method)(…) | Returns the list of all application emojis |
 | [GetGlobalCommand](#getglobalcommand-method)(…) | Fetch global command by ID See [Get Global Application Command](https://discord.com/developers/docs/interactions/application-commands#get-global-application-command) |
 | [GetGlobalCommands](#getglobalcommands-method)(…) | Fetch all of the global commands for your application. Returns a list of ApplicationCommand. See [Get Global Application Commands](https://discord.com/developers/docs/interactions/application-commands#get-global-application-commands)Client to useInclude Command Localizations |
 | [GetGuildCommand](#getguildcommand-method)(…) | Get guild command by Id See [Get Guild Application Command](https://discord.com/developers/docs/interactions/application-commands#get-guild-application-command) |
@@ -54,6 +59,7 @@ public class DiscordApplication : IDebugLoggable
 | [HasAnyApplicationFlags](#hasanyapplicationflags-method)(…) | Returns if the given application has any of the passed in application flags If [`Flags`](#flags-property) is null false is returned |
 | [HasApplicationFlag](#hasapplicationflag-method)(…) | Returns if the given application has the passed in application flag If [`Flags`](#flags-property) is null false is returned |
 | [LogDebug](#logdebug-method)(…) |  |
+| [UpdateApplicationEmoji](#updateapplicationemoji-method)(…) | Updates an existing application emoji |
 | static [Get](#get-method)(…) | Returns the current users application See [Get Current Application]() |
 
 ## See Also
@@ -416,6 +422,127 @@ public IPromise<List<ApplicationRoleConnectionMetadata>> EditRoleConnectionMetad
 * interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
 * class [ApplicationRoleConnectionMetadata](./ApplicationRoleConnectionMetadata.md)
 * class [DiscordClient](../Clients/DiscordClient.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetApplicationEmojis method
+
+Returns the list of all application emojis
+
+```csharp
+public IPromise<ApplicationEmojis> GetApplicationEmojis(DiscordClient client)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [ApplicationEmojis](./ApplicationEmojis.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# GetApplicationEmoji method
+
+Return an application emoji by ID
+
+```csharp
+public IPromise<DiscordEmoji> GetApplicationEmoji(DiscordClient client, Snowflake emojiId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| emojiId | ID of the emoji |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordEmoji](./DiscordEmoji.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* struct [Snowflake](./Snowflake.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# CreateApplicationEmoji method
+
+Creates a new application emoji
+
+```csharp
+public IPromise<DiscordEmoji> CreateApplicationEmoji(DiscordClient client, 
+    ApplicationEmojiCreate create)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| create | Emoji to create |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordEmoji](./DiscordEmoji.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* class [ApplicationEmojiCreate](./ApplicationEmojiCreate.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# UpdateApplicationEmoji method
+
+Updates an existing application emoji
+
+```csharp
+public IPromise<DiscordEmoji> UpdateApplicationEmoji(DiscordClient client, Snowflake emojiId, 
+    ApplicationEmojiUpdate update)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| emojiId | ID of the emoji to update |
+| update | Update to the application emoji |
+
+## See Also
+
+* interface [IPromise&lt;TPromised&gt;](../Interfaces/IPromise%7BTPromised%7D.md)
+* class [DiscordEmoji](./DiscordEmoji.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* struct [Snowflake](./Snowflake.md)
+* class [ApplicationEmojiUpdate](./ApplicationEmojiUpdate.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# DeleteApplicationEmoji method
+
+Deletes an application emoji
+
+```csharp
+public IPromise DeleteApplicationEmoji(DiscordClient client, Snowflake emojiId)
+```
+
+| parameter | description |
+| --- | --- |
+| client | Client to use |
+| emojiId | ID of the emoji to delete |
+
+## See Also
+
+* interface [IPromise](../Interfaces/IPromise.md)
+* class [DiscordClient](../Clients/DiscordClient.md)
+* struct [Snowflake](./Snowflake.md)
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
@@ -828,6 +955,24 @@ public InstallParams InstallParams { get; set; }
 ## See Also
 
 * class [InstallParams](./InstallParams.md)
+* class [DiscordApplication](./DiscordApplication.md)
+* namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
+* assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)
+   
+   
+# IntegrationTypesConfig property
+
+Default scopes and permissions for each supported installation context
+
+```csharp
+public Hash<ApplicationIntegrationType, ApplicationIntegrationTypeConfiguration> 
+    IntegrationTypesConfig { get; set; }
+```
+
+## See Also
+
+* enum [ApplicationIntegrationType](./ApplicationIntegrationType.md)
+* class [ApplicationIntegrationTypeConfiguration](./ApplicationIntegrationTypeConfiguration.md)
 * class [DiscordApplication](./DiscordApplication.md)
 * namespace [Oxide.Ext.Discord.Entities](./EntitiesNamespace.md)
 * assembly [Oxide.Ext.Discord](../../Oxide.Ext.Discord.md)

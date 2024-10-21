@@ -1,27 +1,26 @@
 ﻿using Oxide.Ext.Discord.Entities;
 
-namespace Oxide.Ext.Discord.Exceptions
-{
-    /// <summary>
-    /// Represents an exception for invalid guild roles
-    /// </summary>
-    public class InvalidGuildRoleException : BaseDiscordException
-    {
-        private InvalidGuildRoleException(string message) : base(message) { }
+namespace Oxide.Ext.Discord.Exceptions;
 
-        internal static void ThrowIfInvalidRoleName(string name)
+/// <summary>
+/// Represents an exception for invalid guild roles
+/// </summary>
+public class InvalidGuildRoleException : BaseDiscordException
+{
+    private InvalidGuildRoleException(string message) : base(message) { }
+
+    internal static void ThrowIfInvalidRoleName(string name)
+    {
+        const int MaxLength = 100;
+            
+        if (string.IsNullOrEmpty(name))
         {
-            const int MaxLength = 100;
+            throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be null or empty");
+        }
             
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be null or empty");
-            }
-            
-            if (name.Length > MaxLength)
-            {
-                throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be more than {MaxLength} characters");
-            }
+        if (name.Length > MaxLength)
+        {
+            throw new InvalidGuildRoleException($"{nameof(DiscordRole)}.{nameof(DiscordRole.Name)} cannot be more than {MaxLength} characters");
         }
     }
 }
