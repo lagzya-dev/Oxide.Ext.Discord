@@ -1728,6 +1728,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordPluginCache.GetAllPlugins">
+            <summary>
+            Returns a list of all plugins in the plugin folder
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Oxide.Ext.Discord.Cache.EmojiCache">
             <summary>
             Cached Emoji Data
@@ -20769,15 +20775,15 @@
             <summary>
             Called when the web socket is opened
             </summary>
-            <param name="id">ID of the web socket</param>
+            <param name="webSocketId">ID of the web socket</param>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String)">
             <summary>
             Called when the web socket is closed
             </summary>
-            <param name="id">ID of the websocket</param>
-            <param name="code">Web socket close code</param>
+            <param name="webSocketId">ID of the websocket</param>
+            <param name="status">Web socket close code</param>
             <param name="message">Web socket close message</param>
             <returns></returns>
         </member>
@@ -20785,7 +20791,7 @@
             <summary>
             Called when an error occurs on the web socket
             </summary>
-            <param name="id">ID of the websocket</param>
+            <param name="webSocketId">ID of the websocket</param>
             <param name="ex">Exception that was thrown</param>
             <returns></returns>
         </member>
@@ -20793,7 +20799,7 @@
             <summary>
             Called when a message is received from the websocket
             </summary>
-            <param name="id">ID of the message</param>
+            <param name="webSocketId">ID of the message</param>
             <param name="stream">Stream containing the message</param>
             <returns></returns>
         </member>
@@ -28127,7 +28133,7 @@
             <summary>
             Called when a socket is closed
             </summary>
-            <param name="websocketId">ID of the web socket</param>
+            <param name="webSocketId">ID of the web socket</param>
             <param name="status"><see cref="T:System.Net.WebSockets.WebSocketCloseStatus"/> for the web socket</param>
             <param name="message">Close message from the web socket</param>
         </member>
@@ -28168,7 +28174,7 @@
             Handles the web socket connection and events
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebSocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler,Oxide.Ext.Discord.Interfaces.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebSocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler,Oxide.Ext.Discord.Clients.BotClient,Oxide.Ext.Discord.Interfaces.ILogger)">
             <summary>
             Constructor
             </summary>
