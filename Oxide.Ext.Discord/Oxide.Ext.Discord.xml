@@ -1228,6 +1228,14 @@
             <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
             <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddAllPlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
+            <summary>
+            Adds a list of all plugins in the oxide/plugins folder. Includes loaded and unloaded.
+            </summary>
+            <param name="filter">String to filter by</param>
+            <param name="comparison"><see cref="T:System.StringComparison"/> to use</param>
+            <param name="search"><see cref="T:Oxide.Ext.Discord.Builders.AutoCompleteSearchMode"/> Filter search mode</param>
+        </member>
         <member name="M:Oxide.Ext.Discord.Builders.InteractionAutoCompleteBuilder.AddLoadedPlugins(System.String,System.StringComparison,Oxide.Ext.Discord.Builders.AutoCompleteSearchMode)">
             <summary>
             Adds a list of plugins that are currently loaded
@@ -1725,6 +1733,12 @@
             <summary>
             Returns a list of plugins that can be loaded by oxide
             Already loaded plugins are excluded from the list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Cache.DiscordPluginCache.GetAllPlugins">
+            <summary>
+            Returns a list of all plugins in the plugin folder
             </summary>
             <returns></returns>
         </member>
@@ -7346,6 +7360,15 @@
             Returns the color as a hex color code
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.Equals(Oxide.Ext.Discord.Entities.DiscordColor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Entities.DiscordColor.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Entities.DefaultReaction">
             <summary>
@@ -20769,15 +20792,15 @@
             <summary>
             Called when the web socket is opened
             </summary>
-            <param name="id">ID of the web socket</param>
+            <param name="webSocketId">ID of the web socket</param>
             <returns></returns>
         </member>
         <member name="M:Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler.SocketClosed(Oxide.Ext.Discord.Entities.Snowflake,System.Net.WebSockets.WebSocketCloseStatus,System.String)">
             <summary>
             Called when the web socket is closed
             </summary>
-            <param name="id">ID of the websocket</param>
-            <param name="code">Web socket close code</param>
+            <param name="webSocketId">ID of the websocket</param>
+            <param name="status">Web socket close code</param>
             <param name="message">Web socket close message</param>
             <returns></returns>
         </member>
@@ -20785,7 +20808,7 @@
             <summary>
             Called when an error occurs on the web socket
             </summary>
-            <param name="id">ID of the websocket</param>
+            <param name="webSocketId">ID of the websocket</param>
             <param name="ex">Exception that was thrown</param>
             <returns></returns>
         </member>
@@ -20793,7 +20816,7 @@
             <summary>
             Called when a message is received from the websocket
             </summary>
-            <param name="id">ID of the message</param>
+            <param name="webSocketId">ID of the message</param>
             <param name="stream">Stream containing the message</param>
             <returns></returns>
         </member>
@@ -21769,6 +21792,15 @@
             <param name="player">IPlayer for the ID</param>
             <exception cref="T:System.ArgumentNullException">Thrown if the IPlayer is null</exception>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.Equals(Oxide.Ext.Discord.Libraries.PlayerId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlayerId.GetHashCode">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordLocale">
             <summary>
             Represents a Locale in Discord
@@ -21802,6 +21834,15 @@
             Returns the ID of the Locale
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.Equals(Oxide.Ext.Discord.Libraries.DiscordLocale)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.DiscordLocale.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.DiscordLocales">
             <summary>
@@ -21955,6 +21996,15 @@
             Returns the ID of the ServerLocale
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.Equals(Oxide.Ext.Discord.Libraries.ServerLocale)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.ServerLocale.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.ApplicationCommandPlaceholders">
             <summary>
@@ -23970,6 +24020,15 @@
             </summary>
             <param name="key">Value of the key</param>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.Equals(Oxide.Ext.Discord.Libraries.PlaceholderDataKey)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderDataKey.GetHashCode">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.PlaceholderFormatting">
             <summary>
             Formatting Helpers for Placeholders
@@ -24070,6 +24129,15 @@
             </summary>
             <param name="key"></param>
             <returns></returns>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.Equals(Oxide.Ext.Discord.Libraries.PlaceholderKey)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.PlaceholderKey.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Libraries.PlaceholderState">
             <summary>
@@ -25385,6 +25453,15 @@
             <param name="key"></param>
             <returns></returns>
         </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(Oxide.Ext.Discord.Libraries.TemplateKey)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateKey.GetHashCode">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Libraries.TemplateType">
             <summary>
             Represents available template type
@@ -25500,6 +25577,15 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.ToString">
             <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.Equals(Oxide.Ext.Discord.Libraries.TemplateVersion)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Libraries.TemplateVersion.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Logging.DebugLogger">
             <summary>
@@ -25862,6 +25948,15 @@
         <member name="M:Oxide.Ext.Discord.Plugins.PluginId.LogDebug(Oxide.Ext.Discord.Logging.DebugLogger)">
             <inheritdoc/>
         </member>
+        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.Equals(Oxide.Ext.Discord.Plugins.PluginId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Plugins.PluginId.GetHashCode">
+            <inheritdoc />
+        </member>
         <member name="T:Oxide.Ext.Discord.Plugins.PluginSetup">
             <summary>
             Build Discord Extension Setup Data for a plugin
@@ -25946,6 +26041,15 @@
         </member>
         <member name="M:Oxide.Ext.Discord.Rest.BucketId.ToString">
             <inheritdoc/>
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.BucketId.Equals(Oxide.Ext.Discord.Rest.BucketId)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.BucketId.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Oxide.Ext.Discord.Rest.BucketId.GetHashCode">
+            <inheritdoc />
         </member>
         <member name="T:Oxide.Ext.Discord.Rest.BaseRequest">
             <summary>
@@ -28127,7 +28231,7 @@
             <summary>
             Called when a socket is closed
             </summary>
-            <param name="websocketId">ID of the web socket</param>
+            <param name="webSocketId">ID of the web socket</param>
             <param name="status"><see cref="T:System.Net.WebSockets.WebSocketCloseStatus"/> for the web socket</param>
             <param name="message">Close message from the web socket</param>
         </member>
@@ -28168,7 +28272,7 @@
             Handles the web socket connection and events
             </summary>
         </member>
-        <member name="M:Oxide.Ext.Discord.WebSockets.WebSocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler,Oxide.Ext.Discord.Interfaces.ILogger)">
+        <member name="M:Oxide.Ext.Discord.WebSockets.WebSocketHandler.#ctor(Oxide.Ext.Discord.Interfaces.IWebSocketEventHandler,Oxide.Ext.Discord.Clients.BotClient,Oxide.Ext.Discord.Interfaces.ILogger)">
             <summary>
             Constructor
             </summary>

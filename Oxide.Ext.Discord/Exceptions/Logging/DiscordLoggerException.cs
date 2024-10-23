@@ -1,20 +1,21 @@
 ﻿using Oxide.Ext.Discord.Clients;
 using Oxide.Ext.Discord.Logging;
 
-namespace Oxide.Ext.Discord.Exceptions;
-
-/// <summary>
-/// Exceptions for the <see cref="DiscordClient"/>
-/// </summary>
-public class DiscordLoggerException : BaseDiscordException
+namespace Oxide.Ext.Discord.Exceptions
 {
-    private DiscordLoggerException(string message) : base(message) {}
-
-    internal static void ThrowIfShutdown(DiscordLogHandler handler)
+    /// <summary>
+    /// Exceptions for the <see cref="DiscordClient"/>
+    /// </summary>
+    public class DiscordLoggerException : BaseDiscordException
     {
-        if (handler.IsShutdown)
+        private DiscordLoggerException(string message) : base(message) {}
+
+        internal static void ThrowIfShutdown(DiscordLogHandler handler)
         {
-            throw new DiscordLoggerException("Cannot log into a logger that has been shutdown!");
+            if (handler.IsShutdown)
+            {
+                throw new DiscordLoggerException("Cannot log into a logger that has been shutdown!");
+            }
         }
     }
 }
