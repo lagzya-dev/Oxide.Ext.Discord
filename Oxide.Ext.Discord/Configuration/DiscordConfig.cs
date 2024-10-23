@@ -98,7 +98,7 @@ namespace Oxide.Ext.Discord.Configuration
             }
             catch (Exception ex)
             {
-                DiscordExtension.GlobalLogger.Exception("Failed to load config file. Using default config.", ex);
+                Interface.Oxide.LogException($"[Discord Extension] Failed to load config file. Using default config. {ex}", ex);
                 ApplyDefaults();
             }
         }

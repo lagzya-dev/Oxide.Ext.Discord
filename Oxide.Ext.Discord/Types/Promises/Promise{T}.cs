@@ -531,7 +531,7 @@ namespace Oxide.Ext.Discord.Types
         ///<inheritdoc/>
         public ValueTaskAwaiter<TPromised> GetAwaiter()
         {
-            return _taskSource.GetTask().GetAwaiter();
+            return AsTask().GetAwaiter();
         }
 
         ///<inheritdoc/>
