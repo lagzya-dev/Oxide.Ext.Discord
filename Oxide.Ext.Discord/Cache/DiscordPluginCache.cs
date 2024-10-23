@@ -71,7 +71,7 @@ public sealed class DiscordPluginCache : Singleton<DiscordPluginCache>
         _allPlugins.Clear();
         _allPlugins.AddRange(OxideLibrary.Instance.PluginLoader.ScanDirectory(Interface.Oxide.PluginDirectory).OrderBy(p => p));
         _nextAllUpdate = DateTime.UtcNow + TimeSpan.FromSeconds(15);
-        return _loadablePlugins;
+        return _allPlugins;
     }
 
     internal void OnPluginLoaded(Plugin plugin)
