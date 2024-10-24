@@ -345,7 +345,7 @@ namespace Oxide.Ext.Discord.Clients
                 DiscordGuild guild = GetGuild(guildId);
                 if (guild != null)
                 {
-                    return guild.Channels[channelId] ?? guild.Threads[channelId];
+                    return guild.Channels?[channelId] ?? guild.Threads?[channelId];
                 }
 
                 return null;
