@@ -94,7 +94,6 @@ namespace Oxide.Ext.Discord.Configuration
             try
             {
                 base.Load(filename);
-                ApplyDefaults();
             }
             catch (Exception ex)
             {
